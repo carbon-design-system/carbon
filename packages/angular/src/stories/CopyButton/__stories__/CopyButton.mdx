@@ -1,0 +1,70 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as CopyButtonStories from './CopyButton.stories';
+
+<Meta of={CopyButtonStories} />
+
+# Copy button
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/CopyButton)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/patterns/common-actions/#copy)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The copy button should be accompanied by a tooltip. Tooltip feedback text should
+be concise and describe the action taken when the user clicks the copy button.
+By default we display the text “Copied!”.
+
+### Importing
+
+```ts
+import { CopyButtonComponent } from '@carbon/angular/copy-button';
+
+@Component({
+  standalone: true,
+  imports: [CopyButtonComponent],
+  template: `
+    <cds-ng-copy-button feedback="Copied!" (click)="onCopy($event)">
+      Copy to clipboard
+    </cds-ng-copy-button>
+  `,
+})
+export class MyComponent {
+  onCopy(event: MouseEvent) {
+    /* ... */
+  }
+}
+```
+
+<Canvas of={CopyButtonStories.Default} />
+
+## Component API
+
+<ArgTypes of={CopyButtonStories.Default} />
+
+## Angular-specific notes
+
+- **Component import:**
+  `import { CopyButtonComponent } from '@carbon/angular/copy-button'` (use in
+  standalone `imports: [CopyButtonComponent]` or `NgModule` `imports`)
+- The host element in DevTools will be `cds-ng-copy-button` — this is the web
+  component running under a prefixed tag (ADR 0020). There is no inner element.
+- The projected text content is used as the icon description read by screen
+  readers.
+- Inputs use camelCase property bindings, for example `[feedbackTimeout]="2000"`
+  and `[autoAlign]="true"`.
+- `cds-ng-copy-button` has no custom click event. Bind the native `click` event
+  with `(click)="handler($event)"`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/CopyButton/__stories__/CopyButton.mdx).

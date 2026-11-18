@@ -1,0 +1,72 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FormGroupStories from './FormGroup.stories';
+
+<Meta of={FormGroupStories} />
+
+# Form group
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FormGroup)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/form/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/form/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With AI label](#with-ai-label)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+`cds-ng-form-group` groups related form controls inside a `<fieldset>` with a
+`<legend>`. It can also show a group-level message and invalid state.
+
+### Importing
+
+```ts
+import { FormGroupComponent } from '@carbon/angular/form-group';
+import { FormItemComponent } from '@carbon/angular/form';
+import { TextInputComponent } from '@carbon/angular/text-input';
+
+@Component({
+  standalone: true,
+  imports: [FormGroupComponent, FormItemComponent, TextInputComponent],
+  template: `
+    <cds-ng-form-group legendText="Contact">
+      <cds-ng-form-item>
+        <cds-ng-text-input label="First name"></cds-ng-text-input>
+      </cds-ng-form-item>
+    </cds-ng-form-group>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FormGroupStories.Default} />
+
+## With AI label
+
+<Canvas of={FormGroupStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of={FormGroupStories.Default} />
+
+## Angular-specific notes
+
+- **Component imports:** `FormGroupComponent` comes from
+  `@carbon/angular/form-group`. `FormItemComponent` comes from
+  `@carbon/angular/form`.
+- **Date picker:** the web components `With AI label` story uses the classic
+  `cds-date-picker`. `@carbon/angular` only wraps the Preview Date Picker (see
+  [ADR 0021](https://github.com/carbon-design-system/carbon/blob/main/docs/decisions/0021-angular-drop-classic-date-picker.md)),
+  so the Angular story uses `cds-ng-preview-date-picker` with `kind="single"`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/FormGroup/__stories__/FormGroup.mdx).

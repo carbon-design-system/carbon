@@ -1,0 +1,290 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as GridStories from './Grid.stories';
+
+<Meta of={GridStories} />
+
+# Grid
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Grid)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/elements/2x-grid/overview/)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Debugging](#debugging)
+- [Gutter modes](#gutter-modes)
+  - [Full width grid](#full-width-grid)
+  - [Condensed grid](#condensed-grid)
+  - [Narrow grid](#narrow-grid)
+- [Row gap](#row-gap)
+- [Subgrid](#subgrid)
+- [Subgrid with row gap](#subgrid-with-row-gap)
+- [Mixed gutter modes](#mixed-gutter-modes)
+- [Auto columns](#auto-columns)
+- [Column start and end](#column-start-and-end)
+- [Offset columns](#offset-columns)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [FAQ](#faq)
+  - [How can I hide columns at a certain breakpoint?](#how-can-i-hide-columns-at-a-certain-breakpoint)
+  - [Can I nest grid components?](#can-i-nest-grid-components)
+- [Feedback](#feedback)
+
+Carbon's grid components help developers use the
+[2x Grid](https://carbondesignsystem.com/elements/2x-grid/overview/). The
+package provides `cds-ng-grid` and `cds-ng-column` components which can be used
+to build a variety of layouts.
+
+```ts
+import {
+  ColumnComponent,
+  ColumnHangComponent,
+  GridComponent,
+} from '@carbon/angular/grid';
+```
+
+<Canvas of={GridStories.Default} />
+
+## Overview
+
+Every layout starts with the `cds-ng-grid` component. You can specify a grid at
+the top-level of your project, or at different depths provided that it can span
+100% width of its container.
+
+Next, you will use a combination of `cds-ng-column` and `cds-ng-grid`. You can
+have multiple `cds-ng-column` components in a `cds-ng-grid`, and nest
+`cds-ng-grid` components in a `cds-ng-column`. Each grid will contain all the
+`cds-ng-column` components provided to it, as long as they don't span more
+columns than the total number of columns in the grid.
+
+To specify how many columns the `cds-ng-column` component should span, you can
+use the `sm`, `md`, `lg` inputs. These are shorthand versions of the names given
+to each of the breakpoints defined by the
+[2x Grid](https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints).
+In the example below, we will use the `lg` input for the large breakpoint and
+the number `4` to specify that each `cds-ng-column` component should span 4
+columns at that breakpoint.
+
+```ts
+import { ColumnComponent, GridComponent } from '@carbon/angular/grid';
+
+@Component({
+  standalone: true,
+  imports: [GridComponent, ColumnComponent],
+  template: `
+    <cds-ng-grid>
+      <cds-ng-column lg="4">Span 4 of 16</cds-ng-column>
+      <cds-ng-column lg="4">Span 4 of 16</cds-ng-column>
+      <cds-ng-column lg="4">Span 4 of 16</cds-ng-column>
+      <cds-ng-column lg="4">Span 4 of 16</cds-ng-column>
+    </cds-ng-grid>
+  `,
+})
+export class MyComponent {}
+```
+
+_Note: by default, `@carbon/styles` ships with a 16 column grid._
+
+You can pair up multiple breakpoint inputs to specify how many columns the
+`cds-ng-column` component should span at different break points. In the example
+below, we will use the `sm`, `md`, and `lg` input to specify how many columns
+the `cds-ng-column` components should span at the small, medium, and large
+breakpoints.
+
+<Canvas of={GridStories.Responsive} />
+
+### Debugging
+
+It is incredibly helpful when debugging CSS Grid to use the browser developer
+tools' css gutter mode to view the grid definition. Depending on the browser,
+these typically provide a toggle for overlaying a schematic showing the column
+and grid gap definition. With this overlay, it's much easier to visually
+understand if gutter modes are configured and set properly on the grid.
+
+Documentation on these features is available for
+[Chrome](https://developer.chrome.com/docs/devtools/css/grid/),
+[Firefox](https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Examine_grid_layouts),
+and
+[Safari](https://webkit.org/blog/11588/introducing-css-grid-inspector/#:~:text=If%20you're%20using%20Safari,%23css%2Dgrid%2Ddemo%20.),
+among others.
+
+## Gutter modes
+
+There are several
+[gutter modes](https://carbondesignsystem.com/elements/2x-grid/overview/#gutters)
+that you can use depending on the layout effect you're looking to achieve. By
+default, `cds-ng-grid` uses the wide gutter mode with a 32px gutter. However,
+you can use the `condensed` input to enable the condensed gutter mode with a 1px
+gutter or the `narrow` input to enable the narrow grid with a 16px gutter.
+
+### Full width grid
+
+<Canvas of={GridStories.FullWidth} />
+
+### Condensed grid
+
+<Canvas of={GridStories.Condensed} />
+
+### Narrow grid
+
+<Canvas of={GridStories.Narrow} />
+
+## Row gap
+
+By default, the CSS Grid does not add vertical spacing (row gap) between grid
+items. You can enable row gap by using the `withRowGap` input on the
+`cds-ng-grid` component. When enabled, the row gap will automatically match the
+current gutter size:
+
+- **Default mode**: 2rem (32px) row gap
+- **Narrow mode**: 1rem (16px) row gap
+- **Condensed mode**: 1px row gap
+
+This is useful when you want consistent vertical spacing between rows that
+matches your horizontal gutter spacing.
+
+```html
+<cds-ng-grid [withRowGap]="true">
+  <cds-ng-column lg="4">Row 1, Column 1</cds-ng-column>
+  <cds-ng-column lg="4">Row 1, Column 2</cds-ng-column>
+  <cds-ng-column lg="4">Row 1, Column 3</cds-ng-column>
+  <cds-ng-column lg="4">Row 1, Column 4</cds-ng-column>
+  <cds-ng-column lg="4">Row 2, Column 1</cds-ng-column>
+  <cds-ng-column lg="4">Row 2, Column 2</cds-ng-column>
+  <cds-ng-column lg="4">Row 2, Column 3</cds-ng-column>
+  <cds-ng-column lg="4">Row 2, Column 4</cds-ng-column>
+</cds-ng-grid>
+```
+
+<Canvas of={GridStories.WithRowGap} />
+
+## Subgrid
+
+`cds-ng-grid` components can be nested within one another to achieve more
+advanced layout configurations. When a grid is a child of another grid, the
+child will always be automatically defined as a subgrid. Subgrids should always
+be contained within a `cds-ng-column` to ensure that the column
+amount/definition is properly configured for the subgrid to inherit.
+Additionally, wrapping subgrids in a `cds-ng-column` enables you to define
+responsive parameters for the column (`sm`, `md`, etc) that the subgrid will
+inherit and be bound to.
+
+<Canvas of={GridStories.Subgrid} />
+
+## Subgrid with row gap
+
+`withRowGap` also works on a subgrid, and can be combined with `narrow` and
+`condensed`.
+
+<Canvas of={GridStories.SubgridWithRowGap} />
+
+## Mixed gutter modes
+
+The same way that you can pass in `condensed` to a root grid, you can also pass
+in `condensed` to a nested grid (subgrid) to enable a certain gutter mode for
+only that subgrid. This can be useful when you need to mix-and-match certain
+gutter modes to achieve a particular layout.
+
+<Canvas of={GridStories.MixedGutterModes} />
+
+## Auto columns
+
+Each column by default spans one single column as defined by the parent grid's
+parameters.
+
+The default track sizing functions of the grid columns are defined by the parent
+grid's `grid-template-columns` property. This declares that there should be
+`--cds-grid-columns` number of columns, and each column should by default span a
+`minmax()` of `0` columns minimum, or a maximum of `--cds-grid-column-size`
+(`1fr`).
+
+The values of these custom properties can be changed to modify the default
+behavior of columns.
+
+## Column start and end
+
+A column can also be placed with `start` and `end` (or `span` and `start`, or
+`span` and `end`) instead of a plain span.
+
+<Canvas of={GridStories.GridStartEnd} />
+
+## Offset columns
+
+You can offset your `cds-ng-column` components by a specific amount of columns
+using the string form for each breakpoint input. This form accepts `span` and
+`start` keys, which allow you to specify the total numbers of columns the
+`cds-ng-column` component spans, and how many columns to offset it by.
+
+You can specify either key, and can mix-and-match across breakpoints. For
+example, the following snippet will have the `cds-ng-column` component span two
+columns at the small breakpoint and then four columns at the medium breakpoint.
+At the medium breakpoint, it will be offset by two columns.
+
+```html
+<cds-ng-column sm="2" md="span:4 start:2"></cds-ng-column>
+```
+
+<Canvas of={GridStories.Offset} />
+
+## Component API
+
+### `cds-ng-grid`
+
+<ArgTypes of={GridStories.Default} />
+
+### `cds-ng-column`
+
+| Input  | Type     | Description                                                                                                                                                                           |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sm`   | `string` | Column size at the small breakpoint. Accepts `N`, `P%`, `span:N start:S`, `span:N end:E` and `start:S end:E`, where N is a number of columns, P a percentage, S a start and E an end. |
+| `md`   | `string` | Column size at the medium breakpoint. Same values as `sm`.                                                                                                                            |
+| `lg`   | `string` | Column size at the large breakpoint. Same values as `sm`.                                                                                                                             |
+| `xlg`  | `string` | Column size at the extra large breakpoint. Same values as `sm`.                                                                                                                       |
+| `max`  | `string` | Column size at the max breakpoint. Same values as `sm`.                                                                                                                               |
+| `span` | `string` | Number of columns to span at every breakpoint.                                                                                                                                        |
+
+### `cds-ng-column-hang`
+
+`cds-ng-column-hang` has no inputs. Use it inside a `cds-ng-column` to hang its
+content 16px into the gutter.
+
+## Angular-specific notes
+
+- **Component imports:** `GridComponent`, `ColumnComponent` and
+  `ColumnHangComponent` all come from `@carbon/angular/grid`.
+- **Boolean inputs:** `condensed`, `narrow`, `fullWidth` and `withRowGap` are
+  boolean inputs. Use `[condensed]="true"` or the bare attribute `condensed`.
+  `full-width` and `with-row-gap` in the web components docs are `fullWidth` and
+  `withRowGap` in Angular.
+- **Story styles:** the stories colour the grid through the `part="grid"` shadow
+  part and the `sb-*` classes. These styles are story-only and are not part of
+  the component.
+
+## FAQ
+
+### How can I hide columns at a certain breakpoint?
+
+To hide a column at a specific breakpoint, you should specify 0 for the span of
+the column at that particular breakpoint. For example, you can use the following
+two forms for specifying column span and pass in 0 to either to hide the column
+at the small breakpoint.
+
+```html
+<cds-ng-column sm="0"></cds-ng-column>
+<cds-ng-column sm="span:0"></cds-ng-column>
+```
+
+### Can I nest grid components?
+
+Yes! While the CSS Grid `subgrid` property is still
+[not well supported](https://caniuse.com/#feat=css-subgrid), css custom
+properties are used to enable nested grids with inherited column definitions.
+View the subgrid story documentation for more information on how this works and
+how to use it.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/Grid/__stories__/Grid.mdx).

@@ -1,0 +1,83 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as OrderedListStories from './OrderedList.stories';
+
+<Meta of={OrderedListStories} />
+
+# Ordered list
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/OrderedList)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/list/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/list/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Native list styles](#native-list-styles)
+- [Nested ordered list](#nested-ordered-list)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+Lists are vertical groupings of related content. `cds-ng-ordered-list` renders a
+numbered list of `cds-ng-list-item` children.
+
+### Importing
+
+```ts
+import { ListItemComponent, OrderedListComponent } from '@carbon/angular/list';
+
+@Component({
+  standalone: true,
+  imports: [OrderedListComponent, ListItemComponent],
+  template: `
+    <cds-ng-ordered-list>
+      <cds-ng-list-item>Review pull requests</cds-ng-list-item>
+      <cds-ng-list-item>Update dependencies</cds-ng-list-item>
+    </cds-ng-ordered-list>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={OrderedListStories.Default} />
+
+## Native list styles
+
+Set `native` to use the browser's native list styles instead of Carbon's custom
+counter.
+
+<Canvas of={OrderedListStories.NativeListStyles} />
+
+## Nested ordered list
+
+Place a `cds-ng-ordered-list` inside a `cds-ng-list-item` to nest it, and set
+`nested` on the child list.
+
+<Canvas of={OrderedListStories.Nested} />
+
+## Component API
+
+### `cds-ng-ordered-list`
+
+<ArgTypes of={OrderedListStories.Default} />
+
+### `cds-ng-list-item`
+
+| Input    | Type      | Description                                                                                                                    |
+| -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `nested` | `boolean` | `true` if this list item is a child of a nested list. The ordered and unordered list set this automatically on their children. |
+
+## Angular-specific notes
+
+- **Component imports:** `OrderedListComponent` and `ListItemComponent` come
+  from `@carbon/angular/list`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/OrderedList/__stories__/OrderedList.mdx).

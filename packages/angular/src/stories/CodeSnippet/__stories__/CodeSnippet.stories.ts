@@ -1,0 +1,317 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import {
+  moduleMetadata,
+  type Meta,
+  type StoryObj,
+  type ArgTypes,
+} from '@storybook/angular';
+import {
+  CodeSnippetComponent,
+  CodeSnippetSkeletonComponent,
+} from '@carbon/angular/code-snippet';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
+
+// ─── WC-parity stories (one-for-one with @carbon/web-components CodeSnippet) ─
+
+const args = {
+  copyButtonDescription: 'Copy to clipboard',
+  copyText: '',
+  disabled: false,
+  feedback: 'Copied to clipboard',
+  feedbackTimeout: 2000,
+  hideCopyButton: false,
+  maxCollapsedNumberOfRows: 15,
+  maxExpandedNumberOfRows: 0,
+  minCollapsedNumberOfRows: 3,
+  minExpandedNumberOfRows: 16,
+  showLessText: 'Show less',
+  showMoreText: 'Show more',
+  type: 'single',
+  text: 'node -v',
+  wrapText: false,
+};
+
+const argTypes: ArgTypes = {
+  copyButtonDescription: {
+    control: 'text',
+    description: 'Specify the description for the Copy Button.',
+    table: { defaultValue: { summary: '"Copy to clipboard"' } },
+  },
+  copyText: {
+    control: 'text',
+    description:
+      "Optional text to copy. If not specified, the children node's <code>innerText</code> will be used as the copy value.",
+    table: { defaultValue: { summary: '""' } },
+  },
+  disabled: {
+    control: 'boolean',
+    description: 'Specify whether or not the CodeSnippet should be disabled.',
+    table: { defaultValue: { summary: 'false' } },
+  },
+  feedback: {
+    control: 'text',
+    description: 'Specify the string displayed when the snippet is copied.',
+    table: { defaultValue: { summary: '"Copied!"' } },
+  },
+  feedbackTimeout: {
+    control: 'number',
+    description:
+      'Specify the time it takes for the feedback message to timeout.',
+    table: { defaultValue: { summary: '2000' } },
+  },
+  hideCopyButton: {
+    control: 'boolean',
+    description:
+      'Specify whether or not a copy button should be used/rendered.',
+    table: { defaultValue: { summary: 'false' } },
+  },
+  maxCollapsedNumberOfRows: {
+    control: 'number',
+    description:
+      'Specify the maximum number of rows to be shown when in collapsed view.',
+    table: { defaultValue: { summary: '15' } },
+  },
+  maxExpandedNumberOfRows: {
+    control: 'number',
+    description:
+      'Specify the maximum number of rows to be shown when in expanded view.',
+    table: { defaultValue: { summary: '0' } },
+  },
+  minCollapsedNumberOfRows: {
+    control: 'number',
+    description:
+      'Specify the minimum number of rows to be shown when in collapsed view.',
+    table: { defaultValue: { summary: '3' } },
+  },
+  minExpandedNumberOfRows: {
+    control: 'number',
+    description:
+      'Specify the minimum number of rows to be shown when in expanded view.',
+    table: { defaultValue: { summary: '16' } },
+  },
+  showLessText: {
+    control: 'text',
+    description:
+      'Specify a string that is displayed when the Code Snippet has been interacted with to show more lines.',
+    table: { defaultValue: { summary: '"Show less"' } },
+  },
+  showMoreText: {
+    control: 'text',
+    description:
+      'Specify a string that is displayed when the Code Snippet text is more than 15 lines.',
+    table: { defaultValue: { summary: '"Show more"' } },
+  },
+  type: {
+    control: 'radio',
+    options: ['single', 'inline', 'multi'],
+    table: { defaultValue: { summary: '"single"' } },
+  },
+  text: {
+    control: 'text',
+    description: 'Specify the text that is inside the code snippet',
+  },
+  wrapText: {
+    control: 'boolean',
+    description: 'Specify whether or not to wrap the text.',
+    table: { defaultValue: { summary: 'false' } },
+  },
+};
+
+const variantArgTypes: ArgTypes = {
+  ...argTypes,
+  type: {
+    ...argTypes['type'],
+    table: {
+      ...argTypes['type'].table,
+      readonly: true,
+    },
+  },
+};
+
+const multilineText = `"scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "carbon-cli ci-check",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint actions config codemods packages",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
+    "test": "cross-env BABEL_ENV=test jest",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
+  },
+  "resolutions": {
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-is": "~16.9.0",
+    "react-test-renderer": "~16.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@babel/preset-env": "^7.10.0",
+    "@babel/preset-react": "^7.10.0",
+    "@babel/runtime": "^7.10.0",
+    "@commitlint/cli": "^8.3.5",
+`;
+
+const singlelineText =
+  'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest';
+
+const snippetTemplate = `
+  <cds-ng-code-snippet
+    [type]="type"
+    [copyText]="copyText"
+    [disabled]="disabled"
+    [maxCollapsedNumberOfRows]="maxCollapsedNumberOfRows"
+    [maxExpandedNumberOfRows]="maxExpandedNumberOfRows"
+    [minCollapsedNumberOfRows]="minCollapsedNumberOfRows"
+    [minExpandedNumberOfRows]="minExpandedNumberOfRows"
+    [hideCopyButton]="hideCopyButton"
+    [showLessText]="showLessText"
+    [showMoreText]="showMoreText"
+    [wrapText]="wrapText"
+    [feedback]="feedback"
+    [feedbackTimeout]="feedbackTimeout"
+    [tooltipContent]="copyButtonDescription">{{ text }}</cds-ng-code-snippet>
+`;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const meta: Meta<any> = {
+  title: 'Components/Code snippet',
+  decorators: [
+    moduleMetadata({
+      imports: [CodeSnippetComponent, CodeSnippetSkeletonComponent],
+    }),
+  ],
+};
+
+export default meta;
+type Story = StoryObj<Record<string, unknown>>;
+
+// WC: Inline
+export const Inline: Story = {
+  args: {
+    ...args,
+    type: 'inline',
+  },
+  argTypes: variantArgTypes,
+  render: (args) => ({
+    props: args,
+    template: snippetTemplate,
+  }),
+};
+
+// WC: InlineWithLayer
+export const InlineWithLayer: Story = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: {
+    ...args,
+    type: 'inline',
+  },
+  argTypes: variantArgTypes,
+  render: (args) => ({
+    props: args,
+    template: snippetTemplate,
+  }),
+};
+
+// WC: Multiline
+export const Multiline: Story = {
+  args: {
+    ...args,
+    type: 'multi',
+    text: multilineText,
+  },
+  argTypes: variantArgTypes,
+  render: (args) => ({
+    props: args,
+    template: snippetTemplate,
+  }),
+};
+
+// WC: MultilineWithLayer
+export const MultilineWithLayer: Story = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: {
+    ...args,
+    type: 'multi',
+    text: multilineText,
+  },
+  argTypes: variantArgTypes,
+  render: (args) => ({
+    props: args,
+    template: snippetTemplate,
+  }),
+};
+
+// WC: Singleline
+export const Singleline: Story = {
+  args: {
+    ...args,
+    type: 'single',
+    text: singlelineText,
+  },
+  argTypes: variantArgTypes,
+  render: (args) => ({
+    props: args,
+    template: snippetTemplate,
+  }),
+};
+
+// WC: SinglelineWithLayer
+export const SinglelineWithLayer: Story = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: {
+    ...args,
+    type: 'single',
+    text: singlelineText,
+  },
+  argTypes: variantArgTypes,
+  render: (args) => ({
+    props: args,
+    template: snippetTemplate,
+  }),
+};
+
+// WC: Skeleton
+export const Skeleton: Story = {
+  args: {
+    type: 'single',
+  },
+  argTypes: {
+    type: {
+      control: 'radio',
+      description: 'Specify the type of Code Snippet skeleton.',
+      options: ['single', 'multi'],
+      table: { defaultValue: { summary: '"single"' } },
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['type'],
+    },
+  },
+  render: (args) => ({
+    props: args,
+    template: `<cds-ng-code-snippet-skeleton [type]="type"></cds-ng-code-snippet-skeleton>`,
+  }),
+};

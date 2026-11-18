@@ -1,0 +1,100 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as IconButtonStories from './IconButton.stories';
+
+<Meta of={IconButtonStories} />
+
+# Icon button
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/IconButton)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/button/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/button/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With badge indicator](#with-badge-indicator)
+- [Kind](#kind)
+- [Alignment](#alignment)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-icon-button` component is useful when you have a button where the
+content is an icon. In this situation, it's important that the button itself is
+labeled in a way that can be understandable by mouse, keyboard, and screen
+readers. As a result, this component makes it easy to create accessible icon
+buttons.
+
+### Importing
+
+```ts
+import { IconButtonComponent } from '@carbon/angular/icon-button';
+
+@Component({
+  standalone: true,
+  imports: [IconButtonComponent],
+  template: `
+    <cds-ng-icon-button>
+      <svg slot="icon"><!-- icon --></svg>
+      <span slot="tooltip-content">label</span>
+    </cds-ng-icon-button>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={IconButtonStories.Default} />
+
+## With badge indicator
+
+Slot a `cds-ng-badge-indicator` (`BadgeIndicatorComponent` from
+`@carbon/angular/badge-indicator`) inside the icon button to show a count or a
+dot. When the badge has no `count`, make sure the tooltip text describes that
+there is a new notification.
+
+<Canvas of={IconButtonStories.withBadgeIndicator} />
+
+## Kind
+
+Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
+most commonly will be styled as primary or ghost buttons. Icon only buttons do
+not support Danger, Danger tertiary, or Danger ghost.
+
+## Alignment
+
+The `align` input allows you to specify where your content should be placed
+relative to the `cds-ng-icon-button`. For example, if you provide `align="top"`
+to the component then the tooltip will render above your component. Similarly,
+if you provide `align="bottom"` then the tooltip will render below your
+component.
+
+## Component API
+
+<ArgTypes of={IconButtonStories.Default} />
+
+## Angular-specific notes
+
+- **Component import:**
+  `import { IconButtonComponent } from '@carbon/angular/icon-button'` (use in
+  standalone `imports: [IconButtonComponent]` or `NgModule` `imports`)
+- The host element in DevTools will be `cds-ng-icon-button` — this is the web
+  component running under a prefixed tag (ADR 0020). There is no inner element.
+- Inputs use camelCase property bindings, for example `[enterDelayMs]="100"`,
+  `[leaveDelayMs]="100"`, `[closeOnActivation]="true"` and
+  `[isSelected]="true"`.
+- Boolean inputs accept the attribute form (`disabled`) as well as the property
+  binding form (`[disabled]="isDisabled"`).
+- `cds-ng-icon-button` has no custom click event. Bind the native `click` event
+  with `(click)="handler($event)"`.
+- Project the icon with `slot="icon"` and the tooltip text with
+  `slot="tooltip-content"`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/IconButton/__stories__/IconButton.mdx).

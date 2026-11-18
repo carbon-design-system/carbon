@@ -1,0 +1,130 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as LayerStories from './Layer.stories';
+
+<Meta of={LayerStories} />
+
+# Layer
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Layer)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/elements/color/usage/#layering)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/elements/color/overview/#accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With background](#with-background)
+- [Setting a custom level](#setting-a-custom-level)
+- [Get the current layer](#get-the-current-layer)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-layer` component is used to render components on different layers.
+Each layer has a specific set of token values associated with it. You can use
+these tokens directly, or use contextual tokens from our styles package like
+`$layer` or `$field`.
+
+### Importing
+
+```ts
+import { LayerComponent } from '@carbon/angular/layer';
+
+@Component({
+  standalone: true,
+  imports: [LayerComponent],
+  template: `
+    <cds-ng-layer>
+      <div>Test component</div>
+    </cds-ng-layer>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={LayerStories.Default} />
+
+The layer component accepts child elements. Each child of a layer component is
+rendered using the layer tokens at that layer. Layer components can be nested
+indefinitely, but the token sets typically end after 3 layers.
+
+```html
+<cds-ng-layer>
+  <div>Test component</div>
+  <cds-ng-layer>
+    <div>Test component</div>
+    <cds-ng-layer>
+      <div>Test component</div>
+    </cds-ng-layer>
+  </cds-ng-layer>
+</cds-ng-layer>
+```
+
+## With background
+
+The layer component updates layer tokens at each level and theme. When you add
+the `withBackground` input, it automatically sets a background color using the
+`$layer-background` token. Without it, you can manually set the background with
+`background-color: $layer-background`.
+
+<Canvas of={LayerStories.withBackground} />
+
+## Setting a custom level
+
+You can override the `level` of a layer if you would like to change the
+presentation of a layer in your application. This is particularly helpful if you
+would like to reset the layer level back to `0` or if you want to make sure a
+part of a page always renders in a certain level.
+
+To do this, you can use the `level` input:
+
+<Canvas of={LayerStories.CustomLevel} />
+
+## Get the current layer
+
+If you are building a component and would like to know what layer the component
+resides within, you can listen to the `(useLayer)` output of `cds-ng-layer`.
+
+The event is a `CustomEvent` whose `detail` contains the layer element and its
+level:
+
+```html
+<cds-ng-layer (useLayer)="onUseLayer($event)">
+  <div>Current layer level: <span class="use-layer-level"></span></div>
+</cds-ng-layer>
+```
+
+```ts
+onUseLayer(event: CustomEvent) {
+  const { layer, level } = event.detail;
+  layer.querySelector('.use-layer-level').innerText = `${level + 1}`;
+}
+```
+
+<Canvas of={LayerStories.UseLayer} />
+
+## Component API
+
+<ArgTypes of={LayerStories.Default} />
+
+## Angular-specific notes
+
+- The selector is `cds-ng-layer`. Set the `with-background` attribute rather
+  than the `withBackground` input. The web component's styles select on the
+  attribute and the property is not reflected to it, so the input has no visible
+  effect.
+- The underlying `cds-ng-use-layer` DOM event is exposed as the `useLayer`
+  `@Output`.
+- Storybook also ships a `withLayers` decorator
+  (`.storybook/decorators/with-layers`) that wraps a story in three nested
+  layers to show how a component renders on `$background`, `$layer-01` and
+  `$layer-02`.
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).
