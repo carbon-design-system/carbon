@@ -15,18 +15,36 @@ const path = require('path');
 const {
   EXTENSION_NAMESPACE,
   FORMAT_SCHEMA_URL,
+  RESOLVER_SCHEMA_URL,
+  checkResolverFile,
   checkTokenFile,
 } = require('../tokens');
 
-function check(tokens) {
+function withFiles(files, callback) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'tokens-test-'));
-  const filepath = path.join(directory, 'test.tokens.json');
-  fs.writeFileSync(filepath, JSON.stringify(tokens));
+  for (const [name, contents] of Object.entries(files)) {
+    fs.writeFileSync(path.join(directory, name), JSON.stringify(contents));
+  }
   try {
-    return checkTokenFile(filepath);
+    return callback(directory);
   } finally {
     fs.rmSync(directory, { recursive: true });
   }
+}
+
+function check(tokens) {
+  return withFiles({ 'test.tokens.json': tokens }, (directory) => {
+    return checkTokenFile(path.join(directory, 'test.tokens.json'));
+  });
+}
+
+function checkResolver(resolver, files = {}) {
+  return withFiles(
+    { 'test.resolver.json': resolver, ...files },
+    (directory) => {
+      return checkResolverFile(path.join(directory, 'test.resolver.json'));
+    }
+  );
 }
 
 const color = {
@@ -125,6 +143,58 @@ describe('checkTokenFile', () => {
     expect(results['extension-namespace']).toEqual([
       'uses $extensions["carbon.themes"]',
       'uses $extensions["org.carbon"]',
+    ]);
+  });
+});
+
+describe('checkResolverFile', () => {
+  const resolver = {
+    $schema: RESOLVER_SCHEMA_URL,
+    version: '2025.10',
+    sets: {
+      palette: { sources: [{ $ref: 'palette.tokens.json' }] },
+    },
+    modifiers: {
+      theme: {
+        contexts: {
+          light: [{ $ref: 'light.tokens.json' }],
+          dark: [{ $ref: 'dark.tokens.json' }],
+        },
+        default: 'light',
+      },
+    },
+    resolutionOrder: [
+      { $ref: '#/sets/palette' },
+      { $ref: '#/modifiers/theme' },
+    ],
+  };
+  const files = {
+    'palette.tokens.json': {},
+    'light.tokens.json': {},
+    'dark.tokens.json': {},
+  };
+
+  test('passes a conformant file', () => {
+    expect(checkResolver(resolver, files)).toEqual([]);
+  });
+
+  test('reports schema violations', () => {
+    const { version, ...invalid } = resolver;
+
+    expect(checkResolver(invalid, files)).not.toEqual([]);
+  });
+
+  test('reports a missing or outdated $schema', () => {
+    const { $schema, ...invalid } = resolver;
+
+    expect(checkResolver(invalid, files)).toEqual(['$schema is undefined']);
+  });
+
+  test('reports referenced token files that do not exist', () => {
+    const { 'dark.tokens.json': dark, ...missing } = files;
+
+    expect(checkResolver(resolver, missing)).toEqual([
+      'dark.tokens.json does not exist',
     ]);
   });
 });

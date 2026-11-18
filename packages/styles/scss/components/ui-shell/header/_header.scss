@@ -20,6 +20,7 @@
 @use '../../../utilities/button-reset';
 @use '../../../utilities/component-reset';
 @use '../../../utilities/convert';
+@use '../../../utilities/high-contrast-mode' as *;
 @use '../../../utilities/z-index' as *;
 
 /// UI shell header
@@ -467,5 +468,21 @@
     inset-inline-start: 0;
     // TODO: double check with design that these tokens are correct, missing spec for it
     outline: none;
+  }
+
+  // Forced colors paints the transparent borders the name and menu items
+  // reserve for focus, so every link looked focused. Hide them until focus.
+  @include high-contrast-mode {
+    a.#{$prefix}--header__name,
+    a.#{$prefix}--header__menu-item {
+      border-color: Canvas;
+    }
+
+    a.#{$prefix}--header__name:focus,
+    a.#{$prefix}--header__menu-item:focus,
+    a.#{$prefix}--header__menu-item[aria-current='page']:focus,
+    a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
+      border-color: Highlight;
+    }
   }
 }

@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=15784-271032&m=dev
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/text-input/text-input.ts
+// component=cds-text-input
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,68 +9,97 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=15784-271032&m=dev',
-  {
-    props: {
-      label: figma.string('Label text'),
-      size: figma.enum('Size', {
-        Large: 'lg',
-        Medium: 'md',
-        Small: 'sm',
-      }),
-      disabled: figma.enum('State', {
-        Disabled: true,
-      }),
-      invalid: figma.enum('State', {
-        Error: true,
-      }),
-      invalidText: figma.string('Error text'),
-      warn: figma.enum('State', {
-        Warning: true,
-      }),
-      warnText: figma.string('Warning text'),
-      helperText: figma.boolean('Show helper', {
-        true: figma.string('Helper text'),
-      }),
-      placeholder: figma.string('Placeholder text'),
-      value: figma.boolean('Text filled', {
-        true: figma.string('Input text'),
-      }),
-      enableCounter: figma.boolean('Show count'),
-      readonly: figma.enum('State', {
-        'Read-only': true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-text-input
-        disabled=${props.disabled}
-        enable-counter=${props.enableCounter}
-        helper-text=${props.helperText}
-        invalid=${props.invalid}
-        invalid-text=${props.invalidText}
-        label=${props.label}
-        placeholder=${props.placeholder}
-        readonly=${props.readonly}
-        size=${props.size}
-        value=${props.value}
-        warn=${props.warn}
-        warn-text=${props.warnText}></cds-text-input>`,
-    imports: [
-      "import '@carbon/web-components/es/components/text-input/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=15784-271032&m=dev',
-  {
-    variant: { State: 'Skeleton' },
-    example: () => html`<cds-text-input-skeleton></cds-text-input-skeleton>`,
-    imports: [
-      "import '@carbon/web-components/es/components/text-input/index.js'",
-    ],
+function createTemplate() {
+  const isSkeleton = instance.getEnum('State', {
+    Skeleton: true,
+  });
+
+  if (isSkeleton) {
+    return {
+      id: 'cds-text-input-skeleton',
+      imports: [
+        "import '@carbon/web-components/es/components/text-input/text-input-skeleton.js'",
+      ],
+      example: figma.code`<cds-text-input-skeleton></cds-text-input-skeleton>`,
+      metadata: { nestable: true },
+    };
   }
-);
+
+  const label = instance.getString('Label text');
+  const placeholder = instance.getString('Placeholder text');
+  const value = instance.getBoolean('Text filled')
+    ? instance.getString('Input text')
+    : undefined;
+  const helperText = instance.getBoolean('Show helper')
+    ? instance.getString('Helper text')
+    : undefined;
+  const enableCounter = instance.getBoolean('Show count');
+  const size = instance.getEnum('Size', {
+    Large: 'lg',
+    Medium: 'md',
+    Small: 'sm',
+  });
+  const inline = instance.getEnum('Style', {
+    Inline: true,
+  });
+  const disabled = instance.getEnum('State', {
+    Disabled: true,
+  });
+  const readonly = instance.getEnum('State', {
+    'Read-only': true,
+  });
+  const invalid = instance.getEnum('State', {
+    Error: true,
+  });
+  const invalidText = invalid ? instance.getString('Error text') : undefined;
+  const warn = instance.getEnum('State', {
+    Warning: true,
+  });
+  const warnText = warn ? instance.getString('Warning text') : undefined;
+
+  return {
+    id: 'cds-text-input',
+    imports: [
+      "import '@carbon/web-components/es/components/text-input/text-input.js'",
+    ],
+    example: figma.code`<cds-text-input${renderStringAttribute(
+      'label',
+      label
+    )}${renderStringAttribute(
+      'placeholder',
+      placeholder
+    )}${renderStringAttribute('value', value)}${renderStringAttribute(
+      'helper-text',
+      helperText
+    )}${renderBooleanAttribute(
+      'enable-counter',
+      enableCounter
+    )}${renderStringAttribute('size', size)}${renderBooleanAttribute(
+      'inline',
+      inline
+    )}${renderBooleanAttribute(
+      'disabled',
+      disabled
+    )}${renderBooleanAttribute('readonly', readonly)}${renderBooleanAttribute(
+      'invalid',
+      invalid
+    )}${renderStringAttribute(
+      'invalid-text',
+      invalidText
+    )}${renderBooleanAttribute('warn', warn)}${renderStringAttribute(
+      'warn-text',
+      warnText
+    )}></cds-text-input>`,
+    metadata: { nestable: true },
+  };
+}
+
+export default createTemplate();

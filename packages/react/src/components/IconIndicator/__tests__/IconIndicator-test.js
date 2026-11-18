@@ -56,6 +56,14 @@ describe('IconIndicator', () => {
       expect(trigger).toHaveAccessibleName('Test Label');
     });
 
+    it('should support tabIndex on the tooltip trigger', () => {
+      render(
+        <IconIndicator kind="failed" label="Test Label" compact tabIndex={-1} />
+      );
+
+      expect(screen.getByRole('button')).toHaveAttribute('tabindex', '-1');
+    });
+
     it('should render with tooltip trigger when compact is true', () => {
       const { container } = render(
         <IconIndicator kind="succeeded" label="Success" compact />

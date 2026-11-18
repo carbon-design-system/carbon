@@ -748,6 +748,8 @@ categories:
           - ai-launch
           - ai-recommend
           - ai--observability
+          - bobcoin
+          - bobcoin--consumption
           - business-metrics
           - ibm--engineering-ai-hub
           - ibm--granite
@@ -855,6 +857,7 @@ categories:
           - ibm--gcm
           - ibm--global-storage-architecture
           - ibm--i
+          - ibm--i--alt
           - ibm--ibv
           - ibm--instana
           - ibm--jrs
@@ -1926,6 +1929,7 @@ categories:
           - priority--low
           - queued
           - shield--alert
+          - shield--infinity
           - square-fill
           - undefined
           - undefined--filled
@@ -2069,6 +2073,7 @@ categories:
           - gui--management
           - hardware-security-module
           - hybrid-networking--alt
+          - ibm--z17
           - id-management
           - if--action
           - image-service
@@ -2359,6 +2364,7 @@ categories:
           - cabin-care--alert
           - cabin-care--alt
           - cafe
+          - cafe--alt
           - campsite
           - car
           - car--front

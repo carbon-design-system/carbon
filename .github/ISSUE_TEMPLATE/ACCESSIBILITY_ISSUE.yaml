@@ -63,7 +63,7 @@ body:
       multiple: true
       options:
         - Windows
-        - MacOS
+        - macOS
         - Other
   - type: input
     id: version
@@ -93,7 +93,7 @@ body:
     attributes:
       label: Assistive technology
       description: 'Did you experience the issue using an assistive technology?'
-      placeholder: e.g. JAWS, MacOS VoiceOver
+      placeholder: e.g. JAWS, macOS VoiceOver
   - type: textarea
     id: description
     attributes:

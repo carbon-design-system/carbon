@@ -26,11 +26,11 @@ $block-class: #{$prefix}--action-set;
 
 // Mixin for button separator styles
 @mixin button-separator($direction: horizontal) {
-  $shadow: if(
-    $direction == horizontal,
-    to-rem(-1px) 0 0 0 button-tokens.$button-separator,
-    0 to-rem(-1px) 0 0 button-tokens.$button-separator
-  );
+  $shadow: to-rem(-1px) 0 0 0 button-tokens.$button-separator;
+
+  @if $direction != horizontal {
+    $shadow: 0 to-rem(-1px) 0 0 button-tokens.$button-separator;
+  }
 
   // Slotted buttons
   ::slotted(#{$prefix}-button:not(:first-of-type)) {

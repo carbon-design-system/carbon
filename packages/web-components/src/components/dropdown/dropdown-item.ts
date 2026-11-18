@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { LitElement, html, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -129,9 +129,18 @@ class CDSDropdownItem extends LitElement {
           .id++}`
       );
     }
-    this.setAttribute('aria-selected', String(this.selected));
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', '-1');
+    }
     this.addEventListener('mouseenter', this._handleMouseEnter);
     this.addEventListener('mouseleave', this._handleMouseLeave);
+  }
+
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+    if (changedProperties.has('selected')) {
+      this.setAttribute('aria-selected', String(this.selected));
+    }
   }
 
   disconnectedCallback() {

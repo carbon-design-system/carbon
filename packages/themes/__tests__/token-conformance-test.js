@@ -10,28 +10,22 @@
 'use strict';
 
 const path = require('path');
-const { describeTokenConformance } = require('@carbon/test-utils/tokens');
+const {
+  checkResolverFile,
+  describeTokenConformance,
+} = require('@carbon/test-utils/tokens');
 
-// Theme and component tokens store their values in
-// `$extensions["carbon.themes"]` instead of `$value`, so every token currently
-// fails `token-values`.
-const themeTokenFailures = [
-  'schema-url',
-  'token-values',
-  'extension-namespace',
-];
+const packageDir = path.resolve(__dirname, '..');
 
 describeTokenConformance({
-  packageDir: path.resolve(__dirname, '..'),
-  include: ['src/dtcg/**/*.json'],
-  // generated from @carbon/colors during build
-  exclude: ['src/dtcg/color-palette.json'],
-  knownFailures: {
-    'src/dtcg/themes.json': themeTokenFailures,
-    'src/dtcg/components/button.json': themeTokenFailures,
-    'src/dtcg/components/content-switcher.json': themeTokenFailures,
-    'src/dtcg/components/notification.json': themeTokenFailures,
-    'src/dtcg/components/status.json': themeTokenFailures,
-    'src/dtcg/components/tag.json': themeTokenFailures,
-  },
+  packageDir,
+  include: ['tokens/**/*.tokens.json'],
+});
+
+describe('resolver conformance (DTCG 2025.10)', () => {
+  test('tokens/themes.resolver.json', () => {
+    expect(
+      checkResolverFile(path.join(packageDir, 'tokens/themes.resolver.json'))
+    ).toEqual([]);
+  });
 });

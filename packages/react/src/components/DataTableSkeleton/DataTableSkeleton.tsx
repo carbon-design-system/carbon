@@ -51,6 +51,11 @@ export interface DataTableSkeletonProps
   showToolbar?: boolean;
 
   /**
+   * Specify a label to be read by screen readers on the toolbar region.
+   */
+  toolbarLabel?: string;
+
+  /**
    * Changes the row height of table.
    */
   size?: DataTableSize;
@@ -73,6 +78,7 @@ const DataTableSkeleton = ({
   className,
   showHeader = true,
   showToolbar = true,
+  toolbarLabel = 'data table toolbar',
   size = 'lg',
   ...rest
 }: DataTableSkeletonProps) => {
@@ -109,7 +115,7 @@ const DataTableSkeleton = ({
       ) : null}
       {showToolbar ? (
         <section
-          aria-label="data table toolbar"
+          aria-label={toolbarLabel}
           className={`${prefix}--table-toolbar`}>
           <div className={`${prefix}--toolbar-content`}>
             <span
@@ -174,6 +180,11 @@ DataTableSkeleton.propTypes = {
    * Specify if the table toolbar should be rendered as part of the skeleton.
    */
   showToolbar: PropTypes.bool,
+
+  /**
+   * Specify a label to be read by screen readers on the toolbar region.
+   */
+  toolbarLabel: PropTypes.string,
 
   /**
    * Changes the row height of table.
