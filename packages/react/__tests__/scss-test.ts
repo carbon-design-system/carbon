@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,8 +7,11 @@
  * @jest-environment node
  */
 
+import { describe, expect, it } from '@jest/globals';
 import { files } from '@carbon/styles/files';
 import { SassRenderer } from '@carbon/test-utils/scss';
+
+declare const __dirname: string;
 
 const { render } = SassRenderer.create(__dirname);
 
