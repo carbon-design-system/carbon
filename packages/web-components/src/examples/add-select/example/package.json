@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@carbon/icons": "latest",
-    "@carbon/styles": "latest",
+    "@carbon/styles": "v12-alpha",
     "@carbon/utilities": "latest",
-    "@carbon/web-components": "latest",
+    "@carbon/web-components": "v12-alpha",
     "lit": "^3.2.1",
     "sass": "^1.64.1"
   },

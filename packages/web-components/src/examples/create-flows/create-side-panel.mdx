@@ -25,18 +25,17 @@ and extended further.
 
 To build this pattern, we recommend including the following components:
 
-- [c4p-side-panel](https://web-components.carbondesignsystem.com/?path=/docs/components-sidepanel--overview)
+- [cds-side-panel](https://web-components.carbondesignsystem.com/?path=/docs/components-sidepanel--overview)
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
 - [cds-dropdown](https://web-components.carbondesignsystem.com/?path=/docs/components-dropdown--overview)
 - [cds-form-item](https://web-components.carbondesignsystem.com/?path=/docs/components-form--overview)
 - [cds-number-input](https://web-components.carbondesignsystem.com/?path=/docs/components-number-input--overview)
 - [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input--overview)
 
-Until `SidePanel` is exported from `@carbon/web-components`, import it from
-`@carbon/ibm-products-web-components`:
+Import the side panel and the other components from `@carbon/web-components`:
 
 ```javascript
-import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
+import '@carbon/web-components/es/components/side-panel/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/form/form-item.js';
@@ -49,8 +48,8 @@ import '@carbon/web-components/es/components/text-input/index.js';
 <Canvas of={Stories.Default} />
 
 ```html
-<c4p-side-panel
-  @c4p-side-panel-closed=${this._openHandler}
+<cds-side-panel
+  @cds-side-panel-closed=${this._openHandler}
   ?open=${this.open}
   size="md"
   title="Create partitions"
@@ -69,7 +68,7 @@ import '@carbon/web-components/es/components/text-input/index.js';
   <cds-button slot="actions" kind="primary" @click=${this._openHandler}>
     Create
   </cds-button>
-</c4p-side-panel>
+</cds-side-panel>
 ```
 
 ## With form validation

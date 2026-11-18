@@ -22,7 +22,7 @@ and extended further.
 
 To build this pattern, we recommend including the following components:
 
-- [Coachmark](https://ibm-products-web-components.carbondesignsystem.com/?path=/docs/components-coachmark)
+- [Coachmark](https://web-components.carbondesignsystem.com/?path=/docs/components-coachmark)
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
 - [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
 
@@ -55,8 +55,8 @@ Here's a quick example to get you started.
 
 ```javascript
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-beacon/index.js';
+import '@carbon/web-components/es/components/coachmark/index.js';
+import '@carbon/web-components/es/components/coachmark/coachmark-beacon/index.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/button/button.js';
 ```
@@ -64,23 +64,23 @@ import '@carbon/web-components/es/components/button/button.js';
 ### HTML
 
 ```html
-<c4p-coachmark
+<cds-coachmark
   ?open=${this._open}
   align=${POPOVER_ALIGNMENT.TOP}
   .position=${{ x: 150, y: 150 }}
   .highContrast=${true}
 >
-  <c4p-coachmark-beacon
+  <cds-coachmark-beacon
     label="Show information"
     ?expanded=${this._open}
-    @c4p-coachmark-beacon-clicked=${this.handleBeaconClick}
+    @cds-coachmark-beacon-clicked=${this.handleBeaconClick}
     slot="trigger"
   >
-  </c4p-coachmark-beacon>
-  <c4p-coachmark-header
+  </cds-coachmark-beacon>
+  <cds-coachmark-header
     closeIconDescription="Close"
-  ></c4p-coachmark-header>
-  <c4p-coachmark-body class="coachmark-body">
+  ></cds-coachmark-header>
+  <cds-coachmark-body class="coachmark-body">
     <div>
       <img
         src=${sampleImage}
@@ -134,6 +134,6 @@ import '@carbon/web-components/es/components/button/button.js';
         ` : ''}
       </div>
     </div>
-  </c4p-coachmark-body>
-</c4p-coachmark>
+  </cds-coachmark-body>
+</cds-coachmark>
 ```

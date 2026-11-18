@@ -12,8 +12,8 @@ import '@carbon/web-components/es/components/button/button.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/link/index.js';
 import styles from './styles.scss?lit';
-import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js'; 
+import '@carbon/web-components/es/components/coachmark/index.js';
+import '@carbon/web-components/es/components/coachmark/coachmark-tagline/index.js'; 
 
 
 // Animation styles to inject into shadow DOM
@@ -135,7 +135,7 @@ export class CoachmarkFixedExample extends LitElement {
     }, 100);
     
     // Listen for coachmark close (when close button is clicked)
-    const coachmark = this.shadowRoot?.querySelector('c4p-coachmark') as any;
+    const coachmark = this.shadowRoot?.querySelector('cds-coachmark') as any;
     if (coachmark) {
       // Watch the coachmark's open property directly
       const checkOpen = () => {
@@ -161,7 +161,7 @@ export class CoachmarkFixedExample extends LitElement {
     // Watch for _open state changes (similar to React's useEffect)
     if (changedProperties.has('_open')) {
       // Get shadow DOM elements (used for both opening and closing)
-      const coachmark = this.shadowRoot?.querySelector('c4p-coachmark') as any;
+      const coachmark = this.shadowRoot?.querySelector('cds-coachmark') as any;
       const popoverContent = coachmark?.shadowRoot?.querySelector('cds-popover cds-popover-content') as any;
       const shadowRoot = popoverContent?.shadowRoot;
       const contentPart = shadowRoot?.querySelector('[part="content"]');
@@ -183,7 +183,7 @@ export class CoachmarkFixedExample extends LitElement {
           });
         }
         
-        // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
+        // cds-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
         // focuses the close button. Fire after it to focus the Next button.
         setTimeout(() => {
           requestAnimationFrame(() => {
@@ -201,8 +201,8 @@ export class CoachmarkFixedExample extends LitElement {
           // Try to find by ID first (same as React)
           const taglineButton =
             document.getElementById('CoachmarkTagline') ??
-            (this.shadowRoot?.querySelector('c4p-coachmark-tagline') instanceof HTMLElement
-              ? (this.shadowRoot?.querySelector('c4p-coachmark-tagline') as HTMLElement)
+            (this.shadowRoot?.querySelector('cds-coachmark-tagline') instanceof HTMLElement
+              ? (this.shadowRoot?.querySelector('cds-coachmark-tagline') as HTMLElement)
               : null);
 
           taglineButton?.focus();
@@ -213,25 +213,25 @@ export class CoachmarkFixedExample extends LitElement {
 
   render() {
     return html`
-        <c4p-coachmark
+        <cds-coachmark
           ?open=${this._open}
           align=${POPOVER_ALIGNMENT.TOP}
           .highContrast=${true}
           .caret=${false}
         >
-          <c4p-coachmark-tagline
+          <cds-coachmark-tagline
             id="CoachmarkTagline"
             title="Why are there two types of severity scores?"
             close-icon-description="close"
             ?open=${this._open}
-            @c4p-coachmark-tagline-cta-click=${this.handleBeaconClick}
+            @cds-coachmark-tagline-cta-click=${this.handleBeaconClick}
             slot="trigger"
           >
-          </c4p-coachmark-tagline>
-          <c4p-coachmark-header
+          </cds-coachmark-tagline>
+          <cds-coachmark-header
             closeIconDescription="Close"
-          ></c4p-coachmark-header>
-          <c4p-coachmark-body class="coachmark-body">
+          ></cds-coachmark-header>
+          <cds-coachmark-body class="coachmark-body">
             <div class="exampleCarouselWrapper">
               ${items.map(
                 (item) => html`
@@ -279,8 +279,8 @@ export class CoachmarkFixedExample extends LitElement {
                 ` : ''}
               </div>
             </div>
-          </c4p-coachmark-body>
-        </c4p-coachmark>
+          </cds-coachmark-body>
+        </cds-coachmark>
     `;
   }
 }

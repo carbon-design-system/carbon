@@ -2,7 +2,7 @@
   "name": "coachmark-fixed",
   "version": "0.1.0",
   "private": true,
-  "description": "Sample project for getting started with the Web Components from Carbon for IBM Products.",
+  "description": "Sample project for getting started with the Web Components from Carbon.",
   "license": "Apache-2",
   "main": "index.html",
   "type": "module",
@@ -12,11 +12,9 @@
     "clean": "rimraf node_modules dist .cache"
   },
   "dependencies": {
-     "@carbon/icons": "latest",
-    "@carbon/ibm-products-web-components": "latest",
-    "@carbon/styles": "latest",
-    "@carbon/web-components": "latest",
-    "@carbon/ibm-products-styles": "latest",
+    "@carbon/icons": "latest",
+    "@carbon/styles": "v12-alpha",
+    "@carbon/web-components": "v12-alpha",
     "@carbon/utilities": "latest",
     "lit": "^3.2.1",
     "sass": "^1.64.1"

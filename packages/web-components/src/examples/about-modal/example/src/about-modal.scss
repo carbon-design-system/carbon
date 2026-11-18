@@ -9,7 +9,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 
-$block-class: 'c4p--about-modal';
+$block-class: 'cds--about-modal';
 $carbon-prefix: 'cds';
 
 .#{$block-class}__logo {

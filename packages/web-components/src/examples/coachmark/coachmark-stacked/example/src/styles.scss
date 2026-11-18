@@ -6,7 +6,7 @@
 */
 
 @use '@carbon/utilities/scss/carousel/_index' as carousel;
-@use '@carbon/ibm-products-web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
+@use '@carbon/web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
@@ -14,7 +14,7 @@
 @include carousel.carousel();
 @include carousel.wrapperStyles();
 
-$prefix: 'c4p';
+$prefix: 'cds';
 $carbon-prefix: 'cds';
 $stack-home-class: 'coachmark-stacked-home';
 $stacked-coachmark: 'stacked-coachmark';

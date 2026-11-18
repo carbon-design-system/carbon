@@ -16,7 +16,7 @@ import '@carbon/web-components/es/components/radio-button/index';
 import '@carbon/web-components/es/components/stack/index';
 import styles from './create-modal.scss?lit';
 
-const blockClass = `c4p--create-modal`;
+const blockClass = `cds--create-modal`;
 
 /**
  * CreateModalWithFormValidation - Example showing form validation in CreateModal.

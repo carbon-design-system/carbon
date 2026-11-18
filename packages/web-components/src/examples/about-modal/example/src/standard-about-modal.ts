@@ -13,7 +13,7 @@ import '@carbon/web-components/es/components/button/index.js';
 import exampleLogo from './assets/example-logo.svg';
 import styles from './about-modal.scss?lit';
 
-const blockClass = 'c4p--about-modal';
+const blockClass = 'cds--about-modal';
 
 /**
  * Standard about modal pattern, composed from Carbon web components.

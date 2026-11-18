@@ -10,7 +10,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import styles from './api-key-modal.scss?lit';
 
-const blockClass = `c4p--apikey-modal`;
+const blockClass = `cds--apikey-modal`;
 @customElement('api-key-downloader')
 export class APIKeyDownloader extends LitElement {
   @property({ type: String }) apiKey;

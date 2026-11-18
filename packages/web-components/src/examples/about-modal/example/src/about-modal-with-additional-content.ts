@@ -17,7 +17,7 @@ import ansibleLogo from './assets/ansible-logo.svg';
 import jsLogo from './assets/js-logo.svg';
 import styles from './about-modal.scss?lit';
 
-const blockClass = 'c4p--about-modal';
+const blockClass = 'cds--about-modal';
 
 const content =
   "This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled 'Copyright and trademark information' for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact.";

@@ -14,8 +14,8 @@ import sampleImage from './_example-assets/sample-image.png';
 import styles from './styles.scss?lit';
 
 // Import coachmark components
-import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-beacon/index.js';
+import '@carbon/web-components/es/components/coachmark/index.js';
+import '@carbon/web-components/es/components/coachmark/coachmark-beacon/index.js';
 
 // Carousel story data
 const items = [
@@ -115,7 +115,7 @@ export class CoachmarkOverlayElementsExample extends LitElement {
       if (this._open) {
         // When coachmark opens, initialize tabIndex and focus Next button
         this.updateAriaHiddenTabIndex(0);
-        // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
+        // cds-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
         // focuses the close button. Fire after it to focus the Next button.
         setTimeout(() => {
           requestAnimationFrame(() => {
@@ -127,8 +127,8 @@ export class CoachmarkOverlayElementsExample extends LitElement {
         setTimeout(() => {
           const beacon =
             document.getElementById('CoachmarkBeacon') ??
-            (this.shadowRoot?.querySelector('c4p-coachmark-beacon') instanceof HTMLElement
-              ? (this.shadowRoot?.querySelector('c4p-coachmark-beacon') as HTMLElement)
+            (this.shadowRoot?.querySelector('cds-coachmark-beacon') instanceof HTMLElement
+              ? (this.shadowRoot?.querySelector('cds-coachmark-beacon') as HTMLElement)
               : null);
 
           beacon?.focus();
@@ -166,7 +166,7 @@ export class CoachmarkOverlayElementsExample extends LitElement {
     }, 100);
 
     // Listen for coachmark close (when close button is clicked)
-    const coachmark = this.shadowRoot?.querySelector('c4p-coachmark') as any;
+    const coachmark = this.shadowRoot?.querySelector('cds-coachmark') as any;
     if (coachmark) {
       const checkOpen = () => {
         if (this._open !== coachmark.open) {
@@ -187,24 +187,24 @@ export class CoachmarkOverlayElementsExample extends LitElement {
 
   render() {
     return html`
-        <c4p-coachmark
+        <cds-coachmark
           ?open=${this._open}
           align=${POPOVER_ALIGNMENT.TOP}
           .position=${{ x: 150, y: 150 }}
           .highContrast=${true}
         >
-          <c4p-coachmark-beacon
+          <cds-coachmark-beacon
             label="Show information"
             ?expanded=${this._open}
             id="CoachmarkBeacon"
-            @c4p-coachmark-beacon-clicked=${this.handleBeaconClick}
+            @cds-coachmark-beacon-clicked=${this.handleBeaconClick}
             slot="trigger"
           >
-          </c4p-coachmark-beacon>
-          <c4p-coachmark-header
+          </cds-coachmark-beacon>
+          <cds-coachmark-header
             closeIconDescription="Close"
-          ></c4p-coachmark-header>
-          <c4p-coachmark-body class="coachmark-body">
+          ></cds-coachmark-header>
+          <cds-coachmark-body class="coachmark-body">
             <div>
               <img
                 src=${sampleImage}
@@ -259,8 +259,8 @@ export class CoachmarkOverlayElementsExample extends LitElement {
                 ` : ''}
               </div>
             </div>
-          </c4p-coachmark-body>
-        </c4p-coachmark>
+          </cds-coachmark-body>
+        </cds-coachmark>
     `;
   }
 }

@@ -14,12 +14,12 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use 'sass:map';
 
-$prefix: 'c4p';
+$prefix: 'cds';
 $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--apikey-modal;
 
-.c4p--apikey-modal__body
+.cds--apikey-modal__body
 {
    margin-block-end: $spacing-03;
 }

@@ -28,11 +28,10 @@ The pattern consists of:
 
 Copy both files so step management and layout stay aligned.
 
-Until `Tearsheet` is exported from `@carbon/web-components`, import it from
-`@carbon/ibm-products-web-components`:
+Import the tearsheet and the other components from `@carbon/web-components`:
 
 ```javascript
-import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';
+import '@carbon/web-components/es/components/tearsheet/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 ```
@@ -81,22 +80,22 @@ protected isNextDisabledForStep(stepKey) {
 The tearsheet markup is composed like this:
 
 ```html
-<c4p-preview-tearsheet open variant="wide">
-  <c4p-tearsheet-header>
-    <c4p-tearsheet-header-content title="Create resource">
+<cds-tearsheet open variant="wide">
+  <cds-tearsheet-header>
+    <cds-tearsheet-header-content title="Create resource">
       <div slot="description">
         Specify details for the new resource you want to create
       </div>
-    </c4p-tearsheet-header-content>
-  </c4p-tearsheet-header>
-  <c4p-tearsheet-influencer>
+    </cds-tearsheet-header-content>
+  </cds-tearsheet-header>
+  <cds-tearsheet-influencer>
     <cds-progress-indicator vertical>
       <cds-progress-step label="Topic name" current></cds-progress-step>
     </cds-progress-indicator>
-  </c4p-tearsheet-influencer>
-  <c4p-tearsheet-body>
+  </cds-tearsheet-influencer>
+  <cds-tearsheet-body>
     <div slot="main-content"><!-- Step content --></div>
-  </c4p-tearsheet-body>
-  <c4p-tearsheet-footer variant="wide" .actions=${actions}></c4p-tearsheet-footer>
-</c4p-preview-tearsheet>
+  </cds-tearsheet-body>
+  <cds-tearsheet-footer variant="wide" .actions=${actions}></cds-tearsheet-footer>
+</cds-tearsheet>
 ```
