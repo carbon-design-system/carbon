@@ -91,9 +91,12 @@
         motion(exit, productive) forwards;
     }
 
+    // Selectors must match the specificity of the animation rules above.
     @media (prefers-reduced-motion: reduce) {
-      &,
-      &[data-side-panel-exiting] {
+      &.#{$block-class}--right,
+      &.#{$block-class}--left,
+      &.#{$block-class}--right[data-side-panel-exiting],
+      &.#{$block-class}--left[data-side-panel-exiting] {
         animation: none;
       }
     }
@@ -380,7 +383,6 @@
     .#{$block-class}__navigation-bar::before,
     .#{$block-class}__header-label,
     .#{$block-class}__header-description,
-    .#{$block-class}__toolbar--collapsible,
     .#{$block-class}__header-title,
     .#{$block-class}__title-start,
     .#{$block-class}__title-end,
@@ -435,6 +437,12 @@
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .#{$block-class}__toolbar--collapsible {
+      transition: none;
+    }
   }
 
   .#{$block-class}__body {
