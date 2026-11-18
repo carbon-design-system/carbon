@@ -151,7 +151,7 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size?: 'sm' | 'small' | 'md' | 'field' | 'lg';
+  size?: 'xs' | 'sm' | 'small' | 'md' | 'field' | 'lg';
 }
 
 export interface FileUploaderHandle {
@@ -440,12 +440,18 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         [`${prefix}--label-description--disabled`]: disabled,
       });
 
+    const normalizedSize =
+      size === 'field' || size === 'small'
+        ? { field: 'md', small: 'sm' }[size]
+        : size;
+
     const getSelectedFileClasses = (file) =>
       classNames(`${prefix}--file__selected-file`, {
+        [`${prefix}--layout--size-${normalizedSize}`]: normalizedSize,
         [`${prefix}--file__selected-file--md`]:
-          size === 'field' || size === 'md',
+          size === 'field' || size === 'md', // TODO: V12 - Remove these legacy size classes.
         [`${prefix}--file__selected-file--sm`]:
-          size === 'small' || size === 'sm',
+          size === 'small' || size === 'sm', // TODO: V12 - Remove these legacy size classes.
         [`${prefix}--file__selected-file--disabled`]: file.disabled,
       });
 
@@ -632,7 +638,7 @@ FileUploader.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: PropTypes.oneOf(['sm', 'small', 'md', 'field', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'small', 'md', 'field', 'lg']),
 } as PropTypes.ValidationMap<FileUploaderProps>;
 
 export default FileUploader;

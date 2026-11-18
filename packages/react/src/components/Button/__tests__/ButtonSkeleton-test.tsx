@@ -1,10 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ButtonSkeleton from '../Button.Skeleton';
@@ -17,7 +19,7 @@ describe('ButtonSkeleton', () => {
     ['lg', 'cds--btn--lg'],
     ['xl', 'cds--btn--xl'],
     ['2xl', 'cds--btn--2xl'],
-  ])(
+  ] as const)(
     'should set the expected classes for the size: `%s`',
     (size, className) => {
       render(<ButtonSkeleton data-testid="test" size={size} />);
