@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@carbon/react": "v12-alpha",
-    "@carbon/utilities": "latest",
+    "@carbon/utilities-react": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "sass": "^1.93.2"
