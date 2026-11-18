@@ -5,25 +5,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
+import React, { createRef, type Ref } from 'react';
 import { render, screen } from '@testing-library/react';
 import { Button } from '../../Button';
 import { Edit } from '@carbon/icons-react';
 import { getSupportedLocale } from '../../../internal/getSupportedLocale';
-import { BigNumber } from '..';
+import { BigNumber, type BigNumberProps } from '..';
 import { BigNumberSkeleton } from '../BigNumberSkeleton';
 
 const prefix = 'cds';
 const blockClass = `${prefix}--big-number`;
 const skeletonBlockClass = `${prefix}--big-number-skeleton`;
 
-const componentName = BigNumber.displayName;
+const componentName = BigNumber.displayName ?? 'BigNumber';
 const componentNameSkeleton = BigNumberSkeleton.displayName;
 
 const className = 'class-test';
 const dataTestId = 'big-number-test';
 
-const renderBigNumber = (props = {}) => {
+type TestBigNumberProps = Partial<BigNumberProps> & {
+  'data-testid'?: string;
+  ref?: Ref<HTMLDivElement>;
+};
+
+const renderBigNumber = (props?: TestBigNumberProps) => {
   return render(<BigNumber label="Label" value={12345} {...props} />);
 };
 
@@ -49,7 +56,7 @@ describe(componentName, () => {
   });
 
   it('forwards a ref to an appropriate node', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     renderBigNumber({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
@@ -71,7 +78,7 @@ describe(componentName, () => {
   });
 
   it('forwards a ref to the skeleton node when loading', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     renderBigNumber({ loading: true, ref });
     expect(ref.current).toHaveClass(skeletonBlockClass);
   });
