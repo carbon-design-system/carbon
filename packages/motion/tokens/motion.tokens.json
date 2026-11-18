@@ -3,27 +3,37 @@
   "$description": "Motion tokens for the Carbon Design System — durations and easing curves",
   "duration": {
     "fast": {
+      "00": {
+        "$type": "duration",
+        "$value": { "value": 40, "unit": "ms" },
+        "$description": "The shortest duration. Immediate feedback for the smallest state changes."
+      },
       "01": {
         "$type": "duration",
-        "$value": { "value": 70, "unit": "ms" },
+        "$value": { "value": 80, "unit": "ms" },
         "$description": "Micro-interactions such as button and toggle. Instant response to user action."
       },
       "02": {
         "$type": "duration",
-        "$value": { "value": 110, "unit": "ms" },
+        "$value": { "value": 120, "unit": "ms" },
         "$description": "Micro-interactions such as fade in. Subtle entrance or exit of small UI elements."
       }
     },
     "moderate": {
       "01": {
         "$type": "duration",
-        "$value": { "value": 150, "unit": "ms" },
+        "$value": { "value": 160, "unit": "ms" },
         "$description": "Micro-interactions, small expansion, short distance movements. Default transition speed."
       },
       "02": {
         "$type": "duration",
-        "$value": { "value": 240, "unit": "ms" },
+        "$value": { "value": 220, "unit": "ms" },
         "$description": "Expansion, system communication, toast. Slightly longer interactions with more visual weight."
+      },
+      "03": {
+        "$type": "duration",
+        "$value": { "value": 300, "unit": "ms" },
+        "$description": "Longer moderate motion. Transitions that need more time than moderate-02."
       }
     },
     "slow": {
@@ -34,8 +44,13 @@
       },
       "02": {
         "$type": "duration",
-        "$value": { "value": 700, "unit": "ms" },
+        "$value": { "value": 520, "unit": "ms" },
         "$description": "Background dimming, large hero transitions. Slow, immersive motion for maximum emphasis."
+      },
+      "03": {
+        "$type": "duration",
+        "$value": { "value": 660, "unit": "ms" },
+        "$description": "The longest duration. Extended motion for the slowest, most immersive transitions."
       }
     }
   },
@@ -43,36 +58,36 @@
     "standard": {
       "productive": {
         "$type": "cubicBezier",
-        "$value": [0.2, 0, 0.38, 0.9],
+        "$value": [0.4, 0, 0.2, 1],
         "$description": "Standard easing for productive motion. Used for UI elements that move within the viewport."
       },
       "expressive": {
         "$type": "cubicBezier",
-        "$value": [0.4, 0.14, 0.3, 1],
+        "$value": [0.8, 0, 0, 1],
         "$description": "Standard easing for expressive motion. Used for elements with more prominent, fluid movement."
       }
     },
     "entrance": {
       "productive": {
         "$type": "cubicBezier",
-        "$value": [0, 0, 0.38, 0.9],
+        "$value": [0, 0, 0.2, 1],
         "$description": "Entrance easing for productive motion. Used when elements enter the screen."
       },
       "expressive": {
         "$type": "cubicBezier",
-        "$value": [0, 0, 0.3, 1],
+        "$value": [0, 0, 0, 1],
         "$description": "Entrance easing for expressive motion. Used for prominent element entrances."
       }
     },
     "exit": {
       "productive": {
         "$type": "cubicBezier",
-        "$value": [0.2, 0, 1, 0.9],
+        "$value": [0.4, 0, 1, 1],
         "$description": "Exit easing for productive motion. Used when elements leave the screen."
       },
       "expressive": {
         "$type": "cubicBezier",
-        "$value": [0.4, 0.14, 1, 1],
+        "$value": [0.8, 0, 1, 1],
         "$description": "Exit easing for expressive motion. Used for prominent element exits."
       }
     }
