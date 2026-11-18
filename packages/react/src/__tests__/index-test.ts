@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import * as Carbon from '../index';
 
 describe('Carbon Components React', () => {

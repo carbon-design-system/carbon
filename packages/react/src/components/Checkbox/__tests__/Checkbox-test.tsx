@@ -7,7 +7,9 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { type RefCallback } from 'react';
+import { describe, it, expect, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import Checkbox from '../Checkbox';
 import { AILabel } from '../../AILabel';
 
@@ -83,9 +85,9 @@ describe('Checkbox', () => {
   });
 
   it('should support a `ref` that is placed on the <input> element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLInputElement>>();
     render(<Checkbox id="test" labelText="test-label" ref={ref} />);
-    expect(ref).toHaveBeenCalledWith(screen.getByRole('checkbox'));
+    expect(ref.mock.calls).toContainEqual([screen.getByRole('checkbox')]);
   });
 
   it('should disable the <input> if disabled is provided as a prop', () => {

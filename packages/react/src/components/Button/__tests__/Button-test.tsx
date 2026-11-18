@@ -6,8 +6,10 @@
  */
 
 import { Search, Add } from '@carbon/icons-react';
+import { describe, expect, it, jest, test } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import Button from '../../Button';
 
 describe('Button', () => {
@@ -37,6 +39,11 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
+  it('should not pass badgeCount to a standard button', () => {
+    render(<Button badgeCount={12}>test</Button>);
+    expect(screen.getByRole('button')).not.toHaveAttribute('badgecount');
+  });
+
   it('should use the disabled prop to set disabled on the <button>', () => {
     const { rerender } = render(<Button>test</Button>);
     expect(screen.getByRole('button')).toBeEnabled();
@@ -50,7 +57,7 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveAttribute('type', 'button');
   });
 
-  test.each(['button', 'submit', 'reset'])(
+  test.each(['button', 'submit', 'reset'] as const)(
     'it should support changing the button type to %s with the `type` prop',
     (type) => {
       render(<Button type={type}>test</Button>);
@@ -64,7 +71,7 @@ describe('Button', () => {
   });
 
   it('should support rendering as a custom element with the `as` prop', () => {
-    function CustomComponent(props) {
+    function CustomComponent(props: ComponentProps<'div'>) {
       return <div data-testid="custom-component" {...props} />;
     }
 
@@ -99,7 +106,7 @@ describe('Button', () => {
     ['danger--ghost', 'cds--btn--danger--ghost'],
     ['danger--tertiary', 'cds--btn--danger--tertiary'],
     ['tertiary', 'cds--btn--tertiary'],
-  ])(
+  ] as const)(
     'should set the expected classes for the button of kind: `%s`',
     (kind, className) => {
       render(<Button kind={kind}>test</Button>);
@@ -126,7 +133,7 @@ describe('Button', () => {
     ['lg', 'cds--btn--lg'],
     ['xl', 'cds--btn--xl'],
     ['2xl', 'cds--btn--2xl'],
-  ])(
+  ] as const)(
     'should set the expected classes for the button of size: `%s`',
     (size, className) => {
       render(<Button size={size}>test</Button>);
@@ -196,7 +203,7 @@ describe('Button', () => {
     });
 
     it('should support rendering as a custom element with the `as` prop', () => {
-      function CustomComponent(props) {
+      function CustomComponent(props: ComponentProps<'div'>) {
         return <div data-testid="custom-component" {...props} />;
       }
 
@@ -216,36 +223,33 @@ describe('Button', () => {
       ['bottom', 'end', 'bottom-end'],
       ['top', 'start', 'top-start'],
       ['right', 'center', 'right'],
-    ])(
-      'should map tooltipPosition=%s and tooltipAlignment=%s to IconButton align=%s',
+    ] as const)(
+      'should set tooltip alignment from tooltipPosition=%s and tooltipAlignment=%s',
       (tooltipPosition, tooltipAlignment, expectedAlign) => {
-        const result = Button.render(
-          {
-            hasIconOnly: true,
-            iconDescription: 'test',
-            renderIcon: Add,
-            tooltipAlignment,
-            tooltipPosition,
-          },
-          null
+        const { container } = render(
+          <Button
+            hasIconOnly
+            iconDescription="test"
+            renderIcon={Add}
+            tooltipAlignment={tooltipAlignment}
+            tooltipPosition={tooltipPosition}
+          />
         );
 
-        expect(result.props.align).toBe(expectedAlign);
+        expect(container.firstChild).toHaveClass(
+          `cds--popover--${expectedAlign}`
+        );
       }
     );
 
     it('should pass children through to IconButton when `hasIconOnly` is true without `renderIcon`', () => {
-      const result = Button.render(
-        {
-          children: '🧪',
-          hasIconOnly: true,
-          iconDescription: 'test',
-        },
-        null
+      render(
+        <Button hasIconOnly iconDescription="test">
+          🧪
+        </Button>
       );
 
-      expect(result.props.renderIcon).toBeUndefined();
-      expect(result.props.children).toBe('🧪');
+      expect(screen.getByLabelText('test')).toHaveTextContent('🧪');
     });
   });
 });

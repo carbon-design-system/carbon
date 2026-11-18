@@ -1,12 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import React, { type RefCallback } from 'react';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import { describe, it, expect, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import BadgeIndicator from '../index';
 
 describe('BadgeIndicator', () => {
@@ -26,8 +28,8 @@ describe('BadgeIndicator', () => {
   });
 
   it('should support a ref on the outermost element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLDivElement>>();
     const { container } = render(<BadgeIndicator ref={ref} />);
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
+    expect(ref.mock.calls).toContainEqual([container.firstChild]);
   });
 });
