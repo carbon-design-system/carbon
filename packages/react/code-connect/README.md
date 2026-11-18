@@ -121,10 +121,17 @@ cd packages/react
 npx figma connect publish --token <token>
 ```
 
-You can also publish specific files instead of the entire set:
+To publish only the components you're working on (recommended), pass their
+files:
 
 ```sh
 npx figma connect publish --file code-connect/Tabs/*.figma.ts --token <token>
 ```
+
+> [!WARNING]
+>
+> Only publish the components you're working on. Publishing the full set
+> replaces every published connection with your branch's copy, which can
+> overwrite work someone else has published.
 
 Add `--dry-run` to either command to validate the files without publishing them.
