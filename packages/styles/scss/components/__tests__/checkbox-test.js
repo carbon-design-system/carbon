@@ -9,6 +9,7 @@
 
 'use strict';
 
+const postcss = require('postcss');
 const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
@@ -23,5 +24,29 @@ describe('scss/components/checkbox', () => {
       $_: get('mixin', meta.mixin-exists('checkbox', 'checkbox'));
     `);
     expect(unwrap('mixin')).toBe(true);
+  });
+
+  test('readonly border uses a 3:1 border token, not icon-disabled', async () => {
+    const { result } = await render(`
+      @use '../checkbox';
+    `);
+    const borders = [];
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (
+        rule.selector.includes('.cds--checkbox-wrapper--readonly') &&
+        rule.selector.includes('.cds--checkbox-label::before')
+      ) {
+        rule.walkDecls(/^border/, (decl) => {
+          borders.push(decl.value);
+        });
+      }
+    });
+
+    expect(borders.length).toBe(2);
+    borders.forEach((value) => {
+      expect(value).toContain('--cds-border-strong');
+      expect(value).not.toContain('--cds-icon-disabled');
+    });
   });
 });
