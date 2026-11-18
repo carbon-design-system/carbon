@@ -5,14 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it } from '@jest/globals';
+
+import React, { type ComponentProps } from 'react';
 import { render, screen } from '@testing-library/react';
 import { Table, TableBody, TableDecoratorRow, TableRow } from '../';
 import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
-const renderDecoratorRow = (props = {}) =>
+const renderDecoratorRow = (
+  props: ComponentProps<typeof TableDecoratorRow> = {}
+) =>
   render(
     <Table>
       <TableBody>
@@ -43,9 +48,7 @@ describe('TableDecoratorRow', () => {
     const cell = screen.getByRole('cell');
 
     expect(cell).toHaveClass(
-      'custom-class',
-      `${prefix}--table-column-decorator`,
-      `${prefix}--table-column-decorator--active`,
+      `custom-class ${prefix}--table-column-decorator ${prefix}--table-column-decorator--active`,
       { exact: true }
     );
     expect(screen.queryByText('Non-AI decorator')).not.toBeInTheDocument();
@@ -62,15 +65,11 @@ describe('TableDecoratorRow', () => {
     });
 
     expect(cell).toHaveClass(
-      `${prefix}--table-column-decorator`,
-      `${prefix}--table-column-decorator--active`,
+      `${prefix}--table-column-decorator ${prefix}--table-column-decorator--active`,
       { exact: true }
     );
     expect(aiLabelButton).toHaveClass(
-      `${prefix}--toggletip-button`,
-      `${prefix}--ai-label__button`,
-      `${prefix}--ai-label__button--mini`,
-      `${prefix}--ai-label__button--default`,
+      `${prefix}--toggletip-button ${prefix}--ai-label__button ${prefix}--ai-label__button--mini ${prefix}--ai-label__button--default`,
       { exact: true }
     );
   });

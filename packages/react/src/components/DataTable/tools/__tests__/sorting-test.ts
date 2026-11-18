@@ -1,9 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import { describe, expect, it } from '@jest/globals';
 
 import { compare, defaultSortRow, sortRows } from '../sorting';
 import { sortStates } from '../../state/sortStates';
@@ -11,8 +13,8 @@ import { sortStates } from '../../state/sortStates';
 describe('sortRows', () => {
   const rowIds = ['row2', 'row1'];
   const cellsById = {
-    'row1:header1': { value: 'cell11' },
-    'row2:header1': { value: 'cell21' },
+    'row1:header1': { id: 'row1:header1', value: 'cell11' },
+    'row2:header1': { id: 'row2:header1', value: 'cell21' },
   };
 
   it('should sort data in ascending order', () => {
@@ -56,12 +58,24 @@ describe('sortRows', () => {
 
   it('should sort React elements correctly', () => {
     const reactCells1 = {
-      'row1:header1': { value: { props: { children: 'Apple' } } },
-      'row2:header1': { value: { props: { children: 'Banana' } } },
+      'row1:header1': {
+        id: 'row1:header1',
+        value: { props: { children: 'Apple' } },
+      },
+      'row2:header1': {
+        id: 'row2:header1',
+        value: { props: { children: 'Banana' } },
+      },
     };
     const reactCells2 = {
-      'row1:header1': { value: { props: { children: 1000 } } },
-      'row2:header1': { value: { props: { children: 'hmm' } } },
+      'row1:header1': {
+        id: 'row1:header1',
+        value: { props: { children: 1000 } },
+      },
+      'row2:header1': {
+        id: 'row2:header1',
+        value: { props: { children: 'hmm' } },
+      },
     };
 
     expect(
@@ -88,8 +102,8 @@ describe('sortRows', () => {
 
   it('should sort numeric strings as numbers', () => {
     const cells = {
-      'row1:header1': { value: '10' },
-      'row2:header1': { value: '2' },
+      'row1:header1': { id: 'row1:header1', value: '10' },
+      'row2:header1': { id: 'row2:header1', value: '2' },
     };
 
     expect(
@@ -104,11 +118,11 @@ describe('sortRows', () => {
   });
 
   it('should handle a custom `sortRow` function', () => {
-    const customSortRow = (a, b) => a.length - b.length;
+    const customSortRow = (a: string, b: string) => a.length - b.length;
 
     const customCells = {
-      'row1:header1': { value: 'short' },
-      'row2:header1': { value: 'longerstring' },
+      'row1:header1': { id: 'row1:header1', value: 'short' },
+      'row2:header1': { id: 'row2:header1', value: 'longerstring' },
     };
 
     expect(
@@ -124,8 +138,8 @@ describe('sortRows', () => {
 
   it('should maintain order for equal values', () => {
     const cells = {
-      'row1:header1': { value: 'same' },
-      'row2:header1': { value: 'same' },
+      'row1:header1': { id: 'row1:header1', value: 'same' },
+      'row2:header1': { id: 'row2:header1', value: 'same' },
     };
 
     expect(rowIds).toEqual(['row2', 'row1']);

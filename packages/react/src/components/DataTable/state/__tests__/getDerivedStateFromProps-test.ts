@@ -1,12 +1,21 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { beforeEach, describe, expect, it } from '@jest/globals';
+
 import getDerivedStateFromProps from '../getDerivedStateFromProps';
 import { defaultSortRow } from '../../tools/sorting';
+
+type MockProps = {
+  rows: { id: string; sortField: string }[];
+  headers: { key: string; header: string }[];
+  sortRow: typeof defaultSortRow;
+  locale: string;
+};
 
 describe('getDerivedStateFromProps', () => {
   it('uses prevState if available', () => {
@@ -76,7 +85,7 @@ describe('getDerivedStateFromProps', () => {
   });
 
   describe('with previous state', () => {
-    let mockProps;
+    let mockProps: MockProps;
 
     beforeEach(() => {
       mockProps = {

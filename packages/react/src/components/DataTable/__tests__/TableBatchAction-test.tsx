@@ -5,8 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it, jest } from '@jest/globals';
+
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import { TableBatchAction } from '../';
 
 describe('TableBatchAction', () => {
@@ -16,7 +19,7 @@ describe('TableBatchAction', () => {
   });
 
   it('should support custom icons through `renderIcon`', () => {
-    const renderIcon = jest.fn((props) => (
+    const renderIcon = jest.fn((props: ComponentProps<'svg'>) => (
       <svg {...props} data-testid="icon">
         <circle cx="16" cy="16" r="8" />
       </svg>
@@ -39,7 +42,10 @@ describe('TableBatchAction', () => {
       renderIcon,
     });
 
-    expect(result).toBeInstanceOf(Error);
+    if (!(result instanceof Error)) {
+      throw new Error('Expected the validator to return an Error.');
+    }
+
     expect(result.message).toBe(
       'renderIcon property specified without also providing an iconDescription property.'
     );

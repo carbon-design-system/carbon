@@ -1,9 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it } from '@jest/globals';
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
@@ -70,6 +73,9 @@ describe('TableContainer', () => {
       );
 
       const headerEl = container.querySelector('[class*="data-table-header"]');
+      if (!headerEl) {
+        throw new Error('Expected the table header to render.');
+      }
       const titleEl = headerEl.querySelector('h2');
       const descriptionEl = headerEl.querySelector('p');
 
@@ -89,6 +95,9 @@ describe('TableContainer', () => {
       );
 
       const headerEl = container.querySelector('[class*="data-table-header"]');
+      if (!headerEl) {
+        throw new Error('Expected the table header to render.');
+      }
       const titleEl = headerEl.querySelector('h4');
       const descriptionEl = headerEl.querySelector('p');
 
@@ -111,6 +120,9 @@ describe('TableContainer', () => {
       const headerEl = container.querySelector(
         '[class*="data-table-header__content"]'
       );
+      if (!headerEl) {
+        throw new Error('Expected the table header content to render.');
+      }
       const titleEl = headerEl.querySelector('h2');
       const descriptionEl = headerEl.querySelector('p');
 

@@ -1,17 +1,20 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import '@testing-library/jest-dom/jest-globals';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+
+import React, { type ComponentProps } from 'react';
 import { render, screen } from '@testing-library/react';
 import { Table, TableHead, TableRow, TableSelectRow } from '../';
 import userEvent from '@testing-library/user-event';
 
 describe('DataTable.TableSelectRow', () => {
-  let mockProps;
+  let mockProps: ComponentProps<typeof TableSelectRow>;
 
   beforeEach(() => {
     mockProps = {
@@ -55,16 +58,20 @@ describe('DataTable.TableSelectRow', () => {
 
     it('should respect deprecated ariaLabel prop if aria-label is not defined', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const props: ComponentProps<typeof TableSelectRow> = {
+        ...mockProps,
+        // @ts-expect-error: Allow `null` to test the deprecated `ariaLabel`
+        // fallback.
+        'aria-label': null,
+        ariaLabel: 'Aria label',
+        checked: true,
+      };
+
       render(
         <Table>
           <TableHead>
             <TableRow>
-              <TableSelectRow
-                {...mockProps}
-                aria-label={null}
-                ariaLabel="Aria label"
-                checked
-              />
+              <TableSelectRow {...props} />
             </TableRow>
           </TableHead>
         </Table>
@@ -76,7 +83,6 @@ describe('DataTable.TableSelectRow', () => {
 
     it('should give priority to new aria-label compared to old ariaLabel', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-      spy.mockRestore();
       render(
         <Table>
           <TableHead>
@@ -111,7 +117,7 @@ describe('DataTable.TableSelectRow', () => {
       );
 
       expect(screen.getByRole('row').firstChild).toHaveClass(
-        mockProps.className
+        'custom-class-name'
       );
     });
 

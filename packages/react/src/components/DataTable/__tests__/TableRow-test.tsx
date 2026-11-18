@@ -1,12 +1,15 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it, jest } from '@jest/globals';
+
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { type RefCallback } from 'react';
 import { Table, TableBody, TableCell, TableRow } from '../';
 
 describe('TableRow', () => {
@@ -35,12 +38,10 @@ describe('TableRow', () => {
     );
   });
 
-  it('should forward refs to the rendered Tablerow element', () => {
-    let tr = null;
-    const ref = jest.fn((node) => {
-      tr = node;
-    });
-    const { container } = render(
+  it('should forward refs to the rendered TableRow element', () => {
+    const ref = jest.fn<RefCallback<HTMLTableRowElement>>();
+
+    render(
       <Table>
         <TableBody>
           <TableRow ref={ref} data-testid="tr" className="custom-class">
@@ -49,9 +50,10 @@ describe('TableRow', () => {
         </TableBody>
       </Table>
     );
-    expect(ref).toHaveBeenCalled();
-    expect(tr).not.toBeNull();
-    expect(tr).toEqual(container.querySelector('tr'));
-    expect(tr).toHaveClass('custom-class');
+
+    const row = screen.getByRole('row');
+
+    expect(ref.mock.calls).toContainEqual([row]);
+    expect(row).toHaveClass('custom-class');
   });
 });

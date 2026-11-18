@@ -5,12 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import Button from '../../Button';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
+
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import React, { act, type ReactElement } from 'react';
 import DataTable, {
   Table,
-  TableBatchActions,
   TableBatchAction,
+  TableBatchActions,
   TableBody,
   TableCell,
   TableContainer,
@@ -25,15 +36,43 @@ import DataTable, {
   TableToolbar,
   TableToolbarAction,
   TableToolbarContent,
-  TableToolbarSearch,
   TableToolbarMenu,
+  TableToolbarSearch,
+  type DataTableProps,
+  type DataTableRenderProps,
 } from '../';
-import userEvent from '@testing-library/user-event';
-import { render, screen, within } from '@testing-library/react';
-import { act } from 'react';
-// Test helpers
-const getLastCallFor = (mocker) =>
-  mocker.mock.calls[mocker.mock.calls.length - 1];
+import Button from '../../Button';
+
+type DataTableTestRow = {
+  id: string;
+  fieldA?: string;
+  fieldB?: string;
+  fieldC?: string;
+  fieldD?: string;
+};
+
+type TableRenderProps = DataTableRenderProps<
+  DataTableTestRow,
+  [string, string]
+>;
+
+type TableRender = (renderProps: TableRenderProps) => ReactElement;
+
+type MockProps = Omit<
+  DataTableProps<DataTableTestRow, [string, string]>,
+  'render'
+> & {
+  render: jest.Mock<TableRender>;
+};
+
+const getLastCallFor = (mocker: jest.Mock<TableRender>) => {
+  const lastCall = mocker.mock.calls.at(-1);
+  if (!lastCall) {
+    throw new Error('Expected the DataTable render callback to be called.');
+  }
+
+  return lastCall;
+};
 
 const onSelectAllFn = jest.fn();
 
@@ -56,7 +95,7 @@ const rows = [
 ];
 
 describe('DataTable', () => {
-  let mockProps;
+  let mockProps: MockProps;
 
   beforeEach(() => {
     mockProps = {
@@ -419,8 +458,8 @@ describe('DataTable', () => {
     });
 
     describe('selection', () => {
-      let mockProps;
-      let spy;
+      let mockProps: MockProps;
+      let spy: ReturnType<typeof jest.spyOn>;
 
       beforeEach(() => {
         // v12 TODO: Remove the mock of console.warn once we remove ariaLabel from DataTable
@@ -609,7 +648,7 @@ describe('DataTable', () => {
     });
 
     describe('selection with filtering', () => {
-      let mockProps;
+      let mockProps: MockProps;
 
       beforeEach(() => {
         mockProps = {
@@ -776,7 +815,7 @@ describe('DataTable', () => {
     });
 
     describe('selection -- radio buttons', () => {
-      let mockProps;
+      let mockProps: MockProps;
 
       beforeEach(() => {
         mockProps = {
@@ -894,7 +933,7 @@ describe('DataTable', () => {
     });
 
     describe('updates properly when passed new props', () => {
-      let mockProps;
+      let mockProps: MockProps;
 
       beforeEach(() => {
         mockProps = {
@@ -1091,7 +1130,7 @@ describe('DataTable', () => {
       });
 
       it('should clear selection state when selected rows are removed', () => {
-        const renderSpy = jest.fn(() => null);
+        const renderSpy = jest.fn<TableRender>(() => <></>);
         const { rerender } = render(
           <DataTable
             rows={mockProps.rows}
@@ -1123,7 +1162,7 @@ describe('DataTable', () => {
       });
 
       it('should keep selection state when unselected rows are removed', () => {
-        const renderSpy = jest.fn(() => null);
+        const renderSpy = jest.fn<TableRender>(() => <></>);
         const { rerender } = render(
           <DataTable
             rows={mockProps.rows}
@@ -1208,7 +1247,7 @@ describe('DataTable', () => {
       });
 
       it('should never use mismatched headers and rows for render props while syncing new props', () => {
-        const childrenSpy = jest.fn(() => null);
+        const childrenSpy = jest.fn<TableRender>(() => <></>);
         const initialHeaders = [
           { key: 'fieldA', header: 'Field A' },
           { key: 'fieldB', header: 'Field B' },
@@ -1235,7 +1274,10 @@ describe('DataTable', () => {
 
         // Every render must use headers and rows from the same version:
         // each row has exactly one cell per header, in header order.
-        const expectCellsToMatchHeaders = ({ headers, rows }) => {
+        const expectCellsToMatchHeaders = ({
+          headers,
+          rows,
+        }: TableRenderProps) => {
           const headerKeys = headers.map((header) => header.key);
           rows.forEach((row) => {
             expect(row.cells.map((cell) => cell.info.header)).toEqual(
@@ -1350,7 +1392,7 @@ describe('DataTable', () => {
           { key: 'fieldB', header: 'Field B' },
         ],
         isSortable: true,
-        render: jest.fn(
+        render: jest.fn<TableRender>(
           ({
             rows,
             headers,
@@ -1403,8 +1445,6 @@ describe('DataTable', () => {
     });
 
     it('should correctly sort rows when sortBy is called programmatically on mount', async () => {
-      let sortByRef = null;
-
       const mockProps = {
         rows: [
           { id: 'b', fieldA: 'Field 2:A', fieldB: 'Field 2:B' },
@@ -1416,17 +1456,8 @@ describe('DataTable', () => {
           { key: 'fieldB', header: 'Field B' },
         ],
         isSortable: true,
-        render: jest.fn(
-          ({
-            rows,
-            headers,
-            getHeaderProps,
-            sortBy,
-            getCellProps,
-            getRowProps,
-          }) => {
-            sortByRef = sortBy;
-
+        render: jest.fn<TableRender>(
+          ({ rows, headers, getHeaderProps, getCellProps, getRowProps }) => {
             return (
               <Table>
                 <TableHead>
@@ -1460,6 +1491,7 @@ describe('DataTable', () => {
       // Get initial cell values
       const getCells = () =>
         screen.getAllByRole('cell').map((cell) => cell.textContent);
+      const { sortBy } = getLastCallFor(mockProps.render)[0];
 
       // Initial order
       expect(getCells()).toEqual([
@@ -1473,7 +1505,7 @@ describe('DataTable', () => {
 
       // Call sortBy programmatically (simulating immediate call during render)
       await act(async () => {
-        sortByRef('fieldA');
+        sortBy('fieldA');
       });
 
       // Should be sorted ascending by fieldA
@@ -1488,8 +1520,6 @@ describe('DataTable', () => {
     });
 
     it('should handle rapid sortBy calls without crashing', async () => {
-      let sortByRef = null;
-
       const mockProps = {
         rows: [
           { id: 'b', fieldA: 'Field 2:A', fieldB: 'Field 2:B' },
@@ -1500,17 +1530,8 @@ describe('DataTable', () => {
           { key: 'fieldB', header: 'Field B' },
         ],
         isSortable: true,
-        render: jest.fn(
-          ({
-            rows,
-            headers,
-            getHeaderProps,
-            sortBy,
-            getCellProps,
-            getRowProps,
-          }) => {
-            sortByRef = sortBy;
-
+        render: jest.fn<TableRender>(
+          ({ rows, headers, getHeaderProps, getCellProps, getRowProps }) => {
             return (
               <Table>
                 <TableHead>
@@ -1541,12 +1562,14 @@ describe('DataTable', () => {
 
       render(<DataTable {...mockProps} />);
 
+      const { sortBy } = getLastCallFor(mockProps.render)[0];
+
       // Rapid successive calls should not crash
       expect(() => {
         act(() => {
-          sortByRef('fieldA');
-          sortByRef('fieldB');
-          sortByRef('fieldA');
+          sortBy('fieldA');
+          sortBy('fieldB');
+          sortBy('fieldA');
         });
       }).not.toThrow();
 
@@ -1555,7 +1578,11 @@ describe('DataTable', () => {
     });
 
     it('should maintain state integrity when sortBy is called before full initialization', () => {
-      const stateCapture = [];
+      const stateCapture: {
+        hasRows: boolean;
+        hasCells: boolean;
+        cellCount: number;
+      }[] = [];
 
       const mockProps = {
         rows: [{ id: 'a', fieldA: 'A', fieldB: 'B' }],
@@ -1564,7 +1591,7 @@ describe('DataTable', () => {
           { key: 'fieldB', header: 'Field B' },
         ],
         isSortable: true,
-        render: jest.fn(
+        render: jest.fn<TableRender>(
           ({
             rows,
             headers,

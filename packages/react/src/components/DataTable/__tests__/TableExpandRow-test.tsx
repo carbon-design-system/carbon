@@ -1,11 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import '@testing-library/jest-dom/jest-globals';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+
+import React, { type ComponentProps } from 'react';
 import { Table, TableBody, TableExpandRow, TableExpandedRow } from '../';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
@@ -13,13 +16,16 @@ import { render, screen } from '@testing-library/react';
 const prefix = 'cds';
 
 describe('DataTable.TableExpandRow', () => {
-  let mockProps;
+  let mockProps: ComponentProps<typeof TableExpandRow>;
 
   beforeEach(() => {
     mockProps = {
       className: 'custom-class',
       isExpanded: false,
       onExpand: jest.fn(),
+      // @ts-expect-error: Allow `null` to test the deprecated `ariaLabel`
+      // fallback.
+      'aria-label': null,
       ariaLabel: 'Aria label',
     };
   });
