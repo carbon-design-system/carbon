@@ -21,14 +21,14 @@ import {
   useStepContext,
 } from '@carbon/utilities-react';
 import { ArrowRight } from '@carbon/react/icons';
-import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products';
-import { CreateTearsheetProvider } from './CreateTearsheetContext';
 import {
+  Tearsheet,
   Button,
   InlineLoading,
   ProgressIndicator,
   ProgressStep,
 } from '@carbon/react';
+import { CreateTearsheetProvider } from './CreateTearsheetContext';
 
 export interface CreateTearsheetProps {
   children?: ReactNode;

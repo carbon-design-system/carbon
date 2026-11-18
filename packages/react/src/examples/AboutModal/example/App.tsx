@@ -15,12 +15,12 @@ function App() {
       <h1>About Modal Examples</h1>
 
       <section className="example-section">
-        <h2>Standard About Modal</h2>
+        <h2 className="variant-title">Standard About Modal</h2>
         <StandardAboutModal />
       </section>
 
       <section className="example-section">
-        <h2>About Modal with additional content</h2>
+        <h2 className="variant-title">About Modal with additional content</h2>
         <AboutModalWithAdditionalContent />
       </section>
     </div>

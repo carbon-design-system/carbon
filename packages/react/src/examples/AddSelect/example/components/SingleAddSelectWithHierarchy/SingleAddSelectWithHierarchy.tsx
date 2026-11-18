@@ -15,13 +15,13 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ToastNotification } from '@carbon/react';
 import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  ToastNotification,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
 import './SingleAddSelectWithHierarchy.scss';
 
 const blockClass = `single-add-select-with-hierarchy-pattern`;

@@ -6,8 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
-import { AddSelectItem } from '@carbon/ibm-products';
+import { Button, AddSelectItem } from '@carbon/react';
 import { Document } from '@carbon/react/icons';
 import { MultiAddSelectWithColumnActions as MultiAddSelectWithColumnActionsComponent } from '../../components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
 import './MultiAddSelectWithColumnActions.scss';

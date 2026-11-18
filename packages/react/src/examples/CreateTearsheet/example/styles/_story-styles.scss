@@ -43,7 +43,7 @@ p.step__description:last-of-type {
 }
 
 .tearsheet-create-multi-step--custom-tile
-  .cds--empty-state__illustration.cds--empty-state__illustration--lg {
+  .#{carbon-config.$prefix}--empty-state__illustration--md {
   block-size: 120px;
   min-inline-size: 120px;
 }

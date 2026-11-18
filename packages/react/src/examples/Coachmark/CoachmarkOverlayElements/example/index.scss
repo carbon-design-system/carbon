@@ -5,10 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$prefix: 'c4p' !default;
+$prefix: 'cds' !default;
 
-// Coachmark next (composable) + tagline styles from ibm-products
-@use '@carbon/ibm-products/scss/components/Coachmark';
+// Coachmark (composable) + tagline styles
+@use '@carbon/styles/scss/components/coachmark';
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as theme;
@@ -21,7 +21,7 @@ $prefix: 'c4p' !default;
 
 @include carousel.wrapperStyles();
 
-$block-class: #{$prefix}--coachmark__next;
+$block-class: #{$prefix}--coachmark;
 
 // All example-specific styles are scoped under the unique wrapper class
 // .coachmark-overlay-example so they cannot leak into or be overridden by

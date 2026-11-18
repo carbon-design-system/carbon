@@ -6,6 +6,13 @@
 //
 
 // Standard imports.
+// Config must be loaded first so `with` is applied before any other module
+// pulls it in.
+@use '@carbon/styles/scss/config' as carbon-config with (
+  $font-path: '@ibm/plex'
+);
+// Emits all Carbon styles (reset, theme tokens, fonts, components).
+@use '@carbon/styles';
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -13,9 +20,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/config' as carbon-config;
 @use '@carbon/styles/scss/components/button/button' as button-mixin;
-@use '@carbon/ibm-products/scss/components/PageHeader';
 
 
 // Pattern-specific block classes

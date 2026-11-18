@@ -13,11 +13,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import {
-  preview__CoachmarkTagline as CoachmarkTagline,
-  preview__Coachmark as Coachmark,
-} from '@carbon/ibm-products';
+  Button,
+  Theme,
+  Link as CarbonLink,
+  CoachmarkTagline,
+  Coachmark,
+} from '@carbon/react';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import { Idea } from '@carbon/react/icons';
 import cx from 'classnames';

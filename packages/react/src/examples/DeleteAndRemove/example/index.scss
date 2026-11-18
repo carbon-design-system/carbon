@@ -41,7 +41,7 @@ body {
   margin-inline-start: $spacing-02;
   max-inline-size: 1200px;
 
-  h1 {
+  .main-title {
     font-size: 2rem;
     font-weight: 400;
     margin-block-end: $spacing-07;
@@ -53,7 +53,7 @@ body {
     background-color: var(--cds-layer-01);
     margin-block-end: $spacing-05;
 
-    h2 {
+    .example-title {
       font-size: 1.5rem;
       font-weight: 400;
       margin-block: 0 $spacing-06;

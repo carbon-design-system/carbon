@@ -34,16 +34,15 @@ import {
   TableHeader,
   TableBody,
   TableCell,
-} from '@carbon/react';
-import { Edit, TrashCan } from '@carbon/icons-react';
-import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
   StackProvider,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
+import { Edit, TrashCan } from '@carbon/icons-react';
 import './MultiSelectWithBulkActions.scss';
 
 const blockClass = `multi-add-select-with-bulk-actions-pattern`;
@@ -583,8 +582,8 @@ export const MultiSelectWithBulkActions = forwardRef<
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
                       >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
+                        <EmptyState
+                          illustration={noDataIllustration}
                           size="sm"
                           title={noSelectionTitle}
                           subtitle={noSelectionDescription}

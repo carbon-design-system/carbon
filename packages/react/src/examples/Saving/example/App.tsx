@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="example-container">
-      <h1>Saving Examples</h1>
+      <h1 className="main-title">Saving Examples</h1>
 
       <section className="example-section">
         <div className="example-buttons">

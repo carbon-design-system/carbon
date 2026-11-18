@@ -1,8 +1,8 @@
 {
-  "name": "ibm-products-createfullpage-pattern-example",
+  "name": "create-full-page-pattern-example",
   "version": "0.1.0",
   "private": true,
-  "description": "Sample project for getting started with the createfullpage pattern using Carbon for IBM Products",
+  "description": "Sample project for getting started with the createfullpage pattern using Carbon React",
   "license": "Apache-2.0",
   "main": "index.html",
   "type": "module",
@@ -12,9 +12,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "latest",
-    "@carbon/react": "latest",
-    "@carbon/utilities": "latest",
+    "@carbon/react": "v12-alpha",
+    "@carbon/styles": "latest",
+    "@carbon/utilities-react": "latest",
+    "@ibm/plex": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "sass": "^1.93.2"

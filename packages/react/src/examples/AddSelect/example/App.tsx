@@ -36,12 +36,7 @@ function App() {
         <p style={{ marginBottom: '1.5rem' }}>
           Examples for selecting one item from a flat list or hierarchy.
         </p>
-        <div
-          style={{
-            display: 'grid',
-            gap: '2rem',
-          }}
-        >
+        <div>
           <SingleAddSelectDefaultPreview />
           <SingleAddSelectWithHierarchyPreview />
           <AddSingleItemFromHierarchyPreview />
@@ -54,12 +49,7 @@ function App() {
           Examples for selecting multiple items, including hierarchy, modifiers,
           and peek-inside variants.
         </p>
-        <div
-          style={{
-            display: 'grid',
-            gap: '2rem',
-          }}
-        >
+        <div>
           <MultiAddSelectDefault />
           <MultiAddSelectWithHierarchyPreview />
           <MultiAddSelectWithModifiers />

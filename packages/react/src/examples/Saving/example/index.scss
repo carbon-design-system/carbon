@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$prefix: 'c4p' !default;
 $carbon-prefix: 'cds';
 
 @use '@carbon/styles/scss/config' with (
@@ -30,7 +29,7 @@ body {
   inline-size: 800px;
   margin-inline-start: $spacing-02;
 
-  h1 {
+  .main-title {
     font-size: 2rem;
     font-weight: 400;
     margin-block-end: $spacing-07;
@@ -41,12 +40,6 @@ body {
     border: 1px solid var(--cds-border-subtle);
     background-color: var(--cds-layer-01);
     margin-block-end: $spacing-05;
-
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-block: 0 $spacing-06;
-    }
   }
 }
 

@@ -14,18 +14,18 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/colors' as colors;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
-// ibm-products component styles for the preview Coachmark API
-// (covers coachmark, coachmark-tagline, coachmark-beacon, coachmark_next)
-@use '@carbon/ibm-products/scss/components/Coachmark';
+// Coachmark component styles
+// (covers coachmark, coachmark-tagline, coachmark-beacon)
+@use '@carbon/styles/scss/components/coachmark';
 // @carbon/utilities/scss/carousel/_index auto-emits the carousel CSS
 // (it includes carousel.carousel internally), so we do not call the
 // mixins again here.
 @use '@carbon/utilities/scss/carousel/_index';
 
-$prefix: 'c4p' !default;
+$prefix: 'cds' !default;
 $carbon-prefix: 'cds';
 
-$block-class: #{$prefix}--coachmark__next;
+$block-class: #{$prefix}--coachmark;
 $stack-home-class: 'coachmark-stacked-home';
 $stacked-coachmark: 'stacked-coachmark';
 $elements-block-class: 'stacked_element_content';
@@ -152,7 +152,7 @@ body {
   }
 
   // Create a fixed positioning context for nested coachmarks
-  .#{$prefix}--coachmark__next:has(.#{$elements-block-class}) {
+  .#{$prefix}--coachmark:has(.#{$elements-block-class}) {
     position: fixed;
     z-index: 9001;
     inset-block-end: 0;
@@ -234,7 +234,7 @@ body {
   }
 
   // Trigger animation when is-visible class is applied
-  .#{$prefix}--coachmark__next:has(.#{$elements-block-class}.is-visible) {
+  .#{$prefix}--coachmark:has(.#{$elements-block-class}.is-visible) {
     transform: translateY(0);
     visibility: visible;
   }

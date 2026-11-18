@@ -6,12 +6,11 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
+import { Button, AddSelectItem, UserAvatar } from '@carbon/react';
 import {
   MultiAddSelectWithModifiers as MultiAddSelectWithModifiersComponent,
   ModifierConfig,
 } from '../../components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
-import { AddSelectItem, UserAvatar } from '@carbon/ibm-products';
 import './MultiAddSelectWithModifiers.scss';
 
 // Sample data for the with modifiers variant

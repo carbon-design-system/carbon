@@ -13,20 +13,24 @@ import { ExportModalWithPreformattedExtensions } from './preview-components/Expo
 function App() {
   return (
     <div className="example-container">
-      <h1>Export Modal Examples</h1>
+      <h1 className="main-title">Export Modal Examples</h1>
 
       <section className="example-section">
-        <h2>Standard Export Modal</h2>
+        <h2 className="example-title">Standard Export Modal</h2>
         <StandardExportModal />
       </section>
 
       <section className="example-section">
-        <h2>Export Modal with Extension Validation</h2>
+        <h2 className="example-title">
+          Export Modal with Extension Validation
+        </h2>
         <ExportModalWithExtensionValidation />
       </section>
 
       <section className="example-section">
-        <h2>Export Modal with Preformatted Extensions</h2>
+        <h2 className="example-title">
+          Export Modal with Preformatted Extensions
+        </h2>
         <ExportModalWithPreformattedExtensions />
       </section>
     </div>
