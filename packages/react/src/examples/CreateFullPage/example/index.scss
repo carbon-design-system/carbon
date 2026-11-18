@@ -203,7 +203,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 // CreateFullPage pattern styles
 .#{$block-class} {
   display: grid;
-  block-size: 100%;
+  block-size: 100vh;
   color: $text-primary;
   grid-template-rows: minmax(auto, 100%);
 
