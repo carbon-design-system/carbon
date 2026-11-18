@@ -11,12 +11,14 @@ import { EmptyStatePreview } from './preview-components/EmptyState/EmptyStatePre
 import { EmptyStateWithIsometricIllustration } from './preview-components/EmptyState/EmptyStateWithIsometricIllustration';
 import { EmptyStateWithPictogramIllustration } from './preview-components/EmptyState/EmptyStateWithPictogramIllustration';
 import { EmptyStateUnit } from './preview-components/EmptyState/EmptyStateUnit';
-import { NoDataEmptyStatePreview } from './preview-components/NoDataEmptyState/NoDataEmptyStatePreview';
-import { ErrorEmptyStatePreview } from './preview-components/ErrorEmptyState/ErrorEmptyStatePreview';
-import { NotFoundEmptyStatePreview } from './preview-components/NotFoundEmptyState/NotFoundEmptyStatePreview';
-import { NotificationsEmptyStatePreview } from './preview-components/NotificationsEmptyState/NotificationsEmptyStatePreview';
-import { UnauthorizedEmptyStatePreview } from './preview-components/UnauthorizedEmptyState/UnauthorizedEmptyStatePreview';
-import { NoTagsEmptyStatePreview } from './preview-components/NoTagsEmptyState/NoTagsEmptyStatePreview';
+import {
+  ErrorEmptyStatePreview,
+  NoDataEmptyStatePreview,
+  NoTagsEmptyStatePreview,
+  NotFoundEmptyStatePreview,
+  NotificationsEmptyStatePreview,
+  UnauthorizedEmptyStatePreview,
+} from './preview-components/EmptyState/IllustrationEmptyStatePreviews';
 import './index.scss';
 
 type Placement = 'left' | 'centre';

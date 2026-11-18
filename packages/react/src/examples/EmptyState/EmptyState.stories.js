@@ -7,12 +7,19 @@
 
 import React from 'react';
 import { action } from 'storybook/actions';
-import customIllustration from './example/assets/custom-illustration.svg';
 import DocsPage from './EmptyState.mdx';
+import { EmptyStateVariantsPreview } from './example/preview-components/EmptyState/EmptyStateVariantsPreview';
 import { EmptyStateWithIsometricIllustration } from './example/preview-components/EmptyState/EmptyStateWithIsometricIllustration';
 import { EmptyStateWithPictogramIllustration } from './example/preview-components/EmptyState/EmptyStateWithPictogramIllustration';
 import { EmptyStateUnit } from './example/preview-components/EmptyState/EmptyStateUnit';
-import { EmptyStatePreview } from './example/preview-components/EmptyState/EmptyStatePreview';
+import {
+  ErrorEmptyStatePreview,
+  NoDataEmptyStatePreview,
+  NoTagsEmptyStatePreview,
+  NotFoundEmptyStatePreview,
+  NotificationsEmptyStatePreview,
+  UnauthorizedEmptyStatePreview,
+} from './example/preview-components/EmptyState/IllustrationEmptyStatePreviews';
 
 export default {
   title: 'Examples/EmptyStates/EmptyState',
@@ -24,16 +31,65 @@ export default {
   },
 };
 
-// ─── Stories: base EmptyState (same as ibm-products) ─────────────────────────
-const emptyStateCommonProps = {
-  title: 'Start by adding data assets',
-  subtitleType: 'default',
-  onActionClick: action('Clicked empty state action button'),
+// ─── Shared argTypes / args for illustration-based stories ───────────────────
+const illustrationArgTypes = {
+  headingAs: {
+    control: { type: 'select' },
+    options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  },
+  illustrationTheme: {
+    control: { type: 'select' },
+    options: ['light', 'dark'],
+  },
+  size: { control: { type: 'select' }, options: ['md', 'sm'] },
+  actionType: {
+    control: { type: 'select' },
+    options: ['none', 'text', 'icon'],
+  },
+  WithDarkModeIllustration: {
+    description: 'Show the dark mode illustration.',
+    control: { type: 'boolean' },
+  },
+  WithAction: {
+    description: 'Show a text action button.',
+    control: { type: 'boolean' },
+  },
+  WithActionIconButton: {
+    description: 'Show an icon action button.',
+    control: { type: 'boolean' },
+  },
+  WithSecondaryAction: {
+    description: 'Show primary and secondary action buttons.',
+    control: { type: 'boolean' },
+  },
+  WithLink: {
+    description: 'Show a documentation link.',
+    control: { type: 'boolean' },
+  },
+  WithActionAndLink: {
+    description: 'Show an icon action button combined with a documentation link.',
+    control: { type: 'boolean' },
+  },
 };
 
-const Template = (args) => <EmptyStatePreview {...args} />;
+const illustrationDefaultArgs = {
+  headingAs: 'h3',
+  title: 'Empty state title',
+  subtitle: 'Description text explaining why this section is empty.',
+  illustrationDescription: 'Test alt text',
+  onActionClick: action('Clicked empty state action button'),
+  WithDarkModeIllustration: false,
+  WithAction: false,
+  WithActionIconButton: false,
+  WithSecondaryAction: false,
+  WithLink: false,
+  WithActionAndLink: false,
+};
 
-const baseArgTypes = {
+// ─── Story: Default EmptyState (base, with variant controls) ─────────────────
+export const Default = (args) => <EmptyStateVariantsPreview {...args} />;
+Default.parameters = { layout: 'padded' };
+Default.argTypes = {
   subtitleType: {
     name: 'subtitle',
     control: { type: 'select' },
@@ -48,69 +104,97 @@ const baseArgTypes = {
     control: { type: 'select' },
     options: ['none', 'text', 'icon'],
   },
+  WithTooltipInSubtitle: {
+    description: 'Show subtitle with an inline tooltip.',
+    control: { type: 'boolean' },
+  },
+  WithCustomIllustration: {
+    description: 'Render with a custom SVG illustration.',
+    control: { type: 'boolean' },
+  },
+  WithAction: {
+    description: 'Show a text action button.',
+    control: { type: 'boolean' },
+  },
+  WithActionIconButton: {
+    description: 'Show an icon action button.',
+    control: { type: 'boolean' },
+  },
+  WithSecondaryAction: {
+    description: 'Show primary and secondary action buttons.',
+    control: { type: 'boolean' },
+  },
+  WithLink: {
+    description: 'Show a documentation link.',
+    control: { type: 'boolean' },
+  },
+  WithActionAndLink: {
+    description: 'Show an icon action button combined with a documentation link.',
+    control: { type: 'boolean' },
+  },
+};
+Default.args = {
+  title: 'Start by adding data assets',
+  subtitleType: 'default',
+  onActionClick: action('Clicked empty state action button'),
+  WithTooltipInSubtitle: false,
+  WithCustomIllustration: false,
+  WithAction: false,
+  WithActionIconButton: false,
+  WithSecondaryAction: false,
+  WithLink: false,
+  WithActionAndLink: false,
 };
 
-export const Default = Template.bind({});
-Default.parameters = { layout: 'padded' };
-Default.argTypes = baseArgTypes;
-Default.args = { ...emptyStateCommonProps };
+// ─── Story: ErrorEmptyState ───────────────────────────────────────────────────
+export const ErrorEmptyState = (args) => <ErrorEmptyStatePreview {...args} />;
+ErrorEmptyState.storyName = 'Error empty state';
+ErrorEmptyState.parameters = { layout: 'padded' };
+ErrorEmptyState.argTypes = illustrationArgTypes;
+ErrorEmptyState.args = { ...illustrationDefaultArgs };
 
-export const WithTooltipInSubtitle = Template.bind({});
-WithTooltipInSubtitle.parameters = { layout: 'padded' };
-WithTooltipInSubtitle.argTypes = baseArgTypes;
-WithTooltipInSubtitle.args = {
-  ...emptyStateCommonProps,
-  subtitleType: 'withTooltip',
-};
+// ─── Story: NoDataEmptyState ──────────────────────────────────────────────────
+export const NoDataEmptyState = (args) => <NoDataEmptyStatePreview {...args} />;
+NoDataEmptyState.storyName = 'No data empty state';
+NoDataEmptyState.parameters = { layout: 'padded' };
+NoDataEmptyState.argTypes = illustrationArgTypes;
+NoDataEmptyState.args = { ...illustrationDefaultArgs };
 
-export const WithCustomIllustration = Template.bind({});
-WithCustomIllustration.parameters = { layout: 'padded' };
-WithCustomIllustration.argTypes = baseArgTypes;
-WithCustomIllustration.args = {
-  ...emptyStateCommonProps,
-  illustration: customIllustration,
-  illustrationDescription: 'Test alt text',
-};
+// ─── Story: NoTagsEmptyState ──────────────────────────────────────────────────
+export const NoTagsEmptyState = (args) => <NoTagsEmptyStatePreview {...args} />;
+NoTagsEmptyState.storyName = 'No tags empty state';
+NoTagsEmptyState.parameters = { layout: 'padded' };
+NoTagsEmptyState.argTypes = illustrationArgTypes;
+NoTagsEmptyState.args = { ...illustrationDefaultArgs };
 
-export const WithAction = Template.bind({});
-WithAction.parameters = { layout: 'padded' };
-WithAction.argTypes = baseArgTypes;
-WithAction.args = { ...emptyStateCommonProps, actionType: 'text' };
+// ─── Story: NotFoundEmptyState ────────────────────────────────────────────────
+export const NotFoundEmptyState = (args) => (
+  <NotFoundEmptyStatePreview {...args} />
+);
+NotFoundEmptyState.storyName = 'Not found empty state';
+NotFoundEmptyState.parameters = { layout: 'padded' };
+NotFoundEmptyState.argTypes = illustrationArgTypes;
+NotFoundEmptyState.args = { ...illustrationDefaultArgs };
 
-export const WithActionIconButton = Template.bind({});
-WithActionIconButton.storyName = 'With action icon button';
-WithActionIconButton.parameters = { layout: 'padded' };
-WithActionIconButton.argTypes = baseArgTypes;
-WithActionIconButton.args = { ...emptyStateCommonProps, actionType: 'icon' };
+// ─── Story: NotificationsEmptyState ──────────────────────────────────────────
+export const NotificationsEmptyState = (args) => (
+  <NotificationsEmptyStatePreview {...args} />
+);
+NotificationsEmptyState.storyName = 'Notifications empty state';
+NotificationsEmptyState.parameters = { layout: 'padded' };
+NotificationsEmptyState.argTypes = illustrationArgTypes;
+NotificationsEmptyState.args = { ...illustrationDefaultArgs };
 
-export const WithSecondaryAction = Template.bind({});
-WithSecondaryAction.parameters = { layout: 'padded' };
-WithSecondaryAction.argTypes = baseArgTypes;
-WithSecondaryAction.args = {
-  ...emptyStateCommonProps,
-  actionType: 'text',
-  secondaryAction: true,
-};
+// ─── Story: UnauthorizedEmptyState ───────────────────────────────────────────
+export const UnauthorizedEmptyState = (args) => (
+  <UnauthorizedEmptyStatePreview {...args} />
+);
+UnauthorizedEmptyState.storyName = 'Unauthorized empty state';
+UnauthorizedEmptyState.parameters = { layout: 'padded' };
+UnauthorizedEmptyState.argTypes = illustrationArgTypes;
+UnauthorizedEmptyState.args = { ...illustrationDefaultArgs };
 
-export const WithLink = Template.bind({});
-WithLink.parameters = { layout: 'padded' };
-WithLink.argTypes = baseArgTypes;
-WithLink.args = {
-  ...emptyStateCommonProps,
-  linkText: 'View documentation',
-  linkTarget: '_blank',
-};
-
-export const WithActionAndLink = Template.bind({});
-WithActionAndLink.parameters = { layout: 'padded' };
-WithActionAndLink.argTypes = baseArgTypes;
-WithActionAndLink.args = {
-  ...emptyStateCommonProps,
-  actionType: 'icon',
-  linkText: 'View documentation',
-};
-
-// ─── Story: unit with isometric illustration ─────────────────────────────────
+// ─── Story: Empty state with isometric illustration ───────────────────────────
 export const emptyStateIsometric = (args) => (
   <EmptyStateWithIsometricIllustration {...args} />
 );
