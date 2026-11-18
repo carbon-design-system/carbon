@@ -184,8 +184,9 @@ describe('CodeSnippet', () => {
 
   it('should use fallback container attributes when `type` is not recognized', () => {
     const { container } = render(
-      // @ts-expect-error: This test verifies fallback behavior for an unrecognized type.
-      <CodeSnippet aria-label="" type="other">
+      // @ts-expect-error: This test verifies fallback behavior when
+      // `aria-label` is `null`.
+      <CodeSnippet aria-label={null} type="other">
         {single}
       </CodeSnippet>
     );

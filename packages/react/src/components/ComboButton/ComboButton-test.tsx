@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// TODO: Replace direct DOM access with Testing Library queries.
+
 import { describe, expect, it, jest } from '@jest/globals';
 import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
