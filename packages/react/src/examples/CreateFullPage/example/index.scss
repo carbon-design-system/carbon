@@ -27,6 +27,7 @@
 $block-class: create-full-page-pattern;
 $breadcrumb-block-class: breadcrumb-with-overflow;
 $influencer-block-class: create-influencer;
+$step-block-class: #{$block-class}__step;
 
 // BreadcrumbWithOverflow styles
 .#{$breadcrumb-block-class} {
@@ -313,6 +314,57 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
   button:first-of-type {
     background: none;
   }
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--form-item {
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class} .#{$step-block-class}--hidden-step {
+  display: none;
+}
+
+.#{$block-class} .#{$step-block-class}--visible-step {
+  display: block;
+}
+
+.#{$block-class} .#{$block-class}__step-subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__step-description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--fieldset {
+  margin-block-end: 0;
+}
+
+.#{$block-class} .#{$block-class}__step-fieldset > * {
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--modal-close {
+  display: none;
+}
+
+.#{$block-class} .#{$block-class}__step {
+  position: relative;
+  padding-block-end: $spacing-07;
+}
+
+.#{$block-class}__step .#{carbon-config.$prefix}--css-grid {
+  margin-inline-start: 0;
+}
+
+.#{$block-class}__step-title {
+  @include type.type-style('heading-04');
+
+  margin-block-end: $spacing-05;
 }
 
 // Example app container styles
