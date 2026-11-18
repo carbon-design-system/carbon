@@ -399,28 +399,3 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
   }
 }
 
-// Viewport styles for full-page display
-.create-full-page-stories__viewport {
-  position: fixed;
-  z-index: 9999;
-  overflow: hidden;
-  background-color: $background;
-  block-size: 100vh;
-  inline-size: 100vw;
-  inset: 0;
-}
-
-.create-full-page-stories__viewport
-  .create-full-page-stories__content-container {
-  block-size: 100%;
-  overflow-y: auto;
-  @supports (overflow-block: auto) {
-    overflow-block: auto;
-  }
-}
-
-.create-full-page-stories__viewport
-  .create-full-page-stories__content-container--with-global-header {
-  block-size: calc(100% - #{$spacing-09});
-  margin-block-start: $spacing-09;
-}

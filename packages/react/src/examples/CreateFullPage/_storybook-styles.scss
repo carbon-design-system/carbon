@@ -29,8 +29,13 @@ $story-class: 'create-full-page-stories';
 }
 
 .#{$story-class}__viewport {
+  position: fixed;
+  z-index: 9999;
   overflow: hidden;
+  background-color: $background;
   block-size: 100vh;
+  inline-size: 100vw;
+  inset: 0;
 }
 
 .#{$story-class}__viewport .#{$story-class}__content-container {
