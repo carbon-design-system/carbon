@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@carbon/react": "v12-alpha",
+    "@carbon/styles": "latest",
     "@carbon/utilities-react": "latest",
+    "@ibm/plex": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "sass": "^1.93.2"
