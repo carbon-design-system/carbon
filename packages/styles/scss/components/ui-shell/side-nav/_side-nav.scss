@@ -38,10 +38,9 @@
     inset-block: 0;
     inset-inline-start: 0;
     max-inline-size: mini-units(32);
-    // TODO: sync with motion work
     transition:
-      inline-size 0.11s cubic-bezier(0.2, 0, 1, 0.9),
-      transform 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+      inline-size 0.11s motion(exit, productive),
+      transform 0.11s motion(exit, productive);
     will-change: inline-size;
   }
 
