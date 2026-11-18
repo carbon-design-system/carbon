@@ -95,6 +95,12 @@ async function build() {
         neverBundle: external,
         onlyBundle: false,
       },
+      // `unbundle` keeps one output file per module, so module-level directives
+      // like `'use client'` are preserved. rolldown >= 1.2.19 warns about
+      // them regardless, and `failOnWarn` would turn that into a build error.
+      checks: {
+        moduleLevelDirective: false,
+      },
       failOnWarn: true,
       format: format.type,
       logLevel: 'warn',
