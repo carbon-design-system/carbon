@@ -519,6 +519,9 @@ Map {
       "autoAlign": {
         "type": "bool",
       },
+      "badgeCount": {
+        "type": "number",
+      },
       "children": {
         "type": "node",
       },
@@ -3474,6 +3477,25 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipAlignment": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "type": {
         "type": "string",
       },
@@ -3663,6 +3685,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "small",
             "md",
@@ -3733,6 +3756,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -3793,6 +3817,36 @@ Map {
   },
   "FileUploaderItem" => {
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end",
+            "left-end",
+            "left-start",
+            "right-end",
+            "right-start",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "errorBody": {
         "type": "string",
       },
@@ -3814,6 +3868,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8761,6 +8816,25 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipAlignment": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "type": {
         "type": "string",
       },
@@ -13698,6 +13772,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tabIndex": {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -13963,6 +14040,9 @@ Map {
       },
       "shapeDescription": {
         "type": "string",
+      },
+      "tabIndex": {
+        "type": "number",
       },
       "textSize": {
         "args": [
@@ -15747,6 +15827,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tabIndex": {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -16012,6 +16095,9 @@ Map {
       },
       "shapeDescription": {
         "type": "string",
+      },
+      "tabIndex": {
+        "type": "number",
       },
       "textSize": {
         "args": [

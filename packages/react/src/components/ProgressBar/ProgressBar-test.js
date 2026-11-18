@@ -41,6 +41,26 @@ describe('ProgressBar', () => {
       expect(helperText).toHaveTextContent(text);
     });
 
+    it('should announce the status in the helper text live region', () => {
+      const text = 'ProgressBar helper text';
+      wrapper.rerender(<ProgressBar {...props} helperText={text} />);
+      const live = () =>
+        // eslint-disable-next-line testing-library/no-node-access
+        wrapper.container.querySelector('[aria-live="polite"]');
+
+      expect(live()).toHaveTextContent(/^Loading$/);
+
+      wrapper.rerender(
+        <ProgressBar {...props} helperText={text} status="finished" />
+      );
+      expect(live()).toHaveTextContent(/^Done$/);
+
+      wrapper.rerender(
+        <ProgressBar {...props} helperText={text} status="error" />
+      );
+      expect(live()).toHaveTextContent(/^Error$/);
+    });
+
     it('still renders accessible label when hideLabel is passed', () => {
       wrapper.rerender(<ProgressBar {...props} hideLabel />);
       // eslint-disable-next-line testing-library/no-node-access
@@ -124,6 +144,11 @@ describe('ProgressBar', () => {
       expect(screen.getByRole('progressbar')).toHaveAttribute(
         'aria-invalid',
         'true'
+      );
+
+      expect(screen.getByRole('progressbar')).toHaveAttribute(
+        'aria-busy',
+        'false'
       );
     });
   });

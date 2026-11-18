@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
+import React, {
+  forwardRef,
+  type ComponentPropsWithoutRef,
+  type RefCallback,
+} from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
@@ -105,13 +111,13 @@ describe('Card', () => {
     const handleClick = jest.fn();
     const user = userEvent.setup();
 
-    const { container } = render(
+    render(
       <Card clickable disabled onClick={handleClick} aria-label="Disabled card">
         <CardBody>Disabled content</CardBody>
       </Card>
     );
 
-    const card = container.firstChild;
+    const card = screen.getByLabelText('Disabled card');
     await user.click(card);
 
     expect(handleClick).not.toHaveBeenCalled();
@@ -220,19 +226,20 @@ describe('Card', () => {
         <CardBody>Content</CardBody>
       </Card>
     );
-    expect(container.firstChild.tagName).toBe('A');
+    expect(screen.getByRole('link', { name: 'Dashboard' }).tagName).toBe('A');
   });
 
   it('renders as a custom component when as prop is provided', () => {
-    const CustomEl = React.forwardRef((props, ref) => (
-      <section ref={ref} {...props} />
-    ));
+    const CustomEl = forwardRef<
+      HTMLElement,
+      ComponentPropsWithoutRef<'section'>
+    >((props, ref) => <section ref={ref} {...props} />);
     const { container } = render(
       <Card as={CustomEl} aria-label="Custom">
         <CardBody>Content</CardBody>
       </Card>
     );
-    expect(container.firstChild.tagName).toBe('SECTION');
+    expect(screen.getByLabelText('Custom').tagName).toBe('SECTION');
   });
 
   it('does not apply role="button" when as="a" and clickable', () => {
@@ -275,7 +282,7 @@ describe('Card', () => {
     const footer = container.querySelector('.cds--card__clickable-footer');
     expect(footer).toBeInTheDocument();
     // Footer should contain an SVG (the icon)
-    expect(footer.querySelector('svg')).toBeInTheDocument();
+    expect(footer?.querySelector('svg')).toBeInTheDocument();
   });
 
   it('renders the error icon instead of the footer icon when disabled', () => {
@@ -290,7 +297,7 @@ describe('Card', () => {
       </Card>
     );
     const footer = container.querySelector('.cds--card__clickable-footer');
-    expect(footer.querySelector('svg')).toBeInTheDocument();
+    expect(footer?.querySelector('svg')).toBeInTheDocument();
     expect(screen.queryByTestId('custom-icon')).not.toBeInTheDocument();
   });
 
@@ -353,13 +360,13 @@ describe('Card', () => {
   });
 
   it('supports a ref placed on the root element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLDivElement>>();
     const { container } = render(
       <Card ref={ref}>
         <CardBody>Content</CardBody>
       </Card>
     );
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
+    expect(ref.mock.calls).toContainEqual([container.firstChild]);
   });
 
   it('spreads extra props onto the root element', () => {
@@ -428,7 +435,7 @@ describe('CardHeader', () => {
   });
 
   it('supports a ref placed on the header element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLDivElement>>();
     render(
       <Card>
         <CardHeader ref={ref}>Header</CardHeader>
@@ -482,10 +489,10 @@ describe('CardHeader', () => {
     const topRow = container.querySelector('.cds--card__header-top-row');
     expect(topRow).toBeInTheDocument();
     expect(
-      topRow.querySelector('.cds--card__header-media')
+      topRow?.querySelector('.cds--card__header-media')
     ).toBeInTheDocument();
     expect(
-      topRow.querySelector('.cds--card__actions-slot')
+      topRow?.querySelector('.cds--card__actions-slot')
     ).toBeInTheDocument();
   });
 });
@@ -515,7 +522,7 @@ describe('CardBody', () => {
   });
 
   it('supports a ref placed on the body element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLDivElement>>();
     render(
       <Card>
         <CardBody ref={ref}>Content</CardBody>
@@ -583,7 +590,7 @@ describe('CardFooter', () => {
   });
 
   it('supports a ref placed on the footer element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLDivElement>>();
     render(
       <Card>
         <CardFooter ref={ref}>Footer</CardFooter>
@@ -1133,8 +1140,8 @@ describe('CardActions', () => {
     );
     expect(
       container
-        .querySelector('.cds--card__actions')
-        .style.getPropertyValue('--cds--card--actions-inline-size')
+        .querySelector<HTMLDivElement>('.cds--card__actions')
+        ?.style.getPropertyValue('--cds--card--actions-inline-size')
     ).toMatch(/^\d+px$/);
   });
 });
