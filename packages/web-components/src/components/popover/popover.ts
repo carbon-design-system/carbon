@@ -440,7 +440,12 @@ class CDSPopover extends AutoAlignMixin(HostListenerMixin(LitElement)) {
 
     if (this.autoalign && this.open) {
       // auto align functionality with @floating-ui/dom library
-      const button = this._triggerSlotNode.assignedElements()[0];
+      // `flatten` resolves a forwarded `<slot>` (e.g. `cds-coachmark` re-slots
+      // its trigger) to the real element.
+      const button = this._triggerSlotNode.assignedElements({
+        flatten: true,
+      })[0];
+
       const content = this._contentSlotNode.assignedElements()[0];
 
       const tooltip = content?.shadowRoot?.querySelector(

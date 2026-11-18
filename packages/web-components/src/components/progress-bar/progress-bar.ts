@@ -181,7 +181,7 @@ class CDSProgressBar extends LitElement {
       <div
         class="${prefix}--progress-bar__track"
         role="progressbar"
-        aria-busy="${!isFinished}"
+        aria-busy="${!isFinished && !isError}"
         aria-invalid="${isError}"
         aria-valuemin="${!indeterminate ? 0 : null}"
         aria-valuemax="${!indeterminate ? max : null}"
@@ -192,7 +192,7 @@ class CDSProgressBar extends LitElement {
         ? html`<div class="${prefix}--progress-bar__helper-text">
             ${helperText}
             <div class="${prefix}--visually-hidden" aria-live="polite">
-              ${isFinished ? 'Done' : 'Loading'}
+              ${isFinished ? 'Done' : isError ? 'Error' : 'Loading'}
             </div>
           </div>`
         : null}

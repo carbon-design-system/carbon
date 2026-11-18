@@ -1,19 +1,29 @@
 name: Next release (v12 alpha)
 
+# On every push to next, bump prerelease versions and push a v12 alpha git tag.
+# The git tag push starts release.yml, which publishes the v12-alpha
+# dist-tag. The git tag is also the baseline Lerna uses to detect changed packages.
+#
+# The version bump commit starts with "chore(release):". For those commits, we don't want to trigger a new release. 
+# GitHub only lets one release wait in line. The version-bump push is kept in
+# its own line so it does not knock out a real code push that is waiting.
 on:
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        required: true
-        description: 'Run dry run?'
-        type: boolean
-        default: true
+  push:
+    branches:
+      - next
+
+concurrency:
+  group: ${{ github.event.head_commit.message && startsWith(github.event.head_commit.message, 'chore(release):') && format('next-release-skip-{0}', github.run_id) || 'next-release' }}
+  cancel-in-progress: false
 
 jobs:
   version:
     name: Version and tag
     runs-on: ubuntu-latest-larger-disk
     timeout-minutes: 60
+    if: |
+      github.repository == 'carbon-design-system/carbon' &&
+      !startsWith(github.event.head_commit.message, 'chore(release):')
     permissions:
       contents: write
     steps:
@@ -24,14 +34,107 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
+      # Checkout the commit that triggered this run. A queued run must not
+      # version whatever happens to be on next by the time the job starts.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: next
+          ref: ${{ github.sha }}
           fetch-depth: 0
           token: ${{ steps.generate_token.outputs.token }}
 
-      - name: Determine next alpha tag
-        id: next_tag
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      # Version bumps from a previous publish have to be in this tree so Lerna
+      # increments from versions already on npm. A newer code push supersedes
+      # this run; that newer commit already contains this one.
+      - name: Incorporate version bumps from next
+        id: sync
+        run: |
+          git fetch origin next --tags --force
+
+          if git merge-base --is-ancestor origin/next HEAD; then
+            echo "HEAD already contains origin/next"
+            echo "status=proceed" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          superseded=false
+          while IFS= read -r subject; do
+            case "$subject" in
+              "chore(release):"*) ;;
+              *)
+                superseded=true
+                echo "Newer non-release commit on next: $subject"
+                ;;
+            esac
+          done < <(git log --format=%s HEAD..origin/next)
+
+          if [ "$superseded" = true ]; then
+            echo "A newer push is already on next. Skipping this run."
+            echo "status=skip" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Merging version-bump commits from origin/next"
+          git merge origin/next --no-edit
+          echo "status=proceed" >> "$GITHUB_OUTPUT"
+
+      - name: Use Node.js version from .nvmrc
+        if: steps.sync.outputs.status == 'proceed'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        if: steps.sync.outputs.status == 'proceed'
+        run: yarn install --immutable --check-cache
+
+      - name: Version packages
+        id: version
+        if: steps.sync.outputs.status == 'proceed'
+        run: |
+          yarn lerna version prerelease \
+            --preid alpha \
+            --no-git-tag-version \
+            --yes
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No package changes to publish"
+            echo "status=skip" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "status=proceed" >> "$GITHUB_OUTPUT"
+
+      - name: Install updated lockfile
+        if: steps.version.outputs.status == 'proceed'
+        run: |
+          if ! git diff --quiet -- yarn.lock || ! git diff --cached --quiet -- yarn.lock; then
+            yarn install --immutable --check-cache
+          fi
+
+      # Stage version bumps so the release commit contains only those changes.
+      - name: Stage version bumps
+        if: steps.version.outputs.status == 'proceed'
+        run: git add -A
+
+      # A push that landed during versioning must be tagged by that newer run.
+      - name: Confirm next has not moved
+        id: tip
+        if: steps.version.outputs.status == 'proceed'
+        run: |
+          git fetch origin next --tags --force
+          if git merge-base --is-ancestor origin/next HEAD; then
+            echo "status=proceed" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "next moved during versioning. Skipping this release."
+          echo "status=skip" >> "$GITHUB_OUTPUT"
+
+      - name: Commit version bump and tag
+        if: steps.tip.outputs.status == 'proceed'
         run: |
           latest=$(git tag --list 'v12.*-alpha.*' --sort=-version:refname | grep -E '^v12\.[0-9]+\.[0-9]+-alpha\.[0-9]+$' | head -n 1 || true)
           if [ -z "$latest" ]; then
@@ -40,43 +143,15 @@ jobs:
           fi
           prefix="${latest%.*}"
           number="${latest##*.}"
-          next="${prefix}.$((number + 1))"
-          echo "Latest alpha tag: $latest"
-          echo "Next alpha tag: $next"
-          echo "tag=$next" >> "$GITHUB_OUTPUT"
+          tag="${prefix}.$((number + 1))"
+          echo "Next alpha tag: $tag"
 
-      - name: Configure git
-        run: |
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-
-      - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: '.nvmrc'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: yarn install --immutable --check-cache
-
-      - name: Version packages
-        run: |
-          yarn lerna version prerelease --preid alpha --no-git-tag-version \
-            ${{ github.event.inputs.dry_run != 'true' && '--yes' || '' }}
-
-      - name: Commit version bumps
-        if: github.event.inputs.dry_run != 'true'
-        run: |
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "lerna version produced no changes"
+          if git diff --cached --quiet; then
+            echo "No staged version changes to commit"
             exit 1
           fi
-          git add -A
-          git commit -m "chore(release): ${{ steps.next_tag.outputs.tag }}"
-          git push origin HEAD:next
+          HUSKY=0 git commit -m "chore(release): ${tag}"
 
-      - name: Create git tag
-        if: github.event.inputs.dry_run != 'true'
-        run: |
-          git tag -a "${{ steps.next_tag.outputs.tag }}" -m "${{ steps.next_tag.outputs.tag }}"
-          git push origin "refs/tags/${{ steps.next_tag.outputs.tag }}"
+          git push origin HEAD:next
+          git tag -a "$tag" -m "$tag"
+          git push origin "refs/tags/${tag}"

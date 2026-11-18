@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -43,6 +43,28 @@ describe('InlineLoading', () => {
     expect(document.querySelector('svg')).toHaveClass(
       'cds--inline-loading--error'
     );
+  });
+
+  it('should expose the finished and error icons to assistive technology', () => {
+    const { rerender } = render(<InlineLoading status="finished" />);
+    expect(screen.getByRole('img', { name: 'finished' })).toBeInTheDocument();
+
+    rerender(<InlineLoading status="error" />);
+    expect(screen.getByRole('img', { name: 'error' })).toBeInTheDocument();
+  });
+
+  it('should use iconDescription as the status icon label', () => {
+    const { rerender } = render(
+      <InlineLoading status="finished" iconDescription="Upload complete" />
+    );
+    expect(
+      screen.getByRole('img', { name: 'Upload complete' })
+    ).toBeInTheDocument();
+
+    rerender(<InlineLoading status="error" iconDescription="Upload failed" />);
+    expect(
+      screen.getByRole('img', { name: 'Upload failed' })
+    ).toBeInTheDocument();
   });
 
   it('should not render any text by default', () => {
