@@ -11,10 +11,10 @@ import { StandardImportAndUpload } from './preview-components/StandardImportAndU
 function App() {
   return (
     <div className="example-container">
-      <h1>Import and Upload Examples</h1>
+      <h1 className="main-title">Import and Upload Examples</h1>
 
       <section className="example-section">
-        <h2>Standard Import and Upload</h2>
+        <h2 className="example-title">Standard Import and Upload</h2>
         <StandardImportAndUpload />
       </section>
     </div>
