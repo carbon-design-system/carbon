@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import AISkeletonIcon from '../AISkeletonIcon';
@@ -21,9 +23,7 @@ describe('AISkeleton', () => {
     );
 
     expect(screen.getByTestId('ai-skeleton-placeholder')).toHaveClass(
-      'cds--skeleton__placeholder',
-      'cds--skeleton__placeholder--ai',
-      '💾',
+      'cds--skeleton__placeholder cds--skeleton__placeholder--ai 💾',
       { exact: true }
     );
   });
@@ -32,9 +32,7 @@ describe('AISkeleton', () => {
     render(<AISkeletonIcon className="🖨️" data-testid="ai-skeleton-icon" />);
 
     expect(screen.getByTestId('ai-skeleton-icon')).toHaveClass(
-      '🖨️',
-      'cds--skeleton__icon--ai',
-      'cds--icon--skeleton',
+      '🖨️ cds--skeleton__icon--ai cds--icon--skeleton',
       { exact: true }
     );
   });
@@ -45,10 +43,7 @@ describe('AISkeleton', () => {
     );
 
     expect(screen.getByTestId('ai-skeleton-text')).toHaveClass(
-      'cds--skeleton__text',
-      'cds--skeleton__heading',
-      '💿',
-      'cds--skeleton__text--ai',
+      'cds--skeleton__text cds--skeleton__heading 💿 cds--skeleton__text--ai',
       { exact: true }
     );
   });

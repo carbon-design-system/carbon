@@ -14047,6 +14047,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tabIndex": {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -14106,6 +14109,9 @@ Map {
       },
       "shapeDescription": {
         "type": "string",
+      },
+      "tabIndex": {
+        "type": "number",
       },
       "textSize": {
         "args": [
@@ -15890,6 +15896,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tabIndex": {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -15949,6 +15958,9 @@ Map {
       },
       "shapeDescription": {
         "type": "string",
+      },
+      "tabIndex": {
+        "type": "number",
       },
       "textSize": {
         "args": [
