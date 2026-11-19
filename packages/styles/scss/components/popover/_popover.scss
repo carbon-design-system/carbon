@@ -62,10 +62,14 @@ $popover-border-color: custom-property.get-var(
 );
 
 // The border radius value for the popover container
-$popover-border-radius: custom-property.get-var(
-  'popover-border-radius',
-  if(enabled('enable-v12-release'), $border-radius-08, 2px)
-);
+$popover-border-radius: custom-property.get-var('popover-border-radius', 2px);
+
+@if enabled('enable-v12-release') {
+  $popover-border-radius: custom-property.get-var(
+    'popover-border-radius',
+    $border-radius-08
+  );
+}
 
 // The text color used for text placed inside of the popover
 $popover-text-color: custom-property.get-var(

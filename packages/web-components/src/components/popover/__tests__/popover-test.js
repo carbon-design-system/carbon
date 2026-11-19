@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { expect, fixture, html } from '@open-wc/testing';
+import { expect, fixture, html, nextFrame } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/popover/index.js';
 import '@carbon/web-components/es/components/feature-flags/index.js';
@@ -782,6 +782,40 @@ describe('cds-popover autoAlignBoundary', () => {
     expect(resolvedBoundary).to.have.property('y').that.is.a('number');
     expect(resolvedBoundary).to.have.property('width').that.is.a('number');
     expect(resolvedBoundary).to.have.property('height').that.is.a('number');
+  });
+});
+
+describe('cds-popover autoalign with a forwarded trigger slot', () => {
+  it('should position against the real trigger, not the forwarding <slot>', async () => {
+    // Mirrors components such as `cds-coachmark` that re-slot their trigger:
+    // the popover's first assigned element is a `<slot>`, not the trigger.
+    const host = await fixture(html`
+      <div style="padding: 200px;">
+        <div id="host">
+          <button type="button" slot="trigger">Trigger</button>
+        </div>
+      </div>
+    `);
+    const hostEl = host.querySelector('#host');
+    hostEl.attachShadow({ mode: 'open' }).innerHTML = `
+      <cds-popover open autoalign align="bottom">
+        <slot name="trigger"></slot>
+        <cds-popover-content>Content</cds-popover-content>
+      </cds-popover>
+    `;
+    const popover = hostEl.shadowRoot.querySelector('cds-popover');
+    await popover.updateComplete;
+    await nextFrame();
+    await nextFrame();
+
+    const content = popover
+      .querySelector('cds-popover-content')
+      .shadowRoot.querySelector('.cds--popover-content');
+    const trigger = hostEl.querySelector('button').getBoundingClientRect();
+
+    expect(content.style.visibility).to.equal('visible');
+    expect(parseFloat(content.style.left)).to.be.greaterThan(0);
+    expect(parseFloat(content.style.top)).to.be.greaterThan(trigger.top);
   });
 });
 
