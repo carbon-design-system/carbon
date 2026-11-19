@@ -6,8 +6,11 @@
  */
 
 import { reporter } from '@carbon/cli-reporter';
-import { exec } from 'child-process-promise';
+import { exec as execCallback } from 'node:child_process';
+import { promisify } from 'node:util';
 import { workspace } from '../workspace.js';
+
+const exec = promisify(execCallback);
 
 async function check(args, env) {
   reporter.info('Running checks in CI...');
