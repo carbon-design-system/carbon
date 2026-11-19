@@ -418,7 +418,12 @@ const radioNodes = [
   },
 ];
 
-function renderRadioTree(nodes, selected = [], multiselect = false) {
+function renderRadioOrCheckboxTree(
+  nodes,
+  onNodeSelect,
+  selected = [],
+  multiselect = false
+) {
   if (!nodes) {
     return;
   }
@@ -437,8 +442,11 @@ function renderRadioTree(nodes, selected = [], multiselect = false) {
           <UncheckedIcon />
         );
       }}
+      onSelect={(_event, node) => {
+        onNodeSelect(String(node.id));
+      }}
       {...nodeProps}>
-      {renderRadioTree(children, selected, multiselect)}
+      {renderRadioOrCheckboxTree(children, onNodeSelect, selected, multiselect)}
     </TreeNode>
   ));
 }
@@ -447,6 +455,23 @@ export const WithCheckboxOrRadio = (args) => {
   const [selected, setSelected] = useState([]);
   const [active, setActive] = useState(null);
   const { onActivate, onSelect, ...treeViewArgs } = args;
+
+  /**
+   * Selects and deselects on click. This is different from the default that
+   * requires Cmd+Click.
+   */
+  const handleNodeSelect = (nodeId) => {
+    let nextSelected = [nodeId];
+
+    if (treeViewArgs.multiselect) {
+      nextSelected = selected.includes(nodeId)
+        ? selected.filter((selectedId) => selectedId !== nodeId)
+        : [...selected, nodeId];
+    }
+
+    setSelected(nextSelected);
+    onSelect(nextSelected);
+  };
 
   return (
     <VStack gap={6}>
@@ -477,12 +502,13 @@ export const WithCheckboxOrRadio = (args) => {
             setActive(nextActive);
             onActivate(nextActive);
           }}
-          selected={selected}
-          onSelect={(nextSelected) => {
-            setSelected(nextSelected);
-            onSelect(nextSelected);
-          }}>
-          {renderRadioTree(radioNodes, selected, treeViewArgs.multiselect)}
+          selected={selected}>
+          {renderRadioOrCheckboxTree(
+            radioNodes,
+            handleNodeSelect,
+            selected,
+            treeViewArgs.multiselect
+          )}
         </TreeView>
       </div>
     </VStack>
