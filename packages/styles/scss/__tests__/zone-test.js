@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 const isEqual = require('react-fast-compare');
 
 const { render } = SassRenderer.create(__dirname);
@@ -52,19 +52,18 @@ describe('zone', () => {
 
     // When including the `_zone.scss` file, we generate a stylesheet with four
     // classes, one per theme.
-    const { stylesheet } = css.parse(result.css.toString());
+    const stylesheet = postcss.parse(result.css.toString());
 
-    for (const rule of stylesheet.rules) {
+    for (const rule of stylesheet.nodes) {
       // For each selector, we check that every button token that we have
       // defined for this theme is emitted in CSS with the expected value
       const [_prefix, theme] = rule.selectors[0].split('--');
       const tokens = tokensByTheme.get(theme);
       const includesComponentTokens = Array.from(tokens.entries()).every(
         ([token, value]) => {
-          return rule.declarations.find((declaration) => {
+          return rule.nodes.find((declaration) => {
             return (
-              declaration?.property?.includes(token) &&
-              declaration.value === value
+              declaration?.prop?.includes(token) && declaration.value === value
             );
           });
         }
@@ -81,14 +80,14 @@ describe('zone', () => {
       const { result } = await render(`
         @use '../zone';
       `);
-      const { stylesheet } = css.parse(result.css.toString());
+      const stylesheet = postcss.parse(result.css.toString());
 
       getToken = (theme, token) => {
-        const rule = stylesheet.rules.find((rule) => {
+        const rule = stylesheet.nodes.find((rule) => {
           return rule.selectors?.includes(`.cds--${theme}`);
         });
-        return rule?.declarations.find((declaration) => {
-          return declaration.property === `--cds-${token}`;
+        return rule?.nodes.find((declaration) => {
+          return declaration.prop === `--cds-${token}`;
         })?.value;
       };
     });

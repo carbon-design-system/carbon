@@ -103,7 +103,7 @@ test.describe('@avt FileUploader', () => {
       },
     });
 
-    // The hidden <input type="file"> also has the button role, so match the
+    // the hidden <input type="file"> also has the button role, so match the
     // visible <button> by its text
     const addFileButton = page.locator('button', { hasText: 'Add file' });
 
@@ -179,7 +179,7 @@ test.describe('@avt FileUploader', () => {
       },
     });
 
-    // The hidden <input type="file"> also has the button role, so match the
+    // the hidden <input type="file"> also has the button role, so match the
     // visible <button> by its text
     const addFileButton = page.locator('button', {
       hasText: 'Drag and drop a file here or click to upload',

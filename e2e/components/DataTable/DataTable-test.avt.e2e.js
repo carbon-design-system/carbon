@@ -257,9 +257,6 @@ test.describe('@avt DataTable', () => {
       // Presisng the primary button Apply Filter
       await page.keyboard.press('Enter');
 
-      // Every row with port 443 is filtered out. `toHaveCount` keeps retrying
-      // while the table updates; a strict locator fails as soon as it matches
-      // more than one row.
       await expect(
         page.getByRole('cell', { name: '443', exact: true })
       ).toHaveCount(0);
