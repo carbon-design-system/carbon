@@ -1221,6 +1221,30 @@ describe('Single date picker', () => {
     expect(screen.getByRole('application')).toHaveClass('open');
   });
 
+  it('should not call `onClose` when Escape is pressed on a closed calendar', async () => {
+    const onClose = jest.fn();
+    render(
+      <DatePicker datePickerType="single" onClose={onClose}>
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-escape-closed"
+        />
+      </DatePicker>
+    );
+    const input = screen.getByLabelText('Date Picker label');
+
+    await userEvent.click(input);
+    expect(screen.getByRole('application')).toHaveClass('open');
+
+    await userEvent.keyboard('{escape}');
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+    expect(onClose).toHaveBeenCalledTimes(1);
+
+    await userEvent.keyboard('{escape}');
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
   it('should close calendar with single type on focus loss', async () => {
     const onClose = jest.fn();
     render(

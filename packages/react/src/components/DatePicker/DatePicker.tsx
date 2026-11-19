@@ -705,9 +705,11 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
         todayDateElem: fpTodayDateElem,
       } = calendar;
 
-      if (match(event, keys.Escape)) {
+      if (match(event, keys.Escape) && calendar.isOpen) {
         // Use `close()` rather than only removing the class so flatpickr's
         // `isOpen` state is reset; otherwise a later click won't reopen it.
+        // `close()` fires `onClose` unconditionally, so skip it when the
+        // calendar is already closed.
         calendar.close();
       }
 
@@ -855,7 +857,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       if (
         match(event, keys.Enter) &&
         closeOnSelect &&
-        datePickerType == 'single'
+        datePickerType == 'single' &&
+        calendar.isOpen
       ) {
         // Use `close()` rather than only removing the class so flatpickr's
         // `isOpen` state is reset; otherwise a later click won't reopen it.
