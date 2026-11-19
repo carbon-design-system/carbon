@@ -349,6 +349,7 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
+          package-manager-cache: false
       # AVT only needs these packages at runtime, so skip the full monorepo
       # install. Versions are the exact pins resolved in `avt-build`.
       # --ignore-scripts skips the browser downloads that accessibility-checker's
@@ -371,26 +372,16 @@ jobs:
         with:
           name: avt-storybook-static
           path: packages/react/storybook-static
-      - name: Run storybook
-        id: storybook
-        run: |
-          npx serve -l 3000 packages/react/storybook-static &
-          pid=$!
-          echo "pid=$pid" >> $GITHUB_OUTPUT
-      # Docker-based ./actions/wait-for-it can't reach localhost inside a
-      # job container, so poll from this shell instead
-      - name: Wait for storybook
-        timeout-minutes: 3
-        run: |
-          until node -e "fetch('http://localhost:3000').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"; do
-            sleep 2
-          done
+      # Serve, wait and test in one step: in a job container
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
+        env:
+          SHARD: ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         run: |
-          npx playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
-      - name: Stop storybook
-        run: kill ${{ steps.storybook.outputs.pid }}
+          node_modules/.bin/serve -L -l 3000 packages/react/storybook-static &
+          trap "kill $!" EXIT
+          timeout 180 sh -c 'until node -e "fetch(\"http://localhost:3000\").then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"; do sleep 2; done'
+          npx playwright test --project chromium --grep @avt --shard="$SHARD"
       - name: Upload blob report to GitHub Actions Artifacts
         if:
           ${{ !cancelled() && github.repository == 'carbon-design-system/carbon'
