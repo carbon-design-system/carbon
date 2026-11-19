@@ -14,6 +14,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './modal.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { isFeatureFlagEnabled } from '../feature-flags';
 import '../icon-button';
 
 /**
@@ -37,6 +38,7 @@ class CDSModalCloseButton extends FocusMixin(LitElement) {
 
   render() {
     const { closeButtonLabel } = this;
+    const enableV12Release = isFeatureFlagEnabled('enable-v12-release', this);
     return html`
       <cds-icon-button
         part="button"
@@ -44,7 +46,7 @@ class CDSModalCloseButton extends FocusMixin(LitElement) {
         enter-delay-ms=""
         aria-label="${ifDefined(closeButtonLabel)}"
         kind="ghost"
-        size="lg"
+        size="${enableV12Release ? 'md' : 'lg'}"
         leave-delay-ms="">
         ${iconLoader(Close20, {
           slot: 'icon',

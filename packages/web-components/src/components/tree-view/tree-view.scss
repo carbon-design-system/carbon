@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2025, 2025
+// Copyright IBM Corp. 2025, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -30,6 +30,27 @@ $css--plex: true !default;
 
   .#{$prefix}--tree-parent-node__toggle {
     box-sizing: inherit;
+    flex-shrink: 0;
+  }
+
+  a.#{$prefix}--tree-node {
+    min-inline-size: 0;
+  }
+
+  .#{$prefix}--tree-node__label__tooltip {
+    display: block;
+    min-inline-size: 0;
+  }
+
+  .#{$prefix}--tree-node__label__tooltip::part(popover-container) {
+    display: block;
+  }
+
+  .#{$prefix}--tree-node__label__text {
+    // Keep the label's spacing and line height.
+    line-height: inherit;
+    min-inline-size: 0;
+    padding-inline-start: 0;
   }
 }
 
