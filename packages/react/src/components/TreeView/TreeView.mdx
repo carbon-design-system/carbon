@@ -19,6 +19,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [Overview](#overview)
 - [With Controlled Expansion](#with-controlled-expansion)
 - [With Icons](#with-icons)
+- [With Checkbox or Radio](#with-checkbox-or-radio)
 - [With Links](#with-links)
 - [Component API](#component-api)
 - [Feedback](#feedback)
@@ -80,6 +81,15 @@ TreeView.
     },
   ]}
 />
+
+## With Checkbox or Radio
+
+Use the `renderIcon` prop on each `TreeNode` along with `onSelect` to display
+checkbox or radio icons that reflect the selection state. When `multiselect` is
+enabled, checkbox icons are shown and nodes toggle on click. Otherwise, radio
+icons are shown and a single node is selected.
+
+<Canvas of={TreeViewStories.WithCheckboxOrRadio} />
 
 ## With Links
 
