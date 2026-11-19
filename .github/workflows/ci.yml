@@ -108,11 +108,13 @@ jobs:
         run: yarn install --immutable
       # only load what the tests and styles check
       - name: Build project
-        run:
-          yarn lerna run build --ignore @carbon/web-components --ignore
-          carbon-components --ignore carbon-components-react --ignore
-          @carbon/icons-vue --ignore @carbon/pictograms --ignore
-          @carbon/pictograms-react --ignore @carbon/elements
+        run: |
+          yarn lerna run build \
+            --ignore @carbon/web-components \
+            --ignore carbon-components \
+            --ignore carbon-components-react \
+            --ignore @carbon/icons-vue \
+            --ignore @carbon/elements
       - name: Check generated styles
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
@@ -263,7 +265,10 @@ jobs:
   avt-build:
     runs-on: ubuntu-24.04
     outputs:
-      playwright-version: ${{ steps.playwright.outputs.version }}
+      playwright-version: ${{ steps.versions.outputs.playwright }}
+      playwright-image: ${{ steps.versions.outputs.playwright-image }}
+      accessibility-checker-version:
+        ${{ steps.versions.outputs.accessibility-checker }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -274,17 +279,23 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
-      # `avt-runner` uses this to determine container image, so image browsers
-      # match the installed @playwright/test
-      - name: Read Playwright version
-        id: playwright
+      # Resolve package versions once for the AVT jobs
+      - name: Resolve AVT versions
+        id: versions
         run: |
-          version=$(node -p "require('./package.json').devDependencies['@playwright/test']")
-          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error file=package.json::@playwright/test must be pinned to an exact version, got '$version'"
-            exit 1
-          fi
-          echo "version=$version" >> "$GITHUB_OUTPUT"
+          playwright=$(node -p "require('./package.json').devDependencies['@playwright/test']")
+          checker=$(node -p "require('./package.json').devDependencies['accessibility-checker']")
+          for pin in "@playwright/test=$playwright" "accessibility-checker=$checker"; do
+            if ! [[ "${pin#*=}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "::error file=package.json::${pin%=*} must be pinned to an exact version, got '${pin#*=}'"
+              exit 1
+            fi
+          done
+          {
+            echo "playwright=$playwright"
+            echo "playwright-image=mcr.microsoft.com/playwright:v$playwright-noble"
+            echo "accessibility-checker=$checker"
+          } >> "$GITHUB_OUTPUT"
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         if: github.event_name != 'merge_group'
         id: cache
@@ -323,12 +334,9 @@ jobs:
     runs-on: ubuntu-24.04
     # lower default (hung shards default at 6h)
     timeout-minutes: 20
-    # Use image with preinstalled libs and browser. Tag follows the
-    # @playwright/test pin in package.json (used in `avt-build`)
+    # Image with preinstalled libs and browser, resolved in `avt-build`
     container:
-      image:
-        mcr.microsoft.com/playwright:v${{
-        needs.avt-build.outputs.playwright-version }}-noble
+      image: ${{ needs.avt-build.outputs.playwright-image }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -342,17 +350,20 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       # AVT only needs these packages at runtime, so skip the full monorepo
-      # install. Versions come from package.json, which pins them exactly.
+      # install. Versions are the exact pins resolved in `avt-build`.
       # --ignore-scripts skips the browser downloads that accessibility-checker's
       # puppeteer and chromedriver dependencies would otherwise run; the
       # container already has Chromium
       - name: Install test dependencies
+        env:
+          PLAYWRIGHT_VERSION: ${{ needs.avt-build.outputs.playwright-version }}
+          CHECKER_VERSION:
+            ${{ needs.avt-build.outputs.accessibility-checker-version }}
         run: |
-          pkg() { node -p "require('./package.json').devDependencies['$1']"; }
           npm install --prefix "$RUNNER_TEMP/avt" --no-save --no-package-lock \
             --no-audit --no-fund --ignore-scripts \
-            "@playwright/test@$(pkg @playwright/test)" \
-            "accessibility-checker@$(pkg accessibility-checker)" \
+            "@playwright/test@$PLAYWRIGHT_VERSION" \
+            "accessibility-checker@$CHECKER_VERSION" \
             serve@14.2.6
           ln -s "$RUNNER_TEMP/avt/node_modules" node_modules
       - name: Download storybook artifacts
@@ -400,20 +411,20 @@ jobs:
         run: exit 1
 
   merge-playwright-reports:
-    # Merge reports after avt-runner jobs, even if some shards have failed
+    # Merge reports after avt-runner jobs, even if some shards have failed.
+    # Skip if `avt-build` fails, nothing to report
     if:
       ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
-      github.event.pull_request.draft == false }}
-    needs: [avt-runner]
+      needs.avt-build.result == 'success' && github.event.pull_request.draft ==
+      false }}
+    needs: [avt-build, avt-runner]
 
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # Only needs .nvmrc and package.json for Playwright version
-          sparse-checkout: |
-            /.nvmrc
-            /package.json
+          # Only needs .nvmrc for setup-node
+          sparse-checkout: /.nvmrc
           sparse-checkout-cone-mode: false
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -433,9 +444,9 @@ jobs:
         env:
           PLAYWRIGHT_HTML_OUTPUT_DIR: playwright-avt-report
           PLAYWRIGHT_HTML_OPEN: never
+          PLAYWRIGHT_VERSION: ${{ needs.avt-build.outputs.playwright-version }}
         run: |
-          version=$(node -p "require('./package.json').devDependencies['@playwright/test']")
-          npx --yes "playwright@$version" merge-reports --reporter html ./all-playwright-avt-blob-reports
+          npx --yes "playwright@$PLAYWRIGHT_VERSION" merge-reports --reporter html ./all-playwright-avt-blob-reports
 
       - name: Upload avt HTML report
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
