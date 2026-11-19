@@ -1,0 +1,109 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidMultiSelectStories from './FluidMultiSelect.stories';
+
+<Meta of={FluidMultiSelectStories} />
+
+# FluidMultiSelect
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidMultiSelect)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/multi-select/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/multi-select/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Condensed](#condensed)
+- [Filterable](#filterable)
+- [Filterable with Layer](#filterable-with-layer)
+- [Skeleton](#skeleton)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-multi-select` component provides a fluid variant of
+multi-select dropdown, allowing users to select multiple options from a list.
+
+### Importing
+
+```ts
+import {
+  FluidMultiSelectComponent,
+  FluidMultiSelectSkeletonComponent,
+} from '@carbon/angular/fluid-multi-select';
+import { MultiSelectItemComponent } from '@carbon/angular/multi-select';
+
+@Component({
+  standalone: true,
+  imports: [FluidMultiSelectComponent, MultiSelectItemComponent],
+  template: `
+    <cds-ng-fluid-multi-select titleText="Label" label="Choose options">
+      <cds-ng-multi-select-item value="opt-1"
+        >Option 1</cds-ng-multi-select-item
+      >
+      <cds-ng-multi-select-item value="opt-2"
+        >Option 2</cds-ng-multi-select-item
+      >
+    </cds-ng-fluid-multi-select>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidMultiSelectStories.Default} />
+
+## Condensed
+
+<Canvas of={FluidMultiSelectStories.Condensed} />
+
+## Filterable
+
+<Canvas of={FluidMultiSelectStories.Filterable} />
+
+## Filterable with Layer
+
+<Canvas of={FluidMultiSelectStories.FilterableWithLayer} />
+
+## Skeleton
+
+<Canvas of={FluidMultiSelectStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={FluidMultiSelectStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of={FluidMultiSelectStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidMultiSelectComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-multi-select
+  [formControl]="multiControl"
+  titleText="Multi-select">
+  <cds-ng-multi-select-item value="opt-1">Option 1</cds-ng-multi-select-item>
+</cds-ng-fluid-multi-select>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-multi-select
+  [(ngModel)]="selectedValues"
+  titleText="Multi-select">
+  <cds-ng-multi-select-item value="opt-1">Option 1</cds-ng-multi-select-item>
+</cds-ng-fluid-multi-select>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

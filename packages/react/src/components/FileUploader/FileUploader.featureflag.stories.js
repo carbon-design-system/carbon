@@ -54,7 +54,7 @@ const argTypes = {
   onChange: { action: 'onChange' },
   onClick: { action: 'onClick' },
   onDelete: { action: 'onDelete' },
-  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
 };
 
 export default {

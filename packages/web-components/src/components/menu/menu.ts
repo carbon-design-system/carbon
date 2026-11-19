@@ -191,6 +191,13 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     return `${prefix}-menu-opened`;
   }
   updated(changedProperties) {
+    if (changedProperties.has('size')) {
+      // Nested submenus are sized from the root menu when their item renders,
+      // so the items need to render again to pick up the new size.
+      this.querySelectorAll<CDSmenuItem>(`${prefix}-menu-item`).forEach(
+        (item) => item.requestUpdate()
+      );
+    }
     if (changedProperties.has('open')) {
       if (this.open) {
         this._handleOpen();
@@ -288,7 +295,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   _focusItem = (e: KeyboardEvent | undefined) => {
     let currentItem: number;
 
-    if (document.activeElement?.tagName !== 'CDS-MENU') {
+    if (document.activeElement?.tagName !== `${prefix}-menu`.toUpperCase()) {
       const shadowRootActiveEl = this._findActiveElementInShadowRoot(document);
       currentItem = this.activeitems.findIndex((activeItem) => {
         return (
@@ -569,10 +576,10 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       items = this._slotElement?.assignedElements() ?? [];
     }
     this.items = items?.filter((item) => {
-      if (item.tagName === 'CDS-MENU-ITEM') {
+      if (item.tagName === `${prefix}-menu-item`.toUpperCase()) {
         return !(item as CDSmenuItem).disabled;
       }
-      return item.tagName !== 'CDS-MENU-ITEM-DIVIDER';
+      return item.tagName !== `${prefix}-menu-item-divider`.toUpperCase();
     });
   };
   _setActiveItems = () => {
@@ -581,7 +588,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     this.items?.map((item) => {
       let activeItem: activeItemType;
       switch (item.tagName) {
-        case 'CDS-MENU-ITEM-RADIO-GROUP': {
+        case `${prefix}-menu-item-radio-group`.toUpperCase(): {
           const slotElements = item.querySelectorAll(`${prefix}-menu-item`);
           if (slotElements?.length) {
             for (const entry of slotElements.entries()) {
@@ -594,7 +601,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
           }
           break;
         }
-        case 'CDS-MENU-ITEM-GROUP': {
+        case `${prefix}-menu-item-group`.toUpperCase(): {
           const slotElements = item.shadowRoot
             ?.querySelector('slot')
             ?.assignedElements();
@@ -607,7 +614,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
           });
           break;
         }
-        case 'CDS-MENU-ITEM-SELECTABLE': {
+        case `${prefix}-menu-item-selectable`.toUpperCase(): {
           activeItem = {
             item: item.shadowRoot?.querySelector(
               `${prefix}-menu-item`

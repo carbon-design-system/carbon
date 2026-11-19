@@ -1256,9 +1256,21 @@ collect:
         - g90
         - white
         # General - tooltipAlignment
+        - bottom
+        - bottom-end
+        - bottom-start
         - center
         - end
+        - left
+        - left-end
+        - left-start
+        - right
+        - right-end
+        - right-start
         - start
+        - top
+        - top-end
+        - top-start
         # General - tooltipPosition
         - bottom
         - left

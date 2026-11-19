@@ -192,7 +192,7 @@ class CDSProgressBar extends LitElement {
         ? html`<div class="${prefix}--progress-bar__helper-text">
             ${helperText}
             <div class="${prefix}--visually-hidden" aria-live="polite">
-              ${isFinished ? 'Done' : 'Loading'}
+              ${isFinished ? 'Done' : isError ? 'Error' : 'Loading'}
             </div>
           </div>`
         : null}

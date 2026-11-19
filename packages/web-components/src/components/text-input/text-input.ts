@@ -19,6 +19,7 @@ import ViewOff16 from '@carbon/icons/es/view--off/16.js';
 import FormAssociatedMixin, {
   type FormValue,
 } from '../../globals/mixins/form-associated';
+import { uniqueId } from '../../globals/internal/unique-id';
 import ValidityMixin from '../../globals/mixins/validity';
 import {
   INPUT_COLOR_SCHEME,
@@ -95,6 +96,16 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
    */
   @query("slot[name='slug']")
   private _slotSlugNode!: HTMLSlotElement;
+
+  /**
+   * The ID of the helper text, referenced by `aria-describedby`.
+   */
+  protected _helperTextId = uniqueId('text-input-helper-text');
+
+  /**
+   * The ID of the invalid or warning message, referenced by `aria-describedby`.
+   */
+  protected _errorTextId = uniqueId('text-input-error-text');
 
   /**
    * The internal value.
@@ -525,7 +536,7 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
 
     const helper = html`<div
       class="${helperTextClasses}"
-      id="helper-text"
+      id="${this._helperTextId}"
       ?hidden="${normalizedProps.invalid ||
       normalizedProps.warn ||
       !hasHelperText}">
@@ -540,7 +551,7 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
       normalizedProps.invalid || normalizedProps.warn
         ? html`<div
             class="${prefix}--form-requirement"
-            id="error-text"
+            id="${this._errorTextId}"
             ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
             <slot name="${normalizedProps['slot-name']}">
               ${normalizedProps['slot-text']}
@@ -552,9 +563,9 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
     // helper text, which is hidden while the input is invalid or in warning.
     let describedBy: string | undefined;
     if (normalizedProps.invalid || normalizedProps.warn) {
-      describedBy = 'error-text';
-    } else if (hasHelperText) {
-      describedBy = 'helper-text';
+      describedBy = this._errorTextId;
+    } else if (hasHelperText && !isFluid) {
+      describedBy = this._helperTextId;
     }
 
     return html`

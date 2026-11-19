@@ -27,12 +27,15 @@ from the package by writing the following:
 
 | Name                    | Type     |
 | :---------------------- | :------- |
+| `$duration-fast-00`     | Duration |
 | `$duration-fast-01`     | Duration |
 | `$duration-fast-02`     | Duration |
 | `$duration-moderate-01` | Duration |
 | `$duration-moderate-02` | Duration |
+| `$duration-moderate-03` | Duration |
 | `$duration-slow-01`     | Duration |
 | `$duration-slow-02`     | Duration |
+| `$duration-slow-03`     | Duration |
 | `$easings`              | Map      |
 | `@mixin motion`         | Mixin    |
 | `@function motion`      | Mixin    |

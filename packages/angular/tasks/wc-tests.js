@@ -56,15 +56,11 @@ const EXCLUDED = [
     'components/side-panel/__tests__/side-panel-test.js',
     'imports a story asset that is not vendored',
   ],
-  // TODO: remove these three once the web components stop comparing
-  // `tagName` with uppercase `'CDS-…'` literals, which `create-prefixed-build`
-  // does not rewrite, so they never match a prefixed element.
+  // TODO: remove these once the web components stop comparing `tagName`
+  // with uppercase `'CDS-…'` literals, which `create-prefixed-build` does not
+  // rewrite, so they never match a prefixed element.
   [
     'components/combo-button/__tests__/combo-button-test.js',
-    'uppercase CDS- tag literals in the web components',
-  ],
-  [
-    'components/menu/__tests__/menu-item-test.js',
     'uppercase CDS- tag literals in the web components',
   ],
   [

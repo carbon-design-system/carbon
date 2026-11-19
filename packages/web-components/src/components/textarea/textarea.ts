@@ -233,7 +233,7 @@ class CDSTextarea extends CDSTextInput {
     };
 
     const helper = html`
-      <div class="${helperTextClasses}" id="helper-text">
+      <div class="${helperTextClasses}" id="${this._helperTextId}">
         <slot name="helper-text">${this.helperText}</slot>
       </div>
     `;
@@ -248,12 +248,20 @@ class CDSTextarea extends CDSTextInput {
     const validationMessage = html`
       <div
         class="${prefix}--form-requirement"
+        id="${this._errorTextId}"
         ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
         <slot name="${normalizedProps['slot-name']}">
           ${normalizedProps['slot-text']} ${this.isFluid ? icon() : null}
         </slot>
       </div>
     `;
+
+    let describedBy: string | undefined;
+    if (normalizedProps.invalid || normalizedProps.warn) {
+      describedBy = this._errorTextId;
+    } else if (this.helperText && !this.isFluid) {
+      describedBy = this._helperTextId;
+    }
 
     return html`
       <div class="${prefix}--text-area__label-wrapper">
@@ -266,6 +274,7 @@ class CDSTextarea extends CDSTextInput {
         ${!this.isFluid ? icon() : null}
         <textarea
           autocomplete="${this.autocomplete}"
+          aria-describedby="${ifDefined(describedBy)}"
           ?autofocus="${this.autofocus}"
           class="${textareaClasses}"
           cols="${ifDefined(this.cols)}"

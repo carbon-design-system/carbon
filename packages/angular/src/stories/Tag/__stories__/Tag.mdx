@@ -1,0 +1,107 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TagStories from './Tag.stories';
+
+<Meta of={TagStories} />
+
+# Tag
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Tag)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tag/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tag/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Dismissible](#dismissible)
+- [Selectable](#selectable)
+- [Operational](#operational)
+- [Skeleton](#skeleton)
+- [ReadOnly](#readonly)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+Tags are used for items that need to be labeled, categorized, or organized using
+keywords that describe them.
+
+### Importing
+
+```ts
+import {
+  TagComponent,
+  DismissibleTagComponent,
+  SelectableTagComponent,
+  OperationalTagComponent,
+  TagSkeletonComponent,
+} from '@carbon/angular/tag';
+
+@Component({
+  standalone: true,
+  imports: [TagComponent, DismissibleTagComponent, SelectableTagComponent],
+  template: `
+    <cds-ng-tag type="blue">Blue Tag</cds-ng-tag>
+    <cds-ng-dismissible-tag
+      type="magenta"
+      text="Dismissible Tag"></cds-ng-dismissible-tag>
+    <cds-ng-selectable-tag text="Selectable Tag"></cds-ng-selectable-tag>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={TagStories.ReadOnly} />
+
+## Dismissible
+
+<Canvas of={TagStories.Dismissible} />
+
+## Selectable
+
+<Canvas of={TagStories.Selectable} />
+
+## Operational
+
+<Canvas of={TagStories.Operational} />
+
+## Skeleton
+
+<Canvas of={TagStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={TagStories.WithAILabel} />
+
+## Component API
+
+`Tag` has no `Default` story, so the table below is for
+`cds-ng-dismissible-tag`. The other tag components take the same `type` and
+`size` inputs plus their own (see the stories above).
+
+<ArgTypes of={TagStories.Dismissible} />
+
+## Angular-specific notes
+
+### Events
+
+Each tag component exposes the web component's custom events as `@Output()`s,
+for example `(dismissibleTagClosed)` and `(dismissibleTagBeingclosed)` on
+`cds-ng-dismissible-tag`, and `(selectableTagSelected)` on
+`cds-ng-selectable-tag`. Native events such as `click` are bound as usual.
+
+```html
+<cds-ng-dismissible-tag
+  type="blue"
+  text="Filter"
+  (dismissibleTagClosed)="removeFilter()"></cds-ng-dismissible-tag>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).

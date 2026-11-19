@@ -111,10 +111,24 @@ const allTokens = collectTokens(motionTokenFile);
 const durationTokens = allTokens.filter((t) => t.name.startsWith('duration-'));
 const easingTokens = allTokens.filter((t) => t.name.startsWith('easing-'));
 
+const V10_DURATION_NAMES = [
+  'duration-fast-01',
+  'duration-fast-02',
+  'duration-moderate-01',
+  'duration-moderate-02',
+  'duration-slow-01',
+  'duration-slow-02',
+];
+const v10DurationTokens = durationTokens.filter((token) =>
+  V10_DURATION_NAMES.includes(token.name)
+);
+
 const v11Names = durationTokens.map((t) => toCamelCase(t.name));
-const v10Names = v11Names.map(toV10Name);
-const sassV10Names = durationTokens.map((t) =>
-  t.name.replace(/^duration-/, '')
+const v10Names = v10DurationTokens.map((token) =>
+  toV10Name(toCamelCase(token.name))
+);
+const sassV10Names = v10DurationTokens.map((token) =>
+  token.name.replace(/^duration-/, '')
 );
 
 const allSurfaces = collectSurfaces(surfaceTokenFile);
@@ -297,8 +311,8 @@ describe('@carbon/motion — every token generates a JS export', () => {
     }
   });
 
-  test('every duration token in the JSON has a matching V10 alias JS export with the correct value', () => {
-    for (const token of durationTokens) {
+  test('every v10 duration token in the JSON has a matching V10 alias JS export with the correct value', () => {
+    for (const token of v10DurationTokens) {
       const v10 = toV10Name(toCamelCase(token.name));
       expect(CarbonMotion).toHaveProperty(v10);
       expect(CarbonMotion[v10]).toBe(resolveDuration(token.value));
@@ -336,8 +350,10 @@ describe('@carbon/motion — every token generates a JS export', () => {
   });
 
   test('V10 aliases point to their V11 canonical values', () => {
-    for (let i = 0; i < v11Names.length; i++) {
-      expect(CarbonMotion[v10Names[i]]).toBe(CarbonMotion[v11Names[i]]);
+    for (const token of v10DurationTokens) {
+      const v11 = toCamelCase(token.name);
+      const v10 = toV10Name(v11);
+      expect(CarbonMotion[v10]).toBe(CarbonMotion[v11]);
     }
   });
 
@@ -515,9 +531,9 @@ describe('@carbon/motion — every token generates a Sass variable', () => {
     expect(matches).toHaveLength(durationTokens.length);
   });
 
-  test('Scss has exactly one V10 alias per duration token in the JSON', () => {
+  test('Scss has exactly one V10 alias per v10 duration token in the JSON', () => {
     const matches = scssSource.match(/\$[a-z]+-\d+: \$duration-/g) || [];
-    expect(matches).toHaveLength(durationTokens.length);
+    expect(matches).toHaveLength(v10DurationTokens.length);
   });
 });
 
