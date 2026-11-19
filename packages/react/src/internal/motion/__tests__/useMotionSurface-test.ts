@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { renderHook } from '@testing-library/react';
 import { useMotionEnabled } from '../useMotionEnabled';
 import { useMotionSurface } from '../useMotionSurface';
@@ -15,7 +16,7 @@ jest.mock('../useMotionEnabled', () => ({
 
 describe('useMotionSurface', () => {
   afterEach(() => {
-    useMotionEnabled.mockReturnValue(true);
+    jest.mocked(useMotionEnabled).mockReturnValue(true);
   });
 
   it('resolves shared-element surfaces into Motion transitions', () => {
@@ -23,6 +24,9 @@ describe('useMotionSurface', () => {
 
     expect(result.current.kind).toBe('shared-element');
     expect(result.current.enabled).toBe(true);
+    if (result.current.kind !== 'shared-element') {
+      throw new Error('Expected a shared-element surface.');
+    }
     expect(result.current.origin).toBeUndefined();
     expect(result.current.enterTransition).toEqual({
       duration: 0.24,
@@ -48,6 +52,9 @@ describe('useMotionSurface', () => {
     const { result } = renderHook(() => useMotionSurface('invoke'));
 
     expect(result.current.kind).toBe('shared-element');
+    if (result.current.kind !== 'shared-element') {
+      throw new Error('Expected a shared-element surface.');
+    }
     expect(result.current.origin).toBe('trigger');
     // standard/expressive
     expect(result.current.enterTransition.ease).toEqual([0.4, 0.14, 0.3, 1]);
@@ -60,6 +67,9 @@ describe('useMotionSurface', () => {
     const { result } = renderHook(() => useMotionSurface('contextual'));
 
     expect(result.current.kind).toBe('reveal');
+    if (result.current.kind !== 'reveal') {
+      throw new Error('Expected a reveal surface.');
+    }
     expect(result.current.initial).toEqual({
       opacity: 0,
       transform: 'scale(0.96)',
@@ -79,7 +89,7 @@ describe('useMotionSurface', () => {
   });
 
   it('reports the accessibility gate', () => {
-    useMotionEnabled.mockReturnValue(false);
+    jest.mocked(useMotionEnabled).mockReturnValue(false);
 
     const { result } = renderHook(() => useMotionSurface('expand'));
 
@@ -100,6 +110,9 @@ describe('useMotionSurface', () => {
     );
 
     expect(result.current.kind).toBe('reveal');
+    if (result.current.kind !== 'reveal') {
+      throw new Error('Expected a reveal surface.');
+    }
     expect(result.current.initial).toEqual({
       opacity: 0,
       clipPath: 'inset(50% 0 50% 0)',
@@ -116,7 +129,7 @@ describe('useMotionSurface', () => {
   // structure keeps the resolved targets referentially stable, so Motion is not
   // handed new objects on each pass.
   it('keeps resolved values stable across renders of an inline definition', () => {
-    const renderInline = () =>
+    const { result, rerender } = renderHook(() =>
       useMotionSurface({
         kind: 'reveal',
         duration: 'slow-01',
@@ -124,9 +137,8 @@ describe('useMotionSurface', () => {
         exit: { opacity: 0 },
         enterEasing: { name: 'entrance', mode: 'expressive' },
         exitEasing: { name: 'exit', mode: 'expressive' },
-      });
-
-    const { result, rerender } = renderHook(renderInline);
+      })
+    );
     const first = result.current;
 
     rerender();
@@ -137,6 +149,8 @@ describe('useMotionSurface', () => {
   it('surfaces validation errors from inline definitions', () => {
     expect(() =>
       renderHook(() =>
+        // @ts-expect-error: Omit `enter` to test malformed definition
+        // validation.
         useMotionSurface({
           kind: 'reveal',
           duration: 'slow-01',

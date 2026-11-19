@@ -1,10 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
@@ -34,10 +36,8 @@ describe('useDelayedState', () => {
     render(<TestComponent />);
     expect(screen.getByTestId('count')).toHaveTextContent('0');
 
-    await act(async () => {
-      await user.click(screen.getByText('increment'));
-      jest.runOnlyPendingTimers();
-    });
+    await user.click(screen.getByText('increment'));
+    act(() => jest.runOnlyPendingTimers());
 
     expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
@@ -61,12 +61,10 @@ describe('useDelayedState', () => {
 
     render(<TestComponent />);
 
-    await act(async () => {
-      await user.click(screen.getByText('increment'));
-      jest.advanceTimersByTime(500);
-      await user.click(screen.getByText('increment'));
-      jest.runOnlyPendingTimers();
-    });
+    await user.click(screen.getByText('increment'));
+    act(() => jest.advanceTimersByTime(500));
+    await user.click(screen.getByText('increment'));
+    act(() => jest.runOnlyPendingTimers());
 
     expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
@@ -92,9 +90,7 @@ describe('useDelayedState', () => {
 
     expect(screen.getByTestId('count')).toHaveTextContent('0');
 
-    await act(async () => {
-      await user.click(screen.getByText('increment'));
-    });
+    await user.click(screen.getByText('increment'));
 
     expect(screen.getByTestId('count')).toHaveTextContent('1');
   });

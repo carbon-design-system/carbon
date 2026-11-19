@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useRef, useState } from 'react';
@@ -28,10 +30,19 @@ const TestComponent = () => {
 };
 
 const createDeferred = () => {
-  let resolve;
-  const promise = new Promise((res) => {
-    resolve = res;
+  let resolvePromise: (() => void) | undefined;
+
+  const promise = new Promise<void>((res) => {
+    resolvePromise = res;
   });
+
+  const resolve = () => {
+    if (!resolvePromise) {
+      throw new Error('Deferred promise resolver is unavailable.');
+    }
+
+    resolvePromise();
+  };
 
   return { promise, resolve };
 };
@@ -39,31 +50,40 @@ const createDeferred = () => {
 const mockPresenceAnimations = () => {
   const originalGetAnimations = Element.prototype.getAnimations;
   const originalCSSAnimation = global.CSSAnimation;
-  const deferredAnimations = [];
+  const deferredAnimations: ReturnType<typeof createDeferred>[] = [];
 
-  function MockCSSAnimation(animationName) {
-    this.animationName = animationName;
-    const deferred = createDeferred();
-    this.finished = deferred.promise;
-    deferredAnimations.push(deferred);
+  class MockCSSAnimation {
+    finished: Promise<void>;
+
+    constructor(readonly animationName: string) {
+      const deferred = createDeferred();
+      this.finished = deferred.promise;
+      deferredAnimations.push(deferred);
+    }
   }
 
-  global.CSSAnimation = MockCSSAnimation;
-  Element.prototype.getAnimations = jest.fn(() => [
-    new MockCSSAnimation('cds--presence-modal__exit'),
-  ]);
+  Object.defineProperty(globalThis, 'CSSAnimation', {
+    configurable: true,
+    writable: true,
+    value: MockCSSAnimation,
+  });
+  Object.defineProperty(Element.prototype, 'getAnimations', {
+    configurable: true,
+    writable: true,
+    value: jest.fn(() => [new MockCSSAnimation('cds--presence-modal__exit')]),
+  });
 
   const cleanup = () => {
     if (originalGetAnimations) {
       Element.prototype.getAnimations = originalGetAnimations;
     } else {
-      delete Element.prototype.getAnimations;
+      Reflect.deleteProperty(Element.prototype, 'getAnimations');
     }
 
     if (originalCSSAnimation) {
       global.CSSAnimation = originalCSSAnimation;
     } else {
-      delete global.CSSAnimation;
+      Reflect.deleteProperty(globalThis, 'CSSAnimation');
     }
   };
 
@@ -81,8 +101,8 @@ describe('usePresence', () => {
     render(<TestComponent />);
 
     await userEvent.click(screen.getByRole('button', { name: 'Open' }));
-    expect(screen.queryByRole('dialog')).toBeInTheDocument();
-    expect(screen.queryByRole('dialog')).not.toHaveAttribute(
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).not.toHaveAttribute(
       'data-exiting',
       'true'
     );
@@ -92,7 +112,7 @@ describe('usePresence', () => {
     render(<TestComponent />);
 
     await userEvent.click(screen.getByRole('button', { name: 'Open' }));
-    expect(screen.queryByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: 'Close' }));
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -105,27 +125,25 @@ describe('usePresence', () => {
       render(<TestComponent />);
 
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
-      expect(screen.queryByRole('dialog')).toBeInTheDocument();
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
 
       await userEvent.click(screen.getByRole('button', { name: 'Close' }));
-      expect(screen.queryByRole('dialog')).toBeInTheDocument();
-      expect(screen.queryByRole('dialog')).toHaveAttribute(
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+      expect(screen.getByRole('dialog')).toHaveAttribute(
         'data-exiting',
         'true'
       );
       await waitFor(() => expect(deferredAnimations.length).toBe(1));
 
       await userEvent.click(screen.getByRole('button', { name: 'Open' }));
-      expect(screen.queryByRole('dialog')).toBeInTheDocument();
-      expect(screen.queryByRole('dialog')).not.toHaveAttribute(
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+      expect(screen.getByRole('dialog')).not.toHaveAttribute(
         'data-exiting',
         'true'
       );
 
-      deferredAnimations[0]?.resolve();
-      await waitFor(() =>
-        expect(screen.queryByRole('dialog')).toBeInTheDocument()
-      );
+      deferredAnimations[0].resolve();
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
     } finally {
       cleanup();
     }

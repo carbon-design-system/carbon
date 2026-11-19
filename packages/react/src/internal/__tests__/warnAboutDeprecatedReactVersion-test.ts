@@ -5,11 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+
 describe('warnAboutDeprecatedReactVersion', () => {
   const originalNodeEnv = process.env.NODE_ENV;
-  let spy;
+  let spy: ReturnType<typeof jest.spyOn>;
 
-  function loadWithReactVersion(version) {
+  function loadWithReactVersion(version: string | undefined) {
     jest.doMock('react', () => ({
       __esModule: true,
       default: {
@@ -18,7 +27,9 @@ describe('warnAboutDeprecatedReactVersion', () => {
       version,
     }));
 
-    return require('../warnAboutDeprecatedReactVersion');
+    return jest.requireActual<
+      typeof import('../warnAboutDeprecatedReactVersion')
+    >('../warnAboutDeprecatedReactVersion');
   }
 
   beforeEach(() => {

@@ -5,7 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Profiler } from 'react';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
+import React, { Profiler, type ComponentProps } from 'react';
 import {
   act,
   fireEvent,
@@ -15,6 +24,7 @@ import {
 } from '@testing-library/react';
 import { enabled } from '@carbon/feature-flags';
 import { FloatingMenu } from '../FloatingMenu';
+import type { MenuOffset, Offset } from '../FloatingMenu';
 import { OptimizedResize } from '../OptimizedResize';
 import { warning } from '../warning';
 import { wrapFocus, wrapFocusWithoutSentinels } from '../wrapFocus';
@@ -32,6 +42,11 @@ jest.mock('../wrapFocus', () => ({
   wrapFocusWithoutSentinels: jest.fn(),
 }));
 
+const mockedEnabled = jest.mocked(enabled);
+const mockedWarning = jest.mocked(warning);
+const mockedWrapFocus = jest.mocked(wrapFocus);
+const mockedWrapFocusWithoutSentinels = jest.mocked(wrapFocusWithoutSentinels);
+
 const defaultMenuChildren = (
   <div data-testid="menu">
     <button type="button">Menu item</button>
@@ -39,7 +54,11 @@ const defaultMenuChildren = (
 );
 const defaultMenuOffset = { top: 5, left: 7 };
 
-const createRect = (values) => ({
+const createRect = (
+  values?: Partial<
+    Pick<DOMRect, 'left' | 'top' | 'right' | 'bottom' | 'width' | 'height'>
+  >
+) => ({
   x: values?.left ?? 0,
   y: values?.top ?? 0,
   width: values?.width ?? 0,
@@ -51,13 +70,15 @@ const createRect = (values) => ({
   toJSON: () => {},
 });
 
-const removeByTestId = (testId) => {
+const removeByTestId = (testId: string) => {
   document
     .querySelectorAll(`[data-testid="${testId}"]`)
     .forEach((node) => node.parentNode?.removeChild(node));
 };
 
-const renderFloatingMenu = (options) => {
+const renderFloatingMenu = (
+  options?: Partial<Omit<ComponentProps<typeof FloatingMenu>, 'triggerRef'>>
+) => {
   const { children, ...props } = options ?? {};
   const resolvedChildren = children ?? defaultMenuChildren;
   const trigger = document.createElement('button');
@@ -73,15 +94,15 @@ const renderFloatingMenu = (options) => {
 };
 
 describe('FloatingMenu', () => {
-  let triggerRect;
-  let targetRect;
-  let menuRects;
+  let triggerRect: ReturnType<typeof createRect>;
+  let targetRect: ReturnType<typeof createRect>;
+  let menuRects: ReturnType<typeof createRect>[];
 
   beforeEach(() => {
-    enabled.mockReturnValue(false);
-    warning.mockClear();
-    wrapFocus.mockClear();
-    wrapFocusWithoutSentinels.mockClear();
+    mockedEnabled.mockReturnValue(false);
+    mockedWarning.mockClear();
+    mockedWrapFocus.mockClear();
+    mockedWrapFocusWithoutSentinels.mockClear();
 
     triggerRect = createRect({
       left: 10,
@@ -103,7 +124,7 @@ describe('FloatingMenu', () => {
 
     jest
       .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
-      .mockImplementation(function getRect() {
+      .mockImplementation(function getRect(this: HTMLElement) {
         const testId = this.getAttribute('data-testid');
 
         switch (testId) {
@@ -111,7 +132,11 @@ describe('FloatingMenu', () => {
             return triggerRect;
           case 'menu':
             if (menuRects.length > 1) {
-              return menuRects.shift();
+              const rect = menuRects[0];
+
+              menuRects.shift();
+
+              return rect;
             }
             return menuRects[0];
           case 'portal-target':
@@ -154,7 +179,7 @@ describe('FloatingMenu', () => {
     ['left', 'left', '-97px', '11px'],
     ['top', 'top', '-23px', '-35px'],
     ['right', 'right', '37px', '23px'],
-  ])(
+  ] as const)(
     'should position the menu in the %s direction',
     async (_label, menuDirection, expectedLeft, expectedTop) => {
       renderFloatingMenu({
@@ -212,7 +237,9 @@ describe('FloatingMenu', () => {
   });
 
   it('should support function `menuOffset` values', async () => {
-    const menuOffset = jest.fn(() => defaultMenuOffset);
+    const menuOffset = jest.fn<Exclude<MenuOffset, Offset>>(
+      () => defaultMenuOffset
+    );
 
     renderFloatingMenu({
       flipped: true,
@@ -227,7 +254,12 @@ describe('FloatingMenu', () => {
       expect(menu.style.top).toBe('65px');
     });
 
-    expect(menuOffset).toHaveBeenCalledWith(menu, 'bottom', trigger, true);
+    expect(menuOffset.mock.calls).toContainEqual([
+      menu,
+      'bottom',
+      trigger,
+      true,
+    ]);
   });
 
   it('should focus `selectorPrimaryFocus` when provided', async () => {
@@ -350,12 +382,16 @@ describe('FloatingMenu', () => {
   });
 
   it('should call `wrapFocusWithoutSentinels` on Tab when focus wrap flag is enabled', async () => {
-    enabled.mockReturnValue(true);
+    mockedEnabled.mockReturnValue(true);
 
     renderFloatingMenu();
 
     const menu = screen.getByTestId('menu');
     const { parentElement: wrapper } = menu;
+
+    if (!wrapper) {
+      throw new Error('Expected the floating menu wrapper to be rendered.');
+    }
 
     expect(screen.queryByText('Focus sentinel')).not.toBeInTheDocument();
 
@@ -373,20 +409,12 @@ describe('FloatingMenu', () => {
 
   it('should register a resize handler and remove it on unmount', () => {
     const remove = jest.fn();
-    let resizeCallback;
 
-    jest.spyOn(OptimizedResize, 'add').mockImplementation((callback) => {
-      resizeCallback = callback;
-      return { remove };
-    });
+    jest.spyOn(OptimizedResize, 'add').mockImplementation(() => ({ remove }));
 
     const { unmount } = renderFloatingMenu();
 
     expect(OptimizedResize.add).toHaveBeenCalled();
-
-    act(() => {
-      resizeCallback();
-    });
 
     unmount();
     expect(remove).toHaveBeenCalled();
@@ -411,11 +439,11 @@ describe('FloatingMenu', () => {
 
   it('should not commit again when repeated resizes keep the same updated menu position', async () => {
     const remove = jest.fn();
-    let resizeCallback;
     const onRender = jest.fn();
     const trigger = document.createElement('button');
     const triggerRef = { current: trigger };
     const target = () => document.body;
+    let resizeCallback: Parameters<typeof OptimizedResize.add>[0] | undefined;
 
     trigger.setAttribute('data-testid', 'trigger');
     document.body.appendChild(trigger);
@@ -441,6 +469,12 @@ describe('FloatingMenu', () => {
       expect(screen.getByTestId('menu').style.top).toBe('65px');
     });
 
+    const callback = resizeCallback;
+
+    if (!callback) {
+      throw new Error('Expected a resize callback to be registered.');
+    }
+
     triggerRect = createRect({
       left: 50,
       top: 20,
@@ -451,7 +485,7 @@ describe('FloatingMenu', () => {
     });
 
     act(() => {
-      resizeCallback();
+      callback();
     });
 
     await waitFor(() => {
@@ -462,7 +496,7 @@ describe('FloatingMenu', () => {
     const commitCountAfterPositionChange = onRender.mock.calls.length;
 
     act(() => {
-      resizeCallback();
+      callback();
     });
 
     expect(onRender).toHaveBeenCalledTimes(commitCountAfterPositionChange);
