@@ -9,6 +9,7 @@
 
 'use strict';
 
+const postcss = require('postcss');
 const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
@@ -21,5 +22,25 @@ describe('scss/components/tooltip', () => {
       $_: get('mixin', meta.mixin-exists('tooltip', 'tooltip'));
     `);
     expect(unwrap('mixin')).toBe(true);
+  });
+
+  test('IconButton tooltip content uses full vertical padding', async () => {
+    const { result } = await render(`
+      @use '../tooltip';
+    `);
+
+    const styles = {};
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (rule.selector === '.cds--icon-button-tooltip .cds--tooltip-content') {
+        for (const node of rule.nodes) {
+          if (node.type === 'decl') {
+            styles[node.prop] = node.value;
+          }
+        }
+      }
+    });
+
+    expect(styles['padding-block']).toBe('1rem');
   });
 });
