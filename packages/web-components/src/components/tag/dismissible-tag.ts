@@ -183,6 +183,13 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   @property({ reflect: true })
   type = TAG_TYPE.GRAY;
 
+  /**
+   * Dismissible tags use truncation to choose the dismiss tooltip label.
+   */
+  protected _shouldMeasureEllipsis() {
+    return true;
+  }
+
   render() {
     const {
       disabled,
