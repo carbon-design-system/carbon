@@ -1,10 +1,12 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
+import vm from 'node:vm';
 import { defaultFilterRows } from '../filter';
 
 describe('defaultFilterRows', () => {
@@ -58,6 +60,162 @@ describe('defaultFilterRows', () => {
     expect(result).toEqual([]);
   });
 
+  it.each([
+    ['null', null],
+    ['undefined', undefined],
+  ])('should not match the text %s in an empty cell', (inputValue, value) => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value },
+      },
+      inputValue,
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should not match the default string form of objects and React elements', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1', '2', '3'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: { first: 'Alice' } },
+        '2-name': { value: <a href="#bob">Bob</a> },
+        '3-name': { value: new Map() },
+      },
+      inputValue: 'object',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should not throw on objects without a prototype', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: Object.create(null) },
+      },
+      inputValue: 'object',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should not match the default string form of cross-realm objects', () => {
+    const value = vm.runInNewContext('({ first: "Alice" })');
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value },
+      },
+      inputValue: 'object',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should ignore objects with a non-function `toString`', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: { toString: 42 } },
+      },
+      inputValue: '42',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should match objects with meaningful string forms', () => {
+    const toString = jest.fn(() => 'Allison');
+
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1', '2'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: { toString } },
+        '2-name': { value: ['Alice', 'Allison'] },
+      },
+      inputValue: 'allison',
+    });
+
+    expect(result).toEqual(['1', '2']);
+    expect(toString).toHaveBeenCalledTimes(1);
+  });
+
+  it('should match dates by their string form', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: new Date('2000-06-01T00:00:00.000Z') },
+      },
+      inputValue: '2000',
+    });
+
+    expect(result).toEqual(['1']);
+  });
+
+  it('should ignore objects whose string conversion throws an error', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': {
+          value: {
+            toString: () => {
+              throw new Error('Cannot convert value');
+            },
+          },
+        },
+      },
+      inputValue: 'alice',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should match bigint values', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-age': { value: BigInt(42) },
+      },
+      inputValue: '42',
+    });
+
+    expect(result).toEqual(['1']);
+  });
+
+  it('should match the number zero', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-age': { value: 0 },
+      },
+      inputValue: '0',
+    });
+
+    expect(result).toEqual(['1']);
+  });
+
   it('should perform a case-insensitive search', () => {
     const result = defaultFilterRows({
       ...defaultOptions,
@@ -81,6 +239,17 @@ describe('defaultFilterRows', () => {
       ...defaultOptions,
       rowIds: [],
       inputValue: 'alice',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should not throw when no cell in a row matches and a cell is missing', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: { '1-name': { value: 'Alice' } },
+      inputValue: 'xyz',
     });
 
     expect(result).toEqual([]);
