@@ -133,7 +133,6 @@ const files = [
   'scss/components/overflow-menu/_overflow-menu.scss',
   'scss/components/pagination/_index.scss',
   'scss/components/pagination/_pagination.scss',
-  'scss/components/pagination/_unstable_pagination.scss',
   'scss/components/pagination-nav/_index.scss',
   'scss/components/pagination-nav/_pagination-nav.scss',
   'scss/components/popover/_index.scss',

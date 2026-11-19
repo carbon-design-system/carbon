@@ -268,15 +268,6 @@ export {
   OverflowMenuV2 as unstable_OverflowMenuV2,
   OverflowMenuV2 as preview_OverflowMenuV2,
 } from './components/OverflowMenuV2';
-// unstable_Pagination / preview_Pagination are deprecated. Use the stable
-// `Pagination` component with the `renderPageSelect` prop instead.
-// TODO: These exports will be removed in v12.
-export {
-  PageSelector as unstable_PageSelector,
-  Pagination as unstable_Pagination,
-  PageSelector as preview_PageSelector,
-  Pagination as preview_Pagination,
-} from './components/Pagination/experimental';
 export * from './components/Popover';
 export * from './components/ProgressBar';
 export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';

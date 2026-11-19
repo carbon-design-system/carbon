@@ -33,8 +33,7 @@ describe('scss/components/pagination', () => {
 
     postcss.parse(result.css.toString()).walkRules((rule) => {
       if (
-        (rule.selector.includes('.cds--pagination') ||
-          rule.selector.includes('.cds--unstable-pagination')) &&
+        rule.selector.includes('.cds--pagination') &&
         rule.selector.includes(':hover')
       ) {
         hoverRules.push(rule);

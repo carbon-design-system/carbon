@@ -282,9 +282,6 @@ export default defineConfig(
       // https://github.com/carbon-design-system/carbon/issues/19012
       'packages/react/src/components/Notification/a11yIconWarningSolid.js',
       'packages/react/src/components/OverflowMenuV2/index.js',
-      'packages/react/src/components/Pagination/experimental/PageSelector.js',
-      'packages/react/src/components/Pagination/experimental/Pagination-story.js',
-      'packages/react/src/components/Pagination/experimental/Pagination.js',
       'packages/react/src/components/Switch/IconSwitch.js',
     ],
   }
