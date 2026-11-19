@@ -152,9 +152,8 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       };
     }
 
-    useWindowEvent('focusout', (event: FocusEvent) => {
+    useWindowEvent(addFocusListeners ? 'focusout' : null, (event) => {
       if (
-        addFocusListeners &&
         isChildASwitcher &&
         expandedProp &&
         isHeaderAction(event.target) &&

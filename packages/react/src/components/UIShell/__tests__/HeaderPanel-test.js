@@ -451,4 +451,24 @@ describe('HeaderPanel Switcher focus boundary', () => {
       'cds--header-panel--expanded'
     );
   });
+
+  it('subscribes to window focusout only while addFocusListeners is enabled', () => {
+    const add = jest.spyOn(window, 'addEventListener');
+    const remove = jest.spyOn(window, 'removeEventListener');
+
+    try {
+      const { rerender } = render(<Fixture addFocusListeners={false} />);
+      expect(add).not.toHaveBeenCalledWith('focusout', expect.any(Function));
+
+      rerender(<Fixture addFocusListeners />);
+      expect(add).toHaveBeenCalledWith('focusout', expect.any(Function));
+      const [, listener] = add.mock.calls.find(([name]) => name === 'focusout');
+
+      rerender(<Fixture addFocusListeners={false} />);
+      expect(remove).toHaveBeenCalledWith('focusout', listener);
+    } finally {
+      add.mockRestore();
+      remove.mockRestore();
+    }
+  });
 });
