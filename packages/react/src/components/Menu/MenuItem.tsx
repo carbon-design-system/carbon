@@ -262,6 +262,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 
       pendingKeyboardClick.current = keyboardClickEvent(e);
 
+      // Space activates the item on keyup; prevent the browser's default
+      // page-scroll behavior on keydown. (#24001)
+      if (match(e, keys.Space) && !isDisabled) {
+        e.preventDefault();
+      }
+
       if (rest.onKeyDown) {
         rest.onKeyDown(e);
       }

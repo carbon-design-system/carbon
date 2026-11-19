@@ -20,6 +20,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { tabbable } from 'tabbable';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -242,11 +243,37 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
     e.stopPropagation();
 
-    // If the user presses escape or tab, or this is a submenu and the user presses ArrowLeft, close it.
+    // Tab should close the menu and move focus to the next (or previous with
+    // Shift+Tab) focusable element after the trigger, instead of trapping
+    // focus on the trigger. (#24001)
+    if (match(e, keys.Tab) && onClose) {
+      e.preventDefault();
+      const trigger = focusReturn.current;
+      const menuNode = menu.current;
+      // Exclude menu contents so portal-rendered items don't skew tab order.
+      const focusables = tabbable(document.body, {
+        displayCheck: 'none',
+      }).filter((el) => !menuNode?.contains(el));
+      const triggerIndex = trigger ? focusables.indexOf(trigger) : -1;
+      const nextIndex = e.shiftKey ? triggerIndex - 1 : triggerIndex + 1;
+      const nextTarget = triggerIndex >= 0 ? focusables[nextIndex] : undefined;
+
+      focusReturn.current = null;
+      onClose();
+
+      if (nextTarget) {
+        nextTarget.focus();
+      } else if (trigger) {
+        // No further tab stop — leave focus on the trigger rather than body.
+        trigger.focus();
+      }
+      return;
+    }
+
+    // If the user presses escape, or this is a submenu and the user presses
+    // ArrowLeft, close it.
     if (
-      (match(e, keys.Escape) ||
-        match(e, keys.Tab) ||
-        (!isRoot && match(e, keys.ArrowLeft))) &&
+      (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
       onClose
     ) {
       e.preventDefault();
