@@ -29,6 +29,8 @@
 :host(#{$prefix}-table-toolbar-content) {
   @extend .#{$prefix}--toolbar-content;
 
+  align-items: center;
+
   ::slotted(#{$prefix}-overflow-menu) {
     display: flex;
     block-size: layout.size('height');
