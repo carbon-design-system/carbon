@@ -71,23 +71,34 @@ class CDSHeaderGlobalAction extends CDSButton {
   }
 
   private _handleDocumentClick = (event: MouseEvent) => {
-    const path = event.composedPath();
-    this._handlePanelCloseIfFocusOutside(path);
+    this._closePanelIfOutside(event.composedPath());
   };
 
   private _handleDocumentFocusIn = (event: FocusEvent) => {
-    const path = event.composedPath();
-    this._handlePanelCloseIfFocusOutside(path);
+    this._closePanelIfOutside(event.composedPath(), true);
   };
 
-  private _handlePanelCloseIfFocusOutside(path: EventTarget[]) {
+  private _closePanelIfOutside(path: EventTarget[], movingFocus = false) {
     const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    if (!panel) {
+      return;
+    }
+
+    const header =
+      movingFocus &&
+      panel.querySelector(`${prefix}-switcher`) &&
+      panel.closest(`${prefix}-header`);
     const isInside = path.some(
       (el) =>
-        el instanceof HTMLElement && (panel?.contains(el) || this.contains(el))
+        el instanceof Element &&
+        (panel.contains(el) ||
+          this.contains(el) ||
+          (header &&
+            el.closest(`${prefix}-header-global-action`) &&
+            el.closest(`${prefix}-header`) === header))
     );
 
-    if (panel && !isInside) {
+    if (!isInside) {
       panel.removeAttribute('expanded');
       this.active = false;
     }
@@ -97,17 +108,8 @@ class CDSHeaderGlobalAction extends CDSButton {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleFocusOut(event: FocusEvent) {
-    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
-    const relatedTarget = event.relatedTarget as HTMLElement;
-
-    if (
-      panel &&
-      relatedTarget &&
-      !this.contains(relatedTarget) &&
-      !panel.contains(relatedTarget)
-    ) {
-      panel.removeAttribute('expanded');
-      this.active = false;
+    if (event.relatedTarget) {
+      this._closePanelIfOutside([event.relatedTarget], true);
     }
   }
 
