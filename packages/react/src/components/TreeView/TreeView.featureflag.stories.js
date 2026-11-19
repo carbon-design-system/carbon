@@ -7,14 +7,7 @@
 
 import React, { useState } from 'react';
 import { action } from 'storybook/actions';
-import {
-  Document,
-  Folder,
-  Checkbox,
-  CheckboxCheckedFilled,
-  RadioButton,
-  RadioButtonChecked,
-} from '@carbon/icons-react';
+import { Document, Folder } from '@carbon/icons-react';
 import { Button, VStack } from '../../';
 
 import { TreeView, TreeNode } from './';

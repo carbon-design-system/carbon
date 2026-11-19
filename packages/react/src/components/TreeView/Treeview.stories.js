@@ -812,13 +812,7 @@ function renderRadioOrCheckboxTree(
       onToggle={(_event, node) => {
         onNodeToggle(node.id, node.isExpanded);
       }}
-      renderIcon={() => {
-        return selected.includes(nodeProps.id) ? (
-          <CheckedIcon />
-        ) : (
-          <UncheckedIcon />
-        );
-      }}
+      renderIcon={selected.includes(nodeProps.id) ? CheckedIcon : UncheckedIcon}
       onSelect={(_event, node) => {
         onNodeSelect(String(node.id));
       }}
@@ -867,7 +861,7 @@ export const WithCheckboxOrRadio = (args) => {
     }
 
     setSelected(nextSelected);
-    onSelect(nextSelected);
+    onSelect?.(nextSelected);
   };
 
   return (
