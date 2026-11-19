@@ -209,6 +209,28 @@ class CDSCardActions extends LitElement {
         );
       },
     });
+
+    // A new handler starts with no previously hidden items, so it only calls
+    // `onChange` when something ends up hidden. Going from an overflowing set
+    // of actions back to one that fits would therefore leave the stale hidden
+    // ids, the overflow menu and the offset spacer in place. This frame callback
+    // is queued after the handler's own first pass, which has already updated
+    // `data-hidden`, so it only clears state when nothing is hidden.
+    const handler = this._overflowHandler;
+    requestAnimationFrame(() => {
+      if (this._overflowHandler !== handler) {
+        return;
+      }
+      const anyHidden = this._actionItems.some(({ el }) =>
+        el.hasAttribute('data-hidden')
+      );
+      if (!anyHidden && this._hiddenIds.size > 0) {
+        this._hiddenIds = new Set();
+        if (offsetEl) {
+          offsetEl.style.display = 'none';
+        }
+      }
+    });
   }
 
   private _assignActionIds(actions: HTMLElement[]) {

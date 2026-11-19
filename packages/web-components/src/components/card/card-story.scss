@@ -5,7 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
 
 #storybook-root {
   // 2rem
@@ -19,6 +23,20 @@
   padding-block-end: spacing.$spacing-05;
 }
 
+// Demo content box used in the WithFlushBody story to visualise padding
+// behaviour. A flush body has no padding, so the box must follow the card's
+// bottom corner radius.
+.card-story-flush-demo-content {
+  padding: spacing.$spacing-05;
+  border: 1px dashed var(--cds-link-primary);
+  background: var(--cds-highlight);
+
+  @if flags.enabled('enable-v12-release') {
+    border-end-end-radius: $border-radius-08;
+    border-end-start-radius: $border-radius-08;
+  }
+}
+
 // Metadata row used in horizontal card footer (WithHorizontalMedia story)
 .card-story-time {
   display: flex;
@@ -27,4 +45,38 @@
   padding: 0 spacing.$spacing-05;
   font-size: calc(spacing.$spacing-04 + spacing.$spacing-01);
   gap: spacing.$spacing-03;
+}
+
+// Text styles inside the AI label popover. The card stories do not load the
+// AI label story styles, so the few classes the popover content uses live here.
+cds-ai-label[slot='decorator'] {
+  // Headings keep the compact label look
+  .card-story__ai-heading {
+    @include type.type-style('body-compact-01');
+
+    margin: 0;
+  }
+
+  .secondary {
+    color: theme.$text-secondary;
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  hr {
+    border: 0;
+    background: theme.$border-subtle;
+    block-size: 1px;
+    margin-block: spacing.$spacing-05;
+  }
+
+  // Large metric value (not a heading)
+  .ai-label-heading {
+    margin: 0 0 spacing.$spacing-05;
+    font-size: 2.625rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
 }

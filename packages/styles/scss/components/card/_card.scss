@@ -571,7 +571,6 @@
 
   .#{$prefix}--card__decorator {
     position: absolute;
-    z-index: 1;
     display: flex;
     align-items: center;
     block-size: $spacing-07;

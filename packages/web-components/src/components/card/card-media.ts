@@ -46,9 +46,10 @@ class CDSCardMedia extends LitElement {
   /**
    * Aspect ratio of the media container in vertical layout.
    * E.g. `'16x9'`, `'4x3'`, `'1x1'`. Ignored in horizontal layout.
+   * @default '1x1'
    */
   @property({ type: String, reflect: true })
-  ratio: AspectRatio = '';
+  ratio: AspectRatio = '1x1';
 
   /**
    * Width of the media column in horizontal layout.
@@ -62,7 +63,7 @@ class CDSCardMedia extends LitElement {
   updated() {
     if (this._cardContext.horizontal) {
       this.setAttribute('slot', 'media');
-      // Forward the CSS custom property to the host so the :host-context rule
+      // Forward the CSS custom property to the host so the `slot="media"` rule
       // in card.scss can read it via flex-basis: var(--cds--card--media-width).
       this.style.setProperty(`--${prefix}--card--media-width`, this.mediaWidth);
     } else {
