@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import axe from 'axe-core';
+import { run, type Result, type RunOptions } from 'axe-core';
 
 const defaultOptions = {
   rules: {
@@ -30,9 +30,9 @@ const defaultOptions = {
   },
 };
 
-function toHaveNoAxeViolations(node, options = {}) {
-  return new Promise((resolve) => {
-    axe.run(
+function toHaveNoAxeViolations(node: Element, options: RunOptions = {}) {
+  return new Promise<{ pass: boolean; message: () => string }>((resolve) => {
+    run(
       node,
       {
         ...defaultOptions,
@@ -53,19 +53,23 @@ function toHaveNoAxeViolations(node, options = {}) {
 
         resolve({
           pass: true,
+          message: () => 'Expected axe violations, but none were found.',
         });
       }
     );
   });
 }
 
-function formatOutput(violations) {
+function formatOutput(violations: Result[]) {
   const firstViolation = violations[0];
   const { description, id, impact, help, helpUrl } = firstViolation;
   const nodes = firstViolation.nodes.map((node) => {
-    return ['Node:', node.html, '\n', ...node.failureSummary.split('\n')].join(
-      '\n'
-    );
+    return [
+      'Node:',
+      node.html,
+      '\n',
+      ...(node.failureSummary?.split('\n') ?? []),
+    ].join('\n');
   });
   const divider = '='.repeat(80);
 

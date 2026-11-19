@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ import path from 'path';
 // http://facebook.github.io/jest/docs/tutorial-webpack.html
 
 export default {
-  process(src, filename) {
-    return `export default ${JSON.stringify(path.basename(filename))};`;
+  process(_sourceText: string, sourcePath: string) {
+    return `export default ${JSON.stringify(path.basename(sourcePath))};`;
   },
 };

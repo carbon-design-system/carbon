@@ -1,13 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { afterEach, beforeEach, expect } from '@jest/globals';
 import chalk from 'chalk';
 import util from 'util';
-import toHaveNoAxeViolations from '../matchers/toHaveNoAxeViolations.js';
+import toHaveNoAxeViolations from '../matchers/toHaveNoAxeViolations.ts';
 
 import '@testing-library/jest-dom';
 
@@ -37,14 +38,19 @@ expect.extend({
 //
 // Inspired by the following setup from facebook/react
 // https://github.com/facebook/react/blob/6250462bed19c9f18a8cf3c2b5fcaf9aba1df72b/scripts/jest/setupTests.js#L69
-const consoleMethods = ['error', 'warn', process.env.CI && 'log'].filter(
-  Boolean
-);
+const consoleMethods = [
+  'error',
+  'warn',
+  ...(process.env.CI ? (['log'] as const) : []),
+] as const;
+
+type ConsoleMethodName = (typeof consoleMethods)[number];
+type UnexpectedConsoleCall = [stack: string, message: string];
 
 for (const methodName of consoleMethods) {
-  const unexpectedConsoleCallStacks = [];
-  const patchedConsoleMethod = function (format, ...args) {
-    const stack = new Error().stack;
+  const unexpectedConsoleCallStacks: UnexpectedConsoleCall[] = [];
+  const patchedConsoleMethod = function (format: unknown, ...args: unknown[]) {
+    const stack = new Error().stack ?? '';
     unexpectedConsoleCallStacks.push([
       stack.substr(stack.indexOf('\n') + 1),
       util.format(format, ...args),
@@ -54,14 +60,14 @@ for (const methodName of consoleMethods) {
   // eslint-disable-next-line no-console
   console[methodName] = patchedConsoleMethod;
 
-  global.beforeEach(() => {
+  beforeEach(() => {
     if (unexpectedConsoleCallStacks.length > 0) {
       formatConsoleCallStack(unexpectedConsoleCallStacks, methodName);
     }
     unexpectedConsoleCallStacks.length = 0;
   });
 
-  global.afterEach(() => {
+  afterEach(() => {
     // eslint-disable-next-line no-console
     if (console[methodName] !== patchedConsoleMethod) {
       throw new Error(`Test did not restore a mock for console.${methodName}`);
@@ -73,7 +79,10 @@ for (const methodName of consoleMethods) {
   });
 }
 
-function formatConsoleCallStack(unexpectedConsoleCallStacks, methodName) {
+function formatConsoleCallStack(
+  unexpectedConsoleCallStacks: UnexpectedConsoleCall[],
+  methodName: ConsoleMethodName
+) {
   const messages = unexpectedConsoleCallStacks.map(
     ([stack, message]) =>
       `${message}\n` +
