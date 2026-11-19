@@ -106,8 +106,13 @@ jobs:
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
+      # only load what the tests and styles check
       - name: Build project
-        run: yarn build
+        run:
+          yarn lerna run build --ignore @carbon/web-components --ignore
+          carbon-components --ignore carbon-components-react --ignore
+          @carbon/icons-vue --ignore @carbon/pictograms --ignore
+          @carbon/pictograms-react --ignore @carbon/elements
       - name: Check generated styles
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
@@ -316,6 +321,8 @@ jobs:
         shardIndex: [1, 2, 3, 4]
         shardTotal: [4]
     runs-on: ubuntu-24.04
+    # lower default (hung shards default at 6h)
+    timeout-minutes: 20
     # Use image with preinstalled libs and browser. Tag follows the
     # @playwright/test pin in package.json (used in `avt-build`)
     container:
@@ -327,6 +334,9 @@ jobs:
         with:
           # Same commit as the storybook built in `avt-build`
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          # Specs only need e2e/ plus root files (package.json, .nvmrc,
+          # playwright.config.js, achecker.js)
+          sparse-checkout: e2e
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -399,6 +409,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Only needs .nvmrc and package.json for Playwright version
+          sparse-checkout: |
+            /.nvmrc
+            /package.json
+          sparse-checkout-cone-mode: false
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
