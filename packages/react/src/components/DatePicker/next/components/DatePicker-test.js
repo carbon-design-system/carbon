@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DatePicker } from './DatePicker';
 import { DatePickerInput } from './DatePickerInput';
@@ -243,8 +243,11 @@ describe('DatePicker v12 focus restoration', () => {
     // At this point the sentinel should have been activated by the keydown handler.
     expect(sentinel.tabIndex).toBe(0);
 
-    // Deliver focus to sentinel — mirrors real browser Tab traversal.
-    sentinel.focus();
+    // Deliver focus to sentinel — mirrors real browser Tab traversal. Wrapped in
+    // `act` because focusing triggers a state-machine transition (a React update).
+    act(() => {
+      sentinel.focus();
+    });
 
     await waitFor(() => {
       // Calendar must be closed.
