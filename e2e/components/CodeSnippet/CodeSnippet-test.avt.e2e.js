@@ -46,7 +46,7 @@ test.describe('@avt CodeSnippet', () => {
     });
 
     await expect(page.getByRole('button')).toBeVisible();
-    page.getByRole('button').focus();
+    await page.getByRole('button').focus();
     await expect(page).toHaveNoACViolations('CodeSnippet inline focused');
   });
 

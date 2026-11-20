@@ -6602,7 +6602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.36.2":
+"@playwright/test@npm:1.65.1, @playwright/test@npm:^1.36.2":
   version: 1.65.1
   resolution: "@playwright/test@npm:1.65.1"
   dependencies:
@@ -9258,7 +9258,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^4.0.17":
+"accessibility-checker@npm:4.0.35":
   version: 4.0.35
   resolution: "accessibility-checker@npm:4.0.35"
   dependencies:
@@ -10463,14 +10463,14 @@ __metadata:
     "@eslint/compat": "npm:^2.0.1"
     "@eslint/js": "npm:^9.24.0"
     "@figma/code-connect": "npm:1.5.3"
-    "@playwright/test": "npm:^1.36.2"
+    "@playwright/test": "npm:1.65.1"
     "@testing-library/dom": "npm:^10.1.0"
     "@testing-library/jest-dom": "npm:^7.0.0"
     "@testing-library/react": "npm:^16.0.0"
     "@testing-library/user-event": "npm:^14.4.3"
     "@types/prop-types": "npm:^15.7.13"
     "@types/react-is": "npm:^19.0.0"
-    accessibility-checker: "npm:^4.0.17"
+    accessibility-checker: "npm:4.0.35"
     cross-env: "npm:^10.0.0"
     cross-spawn: "npm:^7.0.0"
     doctoc: "npm:^2.0.0"
