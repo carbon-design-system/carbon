@@ -62,9 +62,115 @@ describe('cds-side-nav-link', () => {
     button.click();
     expect(clicked).to.be.true;
   });
+
+  it('should set `aria-current="page"` on the link when active', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-link active href="#">Link</cds-side-nav-link>`
+    );
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.getAttribute('aria-current')).to.equal('page');
+  });
+
+  it('should not set `aria-current` on the link when not active', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-link href="#">Link</cds-side-nav-link>`
+    );
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.hasAttribute('aria-current')).to.be.false;
+  });
+
+  it('should remove `aria-current` from the link when it stops being active', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-link active href="#">Link</cds-side-nav-link>`
+    );
+    el.active = false;
+    await el.updateComplete;
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.hasAttribute('aria-current')).to.be.false;
+  });
+
+  it('should forward an explicit `aria-current` to the link', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-link aria-current="true" href="#"
+        >Link</cds-side-nav-link
+      >`
+    );
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.getAttribute('aria-current')).to.equal('true');
+  });
+
+  it('should let an explicit `aria-current` win over `active`', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-link active aria-current="location" href="#"
+        >Link</cds-side-nav-link
+      >`
+    );
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.getAttribute('aria-current')).to.equal('location');
+  });
 });
 
 describe('cds-side-nav-menu-item', () => {
+  it('should set `aria-current="page"` on the link when active', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-menu-item active href="#"
+        >Link</cds-side-nav-menu-item
+      >`
+    );
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.getAttribute('aria-current')).to.equal('page');
+  });
+
+  it('should not set `aria-current` on the link when not active', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-menu-item href="#">Link</cds-side-nav-menu-item>`
+    );
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.hasAttribute('aria-current')).to.be.false;
+  });
+
+  it('should remove `aria-current` from the link when it stops being active', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-menu-item active href="#"
+        >Link</cds-side-nav-menu-item
+      >`
+    );
+    el.active = false;
+    await el.updateComplete;
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.hasAttribute('aria-current')).to.be.false;
+  });
+
+  it('should forward an explicit `aria-current` to the link', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-menu-item aria-current="true" href="#"
+        >Link</cds-side-nav-menu-item
+      >`
+    );
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.getAttribute('aria-current')).to.equal('true');
+  });
+
+  it('should let an explicit `aria-current` win over `active`', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-menu-item active aria-current="location" href="#"
+        >Link</cds-side-nav-menu-item
+      >`
+    );
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.getAttribute('aria-current')).to.equal('location');
+  });
+
   it('should render and handle a button when `as` is set to `button`', async () => {
     const el = await fixture(
       html`<cds-side-nav-menu-item as="button">Button</cds-side-nav-menu-item>`

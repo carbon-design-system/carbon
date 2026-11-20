@@ -25,10 +25,19 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-side-nav-menu-item`)
 class CDSSideNavMenuItem extends FocusMixin(LitElement) {
   /**
-   * `true` if the menu item should be active.
+   * `true` if the menu item should be active. When rendered as a link, the
+   * inner `<a>` also gets `aria-current="page"`.
    */
   @property({ type: Boolean, reflect: true })
   active = false;
+
+  /**
+   * An explicit `aria-current` value for the inner `<a>`. It wins over the
+   * `"page"` that `active` sets, like an `aria-current` passed to the React
+   * `SideNavLink`.
+   */
+  @property({ attribute: 'aria-current' })
+  ariaCurrent;
 
   /**
    * The element to render for the side nav menu item.
@@ -73,7 +82,7 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
   }
 
   render() {
-    const { active, as, href, target, title } = this;
+    const { active, ariaCurrent, as, href, target, title } = this;
     const classes = classMap({
       [`${prefix}--side-nav__link`]: true,
       [`${prefix}--side-nav__link--current`]: active,
@@ -92,7 +101,10 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
           part="link"
           class="${classes}"
           href="${href}"
-          target="${ifDefined(target)}">
+          target="${ifDefined(target)}"
+          aria-current="${ifDefined(
+            ariaCurrent || (active ? 'page' : undefined)
+          )}">
           ${content}
         </a>`;
   }
