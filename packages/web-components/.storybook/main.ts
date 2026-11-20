@@ -7,6 +7,7 @@
 
 import type { StorybookConfig } from '@storybook/web-components-vite';
 
+import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
@@ -15,6 +16,11 @@ import remarkGfm from 'remark-gfm';
 import { getIbmAnalyticsHeads } from '../../../tasks/storybook-ibm-analytics.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
+
+// resolve SB from this workspace rather than hoisted root
+function getAbsolutePath(value: string): string {
+  return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
+}
 const { managerAnalyticsHead, previewAnalyticsHead } = getIbmAnalyticsHeads(
   'CarbonWebComponentsStorybook'
 );
@@ -56,7 +62,7 @@ const config: StorybookConfig = {
     interactions: false, // disable Interactions tab
   },
   framework: {
-    name: '@storybook/web-components-vite',
+    name: getAbsolutePath('@storybook/web-components-vite'),
     options: {},
   },
   async viteFinal(config) {

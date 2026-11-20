@@ -6,12 +6,14 @@
  */
 
 import chalk from 'chalk';
-import { exec } from 'child-process-promise';
+import { exec as execCallback } from 'node:child_process';
 import inquirer from 'inquirer';
 import path from 'path';
 import createLogger from 'progress-estimator';
+import { promisify } from 'node:util';
 import getGitHubClient from './tools/getGitHubClient.js';
 
+const exec = promisify(execCallback);
 const logger = createLogger();
 
 chalk.link = chalk.dim.underline.italic;

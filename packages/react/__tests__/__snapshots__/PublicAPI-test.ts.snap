@@ -977,6 +977,14 @@ Map {
     },
     "render": [Function],
   },
+  "CoachmarkBeacon" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "CoachmarkTagline" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "CodeSnippet" => {
     "propTypes": {
       "align": [Function],

@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -45,16 +45,16 @@ describe('@carbon/styles/scss/reset', () => {
     '%s preserves subscript and superscript alignment',
     async (_, source, scope) => {
       const { result } = await render(source);
-      const { stylesheet } = css.parse(result.css.toString());
+      const stylesheet = postcss.parse(result.css.toString());
 
       for (const [element, alignment] of [
         ['sub', 'sub'],
         ['sup', 'super'],
       ]) {
-        const declarations = stylesheet.rules
+        const declarations = stylesheet.nodes
           .filter((rule) => rule.selectors?.includes(`${scope}${element}`))
-          .flatMap((rule) => rule.declarations)
-          .filter((declaration) => declaration.property === 'vertical-align');
+          .flatMap((rule) => rule.nodes)
+          .filter((declaration) => declaration.prop === 'vertical-align');
 
         expect(declarations.at(-1)?.value).toBe(alignment);
       }
@@ -69,8 +69,8 @@ describe('@carbon/styles/scss/reset', () => {
       );
       @use '../reset';
     `);
-    const { stylesheet } = css.parse(result.css.toString());
+    const stylesheet = postcss.parse(result.css.toString());
 
-    expect(stylesheet.rules.filter((rule) => rule.type === 'rule')).toEqual([]);
+    expect(stylesheet.nodes.filter((rule) => rule.type === 'rule')).toEqual([]);
   });
 });

@@ -46,6 +46,8 @@ describe('Carbon Components React', () => {
         "ClassPrefix",
         "ClickableTile",
         "Coachmark",
+        "CoachmarkBeacon",
+        "CoachmarkTagline",
         "CodeSnippet",
         "CodeSnippetSkeleton",
         "Column",
