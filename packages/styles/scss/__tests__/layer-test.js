@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -35,10 +35,10 @@ describe('scss/layer', () => {
         )
       );
     `);
-    const { stylesheet } = css.parse(result.css.toString());
+    const stylesheet = postcss.parse(result.css.toString());
 
     function findSelector(stylesheet, matcher) {
-      return stylesheet.rules.find((rule) => {
+      return stylesheet.nodes.find((rule) => {
         return rule.selectors.some((selector) => {
           return selector.includes(matcher);
         });
@@ -46,8 +46,8 @@ describe('scss/layer', () => {
     }
 
     function findDeclaration(rule, property) {
-      return rule.declarations.find((declaration) => {
-        return declaration.property.includes(property);
+      return rule.nodes.find((declaration) => {
+        return declaration.prop.includes(property);
       });
     }
 
