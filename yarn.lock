@@ -2834,6 +2834,7 @@ __metadata:
     "@mordech/vite-lit-loader": "npm:^0.40.0"
     "@open-wc/testing": "npm:^5.0.0"
     "@playwright/test": "npm:^1.36.2"
+    "@stackblitz/sdk": "npm:^1.11.0"
     "@storybook/addon-docs": "npm:^10.3.5"
     "@storybook/addon-links": "npm:^10.3.5"
     "@storybook/web-components-vite": "npm:^10.3.5"
