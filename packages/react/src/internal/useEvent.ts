@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,7 +40,7 @@ export const useEvent = <E extends keyof GlobalEventHandlersEventMap>(
 };
 
 export const useWindowEvent = <E extends keyof WindowEventMap>(
-  eventName: E,
+  eventName: E | null,
   callback: (event: WindowEventMap[E]) => void
 ) => {
   const savedCallback = useRef<((event: WindowEventMap[E]) => void) | null>(
@@ -52,6 +52,8 @@ export const useWindowEvent = <E extends keyof WindowEventMap>(
   }, [callback]);
 
   useEffect(() => {
+    if (eventName === null) return;
+
     const handler = (event: WindowEventMap[E]) => {
       if (savedCallback.current) {
         savedCallback.current(event);
