@@ -84,3 +84,10 @@ body {
 .docs-story div div {
   transform: none;
 }
+
+// Storybook's zoom wrapper (`transform: scale(1)`) becomes the containing block
+// for `position: fixed` content, which clips the modal inside the Canvas. Only
+// reset it for Canvases containing a modal so other components are unaffected.
+.docs-story:has(cds-modal) > div {
+  transform: none;
+}
