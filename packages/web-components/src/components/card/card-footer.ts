@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html, nothing } from 'lit';
+import { LitElement, html, nothing, PropertyValues } from 'lit';
 import { state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { prefix } from '../../globals/settings';
@@ -13,6 +13,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import {
   cardContext,
   cardDefaultContext,
+  reflectCardContext,
   type CardContextValue,
 } from './card-context';
 import styles from './card.scss?lit';
@@ -55,6 +56,11 @@ class CDSCardFooter extends LitElement {
     } else {
       this.removeAttribute('has-actions');
     }
+  }
+
+  willUpdate(changed: PropertyValues) {
+    super.willUpdate?.(changed);
+    reflectCardContext(this, this._cardContext);
   }
 
   render() {

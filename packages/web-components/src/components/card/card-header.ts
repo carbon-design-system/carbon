@@ -29,7 +29,11 @@ import styles from './card.scss?lit';
  * @slot - Default slot for cds-card-title.
  * @slot header-media - Icon, avatar, tag, or other media rendered above the title.
  * @slot actions - A cds-card-actions element, placed end-aligned in the header.
- * @slot decorator - Slot for cds-ai-label or other decorator element.
+ * @slot decorator - Slot for cds-ai-label or other decorator element. The label is
+ *   positioned from the header, so it follows the header when media sits above it.
+ *   A `cds-ai-label` here makes the parent card show the AI treatment.
+ * @fires cds-card-header-ai-label-change - Dispatched when a `cds-ai-label` is
+ *   added to or removed from the decorator slot. `detail.hasAILabel` is the new state.
  */
 @customElement(`${prefix}-card-header`)
 class CDSCardHeader extends LitElement {
@@ -60,6 +64,19 @@ class CDSCardHeader extends LitElement {
 
   private _handleDecoratorInteraction(e: Event) {
     e.stopPropagation();
+  }
+
+  private _handleDecoratorSlotChange({ target }: Event) {
+    const hasAILabel = (target as HTMLSlotElement)
+      .assignedElements()
+      .some((el) => el.matches(`${prefix}-ai-label`));
+
+    this.dispatchEvent(
+      new CustomEvent(CDSCardHeader.eventAILabelChange, {
+        bubbles: true,
+        detail: { hasAILabel },
+      })
+    );
   }
 
   private _renderMedia() {
@@ -101,10 +118,19 @@ class CDSCardHeader extends LitElement {
           role="presentation"
           @click=${this._handleDecoratorInteraction}
           @keydown=${this._handleDecoratorInteraction}>
-          <slot name="decorator"></slot>
+          <slot
+            name="decorator"
+            @slotchange=${this._handleDecoratorSlotChange}></slot>
         </div>
       </div>
     `;
+  }
+
+  /**
+   * The name of the custom event fired when the AI label presence changes.
+   */
+  static get eventAILabelChange() {
+    return `${prefix}-card-header-ai-label-change`;
   }
 
   static styles = styles;

@@ -5,11 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { LitElement, html, PropertyValues } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { consume } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import {
+  cardContext,
+  cardDefaultContext,
+  reflectCardContext,
+  type CardContextValue,
+} from './card-context';
 import styles from './card.scss?lit';
 
 /**
@@ -25,6 +32,15 @@ class CDSCardBody extends LitElement {
    */
   @property({ type: Boolean, attribute: 'is-flush', reflect: true })
   isFlush = false;
+
+  @consume({ context: cardContext, subscribe: true })
+  @state()
+  private _cardContext: CardContextValue = cardDefaultContext;
+
+  willUpdate(changed: PropertyValues) {
+    super.willUpdate?.(changed);
+    reflectCardContext(this, this._cardContext);
+  }
 
   render() {
     const { isFlush } = this;

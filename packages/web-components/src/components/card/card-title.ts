@@ -5,16 +5,33 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html, nothing } from 'lit';
+import { LitElement, html, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { unsafeStatic, html as staticHtml } from 'lit/static-html.js';
+import { consume } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import {
+  cardContext,
+  cardDefaultContext,
+  reflectCardContext,
+  type CardContextValue,
+} from './card-context';
 import styles from './card.scss?lit';
+
+const TITLE_LEVELS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
+
+type TitleLevel = (typeof TITLE_LEVELS)[number];
 
 /**
  * Card title — primary heading within cds-card-header.
+ *
+ * The title text is rendered in a heading element so assistive technology
+ * users can navigate cards by heading. Use `title-level` to match the heading
+ * hierarchy of the page. The label and description are not part of the heading.
  *
  * @element cds-card-title
  * @slot - Title text (required).
@@ -26,6 +43,14 @@ import styles from './card.scss?lit';
  */
 @customElement(`${prefix}-card-title`)
 class CDSCardTitle extends LitElement {
+  /**
+   * Heading element used for the title text (`h1`–`h6`). Choose the level that
+   * fits the heading hierarchy of the surrounding page. Any other value falls
+   * back to `h2`.
+   */
+  @property({ attribute: 'title-level', reflect: true })
+  titleLevel: TitleLevel = 'h2';
+
   /**
    * Enable truncation on the title text row.
    */
@@ -64,13 +89,36 @@ class CDSCardTitle extends LitElement {
   @property({ attribute: 'description-truncate', reflect: true })
   descriptionTruncate: string | null = null;
 
+  @consume({ context: cardContext, subscribe: true })
+  @state()
+  private _cardContext: CardContextValue = cardDefaultContext;
+
   @state() private _hasTitleStart = false;
+
+  @state() private _hasTitleEnd = false;
+
+  @state() private _hasTitleText = false;
 
   @state() private _hasTitleMedia = false;
 
   private _onTitleStartSlotChange(e: Event) {
     const slot = e.target as HTMLSlotElement;
     this._hasTitleStart = slot.assignedElements().length > 0;
+  }
+
+  private _onTitleEndSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasTitleEnd = slot.assignedElements().length > 0;
+  }
+
+  private _onTitleTextSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasTitleText = slot
+      .assignedNodes({ flatten: true })
+      .some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE || !!node.textContent?.trim()
+      );
   }
 
   private _onTitleMediaSlotChange(e: Event) {
@@ -83,6 +131,11 @@ class CDSCardTitle extends LitElement {
     const num = Number(value);
     if (!isNaN(num) && num > 0) return num;
     return true; // boolean attr present
+  }
+
+  willUpdate(changed: PropertyValues) {
+    super.willUpdate?.(changed);
+    reflectCardContext(this, this._cardContext);
   }
 
   render() {
@@ -116,6 +169,10 @@ class CDSCardTitle extends LitElement {
         }
       : {};
 
+    const titleTag = unsafeStatic(
+      TITLE_LEVELS.includes(this.titleLevel) ? this.titleLevel : 'h2'
+    );
+
     const textRowClasses = classMap({
       [`${blockClass}__title-text-row`]: true,
       [`${blockClass}__title-text-row--truncate`]: titleTruncate === true,
@@ -146,38 +203,61 @@ class CDSCardTitle extends LitElement {
       name="title-media"
       @slotchange=${this._onTitleMediaSlotChange}></slot>`;
 
-    return html`
+    // Same for the leading/trailing icon wrappers: their margins would
+    // otherwise add space around the title text even when nothing is slotted.
+    const startSlot = html`<slot
+      name="title-start"
+      @slotchange=${this._onTitleStartSlotChange}></slot>`;
+    const endSlot = html`<slot
+      name="title-end"
+      @slotchange=${this._onTitleEndSlotChange}></slot>`;
+
+    return staticHtml`
       <div class=${titleClasses}>
-        ${this._hasTitleMedia
-          ? html`<div class="${blockClass}__title-media">${mediaSlot}</div>`
-          : mediaSlot}
+        ${
+          this._hasTitleMedia
+            ? html`<div class="${blockClass}__title-media">${mediaSlot}</div>`
+            : mediaSlot
+        }
         <div class="${blockClass}__title-text">
           <slot name="label">
-            ${this.label
-              ? html`<div class=${labelClasses} style=${styleMap(labelVars)}>
-                  ${this.label}
-                </div>`
-              : nothing}
+            ${
+              this.label
+                ? html`<div class=${labelClasses} style=${styleMap(labelVars)}>
+                    ${this.label}
+                  </div>`
+                : nothing
+            }
           </slot>
 
-          <span class=${textRowClasses} style=${styleMap(titleVars)}>
-            <span class="${blockClass}__title-start-icon">
-              <slot
-                name="title-start"
-                @slotchange=${this._onTitleStartSlotChange}></slot>
-            </span>
-            <slot></slot>
-            <span class="${blockClass}__title-end-icon">
-              <slot name="title-end"></slot>
-            </span>
-          </span>
+          <${titleTag}
+            class=${textRowClasses}
+            style=${styleMap(titleVars)}
+            aria-hidden=${ifDefined(this._hasTitleText ? undefined : 'true')}>
+            ${
+              this._hasTitleStart
+                ? html`<span class="${blockClass}__title-start-icon"
+                    >${startSlot}</span
+                  >`
+                : startSlot
+            }
+            <slot @slotchange=${this._onTitleTextSlotChange}></slot>${
+              this._hasTitleEnd
+                ? html`<span class="${blockClass}__title-end-icon"
+                    >${endSlot}</span
+                  >`
+                : endSlot
+            }
+          </${titleTag}>
 
           <slot name="description">
-            ${this.description
-              ? html`<div class=${descClasses} style=${styleMap(descVars)}>
-                  ${this.description}
-                </div>`
-              : nothing}
+            ${
+              this.description
+                ? html`<div class=${descClasses} style=${styleMap(descVars)}>
+                    ${this.description}
+                  </div>`
+                : nothing
+            }
           </slot>
         </div>
       </div>
