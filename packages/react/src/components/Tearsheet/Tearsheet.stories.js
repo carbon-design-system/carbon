@@ -11,6 +11,8 @@ import docs from './Tearsheet.mdx';
 import React, { useRef, useState } from 'react';
 import { AILabel, AILabelContent } from '../AILabel';
 import Button from '../Button';
+import { ButtonSet } from '../ButtonSet';
+import { useFeatureFlag } from '../FeatureFlags';
 import { IconButton } from '../IconButton';
 import Form from '../Form';
 import FormGroup from '../FormGroup';
@@ -35,6 +37,13 @@ import { StackProvider } from './StackContext';
 import { TruncatedText } from '../TruncatedText';
 import { TearsheetWithSteps } from './TearsheetWithSteps';
 const storyClass = 'tearsheet-stories';
+
+// v12: header action buttons are a fixed `md` size. v11: they shrink to `xs`
+// when the header is collapsed.
+const useHeaderActionSize = () => {
+  const enableV12Release = useFeatureFlag('enable-v12-release');
+  return (isCollapsed) => (enableV12Release ? 'md' : isCollapsed ? 'xs' : 'sm');
+};
 
 const sampleAILabel = (
   <AILabel className="decorator-container" size="xs">
@@ -64,6 +73,23 @@ const sharedArgTypes = {
   label: {
     control: { type: 'text' },
     description: 'Label text displayed above the title.',
+  },
+  description: {
+    control: { type: 'text' },
+    description: 'Description text displayed below the title.',
+  },
+  headerActionCount: {
+    control: { type: 'select' },
+    options: [0, 1, 3],
+    description: 'Number of header actions to render (0, 1 or 3).',
+  },
+  hasTitleStart: {
+    control: { type: 'boolean' },
+    description: 'Toggle the icon shown before the title (`titleStart`).',
+  },
+  hasTitleEnd: {
+    control: { type: 'boolean' },
+    description: 'Toggle the icon shown after the title (`titleEnd`).',
   },
   hasAILabel: {
     control: {
@@ -128,11 +154,18 @@ const sharedArgTypes = {
   },
 };
 
+const defaultDescription =
+  'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page';
+
 const defaultArgs = {
   ariaLabel: '',
   closeIconDescription: 'Close',
+  description: defaultDescription,
   disableHeaderCollapse: false,
   hasAILabel: false,
+  hasTitleEnd: false,
+  hasTitleStart: true,
+  headerActionCount: 3,
   hideCloseButton: false,
   influencerWidth: '256px',
   isFlush: false,
@@ -215,7 +248,7 @@ const description = (
     expandLabel={'Read more'}
     collapseLabel={'Read less'}
     expandAriaLabel={'Read more about tearsheet description'}
-    value="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page"
+    value={defaultDescription}
     type="expand"
   />
 );
@@ -232,8 +265,12 @@ export const Default = {
     {
       ariaLabel,
       closeIconDescription,
+      description: descriptionText,
       disableHeaderCollapse,
       hasAILabel,
+      hasTitleEnd,
+      hasTitleStart,
+      headerActionCount,
       hideCloseButton,
       influencerWidth,
       isFlush,
@@ -250,6 +287,7 @@ export const Default = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef = useRef(null);
     const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
     const summaryPanelTriggerRef = useRef(null);
@@ -292,27 +330,40 @@ export const Default = {
               open
               label={label}
               title={title}
-              titleStart={<Bee size={32} />}
-              description={description}
+              titleStart={hasTitleStart ? <Bee size={32} /> : undefined}
+              titleEnd={hasTitleEnd ? <Information size={32} /> : undefined}
+              description={
+                descriptionText ? (
+                  <TruncatedText
+                    id={`header-description__truncatedText`}
+                    expandLabel={'Read more'}
+                    collapseLabel={'Read less'}
+                    expandAriaLabel={'Read more about tearsheet description'}
+                    value={descriptionText}
+                    type="expand"
+                  />
+                ) : undefined
+              }
               headerActions={
-                <Tearsheet.HeaderActions
-                  menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
-                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size="md">
-                      Action 1
-                    </Button>
-                  </Tearsheet.HeaderActionItem>
-                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size="md">
-                      Action 2
-                    </Button>
-                  </Tearsheet.HeaderActionItem>
-                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size="md">
-                      Action 3
-                    </Button>
-                  </Tearsheet.HeaderActionItem>
-                </Tearsheet.HeaderActions>
+                Number(headerActionCount) > 0 ? (
+                  <Tearsheet.HeaderActions
+                    menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
+                    {Array.from(
+                      { length: Number(headerActionCount) },
+                      (_, index) => (
+                        <Tearsheet.HeaderActionItem
+                          key={index}
+                          overflowItemLabel={`Action ${index + 1}`}>
+                          <Button
+                            kind="tertiary"
+                            size={getActionSize(isCollapsed)}>
+                            Action {index + 1}
+                          </Button>
+                        </Tearsheet.HeaderActionItem>
+                      )
+                    )}
+                  </Tearsheet.HeaderActions>
+                ) : undefined
               }></Tearsheet.HeaderContent>
           </Tearsheet.Header>
           <Tearsheet.Body>
@@ -506,6 +557,7 @@ export const WithInfluencer = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef = useRef(null);
     const influencerPanelTriggerRef = useRef(null);
     const currentStep = 1;
@@ -553,17 +605,17 @@ export const WithInfluencer = {
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size="md">
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 1
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size="md">
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 2
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size="md">
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 3
                     </Button>
                   </Tearsheet.HeaderActionItem>
@@ -750,6 +802,7 @@ export const WithTabs = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef = useRef(null);
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
@@ -789,17 +842,17 @@ export const WithTabs = {
                   <Tearsheet.HeaderActions
                     menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                      <Button kind="tertiary" size="md">
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 1
                       </Button>
                     </Tearsheet.HeaderActionItem>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                      <Button kind="tertiary" size="md">
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 2
                       </Button>
                     </Tearsheet.HeaderActionItem>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                      <Button kind="tertiary" size="md">
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 3
                       </Button>
                     </Tearsheet.HeaderActionItem>
@@ -902,6 +955,7 @@ export const narrowTearsheet = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
     const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
     const launcherButtonRef = useRef(null);
@@ -943,17 +997,17 @@ export const narrowTearsheet = {
                   <Tearsheet.HeaderActions
                     menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                      <Button kind="tertiary" size="md">
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 1
                       </Button>
                     </Tearsheet.HeaderActionItem>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                      <Button kind="tertiary" size="md">
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 2
                       </Button>
                     </Tearsheet.HeaderActionItem>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                      <Button kind="tertiary" size="md">
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 3
                       </Button>
                     </Tearsheet.HeaderActionItem>
@@ -1182,6 +1236,7 @@ export const StackingTearsheet = {
     const [open3, setOpen3] = useState(false);
     const [isCollapsed1, setIsCollapsed1] = useState(false);
     const [isCollapsed2, setIsCollapsed2] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef1 = useRef(null);
     const launcherButtonRef2 = useRef(null);
     const launcherButtonRef3 = useRef(null);
@@ -1230,7 +1285,7 @@ export const StackingTearsheet = {
                       <Button
                         ref={launcherButtonRef2}
                         kind="tertiary"
-                        size="md"
+                        size={getActionSize(isCollapsed1)}
                         onClick={() => {
                           setOpen2(true);
                         }}
@@ -1350,7 +1405,7 @@ export const StackingTearsheet = {
                       <Button
                         ref={launcherButtonRef3}
                         kind="tertiary"
-                        size="md"
+                        size={getActionSize(isCollapsed2)}
                         onClick={() => {
                           setOpen3(true);
                         }}
@@ -1578,6 +1633,7 @@ export const WithCustomFooterActions = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef = useRef(null);
     const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
@@ -1621,17 +1677,17 @@ export const WithCustomFooterActions = {
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size="md">
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 1
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size="md">
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 2
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size="md">
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 3
                     </Button>
                   </Tearsheet.HeaderActionItem>
@@ -1731,7 +1787,7 @@ export const WithCustomFooterActions = {
             </Tearsheet.SummaryContent>
           </Tearsheet.Body>
           <Tearsheet.Footer>
-            <div className="default__action-buttons">
+            <ButtonSet fluid className="cds--tearsheet__footer-button-set">
               <Button
                 kind="ghost"
                 onClick={() => setOpen(false)}
@@ -1754,7 +1810,7 @@ export const WithCustomFooterActions = {
                 size={buttonSize}>
                 Submit
               </Button>
-            </div>
+            </ButtonSet>
           </Tearsheet.Footer>
         </Tearsheet>
       </>

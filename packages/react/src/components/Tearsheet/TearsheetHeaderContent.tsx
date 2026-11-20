@@ -16,9 +16,10 @@ import cx from 'classnames';
 import { TearsheetContext } from './context';
 import { TruncatedText } from '../TruncatedText';
 import { AILabel } from '../AILabel';
+import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
 import { Close } from '@carbon/icons-react';
-import Button from '../Button';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export interface TearsheetHeaderContentProps {
   /**
@@ -71,6 +72,7 @@ const TearsheetHeaderContent = React.forwardRef<
 
   const carbonPrefix = usePrefix();
   const blockClass = `${carbonPrefix}--tearsheet`;
+  const enableV12Release = useFeatureFlag('enable-v12-release');
   const {
     isSm,
     onClose,
@@ -81,12 +83,13 @@ const TearsheetHeaderContent = React.forwardRef<
     fullyCollapsed,
   } = useContext(TearsheetContext);
 
-  // Normalize decorator (AILabel is always size `sm`)
+  // Normalize decorator. v12: AILabel is always size `sm`; v11: it shrinks to
+  // `xs` once the header is fully collapsed.
   const candidateIsAILabel =
     isValidElement(decorator) && decorator.type === AILabel;
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(decorator as ReactElement<{ size?: string }>, {
-        size: 'sm',
+        size: enableV12Release || !fullyCollapsed ? 'sm' : 'xs',
       })
     : decorator;
 
@@ -143,15 +146,19 @@ const TearsheetHeaderContent = React.forwardRef<
   const closeButtonElement = !hideCloseButton && (
     <div
       className={`${blockClass}__close-button ${carbonPrefix}--modal-close-button`}>
-      <Button
-        kind="ghost"
-        size="md"
-        hasIconOnly
-        iconDescription={closeIconDescription || 'Close'}
-        renderIcon={Close}
-        autoAlign
+      <IconButton
+        className={`${carbonPrefix}--modal-close`}
+        label={closeIconDescription || 'Close'}
         onClick={onClose}
-      />
+        align="left"
+        size={enableV12Release || fullyCollapsed ? 'md' : 'lg'}>
+        <Close
+          size={20}
+          aria-hidden="true"
+          tabIndex="-1"
+          className={`${carbonPrefix}--modal-close__icon`}
+        />
+      </IconButton>
     </div>
   );
 

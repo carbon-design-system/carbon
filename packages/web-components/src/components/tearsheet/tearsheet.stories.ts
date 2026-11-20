@@ -21,12 +21,15 @@ import '../toggle-tip/index';
 import '../dropdown/index';
 import '../progress-bar/index';
 import '../notification/index';
+import '../action-set/index';
 import mdx from './tearsheet.mdx';
 import {
   storyPrefix,
   getButtonSize,
   getDecorator,
   toggleButton,
+  handleCollapseChange,
+  getHeaderActionSize,
   toggleInfluencerPanel,
   toggleSummaryPanel,
   description,
@@ -44,7 +47,7 @@ import {
 export const Default = {
   args: {
     variant: 'wide',
-    open: false,
+    open: true,
     decorator: false,
     isFlush: false,
     hideCloseButton: false,
@@ -75,7 +78,8 @@ export const Default = {
         variant="${args.variant}"
         ?open="${args.open}"
         ?prevent-close-on-click-outside="${args.preventCloseOnClickOutside}"
-        selector-primary-focus="#input1">
+        selector-primary-focus="#input1"
+        @cds-tearsheet-collapse-change="${handleCollapseChange}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -90,7 +94,7 @@ export const Default = {
               : ''}
             ${args.showHeaderActions
               ? html`<div slot="header-actions">
-                  <cds-button size="md" kind="tertiary">
+                  <cds-button size="${getHeaderActionSize()}" kind="tertiary">
                     Primary action ${iconLoader(Add16, { slot: 'icon' })}
                   </cds-button>
                 </div>`
@@ -150,6 +154,7 @@ export const Default = {
 export const WithInfluencer = {
   args: {
     variant: 'wide',
+    open: true,
     decorator: false,
     isFlush: false,
     hideCloseButton: false,
@@ -167,7 +172,10 @@ export const WithInfluencer = {
         </div>
       </div>
 
-      <cds-tearsheet variant="${args.variant ?? 'wide'}">
+      <cds-tearsheet
+        variant="${args.variant ?? 'wide'}"
+        ?open="${args.open}"
+        @cds-tearsheet-collapse-change="${handleCollapseChange}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -180,7 +188,9 @@ export const WithInfluencer = {
             })}
 
             <div slot="header-actions">
-              <cds-button size="md" kind="tertiary">Action 1</cds-button>
+              <cds-button size="${getHeaderActionSize()}" kind="tertiary"
+                >Action 1</cds-button
+              >
             </div>
           </cds-tearsheet-header-content>
         </cds-tearsheet-header>
@@ -235,6 +245,7 @@ export const WithInfluencer = {
 export const WithTabs = {
   args: {
     variant: 'wide',
+    open: true,
     decorator: false,
     isFlush: false,
     hideCloseButton: false,
@@ -252,7 +263,10 @@ export const WithTabs = {
         </div>
       </div>
 
-      <cds-tearsheet variant="${args.variant ?? 'wide'}">
+      <cds-tearsheet
+        variant="${args.variant ?? 'wide'}"
+        ?open="${args.open}"
+        @cds-tearsheet-collapse-change="${handleCollapseChange}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -265,7 +279,9 @@ export const WithTabs = {
             })}
 
             <div slot="header-actions">
-              <cds-button size="md" kind="tertiary">Action 1</cds-button>
+              <cds-button size="${getHeaderActionSize()}" kind="tertiary"
+                >Action 1</cds-button
+              >
             </div>
           </cds-tearsheet-header-content>
           <cds-tearsheet-navigation-bar>
@@ -312,6 +328,7 @@ export const WithTabs = {
 
 export const narrowTearsheet = {
   args: {
+    open: true,
     decorator: false,
     isFlush: false,
     hideCloseButton: false,
@@ -329,7 +346,10 @@ export const narrowTearsheet = {
         </div>
       </div>
 
-      <cds-tearsheet variant="narrow">
+      <cds-tearsheet
+        variant="narrow"
+        ?open="${args.open}"
+        @cds-tearsheet-collapse-change="${handleCollapseChange}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -338,7 +358,7 @@ export const narrowTearsheet = {
             <label slot="label">Label</label>
             ${description}
             <div slot="header-actions">
-              <cds-button size="md" kind="tertiary">
+              <cds-button size="${getHeaderActionSize()}" kind="tertiary">
                 Primary action ${iconLoader(Add16, { slot: 'icon' })}
               </cds-button>
             </div>
@@ -444,7 +464,7 @@ export const StackingWithDifferentSizes = {
 export const WithCustomFooterActions = {
   args: {
     variant: 'wide',
-    open: false,
+    open: true,
     decorator: false,
     isFlush: false,
     hideCloseButton: false,
@@ -466,7 +486,8 @@ export const WithCustomFooterActions = {
       <cds-tearsheet
         variant="${args.variant}"
         ?open="${args.open}"
-        prevent-close-on-click-outside>
+        prevent-close-on-click-outside
+        @cds-tearsheet-collapse-change="${handleCollapseChange}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -478,7 +499,7 @@ export const WithCustomFooterActions = {
               slot: 'title-start',
             })}
             <div slot="header-actions">
-              <cds-button size="md" kind="tertiary">
+              <cds-button size="${getHeaderActionSize()}" kind="tertiary">
                 Action 1 ${iconLoader(Add16, { slot: 'icon' })}
               </cds-button>
             </div>
@@ -510,25 +531,28 @@ export const WithCustomFooterActions = {
         </cds-tearsheet-body>
 
         <cds-tearsheet-footer>
-          <div class="default__action-buttons">
-            <cds-button
-              kind="ghost"
-              size="${getButtonSize(args.variant)}"
-              @click="${toggleButton}">
-              Cancel
-            </cds-button>
-            <cds-button
-              kind="secondary"
-              size="${getButtonSize(args.variant)}"
-              @click="${() => {}}">
-              Back
-            </cds-button>
-            <cds-button
-              size="${getButtonSize(args.variant)}"
-              @click="${() => {}}">
-              Submit
-            </cds-button>
-          </div>
+          <cds-action-set
+            size="${args.variant === 'wide' ? '2xl' : 'xl'}"
+            button-size="${getButtonSize(args.variant)}"
+            disable-stacking
+            .actions="${[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: toggleButton,
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+                onClick: () => {},
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+                onClick: () => {},
+              },
+            ]}">
+          </cds-action-set>
         </cds-tearsheet-footer>
       </cds-tearsheet>
     `;

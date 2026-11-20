@@ -13,6 +13,7 @@ import Bee from '@carbon/icons/es/bee/32';
 import Add16 from '@carbon/icons/es/add/32';
 import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';
 import { breakpoints } from '@carbon/layout';
+import { enabled } from '@carbon/feature-flags';
 
 export const storyPrefix = 'tearsheet-stories';
 
@@ -45,6 +46,27 @@ export const getDecorator = (decorator) => {
 
 export const toggleButton = () => {
   document.querySelector(`${prefix}-tearsheet`)?.toggleAttribute('open');
+};
+
+// v12: header action buttons are a fixed `md` size. v11: `sm`, shrinking to
+// `xs` when the header is collapsed (see `handleCollapseChange`).
+export const getHeaderActionSize = () =>
+  enabled('enable-v12-release') ? 'md' : 'sm';
+
+/**
+ * Handles `cds-tearsheet-collapse-change` events in stories.
+ * In v11, resizes header-action buttons to `xs` when collapsed, `sm` when
+ * expanded. In v12 the buttons have a fixed size, so this is a no-op.
+ */
+export const handleCollapseChange = (e: Event) => {
+  if (enabled('enable-v12-release')) {
+    return;
+  }
+  const { collapsed } = (e as CustomEvent).detail as { collapsed: boolean };
+  const tearsheet = e.currentTarget as Element;
+  tearsheet
+    .querySelectorAll('[slot="header-actions"] cds-button')
+    .forEach((btn) => btn.setAttribute('size', collapsed ? 'xs' : 'sm'));
 };
 
 export const toggleInfluencerPanel = () => {

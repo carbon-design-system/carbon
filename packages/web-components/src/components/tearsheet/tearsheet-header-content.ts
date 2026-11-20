@@ -32,6 +32,7 @@ import CDSTearsheetHeader from './tearsheet-header';
 import { consume } from '@lit/context';
 import Close20 from '@carbon/icons/es/close/20.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { isFeatureFlagEnabled } from '../feature-flags';
 import { prefix as carbonPrefix } from '../../globals/settings';
 
 const blockClass = `${prefix}--tearsheet`;
@@ -157,6 +158,8 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
    *  connectedCallback so we avoid repeated DOM traversal on every update. */
   private _uniqueId: string = '';
 
+  private _prevOpen = false;
+
   protected override updated(): void {
     const previousIsMobileOrNarrow = this._isMobileOrNarrow;
     this._isMobileOrNarrow =
@@ -169,7 +172,21 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
     }
 
     this._updateDecoratorSize();
-    this._updateHeaderOffset();
+
+    const currentOpen = (this._tearsheetCtx?.state ?? defaultTearsheetState)
+      .open;
+    const justOpened = currentOpen && !this._prevOpen;
+    this._prevOpen = currentOpen;
+
+    if (justOpened) {
+      // Defer measurement until after the browser has painted the open
+      // tearsheet, so offsetWidth values are non-zero (fixes the case where
+      // open:true is set before first render).
+      requestAnimationFrame(() => this._updateHeaderOffset());
+    } else {
+      this._updateHeaderOffset();
+    }
+
     this._updateInertState();
   }
 
@@ -320,7 +337,12 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
           break;
         }
       }
-      childItems[0].setAttribute('size', 'sm');
+      const { fullyCollapsed } =
+        this._tearsheetCtx?.state ?? defaultTearsheetState;
+      childItems[0].setAttribute(
+        'size',
+        this._v12 || !fullyCollapsed ? 'sm' : 'xs'
+      );
 
       this._tearsheetCtx?.setState({
         hasDecorator: true,
@@ -353,31 +375,49 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
     this._updateHeaderOffset();
   }
 
+  /**
+   * Whether the `enable-v12-release` feature flag is enabled for this element.
+   */
+  private get _v12() {
+    return isFeatureFlagEnabled('enable-v12-release', this);
+  }
+
   private _updateDecoratorSize() {
+    const { fullyCollapsed } =
+      this._tearsheetCtx?.state ?? defaultTearsheetState;
     const assigned = this._decoratorSlot?.assignedElements({ flatten: true });
     if (assigned?.length) {
-      assigned[0].setAttribute('size', 'sm');
+      assigned[0].setAttribute(
+        'size',
+        this._v12 || !fullyCollapsed ? 'sm' : 'xs'
+      );
     }
   }
 
   /**
-   * Measures the rendered AI label and close button so that
-   * `--tearsheet-header-action-offset` stays accurate regardless of which
-   * elements are present. Each element that exists contributes its own width
+   * Sets `--tearsheet-header-action-offset`. In v12 it measures the rendered
+   * AI label and close button so the offset stays accurate regardless of which
+   * elements are present; each element that exists contributes its own width
    * plus an 8px gap.
    */
   private _updateHeaderOffset() {
-    const { open } = this._tearsheetCtx?.state ?? defaultTearsheetState;
+    const { open, isSm } = this._tearsheetCtx?.state ?? defaultTearsheetState;
     if (!open) return;
-    const aiLabelWidth =
-      this.querySelector<HTMLElement>('[slot="decorator"]')?.offsetWidth ?? 0;
-    const closeButtonWidth =
-      this.shadowRoot?.querySelector<HTMLElement>(
-        `.${blockClass}__close-button`
-      )?.offsetWidth ?? 0;
-    const offset =
-      (aiLabelWidth > 0 ? aiLabelWidth + 8 : 0) +
-      (closeButtonWidth > 0 ? closeButtonWidth + 8 : 0);
+    const decorator = this.querySelector<HTMLElement>('[slot="decorator"]');
+    let offset: number;
+    if (this._v12) {
+      const aiLabelWidth = decorator?.offsetWidth ?? 0;
+      const closeButtonWidth =
+        this.shadowRoot?.querySelector<HTMLElement>(
+          `.${blockClass}__close-button`
+        )?.offsetWidth ?? 0;
+      offset =
+        (aiLabelWidth > 0 ? aiLabelWidth + 8 : 0) +
+        (closeButtonWidth > 0 ? closeButtonWidth + 8 : 0);
+    } else {
+      const AILabelWidth = decorator?.clientWidth ?? 0;
+      offset = AILabelWidth + 24 + (isSm ? 8 : 0);
+    }
     document.documentElement.style.setProperty(
       '--tearsheet-header-action-offset',
       `${offset}px`
@@ -406,8 +446,9 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
             <cds-icon-button
               class="${carbonPrefix}--modal-close"
               kind="ghost"
-              size="md"
-              autoalign
+              size="${this._v12 ? 'md' : fullyCollapsed ? 'md' : 'lg'}"
+              align="${this._v12 ? 'top' : 'left'}"
+              ?autoalign="${this._v12}"
               aria-label="${closeIconDescription || 'Close'}"
               @click="${() => {
                 onClose?.();

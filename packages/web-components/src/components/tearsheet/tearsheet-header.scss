@@ -7,6 +7,7 @@
  */
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
@@ -41,8 +42,18 @@ $motion-duration: $duration-moderate-02;
     margin-block: 0;
     max-block-size: 50vh;
     padding-block-end: 0;
-    padding-block-start: $spacing-05;
-    padding-inline: $spacing-05;
+
+    @if flags.enabled('enable-v12-release') {
+      padding-block-start: $spacing-05;
+      padding-inline: $spacing-05;
+    } @else {
+      padding-block-start: $spacing-06;
+      padding-inline: $spacing-07;
+
+      @include breakpoint-down(md) {
+        padding-inline: $spacing-05;
+      }
+    }
   }
 
   /* Animate all slotted children by default */
@@ -60,16 +71,18 @@ $motion-duration: $duration-moderate-02;
     margin-block-end: $spacing-06;
   }
 
-  ::slotted(
-      *:not(
-          [slot='header-content'],
-          [slot='navigation-bar'],
-          [slot='decorator'],
-          .excludeFromCollapse
-        )
-    ) {
-    box-sizing: border-box;
-    padding-inline-start: $spacing-05;
+  @if flags.enabled('enable-v12-release') {
+    ::slotted(
+        *:not(
+            [slot='header-content'],
+            [slot='navigation-bar'],
+            [slot='decorator'],
+            .excludeFromCollapse
+          )
+      ) {
+      box-sizing: border-box;
+      padding-inline-start: $spacing-05;
+    }
   }
 
   ::slotted([slot='header-content']) {
@@ -127,6 +140,11 @@ $motion-duration: $duration-moderate-02;
 // ──────────────────────────────────────────────────────────────
 :host([collapsed]) {
   .#{$block-class}__header {
+    @if not flags.enabled('enable-v12-release') {
+      // Collapsed: remove top padding (was $spacing-04)
+      padding-block-start: 0;
+    }
+
     transition: padding $motion-duration motion(entrance, expressive);
 
     @media screen and (prefers-reduced-motion: reduce) {
@@ -149,7 +167,10 @@ $motion-duration: $duration-moderate-02;
   }
 
   ::slotted([slot='header-content']) {
-    margin-block-end: $spacing-05;
+    @if flags.enabled('enable-v12-release') {
+      margin-block-end: $spacing-05;
+    }
+    // Remove bottom padding when collapsed (was $spacing-04)
     min-block-size: $spacing-08;
   }
 

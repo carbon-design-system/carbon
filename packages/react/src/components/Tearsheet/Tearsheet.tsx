@@ -21,7 +21,7 @@ import ComposedModal, {
   type ComposedModalProps,
   ModalBody,
 } from '../ComposedModal';
-import { FeatureFlags } from '../FeatureFlags';
+import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { TearsheetContext } from './context';
 import TearsheetHeader, {
@@ -214,6 +214,7 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
   ) => {
     const carbonPrefix = usePrefix();
     const blockClass = `${carbonPrefix}--tearsheet`;
+    const enableV12Release = useFeatureFlag('enable-v12-release');
     const localRef = useRef<HTMLDivElement>(null);
     const bodyRef = useRef<HTMLDivElement>(null);
     const mergedRefs = useMergedRefs([ref, localRef, presenceRef]);
@@ -266,24 +267,31 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
 
     // Set CSS custom properties driven by props
     useIsomorphicEffect(() => {
-      // Measure the actual rendered widths of the AI label and close button so
-      // that --tearsheet-header-action-offset stays accurate regardless of which
-      // elements are present.  Each element that exists contributes its own
-      // width plus an 8px gap to the right of the header-content-wrapper.
       const root = localRef.current;
       const aiLabel = root?.querySelector<HTMLElement>(
         `.${carbonPrefix}--ai-label`
       );
-      const closeButton = root?.querySelector<HTMLElement>(
-        `.${blockClass}__close-button`
-      );
 
-      const aiLabelWidth = aiLabel?.offsetWidth ?? 0;
-      const closeButtonWidth = closeButton?.offsetWidth ?? 0;
+      let headerActionMarginRight: number;
+      if (enableV12Release) {
+        // v12: measure the actual rendered widths of the AI label and close
+        // button so that --tearsheet-header-action-offset stays accurate
+        // regardless of which elements are present. Each element that exists
+        // contributes its own width plus an 8px gap to the right of the
+        // header-content-wrapper.
+        const closeButton = root?.querySelector<HTMLElement>(
+          `.${blockClass}__close-button`
+        );
+        const aiLabelWidth = aiLabel?.offsetWidth ?? 0;
+        const closeButtonWidth = closeButton?.offsetWidth ?? 0;
 
-      const headerActionMarginRight =
-        (aiLabelWidth > 0 ? aiLabelWidth + 8 : 0) +
-        (closeButtonWidth > 0 ? closeButtonWidth + 8 : 0);
+        headerActionMarginRight =
+          (aiLabelWidth > 0 ? aiLabelWidth + 8 : 0) +
+          (closeButtonWidth > 0 ? closeButtonWidth + 8 : 0);
+      } else {
+        const AILabelWidth = aiLabel?.clientWidth ?? 0;
+        headerActionMarginRight = AILabelWidth + 24 + (isSm ? 8 : 0); // 24 is to compensate for close button
+      }
 
       document.documentElement.style.setProperty(
         '--tearsheet-header-action-offset',
@@ -311,6 +319,7 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
     }, [
       isSm,
       decorator,
+      enableV12Release,
       hideCloseButton,
       influencerWidth,
       summaryContentWidth,
