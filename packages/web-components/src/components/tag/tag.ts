@@ -159,16 +159,39 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   type = TAG_TYPE.GRAY;
 
   /**
-   * true if the tag text has ellipsis applied
+   * true if the tag text has ellipsis applied.
+   * Only subclasses that surface truncation UI (e.g. dismissible) should
+   * measure layout and set this; plain `cds-tag` must not read scrollWidth.
    */
   @state()
   _hasEllipsisApplied = false;
 
-  updated() {
-    if (!this._textContainer || this._hasEllipsisApplied === true) return;
+  /**
+   * Whether this tag instance needs a synchronous text-overflow measurement.
+   * Plain tags never use the result; dismissible (and similar) override to true.
+   */
+  protected _shouldMeasureEllipsis() {
+    return false;
+  }
+
+  /**
+   * Reads label scrollWidth/clientWidth when truncation UI depends on it.
+   * Kept out of the default update path so lists of plain tags do not force
+   * a layout per instance.
+   */
+  protected _measureEllipsis() {
+    if (!this._textContainer || this._hasEllipsisApplied === true) {
+      return;
+    }
 
     this._hasEllipsisApplied =
       this._textContainer.scrollWidth > this._textContainer.clientWidth;
+  }
+
+  updated() {
+    if (this._shouldMeasureEllipsis()) {
+      this._measureEllipsis();
+    }
 
     const root = this.getRootNode();
     // Check if the root is a shadow root and get its host
