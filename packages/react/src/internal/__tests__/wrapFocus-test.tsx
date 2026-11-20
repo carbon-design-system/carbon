@@ -1,22 +1,37 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { wrapFocus, wrapFocusWithoutSentinels } from '../wrapFocus';
 
 describe('wrapFocus', () => {
-  let node;
-  let spyInnerModal;
-  let spyButton0;
-  let spyButton2;
-  let tooltip;
+  let node: HTMLDivElement;
+  let spyInnerModal: ReturnType<typeof jest.spyOn>;
+  let spyButton0: ReturnType<typeof jest.spyOn>;
+  let spyButton2: ReturnType<typeof jest.spyOn>;
+
+  const getElement = (selector: string) => {
+    const element = node.querySelector(selector);
+
+    if (element instanceof HTMLElement) return element;
+
+    throw new Error(`Expected an element matching ${selector}.`);
+  };
 
   beforeEach(() => {
     node = document.createElement('div');
-    node.tabIndex = '-1';
+    node.tabIndex = -1;
     node.innerHTML = `
       <button id="outer-preceding"></button>
       <span
@@ -40,83 +55,68 @@ describe('wrapFocus', () => {
       <div class="cds--tooltip" tabindex="0"></div>
     `;
     document.body.appendChild(node);
-    tooltip = node.querySelector('.cds--tooltip');
-    spyInnerModal = jest.spyOn(node.querySelector('#inner-modal'), 'focus');
-    spyButton0 = jest.spyOn(node.querySelector('#button-0'), 'focus');
-    spyButton2 = jest.spyOn(node.querySelector('#button-2'), 'focus');
+
+    spyInnerModal = jest.spyOn(getElement('#inner-modal'), 'focus');
+    spyButton0 = jest.spyOn(getElement('#button-0'), 'focus');
+    spyButton2 = jest.spyOn(getElement('#button-2'), 'focus');
   });
 
   afterEach(() => {
-    if (spyButton2) {
-      spyButton2.mockRestore();
-      spyButton2 = null;
-    }
-    if (spyButton0) {
-      spyButton0.mockRestore();
-      spyButton0 = null;
-    }
-    if (spyInnerModal) {
-      spyInnerModal.mockRestore();
-      spyInnerModal = null;
-    }
-    if (node) {
-      node.parentNode.removeChild(node);
-      node = null;
-    }
-    tooltip = null;
+    jest.restoreAllMocks();
+    node.remove();
   });
 
   it('runs forward focus-wrap when following outer node is focused on', () => {
     wrapFocus({
-      bodyNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#outer-following'),
-      oldActiveNode: node.querySelector('#button-2'),
+      bodyNode: getElement('#inner-modal'),
+      startTrapNode: getElement('#start-sentinel'),
+      endTrapNode: getElement('#end-sentinel'),
+      currentActiveNode: getElement('#outer-following'),
+      oldActiveNode: getElement('#button-2'),
     });
     expect(spyButton0).toHaveBeenCalled();
   });
 
   it('runs forward focus-wrap when following focus sentinel is focused on', () => {
     wrapFocus({
-      bodyNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#end-sentinel'),
-      oldActiveNode: node.querySelector('#button-2'),
+      bodyNode: getElement('#inner-modal'),
+      startTrapNode: getElement('#start-sentinel'),
+      endTrapNode: getElement('#end-sentinel'),
+      currentActiveNode: getElement('#end-sentinel'),
+      oldActiveNode: getElement('#button-2'),
     });
     expect(spyButton0).toHaveBeenCalled();
   });
 
   it('runs reverse focus-wrap when preceding outer node is focused on', () => {
     wrapFocus({
-      bodyNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#outer-preceding'),
-      oldActiveNode: node.querySelector('#button-0'),
+      bodyNode: getElement('#inner-modal'),
+      startTrapNode: getElement('#start-sentinel'),
+      endTrapNode: getElement('#end-sentinel'),
+      currentActiveNode: getElement('#outer-preceding'),
+      oldActiveNode: getElement('#button-0'),
     });
     expect(spyButton2).toHaveBeenCalled();
   });
 
   it('runs reverse focus-wrap when preceding focus sentinel is focused on', () => {
     wrapFocus({
-      bodyNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#start-sentinel'),
-      oldActiveNode: node.querySelector('#button-0'),
+      bodyNode: getElement('#inner-modal'),
+      startTrapNode: getElement('#start-sentinel'),
+      endTrapNode: getElement('#end-sentinel'),
+      currentActiveNode: getElement('#start-sentinel'),
+      oldActiveNode: getElement('#button-0'),
     });
     expect(spyButton2).toHaveBeenCalled();
   });
 
   it('does not run focus-wrap when a floating menu is focused on', () => {
     wrapFocus({
-      bodyNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('.cds--tooltip'),
-      oldActiveNode: node.querySelector('#button-2'),
+      bodyNode: getElement('#inner-modal'),
+      startTrapNode: getElement('#start-sentinel'),
+      endTrapNode: getElement('#end-sentinel'),
+      currentActiveNode: getElement('.cds--tooltip'),
+      oldActiveNode: getElement('#button-2'),
     });
     expect(spyInnerModal).not.toHaveBeenCalled();
     expect(spyButton0).not.toHaveBeenCalled();
@@ -124,13 +124,14 @@ describe('wrapFocus', () => {
   });
 
   it('respects prefix overrides when checking floating menus', () => {
+    const tooltip = getElement('.cds--tooltip');
     tooltip.className = 'bx--tooltip';
     wrapFocus({
-      bodyNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
+      bodyNode: getElement('#inner-modal'),
+      startTrapNode: getElement('#start-sentinel'),
+      endTrapNode: getElement('#end-sentinel'),
       currentActiveNode: tooltip,
-      oldActiveNode: node.querySelector('#button-2'),
+      oldActiveNode: getElement('#button-2'),
       prefix: 'bx',
     });
     expect(spyInnerModal).not.toHaveBeenCalled();
@@ -139,35 +140,35 @@ describe('wrapFocus', () => {
   });
 
   it('uses inner modal node as a escape hatch for focusing for forward focus-wrap', () => {
-    node.querySelector('#inner-modal').innerHTML =
+    getElement('#inner-modal').innerHTML =
       `<div id="dummy-old-active-node"></div>`;
     wrapFocus({
-      bodyNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#outer-following'),
-      oldActiveNode: node.querySelector('#dummy-old-active-node'),
+      bodyNode: getElement('#inner-modal'),
+      startTrapNode: getElement('#start-sentinel'),
+      endTrapNode: getElement('#end-sentinel'),
+      currentActiveNode: getElement('#outer-following'),
+      oldActiveNode: getElement('#dummy-old-active-node'),
     });
     expect(spyInnerModal).toHaveBeenCalled();
   });
 
   it('uses inner modal node as a escape hatch for focusing for reverse focus-wrap', () => {
-    node.querySelector('#inner-modal').innerHTML =
+    getElement('#inner-modal').innerHTML =
       `<div id="dummy-old-active-node"></div>`;
     wrapFocus({
-      bodyNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#outer-preceding'),
-      oldActiveNode: node.querySelector('#dummy-old-active-node'),
+      bodyNode: getElement('#inner-modal'),
+      startTrapNode: getElement('#start-sentinel'),
+      endTrapNode: getElement('#end-sentinel'),
+      currentActiveNode: getElement('#outer-preceding'),
+      oldActiveNode: getElement('#dummy-old-active-node'),
     });
     expect(spyInnerModal).toHaveBeenCalled();
   });
 });
 
 describe('wrapFocusWithoutSentinels', () => {
-  let container;
-  let button1;
+  let container: HTMLDivElement;
+  let button1: HTMLButtonElement;
 
   beforeEach(() => {
     container = document.createElement('div');
@@ -176,16 +177,21 @@ describe('wrapFocusWithoutSentinels', () => {
       <button id="button-1">Button 1</button>
     `;
     document.body.appendChild(container);
-    button1 = container.querySelector('#button-1');
+    const element = container.querySelector('#button-1');
+
+    if (!(element instanceof HTMLButtonElement)) {
+      throw new Error('Expected the second button in the container.');
+    }
+
+    button1 = element;
   });
 
   afterEach(() => {
-    document.body.removeChild(container);
+    container.remove();
   });
 
   it('should not throw an error when called during keydown event', () => {
     const event = new KeyboardEvent('keydown', { key: 'Tab' });
-    Object.defineProperty(event, 'shiftKey', { value: false });
 
     expect(() =>
       wrapFocusWithoutSentinels({
@@ -206,6 +212,8 @@ describe('wrapFocusWithoutSentinels', () => {
       wrapFocusWithoutSentinels({
         containerNode: container,
         currentActiveNode: button1,
+        // @ts-expect-error: Pass a focus event to test unsupported event
+        // handling.
         event,
       })
     ).toThrow(

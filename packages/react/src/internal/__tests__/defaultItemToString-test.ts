@@ -1,10 +1,11 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import { defaultItemToString } from '../defaultItemToString';
 
 describe('defaultItemToString', () => {
@@ -42,7 +43,7 @@ describe('defaultItemToString', () => {
   });
 
   it('should ignore arrays unless they have a string label property', () => {
-    const arr = [];
+    const arr: unknown[] & { label?: string } = [];
 
     expect(defaultItemToString(arr)).toBe('');
 
@@ -60,7 +61,7 @@ describe('defaultItemToString', () => {
 
   it('should return empty strings for functions, bigints, and symbols', () => {
     expect(defaultItemToString(() => {})).toBe('');
-    expect(defaultItemToString(10n)).toBe('');
+    expect(defaultItemToString(BigInt(10))).toBe('');
     expect(defaultItemToString(Symbol('x'))).toBe('');
   });
 

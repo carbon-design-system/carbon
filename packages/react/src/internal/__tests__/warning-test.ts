@@ -1,10 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, jest, test } from '@jest/globals';
 import { warning } from '../warning';
 
 describe('warning', () => {
@@ -27,6 +28,7 @@ describe('warning', () => {
 
   test('throws an error when no message is provided', () => {
     expect(() => {
+      // @ts-expect-error: Omit the required message to test this error.
       warning(true);
     }).toThrow();
   });

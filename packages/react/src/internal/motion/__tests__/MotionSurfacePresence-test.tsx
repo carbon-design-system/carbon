@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext } from 'react';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
+import React, { useContext, type ReactNode } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 
 jest.mock('../useMotionEnabled', () => ({
@@ -17,26 +18,37 @@ jest.mock('../useMotionEnabled', () => ({
 // reference when its module loads, so restore a timer-based implementation
 // before requiring anything that imports `motion/react`.
 if (typeof global.performance === 'undefined') {
-  global.performance = { now: () => Date.now() };
+  Object.defineProperty(globalThis, 'performance', {
+    configurable: true,
+    value: { now: () => Date.now() },
+  });
 }
 global.requestAnimationFrame = (callback) =>
-  setTimeout(() => callback(performance.now()), 16);
-global.cancelAnimationFrame = (id) => clearTimeout(id);
+  window.setTimeout(() => callback(performance.now()), 16);
+global.cancelAnimationFrame = (id) => window.clearTimeout(id);
 
-const { MotionSurface } = require('../MotionSurface');
-const { useMotionEnabled } = require('../useMotionEnabled');
-const {
-  ModalPresence,
-  ModalPresenceContext,
-} = require('../../../components/Modal/ModalPresence');
+const { MotionSurface } =
+  jest.requireActual<typeof import('../MotionSurface')>('../MotionSurface');
+const { ModalPresence, ModalPresenceContext } = jest.requireActual<
+  typeof import('../../../components/Modal/ModalPresence')
+>('../../../components/Modal/ModalPresence');
+const useMotionEnabled = jest.mocked(
+  jest.requireMock<typeof import('../useMotionEnabled')>('../useMotionEnabled')
+    .useMotionEnabled
+);
 
 // Attach the presence ref the way Modal does, so usePresence can resolve.
-function PresenceNode({ children }) {
+function PresenceNode({ children }: { children: ReactNode }) {
   const context = useContext(ModalPresenceContext);
-  return <div ref={context?.presenceRef}>{children}</div>;
+
+  if (!context) {
+    throw new Error('PresenceNode must be rendered within ModalPresence.');
+  }
+
+  return <div ref={context.presenceRef}>{children}</div>;
 }
 
-const Demo = ({ open }) => (
+const Demo = ({ open }: { open: boolean }) => (
   <ModalPresence open={open}>
     <PresenceNode>
       <MotionSurface surface="contextual" open={open}>

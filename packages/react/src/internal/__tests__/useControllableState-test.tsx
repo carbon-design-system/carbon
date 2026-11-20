@@ -1,16 +1,24 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, jest, test } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import { useControllableState } from '../useControllableState';
 
-const TextInput = ({ onChange, value: controlledValue }) => {
+const TextInput = ({
+  onChange,
+  value: controlledValue,
+}: {
+  onChange?: (value: string) => void;
+  value?: string;
+}) => {
   const [value, setValue] = useControllableState({
     value: controlledValue,
     defaultValue: '',
@@ -35,7 +43,7 @@ const ControlledTextInput = () => {
   return <TextInput value={value} onChange={setValue} />;
 };
 
-const Toggle = ({ defaultControlled }) => {
+const Toggle = ({ defaultControlled }: { defaultControlled: boolean }) => {
   const [value, setValue] = useState('');
   const [controlled, setControlled] = useState(defaultControlled);
 
@@ -74,7 +82,11 @@ const FunctionalInput = () => {
   );
 };
 
-const UncontrolledInput = ({ onChange }) => {
+const UncontrolledInput = ({
+  onChange,
+}: {
+  onChange?: (value: string) => void;
+}) => {
   const [value, setValue] = useControllableState({
     defaultValue: '',
     onChange,
@@ -92,7 +104,7 @@ const UncontrolledInput = ({ onChange }) => {
   );
 };
 
-const DefaultValueInput = ({ defaultValue }) => {
+const DefaultValueInput = ({ defaultValue }: { defaultValue: string }) => {
   const [value, setValue] = useControllableState({ defaultValue });
 
   return (
@@ -126,13 +138,13 @@ describe('useControllableState', () => {
   test('uncontrolled', async () => {
     render(<TextInput />);
     await userEvent.type(screen.getByTestId('input'), 'test');
-    expect(screen.getByTestId('input').value).toBe('test');
+    expect(screen.getByTestId('input')).toHaveValue('test');
   });
 
   test('controlled', async () => {
     render(<ControlledTextInput />);
     await userEvent.type(screen.getByTestId('input'), 'test');
-    expect(screen.getByTestId('input').value).toBe('test');
+    expect(screen.getByTestId('input')).toHaveValue('test');
   });
 
   test('controlled to uncontrolled', async () => {
@@ -192,13 +204,13 @@ describe('useControllableState', () => {
     const { rerender } = render(<DefaultValueInput defaultValue="initial" />);
     const input = screen.getByTestId('input');
 
-    expect(input.value).toBe('initial');
+    expect(input).toHaveValue('initial');
 
     fireEvent.change(input, { target: { value: 'changed' } });
-    expect(input.value).toBe('changed');
+    expect(input).toHaveValue('changed');
 
     rerender(<DefaultValueInput defaultValue="initial" />);
-    expect(input.value).toBe('changed');
+    expect(input).toHaveValue('changed');
   });
 
   test('should work without `onChange` callback', async () => {
@@ -207,6 +219,6 @@ describe('useControllableState', () => {
     const input = screen.getByTestId('input');
 
     await userEvent.type(input, 'test');
-    expect(input.value).toBe('test');
+    expect(input).toHaveValue('test');
   });
 });

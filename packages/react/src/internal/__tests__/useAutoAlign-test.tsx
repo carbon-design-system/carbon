@@ -5,13 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import { renderHook } from '@testing-library/react';
-import React from 'react';
-import { FeatureFlags } from '../../components/FeatureFlags';
+import React, { type PropsWithChildren } from 'react';
+import {
+  FeatureFlags,
+  type FeatureFlagsProps,
+} from '../../components/FeatureFlags';
 import { useAutoAlign } from '../useAutoAlign';
 
-const withFlags = (flags) =>
-  function Wrapper({ children }) {
+const withFlags = (flags: FeatureFlagsProps) =>
+  function Wrapper({ children }: PropsWithChildren) {
     return <FeatureFlags {...flags}>{children}</FeatureFlags>;
   };
 
