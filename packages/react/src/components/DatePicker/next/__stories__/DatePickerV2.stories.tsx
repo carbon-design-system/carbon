@@ -285,14 +285,12 @@ export const Default = (args) => {
   );
 };
 
-Default.args = { dayRenderer: 'undefined' };
-
 Default.argTypes = {
   ...sharedArgTypes,
   dayRenderer: {
     description:
       'Example `renderDay` and `getDayLabel` implementations using mock events around today. Event dots: purple for meetings, yellow for deadlines, green for reminders. Event background: event days get a neutral background. Event count: number of events. Availability: struck-through days are fully booked.',
-    options: ['undefined', ...Object.keys(dayRenderers)],
+    options: Object.keys(dayRenderers),
     control: { type: 'select' },
   },
   datePickerType: {
