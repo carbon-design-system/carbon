@@ -10,13 +10,13 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 
 const { render } = SassRenderer.create(__dirname);
 
 function findDeclaration(rule, property) {
-  return rule.declarations.find((declaration) => {
-    return declaration.property === property;
+  return rule.nodes.find((declaration) => {
+    return declaration.prop === property;
   });
 }
 
@@ -29,8 +29,8 @@ describe('scss/utilities/skeleton', () => {
         @include skeleton.skeleton;
       }
     `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const rule = stylesheet.rules.find((candidate) => {
+    const stylesheet = postcss.parse(result.css.toString());
+    const rule = stylesheet.nodes.find((candidate) => {
       return candidate.selectors && candidate.selectors.includes('.test');
     });
 
@@ -47,8 +47,8 @@ describe('scss/utilities/skeleton', () => {
         @include skeleton.skeleton($border-radius: border-radius.$border-radius-04);
       }
     `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const rule = stylesheet.rules.find((candidate) => {
+    const stylesheet = postcss.parse(result.css.toString());
+    const rule = stylesheet.nodes.find((candidate) => {
       return candidate.selectors && candidate.selectors.includes('.test');
     });
 
@@ -69,8 +69,8 @@ describe('scss/utilities/skeleton', () => {
         @include skeleton.skeleton($border-radius: border-radius.$border-radius-04);
       }
     `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const rule = stylesheet.rules.find((candidate) => {
+    const stylesheet = postcss.parse(result.css.toString());
+    const rule = stylesheet.nodes.find((candidate) => {
       return candidate.selectors && candidate.selectors.includes('.test');
     });
 
