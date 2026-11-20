@@ -183,6 +183,27 @@ export const RangeWithCalendarWithLayer = (args) => (
 
 RangeWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
 
+export const WithTranslations = () => (
+  <DatePicker
+    datePickerType="single"
+    locale="es"
+    dateFormat="d/m/Y"
+    translateWithId={(id) =>
+      ({
+        'carbon.date-picker.calendar': 'Calendario',
+        'carbon.date-picker.previous-month': 'Mes anterior',
+        'carbon.date-picker.next-month': 'Mes siguiente',
+      })[id]
+    }>
+    <DatePickerInput
+      id="translated-date"
+      iconDescription="Abrir calendario"
+      labelText="Fecha"
+      placeholder="dd/mm/aaaa"
+    />
+  </DatePicker>
+);
+
 export const Simple = (args) => (
   <DatePicker datePickerType="simple" {...args}>
     <DatePickerInput

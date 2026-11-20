@@ -37,6 +37,12 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Component API
 
+When `helperText` is set, use `translateWithId` to localize status
+announcements. The message IDs are `carbon.progress-bar.loading` (default:
+`Loading`), `carbon.progress-bar.finished` (default: `Done`), and
+`carbon.progress-bar.error` (default: `Error`). The error status is not busy and
+announces an error instead of continuing to announce loading.
+
 <ArgTypes />
 
 ## Feedback

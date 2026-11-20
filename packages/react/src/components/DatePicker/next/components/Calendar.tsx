@@ -15,6 +15,18 @@ import {
   getWeekdayLabels,
 } from '@carbon/utilities/date-picker';
 import { usePrefix } from '../../../../internal/usePrefix';
+import type { TFunc } from '../../../../types/common';
+
+const defaultTranslations = {
+  'carbon.date-picker.calendar': 'Calendar',
+  'carbon.date-picker.previous-month': 'Previous month',
+  'carbon.date-picker.next-month': 'Next month',
+};
+
+type TranslationKey = keyof typeof defaultTranslations;
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) =>
+  defaultTranslations[messageId];
 
 /**
  * Calendar component props
@@ -44,6 +56,11 @@ export interface CalendarProps {
    * BCP 47 locale tag used to localize month and weekday labels
    */
   locale?: string;
+
+  /**
+   * Translates the calendar grid and month navigation labels.
+   */
+  translateWithId?: TFunc<TranslationKey>;
 }
 
 /**
@@ -56,6 +73,7 @@ export function Calendar({
   onNavigate,
   className,
   locale = 'en',
+  translateWithId = defaultTranslateWithId,
 }: CalendarProps) {
   const prefix = usePrefix();
   const { viewDate, startDate, endDate, minDate, maxDate, focusedDate, mode } =
@@ -184,7 +202,7 @@ export function Calendar({
     <div
       className={calendarClasses}
       role="grid"
-      aria-label="Calendar"
+      aria-label={translateWithId('carbon.date-picker.calendar')}
       tabIndex={0}>
       {/* Month Header */}
       <div className={`${prefix}--date-picker__month`}>
@@ -192,7 +210,7 @@ export function Calendar({
           type="button"
           className={`${prefix}--date-picker__month-nav`}
           onClick={handlePrevMonth}
-          aria-label="Previous month">
+          aria-label={translateWithId('carbon.date-picker.previous-month')}>
           <svg
             focusable="false"
             preserveAspectRatio="xMidYMid meet"
@@ -217,7 +235,7 @@ export function Calendar({
           type="button"
           className={`${prefix}--date-picker__month-nav`}
           onClick={handleNextMonth}
-          aria-label="Next month">
+          aria-label={translateWithId('carbon.date-picker.next-month')}>
           <svg
             focusable="false"
             preserveAspectRatio="xMidYMid meet"
