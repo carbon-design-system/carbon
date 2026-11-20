@@ -1,0 +1,105 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ComboButtonStories from './ComboButton.stories';
+
+<Meta of={ComboButtonStories} />
+
+# ComboButton
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/ComboButton)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/combo-button/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/combo-button/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With Icons](#with-icons)
+- [With Danger](#with-danger)
+- [Menu Alignment](#menu-alignment-experimental)
+- [Experimental Auto Align](#experimental-auto-align)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+A `cds-ng-combo-button` can be used to offer additional, secondary actions in a
+disclosed list next to the primary action. These additional actions must be
+`cds-ng-menu-item` elements passed as children of a `cds-ng-menu`. The primary
+action's label is passed as `label`.
+
+### Importing
+
+```ts
+import { ComboButtonComponent } from '@carbon/angular/combo-button';
+import { MenuComponent, MenuItemComponent } from '@carbon/angular/menu';
+
+@Component({
+  standalone: true,
+  imports: [ComboButtonComponent, MenuComponent, MenuItemComponent],
+  template: `
+    <cds-ng-combo-button label="Primary action" [onClick]="onPrimaryAction">
+      <cds-ng-menu>
+        <cds-ng-menu-item label="Second action"></cds-ng-menu-item>
+        <cds-ng-menu-item label="Third action"></cds-ng-menu-item>
+        <cds-ng-menu-item label="Fourth action"></cds-ng-menu-item>
+      </cds-ng-menu>
+    </cds-ng-combo-button>
+  `,
+})
+export class MyComponent {
+  onPrimaryAction = () => {
+    /* ... */
+  };
+}
+```
+
+<Canvas of={ComboButtonStories.Default} />
+
+## With Icons
+
+<Canvas of={ComboButtonStories.withIcons} />
+
+## With Danger
+
+<Canvas of={ComboButtonStories.withDanger} />
+
+## Menu Alignment (experimental)
+
+The `menuAlignment` input enables you to define the placement of the menu in
+relation to the `cds-ng-combo-button`. For instance, setting
+`menuAlignment="top"` on the `cds-ng-combo-button` will render the menu above
+the button.
+
+If it seems your specified `menuAlignment` isn't working, it's because we
+prioritize ensuring the menu remains visible. We calculate the optimal position
+to display the menu in case the provided `menuAlignment` obscures it.
+
+We encourage you to play around in the Storybook Default stories to better
+understand the `menuAlignment` input.
+
+## Experimental Auto Align
+
+<Canvas of={ComboButtonStories.ExperimentalAutoAlign} />
+
+## Component API
+
+<ArgTypes of={ComboButtonStories.Default} />
+
+## Angular-specific notes
+
+- Import `ComboButtonComponent` from `@carbon/angular/combo-button`, and
+  `MenuComponent` / `MenuItemComponent` (plus `MenuItemDividerComponent` where
+  used) from `@carbon/angular/menu`.
+- `cds-ng-combo-button` exposes the primary action handler as the `onClick`
+  input, not as an output. Bind a function with `[onClick]="handler"`.
+- Inputs are forwarded to the web component as properties, so use camelCase
+  property bindings such as `[menuAlignment]`, `[tooltipAlignment]` and
+  `[tooltipContent]`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/ComboButton/__stories__/ComboButton.mdx).

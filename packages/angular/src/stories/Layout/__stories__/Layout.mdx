@@ -1,0 +1,132 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as LayoutStories from './Layout.stories';
+
+<Meta of={LayoutStories} />
+
+# Layout
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Layout)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [cds-ng-layout-constraint](#cds-ng-layout-constraint)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-layout` component provides a way to set layout contexts for specific
+parts of an application. It uses Carbon's experimental `layout` sass module
+(exported from `@carbon/styles`) to control layout-related settings like size
+and density of all components within a layout context.
+
+All children components that support it will react to the `size` and `density`
+inputs you pass to `cds-ng-layout`. Note that not all components support the
+entire spectrum of options available. In these cases, a component will typically
+cap out at the maximum or minimum size it supports in order to still best suit
+the layout context's intent.
+
+If a component is outside a layout context or `size` / `density` is not set, it
+will fall back to its default rendering.
+
+Components that are explicitly passed a `size` input are unaffected by the
+layout context. Example:
+
+```ts
+import { LayoutComponent } from '@carbon/angular/layout';
+import { TextInputComponent } from '@carbon/angular/text-input';
+
+@Component({
+  standalone: true,
+  imports: [LayoutComponent, TextInputComponent],
+  template: `
+    <div>
+      <!-- This text input is always lg -->
+      <cds-ng-text-input size="lg" label="Text input"></cds-ng-text-input>
+
+      <!-- This text input will render with its default size (md) -->
+      <cds-ng-text-input label="Text input"></cds-ng-text-input>
+
+      <cds-ng-layout size="sm">
+        <!-- This text input will still be lg -->
+        <cds-ng-text-input size="lg" label="Text input"></cds-ng-text-input>
+
+        <!-- This text input will be sm -->
+        <cds-ng-text-input label="Text input"></cds-ng-text-input>
+      </cds-ng-layout>
+    </div>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={LayoutStories.Default} />
+
+### cds-ng-layout-constraint
+
+In order to apply specific constraints to children components that might differ
+from their own preference, the `cds-ng-layout-constraint` utility component can
+be used.
+
+An example of this use case is the icon-only content switcher. It uses
+`cds-ng-icon-button` under the hood which supports all sizes and defaults to
+`lg`. The `cds-ng-content-switcher` though only supports `sm`->`lg` and defaults
+to `md`.
+
+```ts
+import { LayoutConstraintComponent } from '@carbon/angular/layout';
+
+@Component({
+  standalone: true,
+  imports: [LayoutConstraintComponent],
+  template: `
+    <div>
+      <cds-ng-layout-constraint sizeDefault="md" sizeMin="sm" sizeMax="lg">
+        <!-- cds-ng-icon-button is now locked to the sizes sm->lg and defaults to md -->
+        <cds-ng-icon-button></cds-ng-icon-button>
+      </cds-ng-layout-constraint>
+    </div>
+  `,
+})
+export class MyComponent {}
+```
+
+The constraints for size must be passed as separate inputs:
+
+- `sizeMin`
+- `sizeDefault`
+- `sizeMax`
+
+Example: `sizeMin="sm" sizeMax="lg"`
+
+## Component API
+
+<ArgTypes of={LayoutStories.Default} />
+
+## Angular-specific notes
+
+### Importing
+
+Import both components from the `@carbon/angular/layout` entry point:
+
+```ts
+import {
+  LayoutComponent,
+  LayoutConstraintComponent,
+} from '@carbon/angular/layout';
+```
+
+### Bindings
+
+`cds-ng-layout` exposes `size` and `density` inputs, and
+`cds-ng-layout-constraint` exposes `sizeDefault`, `sizeMin` and `sizeMax`. Use
+camelCase property bindings, for example `[size]="layoutSize"` or
+`sizeMin="sm"`.
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).

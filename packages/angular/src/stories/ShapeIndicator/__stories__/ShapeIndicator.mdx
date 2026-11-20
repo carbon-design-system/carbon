@@ -1,0 +1,90 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ShapeIndicatorStories from './ShapeIndicator.stories';
+
+<Meta of={ShapeIndicatorStories} />
+
+# Shape indicator
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/ShapeIndicator)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/patterns/status-indicator-pattern/)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Kind](#kind)
+  - [Size](#size)
+  - [Compact mode](#compact-mode)
+  - [Customizing the label](#customizing-the-label)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-shape-indicator` component communicates status using a shape, color
+and label.
+
+### Importing
+
+```ts
+import { ShapeIndicatorComponent } from '@carbon/angular/shape-indicator';
+
+@Component({
+  standalone: true,
+  imports: [ShapeIndicatorComponent],
+  template: `
+    <cds-ng-shape-indicator
+      kind="failed"
+      label="Failed"></cds-ng-shape-indicator>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={ShapeIndicatorStories.Default} />
+
+## Kind
+
+Shape indicators can take the form of failed, critical, high, medium, low,
+cautious, undefined, stable, informative, incomplete, and draft.
+
+## Size
+
+Shape indicators have two text size options 12 and 14. The default is 12.
+
+## Compact mode
+
+When the `compact` input is set to `true`, the shape indicator displays only the
+shape with the label shown in a tooltip on hover/focus. This is useful when
+space is limited or when you want to display multiple indicators in a space
+constrained layout.
+
+```html
+<cds-ng-shape-indicator
+  kind="failed"
+  label="Failed"
+  [compact]="true"></cds-ng-shape-indicator>
+```
+
+## Customizing the label
+
+You can set a string to customize the label of the Shape indicator.
+
+## Component API
+
+<ArgTypes of={ShapeIndicatorStories.Default} />
+
+## Angular-specific notes
+
+### Input names
+
+Web component attributes are exposed as camelCase inputs on
+`ShapeIndicatorComponent`, for example `shape-description` is bound as
+`[shapeDescription]` and `text-size` as `[textSize]`.
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).

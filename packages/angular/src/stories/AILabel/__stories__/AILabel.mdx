@@ -1,0 +1,169 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as AILabelStories from './AILabel.stories';
+
+<Meta of={AILabelStories} />
+
+# AI Label
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/AILabel)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/AI-label/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/AI-label/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Inline](#inline)
+- [Inline with content](#inline-with-content)
+- [AI Label anatomy](#ai-label-anatomy)
+- [Component API](#component-api)
+  - [`aiText`](#aitext)
+  - [`aiTextLabel`](#aitextlabel)
+  - [`kind`](#kind)
+  - [`revertActive`](#revertactive)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `AI Label` is intended for any scenario where something is being generated
+by (or with) AI to reinforce AI transparency, accountability, and explainability
+at any interface level. This also enables more effective recognition and recall
+of AI instances in a way that is identifiable across any IBM product.
+
+### Importing
+
+```ts
+import {
+  AiLabelComponent,
+  AiLabelActionButtonComponent,
+} from '@carbon/angular/ai-label';
+
+@Component({
+  standalone: true,
+  imports: [AiLabelComponent],
+  template: `
+    <cds-ng-ai-label aiText="AI" alignment="bottom-start">
+      <div slot="body-text">Explanation of AI-generated content</div>
+    </cds-ng-ai-label>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={AILabelStories.Default} />
+
+## Inline
+
+<Canvas of={AILabelStories.Inline} />
+
+## Inline with content
+
+<Canvas of={AILabelStories.InlineWithContent} />
+
+## AI Label anatomy
+
+The `AI Label` itself is a button that acts as a `toggletip` trigger. To
+construct the contents of the `AI Label` callout, place the desired elements as
+children of `cds-ng-ai-label`, using `slot="body-text"` for the body:
+
+```html
+<cds-ng-ai-label>
+  <div slot="body-text">Content Here</div>
+</cds-ng-ai-label>
+```
+
+The `AI Label` also supports the rendering of an action bar at the bottom of the
+callout. To achieve this, add a set of actions as children of the `AI Label`
+with `slot="actions"`:
+
+```html
+<cds-ng-ai-label>
+  <div slot="body-text">Content Here</div>
+  <cds-ng-icon-button kind="ghost" slot="actions" size="lg">
+    <svg slot="icon">…</svg>
+    <span slot="tooltip-content">View</span>
+  </cds-ng-icon-button>
+  <cds-ng-ai-label-action-button>View details</cds-ng-ai-label-action-button>
+</cds-ng-ai-label>
+```
+
+## Component API
+
+<ArgTypes of={AILabelStories.Default} />
+
+### `aiText`
+
+If needed, you can change the text inside the `AI Label` when translating to
+different languages.
+
+```html
+<cds-ng-ai-label aiText="IA">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ng-ai-label>
+```
+
+### `aiTextLabel`
+
+When using the `inline` variant, you can add text adjacent to the `AI Label`
+with the `aiTextLabel` input.
+
+```html
+<cds-ng-ai-label kind="inline" aiTextLabel="Text goes here">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ng-ai-label>
+
+<cds-ng-ai-label kind="inline">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ng-ai-label>
+```
+
+### `kind`
+
+The `AI Label` component has two variants, `default` and `inline`.
+
+```html
+<cds-ng-ai-label size="xs">
+  <div slot="body-text">AI was used to generate this content</div>
+</cds-ng-ai-label>
+```
+
+The `inline` `AI Label` with the standard icon can also trigger the AI
+explainability callout.
+
+```html
+<cds-ng-ai-label kind="inline" aiTextLabel="Text goes here" size="xs">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ng-ai-label>
+```
+
+### `revertActive`
+
+`revertActive` is a boolean input that transforms the `AI Label` into a revert
+action button. This is useful if a user edits an AI-generated input to show that
+the element has been modified. Combine it with a `(click)` listener to handle
+restoring the element to the AI-generated state.
+
+```html
+<cds-ng-ai-label
+  [revertActive]="isModified"
+  revertLabel="Revert to AI input"
+  (click)="restoreAiValue()">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ng-ai-label>
+```
+
+## Angular-specific notes
+
+- Selectors are `cds-ng-ai-label` and `cds-ng-ai-label-action-button`.
+- `AiLabelComponent` forwards its inputs to the underlying web component as
+  properties, so use property bindings (`[aiText]`, `[revertActive]`) for
+  dynamic values.
+- Native DOM events such as `click` have no `@Output`; bind with `(click)`.
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).

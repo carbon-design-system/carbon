@@ -1,0 +1,81 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FormParticipationStories from './FormParticipation.stories';
+
+<Meta of={FormParticipationStories} />
+
+# Form participation
+
+Form components participate in a `<form>` natively, through
+[`ElementInternals`](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals),
+instead of the deprecated `formdata` event. The browser treats them as real form
+controls.
+
+## The API
+
+Import the Angular wrapper and use the `cds-ng-*` selector:
+
+```ts
+import { TextInputComponent } from '@carbon/angular/text-input';
+
+@Component({
+  standalone: true,
+  imports: [TextInputComponent],
+  template: `<cds-ng-text-input name="email"></cds-ng-text-input>`,
+})
+export class MyComponent {}
+```
+
+Child elements stay as they are, so a `cds-ng-select` still holds
+`cds-ng-select-item` children.
+
+Date picker is the exception. Use `cds-ng-preview-date-picker` from
+`@carbon/angular/date-picker`. The classic date picker is not available in
+`@carbon/angular`.
+
+## What you get
+
+<Canvas of={FormParticipationStories.Default} />
+
+This is the [Components/Form](?path=/story/components-form--default) story,
+rebuilt with form-associated controls. Same layout, same controls, same markup —
+the browser now treats the fields as real form controls.
+
+### What the port deletes
+
+Stories that validate by hand before submitting are no longer needed, because
+`required` lives on the host while the real `<input>` is in shadow DOM.
+`requestSubmit()` runs constraint validation itself once the controls are real
+form controls. The Password field carries both `required` and a `pattern`, and
+both are enforced — submit with a weak password and the browser blocks it and
+fires a native `invalid` event, which you can watch in the **Actions** tab.
+
+Values reach the form the same way: no `formdata` listener, no manual
+collection. Submit and the entries appear below the form.
+
+### Still on preview tags
+
+Form association for the date picker lives on `cds-ng-preview-date-picker` (the
+Temporal rewrite). `cds-ng-file-uploader` is not form-associated.
+
+## Submitting from `cds-ng-button`
+
+The story renders a `cds-ng-button` with `type="submit"` and calls
+`requestSubmit()` on the surrounding `<form>` from its `(click)` handler. The
+button's inner `<button>` lives in the component's shadow DOM, so it does not
+reach the surrounding `<form>` on its own.
+
+## Notes
+
+- `disabled` reports only the element's **own** attribute, matching
+  `HTMLInputElement.disabled`. An element inside a disabled `<fieldset>` reports
+  `false` and matches `:disabled` instead.
+- `cds-ng-multi-select` keeps the joined wire format (`name=a,b`) rather than
+  one entry per selection.
+- Each control also exposes the standard `form`, `labels`, `validity`,
+  `validationMessage`, `willValidate`, `checkValidity()` and `reportValidity()`
+  surface.
+- Native-named events such as `submit`, `reset`, `change` and `invalid` have no
+  `@Output`; bind them as DOM events, for example `(submit)="onSubmit($event)"`.
+
+For the full picture, see the
+[v3 migration guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#form-participation-moves-to-elementinternals).
