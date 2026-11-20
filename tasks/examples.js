@@ -32,6 +32,8 @@ const IGNORE_EXAMPLE_DIRS = new Set([
   'sass-modules',
   'token-explorer',
   'colors-explorer',
+  // modules shared by the examples of a package, not a standalone example
+  'shared',
 ]);
 
 // Install example app deps. Example lockfiles intentionally not committed.

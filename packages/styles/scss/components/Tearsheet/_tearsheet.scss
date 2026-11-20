@@ -608,6 +608,11 @@
       margin-inline-end: 0;
     }
   }
+  // createOverflowHandler marks overflowed items with [data-hidden].
+  // Hide them so only the overflow menu button remains visible.
+  .#{$block-class}__content__header-actions [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
 
   // createOverflowHandler marks overflowed items with [data-hidden].
   // Hide them so only the overflow menu button remains visible.
