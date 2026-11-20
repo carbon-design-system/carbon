@@ -7,8 +7,9 @@
 
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors';
-@use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/custom-property';
 
 .welcome__container {
   position: fixed;
@@ -40,8 +41,23 @@
 }
 
 .welcome__link {
-  --#{$prefix}-link-text-color: #{colors.$blue-40};
-  --#{$prefix}-link-hover-text-color: #{colors.$blue-40};
+  @include custom-property.declaration('link-text-color', theme.$link-inverse);
+  @include custom-property.declaration(
+    'link-hover-text-color',
+    theme.$link-inverse-hover
+  );
+  @include custom-property.declaration(
+    'link-visited-text-color',
+    theme.$link-inverse-visited
+  );
+  @include custom-property.declaration(
+    'link-focus-text-color',
+    theme.$focus-inverse
+  );
+  @include custom-property.declaration(
+    'link-active-text-color',
+    theme.$text-inverse
+  );
 }
 
 .welcome__link-icon {

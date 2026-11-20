@@ -1083,6 +1083,7 @@ $sizes: (
     @include custom-property.declaration('link-hover-text-color', initial);
     @include custom-property.declaration('link-visited-text-color', initial);
     @include custom-property.declaration('link-focus-text-color', initial);
+    @include custom-property.declaration('link-active-text-color', initial);
   }
 
   .#{$prefix}--ai-label
