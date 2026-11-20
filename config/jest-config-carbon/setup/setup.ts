@@ -10,7 +10,8 @@ import { jest } from '@jest/globals';
 jest.setTimeout(20000);
 
 global.requestAnimationFrame = (callback) => {
-  callback();
+  callback(0);
+  return 0;
 };
 
 if (global.HTMLElement) {
@@ -44,7 +45,11 @@ if (global.window) {
 if (global.window && global.AnimationEvent === undefined) {
   // Reference: https://github.com/testing-library/react-testing-library/issues/892#issuecomment-808703402
   class AnimationEvent extends Event {
-    constructor(type, animationEventInitDict = {}) {
+    private _animationName: string;
+    private _elapsedTime: number;
+    private _pseudoElement: string;
+
+    constructor(type: string, animationEventInitDict: AnimationEventInit = {}) {
       const {
         animationName = '',
         elapsedTime = 0,
@@ -77,19 +82,25 @@ if (global.window && global.AnimationEvent === undefined) {
 // https://github.com/jsdom/jsdom/issues/3294
 if (global.window) {
   if (!window.HTMLDialogElement.prototype.show) {
-    HTMLDialogElement.prototype.show = jest.fn(function () {
+    HTMLDialogElement.prototype.show = jest.fn(function (
+      this: HTMLDialogElement
+    ) {
       this.open = true;
     });
   }
 
   if (!window.HTMLDialogElement.prototype.showModal) {
-    HTMLDialogElement.prototype.showModal = jest.fn(function () {
+    HTMLDialogElement.prototype.showModal = jest.fn(function (
+      this: HTMLDialogElement
+    ) {
       this.open = true;
     });
   }
 
   if (!window.HTMLDialogElement.prototype.close) {
-    HTMLDialogElement.prototype.close = jest.fn(function () {
+    HTMLDialogElement.prototype.close = jest.fn(function (
+      this: HTMLDialogElement
+    ) {
       this.open = false;
     });
   }

@@ -1,14 +1,16 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import babelJest from 'babel-jest';
+import type { InputOptions } from '@babel/core';
+
 const { createTransformer } = babelJest;
 
-const babelOptions = {
+const babelOptions: InputOptions = {
   presets: [
     [
       '@babel/preset-env',
@@ -51,4 +53,9 @@ const babelOptions = {
   ],
 };
 
-export default createTransformer(babelOptions);
+// TODO: `babel-jest` 30's types still expect Babel 7's `TransformOptions`.
+// Remove this assertion when `babel-jest` supports Babel 8's `InputOptions`.
+// https://github.com/jestjs/jest/issues/15152
+export default createTransformer(
+  babelOptions as Parameters<typeof createTransformer>[0]
+);

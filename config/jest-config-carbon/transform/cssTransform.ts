@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,6 +11,7 @@ import * as sass from 'sass';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import type { SyncTransformer } from '@jest/transform';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,13 +19,9 @@ const __dirname = dirname(__filename);
 const THIS_FILE = fs.readFileSync(__filename);
 const { root: ROOT_DIR } = path.parse(__dirname);
 
-/**
- * Returns an array of the the directory and its ancestors
- * @param {string} directory
- * @returns {Array<string>}
- */
-function ancestors(directory) {
-  const result = [directory];
+/** Returns an array of the directory and its ancestors. */
+function ancestors(directory: string) {
+  const result: string[] = [];
   let current = directory;
 
   while (current !== '') {
@@ -41,8 +38,8 @@ function ancestors(directory) {
 }
 
 export default {
-  process(_file, filepath) {
-    const nodeModules = ancestors(path.dirname(filepath))
+  process(_sourceText, sourcePath) {
+    const nodeModules = ancestors(path.dirname(sourcePath))
       .map((directory) => {
         return path.join(directory, 'node_modules');
       })
@@ -50,7 +47,7 @@ export default {
         return fs.existsSync(directory);
       });
 
-    const result = sass.compile(filepath, {
+    const result = sass.compile(sourcePath, {
       style: 'compressed',
       loadPaths: [...nodeModules],
     });
@@ -89,4 +86,4 @@ export default {
       .update(String(sass.info))
       .digest('hex');
   },
-};
+} satisfies SyncTransformer;
