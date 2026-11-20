@@ -197,8 +197,6 @@ Next you will need to:
 - [ ] Post the release announcement in slack
   - [ ] #carbon-announcements
   - [ ] #carbon-design-system
-  - [ ] #carbon-react
-  - [ ] #carbon-web-components
 
 <details>
   <summary>Click to view slack announcement template</summary>
