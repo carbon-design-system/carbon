@@ -11,8 +11,7 @@
  * Emits `js/generated/tokens.{js,d.ts}` from tokens/motion.tokens.json.
  *
  * The format receives all resolved tokens (duration + easing) and produces:
- *   - V11 duration exports        (durationFast01, durationFast02, …)
- *   - V10 deprecated aliases      (fast01, fast02, …)
+ *   - Duration exports            (durationFast01, durationFast02, …)
  *   - `easings` nested object     ({ standard: { productive, expressive }, … })
  *   - `unstable_tokens` array
  *
@@ -38,16 +37,6 @@ function kebabToCamel(str) {
 }
 
 /**
- * Derive the V10 camelCase alias name from a V11 camelCase name.
- * e.g. 'durationFast01' → 'fast01'
- */
-function toV10CamelName(v11Camel) {
-  // Strip the leading 'duration' prefix and lowercase the first char.
-  const withoutPrefix = v11Camel.slice('duration'.length);
-  return withoutPrefix.charAt(0).toLowerCase() + withoutPrefix.slice(1);
-}
-
-/**
  * @param {{ dictionary: import('style-dictionary').Dictionary, options: object }} args
  * @returns {string}
  */
@@ -61,8 +50,8 @@ function carbonJsMotionTokensFormat({ dictionary, options }) {
 
   const lines = [FILE_BANNER];
 
-  // Duration tokens (V11 canonical)
-  lines.push('// Duration tokens (V11)');
+  // Duration tokens
+  lines.push('// Duration tokens');
   const durationTokens = dictionary.allTokens.filter((t) =>
     t.name.startsWith('duration-')
   );
@@ -81,36 +70,6 @@ function carbonJsMotionTokensFormat({ dictionary, options }) {
       lines.push(`export const ${camel} = '${value}';`);
     } else {
       lines.push(`export declare const ${camel}: string;`);
-    }
-  }
-
-  // Duration tokens (V10 deprecated aliases).
-  // Only names that existed in v10. New steps such as duration-fast-00 have
-  // no backwards-compatible alias.
-  lines.push('');
-  lines.push('// Duration tokens (V10 — deprecated aliases)');
-  const v10DurationNames = new Set([
-    'duration-fast-01',
-    'duration-fast-02',
-    'duration-moderate-01',
-    'duration-moderate-02',
-    'duration-slow-01',
-    'duration-slow-02',
-  ]);
-  const v10Camels = [];
-
-  for (const token of durationTokens) {
-    if (!v10DurationNames.has(token.name)) continue;
-    const v11Camel = kebabToCamel(token.name);
-    const v10Camel = toV10CamelName(v11Camel);
-    v10Camels.push(v10Camel);
-
-    if (outputMode === 'js') {
-      lines.push(`/** @deprecated Use \`${v11Camel}\` instead */`);
-      lines.push(`export const ${v10Camel} = ${v11Camel};`);
-    } else {
-      lines.push(`/** @deprecated Use \`${v11Camel}\` instead */`);
-      lines.push(`export declare const ${v10Camel}: string;`);
     }
   }
 
@@ -146,7 +105,6 @@ function carbonJsMotionTokensFormat({ dictionary, options }) {
   } else {
     lines.push('export const unstable_tokens = [');
     for (const camel of durationCamels) lines.push(`  '${camel}',`);
-    for (const v10 of v10Camels) lines.push(`  '${v10}',`);
     lines.push('];');
   }
 

@@ -12,12 +12,6 @@ exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
   "duration-slow-01",
   "duration-slow-02",
   "duration-slow-03",
-  "fast-01",
-  "fast-02",
-  "moderate-01",
-  "moderate-02",
-  "slow-01",
-  "slow-02",
   "surfaces",
 ]
 `;
@@ -49,16 +43,10 @@ exports[`@carbon/motion Public API 1`] = `
       "productive": "cubic-bezier(0.4, 0, 0.2, 1)",
     },
   },
-  "fast01": "80ms",
-  "fast02": "120ms",
   "getMotionSurface": [Function],
-  "moderate01": "160ms",
-  "moderate02": "220ms",
   "motion": [Function],
   "resolveDuration": [Function],
   "resolveEasing": [Function],
-  "slow01": "400ms",
-  "slow02": "520ms",
   "surfaces": {
     "contextual": {
       "duration": "fast-02",
@@ -144,12 +132,6 @@ exports[`@carbon/motion Public API 1`] = `
     "durationSlow01",
     "durationSlow02",
     "durationSlow03",
-    "fast01",
-    "fast02",
-    "moderate01",
-    "moderate02",
-    "slow01",
-    "slow02",
   ],
 }
 `;
