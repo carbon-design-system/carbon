@@ -39,12 +39,12 @@ import {
   Tile,
 } from '@carbon/react';
 import { Search as SearchIcon } from '@carbon/icons-react';
-import EmptyStateJsx from '../components/EmptyState';
-import notFoundIllustration from '../assets/not-found.svg';
-import unauthorizedIllustration from '../assets/unauthorized.svg';
-import errorIllustration from '../assets/error.svg';
-import '../styles/_empty-state.scss';
-import '../styles/_story-styles.scss';
+import EmptyStateJsx from '../../components/EmptyState';
+import notFoundIllustration from '../../assets/not-found-light.svg';
+import unauthorizedIllustration from '../../assets/unauthorized-light.svg';
+import errorIllustration from '../../assets/error-light.svg';
+import '../../styles/_empty-state.scss';
+import '../../styles/_story-styles.scss';
 
 interface EmptyStateProps {
   size?: 'md' | 'sm';

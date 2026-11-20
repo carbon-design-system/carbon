@@ -1,7 +1,12 @@
 {
   "name": "empty-state-pattern-example",
   "description": "An example showing use of the EmptyState pattern from @carbon/react.",
-  "keywords": ["carbon", "ibm", "pattern", "empty-state"],
+  "keywords": [
+    "carbon",
+    "ibm",
+    "pattern",
+    "empty-state"
+  ],
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
@@ -26,7 +31,15 @@
     "vite": "^7.0.0"
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

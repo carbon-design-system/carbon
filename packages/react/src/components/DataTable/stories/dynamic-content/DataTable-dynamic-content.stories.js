@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import { TrashCan, Save, Download } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
 import { EmptyState } from '../../../../examples/EmptyState/example/components/EmptyState';
-import notFoundIllustration from '../../../../examples/EmptyState/example/assets/not-found.svg';
+import notFoundIllustration from '../../../../examples/EmptyState/example/assets/not-found-light.svg';
 import { Heading, Section } from '../../../Heading';
 import DataTable, {
   Table,

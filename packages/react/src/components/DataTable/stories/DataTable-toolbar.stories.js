@@ -28,7 +28,7 @@ import {
   TableToolbarMenu,
 } from '..';
 import { EmptyState } from '../../../examples/EmptyState/example/components/EmptyState';
-import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found.svg';
+import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found-light.svg';
 import mdx from '../DataTable.mdx';
 import { dataTableArgs, dataTableArgTypes, headers, rows } from './shared';
 
