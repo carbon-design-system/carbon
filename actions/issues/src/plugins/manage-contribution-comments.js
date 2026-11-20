@@ -40,7 +40,7 @@ const comments = {
   },
   ready: {
     header: '<!-- contribution-ready-to-be-worked -->',
-    body: 'This issue is ready to be worked on. Volunteers, please feel free to join any of the [relevant meetups](https://carbondesignsystem.com/whats-happening/meetups/) to get guidance and feedback. We encourage you to bring any work in progress, no matter its state of completion. You can also ask any questions on Slack. For design questions, the best channels are: [#carbon-design-system](https://ibm-studios.slack.com/archives/C0M053VPT) and [#figma-guild](https://ibm-studios.slack.com/archives/C023WKW6J5U). For developer questions, the best channels are: [#carbon-react](https://ibm-studios.slack.com/archives/C2K6RFJ1G), [#carbon-web-components](https://ibm-studios.slack.com/archives/CL83LMKSA).',
+    body: 'This issue is ready to be worked on. Volunteers, please feel free to join any of the [relevant meetups](https://carbondesignsystem.com/whats-happening/meetups/) to get guidance and feedback. We encourage you to bring any work in progress, no matter its state of completion. You can also ask questions on Slack in [#carbon-design-system](https://ibm-studios.slack.com/archives/C0M053VPT) and [#figma-guild](https://ibm-studios.slack.com/archives/C023WKW6J5U).',
   },
 };
 
