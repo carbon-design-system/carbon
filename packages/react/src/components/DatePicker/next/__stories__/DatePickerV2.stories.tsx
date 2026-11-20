@@ -106,8 +106,8 @@ const sharedArgTypes = {
 // Mock events, generated relative to today so the story always shows events
 // in the visible month, whenever it is opened.
 const eventKinds = {
-  meeting: { label: 'Meeting', color: 'var(--cds-support-info)' },
-  deadline: { label: 'Deadline', color: 'var(--cds-support-error)' },
+  meeting: { label: 'Meeting', color: 'var(--cds-support-caution-undefined)' },
+  deadline: { label: 'Deadline', color: 'var(--cds-support-warning)' },
   reminder: { label: 'Reminder', color: 'var(--cds-support-success)' },
 };
 
@@ -175,7 +175,25 @@ const dayRenderers = {
       )}
     </span>
   ),
-  // 2. A numeric badge: shows the count as text, not only as color
+  // 2. Event days get a neutral background behind the number
+  'Event background': (day, events) => (
+    <span style={dayContentStyle}>
+      {events.length > 0 && !day.isSelected && (
+        <span
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inlineSize: '1.5rem',
+            blockSize: '1.25rem',
+            borderRadius: '0.25rem',
+            backgroundColor: 'var(--cds-layer-accent-01)',
+          }}
+        />
+      )}
+      <span style={{ position: 'relative' }}>{day.date.day}</span>
+    </span>
+  ),
+  // 3. A numeric badge: shows the count as text, not only as color
   'Event count': (day, events) => (
     <span style={dayContentStyle}>
       {day.date.day}
@@ -197,7 +215,7 @@ const dayRenderers = {
       )}
     </span>
   ),
-  // 3. Fully booked days are struck through but stay selectable
+  // 4. Fully booked days are struck through but stay selectable
   Availability: (day, events) => (
     <span
       style={{
@@ -273,7 +291,7 @@ Default.argTypes = {
   ...sharedArgTypes,
   dayRenderer: {
     description:
-      'Example `renderDay` and `getDayLabel` implementations using mock events around today. Event dots: blue for meetings, red for deadlines, green for reminders. Event count: number of events. Availability: struck-through days are fully booked.',
+      'Example `renderDay` and `getDayLabel` implementations using mock events around today. Event dots: purple for meetings, yellow for deadlines, green for reminders. Event background: event days get a neutral background. Event count: number of events. Availability: struck-through days are fully booked.',
     options: ['undefined', ...Object.keys(dayRenderers)],
     control: { type: 'select' },
   },
