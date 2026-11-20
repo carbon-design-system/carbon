@@ -108,6 +108,90 @@ describe('cds-text-input', () => {
     expect(error.textContent).to.include('This is an error');
   });
 
+  it('should not have invalid classname when is disabled', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="test-label"
+        invalid
+        invalid-text="Invalid message"
+        disabled>
+      </cds-text-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+    expect(input.hasAttribute('data-invalid')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to.be
+      .null;
+  });
+
+  it('should not have invalid classname when is readonly', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="test-label"
+        invalid
+        invalid-text="Invalid message"
+        readonly>
+      </cds-text-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+    expect(input.hasAttribute('data-invalid')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to.be
+      .null;
+  });
+
+  it('should not have warn classname when is disabled', async () => {
+    const el = await fixture(html`
+      <cds-text-input label="test-label" warn warn-text="Warn message" disabled>
+      </cds-text-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(
+      fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
+    ).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(
+      el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+    ).to.be.null;
+  });
+
+  it('should not have warn classname when is readonly', async () => {
+    const el = await fixture(html`
+      <cds-text-input label="test-label" warn warn-text="Warn message" readonly>
+      </cds-text-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(
+      fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
+    ).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(
+      el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+    ).to.be.null;
+  });
+
   it('should render warning text', async () => {
     const el = await fixture(html`
       <cds-text-input
@@ -340,14 +424,54 @@ describe('cds-text-input', () => {
     const input = el.shadowRoot.querySelector('input');
     const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
 
-    expect(input.getAttribute('aria-describedby')).to.equal('helper-text');
-    expect(helper.id).to.equal('helper-text');
+    expect(helper.id).to.exist;
+    expect(input.getAttribute('aria-describedby')).to.equal(helper.id);
+  });
+
+  it('should give each instance its own helper and error text ids', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-text-input label="First" helper-text="Help"></cds-text-input>
+        <cds-text-input label="Second" helper-text="Help"></cds-text-input>
+        <cds-text-input
+          label="Third"
+          invalid
+          invalid-text="Wrong"></cds-text-input>
+        <cds-text-input
+          label="Fourth"
+          invalid
+          invalid-text="Wrong"></cds-text-input>
+      </div>
+    `);
+    const [first, second, third, fourth] = Array.from(
+      el.querySelectorAll('cds-text-input')
+    ).map((input) =>
+      input.shadowRoot.querySelector('input').getAttribute('aria-describedby')
+    );
+
+    expect(first).to.not.equal('helper-text');
+    expect(first).to.not.equal(second);
+    expect(third).to.not.equal('error-text');
+    expect(third).to.not.equal(fourth);
   });
 
   it('should not set aria-describedby when there is no helper text', async () => {
     const el = await fixture(defaultInput);
     const input = el.shadowRoot.querySelector('input');
 
+    expect(input.hasAttribute('aria-describedby')).to.be.false;
+  });
+
+  it('should not reference the helper text when isFluid hides it', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="Text input label"
+        isFluid
+        helper-text="Helpful info"></cds-text-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(el.shadowRoot.querySelector('.cds--form__helper-text')).to.not.exist;
     expect(input.hasAttribute('aria-describedby')).to.be.false;
   });
 
@@ -362,8 +486,8 @@ describe('cds-text-input', () => {
     const input = el.shadowRoot.querySelector('input');
     const errorText = el.shadowRoot.querySelector('.cds--form-requirement');
 
-    expect(input.getAttribute('aria-describedby')).to.equal('error-text');
-    expect(errorText.id).to.equal('error-text');
+    expect(errorText.id).to.exist;
+    expect(input.getAttribute('aria-describedby')).to.equal(errorText.id);
   });
 
   describe('AI label and slug slot (@query decorator)', () => {

@@ -23,6 +23,8 @@ import {
 const filenameStatuses = ['edit', 'complete', 'uploading'];
 
 const fileUploaderItemArgs = {
+  align: 'bottom',
+  autoAlign: false,
   disabled: false,
   errorBody: '1 MB max file size. Select a new file and try again.',
   errorSubject: 'File size exceeds limit',
@@ -35,6 +37,30 @@ const fileUploaderItemArgs = {
 };
 
 const fileUploaderItemArgTypes = {
+  align: {
+    control: 'select',
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    description:
+      'Specify how the overflow tooltip, shown when the file name is truncated, should align with the file name',
+  },
+  autoAlign: {
+    control: 'boolean',
+    description:
+      'Experimental: Will attempt to automatically align the overflow tooltip to avoid collisions with the viewport and being clipped by ancestor elements. Requires React v17+',
+  },
   disabled: {
     control: 'boolean',
     description: 'Specify whether file uploader item is disabled',
@@ -54,7 +80,7 @@ const fileUploaderItemArgTypes = {
   },
   name: { control: 'text', description: 'Name of the uploaded file' },
   onDelete: { action: 'onDelete' },
-  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
   status: {
     control: 'inline-radio',
     options: filenameStatuses,
@@ -85,7 +111,7 @@ const dropContainerArgTypes = {
   name: { control: 'text' },
   onAddFiles: { action: 'onAddFiles' },
   onClick: { action: 'onClick' },
-  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
 };
 
 const fileUploaderArgs = {
@@ -132,7 +158,7 @@ const fileUploaderArgTypes = {
   onChange: { action: 'onChange' },
   onClick: { action: 'onClick' },
   onDelete: { action: 'onDelete' },
-  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
 };
 
 export default {

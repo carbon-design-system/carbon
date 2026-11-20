@@ -7,11 +7,6 @@
 
 /* stylelint-disable declaration-no-important */
 
-@use '@carbon/styles/scss/config' with (
-  $font-path: '@ibm/plex'
-);
-@use '@carbon/styles';
-
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as theme;
 @use '@carbon/styles/scss/themes' as themes;

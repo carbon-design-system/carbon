@@ -21,6 +21,7 @@ import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
 import { MultiSelect } from '../';
 import userEvent from '@testing-library/user-event';
+import { tabbable } from 'tabbable';
 
 const prefix = 'cds';
 const waitForPosition = () => act(async () => {});
@@ -282,6 +283,43 @@ describe('MultiSelect', () => {
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeNull();
+  });
+
+  it('should only set `aria-activedescendant` when an option is highlighted', async () => {
+    const items = generateItems(4, generateGenericItem);
+    render(<MultiSelect id="test" label="test-label" items={items} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).not.toHaveAttribute('aria-activedescendant');
+
+    await userEvent.click(combobox);
+    expect(combobox).toHaveAttribute('aria-expanded', 'true');
+    expect(combobox).not.toHaveAttribute('aria-activedescendant');
+
+    await userEvent.keyboard('[ArrowDown]');
+    const options = screen.getAllByRole('option');
+    expect(combobox).toHaveAttribute('aria-activedescendant', options[0].id);
+
+    await userEvent.keyboard('[ArrowDown]');
+    expect(combobox).toHaveAttribute('aria-activedescendant', options[1].id);
+
+    await userEvent.keyboard('[Escape]');
+    expect(combobox).toHaveAttribute('aria-expanded', 'false');
+    expect(combobox).not.toHaveAttribute('aria-activedescendant');
+  });
+
+  it('should exclude the open menu contents from the tab order', async () => {
+    render(<MultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    await userEvent.click(combobox);
+
+    const menu = screen.getByRole('listbox');
+    expect(screen.getAllByRole('option')).toHaveLength(mockProps.items.length);
+    expect(tabbable(menu, { displayCheck: 'none' })).toEqual([]);
+    expect(combobox).toHaveFocus();
   });
 
   it('should move focus to the next control when the user tabs away with the menu open', async () => {
@@ -860,6 +898,54 @@ describe('MultiSelect', () => {
 
       expect(optionsArray[0]).toHaveAttribute('aria-label', 'Item 0');
       expect(optionsArray[2]).toHaveAttribute('aria-label', 'Item 2');
+    });
+
+    it('should highlight and select the same item when `sortItems` returns a new array', async () => {
+      const items = [
+        { id: 'alpha', text: 'Alpha' },
+        { id: 'bravo', text: 'Bravo' },
+        { id: 'charlie', text: 'Charlie' },
+      ];
+      const onChange = jest.fn();
+      render(
+        <MultiSelect
+          id="custom-id"
+          label="test-label"
+          items={items}
+          itemToString={(item) => item?.text ?? ''}
+          sortItems={(list) =>
+            [...list].sort((a, b) => b.text.localeCompare(a.text))
+          }
+          onChange={onChange}
+        />
+      );
+      await waitForPosition();
+
+      await userEvent.tab();
+      await userEvent.keyboard('[ArrowDown]');
+
+      const combobox = screen.getByRole('combobox');
+      const options = screen.getAllByRole('option');
+      expect(options.map((option) => option.textContent)).toEqual([
+        'Charlie',
+        'Bravo',
+        'Alpha',
+      ]);
+      expect(options[0]).toHaveClass(
+        `${prefix}--list-box__menu-item--highlighted`
+      );
+      expect(combobox).toHaveAttribute('aria-activedescendant', options[0].id);
+
+      await userEvent.keyboard('[ArrowDown]');
+      expect(options[1]).toHaveClass(
+        `${prefix}--list-box__menu-item--highlighted`
+      );
+      expect(combobox).toHaveAttribute('aria-activedescendant', options[1].id);
+
+      await userEvent.keyboard('[Enter]');
+      expect(onChange).toHaveBeenLastCalledWith(
+        expect.objectContaining({ selectedItems: [items[1]] })
+      );
     });
 
     it('should apply floating styles when `autoAlign` is enabled', async () => {

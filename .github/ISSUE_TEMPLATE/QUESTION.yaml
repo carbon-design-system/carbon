@@ -37,7 +37,7 @@ body:
       value:
         "For non-IBMer's, you can ask a question on our [GitHub Discussions
         board](https://github.com/carbon-design-system/carbon/discussions/new)
-        or join [our Discord server](https://discord.gg/KAECRaWdzE) to chat with
+        or join [our Discord server](https://discord.gg/J7JEUEkTRX) to chat with
         Carbon maintainers and fellow community members."
   - type: textarea
     id: summary

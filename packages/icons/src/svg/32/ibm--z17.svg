@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="ibm--z17" d="M3,6c0-1.6543,1.3457-3,3-3h20c1.6543,0,3,1.3457,3,3v20c0,1.6543-1.3457,3-3,3H6c-1.6543,0-3-1.3457-3-3V6ZM17,27h9c.5518,0,1-.4482,1-1v-9h-10v10ZM5,18.4141v7.5859c0,.5518.4487,1,1,1h7.5859l-8.5859-8.5859ZM6.4141,17l8.5859,8.5859v-8.5859H6.4141ZM17,15h10V6c0-.5513-.4482-1-1-1h-9v10ZM6.4141,15h8.5859V6.4141L6.4141,15ZM6,5c-.5513,0-1,.4487-1,1v7.5859L13.5859,5h-7.5859Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

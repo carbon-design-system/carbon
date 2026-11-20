@@ -2403,6 +2403,46 @@
     - wireless communication
   sizes:
     - 32
+- name: bobcoin
+  friendly_name: Bobcoin
+  aliases:
+    - bob
+    - ibm bob
+    - coin
+    - bobcoin
+    - circle
+    - hard hat
+    - ai
+    - ai-powered
+    - integration
+    - development
+    - environment
+    - ide
+    - modernization
+    - assistant
+  sizes:
+    - 32
+- name: bobcoin--consumption
+  friendly_name: Bobcoin consumption
+  aliases:
+    - bob
+    - ibm bob
+    - coin
+    - bobcoin
+    - consumption
+    - circle
+    - process
+    - hard hat
+    - ai
+    - ai-powered
+    - integration
+    - development
+    - environment
+    - ide
+    - modernization
+    - assistant
+  sizes:
+    - 32
 - name: bluetooth--off
   friendly_name: Bluetooth off
   sizes:
@@ -3169,6 +3209,21 @@
     - travel
     - coffee shop
     - cafe
+  sizes:
+    - 32
+- name: cafe--alt
+  friendly_name: Cafe alt
+  aliases:
+    - coffee
+    - caffine
+    - drink
+    - espresso
+    - brew
+    - mocha
+    - travel
+    - coffee shop
+    - cafe
+    - cup
   sizes:
     - 32
 - name: calculation
@@ -13310,6 +13365,16 @@
     - Transfer
   sizes:
     - 32
+- name: ibm--z17
+  friendly_name: IBM® z17
+  aliases:
+    - Z
+    - z17
+    - data storage
+    - hardware
+    - hybrid cloud
+  sizes:
+    - 32
 - name: ibm-cloud
   friendly_name: IBM Cloud®
   aliases:
@@ -14253,6 +14318,19 @@
     - IBM Hybrid control plane
     - hybrid
     - control plane
+  sizes:
+    - 32
+- name: ibm--i--alt
+  friendly_name: IBM i alt
+  aliases:
+    - OS
+    - power systems
+    - operating system
+    - i
+    - IBM
+    - IBM i
+    - AS400
+    - circle
   sizes:
     - 32
 - name: ibm-partner-plus
@@ -23967,6 +24045,15 @@
     - warning
     - threat
     - vulnerability
+    - protection
+  sizes:
+    - 32
+- name: shield--infinity
+  friendly_name: Shield infinity
+  aliases:
+    - shield
+    - infinite
+    - infinity
     - protection
   sizes:
     - 32

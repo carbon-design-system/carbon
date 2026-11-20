@@ -1,0 +1,56 @@
+import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as stories from './AboutModal.stories';
+
+<Meta isTemplate />
+
+# About Modal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [With additional content](#with-additional-content)
+
+## Overview
+
+About modal is a pattern that conveys product information, including the version
+number, copyright information, and license details. The about modal is triggered
+by a user's action and appears on top of the main page content. It is persistent
+until dismissed. The purpose of this modal should be immediately apparent to the
+user, with a clear and obvious path to completion.
+
+To build this pattern, we recommend including the following ingredients:
+
+- [ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-composedmodal)
+- [Link](https://react.carbondesignsystem.com/?path=/docs/components-link)
+
+### Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/AboutModal/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/AboutModal/example)
+
+<Canvas withSource="none">
+  <Story of={stories.Standard} />
+</Canvas>
+
+### With additional content
+
+Some products may be legally required to display logos of technologies used to
+build the product. These can be provided in the footer.
+
+While the about modal supports a list of Carbon `Link` components, these should
+be used to display product information and not to direct users to find help
+content.
+
+<Canvas withSource="none">
+  <Story of={stories.WithAdditionalContent} />
+</Canvas>

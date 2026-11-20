@@ -9,7 +9,7 @@ import React from 'react';
 import ContainedList, { ContainedListItem } from '../';
 import ExpandableSearch from '../../ExpandableSearch';
 import Search from '../../Search';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 
 const prefix = 'cds';
 
@@ -78,22 +78,16 @@ describe('ContainedList', () => {
   });
 
   it('list and label ids match', () => {
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    const list = wrapper.getByRole('list');
-    // eslint-disable-next-line testing-library/no-node-access
-    const label = wrapper.container.querySelector(
-      `.${prefix}--contained-list__label`
-    );
+    const list = screen.getByRole('list');
+    const label = screen.getByText(defaultProps.list.label);
 
     expect(list).toHaveAttribute('aria-labelledby', label.id);
   });
 
   it('renders props.label', () => {
-    // eslint-disable-next-line testing-library/no-node-access
-    const label = wrapper.container.querySelector(
-      `.${prefix}--contained-list__label`
-    );
+    const label = screen.getByText(defaultProps.list.label);
 
+    expect(label).toHaveClass(`${prefix}--contained-list__label`);
     expect(label).toHaveTextContent(defaultProps.list.label);
   });
 
@@ -220,19 +214,17 @@ describe('ContainedList', () => {
 
 describe('ContainedListItem', () => {
   it('renders props.children', () => {
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    const content = wrapper.getByRole('listitem');
+    const content = screen.getByRole('listitem');
+    const { children: contentLabel } = defaultProps.item;
 
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(content).toHaveTextContent(defaultProps.item.children);
+    expect(content).toHaveTextContent(contentLabel);
   });
 
   it('supports additional css class names', () => {
     const className = 'some-class';
     wrapper.rerender(<TestComponent item={{ className }} />);
 
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    expect(wrapper.getByRole('listitem')).toHaveClass(className);
+    expect(screen.getByRole('listitem')).toHaveClass(className);
   });
 
   it('renders props.action adjacent to content', () => {
@@ -253,10 +245,7 @@ describe('ContainedListItem', () => {
       <TestComponent item={{ renderIcon: () => <svg data-testid="svg" /> }} />
     );
 
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(wrapper.container.querySelector('svg').dataset['testid']).toBe(
-      'svg'
-    );
+    expect(screen.getByTestId('svg')).toHaveProperty('tagName', 'svg');
   });
 
   describe('interactive', () => {
@@ -266,10 +255,12 @@ describe('ContainedListItem', () => {
     });
 
     it('renders content as button', () => {
-      // eslint-disable-next-line testing-library/prefer-screen-queries
-      const content = wrapper.getByRole('listitem').firstChild;
+      const item = screen.getByRole('listitem');
+      const { children: contentLabel } = defaultProps.item;
+      const content = within(item).getByRole('button', { name: contentLabel });
 
-      expect(content.tagName).toBe('BUTTON');
+      expect(content).toHaveProperty('tagName', 'BUTTON');
+      expect(content).toHaveClass(`${prefix}--contained-list-item__content`);
     });
   });
 });

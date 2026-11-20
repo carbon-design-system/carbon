@@ -1,0 +1,46 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+.multi-add-select-column-actions-pattern {
+  &__no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-07;
+    text-align: center;
+
+    h4 {
+      margin-block-end: $spacing-03;
+    }
+
+    p {
+      color: var(--cds-text-secondary);
+    }
+  }
+
+  &__column-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  &__filter-panel {
+    min-inline-size: 16rem;
+  }
+
+  &__filter-panel-content {
+    padding: $spacing-05;
+  }
+
+  &__filter-panel-title {
+    @include type-style('heading-compact-01');
+
+    margin-block-end: $spacing-03;
+  }
+}

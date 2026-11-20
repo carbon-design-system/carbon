@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2133-9531&t=A3oys5odsvKkcDFA-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/ui-shell/header-nav-item.ts
+// component=cds-header-nav-item
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,75 +9,51 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2133-9531&t=A3oys5odsvKkcDFA-4',
-  {
-    props: {
-      linkText: figma.string('Link text'),
-      isActive: figma.boolean('Selected'),
-    },
-    example: (props) =>
-      html`<cds-header-nav-item href="#" is-active=${props.isActive}>
-        ${props.linkText}
-      </cds-header-nav-item>`,
+const instance = figma.selectedInstance;
+
+function createTemplate() {
+  const linkText = instance.getString('Link text');
+  const isActive = instance.getBoolean('Selected');
+  const isSubMenu = instance.getEnum('Type', {
+    'Sub-menu': true,
+  });
+
+  if (isSubMenu) {
+    return {
+      id: 'cds-header-menu',
+      imports: [
+        "import '@carbon/web-components/es/components/ui-shell/index.js'",
+      ],
+      example: figma.code`<cds-header-menu${renderStringAttribute(
+        'menu-label',
+        linkText
+      )}${renderStringAttribute('trigger-content', linkText)}>
+  <cds-header-menu-item href="#"${renderBooleanAttribute(
+    'is-active',
+    isActive
+  )}>${linkText}</cds-header-menu-item>
+</cds-header-menu>`,
+      metadata: { nestable: true },
+    };
+  }
+
+  return {
+    id: 'cds-header-nav-item',
     imports: [
       "import '@carbon/web-components/es/components/ui-shell/index.js'",
     ],
-  }
-);
+    example: figma.code`<cds-header-nav-item href="#"${renderBooleanAttribute(
+      'is-active',
+      isActive
+    )}>${linkText}</cds-header-nav-item>`,
+    metadata: { nestable: true },
+  };
+}
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2133-9531&t=A3oys5odsvKkcDFA-4',
-  {
-    variant: { Type: 'Sub-menu' },
-    props: {
-      linkText: figma.string('Link text'),
-      isActive: figma.boolean('Selected'),
-    },
-    example: (props) =>
-      html`<cds-header-menu
-        menu-label=${props.linkText}
-        trigger-content=${props.linkText}>
-        <cds-header-menu-item href="#" is-active=${props.isActive}>
-          ${props.linkText}
-        </cds-header-menu-item>
-      </cds-header-menu>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ui-shell/index.js'",
-    ],
-  }
-);
-
-// sub menu item
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2133-9888&t=A3oys5odsvKkcDFA-4',
-  {
-    props: {
-      linkText: figma.string('Link text'),
-    },
-    example: (props) =>
-      html`<cds-header-menu-item href="#">
-        ${props.linkText}
-      </cds-header-menu-item>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ui-shell/index.js'",
-    ],
-  }
-);
-
-// sub menu
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2133-9973&t=A3oys5odsvKkcDFA-4',
-  {
-    props: {
-      children: figma.children(['UI shell - Header sub-menu item']),
-    },
-    example: (props) =>
-      html`<cds-header-menu>${props.children}</cds-header-menu>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ui-shell/index.js'",
-    ],
-  }
-);
+export default createTemplate();

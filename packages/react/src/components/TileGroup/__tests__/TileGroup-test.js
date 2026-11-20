@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,12 +45,7 @@ describe('TileGroup', () => {
         </TileGroup>
       );
 
-      const fieldset = screen
-        .getByText('TestGroup', {
-          selector: 'legend',
-        })
-        // eslint-disable-next-line testing-library/no-node-access
-        .closest('fieldset');
+      const fieldset = screen.getByRole('group', { name: 'TestGroup' });
       expect(fieldset).toContainElement(screen.getByDisplayValue('test-1'));
       expect(fieldset).toContainElement(screen.getByDisplayValue('test-2'));
     });
@@ -163,12 +158,7 @@ describe('TileGroup', () => {
         </TileGroup>
       );
 
-      const fieldset = screen
-        .getByText('TestGroup', {
-          selector: 'legend',
-        })
-        // eslint-disable-next-line testing-library/no-node-access
-        .closest('fieldset');
+      const fieldset = screen.getByRole('group', { name: 'TestGroup' });
       expect(fieldset).toBeDisabled();
     });
 

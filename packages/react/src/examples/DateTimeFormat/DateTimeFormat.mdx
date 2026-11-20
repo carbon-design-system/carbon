@@ -1,0 +1,27 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as DateTimeFormatStories from './DateTimeFormat.stories';
+
+<Meta isTemplate />
+
+# Date Time Format
+
+`dateTimeFormat` is a utility from `@carbon/utilities` that wraps the browser
+internationalization APIs for formatting relative and absolute date and time
+values.
+
+## Overview
+
+Use this utility when you need consistent formatting for:
+
+- absolute date and time values
+- date-only values
+- time-only values
+- relative timestamps such as “3 minutes ago”
+
+## Example usage
+
+<Canvas of={DateTimeFormatStories.DateTimeFormat} />
+
+## Reference
+
+- [dateTimeFormat README](https://github.com/carbon-design-system/carbon/tree/main/packages/utilities/src/dateTimeFormat)

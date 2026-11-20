@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import './carbon.scss';
 import App from './App';
 import './index.scss';
 

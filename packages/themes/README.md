@@ -112,15 +112,17 @@ Sass output is available via `@use '@carbon/themes/scss/component-tokens'`.
 
 ### Modifying token values
 
-Token values are defined in [`src/dtcg/themes.json`](./src/dtcg/themes.json)
-(theme tokens) and [`src/dtcg/components/`](./src/dtcg/components/) (component
-tokens) using the [DTCG token format](https://tr.designtokens.org/format/).
-These are the single source of truth — **do not edit generated files directly**.
+Token values are defined in [`tokens/themes/`](./tokens/themes/) using the
+[DTCG 2025.10 token format](https://www.designtokens.org/tr/2025.10/format/).
+Each theme has a folder with a `theme.tokens.json` file (theme tokens) and one
+`<component>.tokens.json` file per component (component tokens). These are the
+single source of truth — **do not edit generated files directly**. See
+[`tokens/README.md`](./tokens/README.md) for the format.
 
 To add or update a token:
 
-1. Edit `src/dtcg/themes.json` (or the relevant `src/dtcg/components/*.json`
-   file for component tokens)
+1. Edit the token in `tokens/themes/<theme>/theme.tokens.json` (or the relevant
+   `<component>.tokens.json` file for component tokens) for every theme
 2. Run `yarn build` in this package to regenerate all outputs
 3. Run `yarn test --testPathPatterns=packages/themes` from the repo root to
    confirm nothing regressed

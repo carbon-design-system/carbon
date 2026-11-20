@@ -7,7 +7,14 @@
 
 'use strict';
 
-const { TokenFormat, group } = require('../../../src/tokens');
+const { formatTokenName } = require('../../../src/tools');
+const themeTokens = require('../../../tokens/themes/white/theme.tokens.json');
+
+// v11 theme tokens, plus `color-scheme`, which the theme files hold as metadata
+const v11Tokens = new Set([
+  ...Object.keys(themeTokens).filter((key) => !key.startsWith('$')),
+  'color-scheme',
+]);
 
 const denylist = new Set([
   'background',
@@ -114,11 +121,7 @@ function shouldIncludeToken(token) {
   if (denylist.has(token)) {
     return false;
   }
-  const id = TokenFormat.convert({
-    name: token,
-    format: TokenFormat.formats.scss,
-  });
-  return !group.getToken(id);
+  return !v11Tokens.has(formatTokenName(token));
 }
 
 module.exports = {

@@ -27,7 +27,7 @@ const ROOT = path.resolve(__dirname, '..');
 const TOKENS_SOURCE = path.join(ROOT, 'tokens', 'colors.tokens.json');
 const JS_GENERATED = path.join(ROOT, 'js', 'generated');
 
-// ── Name transform ─────────────────────────────────────────────────────────────
+// Name transform
 // Keep the token path intact — our formats use token.path directly, so the
 // name transform is a no-op (just joins segments so SD is happy).
 const carbonNamePath = {

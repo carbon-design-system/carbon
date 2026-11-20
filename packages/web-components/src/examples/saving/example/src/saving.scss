@@ -1,0 +1,36 @@
+/*
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+
+$block-class: saving;
+
+.#{$block-class}__message {
+  display: flex;
+}
+
+.#{$block-class}__error-icon {
+  margin-inline-end: $spacing-05;
+}
+
+.#{$block-class}__error-icon svg {
+  fill: $button-danger-primary;
+}
+
+.#{$block-class}__text {
+  @include type.type-style('body-compact-01');
+}
+
+.#{$block-class}__buttons {
+  display: flex;
+}
+
+cds-inline-loading {
+  min-block-size: auto;
+}

@@ -49,7 +49,6 @@ const items = [
 
 const sharedArgs = {
   'aria-label': '',
-  autoAlign: false,
   direction: 'bottom',
   disabled: false,
   helperText: 'Helper text',
