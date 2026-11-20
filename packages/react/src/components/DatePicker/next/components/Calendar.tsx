@@ -17,6 +17,29 @@ import {
 import { usePrefix } from '../../../../internal/usePrefix';
 
 /**
+ * Information about a single day cell, passed to `renderDay` and
+ * `getDayLabel`.
+ */
+export interface DatePickerDay {
+  /** The date this cell represents */
+  date: Temporal.PlainDate;
+  /** The default localized accessible label, e.g. "November 20, 2026" */
+  label: string;
+  /** Whether the date belongs to the month being shown */
+  isCurrentMonth: boolean;
+  /** Whether the date is outside `minDate`/`maxDate` */
+  isDisabled: boolean;
+  /** Whether the date is today */
+  isToday: boolean;
+  /** Whether the date is selected (start or end of a range) */
+  isSelected: boolean;
+  /** Whether the date is between the start and end of a range */
+  isInRange: boolean;
+  /** Whether the date has keyboard focus */
+  isFocused: boolean;
+}
+
+/**
  * Calendar component props
  */
 export interface CalendarProps {
@@ -44,6 +67,17 @@ export interface CalendarProps {
    * BCP 47 locale tag used to localize month and weekday labels
    */
   locale?: string;
+
+  /**
+   * Custom content for each day cell. Defaults to the day number.
+   */
+  renderDay?: (day: DatePickerDay) => React.ReactNode;
+
+  /**
+   * Custom accessible label for each day cell. Use it to announce what
+   * `renderDay` shows visually, e.g. "November 20, 2026, 2 events".
+   */
+  getDayLabel?: (day: DatePickerDay) => string;
 }
 
 /**
@@ -56,6 +90,8 @@ export function Calendar({
   onNavigate,
   className,
   locale = 'en',
+  renderDay,
+  getDayLabel,
 }: CalendarProps) {
   const prefix = usePrefix();
   const { viewDate, startDate, endDate, minDate, maxDate, focusedDate, mode } =
@@ -262,6 +298,17 @@ export function Calendar({
             focused: focused,
           });
 
+          const day: DatePickerDay = {
+            date,
+            label: getFullDateLabel(date, locale),
+            isCurrentMonth,
+            isDisabled,
+            isToday,
+            isSelected: selected,
+            isInRange: inRange,
+            isFocused: focused,
+          };
+
           return (
             <button
               key={index}
@@ -281,11 +328,11 @@ export function Calendar({
               }}
               onClick={() => handleDateClick(date, isDisabled)}
               disabled={isDisabled}
-              aria-label={getFullDateLabel(date, locale)}
+              aria-label={getDayLabel ? getDayLabel(day) : day.label}
               aria-pressed={selected || undefined}
               aria-current={isToday ? 'date' : undefined}
               tabIndex={focused ? 0 : -1}>
-              {date.day}
+              {renderDay ? renderDay(day) : date.day}
             </button>
           );
         })}

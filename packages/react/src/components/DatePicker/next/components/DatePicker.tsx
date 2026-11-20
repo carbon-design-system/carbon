@@ -9,7 +9,7 @@ import React, { Children, isValidElement, useRef } from 'react';
 import classNames from 'classnames';
 import { useDatePicker } from '../hooks/useDatePicker';
 import { usePrefix } from '../../../../internal/usePrefix';
-import { Calendar } from './Calendar';
+import { Calendar, type DatePickerDay } from './Calendar';
 import { formatPlainDate } from '@carbon/utilities/date-picker';
 import type { DatePickerInputProps } from './DatePickerInput';
 
@@ -97,6 +97,18 @@ export interface DatePickerProps {
    * Initial value
    */
   value?: string;
+
+  /**
+   * Custom content for each calendar day cell, e.g. event indicators.
+   * Defaults to the day number.
+   */
+  renderDay?: (day: DatePickerDay) => React.ReactNode;
+
+  /**
+   * Custom accessible label for each calendar day cell. Use it to announce
+   * what `renderDay` shows visually, e.g. "November 20, 2026, 2 events".
+   */
+  getDayLabel?: (day: DatePickerDay) => string;
 }
 
 /**
@@ -121,6 +133,8 @@ export function DatePicker({
   className,
   children,
   value,
+  renderDay,
+  getDayLabel,
 }: DatePickerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -294,6 +308,8 @@ export function DatePicker({
             onDateSelect={selectDate}
             onNavigate={handleNavigate}
             locale={locale}
+            renderDay={renderDay}
+            getDayLabel={getDayLabel}
           />
         </div>
       )}

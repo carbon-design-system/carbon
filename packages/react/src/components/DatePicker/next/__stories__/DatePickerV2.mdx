@@ -21,6 +21,7 @@ import * as DatePickerStories from './DatePickerV2.stories.tsx';
   - [Range date picker](#range-date-picker)
   - [Skeleton state](#skeleton-state)
   - [AI label](#ai-label)
+  - [Custom day content](#custom-day-content)
 - [Component API](#component-api)
   - [API Compatibility](#api-compatibility)
   - [Breaking changes](#breaking-changes)
@@ -86,6 +87,37 @@ The input also supports Carbon AI label decoration through the `DatePickerInput`
 `decorator` prop.
 
 <Canvas of={DatePickerStories.withAILabel} />
+
+### Custom day content
+
+Use `renderDay` to add content to each calendar day cell, such as event
+indicators or availability, and `getDayLabel` to announce that content to screen
+readers. Both receive the cell's `date` (a `Temporal.PlainDate`), its default
+`label`, and its state: `isCurrentMonth`, `isDisabled`, `isToday`, `isSelected`,
+`isInRange` and `isFocused`.
+
+Anything `renderDay` shows visually must also be in `getDayLabel`, because the
+day's accessible label replaces its content. Don't rely on color alone, and make
+indicators readable on a selected day, for example with `currentColor`.
+
+Try the `dayRenderer` control on the Default story for event dots, event count
+and availability examples.
+
+```jsx
+<DatePicker
+  datePickerType="single"
+  renderDay={(day) => (
+    <span className="my-day">
+      {day.date.day}
+      {hasEvents(day.date) && <span className="my-dot" aria-hidden="true" />}
+    </span>
+  )}
+  getDayLabel={(day) =>
+    hasEvents(day.date) ? `${day.label}, has events` : day.label
+  }>
+  <DatePickerInput id="schedule" labelText="Schedule" />
+</DatePicker>
+```
 
 ## Component API
 
