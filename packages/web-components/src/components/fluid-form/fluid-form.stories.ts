@@ -32,6 +32,8 @@ import '../fluid-combo-box/index';
 import '../combo-box/combo-box-item';
 import '../fluid-multi-select/index';
 import '../fluid-date-picker/index';
+import '../fluid-time-picker/index';
+import '../select/select-item';
 
 const items = [
   {
@@ -276,6 +278,11 @@ const renderDefaultForm = (args) => {
             `)}
             ${row(html`
               ${col(
+                html`<cds-fluid-time-picker-skeleton></cds-fluid-time-picker-skeleton>`
+              )}
+            `)}
+            ${row(html`
+              ${col(
                 html`<cds-fluid-number-input-skeleton></cds-fluid-number-input-skeleton>`
               )}
               ${col(
@@ -431,6 +438,47 @@ const renderDefaultForm = (args) => {
                   ${decorator()}
                 </cds-fluid-date-picker-input>
               </cds-fluid-date-picker>
+            `)}
+          `)}
+          ${row(html`
+            ${col(html`
+              <cds-fluid-time-picker
+                id="kickoff-time"
+                label-text="Kickoff time"
+                placeholder="hh:mm"
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warning="${warn}"
+                warning-text="${ifDefined(warnText)}">
+                <cds-fluid-time-picker-select
+                  id="kickoff-time-period"
+                  label-text="Clock"
+                  default-value="am">
+                  <cds-select-item value="am" selected="true"
+                    >AM</cds-select-item
+                  >
+                  <cds-select-item value="pm">PM</cds-select-item>
+                </cds-fluid-time-picker-select>
+                <cds-fluid-time-picker-select
+                  id="kickoff-time-zone"
+                  label-text="Timezone"
+                  default-value="et">
+                  <cds-select-item value="et" selected="true"
+                    >Eastern Time (ET)</cds-select-item
+                  >
+                  <cds-select-item value="ct"
+                    >Central Time (CT)</cds-select-item
+                  >
+                  <cds-select-item value="mt"
+                    >Mountain Time (MT)</cds-select-item
+                  >
+                  <cds-select-item value="pt"
+                    >Pacific Time (PT)</cds-select-item
+                  >
+                </cds-fluid-time-picker-select>
+              </cds-fluid-time-picker>
             `)}
           `)}
           ${row(html`

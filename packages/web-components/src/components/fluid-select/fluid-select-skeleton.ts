@@ -19,7 +19,9 @@ import CDSSelectSkeleton from '../select/select-skeleton';
 class CDSFluidSelectSkeleton extends CDSSelectSkeleton {
   render() {
     return html`
-      <div class="${prefix}--select--fluid__skeleton">${super.render()}</div>
+      <div part="skeleton" class="${prefix}--select--fluid__skeleton">
+        ${super.render()}
+      </div>
     `;
   }
 
