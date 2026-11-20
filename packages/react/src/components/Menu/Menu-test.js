@@ -282,6 +282,74 @@ describe('Menu', () => {
       expect(menus[1]).toHaveClass('cds--menu--open');
     });
   });
+
+  describe('focus restoration', () => {
+    function MenuWrapper({ containerRef, renderTrigger }) {
+      const [open, setOpen] = useState(false);
+      return (
+        <div>
+          {renderTrigger(() => setOpen(true))}
+          <Menu
+            open={open}
+            containerRef={containerRef}
+            onClose={() => setOpen(false)}>
+            <MenuItem label="Item 1" />
+          </Menu>
+        </div>
+      );
+    }
+
+    it('should return focus directly to containerRef when containerRef element is focusable', async () => {
+      const triggerRef = React.createRef();
+      render(
+        <MenuWrapper
+          containerRef={triggerRef}
+          renderTrigger={(open) => (
+            <button ref={triggerRef} onClick={open}>
+              Trigger
+            </button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByRole('button', { name: 'Trigger' }));
+      await userEvent.keyboard('{Escape}');
+
+      expect(screen.getByRole('button', { name: 'Trigger' })).toHaveFocus();
+    });
+
+    it('should return focus to the first focusable descendant inside containerRef when containerRef element is not focusable', async () => {
+      const containerRef = React.createRef();
+      render(
+        <MenuWrapper
+          containerRef={containerRef}
+          renderTrigger={(open) => (
+            <div ref={containerRef}>
+              <button onClick={open}>Trigger</button>
+            </div>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByRole('button', { name: 'Trigger' }));
+      await userEvent.keyboard('{Escape}');
+
+      expect(screen.getByRole('button', { name: 'Trigger' })).toHaveFocus();
+    });
+
+    it('should fallback to activeElement when containerRef is not provided', async () => {
+      render(
+        <MenuWrapper
+          renderTrigger={(open) => <button onClick={open}>Trigger</button>}
+        />
+      );
+
+      await userEvent.click(screen.getByRole('button', { name: 'Trigger' }));
+      await userEvent.keyboard('{Escape}');
+
+      expect(screen.getByRole('button', { name: 'Trigger' })).toHaveFocus();
+    });
+  });
 });
 
 describe('MenuItem', () => {
