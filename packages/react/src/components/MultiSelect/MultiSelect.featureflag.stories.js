@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { MultiSelect } from '../MultiSelect';
+import { FilterableMultiSelect, MultiSelect } from '../MultiSelect';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 // eslint-disable-next-line storybook/csf-component
@@ -149,4 +149,62 @@ FloatingStyles.argTypes = {
       type: 'radio',
     },
   },
+};
+
+const connectedItems = [
+  { id: 'connected-0', text: 'Option 1' },
+  { id: 'connected-1', text: 'Option 2' },
+  { id: 'connected-2', text: 'Option 3' },
+  { id: 'connected-3', text: 'Option 4' },
+  { id: 'connected-4', text: 'Option 5 - a disabled item', disabled: true },
+  { id: 'connected-5', text: 'Option 6' },
+  { id: 'connected-6', text: 'Option 7' },
+  { id: 'connected-7', text: 'Option 8' },
+];
+
+// A group of three, a lone item, and a disabled item between two selected
+// ones, so every corner case of the connected fill is visible at once.
+const connectedInitialSelectedItems = [
+  connectedItems[0],
+  connectedItems[1],
+  connectedItems[2],
+  connectedItems[5],
+  connectedItems[7],
+];
+
+export const ConnectedSelection = (args) => (
+  <div style={{ width: 300, minHeight: 440 }}>
+    <MultiSelect
+      id="carbon-multiselect-connected"
+      items={connectedItems}
+      itemToString={(item) => (item ? item.text : '')}
+      initialSelectedItems={connectedInitialSelectedItems}
+      selectionFeedback="fixed"
+      {...args}
+    />
+  </div>
+);
+
+ConnectedSelection.args = {
+  ...sharedArgs,
+  open: true,
+};
+
+export const FilterableConnectedSelection = (args) => (
+  <div style={{ width: 300, minHeight: 440 }}>
+    <FilterableMultiSelect
+      id="carbon-filterable-multiselect-connected"
+      items={connectedItems}
+      itemToString={(item) => (item ? item.text : '')}
+      initialSelectedItems={connectedInitialSelectedItems}
+      selectionFeedback="fixed"
+      {...args}
+    />
+  </div>
+);
+
+FilterableConnectedSelection.args = {
+  ...sharedArgs,
+  open: true,
+  placeholder: 'Filter',
 };
