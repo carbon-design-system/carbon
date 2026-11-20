@@ -130,7 +130,7 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
       onRevertClick,
       revertActive,
       revertLabel = 'Revert to AI input',
-      slugLabel = 'Show information',
+      slugLabel,
       ['aria-label']: ariaLabel = 'Show information',
       size = 'xs',
       ...rest
