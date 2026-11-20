@@ -242,7 +242,9 @@ export const WithExpandableSearch = {
           size="lg"
           @cds-search-input="${(e) => {
             const searchValue = e.detail.value.toLowerCase();
-            const list = document.getElementById(listId);
+            const list = (e.currentTarget as HTMLElement).closest(
+              'cds-contained-list'
+            );
             const listItems = list?.querySelectorAll('cds-contained-list-item');
             listItems?.forEach((item, index) => {
               const text = items[index].toLowerCase();
@@ -278,7 +280,9 @@ export const WithPersistentSearch = {
           size="lg"
           @cds-search-input="${(e) => {
             const searchValue = e.detail.value.toLowerCase();
-            const list = document.getElementById(listId);
+            const list = (e.currentTarget as HTMLElement).closest(
+              'cds-contained-list'
+            );
             const listItems = list?.querySelectorAll('cds-contained-list-item');
             listItems?.forEach((item, index) => {
               const text = items[index].toLowerCase();
