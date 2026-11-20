@@ -211,9 +211,6 @@ const sharedArgTypes = {
   dangerDescription: {
     table: { defaultValue: { summary: '"danger"' } },
   },
-  autoAlign: {
-    table: { defaultValue: { summary: false } },
-  },
   hasIconOnly: {
     table: { defaultValue: { summary: false } },
   },
