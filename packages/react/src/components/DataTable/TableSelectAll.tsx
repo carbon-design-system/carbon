@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -74,9 +74,12 @@ const TableSelectAll = ({
 }: TableSelectAllProps) => {
   const prefix = usePrefix();
   return (
+    // The select all checkbox doesn't describe the rows' checkboxes, so this
+    // cell must not be a column header. The `th` keeps the header row styles.
     <th
       aria-live="off"
-      scope="col"
+      // eslint-disable-next-line jsx-a11y/no-interactive-element-to-noninteractive-role
+      role="cell"
       className={cx(`${prefix}--table-column-checkbox`, className)}>
       <InlineCheckbox
         aria-label={ariaLabel || deprecatedAriaLabel}

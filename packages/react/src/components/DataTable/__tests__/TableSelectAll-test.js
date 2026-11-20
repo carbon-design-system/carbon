@@ -8,7 +8,7 @@
 import React from 'react';
 import { Table, TableHead, TableRow, TableSelectAll } from '../';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 
 const prefix = 'cds';
 
@@ -31,12 +31,39 @@ describe('TableSelectAll', () => {
         </Table>
       );
 
-      expect(screen.getByRole('columnheader')).toHaveClass(
+      expect(screen.getByRole('cell')).toHaveClass(
         `${prefix}--table-column-checkbox`
       );
-      expect(screen.getByRole('columnheader').firstChild).toHaveClass(
+      expect(screen.getByRole('cell').firstChild).toHaveClass(
         `${prefix}--checkbox--inline`
       );
+    });
+
+    it('should not expose the select all cell as a column header', () => {
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableSelectAll
+                aria-label="Select all rows"
+                checked={false}
+                id="select-all"
+                name="select-all"
+                onSelect={() => {}}
+              />
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      // The checkbox label must not become the header of the selection column,
+      // otherwise screen readers announce "Select all rows" for every row.
+      expect(screen.queryByRole('columnheader')).not.toBeInTheDocument();
+      expect(
+        within(screen.getByRole('cell')).getByRole('checkbox', {
+          name: 'Select all rows',
+        })
+      ).toBeInTheDocument();
     });
 
     it('should respect the deprecated ariaLabel prop', () => {
@@ -142,7 +169,7 @@ describe('TableSelectAll', () => {
         </Table>
       );
 
-      expect(screen.getByRole('columnheader')).toHaveClass('test-class');
+      expect(screen.getByRole('cell')).toHaveClass('test-class');
     });
 
     it('should respect disabled prop', () => {
