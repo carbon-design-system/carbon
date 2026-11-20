@@ -5,13 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable testing-library/no-node-access */
+// TODO: Replace direct DOM access with Testing Library queries.
 
+import { describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { type RefCallback } from 'react';
 
-import { MenuItem, MenuItemSelectable, MenuItemRadioGroup } from '../Menu';
+import { MenuItem } from '../Menu';
 
 import { ComboButton } from './';
 
@@ -20,13 +22,13 @@ const prefix = 'cds';
 describe('ComboButton', () => {
   describe('renders as expected - Component API', () => {
     it('supports a ref on the outermost element', () => {
-      const ref = jest.fn();
+      const ref = jest.fn<RefCallback<HTMLDivElement>>();
       const { container } = render(
         <ComboButton label="Primary action" ref={ref}>
           <MenuItem label="Additional action" />
         </ComboButton>
       );
-      expect(ref).toHaveBeenCalledWith(container.firstChild);
+      expect(ref.mock.calls).toContainEqual([container.firstChild]);
     });
 
     it('supports a custom class name on the outermost element', () => {
@@ -71,7 +73,7 @@ describe('ComboButton', () => {
     });
 
     describe('supports props.size', () => {
-      const sizes = ['xs', 'sm', 'md', 'lg'];
+      const sizes = ['xs', 'sm', 'md', 'lg'] as const;
 
       sizes.forEach((size) => {
         it(`size="${size}"`, () => {
@@ -98,7 +100,7 @@ describe('ComboButton', () => {
         'bottom-end',
         'left',
         'right',
-      ];
+      ] as const;
 
       alignments.forEach((alignment) => {
         it(`tooltipAlignment="${alignment}"`, () => {
@@ -108,7 +110,7 @@ describe('ComboButton', () => {
             </ComboButton>
           );
 
-          expect(container.firstChild.lastChild).toHaveClass(
+          expect(container.firstChild?.lastChild).toHaveClass(
             `${prefix}--popover--${alignment}`
           );
         });
@@ -123,7 +125,7 @@ describe('ComboButton', () => {
         'bottom',
         'bottom-start',
         'bottom-end',
-      ];
+      ] as const;
 
       alignments.forEach((alignment) => {
         it(`menuAlignment="${alignment}"`, async () => {
@@ -152,6 +154,9 @@ describe('ComboButton', () => {
 
       const triggerButton = screen.getAllByRole('button')[1];
       const tooltipId = triggerButton.getAttribute('aria-labelledby');
+      if (!tooltipId) {
+        throw new Error('Unable to find tooltip ID.');
+      }
       const tooltip = document.getElementById(tooltipId);
 
       expect(tooltip).toHaveTextContent(t());
