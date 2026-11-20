@@ -28,6 +28,11 @@ type StateType = {
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
   items: RegisterItemPayload[];
   requestCloseRoot: (e: Pick<KeyboardEvent<HTMLUListElement>, 'type'>) => void;
+  /**
+   * Ref to the element that opened the root menu. Nested menus use this so
+   * Tab can close the whole chain and move focus past the root trigger.
+   */
+  rootFocusReturn: RefObject<HTMLElement | null> | null;
 };
 
 const menuDefaultState: StateType = {
@@ -37,6 +42,7 @@ const menuDefaultState: StateType = {
   size: null,
   items: [],
   requestCloseRoot: () => {},
+  rootFocusReturn: null,
 };
 
 function menuReducer(state: StateType, action: ActionType) {

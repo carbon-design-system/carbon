@@ -164,6 +164,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     hasSelectableItems: false,
     size,
     requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
+    rootFocusReturn: isRoot ? focusReturn : context.state.rootFocusReturn,
   });
   const childContext = useMemo(() => {
     return {
@@ -240,26 +241,54 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
+  function isVisibleTabbable(element: Element) {
+    let current: Element | null = element;
+    while (current) {
+      if (current instanceof HTMLElement && current.hidden) {
+        return false;
+      }
+      const style = getComputedStyle(current);
+      if (style.display === 'none' || style.visibility === 'hidden') {
+        return false;
+      }
+      current = current.parentElement;
+    }
+    return true;
+  }
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
     e.stopPropagation();
 
     // Tab should close the menu and move focus to the next (or previous with
     // Shift+Tab) focusable element after the trigger, instead of trapping
-    // focus on the trigger. (#24001)
+    // focus on the trigger.
     if (match(e, keys.Tab) && onClose) {
       e.preventDefault();
-      const trigger = focusReturn.current;
-      const menuNode = menu.current;
-      // Exclude menu contents so portal-rendered items don't skew tab order.
+      const rootFocusReturnRef = isRoot
+        ? focusReturn
+        : context.state.rootFocusReturn;
+      const trigger = rootFocusReturnRef?.current ?? null;
+      // Exclude every open menu (including parents) and CSS-hidden nodes so
+      // Tab leaves the menu tree for the next visible control.
       const focusables = tabbable(document.body, {
         displayCheck: 'none',
-      }).filter((el) => !menuNode?.contains(el));
+      }).filter(
+        (el) => !el.closest(`.${prefix}--menu`) && isVisibleTabbable(el)
+      );
       const triggerIndex = trigger ? focusables.indexOf(trigger) : -1;
       const nextIndex = e.shiftKey ? triggerIndex - 1 : triggerIndex + 1;
       const nextTarget = triggerIndex >= 0 ? focusables[nextIndex] : undefined;
 
-      focusReturn.current = null;
-      onClose();
+      if (rootFocusReturnRef) {
+        rootFocusReturnRef.current = null;
+      }
+
+      if (isRoot) {
+        onClose();
+      } else {
+        // Close the entire menu chain, not only this submenu.
+        context.state.requestCloseRoot(e);
+      }
 
       if (nextTarget) {
         nextTarget.focus();

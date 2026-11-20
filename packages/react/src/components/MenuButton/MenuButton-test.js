@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -319,6 +319,78 @@ describe('MenuButton', () => {
       });
 
       expect(preventDefaultMock).toHaveBeenCalled();
+    });
+
+    it('closes nested menus with Tab and moves focus past the root trigger', async () => {
+      render(
+        <>
+          <MenuButton label="Actions">
+            <MenuItem label="Parent">
+              <MenuItem label="Child" />
+            </MenuItem>
+            <MenuItem label="Sibling" />
+          </MenuButton>
+          <button type="button">Next</button>
+        </>
+      );
+
+      await userEvent.tab();
+      await userEvent.keyboard('{Enter}');
+      // Nested menu aria-label is included in the parent menuitem name.
+      expect(
+        screen.getByRole('menuitem', { name: 'Parent Parent' })
+      ).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowRight}');
+      const child = screen.getByRole('menuitem', { name: 'Child' });
+      await waitFor(() => {
+        expect(child).toHaveFocus();
+      });
+
+      await userEvent.tab();
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
+    });
+
+    it('skips CSS-hidden elements when Tab closes the menu', async () => {
+      render(
+        <>
+          <MenuButton label="Actions">
+            <MenuItem label="Action" />
+          </MenuButton>
+          <button type="button" style={{ display: 'none' }}>
+            Hidden
+          </button>
+          <button type="button">Next</button>
+        </>
+      );
+
+      await userEvent.tab();
+      await userEvent.keyboard('{Enter}');
+      expect(screen.getByRole('menuitem', { name: 'Action' })).toHaveFocus();
+
+      await userEvent.tab();
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
+    });
+
+    it('returns focus to the trigger when Tab closes and no further tab stop exists', async () => {
+      render(
+        <MenuButton label="Actions">
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
+
+      await userEvent.tab();
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      expect(menuButton).toHaveFocus();
+
+      await userEvent.keyboard('{Enter}');
+      expect(screen.getByRole('menuitem', { name: 'Action' })).toHaveFocus();
+
+      await userEvent.tab();
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(menuButton).toHaveFocus();
     });
   });
 
