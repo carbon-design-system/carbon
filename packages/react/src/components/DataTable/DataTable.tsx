@@ -239,7 +239,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   };
 
   getCellProps: (options: {
-    cell: DataTableCell<ColTypes>;
+    cell: DataTableCell<ColTypes[number]>;
     headers?: string;
     [key: string]: unknown;
   }) => {
@@ -299,7 +299,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   ) => ReactElement;
   experimentalAutoAlign?: boolean;
   filterRows?: (options: {
-    cellsById: Record<string, DataTableCell<ColTypes>>;
+    cellsById: Record<string, DataTableCell<ColTypes[number]>>;
     getCellId: (rowId: string, header: string) => string;
     headers: DataTableHeader[];
     inputValue: string;
@@ -319,7 +319,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   render?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
   ) => ReactElement;
-  rows: Omit<DataTableRow<ColTypes>, 'cells'>[];
+  rows: (Omit<DataTableRow<ColTypes>, 'cells'> & RowType)[];
   size?: DataTableSize;
   sortRow?: SortRowFn;
   stickyHeader?: boolean;
@@ -328,7 +328,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 interface DataTableState<ColTypes extends any[]> {
-  cellsById: Record<string, DataTableCell<ColTypes>>;
+  cellsById: Record<string, DataTableCell<ColTypes[number]>>;
   filterInputValue: string | null;
   initialRowOrder: string[];
   isExpandedAll: boolean;

@@ -1,0 +1,172 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { beforeEach, describe, expect, it } from '@jest/globals';
+
+import getDerivedStateFromProps from '../getDerivedStateFromProps';
+import { defaultSortRow } from '../../tools/sorting';
+
+type MockProps = {
+  rows: { id: string; sortField: string }[];
+  headers: { key: string; header: string }[];
+  sortRow: typeof defaultSortRow;
+  locale: string;
+};
+
+describe('getDerivedStateFromProps', () => {
+  it('uses prevState if available', () => {
+    const prevState = { sortDirection: 'DESC', sortHeaderKey: 'mockKey' };
+    const props = {
+      rows: [],
+      headers: [],
+    };
+    expect(getDerivedStateFromProps(props, prevState)).toEqual(
+      expect.objectContaining(prevState)
+    );
+  });
+
+  it('has default values if prevState is not available', () => {
+    const props = {
+      rows: [],
+      headers: [],
+    };
+    expect(getDerivedStateFromProps(props, {})).toEqual(
+      expect.objectContaining({
+        sortDirection: 'NONE',
+        sortHeaderKey: null,
+      })
+    );
+  });
+
+  it('stores headers from props in state', () => {
+    const headers = [{ key: 'name', header: 'Name' }];
+    const props = { rows: [], headers };
+    const state = getDerivedStateFromProps(props, {});
+    expect(state.headers).toEqual(headers);
+  });
+
+  it('updates headers in state when props.headers changes', () => {
+    const headersA = [{ key: 'name', header: 'Name' }];
+    const headersB = [
+      { key: 'col1', header: 'Column 1' },
+      { key: 'col2', header: 'Column 2' },
+    ];
+    const stateA = getDerivedStateFromProps(
+      { rows: [], headers: headersA },
+      {}
+    );
+    expect(stateA.headers).toEqual(headersA);
+    const stateB = getDerivedStateFromProps(
+      { rows: [], headers: headersB },
+      stateA
+    );
+    expect(stateB.headers).toEqual(headersB);
+  });
+
+  it('should copy headers so that prop mutations do not affect already-derived state', () => {
+    const headersA = [{ key: 'name', header: 'Name' }];
+    const stateA = getDerivedStateFromProps(
+      { rows: [], headers: headersA },
+      {}
+    );
+    expect(stateA.headers).not.toBe(headersA);
+    expect(stateA.headers[0]).not.toBe(headersA[0]);
+    headersA[0].key = 'newKey';
+    expect(stateA.headers[0].key).toEqual('name');
+    const stateB = getDerivedStateFromProps(
+      { rows: [], headers: headersA },
+      stateA
+    );
+    expect(stateB.headers[0].key).toEqual('newKey');
+  });
+
+  describe('with previous state', () => {
+    let mockProps: MockProps;
+
+    beforeEach(() => {
+      mockProps = {
+        rows: [
+          {
+            id: '1',
+            sortField: 'b',
+          },
+          {
+            id: '2',
+            sortField: 'c',
+          },
+          {
+            id: '0',
+            sortField: 'a',
+          },
+        ],
+        headers: [
+          {
+            key: 'sortField',
+            header: 'Sort field',
+          },
+        ],
+        sortRow: defaultSortRow,
+        locale: 'en',
+      };
+    });
+
+    it('should preserve the previous sort state', () => {
+      const initialState = getDerivedStateFromProps(mockProps, {});
+      expect(initialState.rowIds).toEqual(['1', '2', '0']);
+      const prevState = {
+        sortHeaderKey: 'sortField',
+        sortDirection: 'ASC',
+      };
+      const nextState = getDerivedStateFromProps(mockProps, prevState);
+      expect(nextState.rowIds).toEqual(['0', '1', '2']);
+    });
+
+    it('should preserve the previous filter state', () => {
+      const initialState = getDerivedStateFromProps(mockProps, {});
+      expect(initialState.filterInputValue).toBe(null);
+      const prevState = {
+        filterInputValue: 'a',
+      };
+      const nextState = getDerivedStateFromProps(mockProps, prevState);
+      expect(nextState.filterInputValue).toBe('a');
+    });
+
+    it('should preserve the previous batch action state', () => {
+      const initialState = getDerivedStateFromProps(mockProps, {});
+      expect(initialState.shouldShowBatchActions).toBe(false);
+      const prevState = {
+        shouldShowBatchActions: true,
+        rowsById: {
+          1: {
+            id: '1',
+            isSelected: true,
+            isExpanded: false,
+            disabled: false,
+          },
+        },
+      };
+      const nextState = getDerivedStateFromProps(mockProps, prevState);
+      expect(nextState.shouldShowBatchActions).toBe(true);
+    });
+
+    it('should clear the previous batch action state when selected rows are removed', () => {
+      const prevState = {
+        shouldShowBatchActions: true,
+        rowsById: {
+          3: {
+            id: '3',
+            isSelected: true,
+            isExpanded: false,
+            disabled: false,
+          },
+        },
+      };
+      const nextState = getDerivedStateFromProps(mockProps, prevState);
+      expect(nextState.shouldShowBatchActions).toBe(false);
+    });
+  });
+});

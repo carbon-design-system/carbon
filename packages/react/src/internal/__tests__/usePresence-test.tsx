@@ -31,9 +31,11 @@ const TestComponent = () => {
 
 const createDeferred = () => {
   let resolvePromise: (() => void) | undefined;
+  let rejectPromise: ((reason?: unknown) => void) | undefined;
 
-  const promise = new Promise<void>((res) => {
+  const promise = new Promise<void>((res, rej) => {
     resolvePromise = res;
+    rejectPromise = rej;
   });
 
   const resolve = () => {
@@ -44,7 +46,15 @@ const createDeferred = () => {
     resolvePromise();
   };
 
-  return { promise, resolve };
+  const reject = (reason?: unknown) => {
+    if (!rejectPromise) {
+      throw new Error('Deferred promise rejecter is unavailable.');
+    }
+
+    rejectPromise(reason);
+  };
+
+  return { promise, resolve, reject };
 };
 
 const mockPresenceAnimations = () => {
@@ -144,6 +154,30 @@ describe('usePresence', () => {
 
       deferredAnimations[0].resolve();
       expect(screen.getByRole('dialog')).toBeInTheDocument();
+    } finally {
+      cleanup();
+    }
+  });
+
+  it('should finish exiting without an unhandled rejection when the exit animation is canceled', async () => {
+    const { deferredAnimations, cleanup } = mockPresenceAnimations();
+
+    try {
+      render(<TestComponent />);
+
+      await userEvent.click(screen.getByRole('button', { name: 'Open' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+      await waitFor(() => expect(deferredAnimations.length).toBe(1));
+
+      // Browsers reject `Animation.finished` with an `AbortError` when an
+      // animation is canceled, e.g. when the element unmounts mid-exit.
+      deferredAnimations[0].reject(
+        new DOMException('The animation was aborted.', 'AbortError')
+      );
+
+      await waitFor(() =>
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+      );
     } finally {
       cleanup();
     }
