@@ -64,7 +64,24 @@ test.describe('@avt MenuButton', () => {
     await expect(page.getByRole('menuitem').first()).toBeFocused();
     await page.keyboard.press('ArrowDown');
     await expect(page.getByRole('menuitem').nth(1)).toBeFocused();
-    // Skip the disabled item and come back to the first item
+    // Disabled items remain focusable but cannot be activated.
+    const disabledItem = page.getByRole('menuitem', { name: 'Third action' });
+    await page.keyboard.press('ArrowDown');
+    await expect(disabledItem).toBeFocused();
+    await expect(disabledItem).toHaveAttribute('aria-disabled', 'true');
+
+    await page.keyboard.press('Enter');
+    await expect(disabledItem).toBeFocused();
+    await expect(page.getByRole('menu')).toBeVisible();
+    await page.keyboard.press('Space');
+    await expect(disabledItem).toBeFocused();
+    await expect(page.getByRole('menu')).toBeVisible();
+
+    // Wrap around in both directions, including the disabled item.
+    await page.keyboard.press('ArrowDown');
+    await expect(page.getByRole('menuitem').first()).toBeFocused();
+    await page.keyboard.press('ArrowUp');
+    await expect(disabledItem).toBeFocused();
     await page.keyboard.press('ArrowDown');
     await expect(page.getByRole('menuitem').first()).toBeFocused();
 
