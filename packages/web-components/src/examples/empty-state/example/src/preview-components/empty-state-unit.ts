@@ -25,9 +25,9 @@ import type CDSTableToolbarSearch from '@carbon/web-components/es/components/dat
 import Settings16 from '@carbon/icons/es/settings/16.js';
 
 import '../components/empty-state';
-import notFoundSrc from '../assets/not-found.svg?url';
-import unauthorizedSrc from '../assets/unauthorized.svg?url';
-import errorSrc from '../assets/error.svg?url';
+import notFoundSrc from '../assets/not-found-light.svg?url';
+import unauthorizedSrc from '../assets/unauthorized-light.svg?url';
+import errorSrc from '../assets/error-light.svg?url';
 
 // ─── Static table data ────────────────────────────────────────────────────────
 
