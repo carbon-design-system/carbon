@@ -16,6 +16,8 @@ import { InlineNotification } from '../Notification';
 
 - [Overview](#overview)
 - [Example usage](#example-usage)
+- [Static variant](#static-variant)
+- [Custom action](#custom-action)
 - [Component API](#component-api)
 
 {/* <!-- prettier-ignore-start --> */}
@@ -47,6 +49,33 @@ set of features with ease.
 ## Static variant
 
 <Canvas of={OptionsTileStories.Static} />
+
+## Custom action
+
+Use `actionRenderer` to render something other than a toggle at the end of the
+header, such as a dropdown, icon buttons or a date picker. When it returns
+content, that content replaces the toggle and `enabled` is ignored. The function
+receives the tile `size`, so the action can match it (`sm` controls for `lg`,
+`md` controls for `xl`), and the `titleId`, which you can use to label the
+action.
+
+```jsx
+<OptionsTile
+  title="Audio"
+  actionRenderer={({ size }) => (
+    <IconButton
+      kind="ghost"
+      label="Mute audio"
+      size={size === 'xl' ? 'md' : 'sm'}>
+      <VolumeUp />
+    </IconButton>
+  )}>
+  {children}
+</OptionsTile>
+```
+
+Pick an `actionRenderer` option in the controls below to preview the supported
+patterns.
 
 ## Component API
 

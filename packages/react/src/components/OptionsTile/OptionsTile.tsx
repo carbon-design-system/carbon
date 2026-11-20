@@ -26,7 +26,27 @@ import { usePrefersReducedMotion } from '../../internal/usePrefersReducedMotion'
 
 const componentName = 'OptionsTile';
 
+export interface OptionsTileActionRendererArgs {
+  /**
+   * The size of the OptionsTile, so the rendered action can match it.
+   */
+  size: 'lg' | 'xl';
+
+  /**
+   * The id of the OptionsTile title, to label the rendered action with
+   * `aria-labelledby`.
+   */
+  titleId: string;
+}
+
 export interface OptionsTileProps {
+  /**
+   * Render custom content, such as a dropdown, icon buttons or a date picker,
+   * at the end of the header. When it returns content, it is rendered in place
+   * of the toggle and `enabled` is ignored.
+   */
+  actionRenderer?: (args: OptionsTileActionRendererArgs) => ReactNode;
+
   /**
    * Provide content to render as expandable OptionsTile. If no children
    * are present, the OptionsTile will render as its variant.
@@ -114,14 +134,19 @@ export interface OptionsTileProps {
   warnText?: string;
 }
 
-// Default values for props
-const defaults = {
-  size: 'lg' as const,
+const duration = parseInt(carbonMotion.moderate01, 10);
+const easing = carbonMotion.easings.entrance.productive;
+const collapsedFrame = {
+  paddingTop: 0,
+  paddingBottom: 0,
+  height: 0,
+  opacity: 0,
 };
 
 export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
   (props, ref) => {
     const {
+      actionRenderer,
       children,
       className,
       enabled,
@@ -132,7 +157,7 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       onChange,
       onToggle,
       open: userOpen,
-      size = defaults.size,
+      size = 'lg',
       summary,
       title,
       titleId: userDefinedTitleId,
@@ -151,124 +176,81 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       value: onChange ? userOpen : undefined,
     });
 
-    const detailsRef = useRef<HTMLDetailsElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
 
     useNoInteractiveChildren(headingRef);
 
-    const generatedTitleId = useFallbackId(userDefinedTitleId);
-    const titleId = userDefinedTitleId ?? generatedTitleId;
+    const titleId = useFallbackId(userDefinedTitleId);
+    const contentId = `${titleId}-content`;
     const isExpandable = children !== undefined;
-    const isWarn = !invalid && warn;
-    const isLocked = !invalid && !isWarn && locked;
+    const isLocked = !invalid && !warn && locked;
     const shouldReduceMotion = usePrefersReducedMotion();
 
+    // A custom action replaces the toggle; the toggle renders only when
+    // `enabled` is set and `actionRenderer` returns nothing.
+    const customAction = actionRenderer?.({ size, titleId });
+    const action =
+      customAction != null && customAction !== false ? (
+        customAction
+      ) : enabled !== undefined ? (
+        <Toggle
+          id={`${titleId}-toggle`}
+          className={`${blockClass}__toggle`}
+          toggled={enabled}
+          aria-labelledby={titleId}
+          hideLabel
+          onToggle={onToggle}
+          size="sm"
+          disabled={isLocked}
+        />
+      ) : null;
+    const actionNode = action && (
+      <Layer
+        className={`${blockClass}__action`}
+        data-testid="options-tile-action">
+        {action}
+      </Layer>
+    );
+
     const expand = () => {
-      if (detailsRef.current && contentRef.current && !shouldReduceMotion) {
-        setOpen(true);
-
-        detailsRef.current.open = true;
-        const { paddingTop, paddingBottom, height } = getComputedStyle(
-          contentRef.current
-        );
-
-        contentRef.current.animate(
-          [
-            {
-              paddingTop: 0,
-              paddingBottom: 0,
-              height: 0,
-              opacity: 0,
-              overflow: 'hidden',
-            },
-            {
-              paddingTop,
-              paddingBottom,
-              height,
-              opacity: 1,
-              overflow: 'hidden',
-            },
-          ],
-          {
-            duration: Number(carbonMotion.moderate01.replace('ms', '')),
-            easing: carbonMotion.easings.entrance.productive,
-          }
-        );
-      } else {
-        setOpen(true);
-      }
-    };
-
-    const collapse = () => {
-      if (contentRef.current && !shouldReduceMotion) {
-        setClosing(true);
-
-        const { paddingTop, paddingBottom, height } = getComputedStyle(
-          contentRef.current
-        );
-
-        const animationDuration = Number(
-          carbonMotion.moderate01.replace('ms', '')
-        );
-
-        const animation = contentRef.current.animate(
-          [
-            {
-              paddingTop,
-              paddingBottom,
-              height,
-              opacity: 1,
-            },
-            {
-              paddingTop: 0,
-              paddingBottom: 0,
-              height: 0,
-              opacity: 0,
-            },
-          ],
-          {
-            duration: animationDuration,
-            easing: carbonMotion.easings.entrance.productive,
-          }
-        );
-
-        const callback = () => {
-          setOpen(false);
-          setClosing(false);
-        };
-
-        setTimeout(() => {
-          callback();
-        }, animationDuration * 0.9);
-        animation.oncancel = callback;
-      } else {
-        setOpen(false);
-      }
-    };
-
-    const handleSummaryClick = (evt: React.MouseEvent<HTMLElement>) => {
-      // Check if the click originated from the toggle button
-      const target = evt.target as HTMLElement;
-      const toggleContainer = target.closest(
-        `.${blockClass}__toggle-container`
-      );
-
-      // If click is on toggle button, don't handle expand/collapse
-      if (toggleContainer) {
-        evt.preventDefault();
-        evt.stopPropagation();
+      setOpen(true);
+      const content = contentRef.current;
+      if (!content || shouldReduceMotion) {
         return;
       }
 
-      // Prevent default details toggle behavior
-      evt.preventDefault();
+      // Unhide now so the final size can be measured before React re-renders.
+      content.hidden = false;
+      const { paddingTop, paddingBottom, height } = getComputedStyle(content);
+      content.animate(
+        [
+          { ...collapsedFrame, overflow: 'hidden' },
+          { paddingTop, paddingBottom, height, opacity: 1, overflow: 'hidden' },
+        ],
+        { duration, easing }
+      );
+    };
 
-      if (open) {
-        collapse();
-      } else {
-        expand();
+    const collapse = () => {
+      const content = contentRef.current;
+      if (!content || shouldReduceMotion) {
+        setOpen(false);
+        return;
       }
+
+      setClosing(true);
+      const { paddingTop, paddingBottom, height } = getComputedStyle(content);
+      const animation = content.animate(
+        [{ paddingTop, paddingBottom, height, opacity: 1 }, collapsedFrame],
+        { duration, easing }
+      );
+      const finish = () => {
+        setOpen(false);
+        setClosing(false);
+      };
+      setTimeout(finish, duration * 0.9);
+      animation.oncancel = finish;
     };
 
     const renderTitle = () => {
@@ -283,25 +265,17 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         text = warnText;
       } else if (locked) {
         Icon = Locked;
-        // In the static variant (no children) lockedText always replaces the
-        // summary, matching the web component behavior. In the expandable
-        // variant the summary is kept so the user can still read it; lockedText
-        // is shown in the expanded content area instead.
-        if (!isExpandable) {
-          text = lockedText;
-        } else if (!text) {
+        // The static variant always shows lockedText. The expandable variant
+        // keeps the summary and shows lockedText in the content instead.
+        if (!isExpandable || !text) {
           text = lockedText;
         }
       }
 
-      const hasValidationState = invalid || warn || locked;
-      // Summary is hidden when the tile is expanded (open), unless there is a
-      // validation state (invalid/warn/locked) which should always be visible.
-      // This matches the web component behavior where `.--open .summary { display: none }`.
-      const summaryHidden = !hasValidationState && open;
+      // The summary hides while open, unless a validation state is shown.
+      const summaryHidden = !(invalid || warn || locked) && open;
       const summaryClasses = cx(`${blockClass}__summary`, {
-        [`${blockClass}__summary--closing`]: closing,
-        [`${blockClass}__summary--open`]: open,
+        [`${blockClass}__summary--open`]: open && !closing,
         [`${blockClass}__summary--invalid`]: invalid,
         [`${blockClass}__summary--warn`]: warn,
         [`${blockClass}__summary--locked`]: locked,
@@ -335,48 +309,32 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         ref={ref}
         data-component-name={componentName}>
         {isExpandable ? (
-          <details
-            className={`${blockClass}__details`}
-            open={open}
-            ref={detailsRef}>
-            <summary
-              className={cx(`${blockClass}__header`, {
-                [`${blockClass}__header--has-toggle`]: enabled !== undefined,
-              })}
-              onClick={handleSummaryClick}
+          <div className={`${blockClass}__details`}>
+            <div
+              className={`${blockClass}__header`}
               data-testid="options-tile-header">
-              {enabled !== undefined && (
-                // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                <div
-                  className={`${blockClass}__toggle-container`}
-                  data-testid="options-tile-toggle-container"
-                  onMouseDown={(evt) => {
-                    evt.preventDefault();
-                  }}>
-                  <Toggle
-                    id={`${titleId}-toggle`}
-                    className={`${blockClass}__toggle`}
-                    toggled={enabled}
-                    aria-labelledby={titleId}
-                    hideLabel
-                    onToggle={onToggle}
-                    size="sm"
-                    disabled={isLocked}
-                  />
-                </div>
-              )}
-              <ChevronDown
-                size={16}
-                className={cx(`${blockClass}__chevron`, {
-                  [`${blockClass}__chevron--open`]: open,
-                  [`${blockClass}__chevron--closing`]: closing,
-                })}
-              />
+              <button
+                type="button"
+                className={`${blockClass}__chevron-button`}
+                aria-expanded={open}
+                aria-controls={contentId}
+                aria-labelledby={titleId}
+                onClick={open ? collapse : expand}>
+                <ChevronDown
+                  size={16}
+                  className={cx(`${blockClass}__chevron`, {
+                    [`${blockClass}__chevron--open`]: open && !closing,
+                  })}
+                />
+              </button>
               {renderTitle()}
-            </summary>
+              {actionNode}
+            </div>
             <div
               className={`${blockClass}__content`}
+              id={contentId}
               ref={contentRef}
+              hidden={!open}
               data-testid="options-tile-content">
               <Layer>
                 {isLocked && (
@@ -388,33 +346,11 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
                 {children}
               </Layer>
             </div>
-          </details>
+          </div>
         ) : (
-          <div
-            className={cx(`${blockClass}__static-content`, {
-              [`${blockClass}__header--has-toggle`]: enabled !== undefined,
-            })}>
-            {enabled !== undefined && (
-              // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-              <div
-                className={`${blockClass}__toggle-container`}
-                data-testid="options-tile-toggle-container"
-                onMouseDown={(evt) => {
-                  evt.preventDefault();
-                }}>
-                <Toggle
-                  id={`${titleId}-toggle`}
-                  className={`${blockClass}__toggle`}
-                  toggled={enabled}
-                  aria-labelledby={titleId}
-                  hideLabel
-                  onToggle={onToggle}
-                  size="sm"
-                  disabled={isLocked}
-                />
-              </div>
-            )}
+          <div className={`${blockClass}__static-content`}>
             {renderTitle()}
+            {actionNode}
           </div>
         )}
       </Section>

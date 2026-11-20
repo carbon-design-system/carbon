@@ -42,79 +42,148 @@ const template = (props = defaultProps, slots = defaultSlots) => html`
   </cds-options-tile>
 `;
 
+const query = (el, element) =>
+  el.shadowRoot.querySelector(`.${blockClass}__${element}`);
+
 describe('cds-options-tile', () => {
   it('renders options tile', async () => {
     const el = await fixture(template());
-    expect(el).to.exist;
     expect(el.tagName.toLowerCase()).to.equal('cds-options-tile');
   });
 
   it('renders a title', async () => {
     const el = await fixture(template());
-    expect(el.titleText).to.equal(defaultProps.titleText);
-
-    const titleEl = el.shadowRoot?.querySelector(`.${blockClass}__title`);
-    expect(titleEl).to.exist;
-    expect(titleEl?.getAttribute('id')).to.equal(defaultProps.titleId);
+    expect(query(el, 'title').id).to.equal(defaultProps.titleId);
+    expect(query(el, 'title').textContent.trim()).to.equal(
+      defaultProps.titleText
+    );
+    expect(query(el, 'title').getAttribute('role')).to.equal('heading');
+    expect(query(el, 'title').getAttribute('aria-level')).to.equal('2');
   });
 
-  it('renders a summary', async () => {
-    const el = await fixture(template());
-    await el.updateComplete;
-
-    const slot = el.shadowRoot?.querySelector('slot[name="summary"]');
-    expect(slot).to.exist;
-    const node = slot.assignedNodes()[0];
-    expect(node.innerText).to.equal(defaultSlots.summary);
-  });
-
-  it('renders a toggle', async () => {
-    const el = await fixture(template());
-    await el.updateComplete;
-
-    const slot = el.shadowRoot?.querySelector('slot[name="toggle"]');
-    expect(slot).to.exist;
-    const node = slot.assignedNodes()[0];
-    expect(node.innerText).to.equal(defaultSlots.toggle);
-  });
-
-  it('renders a body', async () => {
-    const el = await fixture(template({ ...defaultProps, defaultOpen: true }));
-    await el.updateComplete;
-
-    const slot = el.shadowRoot?.querySelector('slot[name="body"]');
-    expect(slot).to.exist;
-    const node = slot.assignedNodes()[0];
-    expect(node.innerText).to.equal(defaultSlots.body);
-  });
+  for (const name of ['summary', 'toggle', 'body']) {
+    it(`renders a ${name}`, async () => {
+      const el = await fixture(
+        template({ ...defaultProps, defaultOpen: true })
+      );
+      const slot = el.shadowRoot.querySelector(`slot[name="${name}"]`);
+      expect(slot.assignedNodes()[0].textContent.trim()).to.equal(
+        defaultSlots[name]
+      );
+    });
+  }
 
   it('fires open handler', async () => {
     const el = await fixture(template());
-    await el.updateComplete;
-
-    const header = el.shadowRoot?.querySelector(`.${blockClass}__header`);
     const listener = oneEvent(el, CDSOptionsTile.eventOpen);
-    header?.click();
+    query(el, 'chevron-button').click();
     const { detail } = await listener;
-    expect(detail).to.exist;
+    expect(detail.open).to.be.true;
   });
 
   it('fires close handler', async () => {
     const el = await fixture(template({ ...defaultProps, defaultOpen: true }));
-    await el.updateComplete;
-
-    const header = el.shadowRoot?.querySelector(`.${blockClass}__header`);
     const listener = oneEvent(el, CDSOptionsTile.eventClose);
-    header?.click();
+    query(el, 'chevron-button').click();
     const { detail } = await listener;
-    expect(detail).to.exist;
+    expect(detail.open).to.be.false;
+  });
+
+  it('toggles only from the chevron button', async () => {
+    const el = await fixture(template());
+    const button = query(el, 'chevron-button');
+    const content = query(el, 'content');
+    expect(button.getAttribute('aria-expanded')).to.equal('false');
+    expect(button.getAttribute('aria-controls')).to.equal(content.id);
+    expect(button.getAttribute('aria-labelledby')).to.equal(
+      defaultProps.titleId
+    );
+    expect(content.hidden).to.be.true;
+
+    query(el, 'title').click();
+    await el.updateComplete;
+    expect(button.getAttribute('aria-expanded')).to.equal('false');
+
+    button.click();
+    await el.updateComplete;
+    expect(button.getAttribute('aria-expanded')).to.equal('true');
+    expect(content.hidden).to.be.false;
+  });
+
+  it('renders the action slot in place of the toggle', async () => {
+    const el = await fixture(html`
+      <cds-options-tile titleText="Audio">
+        <button slot="action">Mute</button>
+        <span slot="toggle">Toggle</span>
+      </cds-options-tile>
+    `);
+    const action = query(el, 'action');
+    const toggleSlot = el.shadowRoot.querySelector('slot[name="toggle"]');
+    expect(action.hidden).to.be.false;
+    expect(
+      action.querySelector('slot[name="action"]').assignedElements()[0]
+        .textContent
+    ).to.equal('Mute');
+    expect(toggleSlot.hidden).to.be.true;
+  });
+
+  it('hides the action area when neither action nor toggle is slotted', async () => {
+    const el = await fixture(
+      html`<cds-options-tile titleText="Plain"></cds-options-tile>`
+    );
+    expect(query(el, 'action').hidden).to.be.true;
+  });
+
+  it('shows invalid, then warn, then locked text in the summary', async () => {
+    const el = await fixture(html`
+      <cds-options-tile
+        titleText="Tile"
+        invalid
+        invalidText="Invalid"
+        warn
+        warnText="Warn"
+        locked
+        lockedText="Locked"></cds-options-tile>
+    `);
+    const summary = () => query(el, 'summary');
+    expect(summary().textContent.trim()).to.equal('Invalid');
+    expect(summary().classList.contains(`${blockClass}__summary--invalid`)).to
+      .be.true;
+
+    el.invalid = false;
+    await el.updateComplete;
+    expect(summary().textContent.trim()).to.equal('Warn');
+
+    el.warn = false;
+    await el.updateComplete;
+    expect(summary().textContent.trim()).to.equal('Locked');
+  });
+
+  it('keeps the summary and shows lockedText in the body when locked', async () => {
+    const el = await fixture(html`
+      <cds-options-tile titleText="Tile" locked lockedText="Locked" open>
+        <span slot="summary">Summary</span>
+        <div slot="body">Body</div>
+      </cds-options-tile>
+    `);
+    await el.updateComplete;
+    const summarySlot = el.shadowRoot.querySelector('slot[name="summary"]');
+    expect(summarySlot.hidden).to.be.false;
+    expect(query(el, 'locked-text').textContent.trim()).to.equal('Locked');
+  });
+
+  it('can be controlled with the open property', async () => {
+    const el = await fixture(template());
+    el.open = true;
+    await el.updateComplete;
+    expect(query(el, 'chevron-button').getAttribute('aria-expanded')).to.equal(
+      'true'
+    );
+    expect(query(el, 'content').hidden).to.be.false;
   });
 
   it('has xl class when size is xl', async () => {
     const el = await fixture(template({ ...defaultProps, size: 'xl' }));
-    await el.updateComplete;
-
-    const node = el.shadowRoot?.querySelector(`.${blockClass}--xl`);
-    expect(node).to.exist;
+    expect(el.shadowRoot.querySelector(`.${blockClass}--xl`)).to.exist;
   });
 });

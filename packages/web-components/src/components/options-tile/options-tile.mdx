@@ -53,6 +53,24 @@ import '@carbon/web-components/es/components/options-tile/index.js';
 </cds-options-tile>
 ```
 
+### Custom action
+
+Use the `action` slot to show something other than a toggle at the end of the
+header, such as a dropdown, icon buttons or a date picker. When it has content,
+it replaces the `toggle` slot. Match the slotted components to the tile size:
+`sm` for `lg` tiles and `md` for `xl` tiles. Pick an `action` option in the
+story controls to preview the supported patterns.
+
+```html
+<cds-options-tile size="lg" titleText="Audio">
+  <cds-icon-button slot="action" kind="ghost" size="sm">
+    <svg slot="icon"><!-- volume icon --></svg>
+    <span slot="tooltip-content">Mute audio</span>
+  </cds-icon-button>
+  <div slot="body">Audio settings</div>
+</cds-options-tile>
+```
+
 ## `<cds-options-tile>` attributes, properties and events
 
 <ArgTypes of="cds-options-tile" />

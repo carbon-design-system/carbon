@@ -6,13 +6,7 @@
  */
 
 import React from 'react';
-import {
-  render,
-  screen,
-  fireEvent,
-  act,
-  waitFor,
-} from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { OptionsTile } from '../OptionsTile';
 
 // jsdom does not implement window.matchMedia — mock it for usePrefersReducedMotion
@@ -46,29 +40,20 @@ const props = {
   children,
 };
 
-let originalAnimateFunction;
+const summaryText = 'English | Locale: English';
+const lockedText = 'locked explanation';
+
+// The summary renders right after the title heading.
+const getSummary = () => screen.getByRole('heading').nextSibling;
 
 describe(componentName, () => {
+  // jsdom does not implement the Web Animations API.
   beforeAll(() => {
-    originalAnimateFunction = HTMLDivElement.prototype.animate;
-
-    const obj = {
-      onfinish: () => {},
-      oncancel: () => {},
-    };
-
-    const animationFunction = function () {
-      Promise.resolve().then(async () => {
-        act(() => obj.onfinish());
-      });
-      return obj;
-    };
-
-    HTMLDivElement.prototype.animate = animationFunction;
+    HTMLDivElement.prototype.animate = jest.fn(() => ({}));
   });
 
   afterAll(() => {
-    HTMLDivElement.prototype.animate = originalAnimateFunction;
+    delete HTMLDivElement.prototype.animate;
   });
 
   it('renders a component OptionsTile', () => {
@@ -95,11 +80,6 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
-    render(<OptionsTile {...props} />);
-    screen.getByTestId(dataTestId);
-  });
-
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(<OptionsTile {...props} ref={ref} />);
@@ -115,9 +95,8 @@ describe(componentName, () => {
   });
 
   it('renders a summary if provided', () => {
-    const summary = 'English | Locale: English';
-    render(<OptionsTile {...props} summary={summary} />);
-    expect(screen.getByRole('heading').nextSibling.textContent).toBe(summary);
+    render(<OptionsTile {...props} summary={summaryText} />);
+    expect(getSummary().textContent).toBe(summaryText);
   });
 
   it('renders a toggle if props.enabled is set', () => {
@@ -125,12 +104,73 @@ describe(componentName, () => {
     expect(screen.getByRole('switch')).toHaveAttribute('aria-checked', 'true');
   });
 
-  it('renders as static variant if no children are provided', () => {
-    const { container } = render(<OptionsTile title="Static variant" />);
-    expect(container.querySelector('details')).toBeFalsy();
+  it('renders props.actionRenderer content in place of the toggle', () => {
+    const actionRenderer = jest.fn(({ titleId }) => (
+      <button type="button" aria-describedby={titleId}>
+        Action
+      </button>
+    ));
+    render(
+      <OptionsTile
+        {...props}
+        titleId="action-title"
+        size="xl"
+        enabled
+        actionRenderer={actionRenderer}
+      />
+    );
+
+    expect(actionRenderer).toHaveBeenCalledWith({
+      size: 'xl',
+      titleId: 'action-title',
+    });
+    expect(screen.getByTestId('options-tile-action')).toContainElement(
+      screen.getByRole('button', { name: 'Action' })
+    );
+    expect(screen.queryByRole('switch')).toBeNull();
   });
 
-  it('renders a toggle in the static variant when props.enabled is set', async () => {
+  it('falls back to the toggle when props.actionRenderer returns nothing', () => {
+    render(<OptionsTile {...props} enabled actionRenderer={() => null} />);
+
+    expect(screen.getByTestId('options-tile-action')).toContainElement(
+      screen.getByRole('switch')
+    );
+  });
+
+  it('renders props.actionRenderer content in the static variant', () => {
+    render(
+      <OptionsTile
+        title="Static with action"
+        actionRenderer={() => <span>Static action</span>}
+      />
+    );
+
+    expect(screen.getByTestId('options-tile-action')).toHaveTextContent(
+      'Static action'
+    );
+  });
+
+  it('does not toggle the tile when the action is clicked', () => {
+    const onChange = jest.fn();
+    render(
+      <OptionsTile
+        {...props}
+        onChange={onChange}
+        actionRenderer={() => <button type="button">Action</button>}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Action' }));
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('renders as static variant if no children are provided', () => {
+    render(<OptionsTile title="Static variant" />);
+    expect(screen.queryByRole('button')).toBeNull();
+  });
+
+  it('renders a toggle in the static variant when props.enabled is set', () => {
     render(<OptionsTile title="Static with toggle" enabled />);
 
     expect(screen.getByRole('switch')).toHaveAttribute('aria-checked', 'true');
@@ -144,7 +184,7 @@ describe(componentName, () => {
       <OptionsTile {...props} invalid invalidText={invalidText} warn locked />
     );
 
-    const summary = screen.getByRole('heading').nextSibling;
+    const summary = getSummary();
 
     expect(summary.textContent).toBe(invalidText);
     expect(summary).toHaveClass(`${blockClass}__summary--invalid`);
@@ -156,16 +196,13 @@ describe(componentName, () => {
     // also pass props.locked to verify props.warn has the higher priority
     render(<OptionsTile {...props} warn warnText={warnText} locked />);
 
-    const summary = screen.getByRole('heading').nextSibling;
+    const summary = getSummary();
 
     expect(summary.textContent).toBe(warnText);
     expect(summary).toHaveClass(`${blockClass}__summary--warn`);
   });
 
   it('renders locked state when passed', () => {
-    const summaryText = 'summary of content';
-    const lockedText = 'locked explanation';
-
     render(
       <OptionsTile
         {...props}
@@ -175,7 +212,7 @@ describe(componentName, () => {
       />
     );
 
-    const summary = screen.getByRole('heading').nextSibling;
+    const summary = getSummary();
 
     // In the expandable variant, summary is preserved; lockedText is shown in
     // the expanded content area.
@@ -183,10 +220,7 @@ describe(componentName, () => {
     expect(summary).toHaveClass(`${blockClass}__summary--locked`);
   });
 
-  it('renders lockedText in static variant when both summary and lockedText are set', async () => {
-    const summaryText = 'summary of content';
-    const lockedText = 'locked explanation';
-
+  it('renders lockedText in static variant when both summary and lockedText are set', () => {
     render(
       <OptionsTile
         title="Static locked"
@@ -196,7 +230,7 @@ describe(componentName, () => {
       />
     );
 
-    const summary = screen.getByRole('heading').nextSibling;
+    const summary = getSummary();
 
     // In the static variant lockedText always replaces the summary
     expect(summary.textContent).toBe(lockedText);
@@ -204,57 +238,50 @@ describe(componentName, () => {
   });
 
   it('renders lockedText when locked and no summary is set', () => {
-    const lockedText = 'locked explanation';
-
     render(<OptionsTile {...props} locked lockedText={lockedText} />);
 
-    const summary = screen.getByRole('heading').nextSibling;
+    const summary = getSummary();
 
     expect(summary.textContent).toBe(lockedText);
   });
 
-  it('shows the summary when the tile is collapsed regardless of enabled state', async () => {
-    const summaryText = 'visible summary';
+  it('shows the summary when the tile is collapsed regardless of enabled state', () => {
     render(<OptionsTile {...props} summary={summaryText} enabled={false} />);
 
-    const summary = screen.getByRole('heading').nextSibling;
+    const summary = getSummary();
     expect(summary.textContent).toBe(summaryText);
     // Summary should NOT be hidden when tile is collapsed, even when enabled=false
     expect(summary.getAttribute('aria-hidden')).not.toBe('true');
   });
 
-  it('hides the summary when the tile is open (expanded)', async () => {
-    const summaryText = 'hidden when open';
-    const { container } = render(
-      <OptionsTile {...props} summary={summaryText} />
-    );
+  it('hides the summary when the tile is open (expanded)', () => {
+    render(<OptionsTile {...props} summary={summaryText} />);
 
     // Initially collapsed – summary is visible
-    const summary = screen.getByRole('heading').nextSibling;
+    const summary = getSummary();
     expect(summary.getAttribute('aria-hidden')).not.toBe('true');
 
     // Expand the tile
-    fireEvent.click(container.querySelector('summary'));
+    fireEvent.click(screen.getByRole('button'));
     // Summary should now be hidden
     expect(summary.getAttribute('aria-hidden')).toBe('true');
   });
 
   it('can be controlled by setting props.open', async () => {
     const onChange = jest.fn();
-    const { container, rerender } = render(
+    const { rerender } = render(
       <OptionsTile {...props} open={false} onChange={onChange} />
     );
-    const summaryEl = container.querySelector('summary');
-    const detailsEl = container.querySelector('details');
+    const button = screen.getByRole('button');
 
-    expect(detailsEl.open).toBe(false);
-    fireEvent.click(summaryEl);
-    expect(onChange).toHaveBeenCalled();
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+    fireEvent.click(button);
+    expect(onChange).toHaveBeenLastCalledWith(true);
 
     rerender(<OptionsTile {...props} open={true} onChange={onChange} />);
-    expect(detailsEl.open).toBe(true);
-    fireEvent.click(summaryEl);
-    expect(onChange).toHaveBeenCalled();
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+    fireEvent.click(button);
+    await waitFor(() => expect(onChange).toHaveBeenLastCalledWith(false));
   });
 
   it('supports "lg" size', () => {
@@ -273,31 +300,38 @@ describe(componentName, () => {
     );
   });
 
-  it('expands and collapses on click', async () => {
-    const { container } = render(<OptionsTile {...props} />);
+  it('expands and collapses when the chevron button is clicked', async () => {
+    render(<OptionsTile {...props} />);
+    const button = screen.getByRole('button', { name: title });
+    const content = screen.getByTestId('options-tile-content');
 
-    expect(container.querySelector('details').open).toBe(false);
-    fireEvent.click(container.querySelector('summary'));
-    expect(container.querySelector('details').open).toBe(true);
-    fireEvent.click(container.querySelector('summary'));
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+    expect(button).toHaveAttribute('aria-controls', content.id);
+    expect(content).not.toBeVisible();
+
+    fireEvent.click(button);
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+    expect(content).toBeVisible();
+
+    fireEvent.click(button);
     await waitFor(() => {
-      expect(container.querySelector('details').open).toBe(false);
+      expect(button).toHaveAttribute('aria-expanded', 'false');
     });
+    expect(content).not.toBeVisible();
   });
 
-  it('expands and collapses with usePrefersReducedMotion', async () => {
-    const { container } = render(<OptionsTile {...props} />);
-    const summaryEl = container.querySelector('summary');
-    const detailsEl = container.querySelector('details');
+  it('does not expand when the header outside the chevron button is clicked', () => {
+    const onChange = jest.fn();
+    render(<OptionsTile {...props} onChange={onChange} />);
 
-    fireEvent.click(summaryEl);
-    await waitFor(() => {
-      expect(detailsEl.open).toBe(true);
-    });
-    fireEvent.click(summaryEl);
-    await waitFor(() => {
-      expect(detailsEl.open).toBe(false);
-    });
+    fireEvent.click(screen.getByTestId('options-tile-header'));
+    fireEvent.click(screen.getByRole('heading'));
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
   });
 
   it('emits onToggle when the toggle is clicked', () => {
@@ -309,15 +343,13 @@ describe(componentName, () => {
     expect(onToggle).toHaveBeenCalled();
   });
 
-  it('calls the onChange prop when the tile is opened or closed', () => {
+  it('calls the onChange prop when the tile is opened or closed', async () => {
     const onChange = jest.fn();
-    const { container } = render(
-      <OptionsTile onChange={onChange} {...props} />
-    );
-    fireEvent.click(container.querySelector('summary'));
-    expect(onChange).toHaveBeenCalled();
-    fireEvent.click(container.querySelector('summary'));
-    expect(onChange).toHaveBeenCalled();
+    render(<OptionsTile onChange={onChange} {...props} />);
+    fireEvent.click(screen.getByRole('button'));
+    expect(onChange).toHaveBeenLastCalledWith(true);
+    fireEvent.click(screen.getByRole('button'));
+    await waitFor(() => expect(onChange).toHaveBeenLastCalledWith(false));
   });
 
   it('throws if props.title contains interactive children', () => {

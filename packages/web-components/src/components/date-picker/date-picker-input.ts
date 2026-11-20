@@ -26,6 +26,8 @@ export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
  * The input box for date picker.
  *
  * @element cds-date-picker-input
+ * @csspart input The native `<input>`, for example to change its width.
+ * @slot helper-text - Helper text shown under the input.
  */
 @customElement(`${prefix}-date-picker-input`)
 class CDSDatePickerInput extends FocusMixin(LitElement) {
@@ -120,7 +122,8 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    * Handles `slotchange` event on the default `<slot>`.
    */
   protected _handleSlotChange({ target }: Event) {
-    if (!(target as HTMLSlotElement).name) {
+    const { name } = target as HTMLSlotElement;
+    if (!name || name === 'helper-text') {
       const hasContent = (target as HTMLSlotElement).assignedNodes().some(
         (node) =>
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -352,6 +355,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
         <span>
           <input
             id="input"
+            part="input"
             type="${type}"
             class="${inputClasses}"
             ?disabled="${normalizedProps.disabled}"
@@ -382,7 +386,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
         : formRequirement}
       ${!isFluid
         ? html`
-            <div ?hidden="${hasHelperText}" class="${helperTextClasses}">
+            <div ?hidden="${!hasHelperText}" class="${helperTextClasses}">
               <slot
                 name="helper-text"
                 @slotchange="${this._handleSlotChange}"></slot>

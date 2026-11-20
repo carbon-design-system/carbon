@@ -17,7 +17,7 @@
 
 .options-tile-stories__viewport {
   inline-size: 80vw;
-  max-inline-size: 48rem;
+  max-inline-size: 24rem;
   min-inline-size: 16rem;
 }
 
@@ -29,4 +29,25 @@
 
 .options-tile-stories__dropdown:first-of-type {
   margin-block-end: $spacing-05;
+}
+
+.options-tile-stories__action-dropdown {
+  inline-size: 10rem;
+}
+
+// Same width as the React story's date input.
+.options-tile-stories__action-date cds-date-picker-input::part(input) {
+  inline-size: 9rem;
+}
+
+.options-tile-stories__slot {
+  display: flex;
+  align-items: center;
+  border: 1px dashed var(--cds-border-interactive);
+  background-color: var(--cds-highlight);
+  block-size: 2rem;
+  color: var(--cds-text-secondary);
+  font-size: 0.75rem;
+  inline-size: 10rem;
+  padding-inline: 0.5rem;
 }

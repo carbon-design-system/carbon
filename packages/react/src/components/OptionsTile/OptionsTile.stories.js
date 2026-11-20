@@ -10,32 +10,13 @@ import './story.scss';
 import React, { useEffect, useState } from 'react';
 import mdx from './OptionsTile.mdx';
 import { OptionsTile } from '.';
+import { VolumeUp } from '@carbon/icons-react';
 import Dropdown from '../Dropdown';
-
-export default {
-  title: 'Components/OptionsTile',
-  component: OptionsTile,
-  tags: ['autodocs', 'ibm-products-migrated'],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-  argTypes: {
-    children: {
-      table: { disable: true },
-    },
-    className: {
-      table: { disable: true },
-    },
-    // undefined → toggle not rendered; true/false → toggle on/off
-    enabled: {
-      control: 'select',
-      options: [undefined, true, false],
-      mapping: { undefined: undefined, true: true, false: false },
-    },
-  },
-};
+import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
+import { IconButton } from '../IconButton';
+import { MenuItem } from '../Menu';
+import OverflowMenu from '../OverflowMenu';
 
 // spell-checker:disable
 const languages = [
@@ -80,7 +61,60 @@ const locales = [
 ];
 // spell-checker:enable
 
+// Action components follow the tile size: `sm` (32px) in `lg`, `md` (40px) in `xl`.
+const actionSize = (size) => (size === 'xl' ? 'md' : 'sm');
+
+const actionRenderers = {
+  'None (use enabled)': undefined,
+  Dropdown: ({ size }) => (
+    <Dropdown
+      id="options-tile-action-dropdown"
+      className="options-tile-story__action-dropdown"
+      titleText="Language"
+      label="Language"
+      hideLabel
+      items={languages}
+      initialSelectedItem={languages[0]}
+      size={actionSize(size)}
+    />
+  ),
+  'Icon button': ({ size }) => (
+    <IconButton kind="ghost" label="Mute audio" size={actionSize(size)}>
+      <VolumeUp />
+    </IconButton>
+  ),
+  'Icon button + overflow menu': ({ size }) => (
+    <>
+      <IconButton kind="ghost" label="Mute audio" size={actionSize(size)}>
+        <VolumeUp />
+      </IconButton>
+      <OverflowMenu
+        label="More audio options"
+        size={actionSize(size)}
+        menuAlignment="bottom-end">
+        <MenuItem label="Output device" />
+        <MenuItem label="Audio settings" />
+      </OverflowMenu>
+    </>
+  ),
+  'Date picker': ({ size }) => (
+    <DatePicker
+      datePickerType="single"
+      className="options-tile-story__action-date">
+      <DatePickerInput
+        id="options-tile-action-date"
+        labelText="Date"
+        hideLabel
+        placeholder="mm/dd/yyyy"
+        size={actionSize(size)}
+      />
+    </DatePicker>
+  ),
+  'Custom slot': () => <div className="options-tile-story__slot">Slot</div>,
+};
+
 const defaultArgs = {
+  actionRenderer: 'None (use enabled)',
   enabled: true,
   invalid: false,
   invalidText: 'Your system does not support this configuration',
@@ -95,37 +129,58 @@ const defaultArgs = {
   warnText: 'A restart is required to apply these settings',
 };
 
-export const Default = (args) => {
-  const { enabled: enabledControl, open: openControl, ...rest } = args;
-  // When enabledControl is undefined the toggle is not rendered.
-  // When it is a boolean it seeds the toggle's initial on/off state.
-  const [toggleChecked, setToggleChecked] = useState(
-    enabledControl !== undefined ? !!enabledControl : undefined
-  );
-  const [open, setOpen] = useState(openControl ?? false);
+export default {
+  title: 'Components/OptionsTile',
+  component: OptionsTile,
+  tags: ['autodocs', 'ibm-products-migrated'],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  args: defaultArgs,
+  argTypes: {
+    // Renders custom content in place of the toggle. "None" falls back to the
+    // toggle controlled by `enabled`.
+    actionRenderer: {
+      control: 'select',
+      options: Object.keys(actionRenderers),
+      mapping: actionRenderers,
+    },
+    children: {
+      table: { disable: true },
+    },
+    className: {
+      table: { disable: true },
+    },
+    // undefined → toggle not rendered; true/false → toggle on/off
+    enabled: {
+      control: 'select',
+      options: [undefined, true, false],
+      mapping: { undefined: undefined, true: true, false: false },
+    },
+  },
+};
 
-  // Sync with Storybook controls panel changes
-  useEffect(() => {
-    setOpen(openControl ?? false);
-  }, [openControl]);
+// Local state seeded from a control, re-synced when the control changes.
+const useArgState = (value) => {
+  const [state, setState] = useState(value);
+  useEffect(() => setState(value), [value]);
+  return [state, setState];
+};
 
-  useEffect(() => {
-    setToggleChecked(
-      enabledControl !== undefined ? !!enabledControl : undefined
-    );
-  }, [enabledControl]);
+export const Default = ({ enabled: enabledArg, open: openArg, ...args }) => {
+  const [enabled, setEnabled] = useArgState(enabledArg);
+  const [open, setOpen] = useArgState(openArg);
 
   return (
     <main>
       <OptionsTile
-        {...rest}
+        {...args}
         open={open}
         onChange={setOpen}
-        enabled={toggleChecked}
-        onToggle={(checked) => {
-          setToggleChecked(checked);
-          console.log('Toggle changed:', checked);
-        }}>
+        enabled={enabled}
+        onToggle={setEnabled}>
         <p>
           User interface defines the language the application is displayed in.
           Locale sets the regional display formats for information like time,
@@ -149,33 +204,13 @@ export const Default = (args) => {
     </main>
   );
 };
-Default.args = { ...defaultArgs };
 
-export const Static = (args) => {
-  const { enabled: enabledControl, ...rest } = args;
-  const [toggleChecked, setToggleChecked] = useState(
-    enabledControl !== undefined ? !!enabledControl : undefined
-  );
-
-  // Sync with Storybook controls panel changes to the enabled arg
-  useEffect(() => {
-    setToggleChecked(
-      enabledControl !== undefined ? !!enabledControl : undefined
-    );
-  }, [enabledControl]);
+export const Static = ({ enabled: enabledArg, open, ...args }) => {
+  const [enabled, setEnabled] = useArgState(enabledArg);
 
   return (
     <main>
-      <OptionsTile
-        {...rest}
-        enabled={toggleChecked}
-        onToggle={(checked) => {
-          setToggleChecked(checked);
-          console.log('Toggle changed:', checked);
-        }}
-      />
+      <OptionsTile {...args} enabled={enabled} onToggle={setEnabled} />
     </main>
   );
 };
-Static.args = { ...defaultArgs };
-Static.storyName = 'Static';

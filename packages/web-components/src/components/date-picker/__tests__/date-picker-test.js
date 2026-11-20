@@ -432,4 +432,31 @@ describe('cds-date-picker', () => {
       expect(slugSlot.classList.contains('cds--slug--revert')).to.be.true;
     });
   });
+
+  describe('Helper text', () => {
+    it('shows the helper text only when it is slotted', async () => {
+      const el = await fixture(
+        html`<cds-date-picker-input kind="single"></cds-date-picker-input>`
+      );
+      const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
+      expect(helper.hidden).to.be.true;
+
+      const text = document.createElement('span');
+      text.slot = 'helper-text';
+      text.textContent = 'Pick a date';
+      el.appendChild(text);
+      await new Promise((resolve) => setTimeout(resolve));
+      await el.updateComplete;
+      expect(helper.hidden).to.be.false;
+    });
+
+    it('exposes the native input as a part', async () => {
+      const el = await fixture(
+        html`<cds-date-picker-input kind="single"></cds-date-picker-input>`
+      );
+      expect(el.shadowRoot.querySelector('[part="input"]').tagName).to.equal(
+        'INPUT'
+      );
+    });
+  });
 });
