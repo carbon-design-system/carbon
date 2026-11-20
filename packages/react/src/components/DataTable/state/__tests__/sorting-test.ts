@@ -1,21 +1,27 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+
+import type { DataTableSortState } from '../sortStates';
+import type { SortRowFn } from '../sorting';
 import { sortStates } from '../sortStates';
 
+type Sorting = typeof import('../sorting');
+
 describe('sorting state', () => {
-  let sorting;
-  let initialSortState;
-  let getNextSortDirection;
-  let getNextSortState;
+  let sorting: Sorting;
+  let initialSortState: Sorting['initialSortState'];
+  let getNextSortDirection: Sorting['getNextSortDirection'];
+  let getNextSortState: Sorting['getNextSortState'];
 
   beforeEach(() => {
     jest.mock('../../tools/sorting', () => ({
-      sortRows: jest.fn(() => ['b', 'a', 'c']),
+      sortRows: () => ['b', 'a', 'c'],
     }));
 
     sorting = require('../sorting');
@@ -37,9 +43,9 @@ describe('sorting state', () => {
   });
 
   describe('getNextSortDirection', () => {
-    let mockHeaderA;
-    let mockHeaderB;
-    let mockPrevState;
+    let mockHeaderA: string;
+    let mockHeaderB: string;
+    let mockPrevState: DataTableSortState;
 
     beforeEach(() => {
       mockHeaderA = 'a';
@@ -103,36 +109,36 @@ describe('sorting state', () => {
   });
 
   describe('getNextSortState', () => {
-    let mockProps;
-    let mockState;
+    let mockProps: Parameters<Sorting['getNextSortState']>[0];
+    let mockState: Parameters<Sorting['getNextSortState']>[1];
+
+    const createCell = (rowId: string, header: string) => ({
+      id: `${rowId}:${header}`,
+      value: `row-${rowId}:header-${header}`,
+      isEditable: false,
+      isEditing: false,
+      isValid: true,
+      errors: null,
+      info: { header },
+    });
 
     beforeEach(() => {
       mockProps = {
         locale: 'en',
-        sortRow: jest.fn(),
+        sortRow: jest.fn<SortRowFn>(),
       };
       mockState = {
         rowIds: ['b', 'a', 'c'],
         initialRowOrder: ['a', 'b', 'c'],
+        sortHeaderKey: null,
+        sortDirection: sortStates.NONE,
         cellsById: {
-          'a:a': {
-            value: 'row-a:header-a',
-          },
-          'a:b': {
-            value: 'row-a:header-b',
-          },
-          'a:c': {
-            value: 'row-a:header-c',
-          },
-          'b:a': {
-            value: 'row-b:header-a',
-          },
-          'b:b': {
-            value: 'row-b:header-b',
-          },
-          'b:c': {
-            value: 'row-b:header-c',
-          },
+          'a:a': createCell('a', 'a'),
+          'a:b': createCell('a', 'b'),
+          'a:c': createCell('a', 'c'),
+          'b:a': createCell('b', 'a'),
+          'b:b': createCell('b', 'b'),
+          'b:c': createCell('b', 'c'),
         },
       };
     });

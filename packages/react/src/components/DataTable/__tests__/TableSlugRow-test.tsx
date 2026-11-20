@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@testing-library/jest-dom/jest-globals';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Table, TableBody, TableRow } from '../';
@@ -14,7 +17,9 @@ jest.mock('../../../prop-types/deprecateComponent', () => ({
   deprecateComponent: jest.fn(),
 }));
 
-const Slug = ({ size }) => <span data-testid="slug" data-size={size} />;
+const Slug = ({ size }: { size: string }) => (
+  <span data-testid="slug" data-size={size} />
+);
 
 describe('TableSlugRow', () => {
   beforeEach(() => {
@@ -34,7 +39,7 @@ describe('TableSlugRow', () => {
 
     const cell = screen.getByRole('cell');
 
-    expect(cell).toHaveClass('pew-pew', 'cds--table-column-slug', {
+    expect(cell).toHaveClass('pew-pew cds--table-column-slug', {
       exact: true,
     });
   });
@@ -53,8 +58,7 @@ describe('TableSlugRow', () => {
     const cell = screen.getByRole('cell');
 
     expect(cell).toHaveClass(
-      'cds--table-column-slug',
-      'cds--table-column-slug--active',
+      'cds--table-column-slug cds--table-column-slug--active',
       { exact: true }
     );
     expect(screen.getByTestId('slug')).toHaveAttribute('data-size', 'mini');

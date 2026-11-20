@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it, jest } from '@jest/globals';
+
 import React, { useState, useEffect } from 'react';
 import DataTable, {
   Table,
@@ -48,7 +51,12 @@ describe('TableExpandHeader', () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableExpandHeader isExpanded aria-label="Expand" enableToggle />
+              <TableExpandHeader
+                isExpanded
+                aria-label="Expand"
+                onExpand={jest.fn()}
+                enableToggle
+              />
             </TableRow>
           </TableHead>
         </Table>
@@ -66,6 +74,8 @@ describe('TableExpandHeader', () => {
                 isExpanded
                 enableToggle
                 className="test-class"
+                aria-label="Expand"
+                onExpand={jest.fn()}
               />
             </TableRow>
           </TableHead>
@@ -80,7 +90,12 @@ describe('TableExpandHeader', () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableExpandHeader enableToggle isExpanded />
+              <TableExpandHeader
+                enableToggle
+                isExpanded
+                aria-label="Expand"
+                onExpand={jest.fn()}
+              />
             </TableRow>
           </TableHead>
         </Table>
@@ -100,6 +115,8 @@ describe('TableExpandHeader', () => {
                 enableToggle
                 isExpanded
                 expandIconDescription="Test icon description"
+                aria-label="Expand"
+                onExpand={jest.fn()}
               />
             </TableRow>
           </TableHead>
@@ -116,7 +133,13 @@ describe('TableExpandHeader', () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableExpandHeader isExpanded enableToggle id="test-id" />
+              <TableExpandHeader
+                isExpanded
+                enableToggle
+                id="test-id"
+                aria-label="Expand"
+                onExpand={jest.fn()}
+              />
             </TableRow>
           </TableHead>
         </Table>
@@ -146,7 +169,6 @@ describe('TableExpandHeader', () => {
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader
-                      id="expand"
                       enableToggle={true}
                       {...getExpandHeaderProps({ onExpand })}
                     />
@@ -170,7 +192,9 @@ describe('TableExpandHeader', () => {
 
     it('should update toggle button', async () => {
       const PaginationExample = () => {
-        const [rows, setRows] = useState([]);
+        const [rows, setRows] = useState<
+          { id: string; value: string; timestamp: string }[]
+        >([]);
         const headers = [
           {
             key: 'value',
@@ -215,7 +239,13 @@ describe('TableExpandHeader', () => {
           },
         ];
 
-        const paginate = ({ page, pageSize }) => {
+        const paginate = ({
+          page,
+          pageSize,
+        }: {
+          page: number;
+          pageSize: number;
+        }) => {
           const start = (page - 1) * pageSize;
           const end = page * pageSize;
           return allRows.slice(start, end);

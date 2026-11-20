@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it, jest } from '@jest/globals';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
@@ -24,8 +27,7 @@ describe('TableToolbarAction', () => {
     );
 
     expect(screen.getByTestId('toolbar-action')).toHaveClass(
-      'cds--overflow-menu-options__btn',
-      '🪑',
+      'cds--overflow-menu-options__btn 🪑',
       { exact: true }
     );
     expect(screen.getByTestId('toolbar-action')).toHaveTextContent('Delete');
@@ -36,7 +38,7 @@ describe('TableToolbarAction', () => {
 
   it('should forward the `ref` and call `onClick` when activated', async () => {
     const onClick = jest.fn();
-    const ref = React.createRef();
+    const ref = React.createRef<HTMLElement>();
 
     render(
       <TableToolbarAction closeMenu={jest.fn()} onClick={onClick} ref={ref}>

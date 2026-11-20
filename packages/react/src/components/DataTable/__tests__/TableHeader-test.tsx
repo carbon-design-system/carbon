@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it, jest } from '@jest/globals';
+
 import React from 'react';
 import { Table, TableHead, TableRow, TableHeader } from '../';
 import userEvent from '@testing-library/user-event';
@@ -33,13 +36,16 @@ describe('TableHeader', () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader data-testid="test-id" test="test" />
+              <TableHeader data-testid="test-id" data-test="test" />
             </TableRow>
           </TableHead>
         </Table>
       );
 
-      expect(screen.getByTestId('test-id')).toHaveAttribute('test', 'test');
+      expect(screen.getByTestId('test-id')).toHaveAttribute(
+        'data-test',
+        'test'
+      );
     });
 
     it('should render children as expected', () => {
@@ -274,7 +280,7 @@ describe('TableHeader', () => {
         </Table>
       );
 
-      await userEvent.click(screen.getByRole('button'), 'test');
+      await userEvent.click(screen.getByRole('button'));
       expect(onClick).toHaveBeenCalled();
     });
 

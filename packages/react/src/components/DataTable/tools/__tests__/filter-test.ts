@@ -1,14 +1,16 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+
 import { defaultFilterRows } from '../filter';
 
 describe('defaultFilterRows', () => {
-  const getCellId = (rowId, key) => `${rowId}-${key}`;
+  const getCellId = (rowId: string, key: string) => `${rowId}-${key}`;
 
   const headers = [{ key: 'name' }, { key: 'age' }, { key: 'active' }];
   const cellsById = {

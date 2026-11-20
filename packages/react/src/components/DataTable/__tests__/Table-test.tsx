@@ -1,9 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it, jest } from '@jest/globals';
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
@@ -18,8 +21,23 @@ import {
 
 const prefix = 'cds';
 
+const mockBoundingClientRect = (element: typeof Element, width: number) => {
+  element.prototype.getBoundingClientRect = jest.fn(
+    () => new DOMRect(0, 0, width, 1)
+  );
+};
+
+const mockMeasureText = (width: number) => {
+  Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+    configurable: true,
+    value: jest.fn(() => ({
+      measureText: () => ({ width }),
+    })),
+  });
+};
+
 describe('Table', () => {
-  it.each(['xs', 'sm', 'md', 'lg', 'xl'])(
+  it.each(['xs', 'sm', 'md', 'lg', 'xl'] as const)(
     'should support size=`%s`',
     (size) => {
       render(<Table size={size} />);
@@ -91,25 +109,8 @@ describe('Table', () => {
 
   describe('experimentalAutoAlign', () => {
     it('should align content top when property passed in and content is wrapping', () => {
-      Element.prototype.getBoundingClientRect = jest.fn(() => {
-        return {
-          width: 1,
-          height: 1,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        };
-      });
-      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
-        return {
-          measureText: () => {
-            return {
-              width: 101,
-            };
-          },
-        };
-      });
+      mockBoundingClientRect(Element, 1);
+      mockMeasureText(101);
       render(
         <Table experimentalAutoAlign>
           <TableHead>
@@ -130,25 +131,8 @@ describe('Table', () => {
     });
 
     it('should not align content top when property not passed in and content is wrapping', () => {
-      Element.prototype.getBoundingClientRect = jest.fn(() => {
-        return {
-          width: 1,
-          height: 1,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        };
-      });
-      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
-        return {
-          measureText: () => {
-            return {
-              width: 100,
-            };
-          },
-        };
-      });
+      mockBoundingClientRect(Element, 1);
+      mockMeasureText(100);
       render(
         <Table>
           <TableHead>
@@ -172,25 +156,8 @@ describe('Table', () => {
     });
 
     it('should not align content top when property  passed in and content is not wrapping', () => {
-      Element.prototype.getBoundingClientRect = jest.fn(() => {
-        return {
-          width: 10000,
-          height: 1,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        };
-      });
-      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
-        return {
-          measureText: () => {
-            return {
-              width: 100,
-            };
-          },
-        };
-      });
+      mockBoundingClientRect(Element, 10000);
+      mockMeasureText(100);
       render(
         <Table experimentalAutoAlign>
           <TableHead>
@@ -214,35 +181,9 @@ describe('Table', () => {
     });
 
     it('should only align header top when property passed in and header content is wrapping but body content is not wrapping', () => {
-      HTMLTableCellElement.prototype.getBoundingClientRect = jest.fn(() => {
-        return {
-          width: 10000,
-          height: 1,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        };
-      });
-      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
-        return {
-          measureText: () => {
-            return {
-              width: 100,
-            };
-          },
-        };
-      });
-      HTMLDivElement.prototype.getBoundingClientRect = jest.fn(() => {
-        return {
-          width: 1,
-          height: 1,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        };
-      });
+      mockBoundingClientRect(HTMLTableCellElement, 10000);
+      mockMeasureText(100);
+      mockBoundingClientRect(HTMLDivElement, 1);
 
       render(
         <Table experimentalAutoAlign>
@@ -267,35 +208,9 @@ describe('Table', () => {
     });
 
     it('should only align body top when property passed in and body content is wrapping but header content is not wrapping', () => {
-      HTMLTableCellElement.prototype.getBoundingClientRect = jest.fn(() => {
-        return {
-          width: 1,
-          height: 1,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        };
-      });
-      HTMLDivElement.prototype.getBoundingClientRect = jest.fn(() => {
-        return {
-          width: 10000,
-          height: 1,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        };
-      });
-      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
-        return {
-          measureText: () => {
-            return {
-              width: 100,
-            };
-          },
-        };
-      });
+      mockBoundingClientRect(HTMLTableCellElement, 1);
+      mockBoundingClientRect(HTMLDivElement, 10000);
+      mockMeasureText(100);
       render(
         <Table experimentalAutoAlign>
           <TableHead>

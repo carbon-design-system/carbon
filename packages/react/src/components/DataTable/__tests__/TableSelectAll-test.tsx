@@ -1,9 +1,12 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import '@testing-library/jest-dom/jest-globals';
+import { describe, expect, it, jest } from '@jest/globals';
 
 import React from 'react';
 import { Table, TableHead, TableRow, TableSelectAll } from '../';
@@ -205,7 +208,9 @@ describe('TableSelectAll', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').indeterminate).toEqual(true);
+      expect(
+        screen.getByRole<HTMLInputElement>('checkbox').indeterminate
+      ).toEqual(true);
     });
 
     it('should respect name prop', () => {
@@ -226,7 +231,9 @@ describe('TableSelectAll', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').name).toEqual('select-all-input');
+      expect(screen.getByRole<HTMLInputElement>('checkbox').name).toEqual(
+        'select-all-input'
+      );
     });
   });
 
