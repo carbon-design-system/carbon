@@ -19,6 +19,7 @@ import { AILabel } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
 import { Close } from '@carbon/icons-react';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export interface TearsheetHeaderContentProps {
   /**
@@ -71,6 +72,7 @@ const TearsheetHeaderContent = React.forwardRef<
 
   const carbonPrefix = usePrefix();
   const blockClass = `${carbonPrefix}--tearsheet`;
+  const enableV12Release = useFeatureFlag('enable-v12-release');
   const {
     isSm,
     onClose,
@@ -81,12 +83,13 @@ const TearsheetHeaderContent = React.forwardRef<
     fullyCollapsed,
   } = useContext(TearsheetContext);
 
-  // Normalize decorator (AILabel is always size `sm`)
+  // Normalize decorator. v12: AILabel is always size `sm`; v11: it shrinks to
+  // `xs` once the header is fully collapsed.
   const candidateIsAILabel =
     isValidElement(decorator) && decorator.type === AILabel;
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(decorator as ReactElement<{ size?: string }>, {
-        size: fullyCollapsed ? 'xs' : 'sm',
+        size: enableV12Release || !fullyCollapsed ? 'sm' : 'xs',
       })
     : decorator;
 
@@ -148,7 +151,7 @@ const TearsheetHeaderContent = React.forwardRef<
         label={closeIconDescription || 'Close'}
         onClick={onClose}
         align="left"
-        size={fullyCollapsed ? 'md' : undefined}>
+        size={enableV12Release || fullyCollapsed ? 'md' : 'lg'}>
         <Close
           size={20}
           aria-hidden="true"

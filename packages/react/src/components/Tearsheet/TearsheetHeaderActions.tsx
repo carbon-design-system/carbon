@@ -17,6 +17,7 @@ import React, {
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { TearsheetContext } from './context';
+import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { createOverflowHandler } from '@carbon/utilities';
 import cx from 'classnames';
@@ -60,6 +61,7 @@ export const TearsheetHeaderActions = forwardRef<
 
   const prefix = usePrefix();
   const blockClass = `${prefix}--tearsheet`;
+  const enableV12Release = useFeatureFlag('enable-v12-release');
   const { fullyCollapsed } = useContext(TearsheetContext);
 
   const hasOtherChildType = useRef(false);
@@ -90,16 +92,15 @@ export const TearsheetHeaderActions = forwardRef<
     if (!containerRef.current || hasOtherChildType.current) {
       return;
     }
-    createOverflowHandler({
+    const handler = createOverflowHandler({
       container: containerRef.current,
       gap: 8,
       onChange: (visible, hidden) => {
+        setMenuButtonVisibility(hidden.length > 0);
         setHiddenItems(items?.slice(visible.length));
-        if (hidden.length > 0) {
-          setMenuButtonVisibility(true);
-        }
       },
     });
+    return () => handler?.disconnect();
   }, [containerRef.current]);
 
   return (
@@ -126,7 +127,7 @@ export const TearsheetHeaderActions = forwardRef<
           })}>
           <MenuButton
             ref={menuButtonContainerRef}
-            size={fullyCollapsed ? 'xs' : 'sm'}
+            size={enableV12Release ? 'md' : fullyCollapsed ? 'xs' : 'sm'}
             label="Actions"
             {...menuButtonProps}>
             {hiddenItems.map((item) => {

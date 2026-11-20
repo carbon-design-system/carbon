@@ -7,6 +7,7 @@
  */
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
@@ -24,6 +25,12 @@ $motion-duration: $duration-moderate-02;
 :host-context(#{$prefix}-tearsheet[variant='narrow']) {
   display: flex;
   flex-direction: column;
+
+  @if flags.enabled('enable-v12-release') {
+    justify-content: center;
+    gap: 0;
+    padding-inline-start: 0;
+  }
 
   .#{$block-class}__header-title {
     @include type.type-style('heading-03');
@@ -69,6 +76,11 @@ $motion-duration: $duration-moderate-02;
     );
   inline-size: 100%;
 
+  @if flags.enabled('enable-v12-release') {
+    box-sizing: border-box;
+    padding-inline-start: $spacing-05;
+  }
+
   .#{$block-class}__header-actions,
   .#{$block-class}__header-content
     *:not(
@@ -89,6 +101,11 @@ $motion-duration: $duration-moderate-02;
     display: flex;
     flex-direction: column;
 
+    @if flags.enabled('enable-v12-release') {
+      gap: 0;
+      padding-inline-start: 0;
+    }
+
     .#{$block-class}__header-actions {
       justify-content: flex-start;
       margin-inline-end: 0;
@@ -98,22 +115,35 @@ $motion-duration: $duration-moderate-02;
 
 // ── Decorator (AI label) ─────────────────────────────────────────
 // DOM position: 2nd (after header-actions, before close, before header-content)
-// Visual position: absolute top-right (matches React TearsheetNext)
+// Visual position: absolute top-right (matches React Tearsheet)
 .#{$block-class}__decorator {
   position: absolute;
   z-index: 1;
-  inset-block-start: convert.to-rem(10px);
-  inset-inline-end: $spacing-09;
-  // Transition on base state so it animates in both directions (expand + collapse)
-  transition: inset-block-start $motion-duration motion(entrance, expressive);
 
-  @media screen and (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
+  @if flags.enabled('enable-v12-release') {
+    inset-block-start: convert.to-rem(20px);
+    // Sit to the left of the close button (48px wide).
+    inset-inline-end: $spacing-10;
 
-  // When header is collapsed, shift slightly down — matches React
-  :host-context(#{$prefix}-tearsheet-header[collapsed]) & {
-    inset-block-start: $spacing-03;
+    // When there is no close button, align to the same edge the close button
+    // would have occupied.
+    :host-context(#{$prefix}-tearsheet-header[hide-close-button]) & {
+      inset-inline-end: $spacing-05;
+    }
+  } @else {
+    inset-block-start: convert.to-rem(10px);
+    inset-inline-end: $spacing-09;
+    // Transition on base state so it animates in both directions (expand + collapse)
+    transition: inset-block-start $motion-duration motion(entrance, expressive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    // When header is collapsed, shift slightly down — matches React
+    :host-context(#{$prefix}-tearsheet-header[collapsed]) & {
+      inset-block-start: $spacing-03;
+    }
   }
 }
 
@@ -123,15 +153,24 @@ $motion-duration: $duration-moderate-02;
 .#{$block-class}__close-button {
   position: absolute;
   z-index: 1;
-  inset-block-start: 0;
-  inset-inline-end: 0;
 
-  // Animate size change (lg → md on collapse) — matches React
-  .#{$prefix}--modal-close {
-    transition: all $motion-duration ease;
+  @if flags.enabled('enable-v12-release') {
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  } @else {
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
 
-    @media screen and (prefers-reduced-motion: reduce) {
-      transition: none;
+  // v11 only: animate size change (lg → md on collapse) — matches React.
+  // v12 keeps a fixed `md` size.
+  @if not flags.enabled('enable-v12-release') {
+    .#{$prefix}--modal-close {
+      transition: all $motion-duration ease;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 }
@@ -140,7 +179,12 @@ $motion-duration: $duration-moderate-02;
   display: flex;
   justify-content: flex-end;
   order: 2; /* Visual order: appears on the right on desktop */
-  margin-block-start: -14px;
+
+  @if flags.enabled('enable-v12-release') {
+    align-items: flex-start;
+  } @else {
+    margin-block-start: -14px;
+  }
 
   @include breakpoint-down(md) {
     order: 0; /* Reset to DOM order on mobile (header-actions first) */
@@ -180,11 +224,18 @@ $motion-duration: $duration-moderate-02;
 
   // Header title styling when collapsed
   .#{$block-class}__header-title {
-    @include type.type-style('label-02');
+    @if flags.enabled('enable-v12-release') {
+      @include type.type-style('heading-03');
+    } @else {
+      @include type.type-style('label-02');
+    }
 
     align-items: center;
-    // Fixed block-size keeps the title row at the same height as the close button
-    block-size: $spacing-08;
+
+    @if not flags.enabled('enable-v12-release') {
+      // Fixed block-size keeps the title row at the same height as the close button
+      block-size: $spacing-08;
+    }
     // Gap between title-start icon and title text when collapsed
     gap: $spacing-03;
     margin-block-start: $spacing-02;
@@ -233,8 +284,14 @@ $motion-duration: $duration-moderate-02;
   @include breakpoint(md) {
     .#{$block-class}__header-actions {
       display: flex;
-      align-items: center;
       margin-block: 0;
+
+      @if flags.enabled('enable-v12-release') {
+        align-items: flex-start;
+      } @else {
+        align-items: center;
+      }
+
       transition: margin-block $motion-duration ease;
 
       @media screen and (prefers-reduced-motion: reduce) {
@@ -249,8 +306,13 @@ $motion-duration: $duration-moderate-02;
     align-items: center;
 
     ::slotted(*) {
-      block-size: $spacing-05;
-      inline-size: $spacing-05;
+      @if flags.enabled('enable-v12-release') {
+        block-size: $spacing-06;
+        inline-size: $spacing-06;
+      } @else {
+        block-size: $spacing-05;
+        inline-size: $spacing-05;
+      }
     }
   }
 }

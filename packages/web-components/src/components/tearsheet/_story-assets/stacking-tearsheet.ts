@@ -13,6 +13,7 @@ import '../../../components/button/index';
 import '../../../components/text-input/index';
 import styles from '../story-styles.scss?lit';
 import { iconLoader } from '../../../globals/internal/icon-loader';
+import { getHeaderActionSize } from '../tearsheet-helpers';
 import BottomPanelOpen32 from '@carbon/icons/es/bottom-panel--open/32';
 
 @customElement('stacking-tearsheet-demo')
@@ -160,7 +161,7 @@ export class StackingTearsheetDemo extends LitElement {
               </span>
               <div slot="header-actions">
                 <cds-button
-                  size="sm"
+                  size="${getHeaderActionSize()}"
                   kind="tertiary"
                   @click="${(e: Event) => this._toggleTearsheet2(e)}"
                   aria-haspopup="dialog">
@@ -213,7 +214,7 @@ export class StackingTearsheetDemo extends LitElement {
               </span>
               <div slot="header-actions">
                 <cds-button
-                  size="sm"
+                  size="${getHeaderActionSize()}"
                   kind="tertiary"
                   @click="${(e: Event) => this._toggleTearsheet3(e)}"
                   aria-haspopup="dialog">
