@@ -13,4 +13,5 @@ export { DatePickerSkeleton } from './components/DatePickerSkeleton';
 // Types
 export type { DatePickerProps } from './components/DatePicker';
 export type { DatePickerInputProps } from './components/DatePickerInput';
+export type { DatePickerDay } from './components/Calendar';
 export type { DatePickerSkeletonProps } from './components/DatePickerSkeleton';

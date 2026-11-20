@@ -356,3 +356,33 @@ describe('DatePicker v12 focus restoration', () => {
     });
   });
 });
+
+describe('DatePicker v12 custom day content', () => {
+  it('renders renderDay content and uses getDayLabel as the accessible label', async () => {
+    const user = userEvent.setup();
+    const isEventDay = (day) => day.date.toString() === '2026-01-01';
+
+    render(
+      <DatePicker
+        datePickerType="single"
+        renderDay={(day) => (
+          <span data-testid={`day-${day.date.toString()}`}>{day.date.day}</span>
+        )}
+        getDayLabel={(day) =>
+          isEventDay(day) ? `${day.label}, 2 events` : day.label
+        }>
+        <DatePickerInput id="custom-day" labelText="Date input" />
+      </DatePicker>
+    );
+
+    await user.click(screen.getByLabelText('Date input'));
+
+    const eventDay = await screen.findByRole('button', {
+      name: 'January 1, 2026, 2 events',
+    });
+    expect(eventDay).toContainElement(screen.getByTestId('day-2026-01-01'));
+    expect(
+      screen.getByRole('button', { name: 'January 2, 2026' })
+    ).toBeInTheDocument();
+  });
+});

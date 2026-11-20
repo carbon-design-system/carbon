@@ -13,6 +13,7 @@ import FormAssociatedMixin from '../../../../globals/mixins/form-associated';
 import HostListenerMixin from '../../../../globals/mixins/host-listener';
 import HostListener from '../../../../globals/decorators/host-listener';
 import CDSDatePickerInput from './date-picker-input';
+import type { DatePickerDay } from './calendar-renderer';
 import { WebComponentAdapter } from '../adapters/web-component-adapter.js';
 import type { StateTransition } from '@carbon/utilities/date-picker';
 import {
@@ -572,6 +573,20 @@ class CDSDatePicker extends FormAssociatedMixin(
   locale = 'en';
 
   /**
+   * Custom content for each calendar day cell, e.g. event indicators.
+   * Return a Lit template. Defaults to the day number.
+   */
+  @property({ attribute: false })
+  renderDay?: (day: DatePickerDay) => unknown;
+
+  /**
+   * Custom accessible label for each calendar day cell. Use it to announce
+   * what `renderDay` shows visually, e.g. "November 20, 2026, 2 events".
+   */
+  @property({ attribute: false })
+  getDayLabel?: (day: DatePickerDay) => string;
+
+  /**
    * Controls the disabled state of the input
    */
   @property({ type: Boolean, reflect: true })
@@ -1055,6 +1070,8 @@ class CDSDatePicker extends FormAssociatedMixin(
                 .rangeMode="${mode === DATE_PICKER_MODE.RANGE}"
                 .dateFormat="${this.dateFormat || 'm/d/Y'}"
                 .locale="${this.locale}"
+                .renderDay="${this.renderDay}"
+                .getDayLabel="${this.getDayLabel}"
                 .minDate="${parseDateToPlainDate(this.minDate) || undefined}"
                 .maxDate="${parseDateToPlainDate(this.maxDate) || undefined}"
                 .selectedDates="${selectedDates}"

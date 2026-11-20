@@ -296,3 +296,31 @@ describe('cds-preview-date-picker click-to-close', () => {
     ).to.equal(null);
   });
 });
+
+describe('cds-preview-date-picker custom day content', () => {
+  it('renders renderDay content and uses getDayLabel as the aria-label', async () => {
+    const el = await fixture(html`
+      <cds-preview-date-picker
+        .renderDay="${(day) =>
+          html`<span class="custom-day">${day.date.day}</span>`}"
+        .getDayLabel="${(day) => `${day.label}, custom`}">
+        <cds-preview-date-picker-input kind="single" label-text="Date">
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
+    `);
+    el._adapter.send('INPUT_FOCUS', { inputType: 'from' });
+    el._adapter.send('CALENDAR_OPEN');
+    await el.updateComplete;
+
+    const calendar = el.shadowRoot?.querySelector(
+      'cds-preview-date-picker-calendar'
+    );
+    await calendar.updateComplete;
+    const day = calendar.shadowRoot?.querySelector(
+      '.cds--date-picker__day:not(.prevMonthDay):not(.nextMonthDay)'
+    );
+
+    expect(day.querySelector('.custom-day')).to.exist;
+    expect(day.getAttribute('aria-label')).to.match(/, custom$/);
+  });
+});
