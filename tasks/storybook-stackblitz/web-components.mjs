@@ -21,9 +21,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import * as prettier from 'prettier';
 import {
   analyzeCsf,
   extractStory,
@@ -32,9 +30,22 @@ import {
   statementText,
   ts,
 } from './csf.mjs';
+import {
+  ProjectBuilder,
+  STYLE_OR_ASSET,
+  format,
+  freeName,
+  kebab,
+  metaTitle,
+  packageJson as projectPackageJson,
+  posix,
+  resolveSource,
+  storyNames,
+} from './project.mjs';
+
+export { storyNames };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const prettierConfig = createRequire(import.meta.url)('prettier-config-carbon');
 export const PACKAGE_ROOT = path.resolve(
   __dirname,
   '..',
@@ -44,10 +55,7 @@ export const PACKAGE_ROOT = path.resolve(
 );
 const SRC = path.join(PACKAGE_ROOT, 'src');
 const PACKAGE_NAME = '@carbon/web-components';
-const STORY_FILES_DIR = 'src/story-files';
 const SHIM_FILE = 'src/storybook-shim.ts';
-
-const STYLE_OR_ASSET = /\.(s?css|svg|png|jpe?g|gif|webp|mp4|json)$/;
 
 // mirror `esInputs` globs in packages/web-components/tasks/build.js;
 //  all `src/**\/*.ts` excluding stories, declarations, polyfills, and examples
@@ -69,184 +77,19 @@ function isStoryOnly(file) {
   return /(^|\/)(_story-assets|stories|__stories__)\//.test(rel);
 }
 
-function resolveSource(fromFile, specifier) {
-  const base = path.resolve(path.dirname(fromFile), specifier);
-  // TS ESM specifiers name the emitted `.js`; the source next to it is `.ts`
-  const stem = base.replace(/\.m?js$/, '');
-  for (const candidate of [
-    `${stem}.ts`,
-    `${stem}.js`,
-    base,
-    path.join(base, 'index.ts'),
-    path.join(base, 'index.js'),
-  ]) {
-    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
-      return candidate;
-    }
-  }
-  return null;
-}
+// how a project imports a source module the package publishes
+const publishedSpecifier = (file) =>
+  isPublished(file) && !isStoryOnly(file)
+    ? `${PACKAGE_NAME}/es/${posix(path.relative(SRC, file)).replace(/\.ts$/, '.js')}`
+    : null;
 
-function resolveStyle(fromFile, specifier) {
-  const base = path.resolve(path.dirname(fromFile), specifier);
-  const dir = path.dirname(base);
-  const name = path.basename(base);
-  for (const candidate of [
-    base,
-    `${base}.scss`,
-    path.join(dir, `_${name}.scss`),
-    path.join(dir, `_${name}`),
-    path.join(base, '_index.scss'),
-    path.join(base, 'index.scss'),
-  ]) {
-    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
-      return candidate;
-    }
-  }
-  return null;
-}
-
-const packageNameOf = (specifier) =>
-  specifier.startsWith('@')
-    ? specifier.split('/').slice(0, 2).join('/')
-    : specifier.split('/')[0];
-
-const posix = (p) => p.split(path.sep).join('/');
-
-// project path for a copied (vendored) file
-const vendoredPath = (file) =>
-  `${STORY_FILES_DIR}/${posix(path.relative(PACKAGE_ROOT, file))}`;
-
-const relativeSpecifier = (fromProjectPath, toProjectPath) => {
-  let rel = posix(
-    path.posix.relative(path.posix.dirname(fromProjectPath), toProjectPath)
-  );
-  if (!rel.startsWith('.')) rel = `./${rel}`;
-  return rel.replace(/\.ts$/, '');
-};
-
-// collect project files, copying story-only files as they're referenced and
-// rewriting module specifiers
-class ProjectBuilder {
-  constructor() {
-    this.files = new Map(); // project path -> contents
-    this.packages = new Set([PACKAGE_NAME]);
-    this.usesShim = false;
-    this.usesLitCss = false;
-  }
-
-  // new specifier for `specifier`, imported from `fromFile`
-  rewrite(specifier, fromFile, fromProjectPath) {
-    const [bare, query = ''] = specifier.split('?');
-    if (/^(storybook|@storybook)\//.test(bare)) {
-      this.usesShim = true;
-      return relativeSpecifier(fromProjectPath, SHIM_FILE);
-    }
-    if (!bare.startsWith('.')) {
-      this.packages.add(packageNameOf(bare));
-      return specifier;
-    }
-    if (query === 'lit') this.usesLitCss = true;
-    if (STYLE_OR_ASSET.test(bare)) {
-      const file = path.resolve(path.dirname(fromFile), bare);
-      this.copy(file);
-      const target = relativeSpecifier(fromProjectPath, vendoredPath(file));
-      return query ? `${target}?${query}` : target;
-    }
-    const file = resolveSource(fromFile, bare);
-    if (!file) return specifier;
-    if (isPublished(file) && !isStoryOnly(file)) {
-      const rel = posix(path.relative(SRC, file)).replace(/\.ts$/, '.js');
-      return `${PACKAGE_NAME}/es/${rel}`;
-    }
-    this.copy(file);
-    return relativeSpecifier(fromProjectPath, vendoredPath(file));
-  }
-
-  // copoy story-only file into project; rewrite what it imports
-  copy(file) {
-    const target = vendoredPath(file);
-    if (this.files.has(target) || !fs.existsSync(file)) return;
-    const text = fs.readFileSync(file, 'utf8');
-    this.files.set(target, text); // placeholder, guards against cycles
-    if (/\.s[ac]ss$/.test(file)) {
-      this.files.set(target, this.rewriteStyle(text, file, target));
-    } else if (/\.[jt]sx?$/.test(file)) {
-      this.files.set(target, this.rewriteModule(text, file, target));
-    }
-  }
-
-  rewriteStyle(text, file) {
-    // relative partials
-    for (const match of text.matchAll(
-      /@(?:use|forward|import)\s+['"](\.[^'"]+)['"]/g
-    )) {
-      const partial = resolveStyle(file, match[1]);
-      if (partial) this.copy(partial);
-    }
-    return text;
-  }
-
-  rewriteModule(text, file, projectPath) {
-    const sourceFile = parseModule(file, text);
-    const edits = [];
-    for (const statement of sourceFile.statements) {
-      const isImport = ts.isImportDeclaration(statement);
-      const isReExport =
-        ts.isExportDeclaration(statement) && statement.moduleSpecifier;
-      if (!isImport && !isReExport) continue;
-      if (isImport && statement.importClause?.isTypeOnly) {
-        edits.push([statement.getStart(sourceFile), statement.getEnd(), '']);
-        continue;
-      }
-      const specifier = statement.moduleSpecifier;
-      const next = this.rewrite(specifier.text, file, projectPath);
-      if (next !== specifier.text) {
-        edits.push([
-          specifier.getStart(sourceFile) + 1,
-          specifier.getEnd() - 1,
-          next,
-        ]);
-      }
-    }
-    let out = text;
-    for (const [start, end, replacement] of edits.sort((a, b) => b[0] - a[0])) {
-      out = out.slice(0, start) + replacement + out.slice(end);
-    }
-    return out;
-  }
-
-  // `import` line for an extracted story import
-  importLine(sourceFile, { declaration, names }, file) {
-    const specifier = this.rewrite(
-      declaration.moduleSpecifier.text,
-      file,
-      'src/main.ts'
-    );
-    const clause = declaration.importClause;
-    if (!clause) return `import '${specifier}';`;
-    const parts = [];
-    if (clause.name && names.has(clause.name.text))
-      parts.push(clause.name.text);
-    const bindings = clause.namedBindings;
-    if (
-      bindings &&
-      ts.isNamespaceImport(bindings) &&
-      names.has(bindings.name.text)
-    ) {
-      parts.push(`* as ${bindings.name.text}`);
-    }
-    if (bindings && ts.isNamedImports(bindings)) {
-      const named = bindings.elements
-        .filter((e) => !e.isTypeOnly && names.has(e.name.text))
-        .map((e) => e.getText(sourceFile));
-      if (named.length) parts.push(`{ ${named.join(', ')} }`);
-    }
-    return parts.length
-      ? `import ${parts.join(', ')} from '${specifier}';`
-      : null;
-  }
-}
+const newBuilder = () =>
+  new ProjectBuilder({
+    packageRoot: PACKAGE_ROOT,
+    publishedSpecifier,
+    shimFile: SHIM_FILE,
+    packages: [PACKAGE_NAME],
+  });
 
 // global styles
 const STYLES = `@use '@carbon/styles/scss/reset';
@@ -355,19 +198,7 @@ function packageJson(name, packages, { usesLitCss }) {
   for (const pkg of packages) dependencies[pkg] = VERSIONS[pkg] ?? 'latest';
   const devDependencies = { sass: 'latest', vite: 'latest' };
   if (usesLitCss) devDependencies['vite-plugin-lit-css'] = 'latest';
-  const sort = (o) => Object.fromEntries(Object.entries(o).sort());
-  return `${JSON.stringify(
-    {
-      name,
-      private: true,
-      type: 'module',
-      scripts: { dev: 'vite', build: 'vite build' },
-      dependencies: sort(dependencies),
-      devDependencies: sort(devDependencies),
-    },
-    null,
-    2
-  )}\n`;
+  return projectPackageJson(name, { dependencies, devDependencies });
 }
 
 const viteConfig = ({ usesLitCss }) =>
@@ -397,38 +228,6 @@ const indexHtml = (title) => `<!DOCTYPE html>
 </html>
 `;
 
-// a name not already bound at the top level of the generated module
-function freeName(preferred, taken) {
-  if (!taken.has(preferred)) return preferred;
-  const prefixed = `story${preferred[0].toUpperCase()}${preferred.slice(1)}`;
-  if (!taken.has(prefixed)) return prefixed;
-  let i = 2;
-  while (taken.has(`${preferred}${i}`)) i++;
-  return `${preferred}${i}`;
-}
-
-const metaTitle = (sourceFile, meta) => {
-  if (!meta || !ts.isObjectLiteralExpression(meta)) return null;
-  const title = meta.properties.find(
-    (p) => ts.isPropertyAssignment(p) && p.name.getText(sourceFile) === 'title'
-  );
-  return title && ts.isStringLiteralLike(title.initializer)
-    ? title.initializer.text
-    : null;
-};
-
-const kebab = (s) =>
-  s
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/[^a-zA-Z0-9]+/g, '-')
-    .replace(/^-|-$/g, '')
-    .toLowerCase();
-
-/** Story export names (what the Vite plugin attaches the action to). */
-export function storyNames(file) {
-  return analyzeCsf(parseModule(file)).stories.map((s) => s.name);
-}
-
 /**
  * Generate a StackBlitz project per story in `file`.
  * Returns `{ [storyName]: { title, description, template, openFile, files } }`,
@@ -443,9 +242,11 @@ export async function generateProjects(file) {
 
   for (const { name } of csf.stories) {
     const extracted = extractStory(sourceFile, csf, name);
-    const builder = new ProjectBuilder();
+    const builder = newBuilder();
     const imports = extracted.imports
-      .map((entry) => builder.importLine(sourceFile, entry, file))
+      .map((entry) =>
+        builder.importLine(sourceFile, entry, file, 'src/main.ts')
+      )
       .filter(Boolean);
 
     const taken = new Set(extracted.topLevelNames);
@@ -483,7 +284,11 @@ export async function generateProjects(file) {
 for (const [key, value] of Object.entries(${argsName})) {
   const mapping =
     ${lookup};
-  if (mapping && typeof value === 'string' && value in mapping) {
+  if (
+    mapping &&
+    (typeof value === 'string' || typeof value === 'number') &&
+    value in mapping
+  ) {
     (${argsName} as any)[key] = mapping[value];
   }
 }`;
@@ -532,9 +337,8 @@ for (const [key, value] of Object.entries(${argsName})) {
     } else {
       imports.unshift(`import { ${renderBinding} } from 'lit';`);
     }
-    const main = await prettier.format(
-      `${imports.join('\n')}\n\n${body.join('\n\n')}\n`,
-      { ...prettierConfig, parser: 'typescript' }
+    const main = await format(
+      `${imports.join('\n')}\n\n${body.join('\n\n')}\n`
     );
 
     builder.packages.add('lit');

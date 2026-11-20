@@ -236,10 +236,9 @@ export default defineConfig(
       '**/types/',
 
       'packages/*/examples/*',
-      'packages/*/src/examples/**/example/**',
 
-      // Web components pattern code
-      'packages/web-components/src/examples/**/!(*.stories).ts',
+      // Pattern code (stories are linted)
+      'packages/{react,web-components}/src/examples/**/!(*.stories).@(js|jsx|ts|tsx)',
 
       // Components
       'packages/components/demo/*.css',

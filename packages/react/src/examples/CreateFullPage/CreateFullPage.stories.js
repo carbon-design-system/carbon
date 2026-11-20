@@ -8,11 +8,11 @@
 import React from 'react';
 import './_storybook-styles.scss';
 import DocsPage from './CreateFullPage.mdx';
-import { StandardCreateFullPage as StandardCreateFullPageComponent } from './example/preview-components/StandardCreateFullPage';
-import { CreateFullPageWithSections as CreateFullPageWithSectionsComponent } from './example/preview-components/CreateFullPageWithSections';
-import { CreateFullPageWithHeader as CreateFullPageWithHeaderComponent } from './example/preview-components/CreateFullPageWithHeader';
-import { CreateFullPageWithStepInErrorState as CreateFullPageWithStepInErrorStateComponent } from './example/preview-components/CreateFullPageWithStepInErrorState';
-import { CreateFullPageWithGlobalHeader as CreateFullPageWithGlobalHeaderComponent } from './example/preview-components/CreateFullPageWithGlobalHeader';
+import { StandardCreateFullPage as StandardCreateFullPageComponent } from './preview-components/StandardCreateFullPage';
+import { CreateFullPageWithSections as CreateFullPageWithSectionsComponent } from './preview-components/CreateFullPageWithSections';
+import { CreateFullPageWithHeader as CreateFullPageWithHeaderComponent } from './preview-components/CreateFullPageWithHeader';
+import { CreateFullPageWithStepInErrorState as CreateFullPageWithStepInErrorStateComponent } from './preview-components/CreateFullPageWithStepInErrorState';
+import { CreateFullPageWithGlobalHeader as CreateFullPageWithGlobalHeaderComponent } from './preview-components/CreateFullPageWithGlobalHeader';
 
 export default {
   title: 'Examples/Create flows/Create Full Page',

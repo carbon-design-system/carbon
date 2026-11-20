@@ -192,12 +192,12 @@ const keyOf = (sourceFile, property) =>
   property.name?.getText(sourceFile).replace(/^['"]|['"]$/g, '');
 
 // object literal props that aren't Storybook-specific
-function runtimeProperties(sourceFile, object, { keepArgTypes }) {
+function runtimeProperties(sourceFile, object, { keepArgTypes, keep }) {
   if (!object || !ts.isObjectLiteralExpression(object)) return [];
   return object.properties.filter((property) => {
     const key = keyOf(sourceFile, property);
     if (key === 'argTypes') return keepArgTypes;
-    return !STORYBOOK_ONLY_KEYS.has(key);
+    return keep.has(key) || !STORYBOOK_ONLY_KEYS.has(key);
   });
 }
 
@@ -311,8 +311,12 @@ function storyArgNames(sourceFile, csf, nodes) {
  * - `imports`: side-effect imports plus the imports binding referenced names,
  *   each as `{ declaration, names }` (names = the referenced local bindings)
  * - `usesArgTypesMapping`: whether `argTypes.mapping` must be applied
+ *
+ * `options.keep`: Storybook keys the framework renders with, e.g. React's
+ * `component` (a story without `render` renders `meta.component`)
  */
-export function extractStory(sourceFile, csf, storyName) {
+export function extractStory(sourceFile, csf, storyName, { keep = [] } = {}) {
+  keep = new Set(keep);
   const entry = csf.stories.find((s) => s.name === storyName);
   if (!entry) throw new Error(`No story export named "${storyName}"`);
 
@@ -343,7 +347,10 @@ export function extractStory(sourceFile, csf, storyName) {
     // Story object entries, as source text
     let entries;
     if (init && ts.isObjectLiteralExpression(init)) {
-      entries = runtimeProperties(sourceFile, init, { keepArgTypes }).map(text);
+      entries = runtimeProperties(sourceFile, init, {
+        keepArgTypes,
+        keep,
+      }).map(text);
     } else if (
       init &&
       (ts.isArrowFunction(init) || ts.isFunctionExpression(init))
@@ -367,8 +374,13 @@ export function extractStory(sourceFile, csf, storyName) {
 
     let renderFrom;
     const storyHasRender = entries.some((e) => /^render\s*[:(]/.test(e));
-    const metaProps = runtimeProperties(sourceFile, csf.meta, { keepArgTypes });
-    const metaHasRender = hasKey(sourceFile, metaProps, 'render');
+    const metaProps = runtimeProperties(sourceFile, csf.meta, {
+      keepArgTypes,
+      keep,
+    });
+    const metaHasRender =
+      hasKey(sourceFile, metaProps, 'render') ||
+      (keep.has('component') && hasKey(sourceFile, metaProps, 'component'));
     const metaHasArgs = hasKey(sourceFile, metaProps, 'args');
 
     if (storyHasRender) renderFrom = 'story';
@@ -383,7 +395,12 @@ export function extractStory(sourceFile, csf, storyName) {
 
     // Transitive closure over referenced top-level names
     const roots = [
-      parseModule('story.ts', `(${storySource});(${metaSource ?? '{}'});`),
+      parseModule(
+        sourceFile.languageVariant === ts.LanguageVariant.JSX
+          ? 'story.tsx'
+          : 'story.ts',
+        `(${storySource});(${metaSource ?? '{}'});`
+      ),
     ];
     const needed = new Set();
     for (const root of roots) referencedNames(root, topLevel, needed);
