@@ -62,8 +62,8 @@ test.describe('@avt TimePicker', () => {
     await page.keyboard.press('Tab');
     const selectTimeZone = page.locator('#time-picker-select-2');
     await page.keyboard.press('Space');
-    await selectTimeZone.selectOption('Time zone 1');
-    await expect(selectTimeZone).toHaveValue('Time zone 1');
+    await selectTimeZone.selectOption('America/New_York');
+    await expect(selectTimeZone).toHaveValue('America/New_York');
   });
 
   test('@avt-keyboard-nav TimePicker with layer', async ({ page }) => {
