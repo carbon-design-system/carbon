@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import '@carbon/web-components/es/components/radio-button/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
 import { html, fixture, expect } from '@open-wc/testing';
 
 describe('cds-radio-button-group', () => {
@@ -183,6 +184,32 @@ describe('cds-radio-button-group', () => {
     expect(rb1?.checked).to.be.false;
     expect(rb2?.checked).to.be.true;
   });
+
+  it('should lay out the first radio button below the legend with an AI label', async () => {
+    const el = await fixture(html`
+      <cds-radio-button-group legend-text="test" orientation="vertical">
+        <cds-ai-label>AI content</cds-ai-label>
+        <cds-radio-button label-text="Radio 1" value="1"></cds-radio-button>
+        <cds-radio-button label-text="Radio 2" value="2"></cds-radio-button>
+      </cds-radio-button-group>
+    `);
+    await el.updateComplete;
+
+    const legend = el.shadowRoot?.querySelector('legend');
+    const aiLabel = el.querySelector('cds-ai-label');
+    const firstRadio = el.querySelector('cds-radio-button');
+
+    const legendBox = legend.getBoundingClientRect();
+    const aiLabelBox = aiLabel.getBoundingClientRect();
+    const radioBox = firstRadio.getBoundingClientRect();
+
+    // The AI label sits on the same row as the legend text
+    expect(aiLabelBox.top).to.be.at.least(legendBox.top);
+    expect(aiLabelBox.bottom).to.be.at.most(legendBox.bottom);
+    // The first radio button starts below the legend, not beside it
+    expect(radioBox.top).to.be.at.least(legendBox.bottom);
+  });
+
   describe('Invalid and Warning States', () => {
     it('should show invalid message when invalid prop is true', async () => {
       const el = await fixture(html`

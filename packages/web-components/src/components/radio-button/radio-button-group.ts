@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -290,7 +290,8 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       [`${prefix}--radio-button-group--invalid`]:
         !readOnly && !disabled && invalid,
       [`${prefix}--radio-button-group--warning`]: showWarning,
-      [`${prefix}--radio-button-group--slug`]: hasAILabel,
+      [`${prefix}--radio-button-group--slug`]: hasAILabel, // TODO: Remove in v12
+      [`${prefix}--radio-button-group--decorator`]: hasAILabel,
     });
 
     return html` <fieldset
