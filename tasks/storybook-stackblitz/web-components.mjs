@@ -59,7 +59,7 @@ function isPublished(file) {
     rel.endsWith('.d.ts') ||
     rel === 'globals/internal/storybook-cdn.ts' ||
     rel.startsWith('polyfills/') ||
-    /^examples\/.+\/example\//.test(rel)
+    rel.startsWith('examples/')
   );
 }
 
@@ -569,8 +569,22 @@ for (const [key, value] of Object.entries(${argsName})) {
 // Registration check
 // ---------------------------------------------------------------------------
 
+const SELF_ES = '@carbon/web-components/es/';
 const DECLARES = /@customElement\(\s*`\$\{prefix\}-([a-z0-9-]+)`/g;
 const IMPORTS = /from\s*['"]([^'"]+)['"]|import\s*['"]([^'"]+)['"]/g;
+
+// imports that survive compilation; TS drops imports only used as types
+function runtimeCode(file, text) {
+  if (!file.endsWith('.ts')) return text;
+  return ts.transpileModule(text, {
+    fileName: file,
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ESNext,
+      experimentalDecorators: true,
+    },
+  }).outputText;
+}
 
 let declaredTags;
 /** Every `cds-*` tag a source module declares, keyed by tag. */
@@ -616,15 +630,19 @@ export function findUnregisteredTags(file) {
         }
       }
     }
-    for (const m of text.matchAll(IMPORTS)) {
-      const specifier = m[1] ?? m[2];
+    for (const m of runtimeCode(current, text).matchAll(IMPORTS)) {
+      let specifier = m[1] ?? m[2];
+      // the package's own published modules map back to their source
+      if (specifier.startsWith(SELF_ES)) {
+        specifier = path.join(SRC, specifier.slice(SELF_ES.length));
+      }
       if (
-        !specifier.startsWith('.') ||
+        !(specifier.startsWith('.') || path.isAbsolute(specifier)) ||
         STYLE_OR_ASSET.test(specifier.split('?')[0])
       )
         continue;
       const next = resolveSource(current, specifier);
-      if (next) stack.push(next);
+      if (next && /\.[jt]s$/.test(next)) stack.push(next);
     }
   }
   return [...rendered]
@@ -633,13 +651,9 @@ export function findUnregisteredTags(file) {
     .map((tag) => ({ tag, module: declared.get(tag) }));
 }
 
-/** Stories modules that get a StackBlitz action (pattern examples excluded). */
+/** Stories modules that get a StackBlitz action. */
 export function isStackBlitzStory(file) {
-  return (
-    file.startsWith(SRC + path.sep) &&
-    file.endsWith('.stories.ts') &&
-    !file.startsWith(path.join(SRC, 'examples') + path.sep)
-  );
+  return file.startsWith(SRC + path.sep) && file.endsWith('.stories.ts');
 }
 
 export function listStoryFiles() {

@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import './create-side-panel/example/src/index';
+import './create-side-panel/index';
 import './_story-styles.scss';
 
 export default {

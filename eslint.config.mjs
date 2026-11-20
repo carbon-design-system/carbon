@@ -238,6 +238,9 @@ export default defineConfig(
       'packages/*/examples/*',
       'packages/*/src/examples/**/example/**',
 
+      // Web components pattern code
+      'packages/web-components/src/examples/**/!(*.stories).ts',
+
       // Components
       'packages/components/demo/*.css',
       'packages/components/demo/*.map',

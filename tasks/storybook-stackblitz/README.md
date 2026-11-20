@@ -48,8 +48,6 @@ import { webComponentsStackBlitz } from '../../../tasks/storybook-stackblitz/web
 plugins: [storybookStackBlitz(webComponentsStackBlitz)];
 ```
 
-Stories under `src/examples/` (product patterns) don't get the action yet.
-
 ## Check
 
 ```sh
