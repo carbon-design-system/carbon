@@ -464,6 +464,8 @@ $copy-btn-feedback: $background-inverse !default;
     position: relative;
   }
 
+  $scrollbar-block-size: var(--#{$prefix}-snippet-scrollbar-block-size, 0px);
+
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     inline-size: 100%;
     mask-composite: intersect;
@@ -474,8 +476,9 @@ $copy-btn-feedback: $background-inverse !default;
       ),
       linear-gradient(
         to bottom,
-        #000000 calc(100% - #{$spacing-05}),
-        transparent 100%
+        #000000 calc(100% - #{$spacing-05} - #{$scrollbar-block-size}),
+        transparent calc(100% - #{$scrollbar-block-size}),
+        #000000 calc(100% - #{$scrollbar-block-size})
       );
     pointer-events: auto;
   }
@@ -496,8 +499,9 @@ $copy-btn-feedback: $background-inverse !default;
       ),
       linear-gradient(
         to bottom,
-        #000000 calc(100% - #{$spacing-05}),
-        transparent 100%
+        #000000 calc(100% - #{$spacing-05} - #{$scrollbar-block-size}),
+        transparent calc(100% - #{$scrollbar-block-size}),
+        #000000 calc(100% - #{$scrollbar-block-size})
       );
   }
 

@@ -494,6 +494,39 @@ describe('maxCollapsedNumberOfRows / minCollapsedNumberOfRows / maxExpandedNumbe
     expect(container.style.maxHeight).to.equal('');
   });
 
+  it('should expose the horizontal scrollbar size on the snippet container only when collapsed', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet type="multi" maxCollapsedNumberOfRows="5">
+        ${multiLong}
+      </cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    const pre = el.shadowRoot.querySelector('pre');
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+
+    Object.defineProperties(pre, {
+      offsetHeight: { configurable: true, value: 80 },
+      clientHeight: { configurable: true, value: 65 },
+    });
+    el.requestUpdate();
+    await el.updateComplete;
+
+    expect(
+      container.style.getPropertyValue('--cds-snippet-scrollbar-block-size')
+    ).to.equal('15px');
+
+    el._shouldShowMoreLessBtn = true;
+    el._expandedCode = true;
+    el.requestUpdate();
+    await el.updateComplete;
+
+    expect(
+      container.style.getPropertyValue('--cds-snippet-scrollbar-block-size')
+    ).to.equal('');
+  });
+
   it('should not apply max-height or min-height for non-multi snippet types', async () => {
     const el = await fixture(html`
       <cds-code-snippet

@@ -63,6 +63,8 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
    */
   private _hObserveResize: Handle | null = null;
 
+  private _hObservePreResize: Handle | null = null;
+
   /**
    * Row height in pixels
    */
@@ -318,6 +320,9 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
     if (this._hObserveResize) {
       this._hObserveResize = this._hObserveResize.release();
     }
+    if (this._hObservePreResize) {
+      this._hObservePreResize = this._hObservePreResize.release();
+    }
   }
 
   updated() {
@@ -363,6 +368,20 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
 
       container.style.maxHeight = maxHeight;
       container.style.minHeight = minHeight;
+
+      const pre = container.querySelector('pre');
+
+      if (pre && !this._hObservePreResize) {
+        this._hObservePreResize = observeResize(this._resizeObserver, pre);
+      }
+
+      const scrollbarBlockSize =
+        pre && !expandedCode ? pre.offsetHeight - pre.clientHeight : 0;
+
+      container.style.setProperty(
+        `--${prefix}-snippet-scrollbar-block-size`,
+        scrollbarBlockSize > 0 ? `${scrollbarBlockSize}px` : ''
+      );
     } else {
       container.style.maxHeight = '';
       container.style.minHeight = '';
