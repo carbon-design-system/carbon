@@ -259,7 +259,7 @@ export default defineConfig(
       '**/__testfixtures__/**',
 
       // React
-      '**/storybook-static/**',
+      '**/storybook-static*/**',
 
       // Templates
       'packages/cli/src/component/templates/**',
