@@ -539,6 +539,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             count={cuts.front}
             onSelect={jumpToItem}
             disableOverflow={isOverflowDisabled}
+            translateWithId={t}
           />
 
           {
@@ -565,6 +566,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             count={cuts.back}
             onSelect={jumpToItem}
             disableOverflow={isOverflowDisabled}
+            translateWithId={t}
           />
 
           {
