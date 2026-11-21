@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { type RefCallback } from 'react';
 import SideNavMenuItem from '../SideNavMenuItem';
 
 describe('SideNavMenuItem', () => {
@@ -62,13 +63,13 @@ describe('SideNavMenuItem', () => {
   });
 
   it('should support a `ref` on the <a> element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLAnchorElement>>();
     render(
       <SideNavMenuItem ref={ref} href="/">
         test
       </SideNavMenuItem>
     );
-    expect(ref).toHaveBeenCalledWith(screen.getByRole('link'));
+    expect(ref.mock.calls).toContainEqual([screen.getByRole('link')]);
   });
 
   it('should support rendering a button through the `as` prop', () => {

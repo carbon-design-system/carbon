@@ -5,23 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import React from 'react';
+import React, { type ComponentProps, type RefCallback } from 'react';
 import SideNav from '../SideNav';
 import SideNavLink from '../SideNavLink';
 
+const createMatchMedia = (query: string, matches: boolean): MediaQueryList => ({
+  matches,
+  media: query,
+  onchange: null,
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+  dispatchEvent: jest.fn<MediaQueryList['dispatchEvent']>(),
+});
+
+const mockMatchMedia = jest
+  .fn<typeof matchMedia>()
+  .mockImplementation((query) => createMatchMedia(query, false));
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
+  value: mockMatchMedia,
 });
 
 describe('SideNav', () => {
@@ -66,9 +73,9 @@ describe('SideNav', () => {
   });
 
   it('should support a `ref` on the element with role="navigation"', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLElement>>();
     render(<SideNav aria-label="test" ref={ref} />);
-    expect(ref).toHaveBeenCalledWith(screen.getByRole('navigation'));
+    expect(ref.mock.calls).toContainEqual([screen.getByRole('navigation')]);
   });
 
   it('should call onOverlayClick when overlay is clicked', () => {
@@ -77,12 +84,16 @@ describe('SideNav', () => {
       <SideNav aria-label="test" expanded onOverlayClick={onOverlayClick} />
     );
     const overlay = container.firstChild;
+    if (!overlay) {
+      throw new Error('Expected the side nav overlay to render.');
+    }
     fireEvent.click(overlay);
     expect(onOverlayClick).toHaveBeenCalledTimes(1);
   });
 
   it('should not add focus or mouse listeners when disabled', () => {
-    const onToggle = jest.fn();
+    const onToggle =
+      jest.fn<NonNullable<ComponentProps<typeof SideNav>['onToggle']>>();
     render(
       <SideNav
         aria-label="test"
@@ -98,7 +109,8 @@ describe('SideNav', () => {
   });
 
   it('should handle keyboard events like Escape', () => {
-    const onToggle = jest.fn();
+    const onToggle =
+      jest.fn<NonNullable<ComponentProps<typeof SideNav>['onToggle']>>();
     render(
       <SideNav
         aria-label="test"
@@ -244,7 +256,8 @@ describe('SideNav', () => {
   });
 
   it('should set expanded state to false on mouse leave', () => {
-    const onToggleMock = jest.fn();
+    const onToggleMock =
+      jest.fn<NonNullable<ComponentProps<typeof SideNav>['onToggle']>>();
     const TestChild = () => <div data-testid="child">Child</div>;
     const { getByRole } = render(
       <SideNav aria-label="test" defaultExpanded onToggle={onToggleMock}>
@@ -258,7 +271,8 @@ describe('SideNav', () => {
   });
 
   it('should handleToggle if isRail is true', () => {
-    const onToggleMock = jest.fn();
+    const onToggleMock =
+      jest.fn<NonNullable<ComponentProps<typeof SideNav>['onToggle']>>();
     const TestChild = () => <div data-testid="child">Child</div>;
     const { getByRole } = render(
       <SideNav aria-label="test" onToggle={onToggleMock} isRail>
@@ -275,7 +289,8 @@ describe('SideNav', () => {
   });
 
   it('should not call handleToggle if isRail is false', () => {
-    const onToggleMock = jest.fn();
+    const onToggleMock =
+      jest.fn<NonNullable<ComponentProps<typeof SideNav>['onToggle']>>();
     const TestChild = () => <div data-testid="child">Child</div>;
     const { getByRole } = render(
       <SideNav
@@ -293,7 +308,8 @@ describe('SideNav', () => {
 
   it('should expand the SideNav immediately on click', () => {
     const TestChild = () => <div data-testid="child">Child</div>;
-    const onToggleMock = jest.fn();
+    const onToggleMock =
+      jest.fn<NonNullable<ComponentProps<typeof SideNav>['onToggle']>>();
     const { getByRole } = render(
       <SideNav aria-label="test" onToggle={onToggleMock} isRail>
         <TestChild />
@@ -353,16 +369,9 @@ describe('SideNav', () => {
   });
 
   it('should not set inert at or above lg breakpoint', async () => {
-    window.matchMedia.mockImplementationOnce((query) => ({
-      matches: true,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
+    mockMatchMedia.mockImplementationOnce((query) =>
+      createMatchMedia(query, true)
+    );
 
     render(<SideNav aria-label="test" expanded={false} isRail={false} />);
 
@@ -374,16 +383,9 @@ describe('SideNav', () => {
   });
 
   it('should set inert for collapsed fixed SideNav at or above lg breakpoint', async () => {
-    window.matchMedia.mockImplementationOnce((query) => ({
-      matches: true,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
+    mockMatchMedia.mockImplementationOnce((query) =>
+      createMatchMedia(query, true)
+    );
 
     render(
       <SideNav aria-label="test" expanded={false} isFixedNav isRail={false} />

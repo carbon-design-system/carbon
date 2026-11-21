@@ -1,13 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { type ComponentProps, type RefCallback } from 'react';
 import SideNavSwitcher from '../SideNavSwitcher';
 
 describe('SideNavSwitcher', () => {
@@ -22,7 +23,10 @@ describe('SideNavSwitcher', () => {
   });
 
   it('should call `onChange` when the value of the <select> changes', async () => {
-    const onChange = jest.fn();
+    const onChange =
+      jest.fn<
+        NonNullable<ComponentProps<typeof SideNavSwitcher>['onChange']>
+      >();
     render(
       <SideNavSwitcher
         labelText="test"
@@ -58,7 +62,7 @@ describe('SideNavSwitcher', () => {
   });
 
   it('should support a `ref` on the <select> element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLSelectElement>>();
     render(
       <SideNavSwitcher
         ref={ref}
@@ -67,6 +71,6 @@ describe('SideNavSwitcher', () => {
       />
     );
 
-    expect(ref).toHaveBeenCalledWith(screen.getByLabelText('test'));
+    expect(ref.mock.calls).toContainEqual([screen.getByLabelText('test')]);
   });
 });

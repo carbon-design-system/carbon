@@ -1,10 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import SideNavHeader from '../SideNavHeader';
@@ -12,7 +13,7 @@ import SideNavHeader from '../SideNavHeader';
 describe('SideNavHeader', () => {
   it('should render a <header> element', () => {
     const { container } = render(<SideNavHeader renderIcon={() => <svg />} />);
-    expect(container.firstChild.tagName).toBe('HEADER');
+    expect(container.firstElementChild?.tagName).toBe('HEADER');
   });
 
   it('should support a custom icon through `renderIcon`', () => {

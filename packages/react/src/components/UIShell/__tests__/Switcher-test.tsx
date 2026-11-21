@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
+import React, { createRef } from 'react';
 import Switcher from '../Switcher';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -67,7 +68,7 @@ describe('Switcher', () => {
       expect(container.firstChild).toHaveClass('custom-class');
     });
     it('should correctly merge refs', () => {
-      const ref1 = React.createRef();
+      const ref1 = createRef<HTMLUListElement>();
       render(
         <Switcher ref={ref1} aria-label="test-label">
           <SwitcherItem aria-label="test-item">Item 1</SwitcherItem>
@@ -76,7 +77,7 @@ describe('Switcher', () => {
       );
 
       expect(ref1.current).not.toBeNull();
-      expect(ref1.current.tagName).toBe('UL');
+      expect(ref1.current?.tagName).toBe('UL');
     });
     it('should apply aria attributes correctly', () => {
       render(
@@ -93,7 +94,7 @@ describe('Switcher', () => {
     });
 
     it('should not pass unexpected props to children', () => {
-      const CustomListItem = (props) => {
+      const CustomListItem = (props: Record<string, unknown>) => {
         expect(props).toEqual({});
 
         return <li data-testid="divider">Divider</li>;
