@@ -1,22 +1,27 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import { render } from '@testing-library/react';
 import React from 'react';
-import { HeaderGlobalBar } from '../';
+import SideNavLinkText from '../SideNavLinkText';
 
-describe('HeaderGlobalBar', () => {
+describe('SideNavLinkText', () => {
   it('should support a custom `className` prop on the outermost element', () => {
-    const { container } = render(<HeaderGlobalBar className="test" />);
+    const { container } = render(
+      <SideNavLinkText className="test">test</SideNavLinkText>
+    );
     expect(container.firstChild).toHaveClass('test');
   });
 
   it('should spread extra props on the outermost element', () => {
-    const { container } = render(<HeaderGlobalBar data-testid="test" />);
+    const { container } = render(
+      <SideNavLinkText data-testid="test">test</SideNavLinkText>
+    );
     expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });

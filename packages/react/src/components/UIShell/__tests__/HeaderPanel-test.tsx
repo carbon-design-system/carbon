@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import React from 'react';
 import HeaderPanel from '../HeaderPanel';
 import Switcher from '../Switcher';
@@ -146,6 +147,9 @@ describe('HeaderPanel', () => {
       );
 
       const panel = screen.getByText('Panel Content').parentElement;
+      if (!panel) {
+        throw new Error('Expected the header panel content to render.');
+      }
       fireEvent.blur(panel, {
         relatedTarget: null,
       });

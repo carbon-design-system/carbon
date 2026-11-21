@@ -1,13 +1,14 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import SwitcherItem from '../SwitcherItem';
 
 describe('SwitcherItem', () => {
@@ -89,7 +90,7 @@ describe('SwitcherItem', () => {
         </SwitcherItem>
       );
 
-      fireEvent.click(screen.getByRole('listitem').firstChild);
+      fireEvent.click(screen.getByLabelText('dummy-aria-label'));
 
       expect(dummyHandler).toHaveBeenCalledTimes(1);
     });
@@ -103,7 +104,7 @@ describe('SwitcherItem', () => {
         </SwitcherItem>
       );
 
-      fireEvent.keyDown(screen.getByRole('listitem').firstChild, {
+      fireEvent.keyDown(screen.getByLabelText('dummy-aria-label'), {
         key: 'Enter',
         code: 'Enter',
       });
@@ -112,7 +113,12 @@ describe('SwitcherItem', () => {
     });
 
     it('should handle keyboard navigation with ArrowUp and ArrowDown keys', () => {
-      const mockHandleSwitcherItemFocus = jest.fn();
+      const mockHandleSwitcherItemFocus =
+        jest.fn<
+          NonNullable<
+            ComponentProps<typeof SwitcherItem>['handleSwitcherItemFocus']
+          >
+        >();
 
       render(
         <SwitcherItem
@@ -122,7 +128,7 @@ describe('SwitcherItem', () => {
           Dummy child
         </SwitcherItem>
       );
-      fireEvent.keyDown(screen.getByRole('listitem').firstChild, {
+      fireEvent.keyDown(screen.getByLabelText('dummy-aria-label'), {
         key: 'ArrowDown',
         code: 'ArrowDown',
       });
@@ -131,7 +137,7 @@ describe('SwitcherItem', () => {
         direction: 1,
       });
 
-      fireEvent.keyDown(screen.getByRole('listitem').firstChild, {
+      fireEvent.keyDown(screen.getByLabelText('dummy-aria-label'), {
         key: 'ArrowUp',
         code: 'ArrowUp',
       });
@@ -175,8 +181,9 @@ describe('SwitcherItem', () => {
       const { container } = render(
         <SwitcherItem aria-label="dummy-aria-label">Dummy child</SwitcherItem>
       );
-      const link = container.querySelector('a');
-      fireEvent.keyDown(link, { key: 'ArrowDown' });
+      fireEvent.keyDown(screen.getByLabelText('dummy-aria-label'), {
+        key: 'ArrowDown',
+      });
       expect(container).toBeTruthy();
     });
 

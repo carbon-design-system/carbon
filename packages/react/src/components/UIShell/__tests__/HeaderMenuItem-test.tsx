@@ -1,12 +1,13 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { type RefCallback } from 'react';
 import { HeaderMenuItem } from '../';
 import { HeaderMenu } from '../HeaderMenu';
 import userEvent from '@testing-library/user-event';
@@ -37,13 +38,13 @@ describe('HeaderMenuItem', () => {
   });
 
   it('should support a `ref` on the <a> element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLAnchorElement>>();
     render(
       <HeaderMenuItem ref={ref} data-testid="test">
         test
       </HeaderMenuItem>
     );
-    expect(ref).toHaveBeenCalledWith(screen.getByTestId('test'));
+    expect(ref.mock.calls).toContainEqual([screen.getByTestId('test')]);
   });
   it('should call onClick handler when clicked', async () => {
     const user = userEvent.setup();
