@@ -128,10 +128,6 @@ const nestedGitignorePatterns = gitignorePaths
   .filter((gitignoreFile) => gitignoreFile !== rootGitignore)
   .flatMap((gitignoreFile) => parseNestedGitignore(gitignoreFile, repoRoot));
 
-// TODO: There is an `eslintConfig` reference in `package.json`. Investigate
-// whether it should be moved to this file or deleted.
-// https://github.com/carbon-design-system/carbon/issues/18991
-
 export default defineConfig(
   includeIgnoreFile(rootGitignore),
   {
