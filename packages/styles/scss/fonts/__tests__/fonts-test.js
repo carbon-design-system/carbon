@@ -8,7 +8,7 @@
  */
 
 import { SassRenderer } from '@carbon/test-utils/scss';
-import css from 'css';
+import postcss from 'postcss';
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -36,16 +36,16 @@ const weights = [
 describe('@carbon/styles/scss/fonts', () => {
   it('should emit default fonts, weights, and styles', async () => {
     const { result } = await render(`@use '../' as fonts;`);
-    const { stylesheet } = css.parse(result.css.toString());
-    const atRules = stylesheet.rules.filter((rule) => {
-      return rule.type === 'font-face';
+    const stylesheet = postcss.parse(result.css.toString());
+    const atRules = stylesheet.nodes.filter((rule) => {
+      return rule.type === 'atrule' && rule.name === 'font-face';
     });
     const emitted = new Map();
 
     for (const rule of atRules) {
-      const fontFamily = rule.declarations
+      const fontFamily = rule.nodes
         .find((declaration) => {
-          return declaration.property === 'font-family';
+          return declaration.prop === 'font-family';
         })
         .value.replace(/['"]/g, '');
 
@@ -60,20 +60,20 @@ describe('@carbon/styles/scss/fonts', () => {
 
       const entry = emitted.get(fontFamily);
 
-      for (const declaration of rule.declarations) {
-        if (declaration.property === 'font-weight') {
+      for (const declaration of rule.nodes) {
+        if (declaration.prop === 'font-weight') {
           entry.weights.add(declaration.value);
         }
 
-        if (declaration.property === 'font-style') {
+        if (declaration.prop === 'font-style') {
           entry.styles.add(declaration.value);
         }
 
-        if (declaration.property === 'src') {
+        if (declaration.prop === 'src') {
           entry.src.add(declaration.value);
         }
 
-        if (declaration.property === 'unicode-range') {
+        if (declaration.prop === 'unicode-range') {
           entry.unicodeRange.add(declaration.value);
         }
       }
@@ -110,16 +110,16 @@ describe('@carbon/styles/scss/fonts', () => {
       );
       @use '../' as fonts;
     `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const atRules = stylesheet.rules.filter((rule) => {
-      return rule.type === 'font-face';
+    const stylesheet = postcss.parse(result.css.toString());
+    const atRules = stylesheet.nodes.filter((rule) => {
+      return rule.type === 'atrule' && rule.name === 'font-face';
     });
     const emitted = new Map();
 
     for (const rule of atRules) {
-      const fontFamily = rule.declarations
+      const fontFamily = rule.nodes
         .find((declaration) => {
-          return declaration.property === 'font-family';
+          return declaration.prop === 'font-family';
         })
         .value.replace(/['"]/g, '');
 
@@ -133,16 +133,16 @@ describe('@carbon/styles/scss/fonts', () => {
 
       const entry = emitted.get(fontFamily);
 
-      for (const declaration of rule.declarations) {
-        if (declaration.property === 'font-weight') {
+      for (const declaration of rule.nodes) {
+        if (declaration.prop === 'font-weight') {
           entry.weights.add(declaration.value);
         }
 
-        if (declaration.property === 'font-style') {
+        if (declaration.prop === 'font-style') {
           entry.styles.add(declaration.value);
         }
 
-        if (declaration.property === 'src') {
+        if (declaration.prop === 'src') {
           entry.src.add(declaration.value);
         }
       }

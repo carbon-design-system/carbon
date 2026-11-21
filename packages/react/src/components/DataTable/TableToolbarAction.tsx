@@ -21,6 +21,11 @@ export interface TableToolbarActionProps
   children?: React.ReactNode;
 
   /**
+   * Callback to close the parent menu.
+   */
+  closeMenu?: () => void;
+
+  /**
    * onClick handler for the TableToolbarAction
    */
   onClick: (
@@ -69,6 +74,7 @@ TableToolbarAction.displayName = 'TableToolbarAction';
 TableToolbarAction.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  closeMenu: PropTypes.func,
   onClick: PropTypes.func.isRequired,
 };
 

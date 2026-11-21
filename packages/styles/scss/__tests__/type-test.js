@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -127,9 +127,9 @@ describe('@carbon/styles/scss/type', () => {
         @include type.type-style('label-01');
       }
     `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const [rule] = stylesheet.rules;
-    for (const declaration of rule.declarations) {
+    const stylesheet = postcss.parse(result.css.toString());
+    const [rule] = stylesheet.nodes;
+    for (const declaration of rule.nodes) {
       expect(declaration.value).toEqual(
         expect.stringContaining('var(--custom-')
       );
@@ -146,8 +146,7 @@ describe('@carbon/styles/scss/type', () => {
         @include type.type-style('label-01');
       }
     `);
-    const { stylesheet } = css.parse(result.css.toString());
-    expect(stylesheet).toMatchSnapshot();
+    expect(result.css.toString()).toMatchSnapshot();
   });
 });
 
@@ -160,11 +159,11 @@ describe('type custom properties', () => {
         @include type.emit-type-custom-properties()
       }
     `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const rules = stylesheet.rules.filter(
+    const stylesheet = postcss.parse(result.css.toString());
+    const rules = stylesheet.nodes.filter(
       (rule) => rule.selectors[0] === '.selector'
     );
-    const declarations = rules[0].declarations;
+    const declarations = rules[0].nodes;
 
     expect(declarations.length).toBe(191);
   });
