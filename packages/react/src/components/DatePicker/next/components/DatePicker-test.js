@@ -283,6 +283,45 @@ describe('DatePicker v12 focus restoration', () => {
     expect(sentinel).toBeTruthy();
   });
 
+  describe('DatePicker v12 allowInput', () => {
+    it('allows typing into the input when allowInput is true (default)', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput id="allow-input-true" labelText="Date input" />
+        </DatePicker>
+      );
+
+      const dateInput = screen.getByLabelText('Date input');
+
+      await user.click(dateInput);
+      await user.keyboard('01/15/2026');
+
+      expect(dateInput).toHaveValue('01/15/2026');
+      expect(dateInput).not.toHaveAttribute('readonly');
+    });
+
+    it('sets the input read-only when allowInput is false', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DatePicker datePickerType="single" allowInput={false}>
+          <DatePickerInput id="allow-input-false" labelText="Date input" />
+        </DatePicker>
+      );
+
+      const dateInput = screen.getByLabelText('Date input');
+
+      expect(dateInput).toHaveAttribute('readonly');
+
+      await user.click(dateInput);
+      await user.keyboard('01/15/2026');
+
+      expect(dateInput).toHaveValue('');
+    });
+  });
+
   describe('DatePicker v12 input click reopens calendar', () => {
     it('reopens the calendar when clicking the input after a date has been selected', async () => {
       const user = userEvent.setup();

@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Children, isValidElement, useRef } from 'react';
+import React, {
+  Children,
+  isValidElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import classNames from 'classnames';
 import { useDatePicker } from '../hooks/useDatePicker';
 import { usePrefix } from '../../../../internal/usePrefix';
@@ -157,6 +163,37 @@ export function DatePicker({
     onClose,
   });
 
+  // Draft text for controlled inputs. Selection updates sync from the machine;
+  // typed characters update the draft so allowInput can actually accept typing.
+  const formattedStartDate = context.startDate
+    ? formatPlainDate(context.startDate, context.dateFormat)
+    : '';
+  const formattedEndDate = context.endDate
+    ? formatPlainDate(context.endDate, context.dateFormat)
+    : '';
+  const [draftValues, setDraftValues] = useState({
+    from: formattedStartDate,
+    to: formattedEndDate,
+  });
+  const prevFormattedDatesRef = useRef({
+    from: formattedStartDate,
+    to: formattedEndDate,
+  });
+
+  useEffect(() => {
+    const prev = prevFormattedDatesRef.current;
+    if (prev.from !== formattedStartDate || prev.to !== formattedEndDate) {
+      prevFormattedDatesRef.current = {
+        from: formattedStartDate,
+        to: formattedEndDate,
+      };
+      setDraftValues({
+        from: formattedStartDate,
+        to: formattedEndDate,
+      });
+    }
+  }, [formattedStartDate, formattedEndDate]);
+
   // Handle calendar navigation
   const handleNavigate = (eventType: string) => {
     send(eventType);
@@ -181,6 +218,7 @@ export function DatePicker({
     // Determine which input this is (start or end for range mode)
     const isStartInput = index === 0;
     const isEndInput = index === 1 && datePickerType === 'range';
+    const inputType = isEndInput ? 'to' : 'from';
 
     // Get the appropriate ref
     const inputRef = isStartInput
@@ -189,33 +227,38 @@ export function DatePicker({
         ? endInputRef
         : undefined;
 
-    // Get the appropriate value - always use a string to keep input controlled
-    let inputValue = child.props.value ?? '';
-    if (inputValue === '') {
-      if (isStartInput && context.startDate) {
-        inputValue = formatPlainDate(context.startDate, context.dateFormat);
-      } else if (isEndInput && context.endDate) {
-        inputValue = formatPlainDate(context.endDate, context.dateFormat);
-      }
-    }
+    // Prefer an explicitly controlled child value; otherwise use the draft so
+    // typing is not wiped on every render by the selected-date formatted value.
+    const inputValue =
+      child.props.value ?? (isEndInput ? draftValues.to : draftValues.from);
 
     // Clone the child with enhanced props
     const enhancedProps: Partial<DatePickerInputProps> = {
       ...child.props,
       value: inputValue, // Always a string, never undefined
       disabled: child.props.disabled || context.isDisabled,
-      readOnly: child.props.readOnly || readOnly,
+      // Flatpickr's allowInput=false makes the field read-only for typing while
+      // still allowing calendar selection. Mirror that for the preview picker.
+      readOnly: child.props.readOnly || readOnly || !allowInput,
       onFocus: (e: React.FocusEvent<HTMLInputElement>) => {
         child.props.onFocus?.(e);
-        handleInputFocus(isEndInput ? 'to' : 'from');
+        handleInputFocus(inputType);
       },
       onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
         child.props.onBlur?.(e);
         handleInputBlur();
       },
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!allowInput || readOnly || child.props.readOnly) {
+          return;
+        }
         child.props.onChange?.(e);
-        handleInputChange(e.target.value, isEndInput ? 'to' : 'from');
+        const nextValue = e.target.value;
+        setDraftValues((prev) => ({
+          ...prev,
+          [inputType]: nextValue,
+        }));
+        handleInputChange(nextValue, inputType);
       },
       onClick: (e: React.MouseEvent<HTMLInputElement>) => {
         child.props.onClick?.(e);

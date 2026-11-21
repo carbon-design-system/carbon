@@ -27,6 +27,7 @@ const sizes = {
 };
 
 const defaultArgs = {
+  allowInput: true,
   dateFormat: 'm/d/Y',
   disabled: false,
   locale: 'en',
@@ -44,6 +45,11 @@ const defaultArgs = {
 };
 
 const controls = {
+  allowInput: {
+    control: 'boolean',
+    description:
+      'Allow typing a date directly into the input. When false, the input is read-only and dates must be selected from the calendar.',
+  },
   dateFormat: {
     control: 'text',
     description: 'The date format (e.g., m/d/Y, Y-m-d).',
@@ -148,6 +154,7 @@ export const Default = {
     locale,
     maxDate,
     minDate,
+    allowInput,
     placeholder,
     readonly,
     size,
@@ -161,6 +168,7 @@ export const Default = {
         locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
+        .allowInput="${allowInput}"
         ?readonly="${readonly}">
         <cds-preview-date-picker-input
           kind="${kind === 'range' ? 'from' : kind}"
@@ -202,6 +210,7 @@ export const RangeWithCalendar = {
     locale,
     maxDate,
     minDate,
+    allowInput,
     placeholder,
     readonly,
     size,
@@ -215,6 +224,7 @@ export const RangeWithCalendar = {
         locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
+        .allowInput="${allowInput}"
         ?readonly="${readonly}">
         <cds-preview-date-picker-input
           kind="from"
@@ -253,6 +263,7 @@ export const RangeWithCalendarWithLayer = {
     locale,
     maxDate,
     minDate,
+    allowInput,
     placeholder,
     readonly,
     size,
@@ -266,6 +277,7 @@ export const RangeWithCalendarWithLayer = {
         locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
+        .allowInput="${allowInput}"
         ?readonly="${readonly}">
         <cds-preview-date-picker-input
           kind="from"
@@ -303,6 +315,7 @@ export const Simple = {
     locale,
     maxDate,
     minDate,
+    allowInput,
     placeholder,
     readonly,
     size,
@@ -319,6 +332,7 @@ export const Simple = {
           ?disabled="${disabled}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
+          .allowInput="${allowInput}"
           ?readonly="${readonly}"
           size="${size}"
           ?invalid="${invalid}"
@@ -343,6 +357,7 @@ export const SimpleWithLayer = {
     locale,
     maxDate,
     minDate,
+    allowInput,
     placeholder,
     readonly,
     size,
@@ -359,6 +374,7 @@ export const SimpleWithLayer = {
           ?disabled="${disabled}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
+          .allowInput="${allowInput}"
           ?readonly="${readonly}"
           size="${size}"
           ?invalid="${invalid}"
@@ -382,6 +398,7 @@ export const SingleWithCalendar = {
     locale,
     maxDate,
     minDate,
+    allowInput,
     placeholder,
     readonly,
     size,
@@ -395,6 +412,7 @@ export const SingleWithCalendar = {
         locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
+        .allowInput="${allowInput}"
         ?readonly="${readonly}">
         <cds-preview-date-picker-input
           kind="single"
@@ -423,6 +441,7 @@ export const SingleWithCalendarWithLayer = {
     locale,
     maxDate,
     minDate,
+    allowInput,
     placeholder,
     readonly,
     size,
@@ -436,6 +455,7 @@ export const SingleWithCalendarWithLayer = {
         locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
+        .allowInput="${allowInput}"
         ?readonly="${readonly}">
         <cds-preview-date-picker-input
           kind="single"
@@ -522,6 +542,7 @@ export const WithAILabel = {
     locale,
     maxDate,
     minDate,
+    allowInput,
     placeholder,
     readonly,
     size,
@@ -535,6 +556,7 @@ export const WithAILabel = {
         locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
+        .allowInput="${allowInput}"
         ?readonly="${readonly}">
         <cds-preview-date-picker-input
           kind="single"

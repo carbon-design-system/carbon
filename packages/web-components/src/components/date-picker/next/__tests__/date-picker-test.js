@@ -185,6 +185,48 @@ describe('cds-preview-date-picker', () => {
       expect(el.readonly).to.be.true;
     });
 
+    it('defaults allowInput to true and keeps the input editable', async () => {
+      const el = await fixture(html`
+        <cds-preview-date-picker>
+          <cds-preview-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
+      `);
+      await el.updateComplete;
+
+      expect(el.allowInput).to.be.true;
+
+      const input = el
+        .querySelector('cds-preview-date-picker-input')
+        ?.shadowRoot?.querySelector('input');
+      expect(input).to.exist;
+      expect(input?.hasAttribute('readonly')).to.be.false;
+    });
+
+    it('sets the input read-only when allowInput is false', async () => {
+      const el = await fixture(html`
+        <cds-preview-date-picker allow-input="false">
+          <cds-preview-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
+      `);
+      await el.updateComplete;
+
+      expect(el.allowInput).to.be.false;
+
+      const input = el
+        .querySelector('cds-preview-date-picker-input')
+        ?.shadowRoot?.querySelector('input');
+      expect(input).to.exist;
+      expect(input?.hasAttribute('readonly')).to.be.true;
+    });
+
     it('should handle different sizes', async () => {
       const el = await fixture(html`
         <cds-preview-date-picker-input

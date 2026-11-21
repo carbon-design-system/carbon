@@ -38,6 +38,11 @@ export default {
 };
 
 const sharedArgTypes = {
+  allowInput: {
+    control: {
+      type: 'boolean',
+    },
+  },
   onChange: {
     action: 'onChange',
   },
@@ -125,6 +130,10 @@ export const Default = (args) => {
       )}
     </DatePicker>
   );
+};
+
+Default.args = {
+  allowInput: true,
 };
 
 Default.argTypes = {
