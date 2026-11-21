@@ -2462,7 +2462,7 @@ __metadata:
     "@carbon/utilities-react": "workspace:^0.33.0"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
-    "@rolldown/plugin-babel": "npm:^0.2.0"
+    "@rolldown/plugin-babel": "npm:^0.3.0"
     "@stackblitz/sdk": "npm:^1.11.0"
     "@storybook/addon-a11y": "npm:^10.3.5"
     "@storybook/addon-docs": "npm:^10.3.5"
@@ -6758,11 +6758,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rolldown/plugin-babel@npm:^0.2.0":
-  version: 0.2.3
-  resolution: "@rolldown/plugin-babel@npm:0.2.3"
+"@rolldown/plugin-babel@npm:^0.3.0":
+  version: 0.3.1
+  resolution: "@rolldown/plugin-babel@npm:0.3.1"
   dependencies:
-    picomatch: "npm:^4.0.4"
+    artichokie: "npm:^0.4.5"
+    picomatch: "npm:^4.0.7"
   peerDependencies:
     "@babel/core": ^7.29.0 || ^8.0.0-rc.1
     "@babel/plugin-transform-runtime": ^7.29.0 || ^8.0.0-rc.1
@@ -6776,7 +6777,7 @@ __metadata:
       optional: true
     vite:
       optional: true
-  checksum: 10/dd40e5605dc6e0482a54545ee7ac9cdc9a7d29db7e75ac9be1999eafec30618a574f6a1356ad6e4337d220eb38ac980dc4d8c5f552eaa985ea331a7c0e07375a
+  checksum: 10/7e6d739cafc15a8b0a482beca8316767edd66e4653eeb8c1fec485a87dd05b6c1859b5a2dd342c6b015dbe4d431ea1c32ca2f83d3dcad84d40c267933b6a84f6
   languageName: node
   linkType: hard
 
@@ -9709,6 +9710,13 @@ __metadata:
   version: 2.0.1
   resolution: "arrify@npm:2.0.1"
   checksum: 10/067c4c1afd182806a82e4c1cb8acee16ab8b5284fbca1ce29408e6e91281c36bb5b612f6ddfbd40a0f7a7e0c75bf2696eb94c027f6e328d6e9c52465c98e4209
+  languageName: node
+  linkType: hard
+
+"artichokie@npm:^0.4.5":
+  version: 0.4.5
+  resolution: "artichokie@npm:0.4.5"
+  checksum: 10/eb2593e81d3850be32963631a8e0f79ac38ba5e4ee7174aedaf5999ad67207b556c64c8c3a4ef9213b176ba416a20330a146e840cf1f9be9aeecbfaa565ce716
   languageName: node
   linkType: hard
 
