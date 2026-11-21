@@ -1,28 +1,6 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots[
-  'cds-button should support rendering elements within the button through the `children` prop'
-] = `<button
-  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should support rendering elements within the button through the `children` prop */
-
 snapshots['cds-button should support a custom tabIndex through props'] =
   `<button
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
@@ -35,12 +13,12 @@ snapshots['cds-button should support a custom tabIndex through props'] =
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should support a custom tabIndex through props */
 
@@ -57,12 +35,12 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should support a custom className on the outermost element */
 
@@ -77,12 +55,12 @@ snapshots['cds-button should render an element with the button role'] = `<button
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should render an element with the button role */
 
@@ -101,11 +79,6 @@ snapshots[
   <slot name="icon">
   </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should use the disabled prop to set disabled on the <button> */
 
@@ -121,12 +94,12 @@ snapshots['cds-button should render with a default button type of button'] =
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should render with a default button type of button */
 
@@ -143,12 +116,12 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should support changing the button type to button with the `type` prop */
 
@@ -165,12 +138,12 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should support changing the button type to submit with the `type` prop */
 
@@ -187,12 +160,12 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should support changing the button type to reset with the `type` prop */
 
@@ -212,12 +185,12 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </a>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should render as an element with the role of `link` when the `href` prop is used */
 
@@ -234,202 +207,16 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button should not error on tooltipAlignment even when hasIconOnly=false */
 
-snapshots[
-  'cds-button should set the expected classes for the button of kind: primary'
-] = `<button
-  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of kind: primary */
-
-snapshots[
-  'cds-button should set the expected classes for the button of kind: secondary'
-] = `<button
-  class="cds--btn cds--btn--lg cds--btn--secondary cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of kind: secondary */
-
-snapshots[
-  'cds-button should set the expected classes for the button of kind: ghost'
-] = `<button
-  class="cds--btn cds--btn--ghost cds--btn--lg cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of kind: ghost */
-
-snapshots[
-  'cds-button should set the expected classes for the button of kind: danger'
-] = `<button
-  class="cds--btn cds--btn--danger cds--btn--lg cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <span class="cds--visually-hidden">
-  </span>
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of kind: danger */
-
-snapshots[
-  'cds-button should set the expected classes for the button of kind: danger--primary'
-] = `<button
-  class="cds--btn cds--btn--danger--primary cds--btn--lg cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <span class="cds--visually-hidden">
-  </span>
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of kind: danger--primary */
-
-snapshots[
-  'cds-button should set the expected classes for the button of kind: danger--ghost'
-] = `<button
-  class="cds--btn cds--btn--lg cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <span class="cds--visually-hidden">
-  </span>
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of kind: danger--ghost */
-
-snapshots[
-  'cds-button should set the expected classes for the button of kind: danger--tertiary'
-] = `<button
-  class="cds--btn cds--btn--lg cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <span class="cds--visually-hidden">
-  </span>
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of kind: danger--tertiary */
-
-snapshots[
-  'cds-button should set the expected classes for the button of kind: tertiary'
-] = `<button
-  class="cds--btn cds--btn--lg cds--btn--tertiary cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of kind: tertiary */
-
-snapshots[
-  'cds-button should set the expected classes for the button of size: sm'
-] = `<button
+snapshots['cds-button supports props.size size="sm"'] = `<button
   class="cds--btn cds--btn--primary cds--btn--sm cds--layout--size-sm"
   id="button"
   part="button"
@@ -440,18 +227,16 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
-/* end snapshot cds-button should set the expected classes for the button of size: sm */
+/* end snapshot cds-button supports props.size size="sm" */
 
-snapshots[
-  'cds-button should set the expected classes for the button of size: md'
-] = `<button
+snapshots['cds-button supports props.size size="md"'] = `<button
   class="cds--btn cds--btn--md cds--btn--primary cds--layout--size-md"
   id="button"
   part="button"
@@ -462,18 +247,16 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
-/* end snapshot cds-button should set the expected classes for the button of size: md */
+/* end snapshot cds-button supports props.size size="md" */
 
-snapshots[
-  'cds-button should set the expected classes for the button of size: lg'
-] = `<button
+snapshots['cds-button supports props.size size="lg"'] = `<button
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -484,18 +267,16 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
-/* end snapshot cds-button should set the expected classes for the button of size: lg */
+/* end snapshot cds-button supports props.size size="lg" */
 
-snapshots[
-  'cds-button should set the expected classes for the button of size: xl'
-] = `<button
+snapshots['cds-button supports props.size size="xl"'] = `<button
   class="cds--btn cds--btn--primary cds--btn--xl cds--layout--size-xl"
   id="button"
   part="button"
@@ -506,18 +287,16 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
-/* end snapshot cds-button should set the expected classes for the button of size: xl */
+/* end snapshot cds-button supports props.size size="xl" */
 
-snapshots[
-  'cds-button should set the expected classes for the button of size: 2xl'
-] = `<button
+snapshots['cds-button supports props.size size="2xl"'] = `<button
   class="cds--btn cds--btn--2xl cds--btn--primary cds--layout--size-2xl"
   id="button"
   part="button"
@@ -528,14 +307,14 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
-/* end snapshot cds-button should set the expected classes for the button of size: 2xl */
+/* end snapshot cds-button supports props.size size="2xl" */
 
 snapshots[
   'cds-button Button with Icon variant should render the given icon within the <button> element'
@@ -550,12 +329,12 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button Button with Icon variant should render the given icon within the <button> element */
 
@@ -571,12 +350,12 @@ snapshots['cds-button Icon Button variant should set the icon-only class'] =
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button Icon Button variant should set the icon-only class */
 
@@ -592,12 +371,12 @@ snapshots['cds-button Icon Button variant should support badge indicator'] =
   </slot>
   <slot name="icon">
   </slot>
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
+  </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button Icon Button variant should support badge indicator */
 
@@ -614,263 +393,11 @@ snapshots[
   </slot>
   <slot name="icon">
   </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button Icon Button variant should support badge indicator and truncate */
-
-snapshots[
-  'cds-button should set the expected classes for the button of size: `sm`'
-] = `<button
-  class="cds--btn cds--btn--primary cds--btn--sm cds--layout--size-sm"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
+  <slot
+    id="badge-indicator"
+    name="badge-indicator"
+  >
   </slot>
 </button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of size: `sm` */
-
-snapshots[
-  'cds-button should set the expected classes for the button of size: `md`'
-] = `<button
-  class="cds--btn cds--btn--md cds--btn--primary cds--layout--size-md"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of size: `md` */
-
-snapshots[
-  'cds-button should set the expected classes for the button of size: `lg`'
-] = `<button
-  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of size: `lg` */
-
-snapshots[
-  'cds-button should set the expected classes for the button of size: `xl`'
-] = `<button
-  class="cds--btn cds--btn--primary cds--btn--xl cds--layout--size-xl"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of size: `xl` */
-
-snapshots[
-  'cds-button should set the expected classes for the button of size: `2xl`'
-] = `<button
-  class="cds--btn cds--btn--2xl cds--btn--primary cds--layout--size-2xl"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button should set the expected classes for the button of size: `2xl` */
-
-snapshots['cds-button supports props.size size="sm"'] = `<button
-  class="cds--btn cds--btn--primary cds--btn--sm cds--layout--size-sm"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button supports props.size size="sm" */
-
-snapshots['cds-button supports props.size size="md"'] = `<button
-  class="cds--btn cds--btn--md cds--btn--primary cds--layout--size-md"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button supports props.size size="md" */
-
-snapshots['cds-button supports props.size size="lg"'] = `<button
-  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button supports props.size size="lg" */
-
-snapshots['cds-button supports props.size size="xl"'] = `<button
-  class="cds--btn cds--btn--primary cds--btn--xl cds--layout--size-xl"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button supports props.size size="xl" */
-
-snapshots['cds-button supports props.size size="2xl"'] = `<button
-  class="cds--btn cds--btn--2xl cds--btn--primary cds--layout--size-2xl"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button supports props.size size="2xl" */
-snapshots['cds-button Icon Button variant should support badge indicator'] =
-  `<button
-  class="cds--btn cds--btn--ghost cds--btn--icon-only cds--btn--lg cds--layout--size-lg cds-ce--btn--has-icon"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
-`;
-/* end snapshot cds-button Icon Button variant should support badge indicator */
-
-snapshots[
-  'cds-button Icon Button variant should support badge indicator and truncate'
-] = `<button
-  class="cds--btn cds--btn--ghost cds--btn--icon-only cds--btn--lg cds--layout--size-lg cds-ce--btn--has-icon"
-  id="button"
-  part="button"
-  tabindex="0"
-  type="button"
->
-  <slot>
-  </slot>
-  <slot name="icon">
-  </slot>
-</button>
-<slot
-  id="badge-indicator"
-  name="badge-indicator"
->
-</slot>
 `;
 /* end snapshot cds-button Icon Button variant should support badge indicator and truncate */
