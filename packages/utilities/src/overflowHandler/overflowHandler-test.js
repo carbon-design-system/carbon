@@ -507,12 +507,31 @@ describe('createOverflowHandler', () => {
 
   describe('ResizeObserver', () => {
     let observeCallback;
+    let animationFrameCallbacks;
+    let nextAnimationFrameId;
+
+    const flushAnimationFrameCallbacks = () => {
+      const callbacks = animationFrameCallbacks;
+      animationFrameCallbacks = [];
+      callbacks.forEach((callback) => callback(0));
+    };
 
     beforeEach(() => {
+      animationFrameCallbacks = [];
+      nextAnimationFrameId = 0;
+
       jest.spyOn(global, 'ResizeObserver').mockImplementation((cb) => {
         observeCallback = cb;
         return { observe: jest.fn(), disconnect: jest.fn() };
       });
+
+      jest
+        .spyOn(global, 'requestAnimationFrame')
+        .mockImplementation((callback) => {
+          animationFrameCallbacks.push(callback);
+          nextAnimationFrameId += 1;
+          return nextAnimationFrameId;
+        });
     });
 
     it('should call onChange when ResizeObserver fires and the hidden set changes', () => {
@@ -520,10 +539,12 @@ describe('createOverflowHandler', () => {
       // Initial: 80px → items[2] hidden; then resize to 200px → all visible
       setContainerDimension(container, 'width', 80);
       handler = createOverflowHandler({ container, onChange: mockOnChange });
+      flushAnimationFrameCallbacks();
       mockOnChange.mockClear();
 
       setContainerDimension(container, 'width', 200);
       observeCallback([]);
+      flushAnimationFrameCallbacks();
 
       expect(mockOnChange).toHaveBeenCalled();
       const [visible, hidden] = mockOnChange.mock.calls[0];
@@ -535,6 +556,7 @@ describe('createOverflowHandler', () => {
       container.append(...createItems(Array(3).fill(40), 'width'));
       setContainerDimension(container, 'width', 80);
       handler = createOverflowHandler({ container, onChange: mockOnChange });
+      flushAnimationFrameCallbacks();
       mockOnChange.mockClear();
 
       // Fire the ResizeObserver callback three times in the same synchronous block.
@@ -544,7 +566,8 @@ describe('createOverflowHandler', () => {
       observeCallback([]);
       observeCallback([]);
 
-      // jsdom runs rAF synchronously; a single rAF = a single update call.
+      flushAnimationFrameCallbacks();
+
       expect(mockOnChange).toHaveBeenCalledTimes(1);
     });
 

@@ -775,12 +775,7 @@ export const WithFlushBody = () => (
           <Card.Title>Flush body</Card.Title>
         </Card.Header>
         <Card.Body isFlush>
-          <div
-            style={{
-              background: 'var(--cds-highlight)',
-              border: '1px dashed var(--cds-link-primary)',
-              padding: '1rem',
-            }}>
+          <div className="card-story__flush-demo-content">
             Body flush to card edges
           </div>
         </Card.Body>
@@ -1218,12 +1213,9 @@ export const WithIcon = () => (
             </Button>
           </Card.Action>
           <Card.Action>
-            <Button
-              kind="ghost"
-              label="View report"
-              size="md"
-              renderIcon={Share}
-              hasIconOnly></Button>
+            <IconButton label="Share" kind="ghost" size="md">
+              <Share />
+            </IconButton>
           </Card.Action>
           <Card.Action>
             <IconButton
@@ -1309,12 +1301,9 @@ export const WithMedia = () => (
             <IconIndicator kind="in-progress" size={16} label="In progress" />
           </div>
           <Card.Action>
-            <Button
-              kind="ghost"
-              label="View report"
-              size="md"
-              renderIcon={Share}
-              hasIconOnly></Button>
+            <IconButton label="Share" kind="ghost" size="md">
+              <Share />
+            </IconButton>
           </Card.Action>
         </Card.Footer>
       </Card>
