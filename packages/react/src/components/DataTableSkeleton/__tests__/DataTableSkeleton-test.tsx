@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import React from 'react';
 import DataTableSkeleton from '../DataTableSkeleton';
 import { render, screen, within } from '@testing-library/react';

@@ -1,10 +1,11 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import React from 'react';
 import Switch from '../Switch';
 import userEvent from '@testing-library/user-event';
@@ -13,15 +14,15 @@ import { render, screen } from '@testing-library/react';
 describe('Switch', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
-      const { container } = render(<Switch data-testid="test-id" />);
+      render(<Switch data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
+      expect(screen.getByRole('tab')).toHaveAttribute('data-testid', 'test-id');
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      const { container } = render(<Switch className="custom-class" />);
+      render(<Switch className="custom-class" />);
 
-      expect(container.firstChild).toHaveClass('custom-class');
+      expect(screen.getByRole('tab')).toHaveClass('custom-class');
     });
 
     it('should respect disabled prop', () => {

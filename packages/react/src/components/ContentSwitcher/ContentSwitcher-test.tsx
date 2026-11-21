@@ -5,11 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import { ContentSwitcher } from './ContentSwitcher';
 import { IconSwitch, Switch } from '../Switch';
+
+type ContentSwitcherOnChange = ComponentProps<
+  typeof ContentSwitcher
+>['onChange'];
 
 describe('ContentSwitcher - RTL', () => {
   describe('renders API as expected', () => {
@@ -57,7 +62,7 @@ describe('ContentSwitcher - RTL', () => {
     });
 
     it('should call onChange when selected item changes through mouse click', async () => {
-      const onChange = jest.fn();
+      const onChange = jest.fn<ContentSwitcherOnChange>();
       render(
         <ContentSwitcher onChange={onChange} data-testid="test-id">
           <Switch name="one" text="First section" />
@@ -77,7 +82,7 @@ describe('ContentSwitcher - RTL', () => {
     });
 
     it('should call onChange when selected item changes through keydown', async () => {
-      const onChange = jest.fn();
+      const onChange = jest.fn<ContentSwitcherOnChange>();
       render(
         <ContentSwitcher onChange={onChange} data-testid="test-id">
           <Switch name="one" text="First section" />
@@ -180,7 +185,7 @@ describe('ContentSwitcher - RTL', () => {
     });
 
     it('should have the correct attributes when lowContrast prop is used', () => {
-      const { container } = render(
+      render(
         <ContentSwitcher onChange={() => {}} lowContrast>
           <Switch name="one" text="First section" />
           <Switch name="two" text="Second section" />
@@ -188,7 +193,9 @@ describe('ContentSwitcher - RTL', () => {
         </ContentSwitcher>
       );
 
-      const attributes = Array.from(container.firstChild.attributes).reduce(
+      const attributes = Array.from(
+        screen.getByRole('tablist').attributes
+      ).reduce<Record<string, string>>(
         (acc, { name, value }) => ({ ...acc, [name]: value }),
         {}
       );
@@ -201,7 +208,7 @@ describe('ContentSwitcher - RTL', () => {
     });
 
     it('should have the correct attributes with iconOnly version when lowContrast is used', () => {
-      const { container } = render(
+      render(
         <ContentSwitcher onChange={() => {}} lowContrast>
           <IconSwitch name="one" />
           <IconSwitch name="two" />
@@ -209,7 +216,9 @@ describe('ContentSwitcher - RTL', () => {
         </ContentSwitcher>
       );
 
-      const attributes = Array.from(container.firstChild.attributes).reduce(
+      const attributes = Array.from(
+        screen.getByRole('tablist').attributes
+      ).reduce<Record<string, string>>(
         (acc, { name, value }) => ({ ...acc, [name]: value }),
         {}
       );
