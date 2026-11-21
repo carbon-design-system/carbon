@@ -8,7 +8,7 @@
 'use strict';
 
 /**
- * Emits `scss/generated/_tokens.scss` from the motion DTCG tokens.
+ * Emits `scss/generated/_tokens.scss` from tokens/motion.tokens.json.
  *
  * Generates:
  *   - `$easings` Sass map  (standard/entrance/exit × productive/expressive)
@@ -37,7 +37,7 @@ function carbonScssMotionTokensFormat({ dictionary }) {
 
   const lines = [FILE_BANNER];
 
-  // ── $easings map ──────────────────────────────────────────────────────────
+  // $easings map
   lines.push('/// Common component easings');
   lines.push('/// @type Map');
   lines.push('/// @access public');
@@ -58,7 +58,7 @@ function carbonScssMotionTokensFormat({ dictionary }) {
   lines.push(') !default;');
   lines.push('');
 
-  // ── V11 duration variables ────────────────────────────────────────────────
+  // V11 duration variables
   const durationTokens = dictionary.allTokens.filter((t) =>
     t.name.startsWith('duration-')
   );
@@ -73,7 +73,7 @@ function carbonScssMotionTokensFormat({ dictionary }) {
     lines.push('');
   }
 
-  // ── V10 deprecated aliases ────────────────────────────────────────────────
+  // V10 deprecated aliases
   lines.push('/// V10 backwards compatibility tokens');
   const v10Map = {
     'duration-fast-01': 'fast-01',

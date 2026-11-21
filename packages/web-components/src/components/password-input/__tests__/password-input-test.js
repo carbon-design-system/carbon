@@ -62,6 +62,46 @@ describe('cds-password-input', () => {
     expect(helper.textContent).to.include('Helper text');
   });
 
+  it('should point aria-describedby at the helper or error text', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-password-input helper-text="Help"></cds-password-input>
+        <cds-password-input helper-text="Help"></cds-password-input>
+        <cds-password-input
+          helper-text="Help"
+          invalid
+          invalid-text="Wrong"></cds-password-input>
+        <cds-password-input
+          helper-text="Help"
+          warn
+          warn-text="Careful"></cds-password-input>
+      </div>
+    `);
+    const [first, second, invalid, warn] = Array.from(
+      el.querySelectorAll('cds-password-input')
+    );
+    const describedBy = (host) =>
+      host.shadowRoot.querySelector('input').getAttribute('aria-describedby');
+    const idOf = (host, selector) => host.shadowRoot.querySelector(selector).id;
+
+    expect(describedBy(first)).to.equal(idOf(first, '.cds--form__helper-text'));
+    expect(describedBy(first)).to.not.equal(describedBy(second));
+    expect(describedBy(invalid)).to.equal(
+      idOf(invalid, '.cds--form-requirement')
+    );
+    expect(describedBy(warn)).to.equal(idOf(warn, '.cds--form-requirement'));
+  });
+
+  it('should not reference the helper text when isFluid hides it', async () => {
+    const el = await fixture(html`
+      <cds-password-input isFluid helper-text="Help"></cds-password-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(el.shadowRoot.querySelector('.cds--form__helper-text')).to.not.exist;
+    expect(input.hasAttribute('aria-describedby')).to.be.false;
+  });
+
   it('should apply hide-label attribute', async () => {
     const el = await fixture(html`
       <cds-password-input
@@ -137,6 +177,98 @@ describe('cds-password-input', () => {
     expect(error.textContent).to.include('This is invalid text');
   });
 
+  it('should not have invalid classname when is disabled', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        label="test-label"
+        invalid
+        invalid-text="Invalid message"
+        disabled>
+      </cds-password-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+    expect(input.hasAttribute('data-invalid')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to.be
+      .null;
+  });
+
+  it('should not have invalid classname when is readonly', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        label="test-label"
+        invalid
+        invalid-text="Invalid message"
+        readonly>
+      </cds-password-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+    expect(input.hasAttribute('data-invalid')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to.be
+      .null;
+  });
+
+  it('should not have warn classname when is disabled', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        label="test-label"
+        warn
+        warn-text="Warn message"
+        disabled>
+      </cds-password-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(
+      fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
+    ).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(
+      el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+    ).to.be.null;
+  });
+
+  it('should not have warn classname when is readonly', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        label="test-label"
+        warn
+        warn-text="Warn message"
+        readonly>
+      </cds-password-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(
+      fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
+    ).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(
+      el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+    ).to.be.null;
+  });
+
   it('should apply size attribute', async () => {
     const el = await fixture(html`
       <cds-password-input size="sm"></cds-password-input>
@@ -197,6 +329,29 @@ describe('cds-password-input', () => {
     `);
     const input = el.shadowRoot.querySelector('input');
     expect(input.readOnly).to.be.true;
+  });
+
+  it('should apply readOnly property', async () => {
+    const el = await fixture(html` <cds-password-input></cds-password-input> `);
+
+    el.readOnly = true;
+    await el.updateComplete;
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(el.readonly).to.be.true;
+    expect(el.hasAttribute('read-only')).to.be.false;
+    expect(input.readOnly).to.be.true;
+  });
+
+  it('should keep readOnly as a property alias for readonly', async () => {
+    const el = await fixture(html` <cds-password-input></cds-password-input> `);
+
+    el.readonly = true;
+    await el.updateComplete;
+
+    expect(el.readOnly).to.be.true;
+    expect(el.hasAttribute('readonly')).to.be.true;
+    expect(el.hasAttribute('read-only')).to.be.false;
   });
 
   it('should not disable hide/show password toggle button when readonly is true', async () => {

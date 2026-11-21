@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Re-export individual token constants generated from src/dtcg/layout.json
-// via the Style Dictionary pipeline (tasks/build.mjs → style-dictionary/sd.config.js).
-// The generated file is kept in sync with the DTCG source of truth.
+// Re-export individual token constants generated from
+// tokens/layout.tokens.json via the Style Dictionary pipeline
+// (style-dictionary/sd.config.js). Run `yarn build` to generate them.
 export * from '../js/generated/layout-tokens';
 
 import { unstable_tokens } from './tokens';

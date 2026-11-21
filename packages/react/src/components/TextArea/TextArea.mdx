@@ -19,6 +19,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [Overview](#overview)
 - [Skeleton](#skeleton)
 - [AI Label](#ai-label)
+- [Translations](#translations)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -62,6 +63,46 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     },
   ]}
 />
+
+## Translations
+
+When `maxCount` is set, `TextArea` announces the remaining characters or words
+to screen readers as the value approaches the limit. When `enableCounter` is
+also set, the limit is exposed as the accessible description of the
+`<textarea>`. These strings can be translated with `translateWithId`. The
+function receives a translation ID and an object with `count` and `maxCount`,
+and must return the translated string. Use `count` to select the correct plural
+form. The `counterMode` prop determines whether the `characters` or `words` IDs
+are used.
+
+```jsx
+const translations = {
+  'carbon.text-area.counter.characters.remaining': ({ count }) =>
+    count === 1 ? '1 caractère restant.' : `${count} caractères restants.`,
+  'carbon.text-area.counter.characters.max-reached': () =>
+    'Nombre maximal de caractères atteint.',
+  'carbon.text-area.counter.characters.limit': ({ maxCount }) =>
+    `Limite de ${maxCount} caractères`,
+  // ... `words` IDs when `counterMode="word"`
+};
+
+<TextArea
+  id="text-area"
+  labelText="Label"
+  enableCounter
+  maxCount={500}
+  translateWithId={(id, args) => translations[id](args)}
+/>;
+```
+
+| Translation ID                                    | Default                                          | `count`              |
+| ------------------------------------------------- | ------------------------------------------------ | -------------------- |
+| `carbon.text-area.counter.characters.remaining`   | `1 character left.` / `{count} characters left.` | Remaining characters |
+| `carbon.text-area.counter.characters.max-reached` | `Maximum characters reached.`                    | `maxCount`           |
+| `carbon.text-area.counter.characters.limit`       | `Character limit {maxCount}`                     | `maxCount`           |
+| `carbon.text-area.counter.words.remaining`        | `1 word left.` / `{count} words left.`           | Remaining words      |
+| `carbon.text-area.counter.words.max-reached`      | `Maximum words reached.`                         | `maxCount`           |
+| `carbon.text-area.counter.words.limit`            | `Word limit {maxCount}`                          | `maxCount`           |
 
 ## Component API
 

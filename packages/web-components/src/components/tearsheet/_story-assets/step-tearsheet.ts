@@ -8,7 +8,6 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { SignalWatcher } from '@lit-labs/signals';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';
 
@@ -27,7 +26,7 @@ interface FormStateType extends Record<string, unknown> {
 }
 
 @customElement('step-tearsheet-demo')
-export class StepTearsheetNext extends SignalWatcher(LitElement) {
+export class StepTearsheetNext extends LitElement {
   @property({ type: Boolean })
   declare horizontal: boolean;
 
@@ -40,7 +39,7 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
     this._open = false;
   }
 
-  private _stepInfo = new StepInstance();
+  private _stepInfo = new StepInstance(this);
 
   connectedCallback(): void {
     super.connectedCallback();

@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { expect, fixture, html } from '@open-wc/testing';
+import { expect, fixture, html, nextFrame } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/popover/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 
 describe('cds-popover', function () {
   it('should support a custom class', async () => {
@@ -23,6 +24,27 @@ describe('cds-popover', function () {
     `);
 
     expect(el).to.have.attribute('data-testid', 'test-id');
+  });
+
+  it('should clean up the floating controller when disconnected', async () => {
+    const el = await fixture(html`
+      <cds-popover open>
+        <button type="button">Test</button>
+        <cds-popover-content></cds-popover-content>
+      </cds-popover>
+    `);
+    const originalHostDisconnected = el.popoverController.hostDisconnected;
+    let hostDisconnectedCalled = 0;
+    el.popoverController.hostDisconnected = () => {
+      hostDisconnectedCalled += 1;
+    };
+
+    try {
+      el.remove();
+      expect(hostDisconnectedCalled).to.equal(1);
+    } finally {
+      el.popoverController.hostDisconnected = originalHostDisconnected;
+    }
   });
 });
 describe('cds-popover-content', function () {
@@ -760,5 +782,77 @@ describe('cds-popover autoAlignBoundary', () => {
     expect(resolvedBoundary).to.have.property('y').that.is.a('number');
     expect(resolvedBoundary).to.have.property('width').that.is.a('number');
     expect(resolvedBoundary).to.have.property('height').that.is.a('number');
+  });
+});
+
+describe('cds-popover autoalign with a forwarded trigger slot', () => {
+  it('should position against the real trigger, not the forwarding <slot>', async () => {
+    // Mirrors components such as `cds-coachmark` that re-slot their trigger:
+    // the popover's first assigned element is a `<slot>`, not the trigger.
+    const host = await fixture(html`
+      <div style="padding: 200px;">
+        <div id="host">
+          <button type="button" slot="trigger">Trigger</button>
+        </div>
+      </div>
+    `);
+    const hostEl = host.querySelector('#host');
+    hostEl.attachShadow({ mode: 'open' }).innerHTML = `
+      <cds-popover open autoalign align="bottom">
+        <slot name="trigger"></slot>
+        <cds-popover-content>Content</cds-popover-content>
+      </cds-popover>
+    `;
+    const popover = hostEl.shadowRoot.querySelector('cds-popover');
+    await popover.updateComplete;
+    await nextFrame();
+    await nextFrame();
+
+    const content = popover
+      .querySelector('cds-popover-content')
+      .shadowRoot.querySelector('.cds--popover-content');
+    const trigger = hostEl.querySelector('button').getBoundingClientRect();
+
+    expect(content.style.visibility).to.equal('visible');
+    expect(parseFloat(content.style.left)).to.be.greaterThan(0);
+    expect(parseFloat(content.style.top)).to.be.greaterThan(trigger.top);
+  });
+});
+
+describe('cds-popover autoalign default', () => {
+  it('should default autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-popover>
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-popover');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.true;
+    expect(el).to.have.attribute('autoalign');
+    expect(el.querySelector('cds-popover-content').autoalign).to.be.true;
+  });
+
+  it('should keep autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-popover .autoalign=${false}>
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-popover');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.false;
+    expect(el).to.not.have.attribute('autoalign');
+    expect(el.querySelector('cds-popover-content').autoalign).to.not.be.true;
   });
 });

@@ -12,7 +12,6 @@ to change the styles of components, there are a few options.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Using CSS Custom Properties](#using-css-custom-properties)
-- [Dependency injection](#dependency-injection)
 - [Creating derived components with different style](#creating-derived-components-with-different-style)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -41,23 +40,24 @@ The names of CSS Custom Properties you can use are the Carbon theme
 prefixed with `--cds-`.
 
 With CSS Custom Properties approach, you can switch the entire theme under the
-specific element by:
+specific element. The following example emits all theme tokens as CSS Custom
+Properties:
 
-```css
+```scss
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
 
 footer {
   @include theme.theme(themes.$g100);
-} // Emits all theme tokens in CSS Custom Properties
+}
 ```
 
 Some components such as `button`, `notification`, `tag`, and `content switcher`
 have specific tokens per theme that need to emitted in the styles. You can do
 this for example by adding the following:
 
-```css
+```scss
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';

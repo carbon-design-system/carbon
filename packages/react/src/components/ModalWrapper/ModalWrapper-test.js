@@ -151,10 +151,9 @@ describe('ModalWrapper', () => {
     );
 
     const triggerBtn = screen.getByText('Launch modal');
-    // eslint-disable-next-line testing-library/no-node-access
-    const closeBtn = document.querySelector('.cds--modal-close');
     await userEvent.click(triggerBtn);
     expect(screen.getByTestId('modal-3')).toHaveClass('is-visible');
+    const closeBtn = screen.getByRole('button', { name: 'Close' });
     await userEvent.click(closeBtn);
     expect(screen.getByTestId('modal-3')).not.toHaveClass('is-visible');
   });

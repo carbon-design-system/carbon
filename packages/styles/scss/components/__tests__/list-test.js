@@ -23,4 +23,15 @@ describe('scss/components/list', () => {
     `);
     expect(unwrap('mixin')).toBe(true);
   });
+
+  test('ordered list markers are indented within the list container', async () => {
+    const { unwrap } = await render(`
+      @use '../list';
+      @use '../../spacing' as *;
+
+      $_: get('ordered-padding', $spacing-06);
+    `);
+
+    expect(unwrap('ordered-padding')).toBe('1.5rem');
+  });
 });

@@ -30,9 +30,53 @@ import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import type { TFunc, TranslateWithId } from '../../types/common';
+
+const translationIds = {
+  'carbon.text-area.counter.characters.remaining':
+    'carbon.text-area.counter.characters.remaining',
+  'carbon.text-area.counter.words.remaining':
+    'carbon.text-area.counter.words.remaining',
+  'carbon.text-area.counter.characters.max-reached':
+    'carbon.text-area.counter.characters.max-reached',
+  'carbon.text-area.counter.words.max-reached':
+    'carbon.text-area.counter.words.max-reached',
+  'carbon.text-area.counter.characters.limit':
+    'carbon.text-area.counter.characters.limit',
+  'carbon.text-area.counter.words.limit':
+    'carbon.text-area.counter.words.limit',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+type TranslationArgs = { count: number; maxCount: number };
+
+const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
+  messageId,
+  args
+) => {
+  const count = args?.count ?? 0;
+  const maxCount = args?.maxCount ?? 0;
+
+  switch (messageId) {
+    case translationIds['carbon.text-area.counter.characters.remaining']:
+      return `${count} ${count === 1 ? 'character' : 'characters'} left.`;
+    case translationIds['carbon.text-area.counter.words.remaining']:
+      return `${count} ${count === 1 ? 'word' : 'words'} left.`;
+    case translationIds['carbon.text-area.counter.characters.max-reached']:
+      return 'Maximum characters reached.';
+    case translationIds['carbon.text-area.counter.words.max-reached']:
+      return 'Maximum words reached.';
+    case translationIds['carbon.text-area.counter.characters.limit']:
+      return `Character limit ${maxCount}`;
+    case translationIds['carbon.text-area.counter.words.limit']:
+      return `Word limit ${maxCount}`;
+  }
+};
 
 export interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    TranslateWithId<TranslationKey, TranslationArgs> {
   /**
    * Provide a custom className that is applied to the wrapper node
    */
@@ -166,6 +210,16 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
+const getTextCount = (
+  value: NonNullable<TextAreaProps['value']>,
+  counterMode: TextAreaProps['counterMode']
+): number => {
+  const strValue = value.toString();
+  return counterMode === 'character'
+    ? strValue.length
+    : strValue.match(/\p{L}+/gu)?.length || 0;
+};
+
 const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
 
 const TextArea = frFn((props, forwardRef) => {
@@ -191,6 +245,7 @@ const TextArea = frFn((props, forwardRef) => {
     warnText = '',
     rows = 4,
     slug,
+    translateWithId: t = defaultTranslateWithId,
     ...other
   } = props;
   const prefix = usePrefix();
@@ -208,24 +263,31 @@ const TextArea = frFn((props, forwardRef) => {
 
   const ref = useMergedRefs([forwardRef, textareaRef]);
 
-  function getInitialTextCount(): number {
-    const targetValue =
-      defaultValue || value || textareaRef.current?.value || '';
-    const strValue = targetValue.toString();
+  const isControlled = value != null;
+  const [uncontrolledTextCount, setUncontrolledTextCount] = useState(() =>
+    getTextCount(defaultValue ?? '', counterMode)
+  );
+  // Keep controlled counts derived so rapid input doesn't queue extra state updates.
+  const textCount = isControlled
+    ? getTextCount(value, counterMode)
+    : uncontrolledTextCount;
 
-    if (counterMode === 'character') {
-      return strValue.length;
-    } else {
-      return strValue.match(/\p{L}+/gu)?.length || 0;
+  const setTextCount = (count: number) => {
+    if (!isControlled) {
+      setUncontrolledTextCount(count);
     }
-  }
-
-  const [textCount, setTextCount] = useState(getInitialTextCount());
+  };
 
   useEffect(() => {
-    setTextCount(getInitialTextCount());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, defaultValue, counterMode]);
+    if (!isControlled) {
+      setUncontrolledTextCount(
+        getTextCount(
+          defaultValue || textareaRef.current?.value || '',
+          counterMode
+        )
+      );
+    }
+  }, [isControlled, defaultValue, counterMode]);
 
   useIsomorphicEffect(() => {
     if (other.cols && textareaRef.current) {
@@ -296,6 +358,11 @@ const TextArea = frFn((props, forwardRef) => {
           if (totalWords > maxCount) {
             evt.preventDefault();
 
+            // The consumer owns the value of a controlled field.
+            if (isControlled) {
+              return;
+            }
+
             const allowedWords = existingWords
               .concat(pastedWords)
               .slice(0, maxCount);
@@ -313,7 +380,7 @@ const TextArea = frFn((props, forwardRef) => {
       if (!disabled) {
         if (counterMode == 'character') {
           evt?.persist?.();
-          // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
+          // Read the final DOM value after the change handler has run.
           setTimeout(() => {
             setTextCount(evt.target?.value?.length);
           }, 0);
@@ -481,8 +548,16 @@ const TextArea = frFn((props, forwardRef) => {
   const ariaAnnouncement = getAnnouncement(
     textCount,
     maxCount,
-    counterMode === 'word' ? 'word' : undefined,
-    counterMode === 'word' ? 'words' : undefined
+    counterMode === 'word'
+      ? {
+          remaining: 'carbon.text-area.counter.words.remaining',
+          maxReached: 'carbon.text-area.counter.words.max-reached',
+        }
+      : {
+          remaining: 'carbon.text-area.counter.characters.remaining',
+          maxReached: 'carbon.text-area.counter.characters.max-reached',
+        },
+    t
   );
   useEffect(() => {
     if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
@@ -547,8 +622,14 @@ const TextArea = frFn((props, forwardRef) => {
           id={counterDescriptionId}
           className={`${prefix}--visually-hidden`}>
           {counterMode === 'word'
-            ? `Word limit ${maxCount}`
-            : `Character limit ${maxCount}`}
+            ? t('carbon.text-area.counter.words.limit', {
+                count: maxCount,
+                maxCount,
+              })
+            : t('carbon.text-area.counter.characters.limit', {
+                count: maxCount,
+                maxCount,
+              })}
         </span>
       )}
       <div
@@ -716,6 +797,11 @@ TextArea.propTypes = {
     'The `slug` prop for `TextArea` has ' +
       'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
   ),
+
+  /**
+   * Translates component strings using your i18n tool.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * Provide the current value of the `<textarea>`

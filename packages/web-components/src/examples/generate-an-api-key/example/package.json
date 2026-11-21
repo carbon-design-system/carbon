@@ -1,0 +1,23 @@
+{
+  "name": "carbon-web-components-generate-an-api-key-pattern-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Generate an API key pattern using Carbon web components",
+  "license": "Apache-2.0",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@carbon/icons": "^11.87.0",
+    "@carbon/web-components": "^2.62.0",
+    "lit": "^3.1.4"
+  },
+  "devDependencies": {
+    "sass": "^1.93.2",
+    "vite": "^6.2.3",
+    "vite-plugin-lit-css": "^2.1.0"
+  }
+}

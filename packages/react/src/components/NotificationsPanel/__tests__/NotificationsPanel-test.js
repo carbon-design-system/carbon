@@ -15,6 +15,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { NotificationsPanel } from '../NotificationsPanel';
+import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 const blockClass = `${prefix}--notifications-panel`;
@@ -323,5 +324,111 @@ describe(componentName, () => {
       dateTimeLocale: 'de',
     });
     expect(screen.getByText(/jetzt/i)).toBeTruthy();
+  });
+
+  describe('grouping by calendar day', () => {
+    // Fixed "now": 15 Jun 2025, 09:00 local time
+    const now = new Date(2025, 5, 15, 9, 0, 0, 0);
+
+    beforeEach(() => {
+      jest.useFakeTimers();
+      jest.setSystemTime(now);
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    const makeNotification = (title, timestamp) => ({
+      id: title,
+      type: 'informational',
+      title,
+      timestamp,
+    });
+
+    // Wraps in FeatureFlags so IconButton's Popover tooltip finds 'enable-v12-autoalign'
+    const renderWithFlags = (props = {}) =>
+      render(
+        <FeatureFlags enableV12Autoalign>
+          <NotificationsPanel
+            open={true}
+            onClickOutside={jest.fn()}
+            data={[]}
+            {...props}
+          />
+        </FeatureFlags>
+      );
+
+    const groupOf = (title) => {
+      const notification = screen
+        .getByText(title)
+        .closest(`.${blockClass}__notification`);
+      return ['today', 'yesterday', 'previous'].find((group) =>
+        notification.classList.contains(`${blockClass}__notification-${group}`)
+      );
+    };
+
+    it('should group notifications using midnight boundaries rather than rolling 24h/48h windows', () => {
+      renderWithFlags({
+        data: [
+          makeNotification('now', new Date(now)),
+          makeNotification(
+            'just after midnight today',
+            new Date(2025, 5, 15, 0, 0, 0, 0)
+          ),
+          // exactly 24h ago, but on the previous calendar day
+          makeNotification(
+            '24h ago',
+            new Date(now.getTime() - 24 * 60 * 60 * 1000)
+          ),
+          makeNotification(
+            'last second of yesterday',
+            new Date(2025, 5, 14, 23, 59, 59, 999)
+          ),
+          makeNotification(
+            'first moment of yesterday',
+            new Date(2025, 5, 14, 0, 0, 0, 0)
+          ),
+          // 46h ago (< 48h) but two calendar days ago: the case from issue #9886
+          makeNotification(
+            'two days ago 11am',
+            new Date(2025, 5, 13, 11, 0, 0, 0)
+          ),
+          makeNotification(
+            'last moment before yesterday',
+            new Date(2025, 5, 13, 23, 59, 59, 999)
+          ),
+          makeNotification('long ago', new Date(2025, 4, 1, 12, 0, 0, 0)),
+        ],
+      });
+
+      expect(groupOf('now')).toBe('today');
+      expect(groupOf('just after midnight today')).toBe('today');
+      expect(groupOf('24h ago')).toBe('yesterday');
+      expect(groupOf('last second of yesterday')).toBe('yesterday');
+      expect(groupOf('first moment of yesterday')).toBe('yesterday');
+      expect(groupOf('two days ago 11am')).toBe('previous');
+      expect(groupOf('last moment before yesterday')).toBe('previous');
+      expect(groupOf('long ago')).toBe('previous');
+    });
+
+    it('should keep notifications from earlier today in "Today" shortly after midnight', () => {
+      jest.setSystemTime(new Date(2025, 5, 15, 0, 5, 0, 0));
+      renderWithFlags({
+        data: [
+          makeNotification(
+            'three minutes ago',
+            new Date(2025, 5, 15, 0, 2, 0, 0)
+          ),
+          makeNotification(
+            'ten minutes ago',
+            new Date(2025, 5, 14, 23, 55, 0, 0)
+          ),
+        ],
+      });
+
+      expect(groupOf('three minutes ago')).toBe('today');
+      expect(groupOf('ten minutes ago')).toBe('yesterday');
+    });
   });
 });

@@ -9,10 +9,10 @@
 @use '@carbon/themes/scss/compat/themes' as compat;
 @use '../themes';
 
-// For our compatability themes, we will merge the themes from v10 and v11 and
+// For our compatibility themes, we will merge the themes from v10 and v11 and
 // provide this combination as one of our four default themes.
 //
-// This is useful for situations where a user is trying to use the compatability
+// This is useful for situations where a user is trying to use the compatibility
 // theme, for example:
 //
 // ```scss
