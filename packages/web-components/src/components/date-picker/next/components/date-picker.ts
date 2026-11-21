@@ -487,6 +487,10 @@ class CDSDatePicker extends FormAssociatedMixin(
     this._releaseDatePicker();
     const { _dateInteractNode: dateInteractNode, _mode: mode } = this;
 
+    // Keep input editable state in sync even when the calendar adapter is not
+    // created (simple mode / inputs not ready yet).
+    this._syncInputEditableState();
+
     // Don't instantiate in simple mode
     if (!dateInteractNode || !dateInteractNode.input || mode === 'simple') {
       return;
@@ -548,9 +552,46 @@ class CDSDatePicker extends FormAssociatedMixin(
   }
 
   /**
-   * Allows the user to enter a date directly into the input field
+   * Syncs disabled/readonly state onto slotted inputs.
+   * `allowInput=false` mirrors Flatpickr: the field stays focusable for
+   * calendar use but rejects manual typing via the native readonly attribute.
    */
-  @property({ type: Boolean, reflect: true, attribute: 'allow-input' })
+  private _syncInputEditableState() {
+    const { selectorInputFrom, selectorInputTo } = this
+      .constructor as typeof CDSDatePicker;
+    const inputFrom = this.querySelector(
+      selectorInputFrom
+    ) as CDSDatePickerInput;
+    const inputTo = this.querySelector(selectorInputTo) as CDSDatePickerInput;
+    const inputReadOnly = this.readonly || !this.allowInput;
+
+    [inputFrom, inputTo].forEach((input) => {
+      if (input) {
+        input.disabled = this.disabled;
+        input.readonly = inputReadOnly;
+      }
+    });
+  }
+
+  /**
+   * Allows the user to enter a date directly into the input field.
+   * Defaults to `true`. A custom converter is required because Lit's Boolean
+   * attribute converter treats a missing attribute as `false`, which would
+   * incorrectly override this default.
+   */
+  @property({
+    reflect: true,
+    attribute: 'allow-input',
+    converter: {
+      fromAttribute: (value: string | null) => {
+        if (value === null) {
+          return true;
+        }
+        return value !== 'false';
+      },
+      toAttribute: (value: boolean) => (value ? '' : 'false'),
+    },
+  })
   allowInput = true;
 
   /**
@@ -949,6 +990,14 @@ class CDSDatePicker extends FormAssociatedMixin(
       this._clickOutsideHandler?.updateConfig({ isOpen: this.open });
     }
 
+    if (
+      changedProperties.has('disabled') ||
+      changedProperties.has('readonly') ||
+      changedProperties.has('allowInput')
+    ) {
+      this._syncInputEditableState();
+    }
+
     if (this._adapter) {
       if (
         changedProperties.has('minDate') ||
@@ -979,27 +1028,13 @@ class CDSDatePicker extends FormAssociatedMixin(
 
       if (
         changedProperties.has('disabled') ||
-        changedProperties.has('readonly')
+        changedProperties.has('readonly') ||
+        changedProperties.has('allowInput')
       ) {
-        const { selectorInputFrom, selectorInputTo } = this
-          .constructor as typeof CDSDatePicker;
-        const inputFrom = this.querySelector(
-          selectorInputFrom
-        ) as CDSDatePickerInput;
-        const inputTo = this.querySelector(
-          selectorInputTo
-        ) as CDSDatePickerInput;
-
-        [inputFrom, inputTo].forEach((input) => {
-          if (input) {
-            input.disabled = this.disabled;
-            input.readonly = this.readonly;
-          }
-        });
-
         this._adapter.updateContext({
           isDisabled: this.disabled,
           isReadonly: this.readonly,
+          allowInput: this.allowInput,
         });
       }
 
