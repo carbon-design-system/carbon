@@ -159,16 +159,13 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   type = TAG_TYPE.GRAY;
 
   /**
-   * true if the tag text has ellipsis applied.
-   * Only subclasses that surface truncation UI (e.g. dismissible) should
-   * measure layout and set this; plain `cds-tag` must not read scrollWidth.
+   * Whether the tag text is truncated.
    */
   @state()
   _hasEllipsisApplied = false;
 
   /**
-   * Whether this tag instance needs a synchronous text-overflow measurement.
-   * Plain tags never use the result; dismissible (and similar) override to true.
+   * Whether this tag instance needs to check for truncated text.
    */
   protected _shouldMeasureEllipsis() {
     return false;

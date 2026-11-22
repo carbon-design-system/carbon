@@ -155,16 +155,33 @@ describe('cds-tag', function () {
     }
 
     it('does not measure text width on plain cds-tag', async () => {
-      const el = await fixture(html`<cds-tag type="red">test-tag</cds-tag>`);
-      await el.updateComplete;
+      const el = document.createElement('cds-tag');
+      el.setAttribute('type', 'red');
+      el.textContent = 'test-tag';
 
-      const spy = spyLabelScrollWidth(el._textContainer);
-      el.type = 'blue';
+      // Spy on the label before the first `updated()` so an initial
+      // scrollWidth read during list rendering would be detected.
+      let spy;
+      const originalUpdated = Object.getPrototypeOf(el).updated;
+      el.updated = function (changedProperties) {
+        const label = this.shadowRoot?.querySelector('.cds--tag__label');
+        if (label && !spy) {
+          spy = spyLabelScrollWidth(label);
+        }
+        return originalUpdated.call(this, changedProperties);
+      };
+
+      const parent = await fixture(html`<div></div>`);
+      parent.appendChild(el);
       await el.updateComplete;
 
       expect(el._shouldMeasureEllipsis()).to.equal(false);
       expect(spy.gets).to.equal(0);
       expect(el._hasEllipsisApplied).to.equal(false);
+
+      el.type = 'blue';
+      await el.updateComplete;
+      expect(spy.gets).to.equal(0);
     });
 
     it('measures text width on cds-dismissible-tag', async () => {
