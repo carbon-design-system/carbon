@@ -1330,9 +1330,8 @@ describe('DataTable', () => {
     describe('expansion', () => {
       const renderExpandableTable = () =>
         render(
-          <DataTable
-            {...mockProps}
-            render={({
+          <DataTable headers={mockProps.headers} rows={mockProps.rows}>
+            {({
               rows,
               headers,
               getHeaderProps,
@@ -1379,7 +1378,7 @@ describe('DataTable', () => {
                 </Table>
               </TableContainer>
             )}
-          />
+          </DataTable>
         );
 
       const expandEachRow = async () => {
