@@ -30,15 +30,13 @@ describe('Tooltip', () => {
   });
 
   it('should support initially showing the tooltip with `defaultOpen`', () => {
-    const { container } = render(
+    render(
       <Tooltip defaultOpen label="Close">
         <button type="button">X</button>
       </Tooltip>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const popoverContainer = container.querySelector('.cds--popover-container');
-    expect(popoverContainer).toHaveClass('cds--popover--open');
+    expect(screen.getByRole('tooltip')).toHaveAttribute('aria-hidden', 'false');
   });
 
   it('should support labeling an element by its tooltip', () => {
@@ -90,25 +88,69 @@ describe('Tooltip', () => {
   });
 
   it('should close when item is activated and `closeOnActivation`', async () => {
-    const { container } = render(
-      <>
-        <Tooltip closeOnActivation label="Close">
-          <button type="button">X</button>
-        </Tooltip>
-        <div>Hey</div>
-      </>
+    const user = userEvent.setup();
+    render(
+      <Tooltip closeOnActivation label="Close">
+        <button type="button">X</button>
+      </Tooltip>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const popoverContainer = container.querySelector('.cds--popover-container');
     const button = screen.getByRole('button');
 
-    await userEvent.tab();
+    await user.tab();
 
-    expect(popoverContainer).toHaveClass('cds--popover--open');
-    await userEvent.click(button);
-    expect(popoverContainer).not.toHaveClass('cds--popover--open');
+    const tooltip = screen.getByRole('tooltip');
+    await user.click(button);
+    expect(tooltip).toHaveAttribute('aria-hidden', 'true');
   });
+
+  describe.each([false, true])(
+    'with closeOnActivation=%s',
+    (closeOnActivation) => {
+      it('should close on Escape', async () => {
+        const user = userEvent.setup();
+        render(
+          <Tooltip
+            defaultOpen
+            closeOnActivation={closeOnActivation}
+            label="Close">
+            <button type="button">X</button>
+          </Tooltip>
+        );
+
+        const tooltip = screen.getByRole('tooltip');
+
+        await user.keyboard('{Escape}');
+
+        expect(tooltip).toHaveAttribute('aria-hidden', 'true');
+      });
+
+      it.each([
+        { name: 'Enter', key: '{Enter}' },
+        { name: 'Space', key: ' ' },
+      ])(
+        `should ${closeOnActivation ? 'close' : 'remain open'} on $name`,
+        async ({ key }) => {
+          const user = userEvent.setup();
+          render(
+            <Tooltip closeOnActivation={closeOnActivation} label="Close">
+              <button type="button">X</button>
+            </Tooltip>
+          );
+
+          await user.tab();
+          const tooltip = screen.getByRole('tooltip');
+
+          await user.keyboard(key);
+
+          expect(tooltip).toHaveAttribute(
+            'aria-hidden',
+            closeOnActivation ? 'true' : 'false'
+          );
+        }
+      );
+    }
+  );
 });
 
 describe('Tooltip ARIA logic', () => {
