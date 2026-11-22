@@ -259,17 +259,15 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
     e.stopPropagation();
 
-    // Tab should close the menu and move focus to the next (or previous with
-    // Shift+Tab) focusable element after the trigger, instead of trapping
-    // focus on the trigger.
+    // Tab closes the menu and moves focus to the next (or previous with
+    // Shift+Tab) focusable element relative to the root menu's focus target.
     if (match(e, keys.Tab) && onClose) {
       e.preventDefault();
       const rootFocusReturnRef = isRoot
         ? focusReturn
         : context.state.rootFocusReturn;
-      const trigger = rootFocusReturnRef?.current ?? null;
-      // Exclude every open menu (including parents) and CSS-hidden nodes so
-      // Tab leaves the menu tree for the next visible control.
+      const trigger = rootFocusReturnRef?.current;
+      // Exclude menu contents and hidden elements from Tab target selection.
       const focusables = tabbable(document.body, {
         displayCheck: 'none',
       }).filter(

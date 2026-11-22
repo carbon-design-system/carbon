@@ -29,8 +29,7 @@ type StateType = {
   items: RegisterItemPayload[];
   requestCloseRoot: (e: Pick<KeyboardEvent<HTMLUListElement>, 'type'>) => void;
   /**
-   * Ref to the element that opened the root menu. Nested menus use this so
-   * Tab can close the whole chain and move focus past the root trigger.
+   * Ref to the element focused when the root menu opens.
    */
   rootFocusReturn: RefObject<HTMLElement | null> | null;
 };
