@@ -140,6 +140,12 @@ export interface DatePickerInputProps {
   readOnly?: boolean;
 
   /**
+   * Whether manual typing is allowed. When false, the input is read-only for
+   * typing but the calendar button stays enabled.
+   */
+  allowInput?: boolean;
+
+  /**
    * Autocomplete attribute
    */
   autoComplete?: string;
@@ -205,6 +211,7 @@ export const DatePickerInput = forwardRef<
     pattern,
     type = 'text',
     readOnly = false,
+    allowInput = true,
     autoComplete = 'off',
     name,
     required = false,
@@ -282,7 +289,7 @@ export const DatePickerInput = forwardRef<
             value={value}
             defaultValue={defaultValue}
             disabled={disabled}
-            readOnly={readOnly}
+            readOnly={readOnly || !allowInput}
             pattern={pattern}
             autoComplete={autoComplete}
             required={required}

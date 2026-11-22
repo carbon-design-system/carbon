@@ -6,7 +6,13 @@
  */
 
 import { DatePickerState } from './states.js';
-import { plainDateToISOString, comparePlainDates } from './temporal-utils.js';
+import {
+  plainDateToISOString,
+  comparePlainDates,
+  parseDateString,
+  formatPlainDate,
+  isDateInRange,
+} from './temporal-utils.js';
 import type {
   DatePickerContext,
   DatePickerEvent,
@@ -14,6 +20,7 @@ import type {
   DateSelectPayload,
   InputFocusPayload,
   ValidationErrorPayload,
+  ValueChangePayload,
 } from './types.js';
 
 /**
@@ -317,6 +324,124 @@ const closeCalendarRestoringFocus: StateAction = (context) => ({
   shouldRestoreFocus: context.shouldRestoreFocus,
 });
 
+/**
+ * Whether a typed value is a complete date for the configured format.
+ * `parseDateString` accepts short years, so this also requires each `Y` token
+ * to be four digits and a round-trip format match.
+ *
+ * @param {string} value - Typed input value
+ * @param {string} format - Date format string
+ * @param {Temporal.PlainDate} parsed - Already-parsed date
+ * @returns {boolean} True when the typed value is complete
+ */
+function isCompleteTypedDate(
+  value: string,
+  format: string,
+  parsed: Temporal.PlainDate
+): boolean {
+  if (formatPlainDate(parsed, format) !== value) {
+    return false;
+  }
+
+  const formatParts = format.split(/[^YmdHis]/);
+  const dateParts = value.split(/[^0-9]/);
+  if (formatParts.length !== dateParts.length) {
+    return false;
+  }
+
+  return formatParts.every((part, index) => {
+    if (part === 'Y') {
+      return dateParts[index].length === 4;
+    }
+    return true;
+  });
+}
+
+/**
+ * Commit a fully typed date string. Incomplete or out-of-range values are
+ * ignored so partial typing does not wipe the current selection.
+ *
+ * @param {DatePickerContext} context - Current context
+ * @param {DatePickerEvent} event - The VALUE_CHANGE event
+ * @returns {Partial<DatePickerContext>} Updated context
+ */
+const applyValueChange: StateAction = (context, event) => {
+  if (!context.allowInput || context.isReadonly || context.isDisabled) {
+    return {};
+  }
+
+  const payload = event.payload as ValueChangePayload | undefined;
+  const value = payload?.value ?? '';
+  if (!value) {
+    return {
+      isInvalid: false,
+      errorMessage: undefined,
+    };
+  }
+
+  const parsed = parseDateString(value, context.dateFormat);
+  if (!parsed) {
+    return {};
+  }
+
+  // Require a complete format match so partial years like "01/15/202" do not
+  // commit while the user is still typing.
+  if (!isCompleteTypedDate(value, context.dateFormat, parsed)) {
+    return {};
+  }
+
+  if (!isDateInRange(parsed, context.minDate, context.maxDate)) {
+    return {};
+  }
+
+  const inputType =
+    payload?.inputType || context.lastFocusedInput || ('from' as const);
+
+  if (context.mode === 'range') {
+    if (inputType === 'to') {
+      if (!context.startDate) {
+        return {
+          endDate: parsed,
+          viewDate: parsed,
+          focusedDate: parsed,
+          isInvalid: false,
+          errorMessage: undefined,
+        };
+      }
+      return {
+        ...commitRange(context.startDate, parsed),
+        viewDate: parsed,
+        focusedDate: parsed,
+        // Keep the calendar open while typing; do not steal focus.
+        isOpen: context.isOpen,
+        shouldRestoreFocus: false,
+        isInvalid: false,
+        errorMessage: undefined,
+      };
+    }
+
+    return {
+      ...beginRange(parsed),
+      viewDate: parsed,
+      focusedDate: parsed,
+      isOpen: context.isOpen,
+      shouldRestoreFocus: false,
+      isInvalid: false,
+      errorMessage: undefined,
+    };
+  }
+
+  return {
+    startDate: parsed,
+    value: plainDateToISOString(parsed),
+    viewDate: parsed,
+    focusedDate: parsed,
+    isOpen: context.isOpen,
+    isInvalid: false,
+    errorMessage: undefined,
+  };
+};
+
 /*
  * Shared event groups
  */
@@ -351,6 +476,7 @@ export const actions: ActionMap = {
     INPUT_BLUR: () => ({ isFocused: false }),
     OUTSIDE_CLICK: dismissCalendar,
     CALENDAR_CLOSE: closeCalendarRestoringFocus,
+    VALUE_CHANGE: applyValueChange,
   },
 
   [DatePickerState.FOCUSED]: {
@@ -372,11 +498,13 @@ export const actions: ActionMap = {
       };
     },
     CALENDAR_ICON_CLICK: openCalendar(preserveFocus),
+    VALUE_CHANGE: applyValueChange,
   },
 
   [DatePickerState.CALENDAR_OPEN]: {
     CALENDAR_OPEN: openCalendar(focusSelectionOrView),
     CALENDAR_ICON_CLICK: openCalendar(focusSelectionOrView),
+    VALUE_CHANGE: applyValueChange,
     OUTSIDE_CLICK: dismissCalendar,
     /**
      * Selecting a range start keeps the calendar open, and moves both the view
@@ -510,6 +638,7 @@ export const actions: ActionMap = {
     PAGE_UP: pageFocusByMonth(-1, 'min'),
     PAGE_DOWN: pageFocusByMonth(1, 'max'),
     ...monthNavigation,
+    VALUE_CHANGE: applyValueChange,
   },
 
   [DatePickerState.DATE_SELECTED]: {
@@ -596,11 +725,7 @@ export const actions: ActionMap = {
       isInvalid: false,
       errorMessage: undefined,
     }),
-    // Action for VALUE_CHANGE event
-    VALUE_CHANGE: () => ({
-      isInvalid: false,
-      errorMessage: undefined,
-    }),
+    VALUE_CHANGE: applyValueChange,
   },
 };
 

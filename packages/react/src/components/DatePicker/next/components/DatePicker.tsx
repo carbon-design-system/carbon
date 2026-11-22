@@ -237,9 +237,10 @@ export function DatePicker({
       ...child.props,
       value: inputValue, // Always a string, never undefined
       disabled: child.props.disabled || context.isDisabled,
-      // Flatpickr's allowInput=false makes the field read-only for typing while
-      // still allowing calendar selection. Mirror that for the preview picker.
-      readOnly: child.props.readOnly || readOnly || !allowInput,
+      // keep DatePickerInput.readOnly for true read-only; allowInput=false only
+      // blocks typing while leaving the calendar button enabled
+      readOnly: child.props.readOnly || readOnly,
+      allowInput,
       onFocus: (e: React.FocusEvent<HTMLInputElement>) => {
         child.props.onFocus?.(e);
         handleInputFocus(inputType);
