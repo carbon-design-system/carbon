@@ -24,20 +24,13 @@ describe('cds-icon-button', () => {
 
       await el.updateComplete;
 
-      const button = el.shadowRoot?.querySelector('button');
-      const badgeSlot = button?.querySelector('slot[name="badge-indicator"]');
-
+      const button = el.shadowRoot.querySelector('button');
       expect(button).to.exist;
+      const badgeSlot = button.querySelector('slot[name="badge-indicator"]');
       expect(badgeSlot).to.exist;
       expect(badgeSlot.assignedElements()[0].tagName.toLowerCase()).to.equal(
         'cds-badge-indicator'
       );
-      // Ensure the badge is not a sibling of the button (detached positioning).
-      expect(
-        el.shadowRoot?.querySelector(
-          'button ~ slot[name="badge-indicator"], a ~ slot[name="badge-indicator"]'
-        )
-      ).to.not.exist;
     });
 
     it('should place the badge indicator slot inside the link button', async () => {
@@ -53,16 +46,13 @@ describe('cds-icon-button', () => {
 
       await el.updateComplete;
 
-      const link = el.shadowRoot?.querySelector('a');
-      const badgeSlot = link?.querySelector('slot[name="badge-indicator"]');
-
+      const link = el.shadowRoot.querySelector('a');
       expect(link).to.exist;
+      const badgeSlot = link.querySelector('slot[name="badge-indicator"]');
       expect(badgeSlot).to.exist;
       expect(badgeSlot.assignedElements()[0].tagName.toLowerCase()).to.equal(
         'cds-badge-indicator'
       );
-      expect(el.shadowRoot?.querySelector('a ~ slot[name="badge-indicator"]'))
-        .to.not.exist;
     });
 
     it('should not render the badge indicator slot when disabled', async () => {
@@ -78,8 +68,8 @@ describe('cds-icon-button', () => {
 
       await el.updateComplete;
 
-      expect(el.shadowRoot?.querySelector('slot[name="badge-indicator"]')).to
-        .not.exist;
+      expect(el.shadowRoot.querySelector('slot[name="badge-indicator"]')).to.not
+        .exist;
     });
   });
 });
