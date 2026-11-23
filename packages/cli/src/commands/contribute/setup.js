@@ -181,46 +181,6 @@ const availableProjects = [
       ],
     },
   },
-  {
-    name: 'carbon-website',
-    value: {
-      owner: 'carbon-design-system',
-      repo: 'carbon-website',
-      gitCloneEstimate: 180 * 1000,
-      commands: [
-        {
-          command: 'yarn install --immutable',
-          estimate: 45 * 1000,
-          reason: "to install the project's dependencies",
-        },
-        {
-          command: 'cd packages/addons-website && yarn build',
-          estimate: 30 * 1000,
-          reason: "to build all the project's packages",
-        },
-      ],
-    },
-  },
-  {
-    name: 'gatsby-theme-carbon',
-    value: {
-      owner: 'carbon-design-system',
-      repo: 'gatsby-theme-carbon',
-      gitCloneEstimate: 10 * 1000,
-      commands: [
-        {
-          command: 'yarn install',
-          estimate: 60 * 1000,
-          reason: "to install the project's dependencies",
-        },
-        {
-          command: 'yarn build',
-          estimate: 150 * 1000,
-          reason: "to build all the project's packages",
-        },
-      ],
-    },
-  },
 ];
 
 export const command = 'setup';
