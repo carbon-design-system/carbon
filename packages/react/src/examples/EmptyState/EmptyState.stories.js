@@ -22,7 +22,7 @@ import {
 } from './example/preview-components/EmptyState/IllustrationEmptyStatePreviews';
 
 export default {
-  title: 'Examples/EmptyStates/EmptyState',
+  title: 'Examples/EmptyState',
   component: () => {},
   tags: ['autodocs'],
   parameters: {
