@@ -6,37 +6,32 @@
  */
 
 import React from 'react';
-import {
-  ErrorEmptyState,
-  NoDataEmptyState,
-  NoTagsEmptyState,
-  NotFoundEmptyState,
-  NotificationsEmptyState,
-  UnauthorizedEmptyState,
-} from '../../components/IllustrationEmptyStates';
-import { getEmptyStateProps } from './getEmptyStateProps';
+import { ErrorEmptyState } from '../../components/ErrorEmptyState';
+import { NoDataEmptyState } from '../../components/NoDataEmptyState';
+import { NoTagsEmptyState } from '../../components/NoTagsEmptyState';
+import { NotFoundEmptyState } from '../../components/NotFoundEmptyState';
+import { NotificationsEmptyState } from '../../components/NotificationsEmptyState';
+import { UnauthorizedEmptyState } from '../../components/UnauthorizedEmptyState';
 import '../../styles/_empty-state.scss';
 
-export const ErrorEmptyStatePreview = (props) => (
-  <ErrorEmptyState {...getEmptyStateProps(props)} />
-);
+export const ErrorEmptyStatePreview = (props) => <ErrorEmptyState {...props} />;
 
 export const NoDataEmptyStatePreview = (props) => (
-  <NoDataEmptyState {...getEmptyStateProps(props)} />
+  <NoDataEmptyState {...props} />
 );
 
 export const NoTagsEmptyStatePreview = (props) => (
-  <NoTagsEmptyState {...getEmptyStateProps(props)} />
+  <NoTagsEmptyState {...props} />
 );
 
 export const NotFoundEmptyStatePreview = (props) => (
-  <NotFoundEmptyState {...getEmptyStateProps(props)} />
+  <NotFoundEmptyState {...props} />
 );
 
 export const NotificationsEmptyStatePreview = (props) => (
-  <NotificationsEmptyState {...getEmptyStateProps(props)} />
+  <NotificationsEmptyState {...props} />
 );
 
 export const UnauthorizedEmptyStatePreview = (props) => (
-  <UnauthorizedEmptyState {...getEmptyStateProps(props)} />
+  <UnauthorizedEmptyState {...props} />
 );

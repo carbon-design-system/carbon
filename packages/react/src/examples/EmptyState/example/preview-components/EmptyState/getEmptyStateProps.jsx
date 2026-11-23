@@ -27,6 +27,7 @@ const SubtitleWithTooltip = () => (
 
 /**
  * Maps simple Storybook args to `EmptyState` props.
+ * Used only by the Default story (EmptyStateVariantsPreview).
  *
  * Base controls:
  *   - `subtitleType`: `'default'` | `'withTooltip'`
@@ -35,15 +36,14 @@ const SubtitleWithTooltip = () => (
  *   - `linkText`, `linkHref`, `linkTarget`
  *   - `onActionClick`: click handler
  *
- * Boolean variant flags (each independently activates its own props):
- *   - `WithTooltipInSubtitle`  → subtitleType becomes 'withTooltip'
- *   - `WithCustomIllustration` → passes illustration + illustrationDescription
- *   - `WithDarkModeIllustration` → illustrationTheme becomes 'dark'
- *   - `WithAction`             → actionType becomes 'text'
- *   - `WithActionIconButton`   → actionType becomes 'icon'
- *   - `WithSecondaryAction`    → actionType becomes 'text', secondaryAction true
- *   - `WithLink`               → adds linkText + linkTarget
- *   - `WithActionAndLink`      → actionType becomes 'icon', adds linkText
+ * Boolean variant flags:
+ *   - `WithTooltipInSubtitle`   → subtitle becomes a tooltip node
+ *   - `WithCustomIllustration`  → passes illustration + illustrationDescription
+ *   - `WithAction`              → actionType becomes 'text'
+ *   - `WithActionIconButton`    → actionType becomes 'icon'
+ *   - `WithSecondaryAction`     → actionType 'text' + secondary button
+ *   - `WithLink`                → documentation link
+ *   - `WithActionAndLink`       → icon button + documentation link
  */
 export const getEmptyStateProps = ({
   subtitleType,
@@ -56,10 +56,9 @@ export const getEmptyStateProps = ({
   subtitle,
   illustration,
   illustrationDescription,
-  // boolean variant flags
+  // boolean variant flags (Default story only)
   WithTooltipInSubtitle = false,
   WithCustomIllustration = false,
-  WithDarkModeIllustration = false,
   WithAction = false,
   WithActionIconButton = false,
   WithSecondaryAction = false,
@@ -67,7 +66,7 @@ export const getEmptyStateProps = ({
   WithActionAndLink = false,
   ...rest
 } = {}) => {
-  // Resolve subtitle: flag takes precedence, then fall back to subtitleType select
+  // Resolve subtitle
   let resolvedSubtitle = subtitle;
   if (WithTooltipInSubtitle) {
     resolvedSubtitle = <SubtitleWithTooltip />;
@@ -77,11 +76,6 @@ export const getEmptyStateProps = ({
     resolvedSubtitle = <SubtitleWithTooltip />;
   }
 
-  // Resolve illustration theme: flag sets dark, otherwise use prop
-  const resolvedIllustrationTheme = WithDarkModeIllustration
-    ? 'dark'
-    : rest.illustrationTheme;
-
   // Resolve illustration: flag supplies the bundled SVG, otherwise use prop
   const resolvedIllustration = WithCustomIllustration
     ? customIllustration
@@ -90,7 +84,7 @@ export const getEmptyStateProps = ({
     ? 'Test alt text'
     : illustrationDescription;
 
-  // Resolve action type: flags win over the select control
+  // Boolean flags win over the actionType select
   const resolvedActionType =
     WithActionAndLink || WithActionIconButton
       ? 'icon'
@@ -98,19 +92,13 @@ export const getEmptyStateProps = ({
         ? 'text'
         : actionType;
 
-  // Resolve secondary action
   const resolvedSecondaryAction = WithSecondaryAction || secondaryAction;
-
-  // Resolve link: flags supply a fixed label, otherwise use prop
   const resolvedLinkText =
     WithActionAndLink || WithLink ? 'View documentation' : linkText;
   const resolvedLinkTarget = WithLink ? '_blank' : linkTarget;
 
   return {
     ...rest,
-    ...(resolvedIllustrationTheme !== undefined && {
-      illustrationTheme: resolvedIllustrationTheme,
-    }),
     ...(resolvedIllustration !== undefined && {
       illustration: resolvedIllustration,
     }),

@@ -42,14 +42,6 @@ const illustrationArgTypes = {
     options: ['light', 'dark'],
   },
   size: { control: { type: 'select' }, options: ['md', 'sm'] },
-  actionType: {
-    control: { type: 'select' },
-    options: ['none', 'text', 'icon'],
-  },
-  WithDarkModeIllustration: {
-    description: 'Show the dark mode illustration.',
-    control: { type: 'boolean' },
-  },
   WithAction: {
     description: 'Show a text action button.',
     control: { type: 'boolean' },
@@ -78,7 +70,6 @@ const illustrationDefaultArgs = {
   subtitle: 'Description text explaining why this section is empty.',
   illustrationDescription: 'Test alt text',
   onActionClick: action('Clicked empty state action button'),
-  WithDarkModeIllustration: false,
   WithAction: false,
   WithActionIconButton: false,
   WithSecondaryAction: false,
