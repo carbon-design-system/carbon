@@ -5,7 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import React, { createRef, type ComponentProps } from 'react';
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
@@ -20,19 +28,26 @@ import Dropdown from '..';
 import DropdownSkeleton from '../Dropdown.Skeleton';
 import { AILabel } from '../../AILabel';
 import { FeatureFlags } from '../../FeatureFlags';
-import { Simulate } from 'react-dom/test-utils';
 
 const prefix = 'cds';
 
+type Item = ReturnType<typeof generateGenericItem>;
+
+type DropdownMockProps = Pick<
+  ComponentProps<typeof Dropdown<Item>>,
+  'id' | 'items' | 'label' | 'titleText' | 'type'
+> & {
+  onChange: ReturnType<typeof jest.fn>;
+};
+
 describe('Dropdown', () => {
-  let mockProps;
+  let mockProps: DropdownMockProps;
   beforeEach(() => {
     mockProps = {
       id: 'test-dropdown',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       label: 'input',
-      placeholder: 'Filter...',
       type: 'default',
       titleText: 'Dropdown label',
     };
@@ -62,7 +77,9 @@ describe('Dropdown', () => {
   });
 
   it('should render custom item components', async () => {
-    const itemToElement = jest.fn((item) => {
+    const itemToElement = jest.fn<
+      NonNullable<ComponentProps<typeof Dropdown<Item>>['itemToElement']>
+    >((item) => {
       return <div className="mock-item">{item.label}</div>;
     });
 
@@ -93,17 +110,19 @@ describe('Dropdown', () => {
     expect(
       // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('#a-custom-element-for-selected-item')
-    ).toBeDefined();
+    ).toBeInTheDocument();
     // the title should use the normal itemToString method
 
     expect(screen.getByText('Item 1')).toBeInTheDocument();
   });
 
   it('should render selectedItem as an element of type number', async () => {
-    const itemToElement = jest.fn((item) => {
+    const itemToElement = jest.fn<
+      NonNullable<ComponentProps<typeof Dropdown<Item>>['itemToElement']>
+    >((item) => {
       return <div className="mock-item">{item.label}</div>;
     });
-    let mockProps1 = { ...mockProps, label: 1 };
+    const mockProps1 = { ...mockProps, label: 1 };
     render(<Dropdown itemToElement={itemToElement} {...mockProps1} />);
     await openMenu();
     expect(itemToElement).toHaveBeenCalled();
@@ -112,7 +131,7 @@ describe('Dropdown', () => {
   });
 
   it('should render when defaultItemToString passed with null value', async () => {
-    let mockProps2 = { ...mockProps, label: [] };
+    const mockProps2 = { ...mockProps, label: [] };
     const { container } = render(<Dropdown {...mockProps2} />);
     const labelElement = screen.queryByText('shankar');
     expect(labelElement).not.toBeInTheDocument();
@@ -264,36 +283,30 @@ describe('Dropdown', () => {
   });
 
   it('should not open on arrowUp', async () => {
-    let mockProps1 = { ...mockProps };
-    const ref = React.createRef();
-    render(<Dropdown {...mockProps1} readOnly={false} ref={ref} />);
+    const ref = createRef<HTMLButtonElement>();
+    render(<Dropdown {...mockProps} readOnly={false} ref={ref} />);
 
     const button = screen.getByRole('combobox');
 
-    if (button) {
-      assertMenuClosed();
-      // ArrowUp should not open the menu
-      fireEvent.keyDown(button, { key: 'ArrowUp' });
-      assertMenuClosed();
-      // ArrowDown should open the menu
-      fireEvent.keyDown(button, { key: 'ArrowDown' });
-      assertMenuOpen(mockProps1);
-      // ArrowUp is allowed now that the menu is open
-      fireEvent.keyDown(button, { key: 'ArrowUp' });
-      assertMenuOpen(mockProps1);
-    }
-
-    mockProps.onChange.mockClear();
+    assertMenuClosed();
+    // ArrowUp should not open the menu
+    fireEvent.keyDown(button, { key: 'ArrowUp' });
+    assertMenuClosed();
+    // ArrowDown should open the menu
+    fireEvent.keyDown(button, { key: 'ArrowDown' });
+    assertMenuOpen(mockProps);
+    // ArrowUp is allowed now that the menu is open
+    fireEvent.keyDown(button, { key: 'ArrowUp' });
+    assertMenuOpen(mockProps);
   });
 
   it('should respect readOnly prop', async () => {
-    let onChange = jest.fn();
-    let onKeyDown = jest.fn();
-    let mockProps1 = { ...mockProps };
-    const ref = React.createRef();
-    let dropDownItem = render(
+    const onChange = jest.fn();
+    const onKeyDown = jest.fn();
+    const ref = createRef<HTMLButtonElement>();
+    render(
       <Dropdown
-        {...mockProps1}
+        {...mockProps}
         readOnly={true}
         onChange={onChange}
         onKeyDown={onKeyDown}
@@ -307,11 +320,9 @@ describe('Dropdown', () => {
 
     const button = screen.getByRole('combobox');
 
-    if (button) {
-      fireEvent.click(button);
-      fireEvent.keyDown(screen.getByRole('combobox'), { key: 'ArrowDown' });
-      fireEvent.keyDown(screen.getByRole('combobox'), { code: 'ArrowDown' });
-    }
+    fireEvent.click(button);
+    fireEvent.keyDown(button, { key: 'ArrowDown' });
+    fireEvent.keyDown(button, { code: 'ArrowDown' });
 
     expect(onChange).toHaveBeenCalledTimes(0);
     expect(onKeyDown).toHaveBeenCalledTimes(2);
@@ -320,21 +331,17 @@ describe('Dropdown', () => {
     );
     await openMenu(); // menu should not open
     expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
-    expect(mockProps.onChange).toHaveBeenCalledTimes(0);
     assertMenuClosed();
-
-    mockProps.onChange.mockClear();
   });
 
   it('should respect readOnly prop with false and respect call setTimeout function', async () => {
-    let onChange = jest.fn();
-    let onKeyDown = jest.fn();
-    let mockProps2 = { ...mockProps };
-    const ref = React.createRef();
+    const onChange = jest.fn();
+    const onKeyDown = jest.fn();
+    const ref = createRef<HTMLButtonElement>();
 
     render(
       <Dropdown
-        {...mockProps2}
+        {...mockProps}
         readOnly={false}
         onKeyDown={onKeyDown}
         onChange={onChange}
@@ -342,36 +349,30 @@ describe('Dropdown', () => {
       />
     );
 
-    //const button = dropDownItem.container.querySelector('#downshift-\\:r19\\»-toggle-button');
     const button = screen.getByRole('combobox');
     await waitForPosition();
-    if (button) {
-      act(() => {
-        jest.useFakeTimers();
-        fireEvent.keyDown(screen.getByRole('combobox'), {
-          key: 'Space',
-          code: 'Space',
-        });
-        fireEvent.keyDown(screen.getByRole('combobox'), {
-          key: 'ArrowLeft',
-          code: 'ArrowLeft',
-        });
-        jest.advanceTimersByTime(3000);
+    act(() => {
+      jest.useFakeTimers();
+      fireEvent.keyDown(button, {
+        key: 'Space',
+        code: 'Space',
       });
-    }
-    if (button) {
-      act(() => {
-        fireEvent.keyDown(screen.getByRole('combobox'), {
-          key: 'Space',
-          code: 'Space',
-        });
-        fireEvent.keyDown(screen.getByRole('combobox'), {
-          key: 'ArrowLeft',
-          code: 'ArrowLeft',
-        });
+      fireEvent.keyDown(button, {
+        key: 'ArrowLeft',
+        code: 'ArrowLeft',
       });
-    }
-    //await openMenu();
+      jest.advanceTimersByTime(3000);
+    });
+    act(() => {
+      fireEvent.keyDown(button, {
+        key: 'Space',
+        code: 'Space',
+      });
+      fireEvent.keyDown(button, {
+        key: 'ArrowLeft',
+        code: 'ArrowLeft',
+      });
+    });
 
     expect(onKeyDown).toHaveBeenCalledWith(
       expect.objectContaining({ code: 'Space' })
@@ -381,35 +382,38 @@ describe('Dropdown', () => {
     );
     expect(onChange).toHaveBeenCalledTimes(0);
     assertMenuClosed();
-    jest.useRealTimers(); // Restore the original timer behavior
   });
 
   it('should respect readOnly prop with false argument and respect clear activated Timeout', async () => {
-    let onChange = jest.fn();
-    let onKeyDown = jest.fn();
-    render(<Dropdown {...mockProps} readOnly={false} onKeyDown={onKeyDown} />);
+    const onChange = jest.fn();
+    const onKeyDown = jest.fn();
+    render(
+      <Dropdown
+        {...mockProps}
+        readOnly={false}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
+    );
 
     await waitForPosition();
     const button = screen.getByRole('combobox');
-    if (button) {
-      act(() => {
-        fireEvent.keyDown(screen.getByRole('combobox'), {
-          key: 'Space',
-          code: 'Space',
-        });
-        fireEvent.keyDown(screen.getByRole('combobox'), {
-          key: 'ArrowLeft',
-          code: 'ArrowLeft',
-        });
+    act(() => {
+      fireEvent.keyDown(button, {
+        key: 'Space',
+        code: 'Space',
       });
-    }
+      fireEvent.keyDown(button, {
+        key: 'ArrowLeft',
+        code: 'ArrowLeft',
+      });
+    });
     expect(onKeyDown).toHaveBeenCalledWith(
       expect.objectContaining({ code: 'Space' })
     );
     expect(onKeyDown).toHaveBeenCalledWith(
       expect.objectContaining({ code: 'ArrowLeft' })
     );
-    //expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
     expect(onChange).toHaveBeenCalledTimes(0);
     assertMenuClosed();
   });
@@ -451,25 +455,25 @@ describe('Dropdown', () => {
     });
 
     it('using a string type for the `initialSelectedItem` prop', async () => {
-      // Replace the 'items' property in mockProps with a list of strings
-      mockProps = {
-        ...mockProps,
-        items: ['1', '2', '3'],
-      };
+      const stringItems = ['1', '2', '3'];
 
       render(
-        <Dropdown {...mockProps} initialSelectedItem={mockProps.items[1]} />
+        <Dropdown
+          {...mockProps}
+          items={stringItems}
+          initialSelectedItem={stringItems[1]}
+        />
       );
       await waitForPosition();
 
-      expect(screen.getByText(mockProps.items[1])).toBeInTheDocument();
+      expect(screen.getByText(stringItems[1])).toBeInTheDocument();
     });
   });
 
   describe('Component API', () => {
     window.HTMLElement.prototype.scrollIntoView = function () {};
     it('should accept a `ref` for the underlying button element', async () => {
-      const ref = React.createRef();
+      const ref = createRef<HTMLButtonElement>();
       render(<Dropdown {...mockProps} ref={ref} />);
       await waitForPosition();
       expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
@@ -532,14 +536,13 @@ describe('Dropdown', () => {
 });
 
 describe('Dropdown', () => {
-  let mockProps;
+  let mockProps: DropdownMockProps;
   beforeEach(() => {
     mockProps = {
       id: 'test-dropdown',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       label: 'input',
-      placeholder: 'Filter...',
       type: 'default',
       titleText: 'Dropdown label',
     };
@@ -554,9 +557,9 @@ describe('Dropdown', () => {
   it('should render custom item components when items are strings', async () => {
     const items = ['mario', 'luigi'];
 
-    const itemToElement = jest.fn((item) => (
-      <span data-testid={`${item}-item`}>{item}</span>
-    ));
+    const itemToElement = jest.fn<
+      NonNullable<ComponentProps<typeof Dropdown<string>>['itemToElement']>
+    >((item) => <span data-testid={`${item}-item`}>{item}</span>);
 
     render(
       <Dropdown
@@ -579,7 +582,7 @@ describe('Dropdown', () => {
 });
 
 describe('Validation states with disabled/readonly', () => {
-  let mockProps;
+  let mockProps: DropdownMockProps;
 
   beforeEach(() => {
     mockProps = {
@@ -720,44 +723,31 @@ describe('DropdownSkeleton', () => {
       render(<DropdownSkeleton size="sm" />);
 
       // eslint-disable-next-line testing-library/no-node-access
-      expect(document.querySelector(`${prefix}--skeleton`)).toBeDefined();
+      expect(
+        document.querySelector(`.${prefix}--skeleton`)
+      ).toBeInTheDocument();
     });
   });
 });
 
 describe('Test useEffect ', () => {
-  let mockProps;
+  let mockProps: DropdownMockProps;
   beforeEach(() => {
     mockProps = {
       id: 'test-dropdown',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       label: 'input',
-      placeholder: 'Filter...',
       type: 'default',
       titleText: 'Dropdown label',
     };
   });
 
   it('for auto-align features', async () => {
-    const initialStyles = { top: '10px', left: '20px' };
-    const updatedStyles = { top: '30px', left: '40px' };
-    const { getByTestId, rerender } = render(
-      <Dropdown
-        {...mockProps}
-        autoAlign={false}
-        floatingstyles={initialStyles}
-      />
-    );
+    const { rerender } = render(<Dropdown {...mockProps} autoAlign={false} />);
     //Initially, styles should not be set because autoAlign is false
     //const floatingElement = getByTestId('test-dropdown');
-    rerender(
-      <Dropdown
-        {...mockProps}
-        autoAlign={true}
-        floatingstyles={updatedStyles}
-      />
-    );
+    rerender(<Dropdown {...mockProps} autoAlign={true} />);
     await waitForPosition();
     assertMenuClosed();
   });
@@ -767,7 +757,7 @@ describe('Test useEffect ', () => {
     await openMenu();
     await waitForPosition();
 
-    const menu = document.querySelector('.cds--list-box__menu');
+    const menu = screen.getByRole('listbox', { hidden: true });
     expect(menu.style.maxHeight).toBe('0px');
   });
 
@@ -775,10 +765,12 @@ describe('Test useEffect ', () => {
     render(<Dropdown {...mockProps} titleText="Dropdown Title" />);
 
     const label = screen.getByText('Dropdown Title').closest('label');
-    const attributes = Array.from(label.attributes).reduce(
-      (acc, { name, value }) => ({ ...acc, [name]: value }),
-      {}
-    );
+    if (!label) {
+      throw new Error('Unable to find dropdown label.');
+    }
+    const attributes = Array.from(label.attributes).reduce<
+      Record<string, string>
+    >((acc, { name, value }) => ({ ...acc, [name]: value }), {});
     const idPrefix = attributes.id.replace(/-label$/, '');
 
     expect(attributes).toEqual({
@@ -793,10 +785,12 @@ describe('Test useEffect ', () => {
     render(<Dropdown {...mockProps} titleText={<span>Dropdown Title</span>} />);
 
     const label = screen.getByText('Dropdown Title').closest('label');
-    const attributes = Array.from(label.attributes).reduce(
-      (acc, { name, value }) => ({ ...acc, [name]: value }),
-      {}
-    );
+    if (!label) {
+      throw new Error('Unable to find dropdown label.');
+    }
+    const attributes = Array.from(label.attributes).reduce<
+      Record<string, string>
+    >((acc, { name, value }) => ({ ...acc, [name]: value }), {});
 
     expect(attributes).toEqual({
       class: 'cds--label',
@@ -811,7 +805,7 @@ describe('Validation message ids', () => {
     items: generateItems(5, generateGenericItem),
     onChange: jest.fn(),
     label: 'input',
-    type: 'default',
+    type: 'default' as const,
     titleText: 'Dropdown label',
   };
 

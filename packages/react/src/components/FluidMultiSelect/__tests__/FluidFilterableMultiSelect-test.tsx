@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
@@ -23,11 +24,7 @@ describe('FluidFilterableMultiSelect', () => {
     );
 
     expect(container.firstChild).toHaveClass(
-      'cds--multi-select__wrapper',
-      'cds--multi-select--filterable__wrapper',
-      'cds--list-box__wrapper',
-      'cds--list-box__wrapper--fluid',
-      'test',
+      'cds--multi-select__wrapper cds--multi-select--filterable__wrapper cds--list-box__wrapper cds--list-box__wrapper--fluid test',
       { exact: true }
     );
   });
@@ -44,11 +41,7 @@ describe('FluidFilterableMultiSelect', () => {
     );
 
     expect(container.firstChild).toHaveClass(
-      'cds--multi-select__wrapper',
-      'cds--multi-select--filterable__wrapper',
-      'cds--list-box__wrapper',
-      'cds--list-box__wrapper--fluid',
-      'cds--list-box__wrapper--fluid--condensed',
+      'cds--multi-select__wrapper cds--multi-select--filterable__wrapper cds--list-box__wrapper cds--list-box__wrapper--fluid cds--list-box__wrapper--fluid--condensed',
       { exact: true }
     );
   });

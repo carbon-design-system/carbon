@@ -42,7 +42,7 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderBigNumber();
-    expect(container).toHaveNoAxeViolations();
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', () => {

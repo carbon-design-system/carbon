@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import React, { type ComponentProps } from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
@@ -19,6 +20,7 @@ import {
 import FluidComboBox from '../FluidComboBox';
 
 const prefix = 'cds';
+type Item = ReturnType<typeof generateGenericItem>;
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -26,7 +28,13 @@ const openMenu = async () => {
 };
 
 describe('FluidComboBox', () => {
-  let mockProps;
+  type MockProps = Pick<
+    ComponentProps<typeof FluidComboBox<Item>>,
+    'id' | 'items' | 'label' | 'placeholder'
+  > & {
+    onChange: ReturnType<typeof jest.fn>;
+  };
+  let mockProps: MockProps;
   window.HTMLElement.prototype.scrollIntoView = function () {};
   beforeEach(() => {
     mockProps = {
@@ -35,7 +43,6 @@ describe('FluidComboBox', () => {
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       placeholder: 'Filter...',
-      type: 'default',
     };
   });
 
@@ -90,9 +97,7 @@ describe('FluidComboBox', () => {
   });
 
   it('should render custom item components', async () => {
-    const itemToElement = jest.fn((item) => {
-      return <div className="mock-item">{item.text}</div>;
-    });
+    const itemToElement = jest.fn(() => <div className="mock-item" />);
     render(<FluidComboBox {...mockProps} itemToElement={itemToElement} />);
     await waitForPosition();
     await openMenu();
@@ -137,21 +142,18 @@ describe('FluidComboBox', () => {
     });
 
     it('using a string type for the `initialSelectedItem` prop', async () => {
-      // Replace the 'items' property in mockProps with a list of strings
-      mockProps = {
-        ...mockProps,
-        items: ['1', '2', '3'],
-      };
+      const stringItems = ['1', '2', '3'];
 
       render(
         <FluidComboBox
           {...mockProps}
-          initialSelectedItem={mockProps.items[1]}
+          items={stringItems}
+          initialSelectedItem={stringItems[1]}
         />
       );
       await waitForPosition();
 
-      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
+      expect(findInputNode()).toHaveDisplayValue(stringItems[1]);
     });
   });
 
@@ -165,17 +167,17 @@ describe('FluidComboBox', () => {
     });
 
     it('using a string type for the `selectedItem` prop', async () => {
-      // Replace the 'items' property in mockProps with a list of strings
-      mockProps = {
-        ...mockProps,
-        items: ['1', '2', '3'],
-      };
+      const stringItems = ['1', '2', '3'];
 
       render(
-        <FluidComboBox {...mockProps} selectedItem={mockProps.items[1]} />
+        <FluidComboBox
+          {...mockProps}
+          items={stringItems}
+          selectedItem={stringItems[1]}
+        />
       );
       await waitForPosition();
-      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
+      expect(findInputNode()).toHaveDisplayValue(stringItems[1]);
     });
   });
 

@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { StrictMode } from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import React, { StrictMode, useState, type ComponentProps } from 'react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { useCombobox } from 'downshift';
-import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
 import { FilterableMultiSelect } from '../';
 import {
@@ -21,13 +21,30 @@ import {
 import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
+
+type SelectAllItem = {
+  label: string;
+  isSelectAll?: boolean;
+  disabled?: boolean;
+};
+
+type Item = ReturnType<typeof generateGenericItem>;
+
 const waitForPosition = () => act(async () => {});
+
 const openMenu = async () => {
   await userEvent.click(screen.getByRole('combobox'));
 };
 
 describe('FilterableMultiSelect', () => {
-  let mockProps;
+  type MockProps = Pick<
+    ComponentProps<typeof FilterableMultiSelect<Item>>,
+    'id' | 'disabled' | 'items' | 'initialSelectedItems' | 'placeholder'
+  > & {
+    onChange: ReturnType<typeof jest.fn>;
+    onMenuChange: ReturnType<typeof jest.fn>;
+  };
+  let mockProps: MockProps;
 
   beforeEach(() => {
     mockProps = {
@@ -108,20 +125,17 @@ describe('FilterableMultiSelect', () => {
 
   it('should not be interactive if readonly', async () => {
     const items = generateItems(4, generateGenericItem);
-    const label = 'test-label';
     const { container } = render(
       <FilterableMultiSelect
         id="test"
         readOnly={true}
-        label={label}
+        titleText="test-label"
         items={items}
       />
     );
     await waitForPosition();
 
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    const labelNode = getByText(container, label);
-    await userEvent.click(labelNode);
+    await userEvent.click(screen.getByRole('combobox'));
 
     expect(
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
@@ -166,7 +180,7 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should display helper text instead of invalid message when disabled', async () => {
-    const { container } = render(
+    render(
       <FilterableMultiSelect
         {...mockProps}
         disabled
@@ -177,8 +191,7 @@ describe('FilterableMultiSelect', () => {
     );
     await waitForPosition();
 
-    const multiselectComponent = container.firstChild;
-    const inputComponent = multiselectComponent.childNodes[1];
+    const inputComponent = screen.getByRole('combobox');
     const invalidMessage = screen.queryByText('Invalid message');
     const helper = screen.queryByText('Helper text');
     expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
@@ -187,7 +200,7 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should display helper text instead of invalid message when readOnly', async () => {
-    const { container } = render(
+    render(
       <FilterableMultiSelect
         readOnly
         invalid
@@ -198,8 +211,7 @@ describe('FilterableMultiSelect', () => {
     );
     await waitForPosition();
 
-    const multiselectComponent = container.firstChild;
-    const inputComponent = multiselectComponent.childNodes[1];
+    const inputComponent = screen.getByRole('combobox');
     const invalidMessage = screen.queryByText('Invalid message');
     const helper = screen.queryByText('Helper text');
     expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
@@ -347,11 +359,17 @@ describe('FilterableMultiSelect', () => {
     const comboboxes = screen.getAllByRole('combobox');
     const controls = comboboxes.map((combobox) => {
       const listBox = combobox.closest(`.${prefix}--list-box`);
+      if (!listBox) {
+        throw new Error('Unable to find the list box.');
+      }
       const toggleButton = listBox.querySelector(
         'button[id$="-toggle-button"]'
       );
       const menu = listBox.querySelector('[role="listbox"]');
       const label = document.querySelector(`label[for="${combobox.id}"]`);
+      if (!toggleButton || !menu || !label) {
+        throw new Error('Unable to find generated list box controls.');
+      }
 
       return {
         listBox,
@@ -420,7 +438,7 @@ describe('FilterableMultiSelect', () => {
 
     await userEvent.click(screen.getAllByRole('option')[0]);
 
-    expect(screen.getByPlaceholderText('test')).toHaveDisplayValue(3);
+    expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('3');
   });
 
   it('should clear input value when clicking on cross button', async () => {
@@ -611,17 +629,17 @@ describe('FilterableMultiSelect', () => {
 
   it('should support items filtered by an external search', async () => {
     const externallyFilteredItems = [
-      { id: 'external-result', label: 'Server result' },
+      { id: 'external-result', label: 'Server result', value: -1 },
     ];
 
     function CustomSearchMultiSelect() {
-      const [items, setItems] = React.useState(mockProps.items);
+      const [items, setItems] = useState(mockProps.items);
 
       return (
         <FilterableMultiSelect
           {...mockProps}
           items={items}
-          filterItems={(items) => items}
+          filterItems={(items) => [...items]}
           onInputValueChange={({ inputValue }) => {
             if (inputValue === 'remote') {
               setItems(externallyFilteredItems);
@@ -726,7 +744,9 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should handle custom itemToString prop', async () => {
-    const customItemToString = (item) => `Custom ${item.label}`;
+    const customItemToString: NonNullable<
+      ComponentProps<typeof FilterableMultiSelect<Item>>['itemToString']
+    > = (item) => (item ? `Custom ${item.label}` : '');
     render(
       <FilterableMultiSelect {...mockProps} itemToString={customItemToString} />
     );
@@ -738,12 +758,9 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should handle custom compareItems prop', async () => {
-    const customCompareItems = (a, b) => {
-      if (a.text && b.text) {
-        return b.text.localeCompare(a.text);
-      }
-      return 0;
-    };
+    const customCompareItems: NonNullable<
+      ComponentProps<typeof FilterableMultiSelect<Item>>['compareItems']
+    > = (a, b) => b.localeCompare(a);
     render(
       <FilterableMultiSelect {...mockProps} compareItems={customCompareItems} />
     );
@@ -752,8 +769,13 @@ describe('FilterableMultiSelect', () => {
     await openMenu();
 
     const options = screen.getAllByRole('option');
-    expect(options[0]).toHaveTextContent('Item 0');
-    expect(options[4]).toHaveTextContent('Item 4');
+    expect(options.map(({ textContent }) => textContent)).toEqual([
+      'Item 4',
+      'Item 3',
+      'Item 2',
+      'Item 1',
+      'Item 0',
+    ]);
   });
 
   it('should handle autoAlign prop', async () => {
@@ -763,7 +785,7 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     expect(container.firstChild).toHaveClass(`${prefix}--autoalign`);
-    const menu = container.querySelector('.cds--list-box__menu');
+    const menu = screen.getByRole('listbox', { hidden: true });
     expect(menu.style.maxHeight).toBe('0px');
   });
 
@@ -811,9 +833,11 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should handle custom filterItems function', async () => {
-    const customFilterItems = jest.fn((items) =>
-      items.filter((item) => item.label.includes('2'))
-    );
+    const customFilterItems = jest.fn<
+      NonNullable<
+        ComponentProps<typeof FilterableMultiSelect<Item>>['filterItems']
+      >
+    >((items) => items.filter((item) => item.label.includes('2')));
     render(
       <FilterableMultiSelect {...mockProps} filterItems={customFilterItems} />
     );
@@ -828,9 +852,11 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should handle custom sortItems function', async () => {
-    const customSortItems = jest.fn((items) =>
-      [...items].sort((a, b) => b.label.localeCompare(a.label))
-    );
+    const customSortItems = jest.fn<
+      NonNullable<
+        ComponentProps<typeof FilterableMultiSelect<Item>>['sortItems']
+      >
+    >((items) => [...items].sort((a, b) => b.label.localeCompare(a.label)));
     render(
       <FilterableMultiSelect {...mockProps} sortItems={customSortItems} />
     );
@@ -889,27 +915,22 @@ describe('FilterableMultiSelect', () => {
 
   it('should handle itemToElement prop', async () => {
     const items = [{ text: 'test-item' }];
-    const label = 'test-label';
 
     render(
       <FilterableMultiSelect
         id="custom-id"
-        label={label}
+        titleText="test-label"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        itemToElement={(item) =>
-          item ? (
-            <span className="test-element" data-testid="custom-id-item">
-              {item.text}{' '}
-              <span role="img" aria-label="fire">
-                {' '}
-                🔥
-              </span>
+        itemToElement={(item) => (
+          <span className="test-element" data-testid="custom-id-item">
+            {item.text}{' '}
+            <span role="img" aria-label="fire">
+              {' '}
+              🔥
             </span>
-          ) : (
-            <span></span>
-          )
-        }
+          </span>
+        )}
       />
     );
     await waitForPosition();
@@ -1282,7 +1303,6 @@ describe('FilterableMultiSelect', () => {
     );
     await waitForPosition();
 
-    const combobox = screen.getByRole('combobox');
     await user.tab();
 
     await user.keyboard('{Delete}');
@@ -1378,19 +1398,19 @@ describe('FilterableMultiSelect', () => {
       <FilterableMultiSelect
         id="test-combo"
         items={[{ label: 'Item 1' }]}
-        itemToString={(item) => item?.label || ''}
+        itemToString={(item) => item?.label ?? ''}
         inputProps={{
           maxLength: 10,
           placeholder: 'Type here',
           'aria-label': 'Choose an item',
           'aria-controls': 'test-combo__menu',
-          tabIndex: '0',
+          tabIndex: 0,
           type: 'text',
         }}
       />
     );
     const input = screen.getByPlaceholderText('Type here');
-    const menu = document.querySelector('[role="listbox"]');
+    const menu = screen.getByRole('listbox', { hidden: true });
     const attributes = Array.from(input.attributes).reduce(
       (acc, { name, value }) => ({ ...acc, [name]: value }),
       {}
@@ -1561,7 +1581,6 @@ describe('FilterableMultiSelect', () => {
       <FilterableMultiSelect
         {...mockProps}
         items={[{ label: 'Select all', isSelectAll: true }, ...mockProps.items]}
-        selectAll
       />
     );
     await waitForPosition();
@@ -1572,11 +1591,17 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should select every non-disabled item when "Select all" is clicked', async () => {
-    const items = [
+    const items: SelectAllItem[] = [
       { label: 'Select all', isSelectAll: true },
       ...generateItems(3, (i) => ({ label: `Item ${i}`, disabled: i === 2 })),
     ];
-    render(<FilterableMultiSelect {...mockProps} items={items} selectAll />);
+    render(
+      <FilterableMultiSelect
+        id={mockProps.id}
+        items={items}
+        onChange={mockProps.onChange}
+      />
+    );
     await waitForPosition();
     await openMenu();
 
@@ -1599,7 +1624,6 @@ describe('FilterableMultiSelect', () => {
       <FilterableMultiSelect
         {...mockProps}
         items={items}
-        selectAll
         initialSelectedItems={initial}
       />
     );
@@ -1615,7 +1639,7 @@ describe('FilterableMultiSelect', () => {
       { label: 'Select all', isSelectAll: true },
       ...generateItems(3, generateGenericItem),
     ];
-    render(<FilterableMultiSelect {...mockProps} items={items} selectAll />);
+    render(<FilterableMultiSelect {...mockProps} items={items} />);
     await waitForPosition();
     await openMenu();
 
@@ -1647,7 +1671,7 @@ describe('FilterableMultiSelect', () => {
       { label: 'Select all', isSelectAll: true },
       ...generateItems(4, generateGenericItem),
     ];
-    render(<FilterableMultiSelect {...mockProps} items={items} selectAll />);
+    render(<FilterableMultiSelect {...mockProps} items={items} />);
     await waitForPosition();
     await openMenu();
 
@@ -1682,16 +1706,15 @@ describe('FilterableMultiSelect', () => {
     ];
 
     const ControlledFilterableMultiSelect = () => {
-      const [selectedItems, setSelectedItems] = React.useState([]);
+      const [selectedItems, setSelectedItems] = useState<SelectAllItem[]>([]);
       return (
         <>
           <FilterableMultiSelect
             id="controlled-filterable"
-            label="Controlled test"
+            titleText="Controlled test"
             items={items}
             selectedItems={selectedItems}
-            onChange={(data) => setSelectedItems(data.selectedItems)}
-            selectAll
+            onChange={({ selectedItems }) => setSelectedItems(selectedItems)}
             itemToString={(item) => (item ? item.label : '')}
           />
           <button
@@ -1717,8 +1740,7 @@ describe('FilterableMultiSelect', () => {
     let selectAllCheckbox = screen
       .getAllByRole('option')[0]
       .querySelector('input[type="checkbox"]');
-    expect(selectAllCheckbox).not.toBeNull();
-    expect(selectAllCheckbox.checked).toBe(true);
+    expect(selectAllCheckbox).toHaveProperty('checked', true);
 
     // Trigger external clear
     await userEvent.click(screen.getByText('External Clear'));
@@ -1729,9 +1751,8 @@ describe('FilterableMultiSelect', () => {
     selectAllCheckbox = screen
       .getAllByRole('option')[0]
       .querySelector('input[type="checkbox"]');
-    expect(selectAllCheckbox).not.toBeNull();
-    expect(selectAllCheckbox.checked).toBe(false);
-    expect(selectAllCheckbox.indeterminate).toBe(false);
+    expect(selectAllCheckbox).toHaveProperty('checked', false);
+    expect(selectAllCheckbox).toHaveProperty('indeterminate', false);
 
     // Ensure all individual items are unselected
     screen
