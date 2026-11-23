@@ -2606,7 +2606,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
-    "@npmcli/arborist": "npm:9.9.3"
+    "@npmcli/arborist": "npm:9.9.4"
     ajv: "npm:^8.20.0"
     ajv-formats: "npm:^3.0.1"
     glob: "npm:^14.0.0"
@@ -5435,9 +5435,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@npmcli/arborist@npm:9.9.3":
-  version: 9.9.3
-  resolution: "@npmcli/arborist@npm:9.9.3"
+"@npmcli/arborist@npm:9.9.4":
+  version: 9.9.4
+  resolution: "@npmcli/arborist@npm:9.9.4"
   dependencies:
     "@gar/promise-retry": "npm:^1.0.0"
     "@isaacs/string-locale-compare": "npm:^1.1.0"
@@ -5475,7 +5475,7 @@ __metadata:
     walk-up-path: "npm:^4.0.0"
   bin:
     arborist: bin/index.js
-  checksum: 10/86d95f780416668c47d22cb6286c889e8694576b940f01fa7fdcd9828f1704e5ec6920dc43b11c8d5396fc19afe77e310d93b7efbc29cb4a8021a3a57123660a
+  checksum: 10/aee36f95cd3fe5f91758f53e3b6b65fe3b4f2a9450827f1c3aad82ba5eb23e8da0c83b463673515c763e7e9c580ec2c772fba0841ddee4188279e4e76e0a737e
   languageName: node
   linkType: hard
 
