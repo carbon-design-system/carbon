@@ -1229,7 +1229,7 @@ export const narrowTearsheet = {
 export const StackingTearsheet = {
   render: (
     {
-      variant = ['wide', 'wide', 'wide'],
+      variant: variantProp = ['wide', 'wide', 'wide'],
       hasAILabel,
       isFlush,
       hideCloseButton,
@@ -1238,6 +1238,11 @@ export const StackingTearsheet = {
     },
     context
   ) => {
+    // The story-level `variant` arg is a string ('wide' | 'narrow') from the
+    // shared controls; the stacking stories pass one variant per tearsheet.
+    const variant = Array.isArray(variantProp)
+      ? variantProp
+      : [variantProp, variantProp, variantProp];
     const [open1, setOpen1] = useState(context?.viewMode !== 'docs');
     const [open2, setOpen2] = useState(false);
     const [open3, setOpen3] = useState(false);

@@ -290,11 +290,13 @@ function TearsheetWithStepsInner({
       <Tearsheet.Body>
         <Tearsheet.MainContent>
           {progressIndicator === 'vertical' && (
-            <div className="influencerPanelTrigger">
+            <div className="panelTriggers">
               <Button
                 ref={influencerPanelTriggerRef}
+                wrapperClasses="influencerPanelTrigger"
                 kind="ghost"
-                label="Open influencer panel"
+                iconDescription="Open influencer panel"
+                hasIconOnly
                 renderIcon={() => <RightPanelClose />}
                 aria-expanded={influencerPanelOpen}
                 aria-controls="influencer-panel"
