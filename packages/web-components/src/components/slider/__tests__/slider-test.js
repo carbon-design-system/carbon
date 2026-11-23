@@ -331,6 +331,35 @@ describe('cds-slider', () => {
     expect(el.unstable_valueUpper).to.equal(89);
   });
 
+  it('should raise the value with ArrowUp and lower it with ArrowDown', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50">
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const thumb = el?.shadowRoot?.querySelector('#thumb');
+
+    thumb?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.value).to.equal(51);
+
+    thumb?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.value).to.equal(50);
+  });
+
   it('should update upper value on slider input change and set warn text', async () => {
     const el = await fixture(
       html` <cds-slider

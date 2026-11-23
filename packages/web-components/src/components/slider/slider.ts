@@ -25,16 +25,20 @@ interface Cancelable {
 
 /**
  * The direction to move the thumb, associated with key symbols.
+ *
+ * The slider is horizontal, so the vertical arrow keys follow the ARIA slider
+ * pattern and match their horizontal counterparts: `Up` raises the value like
+ * `Right`, and `Down` lowers it like `Left`.
  */
 const THUMB_DIRECTION = {
   Left: -1,
   ArrowLeft: -1,
-  Up: -1,
-  ArrowUp: -1,
+  Up: 1,
+  ArrowUp: 1,
   Right: 1,
   ArrowRight: 1,
-  Down: 1,
-  ArrowDown: 1,
+  Down: -1,
+  ArrowDown: -1,
 };
 
 /**
