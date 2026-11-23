@@ -1,4 +1,4 @@
-# Carbon Code of Conduct
+# Code of Conduct
 
 ## TL;DR
 

@@ -231,13 +231,12 @@ on GitHub. Sign up on https://github.com.
   practices.
 - **Design:** Contribute visual assets, UX interactions, motion design, Figma
   kit fixes, and more.
-- **Content:** If you want to contribute content for
-  [carbondesignsystem.com](https://carbondesignsystem.com), such as
-  [patterns](https://carbondesignsystem.com/patterns/overview/), please see our
-  [contact page](https://carbondesignsystem.com/support/contact-us/) for more
-  information. Documentation that lives in this repository (e.g., package
-  READMEs, `docs/`, and component `.mdx` files) should still be contributed
-  here.
+- **Content:** If you want to contribute content for the
+  [Carbon website](https://www.carbondesignsystem.com), such as
+  [patterns](https://www.carbondesignsystem.com/building-blocks/core/patterns/overview),
+  please see our
+  [contact page](https://www.carbondesignsystem.com/support/contact-us) for more
+  information.
 - **Research:** If you have findings to improve the Carbon user experience,
   share them — ideally with supporting design and development details in a
   GitHub issue and subsequent PR.
