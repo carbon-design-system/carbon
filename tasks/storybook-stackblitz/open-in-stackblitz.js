@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/**
- * Browser runtime for the "Open in StackBlitz" docs action.
- */
+// Browser runtime for the "Open in StackBlitz" docs action.
 
 import StackBlitzSDK from '@stackblitz/sdk';
 

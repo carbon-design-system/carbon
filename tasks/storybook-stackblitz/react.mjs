@@ -17,29 +17,23 @@
  *   resolve to a small shim
  */
 
-import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import {
-  analyzeCsf,
-  extractStory,
-  parseModule,
-  statementText,
-  ts,
-} from './csf.mjs';
+import { parseModule, statementText, ts } from './csf.mjs';
 import {
   ProjectBuilder,
+  STYLE_OR_ASSET,
   format,
-  freeName,
+  generateStoryProjects,
+  importBindings,
+  importClauseText,
   kebab,
-  metaTitle,
+  listFiles,
+  mergeNamedImports,
+  packageInfo,
   packageJson,
   resolveSource,
-  storyNames,
-  packageInfo,
 } from './project.mjs';
-
-export { storyNames };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PACKAGE_ROOT = path.resolve(
@@ -64,9 +58,13 @@ const originKey = ({ file, name }) => `${file}#${name}`;
 // local binding -> origin, following the module's own imports
 function localOrigin(file, sourceFile, local) {
   for (const statement of sourceFile.statements) {
-    if (!ts.isImportDeclaration(statement)) continue;
+    if (!ts.isImportDeclaration(statement)) {
+      continue;
+    }
     const clause = statement.importClause;
-    if (!clause || clause.isTypeOnly) continue;
+    if (!clause || clause.isTypeOnly) {
+      continue;
+    }
     const specifier = statement.moduleSpecifier.text;
     const target = specifier.startsWith('.')
       ? resolveSource(file, specifier)
@@ -83,7 +81,9 @@ function localOrigin(file, sourceFile, local) {
       }
     } else if (bindings) {
       for (const element of bindings.elements) {
-        if (element.name.text !== local || element.isTypeOnly) continue;
+        if (element.name.text !== local || element.isTypeOnly) {
+          continue;
+        }
         const imported = (element.propertyName ?? element.name).text;
         return target
           ? (moduleExports(target).get(imported) ?? null)
@@ -120,9 +120,11 @@ function localOrigin(file, sourceFile, local) {
 const hasModifier = (node, kind) =>
   node.modifiers?.some((m) => m.kind === kind);
 
-/** Map of a module's runtime exports: exported name -> `{ file, name }`. */
+// Map of a module's runtime exports: exported name -> `{ file, name }`.
 function moduleExports(file) {
-  if (exportsCache.has(file)) return exportsCache.get(file);
+  if (exportsCache.has(file)) {
+    return exportsCache.get(file);
+  }
   const exports = new Map();
   exportsCache.set(file, exports); // guards against cycles
   const sourceFile = parseModule(file);
@@ -135,7 +137,9 @@ function moduleExports(file) {
       const clause = statement.exportClause;
       if (!clause) {
         // export * from './x'
-        if (!target) continue;
+        if (!target) {
+          continue;
+        }
         for (const [name, origin] of moduleExports(target)) {
           if (name !== 'default' && !exports.has(name)) {
             exports.set(name, typeOnly ? { ...origin, type: true } : origin);
@@ -143,7 +147,9 @@ function moduleExports(file) {
         }
       } else if (ts.isNamespaceExport(clause)) {
         // export * as ns from './x'
-        if (target) exports.set(clause.name.text, { file: target, name: '*' });
+        if (target) {
+          exports.set(clause.name.text, { file: target, name: '*' });
+        }
       } else {
         for (const element of clause.elements) {
           const local = (element.propertyName ?? element.name).text;
@@ -152,7 +158,9 @@ function moduleExports(file) {
               ? moduleExports(target).get(local)
               : { file: specifier, name: local }
             : localOrigin(file, sourceFile, local);
-          if (!origin) continue;
+          if (!origin) {
+            continue;
+          }
           exports.set(
             element.name.text,
             typeOnly || element.isTypeOnly ? { ...origin, type: true } : origin
@@ -195,20 +203,28 @@ function moduleExports(file) {
 }
 
 let publicNames;
-/** origin key -> how to reach it from `@carbon/react`: `['Name']` or `['ns', 'Name']`. */
+// origin key -> how to reach it from `@carbon/react`: `['Name']` or `['ns', 'Name']`.
 function publicApi() {
-  if (publicNames) return publicNames;
+  if (publicNames) {
+    return publicNames;
+  }
   publicNames = new Map();
   for (const [name, origin] of moduleExports(path.join(SRC, 'index.ts'))) {
     const key = originKey(origin);
-    if (!publicNames.has(key)) publicNames.set(key, [name]);
+    if (!publicNames.has(key)) {
+      publicNames.set(key, [name]);
+    }
   }
   // members of namespace exports (`export * as preview__Card from ...`)
   for (const [name, origin] of moduleExports(path.join(SRC, 'index.ts'))) {
-    if (origin.name !== '*') continue;
+    if (origin.name !== '*') {
+      continue;
+    }
     for (const [member, memberOrigin] of moduleExports(origin.file)) {
       const key = originKey(memberOrigin);
-      if (!publicNames.has(key)) publicNames.set(key, [name, member]);
+      if (!publicNames.has(key)) {
+        publicNames.set(key, [name, member]);
+      }
     }
   }
   return publicNames;
@@ -217,8 +233,6 @@ function publicApi() {
 // ---------------------------------------------------------------------------
 // Project
 // ---------------------------------------------------------------------------
-
-const STYLE_OR_ASSET = /\.(s?css|svg|png|jpe?g|gif|webp|mp4|json)(\?.*)?$/;
 
 class ReactProjectBuilder extends ProjectBuilder {
   constructor() {
@@ -242,10 +256,17 @@ class ReactProjectBuilder extends ProjectBuilder {
   importStatement(sourceFile, declaration, names, file, projectPath) {
     const specifier = declaration.moduleSpecifier.text;
     const clause = declaration.importClause;
-    if (!specifier.startsWith('.') || !clause || STYLE_OR_ASSET.test(specifier))
+    if (
+      !specifier.startsWith('.') ||
+      !clause ||
+      STYLE_OR_ASSET.test(specifier)
+    ) {
       return undefined;
+    }
     const target = resolveSource(file, specifier);
-    if (!target) return undefined;
+    if (!target) {
+      return undefined;
+    }
     // the package's icons entry point (`packages/react/icons`)
     if (target.startsWith(ICONS_DIR + path.sep)) {
       this.packages.add(PACKAGE_NAME);
@@ -255,26 +276,13 @@ class ReactProjectBuilder extends ProjectBuilder {
       )}`;
     }
 
-    const keep = (local) => !names || names.has(local);
-    const bindings = []; // { imported, local }
-    if (clause.name && keep(clause.name.text)) {
-      bindings.push({ imported: 'default', local: clause.name.text });
+    const bindings = importBindings(
+      clause,
+      (local) => !names || names.has(local)
+    );
+    if (!bindings.length) {
+      return names ? null : '';
     }
-    const named = clause.namedBindings;
-    if (named && ts.isNamespaceImport(named)) {
-      if (keep(named.name.text)) {
-        bindings.push({ imported: '*', local: named.name.text });
-      }
-    } else if (named) {
-      for (const element of named.elements) {
-        if (element.isTypeOnly || !keep(element.name.text)) continue;
-        bindings.push({
-          imported: (element.propertyName ?? element.name).text,
-          local: element.name.text,
-        });
-      }
-    }
-    if (!bindings.length) return names ? null : '';
 
     const api = publicApi();
     const exports = moduleExports(target);
@@ -330,22 +338,7 @@ class ReactProjectBuilder extends ProjectBuilder {
     if (copied.length) {
       this.copy(target);
       const to = this.relativeSpecifier(projectPath, this.vendoredPath(target));
-      const parts = [];
-      const def = copied.find((b) => b.imported === 'default');
-      const ns = copied.find((b) => b.imported === '*');
-      const rest = copied.filter((b) => b.imported !== 'default' && b !== ns);
-      if (def) parts.push(def.local);
-      if (ns) parts.push(`* as ${ns.local}`);
-      if (rest.length) {
-        parts.push(
-          `{ ${rest
-            .map((b) =>
-              b.imported === b.local ? b.local : `${b.imported} as ${b.local}`
-            )
-            .join(', ')} }`
-        );
-      }
-      lines.push(`import ${parts.join(', ')} from '${to}';`);
+      lines.push(`import ${importClauseText(copied)} from '${to}';`);
     }
     return lines.join('\n');
   }
@@ -395,31 +388,6 @@ const indexHtml = (title, entry) => `<!DOCTYPE html>
 </html>
 `;
 
-// One `import { ... } from '@carbon/react'` (and one `import type`) for the
-// whole module: separate story imports can resolve to the same public name.
-function mergePackageImports(imports) {
-  const lines = imports.flatMap((entry) => entry.split('\n'));
-  const merged = { value: new Set(), type: new Set() };
-  const out = [];
-  for (const line of lines) {
-    const match = line.match(
-      new RegExp(`^import (type )?\\{ (.+) \\} from '${PACKAGE_NAME}';$`)
-    );
-    if (!match) {
-      out.push(line);
-      continue;
-    }
-    const kind = match[1] ? 'type' : 'value';
-    if (!merged[kind].size) out.push(kind); // placeholder for the merged line
-    for (const name of match[2].split(/,\s*/)) merged[kind].add(name);
-  }
-  return out.map((line) =>
-    line === 'value' || line === 'type'
-      ? `import ${line === 'type' ? 'type ' : ''}{ ${[...merged[line]].join(', ')} } from '${PACKAGE_NAME}';`
-      : line
-  );
-}
-
 /**
  * Generate a StackBlitz project per story in `file`.
  * Returns `{ [storyName]: { title, description, template, openFile, files } }`,
@@ -428,165 +396,93 @@ function mergePackageImports(imports) {
  * `openFile` is the story module (`src/App.jsx`): its default export renders
  * the story as a React component, so other apps can import it as is.
  */
-export async function generateProjects(file) {
-  const sourceFile = parseModule(file);
-  const csf = analyzeCsf(sourceFile);
-  const title = metaTitle(sourceFile, csf.meta) ?? path.basename(file);
-  const componentName = title.split('/').pop();
+export function generateProjects(file) {
   const tsx = file.endsWith('.tsx');
   const entry = tsx ? 'src/main.tsx' : 'src/main.jsx';
   // the story itself; its default export is the story as a component
   const storyModule = tsx ? 'src/App.tsx' : 'src/App.jsx';
-  const projects = {};
-
-  for (const { name } of csf.stories) {
-    const extracted = extractStory(sourceFile, csf, name, {
-      keep: ['component'],
-    });
-    const builder = new ReactProjectBuilder();
-    const imports = extracted.imports
-      .map((entryImport) =>
-        builder.importLine(sourceFile, entryImport, file, storyModule)
-      )
-      .filter(Boolean);
-
-    const taken = new Set(extracted.topLevelNames);
-    taken.add(name);
-    const pick = (preferred) => {
-      const chosen = freeName(preferred, taken);
-      taken.add(chosen);
-      return chosen;
-    };
-    const metaName = pick('meta');
-    const argsName = pick('args');
-    const appName = pick('App');
-
-    const body = [];
-    const declarations = extracted.declarations.map((s) =>
-      statementText(sourceFile, s)
-    );
-    if (declarations.length) body.push(declarations.join('\n\n'));
-    if (extracted.meta) body.push(`const ${metaName} = ${extracted.meta};`);
-    body.push(`const ${name} = ${extracted.story};`);
-
-    const argSources = [
-      extracted.meta ? `...${metaName}.args` : null,
-      `...${name}.args`,
-    ].filter(Boolean);
-    let run = `const ${argsName} = { ${argSources.join(', ')} };`;
-    if (extracted.usesArgTypesMapping) {
-      const lookup = [
-        `${name}.argTypes?.[key]?.mapping`,
-        extracted.meta ? `${metaName}.argTypes?.[key]?.mapping` : null,
-      ]
-        .filter(Boolean)
-        .join(' ??\n    ');
-      run += `
-
-// Storybook maps some control values (e.g. an icon name) to the value the
-// story renders with; apply the same mapping here.
-for (const [key, value] of Object.entries(${argsName})) {
-  const mapping =
-    ${lookup};
-  if (
-    mapping &&
-    (typeof value === 'string' || typeof value === 'number') &&
-    value in mapping
-  ) {
-    ${argsName}[key] = mapping[value];
-  }
-}`;
-    }
-    const metaRender = extracted.meta
-      ? `${metaName}.render ?? ((props) => <${metaName}.component {...props} />)`
-      : null;
-    const renderFn = {
-      story: `${name}.render`,
-      meta: `(${metaRender})`,
-      either: `(${name}.render ?? ${metaRender})`,
-    }[extracted.renderFrom];
-    run += `
-
-export default function ${appName}() {
+  return generateStoryProjects(file, {
+    storyModule,
+    keep: ['component'],
+    newBuilder: () => new ReactProjectBuilder(),
+    // a story without `render` renders `meta.component`
+    metaRender: (meta) =>
+      `${meta}.render ?? ((props) => <${meta}.component {...props} />)`,
+    async project({ name, componentName, builder, imports, pick, story }) {
+      const { body, argsName, renderFn } = story();
+      const appName = pick('App');
+      body.push(`export default function ${appName}() {
   return ${renderFn}(${argsName}, { args: ${argsName}, viewMode: 'story' });
-}`;
-    body.push(run);
+}`);
+      const app = await format(
+        [
+          ...mergeNamedImports(imports, PACKAGE_NAME),
+          '',
+          body.join('\n\n'),
+          '',
+        ].join('\n')
+      );
+      const main = await format(
+        [
+          `import './index.scss';`,
+          `import { createRoot } from 'react-dom/client';`,
+          `import App from './App';`,
+          '',
+          `createRoot(document.getElementById('root')${tsx ? '!' : ''}).render(<App />);`,
+          '',
+        ].join('\n')
+      );
 
-    const usesFlexGrid = builder.publicNames.has('FlexGrid');
-    const app = await format(
-      [...mergePackageImports(imports), '', body.join('\n\n'), ''].join('\n')
-    );
-    const main = await format(
-      [
-        `import './index.scss';`,
-        `import { createRoot } from 'react-dom/client';`,
-        `import App from './App';`,
-        '',
-        `createRoot(document.getElementById('root')${tsx ? '!' : ''}).render(<App />);`,
-        '',
-      ].join('\n')
-    );
+      const dependencies = {};
+      for (const pkg of builder.packages) {
+        dependencies[pkg] = 'latest';
+      }
+      const files = {
+        'index.html': indexHtml(`${componentName}: ${name}`, entry),
+        'package.json': packageJson(
+          `carbon-react-${kebab(componentName)}-${kebab(name)}`,
+          {
+            dependencies,
+            devDependencies: {
+              '@vitejs/plugin-react': 'latest',
+              sass: 'latest',
+              vite: 'latest',
+            },
+          }
+        ),
+        'vite.config.js': VITE_CONFIG,
+        [entry]: main,
+        [storyModule]: app,
+        'src/index.scss': builder.publicNames.has('FlexGrid')
+          ? FLEX_GRID_STYLES
+          : STYLES,
+        ...Object.fromEntries(builder.files),
+      };
+      if (builder.usesShim) {
+        files[SHIM_FILE] = SHIM;
+      }
 
-    const dependencies = {};
-    for (const pkg of builder.packages) {
-      dependencies[pkg] = 'latest';
-    }
-    const files = {
-      'index.html': indexHtml(`${componentName}: ${name}`, entry),
-      'package.json': packageJson(
-        `carbon-react-${kebab(componentName)}-${kebab(name)}`,
-        {
-          dependencies,
-          devDependencies: {
-            '@vitejs/plugin-react': 'latest',
-            sass: 'latest',
-            vite: 'latest',
-          },
-        }
-      ),
-      'vite.config.js': VITE_CONFIG,
-      [entry]: main,
-      [storyModule]: app,
-      'src/index.scss': usesFlexGrid ? FLEX_GRID_STYLES : STYLES,
-      ...Object.fromEntries(builder.files),
-    };
-    if (builder.usesShim) files[SHIM_FILE] = SHIM;
-
-    projects[name] = {
-      title: `Carbon React: ${componentName} (${name})`,
-      description: `${componentName} "${name}" story from the Carbon React Storybook.`,
-      template: 'node',
-      openFile: storyModule,
-      files,
-    };
-  }
-
-  return projects;
+      return {
+        title: `Carbon React: ${componentName} (${name})`,
+        description: `${componentName} "${name}" story from the Carbon React Storybook.`,
+        template: 'node',
+        openFile: storyModule,
+        files,
+      };
+    },
+  });
 }
 
-/** Stories modules that get a StackBlitz action. */
+// Stories modules that get a StackBlitz action.
 export function isStackBlitzStory(file) {
   return file.startsWith(SRC + path.sep) && /\.stories\.(js|tsx)$/.test(file);
 }
 
-export function listStoryFiles() {
-  const out = [];
-  const walk = (dir) => {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        if (entry.name !== 'node_modules') walk(full);
-      } else if (isStackBlitzStory(full)) out.push(full);
-    }
-  };
-  walk(SRC);
-  return out.sort();
-}
+export const listStoryFiles = () => listFiles(SRC, isStackBlitzStory);
 
-/** Everything the Vite plugin needs for React stories. */
+// Everything the Vite plugin needs for React stories.
 export const reactStackBlitz = {
   include: isStackBlitzStory,
-  storyNames,
   generateProjects,
   package: packageInfo(PACKAGE_ROOT),
 };

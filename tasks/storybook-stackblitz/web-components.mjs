@@ -22,29 +22,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import {
-  analyzeCsf,
-  extractStory,
-  htmlTemplates,
-  parseModule,
-  statementText,
-  ts,
-} from './csf.mjs';
+import { htmlTemplates, parseModule, ts } from './csf.mjs';
 import {
   ProjectBuilder,
   STYLE_OR_ASSET,
+  addNamedImport,
   format,
-  freeName,
+  generateStoryProjects,
   kebab,
-  metaTitle,
+  listFiles,
+  packageInfo,
   packageJson as projectPackageJson,
   posix,
   resolveSource,
-  storyNames,
-  packageInfo,
 } from './project.mjs';
-
-export { storyNames };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PACKAGE_ROOT = path.resolve(
@@ -61,7 +52,9 @@ const SHIM_FILE = 'src/storybook-shim.ts';
 // mirror `esInputs` globs in packages/web-components/tasks/build.js;
 //  all `src/**\/*.ts` excluding stories, declarations, polyfills, and examples
 function isPublished(file) {
-  if (!file.startsWith(SRC + path.sep) || !file.endsWith('.ts')) return false;
+  if (!file.startsWith(SRC + path.sep) || !file.endsWith('.ts')) {
+    return false;
+  }
   const rel = path.relative(SRC, file).split(path.sep).join('/');
   return !(
     rel.endsWith('.stories.ts') ||
@@ -134,7 +127,9 @@ let states: unknown[] = [];
 let index = 0;
 let queued = false;
 const rerender = () => {
-  if (queued) return;
+  if (queued) {
+    return;
+  }
   queued = true;
   queueMicrotask(() => {
     queued = false;
@@ -143,7 +138,7 @@ const rerender = () => {
   });
 };
 
-/** Render the story now and again whenever its hook state or args change. */
+// Render the story now and again whenever its hook state or args change.
 export function mountStory(args: Record<string, unknown>, render: () => void) {
   storyArgs = args;
   draw = render;
@@ -196,9 +191,13 @@ const VERSIONS = { lit: '^3.0.0' };
 
 function packageJson(name, packages, { usesLitCss }) {
   const dependencies = { '@carbon/styles': 'latest' };
-  for (const pkg of packages) dependencies[pkg] = VERSIONS[pkg] ?? 'latest';
+  for (const pkg of packages) {
+    dependencies[pkg] = VERSIONS[pkg] ?? 'latest';
+  }
   const devDependencies = { sass: 'latest', vite: 'latest' };
-  if (usesLitCss) devDependencies['vite-plugin-lit-css'] = 'latest';
+  if (usesLitCss) {
+    devDependencies['vite-plugin-lit-css'] = 'latest';
+  }
   return projectPackageJson(name, { dependencies, devDependencies });
 }
 
@@ -245,144 +244,79 @@ const indexHtml = (title) => `<!DOCTYPE html>
  * `mount(container)`, renders the story into an element, so other apps can
  * import it as is.
  */
-export async function generateProjects(file) {
-  const sourceFile = parseModule(file);
-  const csf = analyzeCsf(sourceFile);
-  const title = metaTitle(sourceFile, csf.meta) ?? path.basename(file);
-  const componentName = title.split('/').pop();
-  const projects = {};
+export function generateProjects(file) {
+  return generateStoryProjects(file, {
+    storyModule: STORY_MODULE,
+    newBuilder,
+    castAny: true,
+    metaRender: (meta) => `${meta}.render`,
+    async project({
+      name,
+      componentName,
+      extracted,
+      builder,
+      imports,
+      pick,
+      story,
+    }) {
+      const renderName = pick('render');
+      const { body, argsName, renderFn } = story();
+      const mountName = pick('mount');
+      const containerName = pick('container');
 
-  for (const { name } of csf.stories) {
-    const extracted = extractStory(sourceFile, csf, name);
-    const builder = newBuilder();
-    const imports = extracted.imports
-      .map((entry) => builder.importLine(sourceFile, entry, file, STORY_MODULE))
-      .filter(Boolean);
-
-    const taken = new Set(extracted.topLevelNames);
-    taken.add(name);
-    const renderName = freeName('render', taken);
-    taken.add(renderName);
-    const metaName = freeName('meta', taken);
-    taken.add(metaName);
-    const argsName = freeName('args', taken);
-    taken.add(argsName);
-    const mountName = freeName('mount', taken);
-    taken.add(mountName);
-    const containerName = freeName('container', taken);
-
-    const body = [];
-    const declarations = extracted.declarations.map((s) =>
-      statementText(sourceFile, s)
-    );
-    if (declarations.length) body.push(declarations.join('\n\n'));
-    if (extracted.meta) body.push(`const ${metaName} = ${extracted.meta};`);
-    body.push(`const ${name} = ${extracted.story};`);
-
-    const argSources = [
-      extracted.meta ? `...${metaName}.args` : null,
-      `...${name}.args`,
-    ].filter(Boolean);
-    let run = `const ${argsName} = { ${argSources.join(', ')} };`;
-    if (extracted.usesArgTypesMapping) {
-      const lookup = [
-        `(${name}.argTypes as any)?.[key]?.mapping`,
-        extracted.meta ? `(${metaName}.argTypes as any)?.[key]?.mapping` : null,
-      ]
-        .filter(Boolean)
-        .join(' ??\n    ');
-      run += `
-
-// Storybook maps some control values (e.g. an icon name) to the value the
-// story renders with; apply the same mapping here.
-for (const [key, value] of Object.entries(${argsName})) {
-  const mapping =
-    ${lookup};
-  if (
-    mapping &&
-    (typeof value === 'string' || typeof value === 'number') &&
-    value in mapping
-  ) {
-    (${argsName} as any)[key] = mapping[value];
-  }
-}`;
-    }
-    const renderFn = {
-      story: `${name}.render`,
-      meta: `${metaName}.render`,
-      either: `(${name}.render ?? ${metaName}.render)`,
-    }[extracted.renderFrom];
-    const usesHooks = extracted.imports.some(
-      ({ declaration }) =>
-        declaration.moduleSpecifier.text === 'storybook/preview-api'
-    );
-    const draw = `${renderName}(${renderFn}(${argsName}), ${containerName})`;
-    const mountBody = usesHooks
-      ? `// The story uses Storybook hooks; re-render it when they update.\n  mountStory(${argsName}, () =>\n    ${draw}\n  );`
-      : `${draw};`;
-    run += `\n\n/** Render the story into \`${containerName}\`. */\nexport default function ${mountName}(${containerName}: HTMLElement) {\n  ${mountBody}\n}`;
-    body.push(run);
-    if (usesHooks) {
-      // Merge into the story's own shim import when it has one.
-      const shimIndex = imports.findIndex((line) =>
-        /^import \{ .+ \} from '\.\/storybook-shim';$/.test(line)
+      const usesHooks = extracted.imports.some(
+        ({ declaration }) =>
+          declaration.moduleSpecifier.text === 'storybook/preview-api'
       );
-      if (shimIndex >= 0) {
-        imports[shimIndex] = imports[shimIndex].replace(
-          /\{ (.+) \}/,
-          (_, names) => `{ ${names}, mountStory }`
-        );
-      } else {
-        imports.push(`import { mountStory } from './storybook-shim';`);
+      const draw = `${renderName}(${renderFn}(${argsName}), ${containerName})`;
+      const mountBody = usesHooks
+        ? `// The story uses Storybook hooks; re-render it when they update.\n  mountStory(${argsName}, () =>\n    ${draw}\n  );`
+        : `${draw};`;
+      body.push(
+        `// Render the story into \`${containerName}\`.\nexport default function ${mountName}(${containerName}: HTMLElement) {\n  ${mountBody}\n}`
+      );
+      if (usesHooks) {
+        addNamedImport(imports, './storybook-shim', 'mountStory');
         builder.usesShim = true;
       }
-    }
-
-    // Add lit's `render` to the story's own `lit` import when it has one.
-    const renderBinding =
-      renderName === 'render' ? 'render' : `render as ${renderName}`;
-    const litIndex = imports.findIndex((line) =>
-      /^import \{ .+ \} from 'lit';$/.test(line)
-    );
-    if (litIndex >= 0) {
-      imports[litIndex] = imports[litIndex].replace(
-        /\{ (.+) \}/,
-        (_, names) => `{ ${names}, ${renderBinding} }`
+      addNamedImport(
+        imports,
+        'lit',
+        renderName === 'render' ? 'render' : `render as ${renderName}`,
+        { prepend: true }
       );
-    } else {
-      imports.unshift(`import { ${renderBinding} } from 'lit';`);
-    }
-    const story = await format(
-      `${imports.join('\n')}\n\n${body.join('\n\n')}\n`
-    );
+      const code = await format(
+        `${imports.join('\n')}\n\n${body.join('\n\n')}\n`
+      );
 
-    builder.packages.add('lit');
-    const files = {
-      'index.html': indexHtml(`${componentName}: ${name}`),
-      'package.json': packageJson(
-        `carbon-web-components-${kebab(componentName)}-${kebab(name)}`,
-        builder.packages,
-        builder
-      ),
-      'tsconfig.json': TSCONFIG,
-      'vite.config.js': viteConfig(builder),
-      'src/main.ts': MAIN,
-      [STORY_MODULE]: story,
-      'src/styles.scss': STYLES,
-      ...Object.fromEntries(builder.files),
-    };
-    if (builder.usesShim) files[SHIM_FILE] = SHIM;
+      builder.packages.add('lit');
+      const files = {
+        'index.html': indexHtml(`${componentName}: ${name}`),
+        'package.json': packageJson(
+          `carbon-web-components-${kebab(componentName)}-${kebab(name)}`,
+          builder.packages,
+          builder
+        ),
+        'tsconfig.json': TSCONFIG,
+        'vite.config.js': viteConfig(builder),
+        'src/main.ts': MAIN,
+        [STORY_MODULE]: code,
+        'src/styles.scss': STYLES,
+        ...Object.fromEntries(builder.files),
+      };
+      if (builder.usesShim) {
+        files[SHIM_FILE] = SHIM;
+      }
 
-    projects[name] = {
-      title: `Carbon web components: ${componentName} (${name})`,
-      description: `${componentName} "${name}" story from the Carbon web components Storybook.`,
-      template: 'node',
-      openFile: STORY_MODULE,
-      files,
-    };
-  }
-
-  return projects;
+      return {
+        title: `Carbon web components: ${componentName} (${name})`,
+        description: `${componentName} "${name}" story from the Carbon web components Storybook.`,
+        template: 'node',
+        openFile: STORY_MODULE,
+        files,
+      };
+    },
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -395,7 +329,9 @@ const IMPORTS = /from\s*['"]([^'"]+)['"]|import\s*['"]([^'"]+)['"]/g;
 
 // imports that survive compilation; TS drops imports only used as types
 function runtimeCode(file, text) {
-  if (!file.endsWith('.ts')) return text;
+  if (!file.endsWith('.ts')) {
+    return text;
+  }
   return ts.transpileModule(text, {
     fileName: file,
     compilerOptions: {
@@ -407,22 +343,17 @@ function runtimeCode(file, text) {
 }
 
 let declaredTags;
-/** Every `cds-*` tag a source module declares, keyed by tag. */
+// Every `cds-*` tag a source module declares, keyed by tag.
 function allDeclaredTags() {
-  if (declaredTags) return declaredTags;
+  if (declaredTags) {
+    return declaredTags;
+  }
   declaredTags = new Map();
-  const walk = (dir) => {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) walk(full);
-      else if (isPublished(full)) {
-        for (const m of fs.readFileSync(full, 'utf8').matchAll(DECLARES)) {
-          declaredTags.set(`cds-${m[1]}`, posix(path.relative(SRC, full)));
-        }
-      }
+  for (const file of listFiles(SRC, isPublished)) {
+    for (const m of fs.readFileSync(file, 'utf8').matchAll(DECLARES)) {
+      declaredTags.set(`cds-${m[1]}`, posix(path.relative(SRC, file)));
     }
-  };
-  walk(SRC);
+  }
   return declaredTags;
 }
 
@@ -439,10 +370,14 @@ export function findUnregisteredTags(file) {
   const stack = [file];
   while (stack.length) {
     const current = stack.pop();
-    if (seen.has(current)) continue;
+    if (seen.has(current)) {
+      continue;
+    }
     seen.add(current);
     const text = fs.readFileSync(current, 'utf8');
-    for (const m of text.matchAll(DECLARES)) registered.add(`cds-${m[1]}`);
+    for (const m of text.matchAll(DECLARES)) {
+      registered.add(`cds-${m[1]}`);
+    }
     if (current === file || !isPublished(current) || isStoryOnly(current)) {
       for (const template of htmlTemplates(parseModule(current, text))) {
         for (const m of template.matchAll(/<(cds-[a-z0-9-]+)/g)) {
@@ -458,11 +393,14 @@ export function findUnregisteredTags(file) {
       }
       if (
         !(specifier.startsWith('.') || path.isAbsolute(specifier)) ||
-        STYLE_OR_ASSET.test(specifier.split('?')[0])
-      )
+        STYLE_OR_ASSET.test(specifier)
+      ) {
         continue;
+      }
       const next = resolveSource(current, specifier);
-      if (next && /\.[jt]s$/.test(next)) stack.push(next);
+      if (next && /\.[jt]s$/.test(next)) {
+        stack.push(next);
+      }
     }
   }
   return [...rendered]
@@ -471,29 +409,16 @@ export function findUnregisteredTags(file) {
     .map((tag) => ({ tag, module: declared.get(tag) }));
 }
 
-/** Stories modules that get a StackBlitz action. */
+// Stories modules that get a StackBlitz action.
 export function isStackBlitzStory(file) {
   return file.startsWith(SRC + path.sep) && file.endsWith('.stories.ts');
 }
 
-export function listStoryFiles() {
-  const out = [];
-  const walk = (dir) => {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        if (entry.name !== 'node_modules') walk(full);
-      } else if (isStackBlitzStory(full)) out.push(full);
-    }
-  };
-  walk(SRC);
-  return out.sort();
-}
+export const listStoryFiles = () => listFiles(SRC, isStackBlitzStory);
 
-/** Everything the Vite plugin needs for web components stories. */
+// Everything the Vite plugin needs for web components stories.
 export const webComponentsStackBlitz = {
   include: isStackBlitzStory,
-  storyNames,
   generateProjects,
   package: packageInfo(PACKAGE_ROOT),
 };

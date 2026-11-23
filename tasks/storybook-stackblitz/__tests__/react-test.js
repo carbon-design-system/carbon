@@ -65,7 +65,7 @@ describe('React stories → StackBlitz', () => {
 
   it('lists Storybook story ids and names for the published index', () => {
     const script = `
-      import { storyEntries } from ${JSON.stringify(path.join(DIR, 'vite-plugin.mjs'))};
+      import { storyEntries } from ${JSON.stringify(path.join(DIR, 'csf.mjs'))};
       const entries = storyEntries(${JSON.stringify(path.join(STORIES, 'Pagination/Pagination.stories.js'))});
       process.stdout.write(JSON.stringify(Object.fromEntries(entries)));
     `;

@@ -21,6 +21,7 @@
  */
 
 import fs from 'node:fs';
+import { storyNameFromExport, toId } from 'storybook/internal/csf';
 import ts from 'typescript';
 
 // Storybook-specific keys of a story or meta object
@@ -73,7 +74,9 @@ function bindingNames(name, out = []) {
     out.push(name.text);
   } else {
     for (const element of name.elements ?? []) {
-      if (!ts.isOmittedExpression(element)) bindingNames(element.name, out);
+      if (!ts.isOmittedExpression(element)) {
+        bindingNames(element.name, out);
+      }
     }
   }
   return out;
@@ -82,24 +85,29 @@ function bindingNames(name, out = []) {
 // names bound by import declaration, excluding type-only bindings
 export function importedNames(declaration) {
   const clause = declaration.importClause;
-  if (!clause || clause.isTypeOnly) return [];
+  if (!clause || clause.isTypeOnly) {
+    return [];
+  }
   const names = [];
-  if (clause.name) names.push(clause.name.text);
+  if (clause.name) {
+    names.push(clause.name.text);
+  }
   const bindings = clause.namedBindings;
-  if (bindings && ts.isNamespaceImport(bindings))
+  if (bindings && ts.isNamespaceImport(bindings)) {
     names.push(bindings.name.text);
+  }
   if (bindings && ts.isNamedImports(bindings)) {
     for (const element of bindings.elements) {
-      if (!element.isTypeOnly) names.push(element.name.text);
+      if (!element.isTypeOnly) {
+        names.push(element.name.text);
+      }
     }
   }
   return names;
 }
 
-/**
- * Index a CSF module: imports, top-level declarations, the default export
- * (meta), named story exports and CSF2-style `Story.args = ...` assignments
- */
+// Index a CSF module: imports, top-level declarations, the default export
+// (meta), named story exports and CSF2-style `Story.args = ...` assignments
 export function analyzeCsf(sourceFile) {
   const imports = new Map(); // local name -> ImportDeclaration
   const sideEffectImports = [];
@@ -110,7 +118,9 @@ export function analyzeCsf(sourceFile) {
 
   for (const statement of sourceFile.statements) {
     if (ts.isImportDeclaration(statement)) {
-      if (!statement.importClause) sideEffectImports.push(statement);
+      if (!statement.importClause) {
+        sideEffectImports.push(statement);
+      }
       for (const name of importedNames(statement)) {
         imports.set(name, statement);
       }
@@ -142,7 +152,9 @@ export function analyzeCsf(sourceFile) {
       ts.isIdentifier(statement.expression.left.expression)
     ) {
       const story = statement.expression.left.expression.text;
-      if (!assignments.has(story)) assignments.set(story, []);
+      if (!assignments.has(story)) {
+        assignments.set(story, []);
+      }
       assignments.get(story).push(statement);
     }
   }
@@ -166,10 +178,8 @@ export function analyzeCsf(sourceFile) {
   };
 }
 
-/**
- * Identifiers in `node` that refer to one of `names`, excluding property names
- * and object keys; shorthand properties count as references
- */
+// Identifiers in `node` that refer to one of `names`, excluding property names
+// and object keys; shorthand properties count as references
 function referencedNames(node, names, found = new Set()) {
   const visit = (n) => {
     if (ts.isIdentifier(n) && names.has(n.text)) {
@@ -180,7 +190,9 @@ function referencedNames(node, names, found = new Set()) {
           (ts.isPropertyAssignment(parent) && parent.name === n) ||
           (ts.isMethodDeclaration(parent) && parent.name === n) ||
           (ts.isPropertyDeclaration(parent) && parent.name === n));
-      if (!isPropertyName) found.add(n.text);
+      if (!isPropertyName) {
+        found.add(n.text);
+      }
     }
     ts.forEachChild(n, visit);
   };
@@ -193,10 +205,14 @@ const keyOf = (sourceFile, property) =>
 
 // object literal props that aren't Storybook-specific
 function runtimeProperties(sourceFile, object, { keepArgTypes, keep }) {
-  if (!object || !ts.isObjectLiteralExpression(object)) return [];
+  if (!object || !ts.isObjectLiteralExpression(object)) {
+    return [];
+  }
   return object.properties.filter((property) => {
     const key = keyOf(sourceFile, property);
-    if (key === 'argTypes') return keepArgTypes;
+    if (key === 'argTypes') {
+      return keepArgTypes;
+    }
     return keep.has(key) || !STORYBOOK_ONLY_KEYS.has(key);
   });
 }
@@ -224,7 +240,11 @@ function mappedArgNames(sourceFile, nodes) {
     }
     ts.forEachChild(node, visit);
   };
-  for (const node of nodes) if (node) visit(node);
+  for (const node of nodes) {
+    if (node) {
+      visit(node);
+    }
+  }
   return names;
 }
 
@@ -245,16 +265,24 @@ function storyArgNames(sourceFile, csf, nodes) {
   const seen = new Set();
   const addObject = (node) => {
     node = unwrap(node);
-    if (!node) return true;
+    if (!node) {
+      return true;
+    }
     if (ts.isIdentifier(node)) {
-      if (seen.has(node.text)) return true;
+      if (seen.has(node.text)) {
+        return true;
+      }
       seen.add(node.text);
       return addObject(resolve(node.text));
     }
-    if (!ts.isObjectLiteralExpression(node)) return false;
+    if (!ts.isObjectLiteralExpression(node)) {
+      return false;
+    }
     for (const property of node.properties) {
       if (ts.isSpreadAssignment(property)) {
-        if (!addObject(property.expression)) return false;
+        if (!addObject(property.expression)) {
+          return false;
+        }
       } else {
         names.add(keyOf(sourceFile, property));
       }
@@ -263,32 +291,34 @@ function storyArgNames(sourceFile, csf, nodes) {
   };
   for (const node of nodes) {
     const object = unwrap(node);
-    if (!object) continue;
+    if (!object) {
+      continue;
+    }
     if (ts.isObjectLiteralExpression(object)) {
       for (const property of object.properties) {
-        if (keyOf(sourceFile, property) !== 'args') continue;
+        if (keyOf(sourceFile, property) !== 'args') {
+          continue;
+        }
         const value = ts.isShorthandPropertyAssignment(property)
           ? property.name
           : property.initializer;
-        if (!addObject(value)) return null;
+        if (!addObject(value)) {
+          return null;
+        }
       }
       // a spread story (`...Default`) might carry args we can't see here
       if (object.properties.some((p) => ts.isSpreadAssignment(p))) {
         for (const p of object.properties.filter(ts.isSpreadAssignment)) {
           const target = unwrap(p.expression);
-          if (ts.isIdentifier(target)) {
-            if (
-              storyArgNames(sourceFile, csf, [resolve(target.text)]) === null
-            ) {
-              return null;
-            }
-            for (const n of storyArgNames(sourceFile, csf, [
-              resolve(target.text),
-            ])) {
-              names.add(n);
-            }
-          } else {
+          if (!ts.isIdentifier(target)) {
             return null;
+          }
+          const spread = storyArgNames(sourceFile, csf, [resolve(target.text)]);
+          if (spread === null) {
+            return null;
+          }
+          for (const n of spread) {
+            names.add(n);
           }
         }
       }
@@ -318,7 +348,9 @@ function storyArgNames(sourceFile, csf, nodes) {
 export function extractStory(sourceFile, csf, storyName, { keep = [] } = {}) {
   keep = new Set(keep);
   const entry = csf.stories.find((s) => s.name === storyName);
-  if (!entry) throw new Error(`No story export named "${storyName}"`);
+  if (!entry) {
+    throw new Error(`No story export named "${storyName}"`);
+  }
 
   const text = (node) => node.getText(sourceFile);
 
@@ -367,7 +399,9 @@ export function extractStory(sourceFile, csf, storyName, { keep = [] } = {}) {
       entries = init ? [`...${text(init)}`] : [];
       storySpreads = true;
     }
-    for (const { key, value } of csf2) entries.push(`${key}: ${text(value)}`);
+    for (const { key, value } of csf2) {
+      entries.push(`${key}: ${text(value)}`);
+    }
     storySource = entries.length
       ? `{\n${entries.map((e) => `  ${e}`).join(',\n')},\n}`
       : '{}';
@@ -383,9 +417,13 @@ export function extractStory(sourceFile, csf, storyName, { keep = [] } = {}) {
       (keep.has('component') && hasKey(sourceFile, metaProps, 'component'));
     const metaHasArgs = hasKey(sourceFile, metaProps, 'args');
 
-    if (storyHasRender) renderFrom = 'story';
-    else if (storySpreads) renderFrom = metaHasRender ? 'either' : 'story';
-    else renderFrom = 'meta';
+    if (storyHasRender) {
+      renderFrom = 'story';
+    } else if (storySpreads) {
+      renderFrom = metaHasRender ? 'either' : 'story';
+    } else {
+      renderFrom = 'meta';
+    }
 
     const needsMeta =
       metaHasArgs ||
@@ -403,14 +441,18 @@ export function extractStory(sourceFile, csf, storyName, { keep = [] } = {}) {
       ),
     ];
     const needed = new Set();
-    for (const root of roots) referencedNames(root, topLevel, needed);
+    for (const root of roots) {
+      referencedNames(root, topLevel, needed);
+    }
     needed.delete(storyName);
     const queue = [...needed];
     const statements = new Set();
     while (queue.length) {
       const name = queue.pop();
       const statement = csf.declarations.get(name);
-      if (!statement || statements.has(statement)) continue;
+      if (!statement || statements.has(statement)) {
+        continue;
+      }
       statements.add(statement);
       for (const ref of referencedNames(statement, topLevel)) {
         if (!needed.has(ref)) {
@@ -452,7 +494,9 @@ export function extractStory(sourceFile, csf, storyName, { keep = [] } = {}) {
   );
   const importDeclarations = new Set(csf.sideEffectImports);
   for (const name of result.needed) {
-    if (csf.imports.has(name)) importDeclarations.add(csf.imports.get(name));
+    if (csf.imports.has(name)) {
+      importDeclarations.add(csf.imports.get(name));
+    }
   }
   const imports = sourceFile.statements
     .filter((s) => importDeclarations.has(s))
@@ -474,10 +518,64 @@ export function extractStory(sourceFile, csf, storyName, { keep = [] } = {}) {
   };
 }
 
-/**
- * Source text of a top-level statement without its `export` keyword, so the
- * extracted code reads like an app module rather than a stories module.
- */
+const stringProperty = (sourceFile, object, key) => {
+  if (!object || !ts.isObjectLiteralExpression(object)) {
+    return null;
+  }
+  const property = object.properties.find(
+    (p) => ts.isPropertyAssignment(p) && p.name.getText(sourceFile) === key
+  );
+  return property && ts.isStringLiteralLike(property.initializer)
+    ? property.initializer.text
+    : null;
+};
+
+// The default export's `title`, or null.
+export const metaTitle = (sourceFile, meta) =>
+  stringProperty(sourceFile, meta, 'title');
+
+// Story export names of a stories module.
+export function storyNames(file) {
+  return analyzeCsf(parseModule(file)).stories.map((s) => s.name);
+}
+
+// display name a story sets for itself (`name: '...'`, or CSF2
+// `Story.storyName = '...'`), if any
+function ownName(sourceFile, csf, story) {
+  for (const statement of csf.assignments.get(story.name) ?? []) {
+    const { left, right } = statement.expression;
+    if (left.name.text === 'storyName' && ts.isStringLiteralLike(right)) {
+      return right.text;
+    }
+  }
+  return stringProperty(sourceFile, story.init, 'name');
+}
+
+// `{ id, title, name }` (as Storybook names them) per story export.
+export function storyEntries(file) {
+  const sourceFile = parseModule(file);
+  const csf = analyzeCsf(sourceFile);
+  const title = metaTitle(sourceFile, csf.meta);
+  if (!title) {
+    return new Map();
+  }
+  return new Map(
+    csf.stories.map((story) => {
+      const storyName = storyNameFromExport(story.name);
+      return [
+        story.name,
+        {
+          id: toId(title, storyName),
+          title,
+          name: ownName(sourceFile, csf, story) ?? storyName,
+        },
+      ];
+    })
+  );
+}
+
+// Source text of a top-level statement without its `export` keyword, so the
+// extracted code reads like an app module rather than a stories module.
 export function statementText(sourceFile, statement) {
   return statement.getText(sourceFile).replace(/^export\s+(?!default)/, '');
 }
