@@ -4,7 +4,13 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  cloneElement,
+  useEffect,
+  useRef,
+  useState,
+  type ReactElement,
+} from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import classnames from 'classnames';
 import { MenuItem, type MenuItemProps } from '../Menu/MenuItem';
@@ -13,6 +19,13 @@ import { blockClass } from './utils';
 import { createOverflowHandler } from '@carbon/utilities';
 import { usePageHeader } from './context';
 import { usePrefix } from '../../internal/usePrefix';
+
+export interface PageHeaderContentPageActionItem {
+  id: string;
+  onClick?: () => void;
+  body: ReactElement<{ onClick?: () => void }>;
+  menuItem: MenuItemProps;
+}
 
 /**
  * ----------------
@@ -35,7 +48,7 @@ export interface PageHeaderContentPageActionsProps {
   /**
    * The PageHeaderContent's page actions
    */
-  actions?: React.ReactNode;
+  actions?: PageHeaderContentPageActionItem[];
 }
 
 export const PageHeaderContentPageActions = ({
@@ -69,17 +82,12 @@ export const PageHeaderContentPageActions = ({
     className
   );
 
-  type action = {
-    id: string;
-    onClick?: () => void;
-    body: React.ReactNode;
-    menuItem: MenuItemProps;
-  };
-
   const containerRef = useRef<HTMLUListElement>(null);
   const offsetRef = useRef<HTMLLIElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
-  const [hiddenItems, setHiddenItems] = useState<action[]>([]);
+  const [hiddenItems, setHiddenItems] = useState<
+    PageHeaderContentPageActionItem[]
+  >([]);
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
@@ -130,10 +138,7 @@ export const PageHeaderContentPageActions = ({
         <>
           {actions.map((action) => (
             <li key={action.id}>
-              {React.cloneElement(action.body, {
-                ...action.body.props,
-                onClick: action.onClick,
-              })}
+              {cloneElement(action.body, { onClick: action.onClick })}
             </li>
           ))}
           <li data-offset data-hidden ref={offsetRef}>

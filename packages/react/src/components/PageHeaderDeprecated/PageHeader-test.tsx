@@ -9,9 +9,17 @@
  * See https://github.com/carbon-design-system/carbon/issues/21926
  */
 
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { type ComponentProps, type ReactNode } from 'react';
 import { preview__PageHeader as PageHeader } from '../../';
 import {
   PageHeader as PageHeaderDirect,
@@ -30,7 +38,20 @@ import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
 import useOverflowItems from '../../internal/useOverflowItems';
-const mockUseOverflowItems = useOverflowItems;
+
+type PageHeaderTag = NonNullable<
+  ComponentProps<typeof PageHeader.TabBar>['tags']
+>[number];
+
+type PageHeaderOverflowTag = PageHeaderTag & { id: string };
+
+const mockUseOverflowItems = jest.mocked(
+  useOverflowItems<PageHeaderOverflowTag>
+);
+
+const isPageHeaderTagArray = (
+  items: ReactNode | PageHeaderOverflowTag[]
+): items is PageHeaderOverflowTag[] => Array.isArray(items);
 
 const prefix = 'cds';
 
@@ -53,6 +74,7 @@ describe('PageHeader', () => {
       visibleItems: [],
       hiddenItems: [],
       itemRefHandler: jest.fn(),
+      offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
     });
     consoleWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
   });
@@ -63,11 +85,23 @@ describe('PageHeader', () => {
 
   describe('deprecation warnings', () => {
     it('should warn once for each deprecated surface', () => {
-      window.matchMedia = jest.fn().mockImplementation(() => ({
-        matches: false,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-      }));
+      Object.defineProperty(window, 'matchMedia', {
+        configurable: true,
+        writable: true,
+        value: jest.fn(
+          (query: string) =>
+            ({
+              matches: false,
+              media: query,
+              onchange: null,
+              addEventListener: jest.fn(),
+              removeEventListener: jest.fn(),
+              dispatchEvent: jest.fn(() => false),
+              addListener: jest.fn(),
+              removeListener: jest.fn(),
+            }) satisfies MediaQueryList
+        ),
+      });
 
       render(
         <>
@@ -287,7 +321,7 @@ describe('PageHeader', () => {
     });
 
     it('should render page actions', () => {
-      const { container } = render(
+      render(
         <PageHeader.Content
           title="title"
           pageActions={<button>page actions</button>}></PageHeader.Content>
@@ -469,7 +503,7 @@ describe('PageHeader', () => {
             />
             <img
               src="https://picsum.photos/200/100"
-              alt="a default image"
+              alt="default"
               style={{ maxWidth: '100%', height: 'auto' }}
             />
           </picture>
@@ -495,7 +529,7 @@ describe('PageHeader', () => {
             />
             <img
               src="https://picsum.photos/200/100"
-              alt="a default image"
+              alt="default"
               style={{ maxWidth: '100%', height: 'auto' }}
             />
           </picture>
@@ -521,7 +555,7 @@ describe('PageHeader', () => {
   });
 
   describe('PageHeader.TabBar component with tags', () => {
-    const mockTags = [
+    const mockTags: PageHeaderOverflowTag[] = [
       { id: '1', type: 'blue', text: 'Tag 1', size: 'md' },
       { id: '2', type: 'green', text: 'Tag 2', size: 'md' },
       { id: '3', type: 'purple', text: 'Tag 3', size: 'md' },
@@ -532,6 +566,7 @@ describe('PageHeader', () => {
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
+        offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
       });
 
       render(<PageHeader.TabBar tags={mockTags} />);
@@ -551,9 +586,10 @@ describe('PageHeader', () => {
 
     it('should support rerendering from no tags to tags and back', () => {
       mockUseOverflowItems.mockImplementation((items) => ({
-        visibleItems: items,
+        visibleItems: isPageHeaderTagArray(items) ? items : [],
         hiddenItems: [],
         itemRefHandler: jest.fn(),
+        offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
       }));
 
       const { rerender } = render(<PageHeader.TabBar />);
@@ -575,6 +611,7 @@ describe('PageHeader', () => {
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
+        offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
       });
 
       render(
@@ -598,6 +635,7 @@ describe('PageHeader', () => {
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
+        offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
       });
 
       const { container } = render(<PageHeader.TabBar tags={mockTags} />);
@@ -613,6 +651,7 @@ describe('PageHeader', () => {
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
+        offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
       });
 
       render(
@@ -632,7 +671,6 @@ describe('PageHeader', () => {
         </>
       );
 
-      const tab1Button = screen.getByRole('tab', { name: 'Tab 1' });
       const tab2Button = screen.getByRole('tab', { name: 'Tab 2' });
       const tab3Button = screen.getByRole('tab', { name: 'Tab 3' });
 
@@ -654,15 +692,16 @@ describe('PageHeader', () => {
     });
 
     it('should regenerate fallback tag `id`s when `id` prefix changes', () => {
-      const tagsWithoutIds = [
+      const tagsWithoutIds: PageHeaderTag[] = [
         { type: 'blue', text: 'Tag 1', size: 'md' },
         { type: 'green', text: 'Tag 2', size: 'md' },
       ];
 
       mockUseOverflowItems.mockImplementation((items) => ({
-        visibleItems: items,
+        visibleItems: isPageHeaderTagArray(items) ? items : [],
         hiddenItems: [],
         itemRefHandler: jest.fn(),
+        offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
       }));
 
       const { rerender } = render(
@@ -675,7 +714,7 @@ describe('PageHeader', () => {
         mockUseOverflowItems.mock.calls[
           mockUseOverflowItems.mock.calls.length - 1
         ][0];
-      expect(firstCallItems[0].id).toContain('prefix-a-PageHeaderTabBar');
+      expect(firstCallItems?.[0].id).toContain('prefix-a-PageHeaderTabBar');
 
       rerender(
         <IdPrefix prefix="prefix-b">
@@ -687,8 +726,8 @@ describe('PageHeader', () => {
         mockUseOverflowItems.mock.calls[
           mockUseOverflowItems.mock.calls.length - 1
         ][0];
-      expect(secondCallItems[0].id).toContain('prefix-b-PageHeaderTabBar');
-      expect(secondCallItems[0].id).not.toEqual(firstCallItems[0].id);
+      expect(secondCallItems?.[0].id).toContain('prefix-b-PageHeaderTabBar');
+      expect(secondCallItems?.[0].id).not.toEqual(firstCallItems?.[0].id);
     });
 
     describe('Overflow functionality', () => {
@@ -697,6 +736,7 @@ describe('PageHeader', () => {
           visibleItems: mockTags.slice(0, 2), // Only Tag 1 and Tag 2
           hiddenItems: mockTags.slice(2), // Only Tag 3
           itemRefHandler: jest.fn(),
+          offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
         });
 
         render(
@@ -727,6 +767,7 @@ describe('PageHeader', () => {
           visibleItems: mockTags,
           hiddenItems: [],
           itemRefHandler: jest.fn(),
+          offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
         });
 
         render(<PageHeader.TabBar tags={mockTags} />);
@@ -745,6 +786,7 @@ describe('PageHeader', () => {
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),
           itemRefHandler: jest.fn(),
+          offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
         });
 
         render(<PageHeader.TabBar tags={mockTags} />);
@@ -768,6 +810,7 @@ describe('PageHeader', () => {
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),
           itemRefHandler: jest.fn(),
+          offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
         });
 
         render(<PageHeader.TabBar tags={mockTags} />);
@@ -796,6 +839,7 @@ describe('PageHeader', () => {
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),
           itemRefHandler: jest.fn(),
+          offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
         });
 
         render(<PageHeader.TabBar tags={mockTags} />);
@@ -823,6 +867,7 @@ describe('PageHeader', () => {
 
       it('should handle useOverflowItems returning null/undefined', () => {
         // Mock the hook to return undefined/null
+        // @ts-expect-error This test covers the runtime fallback for `null`.
         mockUseOverflowItems.mockReturnValue(null);
 
         render(<PageHeader.TabBar tags={mockTags} />);
@@ -838,9 +883,16 @@ describe('PageHeader', () => {
       it('should handle useOverflowItems returning undefined properties', () => {
         // Mock with missing properties
         mockUseOverflowItems.mockReturnValue({
+          // @ts-expect-error This test covers runtime fallback for `undefined`
+          // items.
           visibleItems: undefined,
+          // @ts-expect-error This test covers runtime fallback for `undefined`
+          // items.
           hiddenItems: undefined,
+          // @ts-expect-error This test covers runtime fallback for `undefined`
+          // handlers.
           itemRefHandler: undefined,
+          offsetRefHandler: jest.fn((node: HTMLElement | null) => node),
         });
 
         render(<PageHeader.TabBar tags={mockTags} />);
@@ -852,9 +904,11 @@ describe('PageHeader', () => {
 
       it('should handle useOverflowItems with partial data', () => {
         // Mock with only some properties
+        // @ts-expect-error This test covers runtime fallback for missing
+        // properties.
         mockUseOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 1),
-          // hiddenItems and itemRefHandler missing
+          // hiddenItems, itemRefHandler, and offsetRefHandler are missing.
         });
 
         render(<PageHeader.TabBar tags={mockTags} />);

@@ -1,10 +1,11 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import React from 'react';
 import PaginationNav from './PaginationNav';
 import userEvent from '@testing-library/user-event';
@@ -46,7 +47,6 @@ describe('PaginationNav', () => {
       render(<PaginationNav totalItems={10} itemsShown={4} />);
 
       expect(
-        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('.cds--pagination-nav__page').length
       ).toBe(4);
     });
@@ -83,7 +83,6 @@ describe('PaginationNav', () => {
       render(<PaginationNav totalItems={5} />);
 
       expect(
-        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('.cds--pagination-nav__page').length
       ).toBe(5);
     });

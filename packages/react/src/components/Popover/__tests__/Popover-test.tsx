@@ -5,8 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
-import React, { forwardRef } from 'react';
+import React, {
+  forwardRef,
+  type ComponentProps,
+  type RefCallback,
+} from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import { ClassPrefix } from '../../ClassPrefix';
 import userEvent from '@testing-library/user-event';
@@ -19,9 +24,10 @@ import { FeatureFlags } from '../../FeatureFlags';
 const prefix = 'cds';
 
 describe('Popover', () => {
-  const TriggerWithPopoverContentDisplayName = forwardRef((props, ref) => (
-    <button type="button" ref={ref} {...props} />
-  ));
+  const TriggerWithPopoverContentDisplayName = forwardRef<
+    HTMLButtonElement,
+    ComponentProps<'button'>
+  >((props, ref) => <button type="button" ref={ref} {...props} />);
   TriggerWithPopoverContentDisplayName.displayName = 'PopoverContent';
 
   describe('autoAlign default', () => {
@@ -66,13 +72,13 @@ describe('Popover', () => {
   });
 
   it('should support a ref on the outermost element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLButtonElement>>();
     const { container } = render(
       <Popover open ref={ref}>
         <PopoverContent>test</PopoverContent>
       </Popover>
     );
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
+    expect(ref.mock.calls).toContainEqual([container.firstChild]);
   });
 
   it('should support custom rendering with the `as` prop', () => {
@@ -81,7 +87,7 @@ describe('Popover', () => {
         <PopoverContent>test</PopoverContent>
       </Popover>
     );
-    expect(container.firstChild.tagName).toBe('ARTICLE');
+    expect(container.firstElementChild?.tagName).toBe('ARTICLE');
   });
 
   it('should support a custom class name on the outermost element', () => {
@@ -103,12 +109,19 @@ describe('Popover', () => {
   });
 
   it('should only read computed style for caret dimensions when relevant inputs change', () => {
+    const originalGetComputedStyle = window.getComputedStyle.bind(window);
     const getComputedStyleSpy = jest
       .spyOn(window, 'getComputedStyle')
-      .mockImplementation(() => ({
-        getPropertyValue: jest.fn(() => ''),
-      }));
-    const TestPopover = ({ caret = true, label = 'Settings', prefix }) => (
+      .mockImplementation(originalGetComputedStyle);
+    const TestPopover = ({
+      caret = true,
+      label = 'Settings',
+      prefix,
+    }: {
+      caret?: boolean;
+      label?: string;
+      prefix: string;
+    }) => (
       <ClassPrefix prefix={prefix}>
         <Popover open={false} caret={caret}>
           <button type="button">{label}</button>
@@ -150,11 +163,11 @@ describe('Popover', () => {
 
   describe('PopoverContent', () => {
     it('should support a ref on the popover-content element', () => {
-      const ref = jest.fn();
+      const ref = jest.fn<RefCallback<HTMLSpanElement>>();
       const { container } = render(
         <PopoverContent ref={ref}>test</PopoverContent>
       );
-      expect(ref).toHaveBeenCalledWith(container.firstChild.firstChild);
+      expect(ref.mock.calls).toContainEqual([container.firstChild?.firstChild]);
     });
 
     it('should support a custom class name on the popover content', () => {
@@ -183,7 +196,7 @@ describe('Popover', () => {
 
       await waitForPosition();
       const caretContainer =
-        screen.getByTestId('test').lastChild.lastChild.firstChild;
+        screen.getByTestId('test').lastChild?.lastChild?.firstChild;
       expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
     });
 
@@ -202,7 +215,7 @@ describe('Popover', () => {
 
       await waitForPosition();
       const caretContainer =
-        screen.getByTestId('test').lastChild.lastChild.firstChild;
+        screen.getByTestId('test').lastChild?.lastChild?.firstChild;
       expect(caretContainer).toHaveStyle({ left: '0px', top: '-7px' });
     });
 
@@ -219,7 +232,7 @@ describe('Popover', () => {
       await waitForPosition();
 
       const caretContainer =
-        screen.getByTestId('test').lastChild.lastChild.firstChild;
+        screen.getByTestId('test').lastChild?.lastChild?.firstChild;
 
       expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
     });
@@ -610,7 +623,7 @@ describe('Popover', () => {
       <Popover open isTabTip onRequestClose={onRequestClose}>
         <button type="button">Settings</button>
         <PopoverContent>
-          <RadioButtonGroup legendText="Test options">
+          <RadioButtonGroup name="test-options" legendText="Test options">
             <RadioButton
               labelText="Option 1"
               value="option1"
@@ -666,7 +679,7 @@ describe('Popover', () => {
         configurable: true,
       });
 
-      await userEvent.click(calendar.querySelector('.flatpickr-day'));
+      await userEvent.click(screen.getByText('26'));
 
       expect(onRequestClose).not.toHaveBeenCalled();
     } finally {
@@ -699,9 +712,12 @@ describe('Popover', () => {
 
       input.focus();
       const popoverEl = container.firstChild;
+      if (!popoverEl) {
+        throw new Error('Expected the popover element to render.');
+      }
       const focusoutEvent = new FocusEvent('focusout', {
         bubbles: true,
-        relatedTarget: calendar.querySelector('.flatpickr-day'),
+        relatedTarget: screen.getByText('26'),
       });
       popoverEl.dispatchEvent(focusoutEvent);
 
@@ -738,7 +754,7 @@ describe('Popover', () => {
         configurable: true,
       });
 
-      await userEvent.click(calendar.querySelector('.flatpickr-day'));
+      await userEvent.click(screen.getByText('26'));
 
       expect(onRequestClose).toHaveBeenCalled();
     } finally {
