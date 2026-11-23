@@ -170,6 +170,7 @@ describe('PaginationNav', () => {
       'carbon.pagination-nav.item': '頁',
       'carbon.pagination-nav.active': '目前',
       'carbon.pagination-nav.of': '共',
+      'carbon.pagination-nav.select': '選擇頁碼',
     };
     const translateWithId = (messageId) => {
       if (!Object.hasOwn(messages, messageId)) {
@@ -189,7 +190,7 @@ describe('PaginationNav', () => {
       );
 
       const selects = screen.getAllByRole('combobox', {
-        name: 'Select 頁 number',
+        name: '選擇頁碼',
       });
       expect(selects).toHaveLength(2);
       for (const select of selects) {
@@ -218,7 +219,7 @@ describe('PaginationNav', () => {
       );
 
       const selects = screen.getAllByRole('combobox', {
-        name: 'Select 頁 number',
+        name: '選擇頁碼',
       });
       expect(selects).toHaveLength(2);
       for (const select of selects) {
@@ -248,7 +249,7 @@ describe('PaginationNav', () => {
         );
 
         const select = screen.getAllByRole('combobox', {
-          name: 'Select 頁 number',
+          name: '選擇頁碼',
         })[selectIndex];
         const option = within(select).getByRole('option', {
           name: String(page),

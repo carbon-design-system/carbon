@@ -42,17 +42,18 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 Use `translateWithId` to translate the following messages, including the page
 label used by the overflow controls:
 
-| Message ID                       | Default value |
-| -------------------------------- | ------------- |
-| `carbon.pagination-nav.next`     | `Next`        |
-| `carbon.pagination-nav.previous` | `Previous`    |
-| `carbon.pagination-nav.item`     | `Page`        |
-| `carbon.pagination-nav.active`   | `Active`      |
-| `carbon.pagination-nav.of`       | `of`          |
+| Message ID                       | Default value        |
+| -------------------------------- | -------------------- |
+| `carbon.pagination-nav.next`     | `Next`               |
+| `carbon.pagination-nav.previous` | `Previous`           |
+| `carbon.pagination-nav.item`     | `Page`               |
+| `carbon.pagination-nav.active`   | `Active`             |
+| `carbon.pagination-nav.of`       | `of`                 |
+| `carbon.pagination-nav.select`   | `Select Page number` |
 
-The overflow select label currently combines `Select `, the translated
-`carbon.pagination-nav.item`, and ` number`. The prefix and suffix are not
-translated by this callback.
+`carbon.pagination-nav.select` is the complete accessible label for both
+overflow selects. Translate the whole phrase in the language's natural word
+order. `carbon.pagination-nav.item` continues to label individual pages.
 
 ## Feedback
 
