@@ -1864,3 +1864,204 @@ describe('MultiSelect', () => {
     });
   });
 });
+
+// The v12 connected-fill and focus-ring styles select on this markup, so
+// these tests guard the DOM contract the Sass depends on. jsdom cannot
+// evaluate `:has()` or focus rings, so the visual result is covered by e2e.
+describe('MultiSelect menu item markup used by connected-fill styles', () => {
+  const items = [
+    ...generateItems(4, generateGenericItem),
+    { ...generateGenericItem(4), disabled: true },
+    generateGenericItem(5),
+  ];
+  const isSelected = (option) => option.classList.contains(activeClass);
+  const activeClass = `${prefix}--list-box__menu-item--active`;
+  const highlightedClass = `${prefix}--list-box__menu-item--highlighted`;
+  const optionClass = `${prefix}--list-box__menu-item__option`;
+
+  // `fixed` keeps options in place; the default would float selected items to
+  // the top and make positional assertions meaningless
+  const renderOpen = async (props) => {
+    render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        selectionFeedback="fixed"
+        {...props}
+      />
+    );
+    await waitForPosition();
+    await userEvent.click(screen.getByRole('combobox'));
+    return screen.getAllByRole('option');
+  };
+
+  it('should render the options as adjacent siblings of one list', async () => {
+    const options = await renderOpen();
+
+    expect(options).toHaveLength(items.length);
+    options.forEach((option) => {
+      expect(option.parentElement).toBe(options[0].parentElement);
+      expect(option).toHaveClass(`${prefix}--list-box__menu-item`);
+    });
+  });
+
+  it('should wrap the option content in a direct child that can own the focus ring', async () => {
+    const options = await renderOpen();
+
+    options.forEach((option) => {
+      expect(option.firstElementChild).toHaveClass(optionClass);
+      expect(option.children).toHaveLength(1);
+    });
+  });
+
+  it('should only mark selected options as active', async () => {
+    const options = await renderOpen({
+      initialSelectedItems: [items[0], items[1], items[2], items[5]],
+    });
+
+    expect(options.map(isSelected)).toEqual([
+      true,
+      true,
+      true,
+      false,
+      false,
+      true,
+    ]);
+    options.forEach((option, index) => {
+      expect(option).toHaveAttribute(
+        'aria-selected',
+        String(isSelected(option))
+      );
+      expect(index).toBeLessThan(items.length);
+    });
+  });
+
+  it('should mark a disabled option with the disabled attribute and never as active', async () => {
+    const options = await renderOpen({
+      initialSelectedItems: [items[3]],
+    });
+
+    expect(options[4]).toHaveAttribute('disabled');
+    expect(options[4]).not.toHaveClass(activeClass);
+    expect(options[3]).not.toHaveAttribute('disabled');
+  });
+
+  it('should add an active neighbour when an option joins a selected group', async () => {
+    const options = await renderOpen({ initialSelectedItems: [items[0]] });
+
+    expect(options.map(isSelected)).toEqual([
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ]);
+
+    await userEvent.click(options[1]);
+
+    expect(options.map(isSelected)).toEqual([
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+    ]);
+  });
+
+  it('should split a selected group when its middle option is deselected', async () => {
+    const options = await renderOpen({
+      initialSelectedItems: [items[0], items[1], items[2]],
+    });
+
+    expect(options.map(isSelected).slice(0, 3)).toEqual([true, true, true]);
+
+    await userEvent.click(options[1]);
+
+    expect(options.map(isSelected).slice(0, 3)).toEqual([true, false, true]);
+  });
+
+  it('should keep every option selected and in place after "select all"-style full selection', async () => {
+    const selectable = items.filter((item) => !item.disabled);
+    const options = await renderOpen({ initialSelectedItems: selectable });
+
+    expect(options.map(isSelected)).toEqual([
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+    ]);
+  });
+
+  it('should highlight exactly one option at a time and keep selection on it', async () => {
+    const options = await renderOpen({
+      initialSelectedItems: [items[0], items[1]],
+    });
+    const highlighted = () =>
+      options.filter((option) => option.classList.contains(highlightedClass));
+
+    await userEvent.keyboard('[ArrowDown]');
+    const [first] = highlighted();
+    expect(highlighted()).toHaveLength(1);
+
+    await userEvent.keyboard('[ArrowDown]');
+    const [second] = highlighted();
+    expect(highlighted()).toHaveLength(1);
+    expect(second).not.toBe(first);
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-activedescendant',
+      second.id
+    );
+
+    // Moving the highlight never changes which options are selected
+    expect(options.map(isSelected).slice(0, 3)).toEqual([true, true, false]);
+  });
+
+  it('should keep the focused option highlighted after toggling it with the keyboard', async () => {
+    const options = await renderOpen();
+    const combobox = screen.getByRole('combobox');
+
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.keyboard('[Enter]');
+
+    expect(options[0]).toHaveClass(activeClass, highlightedClass);
+    expect(combobox).toHaveAttribute('aria-activedescendant', options[0].id);
+    expect(combobox).toHaveFocus();
+
+    await userEvent.keyboard('[Enter]');
+
+    expect(options[0]).not.toHaveClass(activeClass);
+    expect(options[0]).toHaveClass(highlightedClass);
+    expect(combobox).toHaveAttribute('aria-activedescendant', options[0].id);
+  });
+
+  it('should not move the highlight onto a disabled option when arrowing past it', async () => {
+    const options = await renderOpen();
+
+    await userEvent.keyboard('[ArrowDown]'.repeat(4));
+    expect(options[3]).toHaveClass(highlightedClass);
+
+    await userEvent.keyboard('[ArrowDown]');
+    expect(options[4]).not.toHaveClass(highlightedClass);
+    expect(options[5]).toHaveClass(highlightedClass);
+  });
+
+  it('should render the same option markup in the inline variant', async () => {
+    const options = await renderOpen({
+      type: 'inline',
+      initialSelectedItems: [items[0], items[1]],
+    });
+
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--multi-select`)
+    ).toHaveClass(`${prefix}--list-box--inline`);
+    expect(options.map(isSelected).slice(0, 3)).toEqual([true, true, false]);
+    options.forEach((option) => {
+      expect(option.firstElementChild).toHaveClass(optionClass);
+    });
+  });
+});

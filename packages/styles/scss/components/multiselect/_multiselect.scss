@@ -137,6 +137,49 @@
     color: $text-primary;
   }
 
+  @if enabled('enable-v12-release') {
+    // The focus ring is drawn on the inner option rather than the <li>, so it
+    // keeps a 4px radius when the <li> corners are squared off for connected
+    // fills below. The option's margin becomes equal padding so the ring still
+    // spans the full row.
+    .#{$prefix}--multi-select .#{$prefix}--list-box__menu-item--highlighted {
+      outline: none;
+
+      > .#{$prefix}--list-box__menu-item__option {
+        @include focus-outline('outline');
+
+        border-radius: $border-radius-04;
+        block-size: 100%;
+        margin-inline: 0;
+        padding-inline: $spacing-05 calc($spacing-05 + $spacing-06);
+      }
+    }
+
+    .#{$prefix}--multi-select.#{$prefix}--list-box--inline
+      .#{$prefix}--list-box__menu-item--highlighted
+      > .#{$prefix}--list-box__menu-item__option {
+      padding-inline: $spacing-03 calc($spacing-03 + $spacing-06);
+    }
+
+    // Adjacent selected or hovered items share a flat edge so their fills
+    // connect. Both halves of a pair must apply together, otherwise only one
+    // side would be squared, so they are gated on `:has()` support.
+    @supports selector(:has(*)) {
+      $-item: '.#{$prefix}--list-box__menu-item';
+      $-connected: '#{$-item}:is(#{$-item}--active, :hover):not([disabled])';
+
+      .#{$prefix}--multi-select #{$-connected}:has(+ #{$-connected}) {
+        border-end-end-radius: $border-radius-00;
+        border-end-start-radius: $border-radius-00;
+      }
+
+      .#{$prefix}--multi-select #{$-connected} + #{$-connected} {
+        border-start-end-radius: $border-radius-00;
+        border-start-start-radius: $border-radius-00;
+      }
+    }
+  }
+
   .#{$prefix}--multi-select--filterable {
     transition: outline-color $duration-fast-01 motion(standard, productive);
   }
