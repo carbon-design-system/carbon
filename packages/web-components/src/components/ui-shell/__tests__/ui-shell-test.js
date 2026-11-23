@@ -83,7 +83,7 @@ describe('cds-side-nav-menu-item', () => {
 
 describe('cds-header-global-action', () => {
   describe('Switcher focus', () => {
-    let el, search, toggle, other, panel;
+    let el, search, toggle, panel;
 
     beforeEach(async () => {
       el = await fixture(html`
@@ -100,12 +100,9 @@ describe('cds-header-global-action', () => {
               </cds-switcher>
             </cds-header-panel>
           </cds-header>
-          <cds-header>
-            <cds-header-global-action>Other header</cds-header-global-action>
-          </cds-header>
         </div>
       `);
-      [search, toggle, other] = el.querySelectorAll('cds-header-global-action');
+      [search, toggle] = el.querySelectorAll('cds-header-global-action');
       panel = el.querySelector('cds-header-panel');
     });
 
@@ -131,7 +128,53 @@ describe('cds-header-global-action', () => {
       }
     });
 
-    it('closes on a sibling click or focus in another header', () => {
+    it('closes when a header action loses focus without a destination', () => {
+      for (const action of [toggle, search]) {
+        toggle.click();
+        const button = action.shadowRoot.querySelector('button');
+        button.focus();
+        button.blur();
+        expect(panel).not.to.have.attribute('expanded');
+        expect(toggle.active).to.be.false;
+      }
+    });
+
+    it('closes once when the toggle is clicked from a focused sibling', async () => {
+      toggle.click();
+      const searchButton = search.shadowRoot.querySelector('button');
+      searchButton.focus();
+      let expandedAfterBlur;
+      search.addEventListener(
+        'focusout',
+        (event) => {
+          expect(event.relatedTarget).to.be.null;
+          expandedAfterBlur = panel.hasAttribute('expanded');
+        },
+        { once: true }
+      );
+      // Reproduce a browser that blurs the focused action on mousedown
+      // without moving focus to the toggle.
+      toggle.addEventListener('mousedown', () => searchButton.blur(), {
+        once: true,
+      });
+      const button = toggle.shadowRoot.querySelector('button');
+      const { x, y, width, height } = button.getBoundingClientRect();
+      await sendMouse({
+        type: 'click',
+        position: [Math.round(x + width / 2), Math.round(y + height / 2)],
+      });
+      expect(expandedAfterBlur).to.be.true;
+      expect(panel).not.to.have.attribute('expanded');
+      expect(toggle.active).to.be.false;
+    });
+
+    it('closes on a sibling click or focus in another header', async () => {
+      const otherHeader = await fixture(html`
+        <cds-header>
+          <cds-header-global-action>Other header</cds-header-global-action>
+        </cds-header>
+      `);
+      const other = otherHeader.querySelector('cds-header-global-action');
       toggle.click();
       search.click();
       expect(panel).not.to.have.attribute('expanded');
