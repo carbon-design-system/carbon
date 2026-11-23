@@ -63,7 +63,7 @@ export interface ProgressBarProps {
   status?: 'active' | 'finished' | 'error';
 
   /**
-   * Translates the loading, finished, and error status announcements.
+   * Translates built-in text.
    */
   translateWithId?: TFunc<TranslationKey>;
 
@@ -253,7 +253,7 @@ ProgressBar.propTypes = {
   status: PropTypes.oneOf(['active', 'finished', 'error']),
 
   /**
-   * Translates the loading, finished, and error status announcements.
+   * Translates built-in text.
    */
   translateWithId: PropTypes.func,
 

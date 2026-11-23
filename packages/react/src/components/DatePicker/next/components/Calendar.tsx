@@ -58,7 +58,7 @@ export interface CalendarProps {
   locale?: string;
 
   /**
-   * Translates the calendar grid and month navigation labels.
+   * Translates built-in text.
    */
   translateWithId?: TFunc<TranslationKey>;
 }

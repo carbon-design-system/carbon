@@ -44,7 +44,7 @@ export interface DatePickerProps {
   locale?: string;
 
   /**
-   * Translates the calendar grid and month navigation labels.
+   * Translates built-in text.
    */
   translateWithId?: CalendarProps['translateWithId'];
 

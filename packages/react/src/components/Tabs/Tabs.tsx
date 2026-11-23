@@ -51,19 +51,16 @@ import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
 import BadgeIndicator from '../BadgeIndicator';
 import { isComponentElement } from '../../internal';
-import type { TFunc } from '../../types/common';
 
 type TranslationKey =
   | 'carbon.tabs.remove-tab'
   | 'carbon.tabs.remove-tab-instructions';
 
 type TranslationArgs = { tabLabel: string; tabIndex: number };
+type TranslateWithId = (id: TranslationKey, args: TranslationArgs) => string;
 
-const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
-  messageId,
-  args
-) => {
-  const tab = args?.tabLabel ? `${args.tabLabel} tab` : 'tab';
+const defaultTranslateWithId: TranslateWithId = (messageId, { tabLabel }) => {
+  const tab = tabLabel ? `${tabLabel} tab` : 'tab';
   return messageId === 'carbon.tabs.remove-tab'
     ? `Remove ${tab}`
     : `Press delete to remove ${tab}`;
@@ -82,7 +79,7 @@ type TabsContextType = {
   setActiveIndex(index: number): void;
   selectedIndex: number;
   setSelectedIndex(index: number): void;
-  translateWithId: TFunc<TranslationKey, TranslationArgs>;
+  translateWithId: TranslateWithId;
 };
 const TabsContext = React.createContext<TabsContextType>({
   baseId: '',
@@ -155,9 +152,9 @@ export interface TabsProps {
   selectedIndex?: number;
 
   /**
-   * Translates dismissable tab labels, with the tab's accessible label and index.
+   * Translates built-in text.
    */
-  translateWithId?: TFunc<TranslationKey, TranslationArgs>;
+  translateWithId?: TranslateWithId;
 }
 
 function Tabs({
@@ -244,7 +241,7 @@ Tabs.propTypes = {
   selectedIndex: PropTypes.number,
 
   /**
-   * Translates dismissable tab labels, with the tab's accessible label and index.
+   * Translates built-in text.
    */
   translateWithId: PropTypes.func,
 };
