@@ -191,7 +191,7 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
             },
           ],
           {
-            duration: Number(carbonMotion.moderate01.replace('ms', '')),
+            duration: Number(carbonMotion.durationModerate01.replace('ms', '')),
             easing: carbonMotion.easings.entrance.productive,
           }
         );
@@ -209,7 +209,7 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         );
 
         const animationDuration = Number(
-          carbonMotion.moderate01.replace('ms', '')
+          carbonMotion.durationModerate01.replace('ms', '')
         );
 
         const animation = contentRef.current.animate(

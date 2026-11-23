@@ -31,12 +31,6 @@ export {
   durationSlow01,
   durationSlow02,
   durationSlow03,
-  fast01,
-  fast02,
-  moderate01,
-  moderate02,
-  slow01,
-  slow02,
   easings,
   unstable_tokens,
 } from '../js/generated/tokens.js';
