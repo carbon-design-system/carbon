@@ -65,3 +65,15 @@ body {
 .docs-story div div {
   transform: none;
 }
+
+// DataTable demo styles (matching @carbon/web-components data-table-story.scss)
+.demo-table-heading {
+  margin: 0;
+  font: inherit;
+}
+
+.demo-expanded-row-heading {
+  @include type.type-style('heading-01');
+
+  margin: 0;
+}
