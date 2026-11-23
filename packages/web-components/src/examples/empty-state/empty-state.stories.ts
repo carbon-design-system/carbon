@@ -6,7 +6,6 @@
  */
 
 import { html } from 'lit';
-import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import type { Meta } from '@storybook/web-components';
 import { action } from 'storybook/actions';
 
@@ -15,7 +14,7 @@ import DocsPage from './empty-state.mdx';
 import './example/src/styles/_empty-state.scss';
 import './example/src/styles/_story-styles.scss';
 import './example/src/preview-components/empty-state-preview';
-import './example/src/preview-components/empty-state-variants-preview';
+import './example/src/preview-components/illustration-empty-state-previews';
 import './example/src/preview-components/empty-state-with-isometric-illustration';
 import './example/src/preview-components/empty-state-with-pictogram-illustration';
 import './example/src/preview-components/empty-state-unit';
@@ -120,8 +119,6 @@ const illustrationDefaultArgs = {
   subtitle: 'Description text explaining why this section is empty.',
   illustrationDescription: 'Test alt text',
   illustrationTheme: 'light',
-  actionType: 'none',
-  WithDarkModeIllustration: false,
   WithAction: false,
   WithActionIconButton: false,
   WithSecondaryAction: false,
@@ -141,15 +138,6 @@ const illustrationArgTypes = {
     options: ['light', 'dark'],
   },
   size: { control: { type: 'select' }, options: ['md', 'sm'] },
-  actionType: {
-    name: 'action-type',
-    control: { type: 'select' },
-    options: ['none', 'text', 'icon'],
-  },
-  WithDarkModeIllustration: {
-    description: 'Show the dark mode illustration.',
-    control: { type: 'boolean' },
-  },
   WithAction: {
     description: 'Show a text action button.',
     control: { type: 'boolean' },
@@ -173,18 +161,19 @@ const illustrationArgTypes = {
   },
 };
 
-const renderIllustration = (args) => {
-  const tag = unsafeStatic(args.tag);
-  return staticHtml`
-    <${tag}
+export const ErrorEmptyState = {
+  name: 'Error empty state',
+  parameters: { layout: 'padded' },
+  args: illustrationDefaultArgs,
+  argTypes: illustrationArgTypes,
+  render: (args) => html`
+    <error-empty-state-preview
       heading-as="${args.headingAs}"
       size="${args.size}"
       heading="${args.heading}"
       subtitle="${args.subtitle}"
       illustration-description="${args.illustrationDescription}"
       illustration-theme="${args.illustrationTheme}"
-      action-type="${args.actionType}"
-      ?with-dark-mode-illustration="${args.WithDarkModeIllustration}"
       ?with-action="${args.WithAction}"
       ?with-action-icon-button="${args.WithActionIconButton}"
       ?with-secondary-action="${args.WithSecondaryAction}"
@@ -192,47 +181,129 @@ const renderIllustration = (args) => {
       ?with-action-and-link="${args.WithActionAndLink}"
       @empty-state-action-click="${action('Clicked empty state action button')}"
       @empty-state-secondary-action-click="${action('Clicked empty state secondary action button')}">
-    </${tag}>
-  `;
+    </error-empty-state-preview>
+  `,
 };
 
-const illustrationStory = (name: string, tag: string) => ({
-  name,
+export const NoDataEmptyState = {
+  name: 'No data empty state',
   parameters: { layout: 'padded' },
-  args: { ...illustrationDefaultArgs, tag },
-  argTypes: { ...illustrationArgTypes, tag: { table: { disable: true } } },
-  render: renderIllustration,
-});
+  args: illustrationDefaultArgs,
+  argTypes: illustrationArgTypes,
+  render: (args) => html`
+    <no-data-empty-state-preview
+      heading-as="${args.headingAs}"
+      size="${args.size}"
+      heading="${args.heading}"
+      subtitle="${args.subtitle}"
+      illustration-description="${args.illustrationDescription}"
+      illustration-theme="${args.illustrationTheme}"
+      ?with-action="${args.WithAction}"
+      ?with-action-icon-button="${args.WithActionIconButton}"
+      ?with-secondary-action="${args.WithSecondaryAction}"
+      ?with-link="${args.WithLink}"
+      ?with-action-and-link="${args.WithActionAndLink}"
+      @empty-state-action-click="${action('Clicked empty state action button')}"
+      @empty-state-secondary-action-click="${action('Clicked empty state secondary action button')}">
+    </no-data-empty-state-preview>
+  `,
+};
 
-export const ErrorEmptyState = illustrationStory(
-  'Error empty state',
-  'error-empty-state-preview'
-);
+export const NoTagsEmptyState = {
+  name: 'No tags empty state',
+  parameters: { layout: 'padded' },
+  args: illustrationDefaultArgs,
+  argTypes: illustrationArgTypes,
+  render: (args) => html`
+    <no-tags-empty-state-preview
+      heading-as="${args.headingAs}"
+      size="${args.size}"
+      heading="${args.heading}"
+      subtitle="${args.subtitle}"
+      illustration-description="${args.illustrationDescription}"
+      illustration-theme="${args.illustrationTheme}"
+      ?with-action="${args.WithAction}"
+      ?with-action-icon-button="${args.WithActionIconButton}"
+      ?with-secondary-action="${args.WithSecondaryAction}"
+      ?with-link="${args.WithLink}"
+      ?with-action-and-link="${args.WithActionAndLink}"
+      @empty-state-action-click="${action('Clicked empty state action button')}"
+      @empty-state-secondary-action-click="${action('Clicked empty state secondary action button')}">
+    </no-tags-empty-state-preview>
+  `,
+};
 
-export const NoDataEmptyState = illustrationStory(
-  'No data empty state',
-  'no-data-empty-state-preview'
-);
+export const NotFoundEmptyState = {
+  name: 'Not found empty state',
+  parameters: { layout: 'padded' },
+  args: illustrationDefaultArgs,
+  argTypes: illustrationArgTypes,
+  render: (args) => html`
+    <not-found-empty-state-preview
+      heading-as="${args.headingAs}"
+      size="${args.size}"
+      heading="${args.heading}"
+      subtitle="${args.subtitle}"
+      illustration-description="${args.illustrationDescription}"
+      illustration-theme="${args.illustrationTheme}"
+      ?with-action="${args.WithAction}"
+      ?with-action-icon-button="${args.WithActionIconButton}"
+      ?with-secondary-action="${args.WithSecondaryAction}"
+      ?with-link="${args.WithLink}"
+      ?with-action-and-link="${args.WithActionAndLink}"
+      @empty-state-action-click="${action('Clicked empty state action button')}"
+      @empty-state-secondary-action-click="${action('Clicked empty state secondary action button')}">
+    </not-found-empty-state-preview>
+  `,
+};
 
-export const NoTagsEmptyState = illustrationStory(
-  'No tags empty state',
-  'no-tags-empty-state-preview'
-);
+export const NotificationsEmptyState = {
+  name: 'Notifications empty state',
+  parameters: { layout: 'padded' },
+  args: illustrationDefaultArgs,
+  argTypes: illustrationArgTypes,
+  render: (args) => html`
+    <notifications-empty-state-preview
+      heading-as="${args.headingAs}"
+      size="${args.size}"
+      heading="${args.heading}"
+      subtitle="${args.subtitle}"
+      illustration-description="${args.illustrationDescription}"
+      illustration-theme="${args.illustrationTheme}"
+      ?with-action="${args.WithAction}"
+      ?with-action-icon-button="${args.WithActionIconButton}"
+      ?with-secondary-action="${args.WithSecondaryAction}"
+      ?with-link="${args.WithLink}"
+      ?with-action-and-link="${args.WithActionAndLink}"
+      @empty-state-action-click="${action('Clicked empty state action button')}"
+      @empty-state-secondary-action-click="${action('Clicked empty state secondary action button')}">
+    </notifications-empty-state-preview>
+  `,
+};
 
-export const NotFoundEmptyState = illustrationStory(
-  'Not found empty state',
-  'not-found-empty-state-preview'
-);
-
-export const NotificationsEmptyState = illustrationStory(
-  'Notifications empty state',
-  'notifications-empty-state-preview'
-);
-
-export const UnauthorizedEmptyState = illustrationStory(
-  'Unauthorized empty state',
-  'unauthorized-empty-state-preview'
-);
+export const UnauthorizedEmptyState = {
+  name: 'Unauthorized empty state',
+  parameters: { layout: 'padded' },
+  args: illustrationDefaultArgs,
+  argTypes: illustrationArgTypes,
+  render: (args) => html`
+    <unauthorized-empty-state-preview
+      heading-as="${args.headingAs}"
+      size="${args.size}"
+      heading="${args.heading}"
+      subtitle="${args.subtitle}"
+      illustration-description="${args.illustrationDescription}"
+      illustration-theme="${args.illustrationTheme}"
+      ?with-action="${args.WithAction}"
+      ?with-action-icon-button="${args.WithActionIconButton}"
+      ?with-secondary-action="${args.WithSecondaryAction}"
+      ?with-link="${args.WithLink}"
+      ?with-action-and-link="${args.WithActionAndLink}"
+      @empty-state-action-click="${action('Clicked empty state action button')}"
+      @empty-state-secondary-action-click="${action('Clicked empty state secondary action button')}">
+    </unauthorized-empty-state-preview>
+  `,
+};
 
 // ─── Story: unit with isometric illustration ─────────────────────────────────
 
@@ -340,7 +411,7 @@ export const emptyStateInUI = {
 };
 
 const meta: Meta = {
-  title: 'Examples/EmptyStates/EmptyState',
+  title: 'Examples/EmptyStates',
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
