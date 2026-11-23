@@ -1,0 +1,139 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { afterEach, beforeEach, expect, jest } from '@jest/globals';
+import chalk from 'chalk';
+import util from 'util';
+import toHaveNoAxeViolations from '../matchers/toHaveNoAxeViolations.ts';
+
+import '@testing-library/jest-dom';
+
+// `useFloating` positions with `computePosition()`, then commits the result in
+// `ReactDOM.flushSync` on a later microtask. That lands outside Testing
+// Library's `act()` and fails any test that mounts a floating element. Keep
+// the real hook for refs and focus, and replace the positioning callback so
+// that microtask never runs.
+//
+// `yarn test:scss-generator` enables native ESM via `--experimental-vm-modules`.
+// `jest.mock` calls `require` and throws there. That suite uses the Node
+// environment and does not render Floating UI, so register the mock only in
+// jsdom. `jest.doMock` is not hoisted, which keeps the call inside this guard.
+if (global.window) {
+  jest.doMock('@floating-ui/react', () => {
+    const actual =
+      jest.requireActual<typeof import('@floating-ui/react')>(
+        '@floating-ui/react'
+      );
+
+    function useFloating(
+      options: Parameters<typeof actual.useFloating>[0] = {}
+    ) {
+      const floating = actual.useFloating({
+        ...options,
+        whileElementsMounted: () => () => {},
+      });
+
+      return {
+        ...floating,
+        update: () => {},
+      };
+    }
+
+    return {
+      ...actual,
+      useFloating,
+    };
+  });
+}
+
+// We can extend `expect` using custom matchers as defined by:
+// https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
+//
+// As recommended by `jest-extended`
+// (https://github.com/jest-community/jest-extended) we're going to place this
+// inside of the `setupFilesAfterEnv` option for Jest. If we used the default
+// `setupFiles` option, we would be unable to hook into the testing framework
+// that is loaded in after those files are run.
+//
+// For more information, check out the docs here:
+// https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
+expect.extend({
+  toHaveNoAxeViolations,
+});
+
+// Have our test suite throw an error if one of the below console methods are
+// called when we are not expecting them. This is often helpful for React
+// warnings that are fired with console.warn or console.error that we would want
+// to address in order for the test suite to pass.
+//
+// By default, we will throw on console.error and console.warn. In CI, we'll
+// also throw on console.log so no extraneous log statements make there way
+// through.
+//
+// Inspired by the following setup from facebook/react
+// https://github.com/facebook/react/blob/6250462bed19c9f18a8cf3c2b5fcaf9aba1df72b/scripts/jest/setupTests.js#L69
+const consoleMethods = [
+  'error',
+  'warn',
+  ...(process.env.CI ? (['log'] as const) : []),
+] as const;
+
+type ConsoleMethodName = (typeof consoleMethods)[number];
+type UnexpectedConsoleCall = [stack: string, message: string];
+
+for (const methodName of consoleMethods) {
+  const unexpectedConsoleCallStacks: UnexpectedConsoleCall[] = [];
+  const patchedConsoleMethod = function (format: unknown, ...args: unknown[]) {
+    const stack = new Error().stack ?? '';
+    unexpectedConsoleCallStacks.push([
+      stack.substr(stack.indexOf('\n') + 1),
+      util.format(format, ...args),
+    ]);
+  };
+
+  // eslint-disable-next-line no-console
+  console[methodName] = patchedConsoleMethod;
+
+  beforeEach(() => {
+    if (unexpectedConsoleCallStacks.length > 0) {
+      formatConsoleCallStack(unexpectedConsoleCallStacks, methodName);
+    }
+    unexpectedConsoleCallStacks.length = 0;
+  });
+
+  afterEach(() => {
+    // eslint-disable-next-line no-console
+    if (console[methodName] !== patchedConsoleMethod) {
+      throw new Error(`Test did not restore a mock for console.${methodName}`);
+    }
+
+    if (unexpectedConsoleCallStacks.length > 0) {
+      formatConsoleCallStack(unexpectedConsoleCallStacks, methodName);
+    }
+  });
+}
+
+function formatConsoleCallStack(
+  unexpectedConsoleCallStacks: UnexpectedConsoleCall[],
+  methodName: ConsoleMethodName
+) {
+  // Drain the buffer before throwing. Otherwise the same calls are reported
+  // again by every later test in the file.
+  const messages = unexpectedConsoleCallStacks.splice(0).map(
+    ([stack, message]) =>
+      `${message}\n` +
+      `${stack
+        .split('\n')
+        .map((line) => chalk.gray(line))
+        .join('\n')}`
+  );
+  const message = `Expected test not to call ${chalk.bold(
+    `console.${methodName}()`
+  )}`;
+
+  throw new Error(`${message}\n\n${messages.join('\n\n')}`);
+}

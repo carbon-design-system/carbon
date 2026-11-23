@@ -3861,7 +3861,7 @@ __metadata:
     "@carbon/utilities-react": "workspace:^1.0.0-alpha.4"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
-    "@rolldown/plugin-babel": "npm:^0.2.0"
+    "@rolldown/plugin-babel": "npm:^0.3.0"
     "@stackblitz/sdk": "npm:^1.11.0"
     "@storybook/addon-a11y": "npm:^10.3.5"
     "@storybook/addon-docs": "npm:^10.3.5"
@@ -4005,7 +4005,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
-    "@npmcli/arborist": "npm:9.9.3"
+    "@npmcli/arborist": "npm:9.9.4"
     ajv: "npm:^8.20.0"
     ajv-formats: "npm:^3.0.1"
     glob: "npm:^14.0.0"
@@ -7786,9 +7786,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@npmcli/arborist@npm:9.9.3":
-  version: 9.9.3
-  resolution: "@npmcli/arborist@npm:9.9.3"
+"@npmcli/arborist@npm:9.9.4":
+  version: 9.9.4
+  resolution: "@npmcli/arborist@npm:9.9.4"
   dependencies:
     "@gar/promise-retry": "npm:^1.0.0"
     "@isaacs/string-locale-compare": "npm:^1.1.0"
@@ -7826,7 +7826,7 @@ __metadata:
     walk-up-path: "npm:^4.0.0"
   bin:
     arborist: bin/index.js
-  checksum: 10/86d95f780416668c47d22cb6286c889e8694576b940f01fa7fdcd9828f1704e5ec6920dc43b11c8d5396fc19afe77e310d93b7efbc29cb4a8021a3a57123660a
+  checksum: 10/aee36f95cd3fe5f91758f53e3b6b65fe3b4f2a9450827f1c3aad82ba5eb23e8da0c83b463673515c763e7e9c580ec2c772fba0841ddee4188279e4e76e0a737e
   languageName: node
   linkType: hard
 
@@ -9029,11 +9029,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rolldown/plugin-babel@npm:^0.2.0":
-  version: 0.2.3
-  resolution: "@rolldown/plugin-babel@npm:0.2.3"
+"@rolldown/plugin-babel@npm:^0.3.0":
+  version: 0.3.1
+  resolution: "@rolldown/plugin-babel@npm:0.3.1"
   dependencies:
-    picomatch: "npm:^4.0.4"
+    artichokie: "npm:^0.4.5"
+    picomatch: "npm:^4.0.7"
   peerDependencies:
     "@babel/core": ^7.29.0 || ^8.0.0-rc.1
     "@babel/plugin-transform-runtime": ^7.29.0 || ^8.0.0-rc.1
@@ -9047,7 +9048,7 @@ __metadata:
       optional: true
     vite:
       optional: true
-  checksum: 10/dd40e5605dc6e0482a54545ee7ac9cdc9a7d29db7e75ac9be1999eafec30618a574f6a1356ad6e4337d220eb38ac980dc4d8c5f552eaa985ea331a7c0e07375a
+  checksum: 10/7e6d739cafc15a8b0a482beca8316767edd66e4653eeb8c1fec485a87dd05b6c1859b5a2dd342c6b015dbe4d431ea1c32ca2f83d3dcad84d40c267933b6a84f6
   languageName: node
   linkType: hard
 
@@ -13034,6 +13035,13 @@ __metadata:
   version: 2.0.1
   resolution: "arrify@npm:2.0.1"
   checksum: 10/067c4c1afd182806a82e4c1cb8acee16ab8b5284fbca1ce29408e6e91281c36bb5b612f6ddfbd40a0f7a7e0c75bf2696eb94c027f6e328d6e9c52465c98e4209
+  languageName: node
+  linkType: hard
+
+"artichokie@npm:^0.4.5":
+  version: 0.4.5
+  resolution: "artichokie@npm:0.4.5"
+  checksum: 10/eb2593e81d3850be32963631a8e0f79ac38ba5e4ee7174aedaf5999ad67207b556c64c8c3a4ef9213b176ba416a20330a146e840cf1f9be9aeecbfaa565ce716
   languageName: node
   linkType: hard
 
@@ -20880,6 +20888,8 @@ __metadata:
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
     sass: "npm:^1.77.7"
+    typescript: "npm:^6.0.3"
+    typescript-config-carbon: "workspace:^0.11.0"
   languageName: unknown
   linkType: soft
 

@@ -1,11 +1,14 @@
 {
   "name": "jest-config-carbon",
   "private": true,
+  "engines": {
+    "node": ">=22.18.0"
+  },
   "description": "Jest configuration and preset for Carbon",
   "version": "2.0.0-alpha.1",
   "license": "Apache-2.0",
   "type": "module",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",
@@ -38,6 +41,8 @@
   },
   "devDependencies": {
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "typescript": "^6.0.3",
+    "typescript-config-carbon": "workspace:^0.11.0"
   }
 }
