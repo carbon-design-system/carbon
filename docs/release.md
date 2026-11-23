@@ -14,7 +14,7 @@
   - [Prerelease](#prerelease)
     - [Releasing another prerelease](#releasing-another-prerelease)
   - [Stable release](#stable-release)
-  - [Update gatsby-theme-carbon and carbon-website](#update-gatsby-theme-carbon-and-carbon-website)
+  - [Verify package bumps are deployed](#verify-package-bumps-are-deployed)
   - [Post release](#post-release)
   - [Manual Patch Release](#manual-patch-release)
 - [Previous releases (v10)](#previous-releases-v10)
@@ -228,30 +228,17 @@ Thanks :tada:
 Or, use the
 [Slack Block Kit Builder announcement template](<https://app.slack.com/block-kit-builder/T7MH7FZKL#%7B%22blocks%22:%5B%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22:carbon10:%20:carbon10:%20:carbon10:%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22Hi%20all!%20:wave:%20We%20wanted%20to%20share%20the%20release%20notes%20for%20%3Chttps://github.com/carbon-design-system/carbon/releases/tag/v11.32.0%257Cv11.32.0%3E%20:rocket:%22%7D%7D,%7B%22type%22:%22rich_text%22,%22elements%22:%5B%7B%22type%22:%22rich_text_list%22,%22elements%22:%5B%7B%22type%22:%22rich_text_section%22,%22elements%22:%5B%7B%22type%22:%22link%22,%22url%22:%22https://react.carbondesignsystem.com/?path=/docs/components-tabs--default#tabs-and-the-grid---fullwidth-prop%22,%22text%22:%22Grid%20aware%20Tabs%22%7D,%7B%22type%22:%22text%22,%22text%22:%22%20(available%20for%20contained%20tabs%20only)!%20%22%7D%5D%7D,%7B%22type%22:%22rich_text_section%22,%22elements%22:%5B%7B%22type%22:%22text%22,%22text%22:%22New%20component%20types%20for%20Accordion%20&%20subcomponents%22%7D%5D%7D,%7B%22type%22:%22rich_text_section%22,%22elements%22:%5B%7B%22type%22:%22text%22,%22text%22:%22ContainedList%20&%20Dropdown%20accessibility%20improvements%20:wheelchair:%EF%B8%8F%22%7D%5D%7D,%7B%22type%22:%22rich_text_section%22,%22elements%22:%5B%7B%22type%22:%22text%22,%22text%22:%22...%20and%20a%20number%20of%20additional%20bugs%20squashed!%20:bug:%22%7D%5D%7D%5D,%22style%22:%22bullet%22,%22indent%22:0%7D%5D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22If%20you%20want%20to%20stay%20up%20to%20date%20with%20our%20release%20schedule,%20check%20out%20our%20%3Chttps://github.com/carbon-design-system/carbon/wiki/Release-radar%257CRelease%20Radar%20wiki%20page%3E.%22%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22If%20there%20are%20any%20issues%20that%20come%20up%20while%20using%20this%20release,%20please%20reach%20out%20on%20GitHub%20or%20Slack%20to%20let%20us%20know!%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22%20%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22Thanks%20:tada:%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22%E2%80%94%20The%20Carbon%20team%20:carbon10:%22,%22emoji%22:true%7D%7D%5D%7D>)
 
-### Update gatsby-theme-carbon and carbon-website
+### Verify package bumps are deployed
 
 After the release workflow for stable release is completed this will trigger the
-`deploy-packages` workflow to update both `design-language-website` and
-`gatsby-theme-carbon` to the latest version of the Carbon packages.
+`deploy-packages` workflow to update the `design-language-website` to the latest
+version of the Carbon packages.
 
 - [ ] Ensure a Pull Request has been generated in the
       [design-language-website](https://github.com/carbon-design-system/design-language-website/pulls).
       Make sure the PR bumps up the icons and pictograms packages to the latest
       version. Do not merge the PR as the brand team will review, approve and
       merge the PR.
-- [ ] Review, approve and merge the Pull Request generated from this action in
-      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
-      to verify no breaking changes have occurred in this release. If the PR
-      from the previous release was not merged, the existing PR will be updated.
-- [ ] Run the
-      [`release-it`](https://github.com/carbon-design-system/gatsby-theme-carbon/actions/workflows/release.yml)
-      workflow in the `gatsby-theme-carbon` repo to trigger a release of
-      `gatsby-theme-carbon`.
-- [ ] Check that
-      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
-      has been released and is on the
-      [latest version](https://github.com/carbon-design-system/gatsby-theme-carbon/blob/main/packages/gatsby-theme-carbon/package.json)
-      of Carbon
 
 ### Post release
 
