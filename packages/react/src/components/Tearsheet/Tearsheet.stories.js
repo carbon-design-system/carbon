@@ -13,7 +13,6 @@ import { AILabel, AILabelContent } from '../AILabel';
 import Button from '../Button';
 import { ButtonSet } from '../ButtonSet';
 import { useFeatureFlag } from '../FeatureFlags';
-import { IconButton } from '../IconButton';
 import Form from '../Form';
 import FormGroup from '../FormGroup';
 import { NumberInput } from '../NumberInput';
@@ -368,17 +367,19 @@ export const Default = {
           </Tearsheet.Header>
           <Tearsheet.Body>
             <Tearsheet.MainContent isFlush={isFlush}>
-              <div className="summaryPanelTrigger">
-                <IconButton
+              <div className="panelTriggers">
+                <Button
                   ref={summaryPanelTriggerRef}
+                  wrapperClasses="summaryPanelTrigger"
                   kind="ghost"
-                  label="Open right panel"
+                  iconDescription="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
                   aria-expanded={summaryPanelOpen}
                   aria-controls="summary-panel"
-                  size="md">
-                  <RightPanelClose />
-                </IconButton>
+                  size="md"
+                  hasIconOnly
+                  renderIcon={() => <RightPanelClose />}
+                />
               </div>
 
               <Section className="main-content">
@@ -647,17 +648,19 @@ export const WithInfluencer = {
           </Tearsheet.Influencer>
           <Tearsheet.Body>
             <Tearsheet.MainContent isFlush={isFlush}>
-              <div className="influencerPanelTrigger">
-                <IconButton
+              <div className="panelTriggers">
+                <Button
                   ref={influencerPanelTriggerRef}
+                  wrapperClasses="influencerPanelTrigger"
                   kind="ghost"
-                  label="Open influencer panel"
+                  iconDescription="Open influencer panel"
                   onClick={() => setInfluencerPanelOpen(true)}
                   aria-expanded={influencerPanelOpen}
                   aria-controls="influencer-panel"
-                  size="md">
-                  <RightPanelClose />
-                </IconButton>
+                  size="md"
+                  hasIconOnly
+                  renderIcon={() => <RightPanelClose />}
+                />
               </div>
 
               <Section className="main-content">
@@ -873,14 +876,16 @@ export const WithTabs = {
             </Tearsheet.Header>
             <Tearsheet.Body>
               <Tearsheet.MainContent isFlush={isFlush}>
-                <div className="summaryPanelTrigger">
-                  <IconButton
+                <div className="panelTriggers">
+                  <Button
+                    wrapperClasses="summaryPanelTrigger"
                     kind="ghost"
-                    label="Open right panel"
+                    iconDescription="Open right panel"
                     onClick={() => setSummaryPanelOpen(true)}
-                    size="md">
-                    <RightPanelClose />
-                  </IconButton>
+                    size="md"
+                    hasIconOnly
+                    renderIcon={() => <RightPanelClose />}
+                  />
                 </div>
                 <TabPanels>
                   <TabPanel className="page-header-story--tall-tab-panel">
@@ -1039,29 +1044,31 @@ export const narrowTearsheet = {
             </Tearsheet.Influencer>
             <Tearsheet.Body>
               <Tearsheet.MainContent isFlush={isFlush}>
-                <div className="influencerPanelTrigger">
-                  <IconButton
+                <div className="panelTriggers">
+                  <Button
                     ref={influencerPanelTriggerRef}
+                    wrapperClasses="influencerPanelTrigger"
                     kind="ghost"
-                    label="Open influencer"
+                    iconDescription="Open influencer"
                     onClick={() => setInfluencerPanelOpen(true)}
                     aria-expanded={influencerPanelOpen}
                     aria-controls="influencer-panel"
-                    size="md">
-                    <RightPanelClose />
-                  </IconButton>
-                </div>
-                <div className="summaryPanelTrigger">
-                  <IconButton
+                    size="md"
+                    hasIconOnly
+                    renderIcon={() => <RightPanelClose />}
+                  />
+                  <Button
                     ref={summaryPanelTriggerRef}
+                    wrapperClasses="summaryPanelTrigger"
                     kind="ghost"
-                    label="Open summary panel"
+                    iconDescription="Open summary panel"
                     onClick={() => setSummaryPanelOpen(true)}
                     aria-expanded={summaryPanelOpen}
                     aria-controls="summary-panel"
-                    size="md">
-                    <RightPanelClose />
-                  </IconButton>
+                    size="md"
+                    hasIconOnly
+                    renderIcon={() => <RightPanelClose />}
+                  />
                 </div>
 
                 <Section className="main-content">
@@ -1696,14 +1703,16 @@ export const WithCustomFooterActions = {
           </Tearsheet.Header>
           <Tearsheet.Body>
             <Tearsheet.MainContent isFlush={isFlush}>
-              <div className="summaryPanelTrigger">
-                <IconButton
+              <div className="panelTriggers">
+                <Button
+                  wrapperClasses="summaryPanelTrigger"
                   kind="ghost"
-                  label="Open right panel"
+                  iconDescription="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
-                  size="md">
-                  <RightPanelClose />
-                </IconButton>
+                  size="md"
+                  hasIconOnly
+                  renderIcon={() => <RightPanelClose />}
+                />
               </div>
 
               <Section className="main-content">

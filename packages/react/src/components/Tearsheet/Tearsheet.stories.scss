@@ -42,31 +42,21 @@ $block-class: cds--tearsheet;
 }
 
 // ── Panel trigger buttons (summary / influencer) ─────────────────────────────
-.summaryPanelTrigger,
-.influencerPanelTrigger {
-  button {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-  }
-
+// Single container: influencer trigger sits at the top-left of the body and the
+// summary trigger at the top-right.
+.panelTriggers {
+  display: flex;
+  justify-content: space-between;
   margin-block-end: $spacing-03;
 }
 
-.influencerPanelTrigger {
-  button {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-  }
-
-  margin-block-end: $spacing-03;
+.summaryPanelTrigger {
+  margin-inline-start: auto;
 }
 
 // On large screens the tearsheet shows panels inline — hide the mobile triggers
 .#{$block-class}:not(.#{$block-class}--narrow) {
-  .summaryPanelTrigger,
-  .influencerPanelTrigger {
+  .panelTriggers {
     @include hide-at-large-screens();
   }
 }
