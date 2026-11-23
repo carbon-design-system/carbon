@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { adoptStyles, html } from 'lit';
+import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import CDSOverflowMenu from '../overflow-menu/overflow-menu';
 import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
@@ -24,12 +24,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-breadcrumb-overflow-menu`)
 class CDSBreadcrumbOverflowMenu extends CDSOverflowMenu {
-  connectedCallback() {
-    super.connectedCallback();
-
-    adoptStyles(this.renderRoot as ShadowRoot, [overflowMenuStyles, styles]);
-  }
-
   render() {
     return html`
       <slot name="icon">
@@ -40,6 +34,8 @@ class CDSBreadcrumbOverflowMenu extends CDSOverflowMenu {
       </slot>
     `;
   }
+
+  static styles = [overflowMenuStyles, styles];
 }
 
 export default CDSBreadcrumbOverflowMenu;

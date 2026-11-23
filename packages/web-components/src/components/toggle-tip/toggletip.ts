@@ -6,7 +6,7 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { adoptStyles, html, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
@@ -106,8 +106,6 @@ class CDSToggletip extends AutoAlignMixin(
     if (this.defaultOpen && !this.hasAttribute('open')) {
       this.open = true;
     }
-
-    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }
 
   /**
@@ -287,6 +285,8 @@ class CDSToggletip extends AutoAlignMixin(
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
+
+  static styles = [popoverStyles, styles];
 }
 
 export default CDSToggletip;
