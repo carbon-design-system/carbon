@@ -1745,4 +1745,89 @@ describe('DataTable', () => {
       });
     });
   });
+
+  describe('initial sorting', () => {
+    it.each([
+      ['fieldA', 'DESC', ['c', 'b', 'a'], 'descending'],
+      ['fieldA', undefined, ['a', 'b', 'c'], 'ascending'],
+      ['fieldA', 'NONE', ['b', 'a', 'c'], 'none'],
+      [undefined, 'DESC', ['b', 'a', 'c'], 'none'],
+      ['missing', 'ASC', ['b', 'a', 'c'], 'none'],
+      [undefined, undefined, ['b', 'a', 'c'], 'none'],
+    ] as const)(
+      'should render the initial sort for header %s and direction %s',
+      (initialSortHeaderKey, initialSortDirection, expectedIds, ariaSort) => {
+        render(
+          <DataTable
+            {...mockProps}
+            isSortable
+            initialSortHeaderKey={initialSortHeaderKey}
+            initialSortDirection={initialSortDirection}
+          />
+        );
+
+        const firstRender = mockProps.render.mock.calls[0][0];
+        expect(firstRender.rows.map((row) => row.id)).toEqual(expectedIds);
+        const [firstHeader, secondHeader] = screen.getAllByRole('columnheader');
+        expect(firstHeader).toHaveAttribute('aria-sort', ariaSort);
+        expect(secondHeader).toHaveAttribute('aria-sort', 'none');
+      }
+    );
+
+    it('should finish custom initial sorting before the first render', () => {
+      const sortRow = jest.fn((a: string, b: string) => b.localeCompare(a));
+      const rowsWithMetadata = rows.map((row) => ({
+        ...row,
+        href: `/items/${row.id}`,
+      }));
+      render(
+        <DataTable
+          {...mockProps}
+          rows={rowsWithMetadata}
+          sortRow={sortRow}
+          initialSortHeaderKey="fieldA"
+        />
+      );
+
+      const [firstRender] = mockProps.render.mock.calls[0];
+      expect(firstRender.rows.map((row) => row.id)).toEqual(['c', 'b', 'a']);
+      expect(Math.max(...sortRow.mock.invocationCallOrder)).toBeLessThan(
+        mockProps.render.mock.invocationCallOrder[0]
+      );
+    });
+
+    it('should skip the comparator when no initial sort is requested', () => {
+      const sortRow = jest.fn<NonNullable<MockProps['sortRow']>>();
+      render(<DataTable {...mockProps} isSortable sortRow={sortRow} />);
+      expect(sortRow).not.toHaveBeenCalled();
+    });
+
+    it('should retain the selected header and respect clearing the sort when rows change', async () => {
+      const props = {
+        ...mockProps,
+        isSortable: true,
+        initialSortHeaderKey: 'fieldA',
+        initialSortDirection: 'DESC' as const,
+      };
+      const { rerender } = render(<DataTable {...props} />);
+      const [firstHeader, secondHeader] = screen.getAllByRole('columnheader');
+      const secondButton = within(secondHeader).getByRole('button');
+      const renderedIds = () =>
+        getLastCallFor(mockProps.render)[0].rows.map((row) => row.id);
+
+      await userEvent.click(secondButton);
+      const newRow = { id: 'd', fieldA: 'Field 4:A', fieldB: 'Field 0:B' };
+      rerender(<DataTable {...props} rows={[...rows, newRow]} />);
+      expect(firstHeader).toHaveAttribute('aria-sort', 'none');
+      expect(secondHeader).toHaveAttribute('aria-sort', 'ascending');
+      expect(renderedIds()).toEqual(['d', 'a', 'b', 'c']);
+
+      await userEvent.click(secondButton);
+      await userEvent.click(secondButton);
+      rerender(<DataTable {...props} rows={[newRow, ...rows]} />);
+      expect(firstHeader).toHaveAttribute('aria-sort', 'none');
+      expect(secondHeader).toHaveAttribute('aria-sort', 'none');
+      expect(renderedIds()).toEqual(['d', 'b', 'a', 'c']);
+    });
+  });
 });
