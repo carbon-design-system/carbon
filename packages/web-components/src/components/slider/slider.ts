@@ -29,12 +29,12 @@ interface Cancelable {
 const THUMB_DIRECTION = {
   Left: -1,
   ArrowLeft: -1,
-  Up: -1,
-  ArrowUp: -1,
+  Up: 1,
+  ArrowUp: 1,
   Right: 1,
   ArrowRight: 1,
-  Down: 1,
-  ArrowDown: 1,
+  Down: -1,
+  ArrowDown: -1,
 };
 
 /**

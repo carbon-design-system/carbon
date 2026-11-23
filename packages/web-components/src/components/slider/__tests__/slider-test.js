@@ -331,6 +331,85 @@ describe('cds-slider', () => {
     expect(el.unstable_valueUpper).to.equal(89);
   });
 
+  it('should increase value with ArrowUp and decrease with ArrowDown', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50">
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const thumb = el?.shadowRoot?.querySelector('#thumb');
+
+    thumb?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.value).to.equal(51);
+
+    thumb?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.value).to.equal(50);
+  });
+
+  it('should increase and decrease both handles with ArrowUp and ArrowDown', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="10"
+        value-upper="90">
+        <cds-slider-input
+          aria-label="Lower bound"
+          type="number"
+          id="lower"
+          slot="lower-input"></cds-slider-input>
+        <cds-slider-input
+          aria-label="Upper bound"
+          type="number"
+          id="upper"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const lowerThumb = el?.shadowRoot?.querySelector('#thumb');
+    const upperThumb = el?.shadowRoot?.querySelector('#thumb-upper');
+
+    lowerThumb?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.value).to.equal(11);
+
+    lowerThumb?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.value).to.equal(10);
+
+    expect(upperThumb).to.exist;
+    upperThumb?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.unstable_valueUpper).to.equal(91);
+
+    upperThumb?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.unstable_valueUpper).to.equal(90);
+  });
+
   it('should update upper value on slider input change and set warn text', async () => {
     const el = await fixture(
       html` <cds-slider
