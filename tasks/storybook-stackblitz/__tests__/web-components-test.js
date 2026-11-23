@@ -10,21 +10,32 @@
 // Native ESM generator for Storybook's Vite config. Run in child process
 // instead of importing in Jest
 
-const { execFileSync, spawnSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const path = require('path');
 
 const DIR = path.resolve(__dirname, '..');
 
 describe('web components stories → StackBlitz', () => {
+  // In Storybook, a story that renders an element it doesn't import still
+  // works when another story registered it, but breaks on its own
   it('every story imports the elements it renders', () => {
-    const result = spawnSync(
-      process.execPath,
-      [path.join(DIR, 'cli.mjs'), '--json'],
-      { encoding: 'utf8' }
+    const script = `
+      import path from 'node:path';
+      import { PACKAGE_ROOT, findUnregisteredTags, listStoryFiles } from ${JSON.stringify(path.join(DIR, 'web-components.mjs'))};
+      const results = listStoryFiles()
+        .map((file) => ({
+          file: path.relative(PACKAGE_ROOT, file).split(path.sep).join('/'),
+          unregistered: findUnregisteredTags(file),
+        }))
+        .filter(({ unregistered }) => unregistered.length);
+      process.stdout.write(JSON.stringify(results));
+    `;
+    const results = JSON.parse(
+      execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+        encoding: 'utf8',
+      })
     );
-    // check that stories import everything it renders
-    expect(JSON.parse(result.stdout)).toEqual([]);
-    expect(result.status).toBe(0);
+    expect(results).toEqual([]);
   });
 
   it('generates a project that runs against the published package', () => {

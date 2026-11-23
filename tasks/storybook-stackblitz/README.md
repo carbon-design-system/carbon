@@ -91,8 +91,8 @@ released package version, for example
 ## Check
 
 ```sh
-node tasks/storybook-stackblitz/cli.mjs
+yarn test tasks/storybook-stackblitz
 ```
 
-Reports web components stories that render elements they don't import. The Jest
-test in `__tests__/` runs it, so it's enforced in CI.
+`__tests__/web-components-test.js` fails when a web components story renders an
+element it doesn't import, and lists each one. It runs in CI.
