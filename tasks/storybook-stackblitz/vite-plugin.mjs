@@ -88,10 +88,11 @@ export function storybookStackBlitz({
       if (!names.length) {
         return null;
       }
-      const virtualId = JSON.stringify(virtualIdFor(file));
+      // id is a fixed prefix and hex hash, no escaping needed
+      const virtualId = virtualIdFor(file);
       const lines = [
         `import { addStackBlitzAction as __addStackBlitzAction } from ${JSON.stringify(RUNTIME)};`,
-        `const __loadStackBlitz = (name) => () => import(${virtualId}).then((m) => m.default[name]);`,
+        `const __loadStackBlitz = (name) => () => import('${virtualId}').then((m) => m.default[name]);`,
         ...names.map(
           (name) =>
             `__addStackBlitzAction(${name}, __loadStackBlitz(${JSON.stringify(name)}));`
