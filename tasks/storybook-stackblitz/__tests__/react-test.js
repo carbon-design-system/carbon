@@ -32,9 +32,12 @@ function generate(stories, story) {
 describe('React stories → StackBlitz', () => {
   it('imports public components from @carbon/react and copies story files', () => {
     const project = generate('Accordion/Accordion.stories.tsx', '_WithLayer');
-    const main = project.files['src/main.tsx'];
+    const main = project.files['src/App.tsx'];
 
-    expect(project.openFile).toBe('src/main.tsx');
+    // the story module; `src/main.tsx` only mounts it
+    expect(project.openFile).toBe('src/App.tsx');
+    expect(main).toContain('export default function App()');
+    expect(project.files['src/main.tsx']).toContain("import App from './App';");
     expect(main).toContain(
       "import { Accordion, AccordionItem } from '@carbon/react';"
     );
@@ -54,9 +57,28 @@ describe('React stories → StackBlitz', () => {
 
   it('renders meta.component for a story without render', () => {
     const main = generate('BigNumber/BigNumber.stories.js', 'Default').files[
-      'src/main.jsx'
+      'src/App.jsx'
     ];
     expect(main).toMatch(/<meta\.component \{\.\.\.props\} \/>/);
     expect(main).toContain('const args = { ...meta.args, ...Default.args };');
+  });
+
+  it('lists Storybook story ids and names for the published index', () => {
+    const script = `
+      import { storyEntries } from ${JSON.stringify(path.join(DIR, 'vite-plugin.mjs'))};
+      const entries = storyEntries(${JSON.stringify(path.join(STORIES, 'Pagination/Pagination.stories.js'))});
+      process.stdout.write(JSON.stringify(Object.fromEntries(entries)));
+    `;
+    const entries = JSON.parse(
+      execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+        encoding: 'utf8',
+      })
+    );
+    expect(entries.MultiplePaginationComponents).toEqual({
+      id: 'components-pagination--multiple-pagination-components',
+      title: 'Components/Pagination',
+      // CSF2 `storyName` wins over the export name
+      name: 'Multiple Pagination components',
+    });
   });
 });

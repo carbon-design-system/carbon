@@ -43,9 +43,16 @@ describe('web components stories → StackBlitz', () => {
         encoding: 'utf8',
       })
     );
-    const main = project.files['src/main.ts'];
+    const main = project.files['src/story.ts'];
 
-    expect(project.openFile).toBe('src/main.ts');
+    // the story module; `src/main.ts` only mounts it
+    expect(project.openFile).toBe('src/story.ts');
+    expect(main).toContain(
+      'export default function mount(container: HTMLElement)'
+    );
+    expect(project.files['src/main.ts']).toContain(
+      "import mount from './story';"
+    );
     // relative source imports become published package imports
     expect(main).toContain(
       "import '@carbon/web-components/es/components/button/index.js';"
@@ -53,7 +60,7 @@ describe('web components stories → StackBlitz', () => {
     expect(main).not.toMatch(/from '\.\.?\//);
     // SB-only keys get dropped
     expect(main).not.toMatch(/\bparameters:/);
-    expect(main).toMatch(/render\(IconButton\.render\(args\)/);
+    expect(main).toMatch(/render\(IconButton\.render\(args\), container\)/);
     expect(
       Object.keys(JSON.parse(project.files['package.json']).dependencies)
     ).toEqual(

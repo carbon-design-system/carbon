@@ -41,6 +41,7 @@ import {
   posix,
   resolveSource,
   storyNames,
+  packageInfo,
 } from './project.mjs';
 
 export { storyNames };
@@ -213,6 +214,13 @@ export default defineConfig({ plugins: [litcss()] });
 export default defineConfig({});
 `;
 
+const STORY_MODULE = 'src/story.ts';
+
+const MAIN = `import mount from './story';
+
+mount(document.getElementById('app')!);
+`;
+
 const indexHtml = (title) => `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -232,6 +240,10 @@ const indexHtml = (title) => `<!DOCTYPE html>
  * Generate a StackBlitz project per story in `file`.
  * Returns `{ [storyName]: { title, description, template, openFile, files } }`,
  * the shape `StackBlitzSDK.openProject()` takes (plus `openFile`).
+ *
+ * `openFile` is the story module (`src/story.ts`): its default export,
+ * `mount(container)`, renders the story into an element, so other apps can
+ * import it as is.
  */
 export async function generateProjects(file) {
   const sourceFile = parseModule(file);
@@ -244,9 +256,7 @@ export async function generateProjects(file) {
     const extracted = extractStory(sourceFile, csf, name);
     const builder = newBuilder();
     const imports = extracted.imports
-      .map((entry) =>
-        builder.importLine(sourceFile, entry, file, 'src/main.ts')
-      )
+      .map((entry) => builder.importLine(sourceFile, entry, file, STORY_MODULE))
       .filter(Boolean);
 
     const taken = new Set(extracted.topLevelNames);
@@ -256,6 +266,10 @@ export async function generateProjects(file) {
     const metaName = freeName('meta', taken);
     taken.add(metaName);
     const argsName = freeName('args', taken);
+    taken.add(argsName);
+    const mountName = freeName('mount', taken);
+    taken.add(mountName);
+    const containerName = freeName('container', taken);
 
     const body = [];
     const declarations = extracted.declarations.map((s) =>
@@ -302,10 +316,11 @@ for (const [key, value] of Object.entries(${argsName})) {
       ({ declaration }) =>
         declaration.moduleSpecifier.text === 'storybook/preview-api'
     );
-    const draw = `${renderName}(${renderFn}(${argsName}), document.getElementById('app')!)`;
-    run += usesHooks
-      ? `\n\n// The story uses Storybook hooks; re-render it when they update.\nmountStory(${argsName}, () =>\n  ${draw}\n);`
-      : `\n\n${draw};`;
+    const draw = `${renderName}(${renderFn}(${argsName}), ${containerName})`;
+    const mountBody = usesHooks
+      ? `// The story uses Storybook hooks; re-render it when they update.\n  mountStory(${argsName}, () =>\n    ${draw}\n  );`
+      : `${draw};`;
+    run += `\n\n/** Render the story into \`${containerName}\`. */\nexport default function ${mountName}(${containerName}: HTMLElement) {\n  ${mountBody}\n}`;
     body.push(run);
     if (usesHooks) {
       // Merge into the story's own shim import when it has one.
@@ -337,7 +352,7 @@ for (const [key, value] of Object.entries(${argsName})) {
     } else {
       imports.unshift(`import { ${renderBinding} } from 'lit';`);
     }
-    const main = await format(
+    const story = await format(
       `${imports.join('\n')}\n\n${body.join('\n\n')}\n`
     );
 
@@ -351,7 +366,8 @@ for (const [key, value] of Object.entries(${argsName})) {
       ),
       'tsconfig.json': TSCONFIG,
       'vite.config.js': viteConfig(builder),
-      'src/main.ts': main,
+      'src/main.ts': MAIN,
+      [STORY_MODULE]: story,
       'src/styles.scss': STYLES,
       ...Object.fromEntries(builder.files),
     };
@@ -361,7 +377,7 @@ for (const [key, value] of Object.entries(${argsName})) {
       title: `Carbon web components: ${componentName} (${name})`,
       description: `${componentName} "${name}" story from the Carbon web components Storybook.`,
       template: 'node',
-      openFile: 'src/main.ts',
+      openFile: STORY_MODULE,
       files,
     };
   }
@@ -479,4 +495,5 @@ export const webComponentsStackBlitz = {
   include: isStackBlitzStory,
   storyNames,
   generateProjects,
+  package: packageInfo(PACKAGE_ROOT),
 };

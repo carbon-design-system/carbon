@@ -45,7 +45,8 @@ keep in sync.
 
 - `vite-plugin.mjs`: appends a few lines to each stories module that attach the
   docs action to its stories. Generated projects live in a virtual module per
-  stories file, fetched only when an action is clicked.
+  stories file, fetched only when an action is clicked. Production builds also
+  publish every project (see [Published projects](#published-projects)).
 - `open-in-stackblitz.js`: browser runtime; opens the project with
   `@stackblitz/sdk`.
 
@@ -62,6 +63,30 @@ import { webComponentsStackBlitz } from '../../../tasks/storybook-stackblitz/web
 // viteFinal
 plugins: [storybookStackBlitz(webComponentsStackBlitz)];
 ```
+
+## Project layout
+
+Each project keeps the story apart from the code that starts the app, so the
+story module can also be imported on its own (`openFile` names it):
+
+|                | Story module (`openFile`)             | Default export                                        | Entry                                                          |
+| -------------- | ------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
+| React          | `src/App.jsx` (`.tsx` for TS stories) | `App`, the story as a component                       | `src/main.jsx` renders `<App />` and imports the Carbon styles |
+| Web components | `src/story.ts`                        | `mount(container)`, renders the story into an element | `src/main.ts` calls `mount()`; `index.html` loads the styles   |
+
+## Published projects
+
+`storybook build` also writes:
+
+- `stackblitz/<story id>.json`: the project for each story, the object
+  `StackBlitzSDK.openProject()` takes, plus `openFile`;
+- `stackblitz/index.json`:
+  `{ package: { name, version }, stories: [{ id, title, name }] }`, where `id`
+  is the Storybook story id.
+
+The Storybooks are deployed on each release, so these are served for the
+released package version, for example
+`https://react.carbondesignsystem.com/stackblitz/components-button--default.json`.
 
 ## Check
 

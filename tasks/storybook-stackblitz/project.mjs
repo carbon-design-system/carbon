@@ -283,6 +283,14 @@ export function storyNames(file) {
   return analyzeCsf(parseModule(file)).stories.map((s) => s.name);
 }
 
+/** `{ name, version }` of the package at `root`. */
+export function packageInfo(root) {
+  const { name, version } = JSON.parse(
+    fs.readFileSync(path.join(root, 'package.json'), 'utf8')
+  );
+  return { name, version };
+}
+
 export const format = (code, parser = 'typescript') =>
   prettier.format(code, { ...prettierConfig, parser });
 

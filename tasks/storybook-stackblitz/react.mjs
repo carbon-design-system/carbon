@@ -36,6 +36,7 @@ import {
   packageJson,
   resolveSource,
   storyNames,
+  packageInfo,
 } from './project.mjs';
 
 export { storyNames };
@@ -423,13 +424,19 @@ function mergePackageImports(imports) {
  * Generate a StackBlitz project per story in `file`.
  * Returns `{ [storyName]: { title, description, template, openFile, files } }`,
  * the shape `StackBlitzSDK.openProject()` takes (plus `openFile`).
+ *
+ * `openFile` is the story module (`src/App.jsx`): its default export renders
+ * the story as a React component, so other apps can import it as is.
  */
 export async function generateProjects(file) {
   const sourceFile = parseModule(file);
   const csf = analyzeCsf(sourceFile);
   const title = metaTitle(sourceFile, csf.meta) ?? path.basename(file);
   const componentName = title.split('/').pop();
-  const entry = file.endsWith('.tsx') ? 'src/main.tsx' : 'src/main.jsx';
+  const tsx = file.endsWith('.tsx');
+  const entry = tsx ? 'src/main.tsx' : 'src/main.jsx';
+  // the story itself; its default export is the story as a component
+  const storyModule = tsx ? 'src/App.tsx' : 'src/App.jsx';
   const projects = {};
 
   for (const { name } of csf.stories) {
@@ -439,7 +446,7 @@ export async function generateProjects(file) {
     const builder = new ReactProjectBuilder();
     const imports = extracted.imports
       .map((entryImport) =>
-        builder.importLine(sourceFile, entryImport, file, entry)
+        builder.importLine(sourceFile, entryImport, file, storyModule)
       )
       .filter(Boolean);
 
@@ -453,7 +460,6 @@ export async function generateProjects(file) {
     const metaName = pick('meta');
     const argsName = pick('args');
     const appName = pick('App');
-    const rootName = pick('createRoot');
 
     const body = [];
     const declarations = extracted.declarations.map((s) =>
@@ -501,23 +507,22 @@ for (const [key, value] of Object.entries(${argsName})) {
     }[extracted.renderFrom];
     run += `
 
-function ${appName}() {
+export default function ${appName}() {
   return ${renderFn}(${argsName}, { args: ${argsName}, viewMode: 'story' });
-}
-
-${rootName}(document.getElementById('root')).render(<${appName} />);`;
+}`;
     body.push(run);
 
     const usesFlexGrid = builder.publicNames.has('FlexGrid');
+    const app = await format(
+      [...mergePackageImports(imports), '', body.join('\n\n'), ''].join('\n')
+    );
     const main = await format(
       [
         `import './index.scss';`,
-        rootName === 'createRoot'
-          ? `import { createRoot } from 'react-dom/client';`
-          : `import { createRoot as ${rootName} } from 'react-dom/client';`,
-        ...mergePackageImports(imports),
+        `import { createRoot } from 'react-dom/client';`,
+        `import App from './App';`,
         '',
-        body.join('\n\n'),
+        `createRoot(document.getElementById('root')${tsx ? '!' : ''}).render(<App />);`,
         '',
       ].join('\n')
     );
@@ -541,6 +546,7 @@ ${rootName}(document.getElementById('root')).render(<${appName} />);`;
       ),
       'vite.config.js': VITE_CONFIG,
       [entry]: main,
+      [storyModule]: app,
       'src/index.scss': usesFlexGrid ? FLEX_GRID_STYLES : STYLES,
       ...Object.fromEntries(builder.files),
     };
@@ -550,7 +556,7 @@ ${rootName}(document.getElementById('root')).render(<${appName} />);`;
       title: `Carbon React: ${componentName} (${name})`,
       description: `${componentName} "${name}" story from the Carbon React Storybook.`,
       template: 'node',
-      openFile: entry,
+      openFile: storyModule,
       files,
     };
   }
@@ -582,4 +588,5 @@ export const reactStackBlitz = {
   include: isStackBlitzStory,
   storyNames,
   generateProjects,
+  package: packageInfo(PACKAGE_ROOT),
 };
