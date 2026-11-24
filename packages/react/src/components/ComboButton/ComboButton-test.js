@@ -187,13 +187,14 @@ describe('ComboButton', () => {
       ).toHaveTextContent(/^Additional action$/);
     });
 
-    it('returns focus to the trigger when the menu was opened with a mouse click', async () => {
+    it('moves focus past the trigger when Tab closes a mouse-opened menu', async () => {
       render(
         <>
           <button type="button">Focusable element</button>
           <ComboButton label="Primary action">
             <MenuItem label="Additional action" />
           </ComboButton>
+          <button type="button">After</button>
         </>
       );
 
@@ -214,10 +215,10 @@ describe('ComboButton', () => {
       expect(trigger).toHaveAttribute('aria-expanded', 'true');
       expect(screen.getByRole('menuitem', { hidden: true })).toHaveFocus();
 
-      // Close the menu with Tab. Focus should move back to the trigger.
+      // Close the menu with Tab. Focus should advance past the trigger.
       await userEvent.tab();
       expect(trigger).toHaveAttribute('aria-expanded', 'false');
-      expect(trigger).toHaveFocus();
+      expect(screen.getByRole('button', { name: 'After' })).toHaveFocus();
     });
 
     it('supports ellipsis in ComboButton by checking the className', async () => {

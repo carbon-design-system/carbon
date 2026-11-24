@@ -28,6 +28,10 @@ type StateType = {
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
   items: RegisterItemPayload[];
   requestCloseRoot: (e: Pick<KeyboardEvent<HTMLUListElement>, 'type'>) => void;
+  /**
+   * Ref to the element focused when the root menu opens.
+   */
+  rootFocusReturn: RefObject<HTMLElement | null> | null;
 };
 
 const menuDefaultState: StateType = {
@@ -37,6 +41,7 @@ const menuDefaultState: StateType = {
   size: null,
   items: [],
   requestCloseRoot: () => {},
+  rootFocusReturn: null,
 };
 
 function menuReducer(state: StateType, action: ActionType) {

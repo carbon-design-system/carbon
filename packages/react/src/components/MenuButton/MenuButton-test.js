@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -212,13 +212,14 @@ describe('MenuButton', () => {
       expect(input).toHaveFocus();
     });
 
-    it('returns focus to the trigger when the menu was opened with a mouse click', async () => {
+    it('moves focus past the trigger when Tab closes a mouse-opened menu', async () => {
       render(
         <>
           <button type="button">Focusable element</button>
           <MenuButton label="Actions">
             <MenuItem label="Action" />
           </MenuButton>
+          <button type="button">After</button>
         </>
       );
 
@@ -236,7 +237,157 @@ describe('MenuButton', () => {
       const menuItem = screen.getByRole('menuitem', { name: 'Action' });
       expect(menuItem).toHaveFocus();
 
-      // Close the menu with Tab. Focus should move back to the MenuButton.
+      // Close the menu with Tab. Focus should advance past the MenuButton.
+      await userEvent.tab();
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'After' })).toHaveFocus();
+    });
+
+    it('closes the menu with Tab and moves focus to the next focusable element', async () => {
+      render(
+        <>
+          <MenuButton label="Actions">
+            <MenuItem label="Action" />
+          </MenuButton>
+          <button type="button">Next</button>
+        </>
+      );
+
+      await userEvent.tab();
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      expect(menuButton).toHaveFocus();
+
+      await userEvent.keyboard('{Enter}');
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+      expect(screen.getByRole('menuitem', { name: 'Action' })).toHaveFocus();
+
+      await userEvent.tab();
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
+    });
+
+    it('closes the menu with Shift+Tab and moves focus to the previous focusable element', async () => {
+      render(
+        <>
+          <button type="button">Previous</button>
+          <MenuButton label="Actions">
+            <MenuItem label="Action" />
+          </MenuButton>
+        </>
+      );
+
+      await userEvent.tab();
+      await userEvent.tab();
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      expect(menuButton).toHaveFocus();
+
+      await userEvent.keyboard('{Enter}');
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+      expect(screen.getByRole('menuitem', { name: 'Action' })).toHaveFocus();
+
+      await userEvent.tab({ shift: true });
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Previous' })).toHaveFocus();
+    });
+
+    it('prevents the default Space scroll when activating a menu item', async () => {
+      render(
+        <MenuButton label="Actions">
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
+
+      await userEvent.tab();
+      await userEvent.keyboard('{Enter}');
+      const menuItem = screen.getByRole('menuitem', { name: 'Action' });
+      expect(menuItem).toHaveFocus();
+
+      const event = new KeyboardEvent('keydown', {
+        key: ' ',
+        code: 'Space',
+        bubbles: true,
+        cancelable: true,
+      });
+      const preventDefaultMock = jest.fn();
+      Object.defineProperty(event, 'preventDefault', {
+        value: preventDefaultMock,
+        writable: true,
+      });
+
+      await act(async () => {
+        menuItem.dispatchEvent(event);
+      });
+
+      expect(preventDefaultMock).toHaveBeenCalled();
+    });
+
+    it('closes nested menus with Tab and moves focus past the root trigger', async () => {
+      render(
+        <>
+          <MenuButton label="Actions">
+            <MenuItem label="Parent">
+              <MenuItem label="Child" />
+            </MenuItem>
+            <MenuItem label="Sibling" />
+          </MenuButton>
+          <button type="button">Next</button>
+        </>
+      );
+
+      await userEvent.tab();
+      await userEvent.keyboard('{Enter}');
+      // Nested menu aria-label is included in the parent menuitem name.
+      expect(
+        screen.getByRole('menuitem', { name: 'Parent Parent' })
+      ).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowRight}');
+      const child = screen.getByRole('menuitem', { name: 'Child' });
+      await waitFor(() => {
+        expect(child).toHaveFocus();
+      });
+
+      await userEvent.tab();
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
+    });
+
+    it('skips CSS-hidden elements when Tab closes the menu', async () => {
+      render(
+        <>
+          <MenuButton label="Actions">
+            <MenuItem label="Action" />
+          </MenuButton>
+          <button type="button" style={{ display: 'none' }}>
+            Hidden
+          </button>
+          <button type="button">Next</button>
+        </>
+      );
+
+      await userEvent.tab();
+      await userEvent.keyboard('{Enter}');
+      expect(screen.getByRole('menuitem', { name: 'Action' })).toHaveFocus();
+
+      await userEvent.tab();
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
+    });
+
+    it('returns focus to the trigger when Tab closes and no further tab stop exists', async () => {
+      render(
+        <MenuButton label="Actions">
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
+
+      await userEvent.tab();
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      expect(menuButton).toHaveFocus();
+
+      await userEvent.keyboard('{Enter}');
+      expect(screen.getByRole('menuitem', { name: 'Action' })).toHaveFocus();
+
       await userEvent.tab();
       expect(screen.queryByRole('menu')).not.toBeInTheDocument();
       expect(menuButton).toHaveFocus();

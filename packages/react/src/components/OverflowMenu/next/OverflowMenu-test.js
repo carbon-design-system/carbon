@@ -238,13 +238,14 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     );
   });
 
-  it('returns focus to the trigger when the menu was opened with a mouse click', async () => {
+  it('moves focus past the trigger when Tab closes a mouse-opened menu', async () => {
     render(
       <>
         <button type="button">Focusable element</button>
         <OverflowMenu>
           <MenuItem label="one" />
         </OverflowMenu>
+        <button type="button">After</button>
       </>
     );
 
@@ -261,10 +262,10 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     const menuItem = screen.getByRole('menuitem', { name: 'one' });
     expect(menuItem).toHaveFocus();
 
-    // Close the menu with Tab. Focus should move back to the trigger.
+    // Close the menu with Tab. Focus should advance past the trigger.
     await userEvent.tab();
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
-    expect(menuButton).toHaveFocus();
+    expect(screen.getByRole('button', { name: 'After' })).toHaveFocus();
   });
 
   describe('supports props.menuAlignment', () => {

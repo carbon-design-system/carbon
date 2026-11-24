@@ -20,6 +20,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { tabbable } from 'tabbable';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -163,6 +164,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     hasSelectableItems: false,
     size,
     requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
+    rootFocusReturn: isRoot ? focusReturn : context.state.rootFocusReturn,
   });
   const childContext = useMemo(() => {
     return {
@@ -239,14 +241,66 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
+  function isVisibleTabbable(element: Element) {
+    let current: Element | null = element;
+    while (current) {
+      if (current instanceof HTMLElement && current.hidden) {
+        return false;
+      }
+      const style = getComputedStyle(current);
+      if (style.display === 'none' || style.visibility === 'hidden') {
+        return false;
+      }
+      current = current.parentElement;
+    }
+    return true;
+  }
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
     e.stopPropagation();
 
-    // If the user presses escape or tab, or this is a submenu and the user presses ArrowLeft, close it.
+    // Tab closes the menu and moves focus to the next (or previous with
+    // Shift+Tab) focusable element relative to the root menu's focus target.
+    if (match(e, keys.Tab) && onClose) {
+      e.preventDefault();
+      const rootFocusReturnRef = isRoot
+        ? focusReturn
+        : context.state.rootFocusReturn;
+      const trigger = rootFocusReturnRef?.current;
+      // Exclude menu contents and hidden elements from Tab target selection.
+      const focusables = tabbable(document.body, {
+        displayCheck: 'none',
+      }).filter(
+        (el) => !el.closest(`.${prefix}--menu`) && isVisibleTabbable(el)
+      );
+      const triggerIndex = trigger ? focusables.indexOf(trigger) : -1;
+      const nextIndex = e.shiftKey ? triggerIndex - 1 : triggerIndex + 1;
+      const nextTarget = triggerIndex >= 0 ? focusables[nextIndex] : undefined;
+
+      if (rootFocusReturnRef) {
+        rootFocusReturnRef.current = null;
+      }
+
+      if (isRoot) {
+        onClose();
+      } else {
+        // Close the entire menu chain, not only this submenu.
+        context.state.requestCloseRoot(e);
+      }
+
+      if (nextTarget) {
+        nextTarget.focus();
+      } else if (trigger) {
+        // No further tab stop — leave focus on the trigger rather than body.
+        trigger.focus();
+      }
+      return;
+    }
+
+    // If the user presses escape, or this is a submenu and the user presses
+    // ArrowLeft, close it.
     if (
-      (match(e, keys.Escape) ||
-        match(e, keys.Tab) ||
-        (!isRoot && match(e, keys.ArrowLeft))) &&
+      (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
       onClose
     ) {
       e.preventDefault();
