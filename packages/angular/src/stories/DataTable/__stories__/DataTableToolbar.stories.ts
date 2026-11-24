@@ -171,7 +171,7 @@ export const Default: Story = {
         [useZebraStyles]="useZebraStyles">
         <cds-ng-table-header-title slot="title">DataTable</cds-ng-table-header-title>
         <cds-ng-table-header-description slot="description"
-          >With batch actions.</cds-ng-table-header-description
+          >With toolbar.</cds-ng-table-header-description
         >
 
         <cds-ng-table-toolbar slot="toolbar">
