@@ -33,7 +33,13 @@ export const findMenuItemNode = (index: number) => {
 };
 
 export const findMenuIconNode = () => {
-  return document.querySelector(`.${prefix}--list-box__menu-icon`);
+  const node = document.querySelector(`.${prefix}--list-box__menu-icon`);
+
+  if (!node) {
+    throw new Error('Unable to find menu icon node.');
+  }
+
+  return node;
 };
 
 export const findFieldNode = () => {
@@ -66,7 +72,6 @@ export const assertMenuOpen = (mockProps: { items: unknown[] }) => {
   const popup = findPopupNode();
 
   if (!menu) throw new Error('Unable to find menu node.');
-  if (!icon) throw new Error('Unable to find menu icon node.');
   if (!popup) throw new Error('Unable to find popup node.');
 
   expect(menu.childNodes.length).toBe(mockProps.items.length);
@@ -79,7 +84,6 @@ export const assertMenuClosed = () => {
   const icon = findMenuIconNode();
   const popup = findPopupNode();
 
-  if (!icon) throw new Error('Unable to find menu icon node.');
   if (!popup) throw new Error('Unable to find popup node.');
 
   expect(icon).toHaveClass(`${prefix}--list-box__menu-icon`);

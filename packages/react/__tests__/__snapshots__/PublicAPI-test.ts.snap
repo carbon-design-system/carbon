@@ -2491,6 +2491,9 @@ Map {
         "className": {
           "type": "string",
         },
+        "closeMenu": {
+          "type": "func",
+        },
         "onClick": {
           "isRequired": true,
           "type": "func",
@@ -10655,6 +10658,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "closeMenu": {
+        "type": "func",
       },
       "onClick": {
         "isRequired": true,
