@@ -27,7 +27,7 @@ export function AliasedWithExtras({ ref }) {
   return (
     // TODO: TagSet → TagOverflow migration: onOverflowClick has no direct equivalent in TagOverflow. Handle overflow manually or remove this prop.
     (<MyTagSet
-      // @deprecated containingElementRef — safe to remove; see TagOverflow docs
+      // @deprecated containingElementRef is deprecated in TagOverflow; review before removing
       containingElementRef={ref}
       items={[{
         id: 'ok',

@@ -64,11 +64,11 @@ export function OverflowClickTagSet() {
 export function DeprecatedPropsTagSet({ containerRef }) {
   return (
     (<TagOverflow
-      // @deprecated containingElementRef — safe to remove; see TagOverflow docs
+      // @deprecated containingElementRef is deprecated in TagOverflow; review before removing
       containingElementRef={containerRef}
-      // @deprecated measurementOffset — safe to remove; see TagOverflow docs
+      // @deprecated measurementOffset is deprecated in TagOverflow; review before removing
       measurementOffset={20}
-      // @deprecated multiline — safe to remove; see TagOverflow docs
+      // @deprecated multiline is deprecated in TagOverflow; review before removing
       multiline
       items={[{
         id: 'item',
@@ -96,5 +96,43 @@ export function DynamicTagSet({ myTags }) {
   return (
     // TODO: TagSet → TagOverflow migration: rename `type` → `tagType` and add a unique `id` field to each item object.
     <TagOverflow items={myTags} />
+  );
+}
+
+// Duplicate labels and labels that slugify to an empty string get unique ids
+export function UniqueIds() {
+  return (
+    (<TagOverflow
+      items={[
+        {
+          id: 'info',
+          tagType: 'red',
+          label: 'Info',
+        },
+        {
+          id: 'info-2',
+          tagType: 'blue',
+          label: 'Info',
+        },
+        {
+          id: 'tag-2',
+          tagType: 'green',
+          label: '!!!',
+        },
+        { tagType: 'gray', label: 'Info', id: 'info-1' },
+      ]}
+    />)
+  );
+}
+
+// Arrays with spread elements can't be fully migrated – transform adds a TODO
+export function SpreadTagSet({ extraTags }) {
+  return (
+    // TODO: TagSet → TagOverflow migration: rename `type` → `tagType` and add a unique `id` field to each item object.
+    <TagOverflow items={[{
+      id: 'first',
+      tagType: 'red',
+      label: 'First',
+    }, ...extraTags]} />
   );
 }

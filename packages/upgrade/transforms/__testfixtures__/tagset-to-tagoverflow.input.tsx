@@ -65,3 +65,22 @@ export function ItemsWithId() {
 export function DynamicTagSet({ myTags }) {
   return <TagSet tags={myTags} />;
 }
+
+// Duplicate labels and labels that slugify to an empty string get unique ids
+export function UniqueIds() {
+  return (
+    <TagSet
+      tags={[
+        { type: 'red', label: 'Info' },
+        { type: 'blue', label: 'Info' },
+        { type: 'green', label: '!!!' },
+        { type: 'gray', label: 'Info', id: 'info-1' },
+      ]}
+    />
+  );
+}
+
+// Arrays with spread elements can't be fully migrated – transform adds a TODO
+export function SpreadTagSet({ extraTags }) {
+  return <TagSet tags={[{ type: 'red', label: 'First' }, ...extraTags]} />;
+}

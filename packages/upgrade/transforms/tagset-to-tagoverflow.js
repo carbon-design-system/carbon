@@ -53,8 +53,6 @@ const DEPRECATED_PROPS = new Set([
   'multiline',
 ]);
 
-// ─── helpers ──────────────────────────────────────────────────────────────────
-
 /**
  * Convert an arbitrary string into a simple slug (lowercase, hyphens).
  * Used to synthesise a stable `id` value from an item's `label`.
@@ -85,31 +83,46 @@ function staticStringValue(valueNode) {
 }
 
 /**
+ * Read the key name of an object property, or null when it is not static.
+ */
+function getKeyName(prop) {
+  if (prop.type !== 'ObjectProperty' && prop.type !== 'Property') return null;
+  if (prop.key.type === 'Identifier') return prop.key.name;
+  if (prop.key.type === 'StringLiteral') return prop.key.value;
+  return null;
+}
+
+/**
+ * Return an id based on `base` that is not in `usedIds` (`info`, `info-1`, …)
+ * and record it as used.
+ */
+function uniqueId(base, usedIds) {
+  let candidate = base;
+  let counter = 1;
+  while (usedIds.has(candidate)) {
+    candidate = `${base}-${counter++}`;
+  }
+  usedIds.add(candidate);
+  return candidate;
+}
+
+/**
  * Transform object properties within an item object literal:
  *   - rename `type` → `tagType`
- *   - inject `id` when absent
+ *   - inject a unique `id` when absent
  *
- * @param {object} j         - jscodeshift API
- * @param {object} objExpr   - ObjectExpression AST node (one tag item)
- * @param {number} index     - array index (fallback for id generation)
+ * @param {object} j            - jscodeshift API
+ * @param {object} objExpr      - ObjectExpression AST node (one tag item)
+ * @param {number} index        - array index (fallback for id generation)
+ * @param {Set<string>} usedIds - ids already used in the same array
  */
-function transformItemObject(j, objExpr, index) {
-  if (!objExpr || objExpr.type !== 'ObjectExpression') return;
-
+function transformItemObject(j, objExpr, index, usedIds) {
   const props = objExpr.properties;
   let hasId = false;
-  let labelValue = undefined;
+  let labelValue;
 
-  // Pass 1: rename `type` → `tagType`, collect `label` for id generation
   for (const prop of props) {
-    if (prop.type !== 'ObjectProperty' && prop.type !== 'Property') continue;
-
-    const keyName =
-      prop.key.type === 'Identifier'
-        ? prop.key.name
-        : prop.key.type === 'StringLiteral'
-          ? prop.key.value
-          : null;
+    const keyName = getKeyName(prop);
 
     if (keyName === 'type') {
       prop.key = j.identifier('tagType');
@@ -122,57 +135,62 @@ function transformItemObject(j, objExpr, index) {
     }
   }
 
-  // Pass 2: inject `id` when missing
   if (!hasId) {
-    let idStr;
-    if (labelValue !== undefined && labelValue !== '') {
-      idStr = slugify(labelValue);
-    } else {
-      idStr = `tag-${index}`;
-    }
-    const idProp = j.objectProperty(j.identifier('id'), j.stringLiteral(idStr));
-    // Insert id as the first property for visibility
-    props.unshift(idProp);
+    // slugify returns '' for non-Latin or punctuation-only labels
+    const base = (labelValue && slugify(labelValue)) || `tag-${index}`;
+    props.unshift(
+      j.objectProperty(
+        j.identifier('id'),
+        j.stringLiteral(uniqueId(base, usedIds))
+      )
+    );
   }
 }
 
 /**
- * Walk an expression (possibly ArrayExpression, possibly a reference) and
- * transform every ObjectExpression that looks like a tag item.
- * Only handles statically-inlined arrays; dynamic references are left as-is
- * with a TODO comment.
+ * Transform every object literal in an inline array of tag items.
+ * Arrays containing anything other than object literals (spreads,
+ * conditionals, references) cannot be fully migrated, so they are reported as
+ * not handled and the caller adds a TODO comment.
  *
- * @returns {boolean} true when the array was handled inline
+ * @returns {boolean} true when every element was migrated
  */
 function transformItemsArray(j, valueNode) {
-  // Unwrap JSXExpressionContainer
   const expr =
     valueNode && valueNode.type === 'JSXExpressionContainer'
       ? valueNode.expression
       : valueNode;
 
   if (!expr || expr.type !== 'ArrayExpression') {
-    return false; // dynamic — caller adds a TODO
+    return false;
   }
 
-  expr.elements.forEach((el, idx) => {
-    if (el && el.type === 'ObjectExpression') {
-      transformItemObject(j, el, idx);
-    }
-  });
-  return true;
-}
+  const isObject = (el) => el && el.type === 'ObjectExpression';
 
-// ─── main transform ───────────────────────────────────────────────────────────
+  // Reserve explicit ids first so generated ids never collide with them
+  const usedIds = new Set();
+  expr.elements.filter(isObject).forEach((obj) => {
+    obj.properties.forEach((prop) => {
+      if (getKeyName(prop) === 'id') {
+        const value = staticStringValue(prop.value);
+        if (value !== undefined) usedIds.add(value);
+      }
+    });
+  });
+
+  expr.elements.forEach((el, idx) => {
+    if (isObject(el)) transformItemObject(j, el, idx, usedIds);
+  });
+
+  return expr.elements.every(isObject);
+}
 
 function transform(fileInfo, api, options) {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
   const printOptions = options.printOptions || defaultOptions;
 
-  // ── 1. Collect local names imported as TagSet ──────────────────────────────
-  // Supports both '@carbon/ibm-products' and '@carbon/react'
-  const tagSetLocalNames = new Map(); // localName → { path, sourceValue }
+  const tagSetLocalNames = new Map(); // localName → { importPath, sourceValue }
 
   const IMPORT_SOURCES = ['@carbon/ibm-products', '@carbon/react'];
 
@@ -199,15 +217,10 @@ function transform(fileInfo, api, options) {
 
   let changed = false;
 
-  // ── 2. Transform JSX elements ──────────────────────────────────────────────
   tagSetLocalNames.forEach((_, localName) => {
-    // When the consumer wrote `TagSet as MyAlias`, localName is `MyAlias`.
-    // After the import is rewritten to `TagOverflow as MyAlias` the JSX
-    // identifier stays as `MyAlias`, so we only rename when there is NO alias
-    // (i.e. localName === 'TagSet').
+    // Aliased imports (`TagSet as MyAlias`) keep their JSX identifier
     const jsxTargetName = localName === 'TagSet' ? 'TagOverflow' : localName;
 
-    // Find every <TagSet …> / <MyAlias …> (opening + closing)
     root
       .find(j.JSXElement, {
         openingElement: { name: { name: localName } },
@@ -217,16 +230,13 @@ function transform(fileInfo, api, options) {
         const opening = elPath.node.openingElement;
         const closing = elPath.node.closingElement;
 
-        // Rename element (no-op when an alias is in use)
         opening.name = j.jsxIdentifier(jsxTargetName);
         if (closing) {
           closing.name = j.jsxIdentifier(jsxTargetName);
         }
 
-        // Process attributes
         const newAttrs = [];
         for (const attr of opening.attributes) {
-          // Keep spread attributes unchanged
           if (attr.type !== 'JSXAttribute') {
             newAttrs.push(attr);
             continue;
@@ -234,13 +244,8 @@ function transform(fileInfo, api, options) {
 
           const propName = attr.name.name;
 
-          // ── onOverflowClick: remove and insert a TODO comment ──────────────
           if (REMOVED_PROPS.has(propName)) {
-            // We attach a leading comment on the next sibling attribute, or on
-            // the element itself if this is the last attribute.
-            // Simplest approach: replace with a comment-only placeholder that
-            // jscodeshift will render, then filter it out.
-            // Instead, we annotate the JSX element node with a leading comment.
+            // The attribute is dropped; the TODO goes on the element instead
             const todo = j.line(
               ' TODO: TagSet → TagOverflow migration: onOverflowClick has no' +
                 ' direct equivalent in TagOverflow. Handle overflow manually or remove this prop.'
@@ -249,14 +254,12 @@ function transform(fileInfo, api, options) {
             todo.trailing = false;
             elPath.node.comments = elPath.node.comments || [];
             elPath.node.comments.push(todo);
-            // Do not push attr — it is removed
             continue;
           }
 
-          // ── Deprecated props: keep but annotate ───────────────────────────
           if (DEPRECATED_PROPS.has(propName)) {
             const deprecatedComment = j.line(
-              ` @deprecated ${propName} — safe to remove; see TagOverflow docs`
+              ` @deprecated ${propName} is deprecated in TagOverflow; review before removing`
             );
             deprecatedComment.leading = true;
             deprecatedComment.trailing = false;
@@ -266,15 +269,11 @@ function transform(fileInfo, api, options) {
             continue;
           }
 
-          // ── tags → items ──────────────────────────────────────────────────
           if (propName === 'tags') {
-            const newAttrName = j.jsxIdentifier('items');
-            attr.name = newAttrName;
+            attr.name = j.jsxIdentifier('items');
 
-            // Transform item objects inside the array (when static)
             const handled = transformItemsArray(j, attr.value);
             if (!handled) {
-              // Dynamic reference — add a TODO comment on the element
               const todoItems = j.line(
                 ' TODO: TagSet → TagOverflow migration: rename `type` → `tagType`' +
                   ' and add a unique `id` field to each item object.'
@@ -289,14 +288,9 @@ function transform(fileInfo, api, options) {
             continue;
           }
 
-          // ── overflowAutoAlign → autoAlign ─────────────────────────────────
           if (PROP_RENAMES[propName]) {
             attr.name = j.jsxIdentifier(PROP_RENAMES[propName]);
-            newAttrs.push(attr);
-            continue;
           }
-
-          // All other props pass through unchanged
           newAttrs.push(attr);
         }
 
@@ -308,7 +302,6 @@ function transform(fileInfo, api, options) {
     return null;
   }
 
-  // ── 3. Rewrite import specifiers ──────────────────────────────────────────
   tagSetLocalNames.forEach(({ importPath }) => {
     const specifiers = importPath.node.specifiers;
     const idx = specifiers.findIndex(
