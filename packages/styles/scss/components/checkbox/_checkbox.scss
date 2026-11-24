@@ -328,7 +328,7 @@
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox
     + .#{$prefix}--checkbox-label::before {
-    border-color: $icon-disabled;
+    border-color: $border-strong;
   }
 
   .#{$prefix}--checkbox-group--readonly
@@ -337,7 +337,7 @@
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::before {
-    border: 1px solid $icon-disabled;
+    border: 1px solid $border-strong;
     background: transparent;
   }
 
