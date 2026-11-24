@@ -11,34 +11,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/focus-outline';
 @use '@carbon/styles/scss/config' as *;
+@use './tearsheet-mixins' as *;
 
 @use '@carbon/styles/scss/components/Tearsheet';
 
-$block-class: #{$prefix}--tearsheet;
-$motion-duration: $duration-moderate-02;
-
-@mixin collapsed-element {
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
-  max-block-size: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity $motion-duration motion(entrance, expressive),
-    max-block-size $motion-duration motion(entrance, expressive),
-    padding $motion-duration motion(entrance, expressive),
-    margin $motion-duration motion(entrance, expressive);
-
-  @media screen and (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
 .#{$block-class}--has-ai-label::part(dialog) {
   border: 1px solid transparent !important; /* stylelint-disable-line declaration-no-important */
 
@@ -86,23 +66,6 @@ $motion-duration: $duration-moderate-02;
   padding-inline: 0;
 }
 :host(#{$prefix}-tearsheet) {
-  @media screen and (prefers-reduced-motion: reduce) {
-    ::part(dialog) {
-      align-self: flex-end;
-      border: 1px solid $border-subtle-01;
-      block-size: 100%;
-      inset-block-start: auto;
-      max-block-size: calc(
-        100% - var(
-            --tearsheet-vertical-gap,
-            calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
-          )
-      );
-      transform: translate3d(0, min(95vh, 500px), 0);
-      transition: none;
-    }
-  }
-
   ::part(dialog) {
     align-self: flex-end;
     border: 1px solid $border-subtle-01;
@@ -118,6 +81,10 @@ $motion-duration: $duration-moderate-02;
     transition:
       transform $motion-duration motion(entrance, expressive),
       max-block-size $motion-duration motion(entrance, expressive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   ::slotted([slot='influencer']) {
@@ -206,9 +173,8 @@ $motion-duration: $duration-moderate-02;
   }
 }
 
-// ──────────────────────────────────────────────────────────────
-// Narrow variant styles
-// ──────────────────────────────────────────────────────────────
+// ── Narrow variant ────────────────────────────────────────────
+// Header rules live in tearsheet-header.scss / tearsheet-header-content.scss.
 // ── Narrow container sizing ───────────────────────────────────
 // Carbon's dialog defaults to full-width on small screens and ~480 px on
 // larger ones, but its breakpoint (~672 px) is too wide for a narrow
@@ -222,30 +188,6 @@ $motion-duration: $duration-moderate-02;
       inline-size: 100%;
       max-inline-size: 100%;
     }
-  }
-
-  .#{$block-class}__header {
-    padding-inline: $spacing-05;
-  }
-
-  .#{$block-class}__header.#{$block-class}__header-collapsed {
-    .#{$block-class}__header-actions {
-      display: none;
-    }
-  }
-
-  .#{$block-class}__header-content-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .#{$block-class}__header-title {
-    @include type.type-style('heading-03');
-  }
-
-  .#{$block-class}__content__header-actions {
-    justify-content: flex-start;
-    margin-inline-end: 0;
   }
 
   .#{$block-class}__body {
@@ -268,26 +210,9 @@ $motion-duration: $duration-moderate-02;
   }
 }
 
-.#{$block-class}__header-label {
-  @extend .#{$block-class}__header-label !optional;
-}
-.#{$block-class}__header-title {
-  @extend .#{$block-class}__header-title !optional;
-}
-
-.#{$block-class}__header-description {
-  @extend .#{$block-class}__header-description !optional;
-}
-
 :host {
   #{$prefix}-side-panel::part(dialog) {
     @extend .#{$block-class}__side-panel !optional;
-  }
-}
-
-:host-context(#{$prefix}-tearsheet[variant='narrow']) {
-  ::slotted([slot='summary-content']) {
-    padding: 0;
   }
 }
 

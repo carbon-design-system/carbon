@@ -1,0 +1,30 @@
+/**
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+
+$block-class: #{$prefix}--tearsheet;
+$motion-duration: $duration-moderate-02;
+
+@mixin collapsed-element {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  max-block-size: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity $motion-duration motion(entrance, expressive),
+    max-block-size $motion-duration motion(entrance, expressive),
+    padding $motion-duration motion(entrance, expressive),
+    margin $motion-duration motion(entrance, expressive);
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}

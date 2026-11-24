@@ -12,10 +12,8 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/layout/scss/convert';
-@use './tearsheet.scss' as *;
-
-$block-class: #{$prefix}--tearsheet;
-$motion-duration: $duration-moderate-02;
+@use '@carbon/styles/scss/components/Tearsheet';
+@use './tearsheet-mixins' as *;
 
 .#{$block-class}__header-title {
   margin-block-start: 0;
@@ -40,10 +38,8 @@ $motion-duration: $duration-moderate-02;
     justify-content: flex-start;
     margin-inline-end: 0;
   }
-}
 
-// Hide header actions when collapsed in narrow variant
-:host-context(#{$prefix}-tearsheet[variant='narrow']) {
+  // Hide header actions when collapsed in narrow variant
   &:host-context(#{$prefix}-tearsheet-header[collapsed]) {
     .#{$block-class}__header-actions {
       display: none;
@@ -100,6 +96,7 @@ $motion-duration: $duration-moderate-02;
   @include breakpoint-down(md) {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 
     @if flags.enabled('enable-v12-release') {
       gap: 0;
