@@ -78,6 +78,7 @@
 
   .#{$prefix}--time-picker__input-field-error {
     inline-size: 6.175rem;
+    padding-inline-end: $spacing-08;
   }
 
   // V11: Possibly deprecate

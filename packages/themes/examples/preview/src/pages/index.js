@@ -7,13 +7,14 @@
 
 import { colors, hoverColors } from '@carbon/colors';
 import React from 'react';
-import { themes } from '../../../../src';
-import { TokenFormat, group, set as tokenSet } from '../../../../src/tokens';
-
-const tokens = group.getTokens();
-const groups = group.getTokenGroups();
-const properties = group.getTokenProperties();
-const tokenSets = tokenSet.getTokenSets();
+import { themes, formatTokenName } from '../../../../src';
+import {
+  tokens,
+  groups,
+  properties,
+  tokenSets,
+  toJsName,
+} from '../../../shared/token-metadata';
 
 const colorsByValue = {};
 
@@ -46,36 +47,18 @@ function getColorByValue(value, swatchPreference) {
 
 for (const [swatch, grades] of Object.entries(colors)) {
   for (const [grade, value] of Object.entries(grades)) {
-    addColorByValue(
-      value,
-      TokenFormat.convert({
-        name: `${swatch}-${grade}`,
-        format: TokenFormat.formats.scss,
-      })
-    );
+    addColorByValue(value, formatTokenName(`${swatch}${grade}`));
   }
 }
 
 for (const [swatch, grades] of Object.entries(hoverColors)) {
   if (typeof grades !== 'object') {
-    addColorByValue(
-      grades,
-      TokenFormat.convert({
-        name: swatch,
-        format: TokenFormat.formats.scss,
-      })
-    );
+    addColorByValue(grades, formatTokenName(swatch));
     continue;
   }
 
   for (const [grade, value] of Object.entries(grades)) {
-    addColorByValue(
-      value,
-      TokenFormat.convert({
-        name: `${swatch}-${grade}`,
-        format: TokenFormat.formats.scss,
-      })
-    );
+    addColorByValue(value, formatTokenName(`${swatch}${grade}`));
   }
 }
 
@@ -191,8 +174,10 @@ export default function IndexPage({ lastBuiltOn }) {
                   }
 
                   if (activeSet !== 'All') {
-                    const set = tokenSet.getTokenSet(activeSet);
-                    if (!set.hasToken(token.name)) {
+                    const set = tokenSets.find(({ name }) => {
+                      return name === activeSet;
+                    });
+                    if (!set.tokens.includes(token.name)) {
                       return false;
                     }
                   }
@@ -200,10 +185,7 @@ export default function IndexPage({ lastBuiltOn }) {
                   return true;
                 })
                 .map((token) => {
-                  const exportName = TokenFormat.convert({
-                    name: token.name,
-                    format: TokenFormat.formats.js,
-                  });
+                  const exportName = toJsName(token.name);
                   return (
                     <tr key={exportName} id={token.name}>
                       <td>

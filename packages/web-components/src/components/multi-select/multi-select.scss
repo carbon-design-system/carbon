@@ -56,7 +56,7 @@ $css--plex: true !default;
     padding-inline-start: 0;
 
     &:focus {
-      outline: none;
+      @include focus-outline('reset');
     }
   }
 

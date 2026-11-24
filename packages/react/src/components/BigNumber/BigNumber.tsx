@@ -100,7 +100,7 @@ export interface BigNumberProps {
   /**
    * The primary value to display (or the "numerator" of a fraction).
    */
-  value?: number;
+  value?: number | null;
 }
 
 /**
