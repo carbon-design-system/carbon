@@ -71,7 +71,7 @@ const controls: ArgTypes = {
   },
   persistent: {
     control: 'boolean',
-    description: 'Persistent toolbar search',
+    description: 'Keep the toolbar search expanded.',
   },
   radio: {
     control: 'boolean',
