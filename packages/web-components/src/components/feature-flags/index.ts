@@ -66,9 +66,6 @@ const hasOwn = <T extends object>(obj: T, key: PropertyKey): key is keyof T =>
  * component reads this flag once, when it connects, so changing the flag later
  * does not affect components that are already on the page. Becomes the default
  * behavior in v12.
- * @attr {boolean} enable-v12-toggle-reduced-label-spacing - Enable a reduced
- * spacing between the toggle control and its label. Becomes the default
- * behavior in v12.
  * @attr {boolean} enable-treeview-controllable - Enable the new `cds-treeview`
  * controllable API.
  * @attr {boolean} enable-dialog-element - Enable components to utilize the
@@ -98,7 +95,6 @@ class FeatureFlagsElement extends LitElement {
     'enable-dialog-element': 'CDS-MODAL',
     'enable-v12-dynamic-floating-styles': 'CDS-FLOATING',
     'enable-v12-autoalign': null,
-    'enable-v12-toggle-reduced-label-spacing': 'CDS-TOGGLE',
   } as const;
 
   static get observedAttributes() {

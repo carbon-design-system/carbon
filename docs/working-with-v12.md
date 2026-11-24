@@ -124,6 +124,8 @@ see the same v12 state.
 
 <!-- prettier-ignore-end -->
 
+<!-- TODO: `enable-v12-toggle-reduced-label-spacing` was removed (#24101). Remove this paragraph once no such flags remain. -->
+
 Some Web Components Sass is selected through attributes on the component itself,
 for example `cds-toggle[enable-v12-toggle-reduced-label-spacing]`. The
 `feature-flags` element syncs enabled related flags onto nested components so a

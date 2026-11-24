@@ -814,7 +814,6 @@ collect:
         - enable-v12-release
         - enable-v12-tile-default-icons
         - enable-v12-tile-radio-icons
-        - enable-v12-toggle-reduced-label-spacing
         # stacking-tearsheet-demo
         - tearsheet-type
         # tabs-story-wrapper
