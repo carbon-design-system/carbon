@@ -1102,13 +1102,13 @@ export const upgrades = [
         },
       },
       {
-        name: 'tagset-to-tagoverflow',
+        name: 'ibm-products-tagset-to-tagoverflow',
         description:
-          'Migrates TagSet (deprecated) to TagOverflow: renames the import specifier and JSX element, renames tags→items and overflowAutoAlign→autoAlign, transforms per-item fields (type→tagType, injects id), removes onOverflowClick with a TODO comment, and annotates deprecated props containingElementRef/measurementOffset/multiline.',
+          'Migrates TagSet (deprecated) to TagOverflow in @carbon/ibm-products: renames the import specifier and JSX element, renames tags→items and overflowAutoAlign→autoAlign, transforms per-item fields (type→tagType, injects id), and removes onOverflowClick, containingElementRef, measurementOffset and multiline with a TODO comment describing the lost behavior.',
         migrate: async (options) => {
           const transform = path.join(
             TRANSFORM_DIR,
-            'tagset-to-tagoverflow.js'
+            'ibm-products-tagset-to-tagoverflow.js'
           );
           const paths =
             Array.isArray(options.paths) && options.paths.length > 0

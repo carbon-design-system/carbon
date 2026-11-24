@@ -23,11 +23,22 @@
  *   Inject a stable `id` field when one is absent (slug from label, fallback
  *   to array index).
  *
- * Removed / flagged props:
- *   onOverflowClick  — no equivalent; replaced with a TODO comment
+ * Removed props (each leaves a TODO describing the behaviour that is lost):
+ *   onOverflowClick, containingElementRef, measurementOffset, multiline
+ *   TagOverflow does not destructure these, so they would fall into `...rest`
+ *   and be spread onto the root <div>.
  *
- * Deprecated-but-kept props (left in place, given an inline @deprecated note):
- *   containingElementRef, measurementOffset, multiline
+ * Missing default labels:
+ *   TagSet defaults allTagsModalTitle, allTagsModalSearchLabel,
+ *   allTagsModalSearchPlaceholderText and showAllTagsLabel; TagOverflow does
+ *   not. A TODO is added when any of them is absent (English strings are not
+ *   injected so that no untranslated text is hard-coded).
+ *
+ * Imports:
+ *   When TagOverflow is already imported, the TagSet specifier is removed
+ *   rather than renamed. When TagSet is still referenced outside JSX
+ *   (`typeof TagSet`, `React.createElement(TagSet)`, …) the TagSet specifier is
+ *   kept, TagOverflow is added, and a TODO is left on the import.
  */
 
 'use strict';
@@ -43,15 +54,30 @@ const PROP_RENAMES = {
   overflowAutoAlign: 'autoAlign',
 };
 
-// Props that have been removed with no equivalent
-const REMOVED_PROPS = new Set(['onOverflowClick']);
+// Props that have been removed; the value is the TODO describing what is lost
+const REMOVED_PROPS = {
+  onOverflowClick:
+    'onOverflowClick was removed. TagOverflow has no equivalent and always' +
+    ' opens its own "all tags" modal, so reimplement any custom overflow' +
+    ' handling manually.',
+  containingElementRef:
+    'containingElementRef was removed. TagOverflow forwards its ref to the' +
+    ' root element; use that ref if you need access to the container.',
+  measurementOffset:
+    'measurementOffset was removed. TagOverflow now calculates the offset' +
+    ' automatically.',
+  multiline:
+    'multiline was removed. TagOverflow only hides overflowing items, so the' +
+    ' multiline layout is no longer available.',
+};
 
-// Props that are deprecated but kept – we annotate them
-const DEPRECATED_PROPS = new Set([
-  'containingElementRef',
-  'measurementOffset',
-  'multiline',
-]);
+// TagSet provides default values for these; TagOverflow does not
+const LABEL_PROPS = [
+  'allTagsModalTitle',
+  'allTagsModalSearchLabel',
+  'allTagsModalSearchPlaceholderText',
+  'showAllTagsLabel',
+];
 
 /**
  * Convert an arbitrary string into a simple slug (lowercase, hyphens).
@@ -185,6 +211,60 @@ function transformItemsArray(j, valueNode) {
   return expr.elements.every(isObject);
 }
 
+/**
+ * Attach a `TODO: TagSet → TagOverflow migration` comment to an element path.
+ * A `//` comment placed before a JSX child would render as text, so inside JSX
+ * children a block comment in an expression container is inserted instead.
+ */
+function addTodo(j, path, text) {
+  const message = ` TODO: TagSet → TagOverflow migration: ${text}`;
+  const parent = path.parent.node;
+  const isJsxChild =
+    (parent.type === 'JSXElement' || parent.type === 'JSXFragment') &&
+    Array.isArray(parent.children) &&
+    parent.children.includes(path.node);
+
+  if (isJsxChild) {
+    const empty = j.jsxEmptyExpression();
+    const block = j.commentBlock(`${message} `, false, true);
+    empty.comments = [block];
+    const container = j.jsxExpressionContainer(empty);
+    parent.children.splice(parent.children.indexOf(path.node), 0, container);
+    return;
+  }
+
+  const comment = j.line(message);
+  comment.leading = true;
+  comment.trailing = false;
+  path.node.comments = path.node.comments || [];
+  path.node.comments.push(comment);
+}
+
+/**
+ * True when an Identifier path is a real reference to a binding (as opposed to
+ * a property name, an object key, or part of an import specifier).
+ */
+function isReference(path) {
+  const parent = path.parent.node;
+  const node = path.node;
+  switch (parent.type) {
+    case 'ImportSpecifier':
+    case 'ImportDefaultSpecifier':
+    case 'ImportNamespaceSpecifier':
+      return false;
+    case 'MemberExpression':
+    case 'OptionalMemberExpression':
+      return parent.object === node || parent.computed;
+    case 'ObjectProperty':
+    case 'Property':
+    case 'ClassProperty':
+    case 'TSPropertySignature':
+      return parent.value === node || parent.computed;
+    default:
+      return true;
+  }
+}
+
 function transform(fileInfo, api, options) {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
@@ -217,9 +297,27 @@ function transform(fileInfo, api, options) {
 
   let changed = false;
 
+  // A TagOverflow binding that is already imported must not be duplicated
+  const hasTagOverflowImport = root
+    .find(j.ImportSpecifier)
+    .some((p) => (p.node.local || p.node.imported).name === 'TagOverflow');
+
+  // Local names that are still referenced somewhere other than JSX / imports
+  const otherRefs = new Set();
   tagSetLocalNames.forEach((_, localName) => {
-    // Aliased imports (`TagSet as MyAlias`) keep their JSX identifier
-    const jsxTargetName = localName === 'TagSet' ? 'TagOverflow' : localName;
+    const count = root
+      .find(j.Identifier, { name: localName })
+      .filter((p) => p.node.type === 'Identifier' && isReference(p)).length;
+    if (count > 0) otherRefs.add(localName);
+  });
+
+  tagSetLocalNames.forEach((_, localName) => {
+    // Aliased imports (`TagSet as MyAlias`) keep their JSX identifier, unless
+    // the alias must stay bound to TagSet for non-JSX references
+    const jsxTargetName =
+      localName === 'TagSet' || otherRefs.has(localName)
+        ? 'TagOverflow'
+        : localName;
 
     root
       .find(j.JSXElement, {
@@ -244,28 +342,9 @@ function transform(fileInfo, api, options) {
 
           const propName = attr.name.name;
 
-          if (REMOVED_PROPS.has(propName)) {
+          if (Object.prototype.hasOwnProperty.call(REMOVED_PROPS, propName)) {
             // The attribute is dropped; the TODO goes on the element instead
-            const todo = j.line(
-              ' TODO: TagSet → TagOverflow migration: onOverflowClick has no' +
-                ' direct equivalent in TagOverflow. Handle overflow manually or remove this prop.'
-            );
-            todo.leading = true;
-            todo.trailing = false;
-            elPath.node.comments = elPath.node.comments || [];
-            elPath.node.comments.push(todo);
-            continue;
-          }
-
-          if (DEPRECATED_PROPS.has(propName)) {
-            const deprecatedComment = j.line(
-              ` @deprecated ${propName} is deprecated in TagOverflow; review before removing`
-            );
-            deprecatedComment.leading = true;
-            deprecatedComment.trailing = false;
-            attr.comments = attr.comments || [];
-            attr.comments.push(deprecatedComment);
-            newAttrs.push(attr);
+            addTodo(j, elPath, REMOVED_PROPS[propName]);
             continue;
           }
 
@@ -274,14 +353,12 @@ function transform(fileInfo, api, options) {
 
             const handled = transformItemsArray(j, attr.value);
             if (!handled) {
-              const todoItems = j.line(
-                ' TODO: TagSet → TagOverflow migration: rename `type` → `tagType`' +
-                  ' and add a unique `id` field to each item object.'
+              addTodo(
+                j,
+                elPath,
+                'rename `type` → `tagType` and add a unique `id` field to' +
+                  ' each item object.'
               );
-              todoItems.leading = true;
-              todoItems.trailing = false;
-              elPath.node.comments = elPath.node.comments || [];
-              elPath.node.comments.push(todoItems);
             }
 
             newAttrs.push(attr);
@@ -295,6 +372,22 @@ function transform(fileInfo, api, options) {
         }
 
         opening.attributes = newAttrs;
+
+        const present = new Set(
+          newAttrs
+            .filter((a) => a.type === 'JSXAttribute')
+            .map((a) => a.name.name)
+        );
+        const missingLabels = LABEL_PROPS.filter((name) => !present.has(name));
+        if (missingLabels.length > 0) {
+          addTodo(
+            j,
+            elPath,
+            `TagSet defaulted ${missingLabels.join(', ')}; TagOverflow has no` +
+              ' defaults. Provide translated values to keep the "view all"' +
+              ' link, modal title and search field labelled.'
+          );
+        }
       });
   });
 
@@ -302,7 +395,7 @@ function transform(fileInfo, api, options) {
     return null;
   }
 
-  tagSetLocalNames.forEach(({ importPath }) => {
+  tagSetLocalNames.forEach(({ importPath }, localName) => {
     const specifiers = importPath.node.specifiers;
     const idx = specifiers.findIndex(
       (s) => s.type === 'ImportSpecifier' && s.imported.name === 'TagSet'
@@ -316,11 +409,36 @@ function transform(fileInfo, api, options) {
         ? existing.local.name
         : null;
 
-    const newSpecifier = alias
+    if (otherRefs.has(localName)) {
+      // Keep TagSet bound for the remaining references, add TagOverflow
+      addTodo(
+        j,
+        importPath,
+        `${localName} is still referenced outside JSX. Migrate those` +
+          ' references to TagOverflow, then remove the TagSet import.'
+      );
+      if (!hasTagOverflowImport) {
+        specifiers.splice(
+          idx + 1,
+          0,
+          j.importSpecifier(j.identifier('TagOverflow'))
+        );
+      }
+      return;
+    }
+
+    if (!alias && hasTagOverflowImport) {
+      // TagOverflow is already imported; renaming would duplicate the binding
+      specifiers.splice(idx, 1);
+      if (specifiers.length === 0) {
+        j(importPath).remove();
+      }
+      return;
+    }
+
+    specifiers[idx] = alias
       ? j.importSpecifier(j.identifier('TagOverflow'), j.identifier(alias))
       : j.importSpecifier(j.identifier('TagOverflow'));
-
-    specifiers[idx] = newSpecifier;
   });
 
   return root.toSource(printOptions);

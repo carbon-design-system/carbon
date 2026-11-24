@@ -84,3 +84,20 @@ export function UniqueIds() {
 export function SpreadTagSet({ extraTags }) {
   return <TagSet tags={[{ type: 'red', label: 'First' }, ...extraTags]} />;
 }
+
+// Nested TagSet inside another element, with all default labels provided
+export function NestedTagSet() {
+  return (
+    <div>
+      <section>
+        <TagSet
+          allTagsModalTitle="All tags"
+          allTagsModalSearchLabel="Search all tags"
+          allTagsModalSearchPlaceholderText="Search all tags"
+          showAllTagsLabel="View all tags"
+          tags={[{ type: 'red', label: 'Nested' }]}
+        />
+      </section>
+    </div>
+  );
+}
