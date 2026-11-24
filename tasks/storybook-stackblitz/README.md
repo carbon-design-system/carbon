@@ -47,8 +47,11 @@ keep in sync.
   docs action to its stories. Generated projects live in a virtual module per
   stories file, fetched only when an action is clicked. Production builds also
   publish every project (see [Published projects](#published-projects)).
-- `open-in-stackblitz.js`: browser runtime; opens the project with
-  `@stackblitz/sdk`.
+- `open-in-stackblitz.js`: browser runtime. The click opens a new tab right
+  away, then the project is posted into it with StackBlitz's
+  [POST API](https://developer.stackblitz.com/platform/api/post-api) once it has
+  loaded. `@stackblitz/sdk` opens the tab only after the async load, so browsers
+  can block it as a popup.
 
 ## Usage
 
