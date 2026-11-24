@@ -282,6 +282,7 @@ describe('Carbon Components React', () => {
         "TileGroup",
         "TimePicker",
         "TimePickerSelect",
+        "TimePickerSkeleton",
         "ToastNotification",
         "Toggle",
         "ToggleSkeleton",

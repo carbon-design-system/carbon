@@ -23,6 +23,8 @@ import FluidSearch, { FluidSearchSkeleton } from '../FluidSearch';
 import FluidSelect, { FluidSelectSkeleton } from '../FluidSelect';
 import FluidTextArea, { FluidTextAreaSkeleton } from '../FluidTextArea';
 import FluidTextInput, { FluidTextInputSkeleton } from '../FluidTextInput';
+import FluidTimePicker, { FluidTimePickerSkeleton } from '../FluidTimePicker';
+import FluidTimePickerSelect from '../FluidTimePickerSelect';
 import FluidPasswordInput from '../FluidTextInput/FluidPasswordInput';
 import Checkbox from '../Checkbox';
 import FormGroup from '../FormGroup';
@@ -266,6 +268,11 @@ export const Default = (args) => {
         </div>
         <div style={formRowStyle}>
           <div style={formColStyle}>
+            <FluidTimePickerSkeleton />
+          </div>
+        </div>
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
             <FluidNumberInputSkeleton label="Budget" id="skeleton-budget" />
           </div>
           <div style={formColStyle}>
@@ -375,6 +382,34 @@ export const Default = (args) => {
                 {...sharedProps}
               />
             </FluidDatePicker>
+          </div>
+        </div>
+
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <FluidTimePicker
+              id="kickoff-time"
+              labelText="Kickoff time"
+              placeholder="hh:mm"
+              disabled={disabled}
+              readOnly={readOnly}
+              invalid={invalid}
+              invalidText={invalidText}
+              warn={warn}
+              warnText={warnText}>
+              <FluidTimePickerSelect id="kickoff-time-period" labelText="Clock">
+                <SelectItem value="am" text="AM" />
+                <SelectItem value="pm" text="PM" />
+              </FluidTimePickerSelect>
+              <FluidTimePickerSelect
+                id="kickoff-time-zone"
+                labelText="Timezone">
+                <SelectItem value="et" text="Eastern Time (ET)" />
+                <SelectItem value="ct" text="Central Time (CT)" />
+                <SelectItem value="mt" text="Mountain Time (MT)" />
+                <SelectItem value="pt" text="Pacific Time (PT)" />
+              </FluidTimePickerSelect>
+            </FluidTimePicker>
           </div>
         </div>
 

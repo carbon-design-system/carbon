@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -51,11 +51,21 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   /**
-   * Handle slotchange event for time-picker-select slot
-   * to propagate properties to child elements
+   * Whether any time-picker-select elements are slotted
    */
-  protected _handleSlotChange() {
-    this.requestUpdate();
+  @state()
+  protected _hasSelectChildren = false;
+
+  /**
+   * Handle slotchange event to detect slotted time-picker-select children
+   */
+  protected _handleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement;
+    const { selectorTimePickerSelect } = this
+      .constructor as typeof CDSTimePicker;
+    this._hasSelectChildren = slot
+      .assignedElements({ flatten: true })
+      .some((el) => el.matches(selectorTimePickerSelect));
   }
 
   _handleFormdata(event: Event) {
@@ -203,6 +213,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       size,
       type,
       value,
+      _hasSelectChildren: hasSelectChildren,
       _handleInput: handleInput,
       _handleSlotChange: handleSlotChange,
     } = this;
@@ -237,6 +248,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--text-input`]: true,
       [`${prefix}--time-picker__input-field-error`]:
         normalizedProps.invalid || normalizedProps.warn,
+      [`${prefix}--time-picker__input-field--with-select`]: hasSelectChildren,
       ...(className && { [className]: true }),
     });
 
