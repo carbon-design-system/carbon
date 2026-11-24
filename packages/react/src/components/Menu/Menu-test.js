@@ -499,6 +499,39 @@ describe('MenuItem', () => {
       });
     });
 
+    it('should not move focus to a leaf item when the pointer leaves the page after hovering it', async () => {
+      jest.useFakeTimers();
+      try {
+        render(
+          <>
+            <button type="button">Outside</button>
+            <Menu open label="Menu">
+              <MenuItem label="Item 1" />
+              <MenuItem label="Item 2" />
+            </Menu>
+          </>
+        );
+        await waitForPosition();
+
+        const outside = screen.getByRole('button', { name: 'Outside' });
+        outside.focus();
+
+        const item = screen.getByRole('menuitem', { name: 'Item 2' });
+        await act(() => {
+          fireEvent.mouseEnter(item);
+          jest.runOnlyPendingTimers();
+        });
+        await act(() => {
+          fireEvent.mouseLeave(item);
+          fireEvent.mouseLeave(document.documentElement);
+        });
+
+        expect(outside).toHaveFocus();
+      } finally {
+        jest.useRealTimers();
+      }
+    });
+
     it('should move focus to the next item when pressing ArrowDown while an item with a submenu is in focus', async () => {
       render(
         <Menu open label="Menu">

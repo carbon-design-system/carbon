@@ -95,6 +95,6 @@ external documentation focused towards end users of the system (designers,
 developers, product managers)
 
 - Detailed design and usage information for the system as a whole:
-  https://github.com/carbon-design-system/carbon-website/tree/main/src/pages
+  https://www.carbondesignsystem.com
 - Developer-focused, component-specific usage docs are surfaced through
   storybook and housed in colocated `.mdx` files.

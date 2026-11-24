@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -38,13 +38,13 @@ describe('scss/utilities/custom-property', () => {
         @include custom-property.declaration(test, #000000);
       }
     `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const selector = stylesheet.rules.find((rule) => {
+    const stylesheet = postcss.parse(result.css.toString());
+    const selector = stylesheet.nodes.find((rule) => {
       return rule.selectors.includes('.test');
     });
-    const [declaration] = selector.declarations;
+    const [declaration] = selector.nodes;
 
-    expect(declaration.property).toBe('--cds-test');
+    expect(declaration.prop).toBe('--cds-test');
     expect(declaration.value).toBe('#000000');
   });
 });
