@@ -1807,7 +1807,7 @@ export const WithTruncatedTitle = {
               ?description-truncate=${descriptionTruncate}>
               ${title}
             </cds-card-title>
-            ${renderHeaderActions(actionCount)}
+            ${renderHeaderActions(actionCount, title)}
           </cds-card-header>
           <cds-card-body>${bodyText}</cds-card-body>
           <cds-card-footer>
