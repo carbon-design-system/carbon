@@ -30,6 +30,7 @@ const translationIds = {
   'carbon.pagination-nav.item': 'carbon.pagination-nav.item',
   'carbon.pagination-nav.active': 'carbon.pagination-nav.active',
   'carbon.pagination-nav.of': 'carbon.pagination-nav.of',
+  'carbon.pagination-nav.select': 'carbon.pagination-nav.select',
 } as const;
 
 type TranslationKey = keyof typeof translationIds;
@@ -40,6 +41,7 @@ const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['carbon.pagination-nav.item']]: 'Page',
   [translationIds['carbon.pagination-nav.active']]: 'Active',
   [translationIds['carbon.pagination-nav.of']]: 'of',
+  [translationIds['carbon.pagination-nav.select']]: 'Select Page number',
 };
 
 const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
@@ -198,7 +200,9 @@ function PaginationItem({
 
 export interface PaginationOverflowProps
   extends TranslateWithId<
-    'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
+    | 'carbon.pagination-nav.item'
+    | 'carbon.pagination-nav.active'
+    | 'carbon.pagination-nav.select'
   > {
   /**
    * How many items to display in this overflow.
@@ -240,7 +244,7 @@ function PaginationOverflow({
           {}
           <select
             className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
-            aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
+            aria-label={t('carbon.pagination-nav.select')}
             disabled></select>
           <div className={`${prefix}--pagination-nav__select-icon-wrapper`}>
             <OverflowMenuHorizontal
@@ -259,7 +263,7 @@ function PaginationOverflow({
           {}
           <select
             className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
-            aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
+            aria-label={t('carbon.pagination-nav.select')}
             onChange={(e) => {
               const index = Number(e.target.value);
               onSelect?.(index);
@@ -539,6 +543,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             count={cuts.front}
             onSelect={jumpToItem}
             disableOverflow={isOverflowDisabled}
+            translateWithId={t}
           />
 
           {
@@ -565,6 +570,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             count={cuts.back}
             onSelect={jumpToItem}
             disableOverflow={isOverflowDisabled}
+            translateWithId={t}
           />
 
           {
