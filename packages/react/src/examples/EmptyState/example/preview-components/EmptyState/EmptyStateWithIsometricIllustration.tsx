@@ -6,13 +6,13 @@
  */
 
 import React, { type FC } from 'react';
-import EmptyStateJsx from '../components/EmptyState';
-import noDataIllustration from '../assets/no-data.svg';
-import notFoundIllustration from '../assets/not-found.svg';
-import unauthorizedIllustration from '../assets/unauthorized.svg';
-import errorIllustration from '../assets/error.svg';
-import notificationIllustration from '../assets/notification.svg';
-import '../styles/_empty-state.scss';
+import EmptyStateJsx from '../../components/EmptyState';
+import noDataIllustration from '../../assets/no-data-light.svg';
+import notFoundIllustration from '../../assets/not-found-light.svg';
+import unauthorizedIllustration from '../../assets/unauthorized-light.svg';
+import errorIllustration from '../../assets/error-light.svg';
+import notificationIllustration from '../../assets/notification-light.svg';
+import '../../styles/_empty-state.scss';
 
 interface EmptyStateProps {
   size?: 'md' | 'sm';
