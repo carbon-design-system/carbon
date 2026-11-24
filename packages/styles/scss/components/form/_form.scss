@@ -24,6 +24,11 @@ $input-label-weight: 400 !default;
 @mixin form {
   .#{$prefix}--fieldset {
     @include component-reset.reset;
+
+    // Native disclosure content can interrupt inherited box sizing.
+    .#{$prefix}--btn {
+      box-sizing: border-box;
+    }
   }
 
   .#{$prefix}--form-item {
