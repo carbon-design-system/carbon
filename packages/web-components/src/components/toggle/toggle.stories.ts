@@ -18,15 +18,16 @@ const sizes = {
 const defaultArgs = {
   labelA: 'On',
   labelB: 'Off',
+  disabled: false,
+  hideLabel: false,
+  readOnly: false,
   toggled: true,
+  size: null,
   labelText: 'Label',
 };
 
 const smallToggleArgs = {
-  labelA: 'On',
-  labelB: 'Off',
-  toggled: true,
-  labelText: 'Label',
+  ...defaultArgs,
   size: 'sm',
 };
 
@@ -100,6 +101,11 @@ export const Skeleton = {
 export const SmallToggle = {
   argTypes: controls,
   args: smallToggleArgs,
+  parameters: {
+    controls: {
+      exclude: ['size'],
+    },
+  },
   render: ({
     disabled,
     hideLabel,

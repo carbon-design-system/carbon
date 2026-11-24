@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { VStack } from '../Stack';
 import Toggle, { ToggleSkeleton } from '../Toggle';
@@ -22,24 +22,39 @@ export default {
 };
 
 export const Default = (args) => {
-  return (
-    <Toggle
-      labelText="Label"
-      labelA="Off"
-      labelB="On"
-      defaultToggled
-      id="toggle-3"
-      {...args}
-    />
-  );
+  const { toggled: toggledArg } = args;
+  const [toggled, setToggled] = useState(toggledArg);
+
+  useEffect(() => {
+    setToggled(toggledArg);
+  }, [toggledArg]);
+
+  return <Toggle {...args} toggled={toggled} onToggle={setToggled} />;
+};
+
+Default.args = {
+  defaultToggled: true,
+  disabled: false,
+  hideLabel: false,
+  id: 'toggle-3',
+  labelA: 'Off',
+  labelB: 'On',
+  labelText: 'Label',
+  readOnly: false,
+  size: 'md',
+  toggled: true,
 };
 
 Default.argTypes = {
-  className: {
-    control: false,
+  'aria-labelledby': {
+    control: {
+      type: 'text',
+    },
   },
   defaultToggled: {
-    control: false,
+    control: {
+      type: 'boolean',
+    },
   },
   disabled: {
     control: {
@@ -51,44 +66,61 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
-  id: {
-    control: false,
-  },
   labelA: {
-    control: false,
+    control: {
+      type: 'text',
+    },
   },
   labelB: {
-    control: false,
+    control: {
+      type: 'text',
+    },
   },
   labelText: {
-    control: false,
+    control: {
+      type: 'text',
+    },
   },
-  onClick: {
-    control: false,
-  },
-  onToggle: {
-    control: false,
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
   },
   size: {
-    size: {
-      options: ['sm', 'md'],
-      control: { type: 'select' },
+    control: {
+      type: 'radio',
+    },
+    options: ['sm', 'md'],
+  },
+  toggled: {
+    control: {
+      type: 'boolean',
     },
   },
 };
 
 export const SmallToggle = (args) => {
-  return (
-    <Toggle
-      size="sm"
-      labelText="Label"
-      labelA="Off"
-      labelB="On"
-      defaultToggled
-      id="toggle-2"
-      {...args}
-    />
-  );
+  const { toggled: toggledArg } = args;
+  const [toggled, setToggled] = useState(toggledArg);
+
+  useEffect(() => {
+    setToggled(toggledArg);
+  }, [toggledArg]);
+
+  return <Toggle {...args} toggled={toggled} onToggle={setToggled} />;
+};
+
+SmallToggle.args = {
+  ...Default.args,
+  id: 'toggle-2',
+  size: 'sm',
+};
+
+SmallToggle.argTypes = {
+  ...Default.argTypes,
+  size: {
+    control: false,
+  },
 };
 
 export const WithAccessibleLabels = () => {
