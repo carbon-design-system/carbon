@@ -2319,4 +2319,44 @@ describe('Date picker with minDate and maxDate', () => {
 
     document.body.removeChild(customContainer);
   });
+
+  it('should not throw an unhandled rejection when unmounted before the deferred calendar position update', async () => {
+    // https://github.com/carbon-design-system/carbon/issues/24084
+    const rejections = [];
+    const onUnhandledRejection = (event) => {
+      rejections.push(event.reason);
+    };
+    window.addEventListener('unhandledrejection', onUnhandledRejection);
+
+    const customContainer = document.createElement('div');
+    document.body.appendChild(customContainer);
+
+    const { unmount } = render(
+      <DatePicker
+        datePickerType="single"
+        appendTo={customContainer}
+        value="01/01/2025">
+        <DatePickerInput
+          id="date-picker-input-id-deferred"
+          placeholder="mm/dd/yyyy"
+          labelText="Label"
+          data-testid="date-picker-1"
+        />
+      </DatePicker>
+    );
+
+    // `fireEvent` is synchronous, unlike `userEvent`, so the calendar opens
+    // and the component unmounts before the microtask queued by
+    // `onPreCalendarPosition` runs. Flatpickr's `destroy()` deletes the
+    // instance fields the deferred update relies on.
+    fireEvent.click(screen.getByTestId('date-picker-1'));
+    unmount();
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    window.removeEventListener('unhandledrejection', onUnhandledRejection);
+    document.body.removeChild(customContainer);
+
+    expect(rejections).toEqual([]);
+  });
 });
