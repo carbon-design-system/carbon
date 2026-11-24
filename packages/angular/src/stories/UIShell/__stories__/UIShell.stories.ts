@@ -127,7 +127,7 @@ const badgeArgTypes: ArgTypes = {
   badgeCount: {
     control: 'number',
     description:
-      'Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.',
+      'Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0. Must be used with size="lg" and kind="ghost"',
   },
 };
 
