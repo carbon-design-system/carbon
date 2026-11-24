@@ -17,17 +17,9 @@ import type {
 import type { ButtonProps } from '../../Button';
 import type { MenuButtonProps } from '../../MenuButton';
 
-// ============================================================================
-// Core Types
-// ============================================================================
-
 export type SidePanelSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type SidePanelPlacement = 'right' | 'left';
 export type SidePanelVariant = 'slideIn' | 'slideOver';
-
-// ============================================================================
-// 1. Root Component: SidePanel
-// ============================================================================
 
 export interface SidePanelProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
@@ -104,8 +96,9 @@ export interface SidePanelProps
   preventCloseOnClickOutside?: boolean;
 
   /**
-   * When `true`, allows the panel to be resized. Only supported in the
-   * `slideOver` variant, and only on viewports wider than 768px.
+   * Not implemented yet. Intended to allow resizing the panel in the
+   * `slideOver` variant on viewports wider than 768px. Currently has no
+   * effect.
    * @default false
    */
   resizable?: boolean;
@@ -144,10 +137,6 @@ export interface SidePanelProps
   variant?: SidePanelVariant;
 }
 
-// ============================================================================
-// 2. Header Layout: SidePanel.Header
-// ============================================================================
-
 export interface SidePanelHeaderProps {
   /**
    * Header children: typically `SidePanel.HeaderContent`, `SidePanel.Toolbar`,
@@ -184,10 +173,6 @@ export interface SidePanelHeaderProps {
    */
   onHeaderCollapse?: (isCollapsed: boolean) => void;
 }
-
-// ============================================================================
-// 3. Header Content: SidePanel.HeaderContent
-// ============================================================================
 
 export interface SidePanelHeaderContentProps {
   /**
@@ -239,10 +224,6 @@ export interface SidePanelHeaderContentProps {
   titleStart?: ReactNode;
 }
 
-// ============================================================================
-// 4. Header Actions & Item
-// ============================================================================
-
 export interface SidePanelHeaderActionsProps {
   /**
    * One or more `SidePanel.HeaderActionItem` components.
@@ -283,10 +264,6 @@ export interface SidePanelHeaderActionItemProps {
   overflowItemLabel: string;
 }
 
-// ============================================================================
-// 5. Header Sub-Bars: Toolbar & NavBar
-// ============================================================================
-
 export interface SidePanelToolbarProps {
   /**
    * Toolbar controls, filters, or action buttons.
@@ -318,10 +295,6 @@ export interface SidePanelNavBarProps {
   className?: string;
 }
 
-// ============================================================================
-// 6. Body: SidePanel.Body
-// ============================================================================
-
 export interface SidePanelBodyProps {
   /**
    * Main scrollable content of the side panel.
@@ -339,10 +312,6 @@ export interface SidePanelBodyProps {
    */
   isFlush?: boolean;
 }
-
-// ============================================================================
-// 7. Footer: SidePanel.Footer
-// ============================================================================
 
 export interface SidePanelFooterProps {
   /**

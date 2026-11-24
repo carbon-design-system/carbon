@@ -13,14 +13,6 @@ import { usePrefix } from '../../../internal/usePrefix';
 import { SidePanelContext } from './context';
 import type { SidePanelHeaderContentProps } from './SidePanel.types';
 
-/**
- * ----------------
- * SidePanelHeaderContent
- * ----------------
- *
- * Renders the label, title, description, and header actions. Scroll-collapse
- * and action overflow are implemented in follow-up issues.
- */
 const SidePanelHeaderContent = forwardRef<
   HTMLDivElement,
   SidePanelHeaderContentProps

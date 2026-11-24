@@ -13,14 +13,6 @@ import type {
   SidePanelHeaderActionsProps,
 } from './SidePanel.types';
 
-/**
- * ----------------
- * SidePanelHeaderActions
- * ----------------
- *
- * Placeholder shell. The overflow `MenuButton` behavior is implemented in a
- * follow-up issue.
- */
 export const SidePanelHeaderActions = forwardRef<
   HTMLDivElement,
   SidePanelHeaderActionsProps
@@ -36,11 +28,6 @@ export const SidePanelHeaderActions = forwardRef<
 });
 SidePanelHeaderActions.displayName = 'SidePanelHeaderActions';
 
-/**
- * ----------------
- * SidePanelHeaderActionItem
- * ----------------
- */
 export const SidePanelHeaderActionItem = ({
   children,
   className,

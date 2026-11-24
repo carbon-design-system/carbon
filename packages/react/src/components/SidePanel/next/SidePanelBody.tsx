@@ -20,10 +20,6 @@ import { SidePanelContext } from './context';
 import type { SidePanelBodyProps } from './SidePanel.types';
 
 /**
- * ----------------
- * SidePanelBody
- * ----------------
- *
  * Scrollable content area. Scrolling or dragging down collapses the header,
  * and scrolling back to the top expands it, unless `disableHeaderCollapse` is
  * set on `SidePanel.Header`.

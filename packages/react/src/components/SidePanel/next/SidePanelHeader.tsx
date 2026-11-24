@@ -5,27 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  useContext,
-  useEffect,
-} from 'react';
-import type { ReactElement } from 'react';
+import React, { cloneElement, forwardRef, useContext, useEffect } from 'react';
 import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { AILabel } from '../../AILabel';
 import { IconButton } from '../../IconButton';
 import { usePrefix } from '../../../internal/usePrefix';
+import { isComponentElement } from '../../../internal/utils';
 import { SidePanelContext } from './context';
 import type { SidePanelHeaderProps } from './SidePanel.types';
 
 /**
- * ----------------
- * SidePanelHeader
- * ----------------
- *
  * Renders the decorator and close button, and syncs the header collapse
  * options to the root.
  */
@@ -35,7 +25,7 @@ const SidePanelHeader = forwardRef<HTMLDivElement, SidePanelHeaderProps>(
       children,
       className,
       closeIconDescription = 'Close',
-      hideCloseButton = false,
+      hideCloseButton,
       disableHeaderCollapse,
       onHeaderCollapse,
     },
@@ -51,12 +41,9 @@ const SidePanelHeader = forwardRef<HTMLDivElement, SidePanelHeaderProps>(
       setDisableHeaderCollapse,
     } = parentContext;
     // An `AILabel` decorator is always size `xs`.
-    const normalizedDecorator =
-      isValidElement(decorator) && decorator.type === AILabel
-        ? cloneElement(decorator as ReactElement<{ size?: string }>, {
-            size: 'xs',
-          })
-        : decorator;
+    const normalizedDecorator = isComponentElement(decorator, AILabel)
+      ? cloneElement(decorator, { size: 'xs' })
+      : decorator;
 
     useEffect(() => {
       setDisableHeaderCollapse?.(!!disableHeaderCollapse);
@@ -96,7 +83,7 @@ const SidePanelHeader = forwardRef<HTMLDivElement, SidePanelHeaderProps>(
                   align="left"
                   size="md"
                   onClick={onRequestClose}>
-                  <Close size={16} aria-hidden="true" />
+                  <Close aria-hidden="true" />
                 </IconButton>
               )}
             </div>

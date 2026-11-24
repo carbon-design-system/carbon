@@ -17,6 +17,7 @@ import React, {
 } from 'react';
 import cx from 'classnames';
 import { durationModerate02 } from '@carbon/motion';
+import { tabbable } from 'tabbable';
 import { AILabel } from '../../AILabel';
 import { Section } from '../../Heading';
 import { getSpecificElement, useFocus } from '../../../internal/useFocus';
@@ -39,12 +40,6 @@ import SidePanelNavBar from './SidePanelNavBar';
 import SidePanelBody from './SidePanelBody';
 import SidePanelFooter from './SidePanelFooter';
 import type { SidePanelProps } from './SidePanel.types';
-
-/**
- * ----------
- * SidePanel
- * ----------
- */
 
 export type SidePanelComponentType = React.ForwardRefExoticComponent<
   SidePanelProps & React.RefAttributes<HTMLDivElement>
@@ -92,7 +87,7 @@ export const SidePanel = forwardRef<HTMLDivElement, SidePanelProps>(
     const mergedRefs = useMergedRefs([ref, localRef]);
     const titleId = `${blockClass}__title-${useId()}`;
     const shouldReduceMotion = usePrefersReducedMotion();
-    const { firstElement, keyDownListener } = useFocus(localRef);
+    const { keyDownListener } = useFocus(localRef);
     const slideIn = variant === 'slideIn';
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [disableHeaderCollapse, setDisableHeaderCollapse] = useState(false);
@@ -128,8 +123,9 @@ export const SidePanel = forwardRef<HTMLDivElement, SidePanelProps>(
         return;
       }
 
-      firstElement?.focus();
-    }, [firstElement, isPresent, open, selectorPrimaryFocus, slideIn]);
+      // Read the tabbable elements here, once the panel is in the DOM.
+      tabbable(panel, { displayCheck: 'none' })[0]?.focus();
+    }, [isPresent, open, selectorPrimaryFocus, slideIn]);
 
     // Push the page content aside for `slideIn`, and restore it on close.
     useEffect(() => {
@@ -150,13 +146,26 @@ export const SidePanel = forwardRef<HTMLDivElement, SidePanelProps>(
 
       const property =
         placement === 'right' ? 'margin-inline-end' : 'margin-inline-start';
+      const previousTransition = pageContent.style.transition;
+      const previousMargin = pageContent.style.getPropertyValue(property);
+      const previousMarginPriority =
+        pageContent.style.getPropertyPriority(property);
       pageContent.style.transition = shouldReduceMotion
         ? ''
         : `${property} ${durationModerate02}`;
       pageContent.style.setProperty(property, SIDE_PANEL_SIZES[size]);
 
       return () => {
-        pageContent.style.removeProperty(property);
+        pageContent.style.transition = previousTransition;
+        if (previousMargin) {
+          pageContent.style.setProperty(
+            property,
+            previousMargin,
+            previousMarginPriority
+          );
+        } else {
+          pageContent.style.removeProperty(property);
+        }
       };
     }, [
       open,
@@ -174,28 +183,16 @@ export const SidePanel = forwardRef<HTMLDivElement, SidePanelProps>(
       }
     }, [isPresent]);
 
-    // Return focus to the launcher when the panel closes.
-    const wasOpen = useRef(open);
-    useEffect(() => {
-      if (wasOpen.current && !open && launcherButtonRef) {
-        const timeoutId = setTimeout(
-          () => launcherButtonRef.current?.focus(),
-          0
-        );
-        wasOpen.current = open;
-        return () => clearTimeout(timeoutId);
-      }
-      wasOpen.current = open;
-    }, [launcherButtonRef, open]);
-
-    // Notify once the exit animation has finished and the panel is removed.
+    // Once the exit animation has finished and the panel is removed, return
+    // focus to the launcher and notify.
     const wasPresent = useRef(isPresent);
     useEffect(() => {
       if (wasPresent.current && !isPresent) {
+        launcherButtonRef?.current?.focus();
         onUnmount?.();
       }
       wasPresent.current = isPresent;
-    }, [isPresent, onUnmount]);
+    }, [isPresent, launcherButtonRef, onUnmount]);
 
     if (!isPresent) {
       return null;

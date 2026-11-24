@@ -8,12 +8,6 @@
 import { createContext, type ReactNode } from 'react';
 import type { SidePanelProps } from './SidePanel.types';
 
-/**
- * -------------
- * Context setup
- * -------------
- */
-
 export interface SidePanelContextType {
   /**
    * Decorator slot (typically an `AILabel`) rendered by `SidePanel.Header`.

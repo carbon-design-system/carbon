@@ -10,14 +10,6 @@ import cx from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 import type { SidePanelToolbarProps } from './SidePanel.types';
 
-/**
- * ----------------
- * SidePanelToolbar
- * ----------------
- *
- * Toolbar slot in `SidePanel.Header`. It stays visible when the header
- * collapses, unless `stickyToolbar` is `false`.
- */
 const SidePanelToolbar = forwardRef<HTMLDivElement, SidePanelToolbarProps>(
   ({ children, className, stickyToolbar = true }, ref) => {
     const prefix = usePrefix();

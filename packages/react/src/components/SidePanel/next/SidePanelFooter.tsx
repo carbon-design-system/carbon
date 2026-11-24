@@ -12,20 +12,16 @@ import { ButtonSet } from '../../ButtonSet';
 import { usePrefix } from '../../../internal/usePrefix';
 import type { SidePanelFooterProps } from './SidePanel.types';
 
-/**
- * ----------------
- * SidePanelFooter
- * ----------------
- */
 const SidePanelFooter = forwardRef<HTMLDivElement, SidePanelFooterProps>(
   ({ actions, buttonSize = 'lg', children, className }, ref) => {
     const prefix = usePrefix();
     const blockClass = `${prefix}--side-panel__next`;
+    const hasChildren = children !== undefined && children !== null;
 
     return (
       <div ref={ref} className={cx(`${blockClass}__footer`, className)}>
         {children}
-        {!children && actions && actions.length > 0 && (
+        {!hasChildren && actions && actions.length > 0 && (
           <ButtonSet fluid className={`${blockClass}__footer-button-set`}>
             {actions.map(({ label, key, ...action }, i) => (
               <Button key={key ?? i} {...action} size={buttonSize}>

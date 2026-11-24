@@ -10,13 +10,6 @@ import cx from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 import type { SidePanelNavBarProps } from './SidePanel.types';
 
-/**
- * ----------------
- * SidePanelNavBar
- * ----------------
- *
- * Placeholder shell. Sticky positioning is implemented in a follow-up issue.
- */
 const SidePanelNavBar = forwardRef<HTMLDivElement, SidePanelNavBarProps>(
   ({ children, className }, ref) => {
     const prefix = usePrefix();
