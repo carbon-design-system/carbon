@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { cloneElement, useRef, type ReactNode } from 'react';
+import React, { cloneElement, forwardRef, useRef, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import { deprecate } from '../../prop-types/deprecate';
@@ -110,7 +110,7 @@ export interface CheckboxProps
   onClick?: (evt: React.MouseEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox = React.forwardRef(
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       className,
@@ -131,7 +131,7 @@ const Checkbox = React.forwardRef(
       disabled,
       slug,
       ...other
-    }: CheckboxProps,
+    },
     ref
   ) => {
     const prefix = usePrefix();

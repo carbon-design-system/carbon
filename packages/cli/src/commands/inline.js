@@ -125,7 +125,7 @@ async function inlineSassDependencies(
         glob: { windowsPathsNoEscape: true },
         to(_, match) {
           return `@import '${
-            isWin ? relativeImportPath.replace('\\', '/') : relativeImportPath
+            isWin ? relativeImportPath.replace(/\\/g, '/') : relativeImportPath
           }/${match}`;
         },
       });

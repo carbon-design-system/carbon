@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 const { camelCase, paramCase } = require('change-case-all');
 const { productiveHeading01 } = require('../src');
 
@@ -25,15 +25,15 @@ describe('@carbon/type', () => {
           @include type-style('productive-heading-01');
         }
       `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const { declarations } = stylesheet.rules[0];
+    const stylesheet = postcss.parse(result.css.toString());
+    const { nodes: declarations } = stylesheet.nodes[0];
 
     expect(declarations.length).toBe(Object.keys(productiveHeading01).length);
 
     Object.keys(productiveHeading01).forEach((key) => {
       const property = paramCase(key);
       const match = declarations.find((declaration) => {
-        if (declaration.property !== property) {
+        if (declaration.prop !== property) {
           return false;
         }
         // Note: the value on the CSS side is a CSS Custom Property. This makes
@@ -53,11 +53,11 @@ describe('@carbon/type', () => {
           @include type-style('productive-heading-01');
         }
       `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const { declarations } = stylesheet.rules[0];
+    const stylesheet = postcss.parse(result.css.toString());
+    const { nodes: declarations } = stylesheet.nodes[0];
 
     for (const declaration of declarations) {
-      const { property, value } = declaration;
+      const { prop: property, value } = declaration;
       const key = camelCase(property);
 
       // Make sure it's a custom property

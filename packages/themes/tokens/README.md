@@ -22,6 +22,9 @@ tokens/
     └── g100/
 ```
 
+`next/` holds the experimental V12 tokens, in the same layout. See
+[V12 tokens](#v12-tokens).
+
 Each theme has its own folder, and every file in it holds that theme's values
 only. To compare a token across themes, build the package and open
 `docs/generated/theme-tokens.md` at the root of the repository. It lists every
@@ -131,14 +134,29 @@ tool that ignores extensions still reads the correct value of every token.
 | Where                            | Key            | Description                                                                                                                   |
 | -------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | Root of each `theme.tokens.json` | `color-scheme` | `"light"` or `"dark"`. The build adds it to the theme as `color-scheme`.                                                      |
+| Root of each `theme.tokens.json` | `contextual`   | The names of the contextual layer tokens. See **Contextual layer tokens** below.                                              |
+| A theme token                    | `group`        | The group the token is listed under, such as `"Background"` or `"Layer"`. Tokens without a group are listed on their own.     |
+| A theme token                    | `properties`   | The CSS properties the token is meant for, such as `["background"]`.                                                          |
+| A theme token                    | `state`        | The interaction state the token is for: `active`, `disabled`, `hover`, `selected` or `visited`.                               |
+| A theme token                    | `layer-set`    | The layer set the token belongs to: `base`, `01`, `02` or `03`.                                                               |
 | A component token                | `fallback`     | The value a component token has when the current theme is not one of the four Carbon themes. Only `button-separator` has one. |
+
+## Token order
+
+Tokens are listed in their group, in the order they are documented. That order
+is used for the `$<token>` variables in `scss/generated/_tokens.scss` and for
+`unstable_metadata`. The theme maps and the JavaScript exports keep their
+published order: the build sorts them by name, with numbered tokens first at
+each level, so `syntax-heading` follows `syntax-heading-1` … `syntax-heading-6`.
 
 ## Tokens that are not in every theme
 
-A component token can be left out of a theme. `notification-action-hover`, for
-example, is only defined for `white` and `g10`, so the generated Sass map and
-JavaScript object for it only have those two themes. Theme tokens must be
-defined in all four themes.
+A component token can be left out of a theme, and the generated Sass map and
+JavaScript object for it then only have the themes that define it. Consumers
+reading such a token for a missing theme get `undefined` in JavaScript and
+`null` from `map.get` in Sass, so define every component token in all four
+themes unless the gap is intentional. Theme tokens must be defined in all four
+themes.
 
 ## The resolver file
 
@@ -161,11 +179,28 @@ when `@carbon/themes` and `@carbon/colors` are installed next to each other in
 ## Contextual layer tokens (`$layer`, `$field`, `$border-subtle`)
 
 Component styles often use tokens without a number, such as `$layer`,
-`$layer-accent`, `$field` and `$border-subtle`. These are not in the token
-files. They are assigned at runtime by the layer sets in
-`packages/styles/scss/layer/_layer-sets.scss`, which point each one at its
-numbered token (`layer-01`, `layer-02` or `layer-03`) for the current layer
-level.
+`$layer-accent`, `$field` and `$border-subtle`. They have no value of their own,
+so they are not tokens in the token files; the `contextual` list at the root of
+each `theme.tokens.json` names them for `unstable_metadata`. They are assigned
+at runtime by the layer sets in `packages/styles/scss/layer/_layer-sets.scss`,
+which point each one at its numbered token (`layer-01`, `layer-02` or
+`layer-03`) for the current layer level.
+
+## V12 tokens
+
+`next/themes/{light,dark}/theme.tokens.json` are generated from the OKLCH
+specification in `src/theme-generator`, so do not edit them directly. Change the
+specification, then regenerate them and commit the result:
+
+```bash
+cd packages/themes
+yarn generate:v12
+```
+
+The generator validates each theme, and a test fails when the files no longer
+match the specification. These tokens have their own resolver file,
+`next/themes.resolver.json`, and are built separately from the four themes
+below.
 
 ## Build
 
@@ -178,10 +213,12 @@ The build runs [Style Dictionary](https://styledictionary.com/) once per theme
 (see [`style-dictionary/`](../style-dictionary)) and generates:
 
 - `scss/generated/_themes.scss`: the four theme maps
+- `scss/generated/_tokens.scss`: a `$<token>` variable for every theme token
 - `scss/generated/_<component>-tokens.scss`: the component tokens, each a map of
   its value in every theme
 - `js/generated/themes/` and `js/generated/component-tokens/`: the JavaScript
   modules and their type declarations
+- `js/generated/metadata.js`: the token names behind `unstable_metadata`
 - `docs/generated/theme-tokens.md`: every token side by side for all themes
 
 Do not edit generated files.
@@ -194,8 +231,8 @@ Do not edit generated files.
    check the files against the format, check that the themes agree with each
    other, and compare the generated output with snapshots of the public API.
 
-To add a theme token, also add it to the token metadata in
-[`src/tokens/`](../src/tokens), which generates the `$<token>` Sass variables.
+A new theme token goes in its group, with the same `com.ibm.carbon` metadata as
+the tokens around it. The build generates its `$<token>` Sass variable.
 
 To add a component token file, create `<component>.tokens.json` in each theme
 folder and add it to each context in `themes.resolver.json`. Then forward the

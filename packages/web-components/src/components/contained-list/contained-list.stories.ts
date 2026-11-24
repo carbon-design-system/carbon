@@ -7,11 +7,13 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { enabled } from '@carbon/feature-flags';
 import './index';
 import '../button/index';
 import '../search/index';
 import '../tag/index';
 import '../overflow-menu/index';
+import '../menu/index';
 import '../icon-button/index';
 import storyDocs from './contained-list.mdx';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -410,6 +412,46 @@ export const _WithLayer = {
     ),
 };
 
+const renderUsageOverflowMenu = () => {
+  const icon = iconLoader(OverflowMenuVertical16, {
+    class: `${prefix}--overflow-menu__icon`,
+    slot: 'icon',
+  });
+
+  if (enabled('enable-v12-overflowmenu')) {
+    return html`
+      <cds-overflow-menu
+        slot="action"
+        size="lg"
+        label="List item options"
+        menu-alignment="bottom-end">
+        ${icon}
+        <cds-menu>
+          <cds-menu-item label="View details"></cds-menu-item>
+          <cds-menu-item label="Edit"></cds-menu-item>
+          <cds-menu-item-divider></cds-menu-item-divider>
+          <cds-menu-item kind="danger" label="Remove"></cds-menu-item>
+        </cds-menu>
+      </cds-overflow-menu>
+    `;
+  }
+
+  return html`
+    <cds-overflow-menu slot="action" size="lg">
+      ${icon}
+      <span slot="tooltip-content">Options</span>
+      <cds-overflow-menu-body flipped>
+        <cds-overflow-menu-item>View details</cds-overflow-menu-item>
+        <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
+        <cds-overflow-menu-item danger>
+          <div class="${prefix}--overflow-menu-item__divider"></div>
+          Remove
+        </cds-overflow-menu-item>
+      </cds-overflow-menu-body>
+    </cds-overflow-menu>
+  `;
+};
+
 export const UsageExamples = {
   args: sharedArgs,
   argTypes: controls,
@@ -425,22 +467,7 @@ export const UsageExamples = {
         ${[...Array(3)].map(
           () => html`
             <cds-contained-list-item>
-              List item
-              <cds-overflow-menu slot="action" size="lg">
-                ${iconLoader(OverflowMenuVertical16, {
-                  class: `${prefix}--overflow-menu__icon`,
-                  slot: 'icon',
-                })}
-                <span slot="tooltip-content">Options</span>
-                <cds-overflow-menu-body flipped>
-                  <cds-overflow-menu-item>View details</cds-overflow-menu-item>
-                  <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
-                  <cds-overflow-menu-item danger>
-                    <div class="${prefix}--overflow-menu-item__divider"></div>
-                    Remove
-                  </cds-overflow-menu-item>
-                </cds-overflow-menu-body>
-              </cds-overflow-menu>
+              List item ${renderUsageOverflowMenu()}
             </cds-contained-list-item>
           `
         )}

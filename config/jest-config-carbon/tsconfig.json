@@ -1,0 +1,9 @@
+{
+  "extends": "typescript-config-carbon/tsconfig.base.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": false,
+    "noEmit": true
+  },
+  "include": ["**/*.ts"]
+}
