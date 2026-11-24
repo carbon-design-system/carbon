@@ -1,10 +1,11 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import { defaultFilterItems } from '../filter';
 
 describe('defaultFilterItems', () => {
@@ -15,7 +16,8 @@ describe('defaultFilterItems', () => {
     { label: 'Date' },
   ];
 
-  const itemToString = (item) => item?.label ?? '';
+  const itemToString = (item: (typeof items)[number] | null) =>
+    item?.label ?? '';
 
   it('should return all items if `inputValue` is `null`', () => {
     const result = defaultFilterItems(items, {

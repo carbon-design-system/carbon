@@ -1,21 +1,23 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { defaultSortItems, defaultCompareItems } from '../sorting';
+import type { SortItemsOptions } from '../../MultiSelectPropTypes';
+
+type Item = { label: string };
 
 describe('defaultSortItems', () => {
-  let mockItemToString;
-  let mockOptions;
+  let mockOptions: SortItemsOptions<Item>;
 
   beforeEach(() => {
-    mockItemToString = jest.fn(({ label }) => label);
     mockOptions = {
       selectedItems: [],
-      itemToString: mockItemToString,
+      itemToString: ({ label }) => label,
       compareItems: defaultCompareItems,
       locale: 'en',
     };
