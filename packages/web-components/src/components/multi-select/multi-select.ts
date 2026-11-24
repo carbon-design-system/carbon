@@ -18,6 +18,7 @@ import CDSDropdown, {
 } from '../dropdown/dropdown';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { SELECTION_FEEDBACK_OPTION } from './defs';
+import dropdownStyles from '../dropdown/dropdown.scss?lit';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -1073,7 +1074,7 @@ class CDSMultiSelect extends CDSDropdown {
     return `${prefix}-multi-select-selected`;
   }
 
-  static styles = styles;
+  static styles = [dropdownStyles, styles];
 }
 
 export default CDSMultiSelect;

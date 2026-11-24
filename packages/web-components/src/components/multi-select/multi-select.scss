@@ -12,11 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/components/list-box/list-box';
 @use '@carbon/styles/scss/components/multiselect/index';
-@use '@carbon/styles/scss/components/form';
-@use '@carbon/styles/scss/components/checkbox';
-@use '@carbon/styles/scss/components/tag';
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/layout' as *;
 

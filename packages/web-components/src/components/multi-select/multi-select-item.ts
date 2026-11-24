@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import CDSDropdownItem from '../dropdown/dropdown-item';
+import dropdownStyles from '../dropdown/dropdown.scss?lit';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { isFeatureFlagEnabled } from '../feature-flags';
@@ -75,7 +76,7 @@ class CDSMultiSelectItem extends CDSDropdownItem {
     return `${prefix}-multi-select`;
   }
 
-  static styles = styles;
+  static styles = [dropdownStyles, styles];
 }
 
 export default CDSMultiSelectItem;
