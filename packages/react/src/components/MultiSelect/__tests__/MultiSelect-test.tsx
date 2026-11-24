@@ -5,16 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import React, { createRef, type ComponentProps, useState } from 'react';
 import {
   act,
   fireEvent,
   render,
   screen,
+  within,
   waitFor,
 } from '@testing-library/react';
 import { generateGenericItem, generateItems } from '../../ListBox/test-helpers';
-import { getByText, isElementVisible } from '@carbon/test-utils/dom';
+import { isElementVisible } from '@carbon/test-utils/dom';
 
 import { AILabel } from '../../AILabel';
 import Button from '../../Button';
@@ -24,10 +26,29 @@ import userEvent from '@testing-library/user-event';
 import { tabbable } from 'tabbable';
 
 const prefix = 'cds';
+
+type GenericItem = ReturnType<typeof generateGenericItem>;
+
+type SelectableItem = {
+  id: string;
+  text: string;
+  isSelectAll?: boolean;
+};
+
+type SelectableItemsChange = Parameters<
+  NonNullable<ComponentProps<typeof MultiSelect<SelectableItem>>['onChange']>
+>[0];
+
 const waitForPosition = () => act(async () => {});
 
 describe('MultiSelect', () => {
-  let mockProps;
+  type MockProps = Pick<
+    ComponentProps<typeof MultiSelect<GenericItem>>,
+    'id' | 'initialSelectedItems' | 'items' | 'label'
+  > & {
+    onChange: ReturnType<typeof jest.fn>;
+  };
+  let mockProps: MockProps;
   beforeEach(() => {
     jest.mock('../../../internal/deprecateFieldOnObject');
     mockProps = {
@@ -144,7 +165,7 @@ describe('MultiSelect', () => {
         id="custom-id"
         label={label}
         items={items}
-        itemToString={(item) => (item ? item.text : '')}
+        itemToString={(item) => item.text ?? ''}
       />
     );
     await waitForPosition();
@@ -168,7 +189,7 @@ describe('MultiSelect', () => {
     await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const labelNode = getByText(container, label);
+    const labelNode = within(container).getByText(label);
     expect(isElementVisible(labelNode)).toBe(true);
 
     expect(
@@ -186,7 +207,7 @@ describe('MultiSelect', () => {
     await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const labelNode = getByText(container, label);
+    const labelNode = within(container).getByText(label);
     await userEvent.click(labelNode);
 
     expect(screen.getByRole('combobox')).toHaveAttribute(
@@ -244,13 +265,12 @@ describe('MultiSelect', () => {
     await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const labelNode = getByText(container, label);
+    const labelNode = within(container).getByText(label);
     await userEvent.click(labelNode);
 
     const [item] = items;
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const itemNode = getByText(container, item.label);
-
+    const itemNode = within(container).getByText(item.label);
     const options = screen.getAllByRole('option');
     for (const option of options) {
       expect(option).toHaveAttribute('aria-selected', 'false');
@@ -378,7 +398,7 @@ describe('MultiSelect', () => {
     await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const labelNode = getByText(container, label);
+    const labelNode = within(container).getByText(label);
 
     expect(
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
@@ -497,17 +517,11 @@ describe('MultiSelect', () => {
   it('should toggle selection with enter', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
-    const { container } = render(
-      <MultiSelect id="test" label={label} items={items} />
-    );
+    render(<MultiSelect id="test" label={label} items={items} />);
     await waitForPosition();
 
     await userEvent.tab();
     await userEvent.keyboard('[Space]');
-
-    const [item] = items;
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    const itemNode = getByText(container, item.label);
 
     const options = screen.getAllByRole('option');
     for (const option of options) {
@@ -532,28 +546,21 @@ describe('MultiSelect', () => {
     await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const labelNode = getByText(container, label);
+    const labelNode = within(container).getByText(label);
     await userEvent.click(labelNode);
 
     const [item] = items;
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const itemNode = getByText(container, item.label);
+    const itemNode = within(container).getByText(item.label);
     await userEvent.click(itemNode);
 
-    expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear selected item"]')
-    ).toBeTruthy();
-
     await userEvent.click(
-      // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear selected item"]')
+      screen.getByRole('button', { name: 'Clear selected item' })
     );
 
     expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear selected item"]')
-    ).toBeFalsy();
+      screen.queryByRole('button', { name: 'Clear selected item' })
+    ).not.toBeInTheDocument();
   });
 
   it('should clear selected items and announce it when Delete is pressed', async () => {
@@ -592,7 +599,7 @@ describe('MultiSelect', () => {
     await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const labelNode = getByText(container, label);
+    const labelNode = within(container).getByText(label);
     await userEvent.click(labelNode);
 
     expect(
@@ -610,7 +617,7 @@ describe('MultiSelect', () => {
     await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    const labelNode = getByText(container, label);
+    const labelNode = within(container).getByText(label);
     await userEvent.click(labelNode);
 
     expect(
@@ -639,7 +646,7 @@ describe('MultiSelect', () => {
       ).toBeTruthy();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
 
       await userEvent.click(labelNode);
 
@@ -651,15 +658,14 @@ describe('MultiSelect', () => {
     });
 
     it('should trigger onChange with selected items', async () => {
-      let selectedItems = [];
-      const testFunction = jest.fn((e) => (selectedItems = e?.selectedItems));
+      const testFunction = jest.fn();
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const { container } = render(
         <MultiSelect
           id="custom-id"
           onChange={testFunction}
-          selectedItems={selectedItems}
+          selectedItems={[]}
           label={label}
           items={items}
         />
@@ -667,16 +673,15 @@ describe('MultiSelect', () => {
       await waitForPosition();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
       await userEvent.click(labelNode);
 
       const [item] = items;
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const itemNode = getByText(container, item.label);
+      const itemNode = within(container).getByText(item.label);
 
       await userEvent.click(itemNode);
-      // Assert that the onChange callback returned the selected items and assigned it to selectedItems
-      expect(testFunction.mock.results[0].value).toEqual(selectedItems);
+      expect(testFunction).toHaveBeenCalledWith({ selectedItems: [item] });
     });
 
     it('should place the given id on the ___ node when passed in as a prop', async () => {
@@ -711,26 +716,26 @@ describe('MultiSelect', () => {
           id="custom-id"
           label={label}
           items={items}
-          itemToString={(item) => (item ? item.text : '')}
+          itemToString={({ text }) => text}
         />
       );
       await waitForPosition();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
 
       await userEvent.click(labelNode);
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      expect(getByText(container, 'joey')).toBeInTheDocument();
+      expect(within(container).getByText('joey')).toBeInTheDocument();
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      expect(getByText(container, 'johnny')).toBeInTheDocument();
+      expect(within(container).getByText('johnny')).toBeInTheDocument();
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      expect(getByText(container, 'tommy')).toBeInTheDocument();
+      expect(within(container).getByText('tommy')).toBeInTheDocument();
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      expect(getByText(container, 'dee dee')).toBeInTheDocument();
+      expect(within(container).getByText('dee dee')).toBeInTheDocument();
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      expect(getByText(container, 'marky')).toBeInTheDocument();
+      expect(within(container).getByText('marky')).toBeInTheDocument();
     });
 
     it('should support a custom itemToElement', async () => {
@@ -741,7 +746,7 @@ describe('MultiSelect', () => {
           id="custom-id"
           label={label}
           items={items}
-          itemToString={(item) => (item ? item.text : '')}
+          itemToString={({ text }) => text}
           itemToElement={(item) =>
             item ? (
               <span className="test-element">
@@ -760,7 +765,7 @@ describe('MultiSelect', () => {
       await waitForPosition();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
       await userEvent.click(labelNode);
 
       // eslint-disable-next-line testing-library/no-node-access
@@ -803,12 +808,12 @@ describe('MultiSelect', () => {
       await waitForPosition();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
       await userEvent.click(labelNode);
 
       const [item] = items;
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const itemNode = getByText(container, item.label);
+      const itemNode = within(container).getByText(item.label);
 
       await userEvent.click(itemNode);
 
@@ -831,7 +836,9 @@ describe('MultiSelect', () => {
       await waitForPosition();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      expect(getByText(container, 'Fool of a Took!')).toBeInTheDocument();
+      expect(
+        within(container).getByText('Fool of a Took!')
+      ).toBeInTheDocument();
 
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('[data-invalid="true"')).toBeInstanceOf(
@@ -842,7 +849,7 @@ describe('MultiSelect', () => {
     it('should support different feedback modes with selectionFeedback', async () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
-      const [_firstItem, _secondItem, thirdItem] = items;
+      const thirdItem = items[2];
       const { container } = render(
         <MultiSelect
           id="custom-id"
@@ -855,12 +862,12 @@ describe('MultiSelect', () => {
 
       // click the label to open the multiselect options menu
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
       await userEvent.click(labelNode);
 
       // click the third option down in the list
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const itemNode = getByText(container, thirdItem.label);
+      const itemNode = within(container).getByText(thirdItem.label);
       await userEvent.click(itemNode);
 
       // get an array of all the options
@@ -888,10 +895,10 @@ describe('MultiSelect', () => {
 
       await waitForPosition();
 
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
       await userEvent.click(labelNode);
 
-      const itemNode = getByText(container, thirdItem.label);
+      const itemNode = within(container).getByText(thirdItem.label);
       await userEvent.click(itemNode);
 
       const optionsArray = screen.getAllByRole('option');
@@ -912,7 +919,7 @@ describe('MultiSelect', () => {
           id="custom-id"
           label="test-label"
           items={items}
-          itemToString={(item) => item?.text ?? ''}
+          itemToString={({ text }) => text}
           sortItems={(list) =>
             [...list].sort((a, b) => b.text.localeCompare(a.text))
           }
@@ -967,10 +974,7 @@ describe('MultiSelect', () => {
       const multiSelect = combobox.closest(`.${prefix}--multi-select`);
 
       expect(multiSelect).toHaveClass(
-        `${prefix}--multi-select`,
-        `${prefix}--autoalign`,
-        `${prefix}--list-box`,
-        `${prefix}--list-box--expanded`,
+        `${prefix}--multi-select ${prefix}--autoalign ${prefix}--list-box ${prefix}--list-box--expanded`,
         { exact: true }
       );
 
@@ -999,7 +1003,7 @@ describe('MultiSelect', () => {
     });
 
     it('should accept a `ref` for the underlying button element', async () => {
-      const ref = React.createRef();
+      const ref = createRef<HTMLButtonElement>();
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       render(<MultiSelect id="test" label={label} items={items} ref={ref} />);
@@ -1066,7 +1070,7 @@ describe('MultiSelect', () => {
           id="test"
           label={'test-label'}
           titleText="Multiselect title"
-          itemToString={(item) => (item ? item.text : '')}
+          itemToString={({ text }) => text}
           helperText="This is helper text"
           items={items}
         />
@@ -1125,7 +1129,7 @@ describe('MultiSelect', () => {
     });
 
     it('should display helper text instead of invalid message when disabled', async () => {
-      const { container } = render(
+      render(
         <MultiSelect
           disabled
           invalid
@@ -1136,8 +1140,7 @@ describe('MultiSelect', () => {
       );
       await waitForPosition();
 
-      const multiselectComponent = container.firstChild;
-      const inputComponent = multiselectComponent.childNodes[1];
+      const inputComponent = screen.getByRole('combobox');
       const invalidMessage = screen.queryByText('Invalid message');
       const helper = screen.queryByText('Helper text');
       expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
@@ -1146,7 +1149,7 @@ describe('MultiSelect', () => {
     });
 
     it('should display helper text instead of invalid message when readOnly', async () => {
-      const { container } = render(
+      render(
         <MultiSelect
           readOnly
           invalid
@@ -1157,8 +1160,7 @@ describe('MultiSelect', () => {
       );
       await waitForPosition();
 
-      const multiselectComponent = container.firstChild;
-      const inputComponent = multiselectComponent.childNodes[1];
+      const inputComponent = screen.getByRole('combobox');
       const invalidMessage = screen.queryByText('Invalid message');
       const helper = screen.queryByText('Helper text');
       expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
@@ -1170,10 +1172,10 @@ describe('MultiSelect', () => {
   describe('Controlled', () => {
     const ControlledMultiselect = () => {
       const items = generateItems(4, generateGenericItem);
-      const [selectedItems, setSelectedItems] = useState([]);
+      const [selectedItems, setSelectedItems] = useState<typeof items>([]);
 
-      const onSelectionChanged = (value) => {
-        setSelectedItems(value);
+      const onSelectionChanged = (value: typeof selectedItems | null) => {
+        setSelectedItems(value ?? []);
       };
       return (
         <>
@@ -1188,11 +1190,7 @@ describe('MultiSelect', () => {
           />
           <br />
           <ButtonSet>
-            <Button
-              id="all"
-              onClick={() =>
-                setSelectedItems(items.filter((item) => !item.disabled))
-              }>
+            <Button id="all" onClick={() => setSelectedItems(items)}>
               Select all
             </Button>
             <Button
@@ -1211,7 +1209,7 @@ describe('MultiSelect', () => {
       const { container } = render(<ControlledMultiselect />);
       await waitForPosition();
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
       expect(isElementVisible(labelNode)).toBe(true);
 
       expect(
@@ -1224,7 +1222,7 @@ describe('MultiSelect', () => {
     it('should allow the items to be controlled from external state', async () => {
       const label = 'test-label';
       const { container } = render(<ControlledMultiselect />);
-      const labelNode = getByText(container, label);
+      const labelNode = within(container).getByText(label);
       expect(isElementVisible(labelNode)).toBe(true);
       //select all the items
       await userEvent.click(screen.getByText('Select all'));
@@ -1340,7 +1338,7 @@ describe('MultiSelect', () => {
   it('should focus the element if mergedRef.current is defined', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
-    const mergedRef = React.createRef(); // No TypeScript type annotation needed here
+    const mergedRef = createRef<HTMLButtonElement>();
 
     render(
       <MultiSelect id="test" label={label} items={items} ref={mergedRef} />
@@ -1368,6 +1366,8 @@ describe('MultiSelect', () => {
     const combobox = screen.getByRole('combobox');
     expect(combobox).toBeInTheDocument();
   });
+
+  // TODO: Rewrite this test to assert the component's keydown behavior.
   it('should call preventDefault for select access keys when readonly is true', () => {
     const mockPreventDefault = jest.fn();
     render(
@@ -1385,16 +1385,19 @@ describe('MultiSelect', () => {
     expect(mockPreventDefault).toHaveBeenCalled();
   });
 
+  // TODO: Rewrite this test to exercise `MultiSelect`, not a local formatter.
   it('should return a comma-separated string for an array of items', () => {
     const mockItems = [{ value: 'item1' }, { value: 'item2' }];
-    const mockItemToString = jest.fn((item) => item.value);
+    const mockItemToString = jest.fn(
+      (item: (typeof mockItems)[number]) => item.value
+    );
 
     const selectProps = {
       stateReducer: jest.fn(),
       isOpen: false,
-      itemToString: (filteredItems) =>
+      itemToString: (filteredItems: typeof mockItems | null) =>
         Array.isArray(filteredItems)
-          ? filteredItems.map((item) => mockItemToString(item)).join(', ')
+          ? filteredItems.map(mockItemToString).join(', ')
           : '',
     };
     const result = selectProps.itemToString(mockItems);
@@ -1402,15 +1405,16 @@ describe('MultiSelect', () => {
     expect(mockItemToString).toHaveBeenCalledTimes(2);
   });
 
+  // TODO: Rewrite this test to exercise `MultiSelect`, not a local formatter.
   it('should return an empty string for non-array input', () => {
     const mockItemToString = jest.fn();
 
     const selectProps = {
       stateReducer: jest.fn(),
       isOpen: false,
-      itemToString: (filteredItems) =>
+      itemToString: (filteredItems: unknown) =>
         Array.isArray(filteredItems)
-          ? filteredItems.map((item) => mockItemToString(item)).join(', ')
+          ? filteredItems.map(mockItemToString).join(', ')
           : '',
     };
 
@@ -1424,10 +1428,12 @@ describe('MultiSelect', () => {
     render(<MultiSelect {...mockProps} titleText="MultiSelect Title" />);
 
     const label = screen.getByText('MultiSelect Title').closest('label');
-    const attributes = Array.from(label.attributes).reduce(
-      (acc, { name, value }) => ({ ...acc, [name]: value }),
-      {}
-    );
+    if (!label) {
+      throw new Error('Unable to find multiselect label.');
+    }
+    const attributes = Array.from(label.attributes).reduce<
+      Record<string, string>
+    >((acc, { name, value }) => ({ ...acc, [name]: value }), {});
     const idPrefix = attributes.id.replace(/-label$/, '');
 
     expect(attributes).toEqual({
@@ -1444,10 +1450,12 @@ describe('MultiSelect', () => {
     );
 
     const label = screen.getByText('MultiSelect Title').closest('label');
-    const attributes = Array.from(label.attributes).reduce(
-      (acc, { name, value }) => ({ ...acc, [name]: value }),
-      {}
-    );
+    if (!label) {
+      throw new Error('Unable to find multiselect label.');
+    }
+    const attributes = Array.from(label.attributes).reduce<
+      Record<string, string>
+    >((acc, { name, value }) => ({ ...acc, [name]: value }), {});
 
     expect(attributes).toEqual({
       class: 'cds--label',
@@ -1505,7 +1513,7 @@ describe('MultiSelect', () => {
             titleText="Multiselect title"
             label="test-label"
             items={items}
-            itemToString={(item) => (item ? item.text : '')}
+            itemToString={({ text }) => text}
           />
           <Button id="add-items" onClick={addItems}>
             Add Items
@@ -1541,7 +1549,7 @@ describe('MultiSelect', () => {
 
     // Get the "Select All" checkbox element
     const selectAllOption = screen.getByText('All roles').closest('li');
-    const selectAllCheckbox = selectAllOption.querySelector(
+    const selectAllCheckbox = selectAllOption?.querySelector(
       'input[type="checkbox"]'
     );
 
@@ -1578,7 +1586,7 @@ describe('MultiSelect', () => {
     ];
 
     const ControlledMultiSelect = () => {
-      const [selectedItems, setSelectedItems] = React.useState([]);
+      const [selectedItems, setSelectedItems] = useState<SelectableItem[]>([]);
       return (
         <>
           <MultiSelect
@@ -1586,15 +1594,13 @@ describe('MultiSelect', () => {
             label="Controlled test"
             items={items}
             selectedItems={selectedItems}
-            onChange={(data) => setSelectedItems(data.selectedItems)}
-            itemToString={(item) => (item ? item.text : '')}
+            onChange={(data) => setSelectedItems(data.selectedItems ?? [])}
+            itemToString={({ text }) => text}
           />
           <Button
             id="external-all"
             onClick={() =>
-              setSelectedItems(
-                items.filter((i) => !i.disabled && !i.isSelectAll)
-              )
+              setSelectedItems(items.filter((i) => !i.isSelectAll))
             }>
             External Select All
           </Button>
@@ -1693,7 +1699,7 @@ describe('MultiSelect', () => {
         id="test"
         label="test-label"
         titleText="Multiselect title"
-        itemToString={(item) => (item ? item.text : '')}
+        itemToString={({ text }) => text}
         items={items}
         onChange={onChange}
       />
@@ -1706,16 +1712,13 @@ describe('MultiSelect', () => {
     await userEvent.click(screen.getByText('All roles'));
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    const firstCallData = onChange.mock.calls[0][0];
-    expect(firstCallData.selectedItems).toHaveLength(3);
-    expect(firstCallData.selectedItems).toEqual([
-      { id: 'downshift-1-item-0', text: 'Editor' },
-      { id: 'downshift-1-item-1', text: 'Owner' },
-      { id: 'downshift-1-item-2', text: 'Uploader' },
-    ]);
-    expect(firstCallData.selectedItems.some((item) => item.isSelectAll)).toBe(
-      false
-    );
+    expect(onChange).toHaveBeenNthCalledWith(1, {
+      selectedItems: [
+        { id: 'downshift-1-item-0', text: 'Editor' },
+        { id: 'downshift-1-item-1', text: 'Owner' },
+        { id: 'downshift-1-item-2', text: 'Uploader' },
+      ],
+    });
 
     onChange.mockClear();
 
@@ -1723,9 +1726,7 @@ describe('MultiSelect', () => {
     await userEvent.click(screen.getByText('All roles'));
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    const secondCallData = onChange.mock.calls[0][0];
-    expect(secondCallData.selectedItems).toHaveLength(0);
-    expect(secondCallData.selectedItems).toEqual([]);
+    expect(onChange).toHaveBeenNthCalledWith(1, { selectedItems: [] });
 
     onChange.mockClear();
 
@@ -1734,26 +1735,15 @@ describe('MultiSelect', () => {
     await userEvent.click(screen.getByText('Owner'));
 
     expect(onChange).toHaveBeenCalledTimes(2);
-
-    const thirdCallData = onChange.mock.calls[0][0];
-    expect(thirdCallData.selectedItems).toHaveLength(1);
-    expect(thirdCallData.selectedItems[0]).toEqual({
-      id: 'downshift-1-item-0',
-      text: 'Editor',
+    expect(onChange).toHaveBeenNthCalledWith(1, {
+      selectedItems: [{ id: 'downshift-1-item-0', text: 'Editor' }],
     });
-    expect(thirdCallData.selectedItems.some((item) => item.isSelectAll)).toBe(
-      false
-    );
-
-    const fourthCallData = onChange.mock.calls[1][0];
-    expect(fourthCallData.selectedItems).toHaveLength(2);
-    expect(fourthCallData.selectedItems).toEqual([
-      { id: 'downshift-1-item-0', text: 'Editor' },
-      { id: 'downshift-1-item-1', text: 'Owner' },
-    ]);
-    expect(fourthCallData.selectedItems.some((item) => item.isSelectAll)).toBe(
-      false
-    );
+    expect(onChange).toHaveBeenNthCalledWith(2, {
+      selectedItems: [
+        { id: 'downshift-1-item-0', text: 'Editor' },
+        { id: 'downshift-1-item-1', text: 'Owner' },
+      ],
+    });
 
     onChange.mockClear();
 
@@ -1761,16 +1751,13 @@ describe('MultiSelect', () => {
     await userEvent.click(screen.getByText('Uploader'));
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    const fifthCallData = onChange.mock.calls[0][0];
-    expect(fifthCallData.selectedItems).toHaveLength(3);
-    expect(fifthCallData.selectedItems).toEqual([
-      { id: 'downshift-1-item-0', text: 'Editor' },
-      { id: 'downshift-1-item-1', text: 'Owner' },
-      { id: 'downshift-1-item-2', text: 'Uploader' },
-    ]);
-    expect(fifthCallData.selectedItems.some((item) => item.isSelectAll)).toBe(
-      false
-    );
+    expect(onChange).toHaveBeenNthCalledWith(1, {
+      selectedItems: [
+        { id: 'downshift-1-item-0', text: 'Editor' },
+        { id: 'downshift-1-item-1', text: 'Owner' },
+        { id: 'downshift-1-item-2', text: 'Uploader' },
+      ],
+    });
   });
 
   it('should handle controlled mode without including isSelectAll item in selectedItems', async () => {
@@ -1782,21 +1769,22 @@ describe('MultiSelect', () => {
     ];
 
     const ControlledComponent = () => {
-      const [selectedItems, setSelectedItems] = useState([]);
-      const [changeHistory, setChangeHistory] = useState([]);
+      const [selectedItems, setSelectedItems] = useState<SelectableItem[]>([]);
+      const [changeHistory, setChangeHistory] = useState<
+        { hasSelectAll: boolean; itemCount: number }[]
+      >([]);
 
-      const handleChange = (data) => {
-        const hasSelectAll = data.selectedItems.some(
-          (item) => item.isSelectAll
-        );
+      const handleChange = (data: SelectableItemsChange) => {
+        const dataItems = data.selectedItems ?? [];
+        const hasSelectAll = dataItems.some((item) => item.isSelectAll);
         setChangeHistory((prev) => [
           ...prev,
           {
             hasSelectAll,
-            itemCount: data.selectedItems.length,
+            itemCount: dataItems.length,
           },
         ]);
-        setSelectedItems(data.selectedItems);
+        setSelectedItems(dataItems);
       };
 
       return (
@@ -1807,7 +1795,7 @@ describe('MultiSelect', () => {
             items={items}
             selectedItems={selectedItems}
             onChange={handleChange}
-            itemToString={(item) => (item ? item.text : '')}
+            itemToString={({ text }) => text}
           />
           <div data-testid="change-history">
             {changeHistory.map((change, idx) => (

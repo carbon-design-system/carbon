@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import React, { createRef, type ComponentProps } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
@@ -20,15 +21,22 @@ import FluidDropdown from '../FluidDropdown';
 
 const prefix = 'cds';
 
+type Item = ReturnType<typeof generateGenericItem>;
+
 describe('FluidDropdown', () => {
-  let mockProps;
+  type MockProps = Pick<
+    ComponentProps<typeof FluidDropdown<Item>>,
+    'id' | 'items' | 'label' | 'titleText' | 'type'
+  > & {
+    onChange: ReturnType<typeof jest.fn>;
+  };
+  let mockProps: MockProps;
   beforeEach(() => {
     mockProps = {
       id: 'test-fluiddropdown',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       label: 'input',
-      placeholder: 'Filter...',
       type: 'default',
       titleText: 'Dropdown label',
     };
@@ -71,9 +79,7 @@ describe('FluidDropdown', () => {
   });
 
   it('should render custom item components', async () => {
-    const itemToElement = jest.fn((item) => {
-      return <div className="mock-item">{item.label}</div>;
-    });
+    const itemToElement = jest.fn(() => <div className="mock-item" />);
 
     render(<FluidDropdown itemToElement={itemToElement} {...mockProps} />);
     await openMenu();
@@ -102,7 +108,7 @@ describe('FluidDropdown', () => {
     expect(
       // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('#a-custom-element-for-selected-item')
-    ).toBeDefined();
+    ).toBeInTheDocument();
     // the title should use the normal itemToString method
 
     expect(screen.getByText('Item 1')).toBeInTheDocument();
@@ -158,28 +164,25 @@ describe('FluidDropdown', () => {
     });
 
     it('using a string type for the `initialSelectedItem` prop', async () => {
-      // Replace the 'items' property in mockProps with a list of strings
-      mockProps = {
-        ...mockProps,
-        items: ['1', '2', '3'],
-      };
+      const stringItems = ['1', '2', '3'];
 
       render(
         <FluidDropdown
           {...mockProps}
-          initialSelectedItem={mockProps.items[1]}
+          items={stringItems}
+          initialSelectedItem={stringItems[1]}
         />
       );
       await waitForPosition();
 
-      expect(screen.getByText(mockProps.items[1])).toBeInTheDocument();
+      expect(screen.getByText(stringItems[1])).toBeInTheDocument();
     });
   });
 
   describe('Component API', () => {
     window.HTMLElement.prototype.scrollIntoView = function () {};
     it('should accept a `ref` for the underlying button element', async () => {
-      const ref = React.createRef();
+      const ref = createRef<HTMLButtonElement>();
       render(<FluidDropdown {...mockProps} ref={ref} />);
       await waitForPosition();
       expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');

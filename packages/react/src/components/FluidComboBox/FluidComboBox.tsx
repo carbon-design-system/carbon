@@ -6,7 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { type ComponentProps, type ForwardedRef } from 'react';
+import React, {
+  type ComponentProps,
+  type ForwardedRef,
+  type ReactElement,
+  type RefAttributes,
+} from 'react';
 import classnames from 'classnames';
 import ComboBox from '../ComboBox';
 import { usePrefix } from '../../internal/usePrefix';
@@ -235,4 +240,10 @@ FluidComboBox.propTypes = {
   warnText: PropTypes.node,
 };
 
-export default FluidComboBox;
+interface FluidComboBoxComponent {
+  <ItemType>(
+    props: FluidComboBoxProps<ItemType> & RefAttributes<HTMLInputElement>
+  ): ReactElement | null;
+}
+
+export default FluidComboBox as FluidComboBoxComponent;

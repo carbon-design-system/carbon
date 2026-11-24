@@ -5,11 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import React, { type ComponentProps, useState } from 'react';
 import { render, screen, within, fireEvent, act } from '@testing-library/react';
 import { useCombobox } from 'downshift';
 import userEvent from '@testing-library/user-event';
-import { useFloating } from '@floating-ui/react';
+import {
+  useFloating,
+  type ReferenceType,
+  type UseFloatingOptions,
+} from '@floating-ui/react';
 import {
   findListBoxNode,
   assertMenuOpen,
@@ -20,31 +25,44 @@ import {
   waitForPosition,
   findMenuItemNode,
 } from '../ListBox/test-helpers';
-import ComboBox from '../ComboBox';
+import ComboBox, { type OnChangeData } from '../ComboBox/ComboBox';
 import { AILabel } from '../AILabel';
 
 jest.mock('@floating-ui/react', () => ({
-  ...jest.requireActual('@floating-ui/react'),
+  ...jest.requireActual<typeof import('@floating-ui/react')>(
+    '@floating-ui/react'
+  ),
   useFloating: jest.fn(),
 }));
 
-const actualFloatingUiReact = jest.requireActual('@floating-ui/react');
+const mockedUseFloating = jest.mocked(useFloating);
 
-const findInputNode = () => screen.getByRole('combobox');
+const actualFloatingUiReact = jest.requireActual<{
+  useFloating: typeof useFloating;
+}>('@floating-ui/react');
+
+const findInputNode = () => screen.getByRole<HTMLInputElement>('combobox');
+
 const openMenu = async () => {
   await userEvent.click(screen.getByRole('combobox'));
 };
 
 const prefix = 'cds';
 
-const ControlledComboBox = ({ controlledItem }) => {
+type Item = ReturnType<typeof generateGenericItem> & { disabled?: boolean };
+
+const ControlledComboBox = ({
+  controlledItem,
+}: {
+  controlledItem?: Item | null;
+}) => {
   const items = generateItems(5, generateGenericItem);
-  const [value, setValue] = useState(
+  const [value, setValue] = useState<Item | null | undefined>(
     typeof controlledItem !== 'undefined' ? controlledItem : items[0]
   );
   const [onChangeCallCount, setOnChangeCallCount] = useState(0);
   const [onInputChangeCallCount, setOnInputChangeCallCount] = useState(0);
-  const controlledOnChange = ({ selectedItem }) => {
+  const controlledOnChange = ({ selectedItem }: OnChangeData<Item>) => {
     setValue(selectedItem);
     setOnChangeCallCount((prevCount) => prevCount + 1);
   };
@@ -61,7 +79,6 @@ const ControlledComboBox = ({ controlledItem }) => {
         onChange={controlledOnChange}
         onInputChange={controlledOnInputChange}
         placeholder="Filter..."
-        type="default"
       />
       <div data-testid="selected-item">{value?.label || 'none'}</div>
       <div>onChangeCallCount: {onChangeCallCount}</div>
@@ -73,17 +90,22 @@ const ControlledComboBox = ({ controlledItem }) => {
 };
 
 describe('ComboBox', () => {
-  let mockProps;
+  type MockProps = Pick<
+    ComponentProps<typeof ComboBox<Item>>,
+    'id' | 'items' | 'placeholder'
+  > & {
+    onChange: ReturnType<typeof jest.fn>;
+  };
+  let mockProps: MockProps;
   window.HTMLElement.prototype.scrollIntoView = function () {};
   beforeEach(() => {
-    useFloating.mockReset();
-    useFloating.mockImplementation(actualFloatingUiReact.useFloating);
+    mockedUseFloating.mockReset();
+    mockedUseFloating.mockImplementation(actualFloatingUiReact.useFloating);
     mockProps = {
       id: 'test-combobox',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       placeholder: 'Filter...',
-      type: 'default',
     };
   });
 
@@ -164,10 +186,12 @@ describe('ComboBox', () => {
   });
 
   it('should call `onChange` with the proper item when `shouldFilterItem` is provided', async () => {
-    const filterItems = (menu) => {
+    const filterItems: NonNullable<
+      ComponentProps<typeof ComboBox<Item>>['shouldFilterItem']
+    > = (menu) => {
       return menu?.item?.label
         ?.toLowerCase()
-        .includes(menu?.inputValue?.toLowerCase());
+        .includes(menu?.inputValue?.toLowerCase() ?? '');
     };
     const onInputChange = jest.fn();
 
@@ -267,7 +291,10 @@ describe('ComboBox', () => {
   });
 
   describe('onInputChange', () => {
-    let onInputChange;
+    type OnInputChange = NonNullable<
+      ComponentProps<typeof ComboBox<Item>>['onInputChange']
+    >;
+    let onInputChange: jest.MockedFunction<OnInputChange>;
     beforeEach(() => {
       onInputChange = jest.fn();
     });
@@ -337,9 +364,9 @@ describe('ComboBox', () => {
   });
 
   it('should render custom item components', async () => {
-    const itemToElement = jest.fn((item) => {
-      return <div className="mock-item">{item.text}</div>;
-    });
+    const itemToElement = jest.fn<
+      NonNullable<ComponentProps<typeof ComboBox<Item>>['itemToElement']>
+    >((item) => <div className="mock-item">{item.label}</div>);
     render(<ComboBox {...mockProps} itemToElement={itemToElement} />);
     await openMenu();
 
@@ -640,16 +667,17 @@ describe('ComboBox', () => {
 
     it('using a string type for the `initialSelectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
-      mockProps = {
-        ...mockProps,
-        items: ['1', '2', '3'],
-      };
+      const stringItems = ['1', '2', '3'];
 
       render(
-        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
+        <ComboBox
+          {...mockProps}
+          items={stringItems}
+          initialSelectedItem={stringItems[1]}
+        />
       );
       await waitForPosition();
-      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
+      expect(findInputNode()).toHaveDisplayValue(stringItems[1]);
     });
 
     it('should not revert to `initialSelectedItem` after clearing selection in uncontrolled mode', async () => {
@@ -748,14 +776,17 @@ describe('ComboBox', () => {
 
     it('should display selected item using a string type for the `selectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
-      mockProps = {
-        ...mockProps,
-        items: ['1', '2', '3'],
-      };
+      const stringItems = ['1', '2', '3'];
 
-      render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
+      render(
+        <ComboBox
+          {...mockProps}
+          items={stringItems}
+          selectedItem={stringItems[1]}
+        />
+      );
       await waitForPosition();
-      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
+      expect(findInputNode()).toHaveDisplayValue(stringItems[1]);
     });
     it('should update and call `onChange` once when selection is updated from the combobox', async () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
@@ -763,9 +794,7 @@ describe('ComboBox', () => {
       await openMenu();
       await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
       expect(mockProps.onChange).toHaveBeenCalledTimes(1);
-      expect(
-        screen.getByRole('combobox', { value: 'Item 2' })
-      ).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('Item 2');
     });
     it('should not call `onChange` when current selection is selected again', async () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
@@ -773,9 +802,7 @@ describe('ComboBox', () => {
       await openMenu();
       await userEvent.click(screen.getByRole('option', { name: 'Item 0' }));
       expect(mockProps.onChange).toHaveBeenCalledTimes(0);
-      expect(
-        screen.getByRole('combobox', { value: 'Item 0' })
-      ).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('Item 0');
     });
     it('should update and call `onChange` once when selection is updated from the combobox and the external state managing selectedItem is updated', async () => {
       render(<ControlledComboBox />);
@@ -784,9 +811,7 @@ describe('ComboBox', () => {
       await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
       expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
       expect(screen.getByTestId('selected-item').textContent).toBe('Item 2');
-      expect(
-        screen.getByRole('combobox', { value: 'Item 2' })
-      ).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('Item 2');
     });
     it('should update and call `onChange` once when selection is cleared from the combobox and the external state managing selectedItem is updated', async () => {
       render(<ControlledComboBox />);
@@ -942,9 +967,7 @@ describe('ComboBox', () => {
         selectedItem: undefined,
         type: useCombobox.stateChangeTypes.FunctionSetHighlightedIndex,
       });
-      expect(
-        screen.getByRole('combobox', { value: 'Item 2' })
-      ).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('Item 2');
     });
   });
 
@@ -1132,7 +1155,7 @@ describe('ComboBox', () => {
       await waitForPosition();
       await openMenu();
       await userEvent.keyboard('{Alt>}{ArrowUp}');
-      assertMenuClosed(mockProps);
+      assertMenuClosed();
     });
   });
 
@@ -1187,7 +1210,7 @@ describe('ComboBox', () => {
       render(
         <ComboBox
           {...mockProps}
-          selectedItem={{ id: 'not-in-list', label: 'Not in list' }}
+          selectedItem={{ id: 'not-in-list', label: 'Not in list', value: -1 }}
         />
       );
       act(() => {
@@ -1200,7 +1223,9 @@ describe('ComboBox', () => {
     });
 
     it('should keep the menu open when ArrowDown is pressed with no matching items', async () => {
-      const filterItems = ({ item, inputValue }) =>
+      const filterItems: NonNullable<
+        ComponentProps<typeof ComboBox<Item>>['shouldFilterItem']
+      > = ({ item, inputValue }) =>
         item.label.toLowerCase().includes((inputValue ?? '').toLowerCase());
       render(<ComboBox {...mockProps} shouldFilterItem={filterItems} />);
 
@@ -1292,7 +1317,7 @@ describe('ComboBox', () => {
       assertMenuOpen(mockProps);
 
       await userEvent.click(screen.getByRole('button', { name: 'Close' }));
-      assertMenuClosed(mockProps);
+      assertMenuClosed();
 
       expect(findInputNode()).toHaveDisplayValue('Item 1');
     });
@@ -1307,36 +1332,31 @@ describe('ComboBox', () => {
     });
 
     it('should pass defined selectedItem to onChange when item is selected', async () => {
-      render(<ComboBox {...mockProps} />);
+      const onChange = jest.fn();
+      render(<ComboBox {...mockProps} onChange={onChange} />);
 
-      expect(mockProps.onChange).not.toHaveBeenCalled();
+      expect(onChange).not.toHaveBeenCalled();
 
       await openMenu();
       await userEvent.click(screen.getAllByRole('option')[0]);
 
-      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
-      expect(mockProps.onChange).toHaveBeenCalledWith(
-        expect.objectContaining({
-          selectedItem: expect.anything(),
-        })
-      );
-
-      const call = mockProps.onChange.mock.calls[0][0];
-      expect(call.selectedItem).toBeDefined();
-      expect(call.selectedItem).toEqual(mockProps.items[0]);
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith({
+        selectedItem: mockProps.items[0],
+      });
     });
 
     it('should never pass undefined as selectedItem to onChange', async () => {
-      render(<ComboBox {...mockProps} />);
+      const onChange = jest.fn();
+      render(<ComboBox {...mockProps} onChange={onChange} />);
 
       for (let i = 0; i < mockProps.items.length; i++) {
         await openMenu();
         await userEvent.click(screen.getAllByRole('option')[i]);
 
-        const call = mockProps.onChange.mock.calls[i][0];
-        expect(call.selectedItem).toBeDefined();
-        expect(call.selectedItem).not.toBeUndefined();
-        expect(call.selectedItem).toEqual(mockProps.items[i]);
+        expect(onChange).toHaveBeenNthCalledWith(i + 1, {
+          selectedItem: mockProps.items[i],
+        });
       }
     });
     it('should clear selection if input does not match any item and there is already a selected item', async () => {
@@ -1403,8 +1423,6 @@ describe('ComboBox', () => {
   });
 
   describe('ComboBox autocomplete', () => {
-    let mockProps;
-
     const items = [
       { id: 'option-1', text: 'Option 1' },
       { id: 'option-2', text: 'Option 2' },
@@ -1415,12 +1433,29 @@ describe('ComboBox', () => {
       { id: 'orangeish', text: 'Orangeish' },
     ];
 
+    type AutocompleteItem = (typeof items)[number];
+    let mockProps: Omit<
+      ComponentProps<typeof ComboBox<AutocompleteItem>>,
+      'onChange'
+    > & {
+      onChange: jest.MockedFunction<
+        NonNullable<
+          ComponentProps<typeof ComboBox<AutocompleteItem>>['onChange']
+        >
+      >;
+    };
+
     beforeEach(() => {
       mockProps = {
         id: 'test-combobox',
         items,
         itemToString: (item) => (item ? item.text : ''),
-        onChange: jest.fn(),
+        onChange:
+          jest.fn<
+            NonNullable<
+              ComponentProps<typeof ComboBox<AutocompleteItem>>['onChange']
+            >
+          >(),
       };
     });
 
@@ -1623,7 +1658,7 @@ describe('ComboBox', () => {
 
       // blur
       await userEvent.keyboard('[Tab]');
-      assertMenuClosed(mockProps);
+      assertMenuClosed();
 
       // open the menu
       await userEvent.click(findInputNode());
@@ -1639,8 +1674,6 @@ describe('ComboBox', () => {
 
   describe('ComboBox repeated selection with controlled selectedItem and object items', () => {
     const ControlledComboBox = () => {
-      const [selectedItem, setSelectedItem] = useState(null);
-      const [changeCount, setChangeCount] = useState(0);
       const items = [
         {
           id: 'option-0',
@@ -1669,7 +1702,14 @@ describe('ComboBox', () => {
         },
       ];
 
-      const handleChange = ({ selectedItem }) => {
+      const [selectedItem, setSelectedItem] = useState<
+        (typeof items)[number] | null | undefined
+      >(null);
+      const [changeCount, setChangeCount] = useState(0);
+
+      const handleChange = ({
+        selectedItem,
+      }: OnChangeData<(typeof items)[number]>) => {
         setSelectedItem(selectedItem);
         setChangeCount((prev) => prev + 1);
       };
@@ -1820,8 +1860,6 @@ describe('ComboBox', () => {
 
   describe('ComboBox repeated selection with controlled selectedItem and string items', () => {
     const ControlledComboBox = () => {
-      const [selectedItem, setSelectedItem] = useState(null);
-      const [changeCount, setChangeCount] = useState(0);
       const items = [
         'An example option that is really long',
         'Option 1',
@@ -1830,8 +1868,12 @@ describe('ComboBox', () => {
         'Option 4',
         'Option 5',
       ];
+      const [selectedItem, setSelectedItem] = useState<
+        string | null | undefined
+      >(null);
+      const [changeCount, setChangeCount] = useState(0);
 
-      const handleChange = ({ selectedItem }) => {
+      const handleChange = ({ selectedItem }: OnChangeData<string>) => {
         setSelectedItem(selectedItem);
         setChangeCount((prev) => prev + 1);
       };
@@ -1946,16 +1988,16 @@ describe('ComboBox', () => {
       <ComboBox
         id="test-combo"
         items={[{ label: 'Item 1' }]}
-        itemToString={(item) => item?.label || ''}
+        onChange={jest.fn()}
+        itemToString={(item) => item?.label ?? ''}
         inputProps={{ maxLength: 10, placeholder: 'Type here' }}
       />
     );
 
     const input = screen.getByPlaceholderText('Type here');
-    const attributes = Array.from(input.attributes).reduce(
-      (acc, { name, value }) => ({ ...acc, [name]: value }),
-      {}
-    );
+    const attributes = Array.from(input.attributes).reduce<
+      Record<string, string>
+    >((acc, { name, value }) => ({ ...acc, [name]: value }), {});
 
     expect(input).toBeInTheDocument();
     expect(attributes).toEqual({
@@ -1998,24 +2040,34 @@ describe('ComboBox', () => {
       configurable: true,
     });
 
-    useFloating.mockReturnValue({
-      refs: {
-        reference: { current: referenceNode },
-        floating: { current: floatingNode },
-        setReference: jest.fn(),
-        setFloating: jest.fn(),
-      },
-      floatingStyles: {
-        position: 'fixed',
-        top: '12px',
-        left: '8px',
-      },
-      middlewareData: {
-        hide: {
-          referenceHidden: true,
-        },
-      },
-    });
+    mockedUseFloating.mockImplementation(
+      <RT extends ReferenceType>(options?: UseFloatingOptions) => {
+        const floating = actualFloatingUiReact.useFloating<RT>({
+          ...options,
+          whileElementsMounted: () => () => {},
+        });
+
+        return {
+          ...floating,
+          refs: {
+            ...floating.refs,
+            reference: { current: referenceNode },
+            floating: { current: floatingNode },
+          },
+          floatingStyles: {
+            position: 'fixed',
+            top: '12px',
+            left: '8px',
+          },
+          middlewareData: {
+            ...floating.middlewareData,
+            hide: {
+              referenceHidden: true,
+            },
+          },
+        };
+      }
+    );
 
     render(<ComboBox {...mockProps} autoAlign />);
 
@@ -2029,7 +2081,9 @@ describe('ComboBox', () => {
   });
 
   it('should expose downshift actions through `downshiftActions`', () => {
-    const downshiftActions = { current: undefined };
+    const downshiftActions: NonNullable<
+      ComponentProps<typeof ComboBox<Item>>['downshiftActions']
+    > = { current: undefined };
 
     render(<ComboBox {...mockProps} downshiftActions={downshiftActions} />);
 
@@ -2046,6 +2100,9 @@ describe('ComboBox', () => {
     );
 
     act(() => {
+      if (!downshiftActions.current) {
+        throw new Error('Expected downshift actions to be available.');
+      }
       downshiftActions.current.openMenu();
     });
 
@@ -2064,16 +2121,14 @@ describe('ComboBox', () => {
     const listbox = screen.getByRole('listbox');
 
     expect(firstOption).toHaveClass(
-      'cds--list-box__menu-item',
-      'cds--list-box__menu-item--highlighted',
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted',
       { exact: true }
     );
 
     fireEvent.mouseLeave(listbox);
 
     expect(firstOption).toHaveClass(
-      'cds--list-box__menu-item',
-      'cds--list-box__menu-item--highlighted',
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted',
       { exact: true }
     );
   });
