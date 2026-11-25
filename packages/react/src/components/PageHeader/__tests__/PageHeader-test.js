@@ -2098,6 +2098,45 @@ describe('PageHeader', () => {
       expect(focusSpy).toHaveBeenCalled();
       focusSpy.mockRestore();
     });
+
+    it('sets the accessible name of the hidden tags list from hiddenTagsLabel', () => {
+      const { rerender } = render(
+        <PageHeader.Root>
+          <PageHeader.TabBar
+            tags={
+              <PageHeader.TagOverflow renderPopoverContent={() => null}>
+                <Tag type="blue">Tag A</Tag>
+              </PageHeader.TagOverflow>
+            }
+          />
+        </PageHeader.Root>
+      );
+
+      expect(
+        screen.getByRole('list', { name: 'Hidden tags', hidden: true })
+      ).toBeInTheDocument();
+
+      rerender(
+        <PageHeader.Root>
+          <PageHeader.TabBar
+            tags={
+              <PageHeader.TagOverflow
+                hiddenTagsLabel="Custom hidden tags label"
+                renderPopoverContent={() => null}>
+                <Tag type="blue">Tag A</Tag>
+              </PageHeader.TagOverflow>
+            }
+          />
+        </PageHeader.Root>
+      );
+
+      expect(
+        screen.getByRole('list', {
+          name: 'Custom hidden tags label',
+          hidden: true,
+        })
+      ).toBeInTheDocument();
+    });
   });
 
   // ─── PageHeader.TitleBreadcrumb ───────────────────────────────────────────

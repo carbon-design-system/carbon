@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
+  forwardRef,
   useEffect,
   useState,
   useRef,
@@ -20,6 +21,11 @@ import { usePrefix } from '../../internal/usePrefix';
 export interface PageHeaderTagOverflowProps {
   // Maybe scope this more to only accept tag or operational tag children
   children: React.ReactNode;
+  /**
+   * Accessible name of the list of hidden tags shown in the overflow popover.
+   * Provide a translated string to localize it.
+   */
+  hiddenTagsLabel?: string;
   renderOverflowTag?: (
     hiddenBreadcrumbs: HTMLElement[],
     handleOverflowClick: (event: React.MouseEvent) => void,
@@ -31,10 +37,15 @@ export interface PageHeaderTagOverflowProps {
   ) => React.ReactElement;
 }
 
-export const PageHeaderTagOverflow = React.forwardRef<
-  HTMLDivElement,
-  PageHeaderTagOverflowProps
->(({ renderOverflowTag, renderPopoverContent, children }, ref) => {
+const frFn = forwardRef<HTMLDivElement, PageHeaderTagOverflowProps>;
+
+export const PageHeaderTagOverflow = frFn((props, ref) => {
+  const {
+    renderOverflowTag,
+    renderPopoverContent,
+    children,
+    hiddenTagsLabel = 'Hidden tags',
+  } = props;
   const prefix = usePrefix();
   const [openPopover, setOpenPopover] = useState(false);
   const [hiddenTags, setHiddenTags] = useState<HTMLElement[]>([]);
@@ -107,7 +118,7 @@ export const PageHeaderTagOverflow = React.forwardRef<
         <PopoverContent>
           <ul
             className={`${blockClass}__tags-popover-list`}
-            aria-label="Hidden tags">
+            aria-label={hiddenTagsLabel}>
             {renderPopoverContent?.(hiddenTags)}
           </ul>
         </PopoverContent>
