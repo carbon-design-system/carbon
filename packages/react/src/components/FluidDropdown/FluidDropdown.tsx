@@ -6,7 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef, type ComponentProps } from 'react';
+import React, {
+  type ComponentProps,
+  type ForwardedRef,
+  type ReactElement,
+  type RefAttributes,
+} from 'react';
 import classnames from 'classnames';
 import Dropdown, { DropdownProps } from '../Dropdown';
 import { usePrefix } from '../../internal/usePrefix';
@@ -244,4 +249,10 @@ FluidDropdown.propTypes = {
   warnText: PropTypes.node,
 };
 
-export default FluidDropdown;
+interface FluidDropdownComponent {
+  <ItemType>(
+    props: FluidDropdownProps<ItemType> & RefAttributes<HTMLButtonElement>
+  ): ReactElement | null;
+}
+
+export default FluidDropdown as FluidDropdownComponent;

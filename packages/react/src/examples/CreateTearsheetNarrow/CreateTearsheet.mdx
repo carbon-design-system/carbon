@@ -1,5 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as stories from './CreateTearsheet.stories';
 
 <Meta isTemplate />
@@ -52,12 +51,6 @@ import {
 
 ## Example usage
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateTearsheetNarrow/example)
-> example implementation.
-
-[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateTearsheetNarrow/example)
-
 ## Default
 
 The default CreateTearsheetNarrow pattern provides a basic single-form creation
@@ -68,15 +61,7 @@ interface with:
 - Form groups for organizing related inputs
 - Submit and cancel actions in the footer
 
-<Canvas
-  of={stories.createTearsheetNarrow}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.createTearsheetNarrow),
-    },
-  ]}
-/>
+<Canvas of={stories.createTearsheetNarrow} />
 
 ## With form validation
 
@@ -87,12 +72,4 @@ The pattern can be extended to include form validation:
 - Invalid text displayed for fields with errors
 - Real-time validation on blur or change events
 
-<Canvas
-  of={stories.withFormValidation}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.withFormValidation),
-    },
-  ]}
-/>
+<Canvas of={stories.withFormValidation} />

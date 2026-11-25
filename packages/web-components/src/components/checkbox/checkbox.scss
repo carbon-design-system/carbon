@@ -30,7 +30,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-checkbox[readonly]) {
+:host(#{$prefix}-checkbox[readonly]:not([disabled])) {
   @extend .#{$prefix}--checkbox-wrapper--readonly;
 }
 

@@ -7,7 +7,7 @@
  */
 
 import { html } from 'lit';
-import './example/src/api-key-modal';
+import './api-key-modal';
 import './_story-styles.scss';
 
 export default {

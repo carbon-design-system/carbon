@@ -32,6 +32,8 @@ import '../fluid-combo-box/index';
 import '../combo-box/combo-box-item';
 import '../fluid-multi-select/index';
 import '../fluid-date-picker/index';
+import '../multi-select/multi-select-item';
+import '../select/select-item';
 
 const items = [
   {
@@ -186,7 +188,7 @@ const aiLabelStoryStyles = `
   }
 `;
 
-const wrapForm = (content, { showInModal, modalId }) => {
+const wrapForm = (content, { showInModal }) => {
   if (!showInModal) {
     return html`<div style="width: 100%; max-width: 600px; min-width: 0;">
       <style>
@@ -196,8 +198,10 @@ const wrapForm = (content, { showInModal, modalId }) => {
     </div>`;
   }
 
-  const openModal = () => {
-    document.getElementById(modalId)?.toggleAttribute('open');
+  const openModal = (event: Event) => {
+    (event.currentTarget as HTMLElement).nextElementSibling?.toggleAttribute(
+      'open'
+    );
   };
 
   return html`
@@ -205,7 +209,7 @@ const wrapForm = (content, { showInModal, modalId }) => {
       ${aiLabelStoryStyles}
     </style>
     <cds-button @click="${openModal}">Open form</cds-button>
-    <cds-modal id="${modalId}" size="md" prevent-close-on-click-outside>
+    <cds-modal size="md" prevent-close-on-click-outside>
       <cds-modal-header>
         <cds-modal-close-button></cds-modal-close-button>
         <cds-modal-heading>Create project</cds-modal-heading>
@@ -290,7 +294,7 @@ const renderDefaultForm = (args) => {
           </cds-stack>
         </cds-fluid-form>
       `,
-      { showInModal, modalId: 'fluid-form-default-modal' }
+      { showInModal }
     );
   }
 
@@ -605,7 +609,7 @@ const renderDefaultForm = (args) => {
         </cds-stack>
       </cds-fluid-form>
     `,
-    { showInModal, modalId: 'fluid-form-default-modal' }
+    { showInModal }
   );
 };
 

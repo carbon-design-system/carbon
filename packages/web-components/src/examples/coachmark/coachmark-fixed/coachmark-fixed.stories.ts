@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import './example/src/coachmark-fixed';
+import './coachmark-fixed';
 
 export default {
   title: 'Examples/Coachmark/CoachmarkFixed',
