@@ -502,10 +502,14 @@ describe('CheckboxGroup', () => {
       const fieldset = screen.getByRole('group');
       expect(fieldset).toBeDisabled();
       expect(fieldset).toHaveAttribute('aria-disabled', 'true');
+      expect(fieldset).not.toHaveAttribute('aria-readonly');
+      expect(fieldset).not.toHaveClass(`${prefix}--checkbox-group--readonly`);
       const checkbox1 = screen.getByLabelText('Checkbox 1');
       const checkbox2 = screen.getByLabelText('Checkbox 2');
       expect(checkbox1).toBeDisabled();
       expect(checkbox2).toBeDisabled();
+      expect(checkbox1).not.toHaveAttribute('aria-readonly');
+      expect(checkbox2).not.toHaveAttribute('aria-readonly');
     });
   });
 });

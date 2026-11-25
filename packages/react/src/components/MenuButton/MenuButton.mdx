@@ -1,6 +1,5 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as MenuButtonStories from './MenuButton.stories.js';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -39,55 +38,19 @@ passed as `props.label`.
 </MenuButton>
 ```
 
-<Canvas
-  of={MenuButtonStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: MenuButtonStories.Default }),
-    },
-  ]}
-/>
+<Canvas of={MenuButtonStories.Default} />
 
 #### With Danger
 
-<Canvas
-  of={MenuButtonStories.WithDanger}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: MenuButtonStories.WithDanger }),
-    },
-  ]}
-/>
+<Canvas of={MenuButtonStories.WithDanger} />
 
 #### With Dividers
 
-<Canvas
-  of={MenuButtonStories.WithDividers}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: MenuButtonStories.WithDividers }),
-    },
-  ]}
-/>
+<Canvas of={MenuButtonStories.WithDividers} />
 
 #### With Icons
 
-<Canvas
-  of={MenuButtonStories.WithIcons}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: MenuButtonStories.WithIcons }),
-    },
-  ]}
-/>
+<Canvas of={MenuButtonStories.WithIcons} />
 
 ## Menu Alignment
 
@@ -102,16 +65,7 @@ to display the Menu in case the provided `menuAlignment` obscures it.
 We encourage you to play around in the Storybook Default stories to better
 understand the `menuAlignment` prop.
 
-<Canvas
-  of={MenuButtonStories.WithMenuAlignment}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: MenuButtonStories.WithMenuAlignment }),
-    },
-  ]}
-/>
+<Canvas of={MenuButtonStories.WithMenuAlignment} />
 
 ## menuTarget Prop
 
@@ -149,18 +103,7 @@ const Component = () => {
 
 ## Experimental Auto Align
 
-<Canvas
-  of={MenuButtonStories.ExperimentalAutoAlign}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: MenuButtonStories.ExperimentalAutoAlign,
-        }),
-    },
-  ]}
-/>
+<Canvas of={MenuButtonStories.ExperimentalAutoAlign} />
 
 ## Component API
 

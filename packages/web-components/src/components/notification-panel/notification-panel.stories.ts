@@ -6,6 +6,7 @@
  */
 import { html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
+import { createRef, ref } from 'lit/directives/ref.js';
 import { action } from 'storybook/actions';
 import './index';
 import styles from './story-styles.scss?lit';
@@ -127,6 +128,15 @@ const defaultTemplate = {
     const [expandUserPanel, setExpandUserPanel] = useState(false);
     const [expandPanel, setExpandPanel] = useState(false);
     const [isNewNotification, setIsNewNotification] = useState(false);
+    const triggerRef = createRef<HTMLElement>();
+    const setTrigger = (panel?: Element) => {
+      if (panel) {
+        (
+          panel as HTMLElement & { triggerButtonRef?: HTMLElement }
+        ).triggerButtonRef = triggerRef.value;
+      }
+    };
+
     const toggleButton = () => {
       setOpenPanel(!openPanel);
       setExpandPanel(false);
@@ -214,7 +224,7 @@ const defaultTemplate = {
             class="${storyBlockClass}__notification-trigger"
             aria-label="Notification"
             tooltip-text="Notification"
-            id="trigger-button"
+            ${ref(triggerRef)}
             @click="${toggleButton}">
             ${openPanel
               ? iconLoader(Close20, { slot: 'icon' })
@@ -246,7 +256,7 @@ const defaultTemplate = {
         </div>
       </cds-header>
       <cds-notification-panel
-        .triggerButtonRef=${document.querySelector('#trigger-button')}
+        ${ref(setTrigger)}
         .open="${openPanel}"
         title-text="${args.titleText}"
         today-text="${args.todayText}"
@@ -344,8 +354,8 @@ const defaultTemplate = {
   },
 };
 
-async function queryShadowElement(hostSelector, targetSelector) {
-  const host = document.querySelector(hostSelector);
+async function queryShadowElement(root, hostSelector, targetSelector) {
+  const host = root.querySelector(hostSelector);
   await new Promise((resolve) => {
     const checkShadow = () => {
       if (host && host.shadowRoot) {
@@ -370,8 +380,9 @@ export const Default = {
 
 export const EmptyState = {
   ...defaultTemplate,
-  play: async ({ userEvent }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const dismissAllButton = await queryShadowElement(
+      canvasElement,
       'cds-notification-panel',
       `.${blockClass}__dismiss-button`
     );

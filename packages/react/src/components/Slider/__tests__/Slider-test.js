@@ -699,6 +699,13 @@ describe('Slider', () => {
       });
       const sliderInput = screen.getByRole('spinbutton');
       expect(sliderInput).toBeDisabled();
+      expect(sliderInput).not.toHaveAttribute('readonly');
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(document.querySelector(`.${prefix}--slider--readonly`)).toBeNull();
+      expect(
+        // eslint-disable-next-line testing-library/no-node-access
+        document.querySelector(`.${prefix}--text-input-wrapper--readonly`)
+      ).toBeNull();
     });
 
     describe('Error handling, expected behavior from event handlers', () => {
@@ -1649,6 +1656,12 @@ describe('Slider', () => {
       });
       expect(lowerInput).toBeDisabled();
       expect(upperInput).toBeDisabled();
+      expect(lowerInput).not.toHaveAttribute('readonly');
+      expect(upperInput).not.toHaveAttribute('readonly');
+      expect(
+        // eslint-disable-next-line testing-library/no-node-access
+        document.querySelector(`.${prefix}--slider-container--readonly`)
+      ).toBeNull();
     });
 
     it('should clear invalid state when invalid changes to false', async () => {

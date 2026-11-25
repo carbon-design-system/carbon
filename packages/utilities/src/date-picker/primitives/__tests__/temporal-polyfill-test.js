@@ -50,9 +50,10 @@ describe('date picker without native Temporal', () => {
 
     expect(machine.getState()).toBe(DatePickerState.CALENDAR_OPEN);
     expect(context.isOpen).toBe(true);
-    expect(context.focusedDate.toString()).toBe(
+    expect(context.viewDate.toString()).toBe(
       Temporal.Now.plainDateISO().toString()
     );
+    expect(context.focusedDate).toBeNull();
   });
 
   it('renders a grid the calendar can draw from', () => {

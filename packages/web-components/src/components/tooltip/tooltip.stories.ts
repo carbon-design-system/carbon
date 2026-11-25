@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { ref } from 'lit/directives/ref.js';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -77,6 +78,14 @@ const controls = {
     description:
       'Specify the duration in milliseconds to delay before hiding the tooltip',
   },
+};
+
+const scrollIntoCenter = (el?: Element) => {
+  if (el) {
+    requestAnimationFrame(() =>
+      el.scrollIntoView({ block: 'center', inline: 'center' })
+    );
+  }
 };
 
 export const Default = {
@@ -192,15 +201,10 @@ export const ExperimentalAutoAlign = {
     enterDelayMs,
     leaveDelayMs,
   }) => {
-    requestAnimationFrame(() => {
-      document.querySelector('cds-tooltip')?.scrollIntoView({
-        block: 'center',
-        inline: 'center',
-      });
-    });
     return html`
       <div style="${autoAlignStoryContainerStyle}">
         <cds-tooltip
+          ${ref(scrollIntoCenter)}
           ?defaultOpen=${defaultOpen}
           .dropShadow=${dropShadow}
           autoalign

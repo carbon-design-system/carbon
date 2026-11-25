@@ -234,7 +234,6 @@ const DatePickerInput = frFn((props, ref) => {
   });
   const inputClasses = cx(`${prefix}--date-picker__input`, {
     [`${prefix}--date-picker__input--${size}`]: size,
-    [`${prefix}--date-picker__input--disabled`]: normalizedProps.disabled,
     [`${prefix}--date-picker__input--invalid`]: normalizedProps.invalid,
     [`${prefix}--date-picker__input--warn`]: normalizedProps.warn,
   });

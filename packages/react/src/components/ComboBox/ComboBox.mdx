@@ -1,7 +1,6 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as ComboBoxStories from './ComboBox.stories.js';
 import ComboBox from '../ComboBox';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -46,16 +45,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 A combobox allows the user to make a selection from a predefined list of options
 and is typically used when there are a large amount of options to choose from.
 
-<Canvas
-  of={ComboBoxStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ComboBoxStories.Default }),
-    },
-  ]}
-/>
+<Canvas of={ComboBoxStories.Default} />
 
 ## Disabled
 
@@ -101,18 +91,7 @@ custom values and typeahead suggestions.
 
 ### Autocomplete with typeahead
 
-<Canvas
-  of={ComboBoxStories.AutocompleteWithTypeahead}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: ComboBoxStories.AutocompleteWithTypeahead,
-        }),
-    },
-  ]}
-/>
+<Canvas of={ComboBoxStories.AutocompleteWithTypeahead} />
 
 ### Combobox `downshiftActions`
 
@@ -176,16 +155,7 @@ const items = ['Option 1', 'Option 2', 'Option 3']
 
 You can use `selectedItem` for a fully controlled component.
 
-<Canvas
-  of={ComboBoxStories.Controlled}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ComboBoxStories.Controlled }),
-    },
-  ]}
-/>
+<Canvas of={ComboBoxStories.Controlled} />
 
 ```jsx
 const options = [
@@ -312,16 +282,7 @@ callback.
 {selectedItem: undefined, inputValue: 'Apple'}
 ```
 
-<Canvas
-  of={ComboBoxStories.AllowCustomValue}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ComboBoxStories.AllowCustomValue }),
-    },
-  ]}
-/>
+<Canvas of={ComboBoxStories.AllowCustomValue} />
 
 ## `inputProps`
 
@@ -350,16 +311,7 @@ both `helperText` and `invalidText`/`warnText`.
 
 ## With AI Label
 
-<Canvas
-  of={ComboBoxStories.withAILabel}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ComboBoxStories.withAILabel }),
-    },
-  ]}
-/>
+<Canvas of={ComboBoxStories.withAILabel} />
 
 ## With Layer
 

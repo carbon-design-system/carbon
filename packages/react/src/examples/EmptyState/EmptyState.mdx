@@ -1,5 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as stories from './EmptyState.stories';
 
 <Meta isTemplate />
@@ -29,7 +28,7 @@ content to display.
 > be built and extended further.
 
 To build this pattern, you can use the `EmptyState` component recipe from
-`example/components/EmptyState.tsx` alongside:
+`components/EmptyState.tsx` alongside:
 
 - [DataTable](https://react.carbondesignsystem.com/?path=/docs/components-datatable)
 - [Tile](https://react.carbondesignsystem.com/?path=/docs/components-tile)
@@ -38,41 +37,19 @@ To build this pattern, you can use the `EmptyState` component recipe from
 
 ## Example usage
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/EmptyState/example)
-> example implementation.
-
-[![Edit empty-state-pattern](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/EmptyState/example)
-
 ## Isometric illustration
 
 Use an isometric SVG illustration to communicate a visually rich empty state.
 Swap the `illustration` prop with any image `src` string.
 
-<Canvas
-  of={stories.emptyStateIsometric}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.emptyStateIsometric),
-    },
-  ]}
-/>
+<Canvas of={stories.emptyStateIsometric} />
 
 ## Pictogram illustration
 
 Use a Carbon pictogram (or any inline SVG component) for a leaner illustration
 style that respects the current text colour.
 
-<Canvas
-  of={stories.emptyStatePictogram}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.emptyStatePictogram),
-    },
-  ]}
-/>
+<Canvas of={stories.emptyStatePictogram} />
 
 ## Empty state in a UI
 

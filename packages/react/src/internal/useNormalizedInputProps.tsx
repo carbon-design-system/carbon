@@ -50,8 +50,9 @@ interface NormalizedInputProps {
  * Returns an object containing normalized properties for an input component.
  *
  * This hook ensures that only one of `invalid` or `warn` is active (with
- * `invalid` taking precedence) and that `disabled` overrides the `readOnly`,
- * `invalid`, and `warn` states. It generates unique IDs for error, warning, and
+ * `invalid` taking precedence), that `disabled` takes precedence over
+ * `readOnly`, and that either `disabled` or `readOnly` suppresses the `invalid`
+ * and `warn` states. It generates unique IDs for error, warning, and
  * helper messages, and conditionally provides the appropriate validation
  * message and accompanying icon.
  */

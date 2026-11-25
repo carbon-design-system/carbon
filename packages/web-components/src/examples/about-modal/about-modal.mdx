@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as AboutModalStories from './about-modal.stories';
 
 <Meta of={AboutModalStories} />
@@ -43,15 +43,7 @@ import '@carbon/web-components/es/components/link/index.js';
 
 ### Example usage
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/about-modal/example)
-> example implementation.
-
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/about-modal/example)
-
-<Canvas withSource="none">
-  <Story of={AboutModalStories.Standard} />
-</Canvas>
+<Canvas of={AboutModalStories.Standard} sourceState="none" />
 
 ```html
 <cds-modal aria-label="About this product" ?open="${this._open}">
@@ -80,9 +72,7 @@ While the about modal supports a list of Carbon `cds-link` components, these
 should be used to display product information and not to direct users to find
 help content.
 
-<Canvas withSource="none">
-  <Story of={AboutModalStories.WithAdditionalContent} />
-</Canvas>
+<Canvas of={AboutModalStories.WithAdditionalContent} sourceState="none" />
 
 ```html
 <cds-modal aria-label="About this product" ?open="${this._open}">

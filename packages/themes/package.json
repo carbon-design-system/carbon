@@ -1,7 +1,7 @@
 {
   "name": "@carbon/themes",
   "description": "Themes for applying color in the Carbon Design System",
-  "version": "11.86.0-rc.0",
+  "version": "11.86.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -32,6 +32,8 @@
     "build:types": "tsc -p tsconfig.types.json",
     "babel-node": "node ../../node_modules/@babel/node/lib/babel-node.js",
     "build:js-tokens": "yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/generate-js-tokens.js",
+    "generate:v12": "yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/generate-v12-tokens.js",
+    "build:v12": "yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build-v12.js",
     "build": "yarn clean && yarn build:js-tokens && carbon-cli bundle src/index.ts --name CarbonThemes && yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build.js && yarn build:types && carbon-cli check \"scss/*.scss\"",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
@@ -56,8 +58,5 @@
     "typescript": "^6.0.3",
     "typescript-config-carbon": "workspace:^0.11.0"
   },
-  "sideEffects": false,
-  "engines": {
-    "node": ">=22"
-  }
+  "sideEffects": false
 }
