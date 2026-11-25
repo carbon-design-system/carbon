@@ -11,7 +11,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import '../side-panel/index';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
 import { consume } from '@lit/context';
@@ -31,8 +30,9 @@ const blockClass = `${prefix}--tearsheet`;
  * @slot - Content for the summary panel
  * @fires cds-tearsheet-summary-closed - Fired when the summary panel is closed (mobile only)
  */
-@customElement(`${prefix}-tearsheet-summary-content`)
 class CDSTearsheetSummaryContent extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tearsheet-summary-content`;
+
   @property({ reflect: true })
   slot = 'summary-content';
 

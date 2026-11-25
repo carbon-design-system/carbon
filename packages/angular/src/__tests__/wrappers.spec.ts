@@ -47,7 +47,6 @@ const wrappers: [string, Type<unknown>][] = readdirSync(ENTRIES_DIR, {
 const NEEDS_CHILDREN = 'throws when mounted without the children it expects';
 const KNOWN_MOUNT_ERRORS = new Map([
   ['cds-ng-combo-button', NEEDS_CHILDREN],
-  ['cds-ng-copy', NEEDS_CHILDREN],
   ['cds-ng-file-uploader', NEEDS_CHILDREN],
   ['cds-ng-menu-button', NEEDS_CHILDREN],
   ['cds-ng-menu-item-radio-group', 'throws when mounted outside a menu'],

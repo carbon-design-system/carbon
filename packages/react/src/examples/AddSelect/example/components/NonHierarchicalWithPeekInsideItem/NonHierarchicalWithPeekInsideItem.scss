@@ -119,7 +119,7 @@ $c4p-prefix: 'c4p';
   &__peek-item {
     display: flex;
     border-inline-start: $spacing-01 solid transparent;
-    transition: background-color $duration-fast-01 cubic-bezier(0, 0, 0.38, 0.9);
+    transition: background-color $duration-fast-01 motion(entrance, productive);
 
     &:hover {
       background: $layer-hover-01;

@@ -30,6 +30,7 @@ packages/**/examples/**
 
 # Generated files
 **/generated/**
+packages/themes/tokens/next/themes/**
 
 # Templates
 **/*.template.*

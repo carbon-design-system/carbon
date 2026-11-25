@@ -84,12 +84,24 @@ function carbonJsMotionTokensFormat({ dictionary, options }) {
     }
   }
 
-  // Duration tokens (V10 deprecated aliases)
+  // Duration tokens (V10 deprecated aliases).
+  // Only names that existed in v10. New steps such as duration-fast-00 have
+  // no backwards-compatible alias.
   lines.push('');
   lines.push('// Duration tokens (V10 — deprecated aliases)');
+  const v10DurationNames = new Set([
+    'duration-fast-01',
+    'duration-fast-02',
+    'duration-moderate-01',
+    'duration-moderate-02',
+    'duration-slow-01',
+    'duration-slow-02',
+  ]);
   const v10Camels = [];
 
-  for (const v11Camel of durationCamels) {
+  for (const token of durationTokens) {
+    if (!v10DurationNames.has(token.name)) continue;
+    const v11Camel = kebabToCamel(token.name);
     const v10Camel = toV10CamelName(v11Camel);
     v10Camels.push(v10Camel);
 

@@ -28,4 +28,35 @@ describe('cds-progress-bar', () => {
     expect(bar.style.transform).to.equal('none');
     expect(bar.style.inlineSize).to.equal('');
   });
+
+  it('should not report aria-busy when status is error', async () => {
+    const el = await fixture(html`
+      <cds-progress-bar value="50" status="error"></cds-progress-bar>
+    `);
+    const track = el.shadowRoot.querySelector('[role="progressbar"]');
+
+    expect(track.getAttribute('aria-invalid')).to.equal('true');
+    expect(track.getAttribute('aria-busy')).to.equal('false');
+  });
+
+  it('should announce the status in the helper text live region', async () => {
+    const el = await fixture(html`
+      <cds-progress-bar
+        label="Progress"
+        helper-text="Fetching assets"
+        value="50"></cds-progress-bar>
+    `);
+    const live = () =>
+      el.shadowRoot.querySelector('[aria-live="polite"]').textContent.trim();
+
+    expect(live()).to.equal('Loading');
+
+    el.status = 'finished';
+    await el.updateComplete;
+    expect(live()).to.equal('Done');
+
+    el.status = 'error';
+    await el.updateComplete;
+    expect(live()).to.equal('Error');
+  });
 });

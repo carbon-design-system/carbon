@@ -7,4 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './page-header-actions-set';
+import { defineCustomElement } from '../../../globals/register';
+import CDSPageHeaderActionsSet from './page-header-actions-set';
+
+export { CDSPageHeaderActionsSet };
+
+defineCustomElement(CDSPageHeaderActionsSet);

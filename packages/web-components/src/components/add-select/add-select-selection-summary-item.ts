@@ -10,7 +10,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../icon-button/index';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import SubtractAlt16 from '@carbon/icons/es/subtract--alt/16';
@@ -30,8 +29,9 @@ const blockClass = `${prefix}--add-select__next`;
  * @slot accordion-body - Custom accordion body (used when use-accordion is true)
  * @fires cds-add-select-selection-summary-item-remove - Fired when remove button clicked; detail: { itemId }
  */
-@customElement(`${prefix}-add-select-selection-summary-item`)
 class CDSAddSelectSelectionSummaryItem extends LitElement {
+  static is = `${prefix}-add-select-selection-summary-item`;
+
   /**
    * Item data (set via JS property)
    */

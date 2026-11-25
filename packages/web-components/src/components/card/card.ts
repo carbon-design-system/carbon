@@ -134,19 +134,6 @@ class CDSCard extends CDSLink {
     }
   }
 
-  private _handleDefaultSlotChange({ target }: Event) {
-    const slot = target as HTMLSlotElement;
-    const hasActions = slot
-      .assignedElements({ flatten: true })
-      .some((el) => el.matches(`${prefix}-card-actions`));
-
-    if (hasActions) {
-      this.setAttribute('has-actions', '');
-    } else {
-      this.removeAttribute('has-actions');
-    }
-  }
-
   // ─── Event handlers (non-link clickable mode) ─────────────────────────────
 
   private _handleClick(e: MouseEvent) {
@@ -186,13 +173,13 @@ class CDSCard extends CDSLink {
     const { horizontal, mediaPosition } = this;
 
     if (!horizontal) {
-      return html`<slot @slotchange=${this._handleDefaultSlotChange}></slot>`;
+      return html`<slot></slot>`;
     }
 
     const mediaSlot = html`<slot name="media"></slot>`;
     const contentDiv = html`
       <div class="${prefix}--card__content">
-        <slot @slotchange=${this._handleDefaultSlotChange}></slot>
+        <slot></slot>
       </div>
     `;
 

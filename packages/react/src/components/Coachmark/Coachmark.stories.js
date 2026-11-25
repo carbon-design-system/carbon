@@ -59,7 +59,7 @@ function useCarbonTheme() {
 }
 
 export default {
-  title: 'Components/Coachmark',
+  title: 'Components/Onboarding/Coachmark',
   component: Coachmark,
   subcomponents: {
     CoachmarkContent: Coachmark.Content,

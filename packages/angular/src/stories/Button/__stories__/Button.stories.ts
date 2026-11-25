@@ -8,6 +8,8 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { expect, fn, userEvent } from 'storybook/test';
 import { ButtonComponent } from '@carbon/angular/button';
+import { iconToSvg } from '../../../../.storybook/helpers/icon-to-svg';
+import Add16 from '@carbon/icons/es/add/16.js';
 
 // `cds-ng-button` has no custom click event, so stories bind the native
 // `(click)` to this spy arg.
@@ -219,11 +221,7 @@ export const IconButton: Story = {
       [tooltipText]="tooltipText"
       [tooltipPosition]="tooltipPosition"
       (click)="onClick($event)"
-    ><svg slot="icon" focusable="false" preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-        aria-hidden="true" width="16" height="16" viewBox="0 0 32 32">
-        <path d="M17 15V8h-2v7H8v2h7v7h2v-7h7v-2z"/>
-      </svg></cds-ng-button>`,
+    >${iconToSvg(Add16, { slot: 'icon' })}</cds-ng-button>`,
   }),
   play: async ({ canvasElement }) => {
     // Host IS the cds-ng-button WC.

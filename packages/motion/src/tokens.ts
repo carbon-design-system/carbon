@@ -9,22 +9,28 @@
 // `yarn build:tokens` (tasks/build.js) and written to js/generated/tokens.js
 // before this file is bundled. Run `yarn build` to regenerate them.
 import {
+  durationFast00,
   durationFast01,
   durationFast02,
   durationModerate01,
   durationModerate02,
+  durationModerate03,
   durationSlow01,
   durationSlow02,
+  durationSlow03,
   easings,
 } from '../js/generated/tokens.js';
 
 export {
+  durationFast00,
   durationFast01,
   durationFast02,
   durationModerate01,
   durationModerate02,
+  durationModerate03,
   durationSlow01,
   durationSlow02,
+  durationSlow03,
   fast01,
   fast02,
   moderate01,
@@ -36,12 +42,15 @@ export {
 } from '../js/generated/tokens.js';
 
 export type DurationName =
+  | 'fast-00'
   | 'fast-01'
   | 'fast-02'
   | 'moderate-01'
   | 'moderate-02'
+  | 'moderate-03'
   | 'slow-01'
-  | 'slow-02';
+  | 'slow-02'
+  | 'slow-03';
 
 export type EasingName = 'standard' | 'entrance' | 'exit';
 export type EasingMode = 'productive' | 'expressive';
@@ -50,12 +59,15 @@ export type EasingMap = Record<EasingName, Record<EasingMode, string>>;
 
 // Map the surface names to the existing Carbon duration tokens.
 const durations: Record<DurationName, string> = {
+  'fast-00': durationFast00,
   'fast-01': durationFast01,
   'fast-02': durationFast02,
   'moderate-01': durationModerate01,
   'moderate-02': durationModerate02,
+  'moderate-03': durationModerate03,
   'slow-01': durationSlow01,
   'slow-02': durationSlow02,
+  'slow-03': durationSlow03,
 };
 
 type EasingCurveMap = Record<EasingName, Record<EasingMode, CubicBezier>>;
@@ -64,16 +76,16 @@ type EasingCurveMap = Record<EasingName, Record<EasingMode, CubicBezier>>;
 // Used by resolveEasing() — surfaces need raw numeric arrays, not CSS strings.
 const easingCurves: EasingCurveMap = {
   standard: {
-    productive: [0.2, 0, 0.38, 0.9],
-    expressive: [0.4, 0.14, 0.3, 1],
+    productive: [0.4, 0, 0.2, 1],
+    expressive: [0.8, 0, 0, 1],
   },
   entrance: {
-    productive: [0, 0, 0.38, 0.9],
-    expressive: [0, 0, 0.3, 1],
+    productive: [0, 0, 0.2, 1],
+    expressive: [0, 0, 0, 1],
   },
   exit: {
-    productive: [0.2, 0, 1, 0.9],
-    expressive: [0.4, 0.14, 1, 1],
+    productive: [0.4, 0, 1, 1],
+    expressive: [0.8, 0, 1, 1],
   },
 };
 

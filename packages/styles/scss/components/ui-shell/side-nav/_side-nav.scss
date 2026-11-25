@@ -38,10 +38,9 @@
     inset-block: 0;
     inset-inline-start: 0;
     max-inline-size: mini-units(32);
-    // TODO: sync with motion work
     transition:
-      inline-size 0.11s cubic-bezier(0.2, 0, 1, 0.9),
-      transform 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+      inline-size 0.11s motion(exit, productive),
+      transform 0.11s motion(exit, productive);
     will-change: inline-size;
   }
 
@@ -364,7 +363,7 @@
   .#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
   .#{$prefix}--side-nav
     a.#{$prefix}--header__menu-item
-    .#{$prefix}--text-truncate-end {
+    .#{$prefix}--text-truncate--end {
     @include text-overflow();
 
     color: $text-secondary;
@@ -548,6 +547,7 @@
     a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
+    flex-shrink: 0;
     fill: $icon-secondary;
   }
 

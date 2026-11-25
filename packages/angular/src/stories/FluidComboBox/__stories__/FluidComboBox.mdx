@@ -1,0 +1,91 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidComboBoxStories from './FluidComboBox.stories';
+
+<Meta of={FluidComboBoxStories} />
+
+# FluidComboBox
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidComboBox)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/combo-box/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/combo-box/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Condensed](#condensed)
+- [Skeleton](#skeleton)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-combo-box` component is a fluid variant of the ComboBox,
+spanning the full width of its container with specialized styling.
+
+### Importing
+
+```ts
+import {
+  FluidComboBoxComponent,
+  FluidComboBoxSkeletonComponent,
+} from '@carbon/angular/fluid-combo-box';
+import { ComboBoxItemComponent } from '@carbon/angular/combo-box';
+
+@Component({
+  standalone: true,
+  imports: [FluidComboBoxComponent, ComboBoxItemComponent],
+  template: `
+    <cds-ng-fluid-combo-box titleText="Label" label="Choose an option">
+      <cds-ng-combo-box-item value="option-0">Option 0</cds-ng-combo-box-item>
+      <cds-ng-combo-box-item value="option-1">Option 1</cds-ng-combo-box-item>
+    </cds-ng-fluid-combo-box>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidComboBoxStories.Default} />
+
+## Condensed
+
+<Canvas of={FluidComboBoxStories.Condensed} />
+
+## Skeleton
+
+<Canvas of={FluidComboBoxStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={FluidComboBoxStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of={FluidComboBoxStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidComboBoxComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-combo-box [formControl]="comboControl" titleText="Combo box">
+  <cds-ng-combo-box-item value="opt-1">Option 1</cds-ng-combo-box-item>
+</cds-ng-fluid-combo-box>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-combo-box [(ngModel)]="selectedValue" titleText="Combo box">
+  <cds-ng-combo-box-item value="opt-1">Option 1</cds-ng-combo-box-item>
+</cds-ng-fluid-combo-box>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

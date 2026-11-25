@@ -495,11 +495,6 @@ collect:
         - 'flags'
         # unstable_Layout
         - 'density'
-        # unstable_PageSelector
-        - 'currentPage'
-        - 'totalPages'
-        # unstable_Pagination
-        - 'initialPage'
         # unstable_TextDirection
         - 'getTextDirection'
         # unstable__FluidMultiSelect

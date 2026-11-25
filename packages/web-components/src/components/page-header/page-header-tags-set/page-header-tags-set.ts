@@ -9,7 +9,6 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import '../../tag/index';
 import '../../button/index';
 import '../../modal/index';
@@ -21,8 +20,9 @@ import { prefix } from '../../../globals/settings';
 
 const blockClass = `${prefix}--page-header-tags-set`;
 
-@customElement(`${prefix}-page-header-tags-set`)
 export default class CDSPageHeaderTagsSet extends LitElement {
+  static is = `${prefix}-page-header-tags-set`;
+
   @state()
   hiddenTags: TagType[] = [];
 

@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 const isEqual = require('react-fast-compare');
 
 const { render } = SassRenderer.create(__dirname);
@@ -52,19 +52,18 @@ describe('zone', () => {
 
     // When including the `_zone.scss` file, we generate a stylesheet with four
     // classes, one per theme.
-    const { stylesheet } = css.parse(result.css.toString());
+    const stylesheet = postcss.parse(result.css.toString());
 
-    for (const rule of stylesheet.rules) {
+    for (const rule of stylesheet.nodes) {
       // For each selector, we check that every button token that we have
       // defined for this theme is emitted in CSS with the expected value
       const [_prefix, theme] = rule.selectors[0].split('--');
       const tokens = tokensByTheme.get(theme);
       const includesComponentTokens = Array.from(tokens.entries()).every(
         ([token, value]) => {
-          return rule.declarations.find((declaration) => {
+          return rule.nodes.find((declaration) => {
             return (
-              declaration?.property?.includes(token) &&
-              declaration.value === value
+              declaration?.prop?.includes(token) && declaration.value === value
             );
           });
         }
@@ -72,5 +71,44 @@ describe('zone', () => {
 
       expect(includesComponentTokens).toBe(true);
     }
+  });
+
+  describe('component tokens from @carbon/themes', () => {
+    let getToken;
+
+    beforeAll(async () => {
+      const { result } = await render(`
+        @use '../zone';
+      `);
+      const stylesheet = postcss.parse(result.css.toString());
+
+      getToken = (theme, token) => {
+        const rule = stylesheet.nodes.find((rule) => {
+          return rule.selectors?.includes(`.cds--${theme}`);
+        });
+        return rule?.nodes.find((declaration) => {
+          return declaration.prop === `--cds-${token}`;
+        })?.value;
+      };
+    });
+
+    // https://github.com/carbon-design-system/carbon/issues/18044
+    it('should emit notification-action-hover in every theme', () => {
+      expect(getToken('white', 'notification-action-hover')).toBe('#ffffff');
+      expect(getToken('g10', 'notification-action-hover')).toBe('#ffffff');
+      expect(getToken('g90', 'notification-action-hover')).toBe('#474747');
+      expect(getToken('g100', 'notification-action-hover')).toBe('#333333');
+    });
+
+    it('should emit status outline tokens in every theme', () => {
+      for (const theme of ['white', 'g10']) {
+        expect(getToken(theme, 'status-orange-outline')).toBe('#ba4e00');
+        expect(getToken(theme, 'status-yellow-outline')).toBe('#8e6a00');
+      }
+      for (const theme of ['g90', 'g100']) {
+        expect(getToken(theme, 'status-orange-outline')).toBe('#ff832b');
+        expect(getToken(theme, 'status-yellow-outline')).toBe('#f1c21b');
+      }
+    });
   });
 });

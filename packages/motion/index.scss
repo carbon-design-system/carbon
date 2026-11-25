@@ -13,12 +13,15 @@
 
 // Re-forward all generated token variables as public API
 $easings: tokens.$easings !default;
+$duration-fast-00: tokens.$duration-fast-00 !default;
 $duration-fast-01: tokens.$duration-fast-01 !default;
 $duration-fast-02: tokens.$duration-fast-02 !default;
 $duration-moderate-01: tokens.$duration-moderate-01 !default;
 $duration-moderate-02: tokens.$duration-moderate-02 !default;
+$duration-moderate-03: tokens.$duration-moderate-03 !default;
 $duration-slow-01: tokens.$duration-slow-01 !default;
 $duration-slow-02: tokens.$duration-slow-02 !default;
+$duration-slow-03: tokens.$duration-slow-03 !default;
 
 /// V10 backwards compatibility tokens
 /// @deprecated
@@ -97,12 +100,15 @@ $surfaces: generated.$surfaces;
 /// @access private
 /// @group @carbon/motion
 $-durations: (
+  'fast-00': $duration-fast-00,
   'fast-01': $duration-fast-01,
   'fast-02': $duration-fast-02,
   'moderate-01': $duration-moderate-01,
   'moderate-02': $duration-moderate-02,
+  'moderate-03': $duration-moderate-03,
   'slow-01': $duration-slow-01,
   'slow-02': $duration-slow-02,
+  'slow-03': $duration-slow-03,
 );
 
 /// Name a surface argument for error messages, so an incorrect inline
@@ -160,7 +166,7 @@ $-durations: (
   }
 
   @if $kind != 'reveal' {
-    @error 'Expected the #{$label} to declare `kind: reveal`, but found `#{if($kind, $kind, 'nothing')}`.';
+    @error 'Expected the #{$label} to declare `kind: reveal`, but found `#{$kind or 'nothing'}`.';
   }
 
   @each $key in (enter, exit) {
@@ -178,7 +184,7 @@ $-durations: (
   $duration: map.get($definition, duration);
 
   @if not map.has-key($-durations, $duration) {
-    @error 'Unable to find duration `#{if($duration, $duration, 'nothing')}` for the #{$label}. Expected one of: #{map.keys($-durations)}.';
+    @error 'Unable to find duration `#{$duration or 'nothing'}` for the #{$label}. Expected one of: #{map.keys($-durations)}.';
   }
 
   @each $key in (enter-easing, exit-easing) {

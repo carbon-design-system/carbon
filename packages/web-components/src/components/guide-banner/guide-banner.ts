@@ -11,7 +11,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './guide-banner.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../button/index';
 import Close16 from '@carbon/icons/es/close/16';
 import Idea20 from '@carbon/icons/es/idea/20';
@@ -29,8 +28,9 @@ const blockEvent = `${prefix}-guidebanner`;
  * @fires cds-guide-banner-close Custom event fired when banner is closed
  * */
 
-@customElement(`${prefix}-guide-banner`)
 class CDSGuideBanner extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-guide-banner`;
+
   @property({ type: String, reflect: true, attribute: 'collapse-text' })
   collapseText!: string;
 
