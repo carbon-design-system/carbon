@@ -10,11 +10,11 @@ import type { Meta } from '@storybook/web-components';
 
 import DocsPage from './empty-state.mdx';
 
-import './example/src/styles/_empty-state.scss';
-import './example/src/styles/_story-styles.scss';
-import './example/src/preview-components/empty-state-with-isometric-illustration';
-import './example/src/preview-components/empty-state-with-pictogram-illustration';
-import './example/src/preview-components/empty-state-unit';
+import './styles/_empty-state.scss';
+import './styles/_story-styles.scss';
+import './preview-components/empty-state-with-isometric-illustration';
+import './preview-components/empty-state-with-pictogram-illustration';
+import './preview-components/empty-state-unit';
 
 // ─── Story: unit with isometric illustration ─────────────────────────────────
 

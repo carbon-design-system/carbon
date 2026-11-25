@@ -7,7 +7,7 @@
  */
 
 import { html } from 'lit';
-import './example/src/delete-and-remove';
+import './delete-and-remove';
 import './story-styles.scss';
 
 export default {

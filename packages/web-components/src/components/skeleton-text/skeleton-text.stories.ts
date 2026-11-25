@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import './index';
 
 const args = {
   paragraph: false,

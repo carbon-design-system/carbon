@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import './example/src/about-modal';
+import './about-modal';
 
 export default {
   title: 'Examples/About Modal',

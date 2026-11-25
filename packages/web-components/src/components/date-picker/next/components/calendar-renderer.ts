@@ -360,7 +360,7 @@ class CDSDatePickerCalendar extends LitElement {
             disabled: isDisabled,
             selected: isSelected,
             inRange: isInRange,
-            today: isToday && !isSelected,
+            today: isToday,
             'no-border': isToday && isSelected,
             focused: isFocused,
           });
@@ -371,6 +371,7 @@ class CDSDatePickerCalendar extends LitElement {
               class="${dayClasses}"
               tabindex="-1"
               ?disabled="${isDisabled}"
+              @mousedown="${(event: MouseEvent) => event.preventDefault()}"
               @click="${() => this._handleDateSelect(date)}"
               @mouseenter="${() => this._handleDateMouseEnter(date)}"
               @mouseleave="${() => this._handleDateMouseLeave()}"

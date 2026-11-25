@@ -9,8 +9,8 @@ import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import './_story-styles.scss';
 import DocsPage from './CreateModal.mdx';
-import { StandardCreateModal } from './example/preview-components/StandardCreateModal';
-import { CreateModalWithValidation } from './example/preview-components/CreateModalWithValidation';
+import { StandardCreateModal } from './preview-components/StandardCreateModal';
+import { CreateModalWithValidation } from './preview-components/CreateModalWithValidation';
 
 export default {
   title: 'Examples/Create flows/Create Modal',

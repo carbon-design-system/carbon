@@ -6,10 +6,12 @@
  */
 
 import { html } from 'lit';
+import { createRef, ref } from 'lit/directives/ref.js';
 import { prefix } from '../../globals/settings';
 import { ACCORDION_SIZE } from './accordion';
 import './index';
 import '../layer/index';
+import '../button/index';
 import styles from './accordion.scss?lit';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
 
@@ -131,9 +133,10 @@ export const Controlled = {
     onBeforeToggle,
     onToggle,
   }) => {
+    const accordionRef = createRef<HTMLElement>();
     const toggleItems = (isOpen: boolean) => {
-      document
-        .querySelectorAll('cds-accordion-item[controlled]')
+      accordionRef.value
+        ?.querySelectorAll('cds-accordion-item[controlled]')
         .forEach((item) => {
           if (isOpen) {
             item.setAttribute('open', '');
@@ -161,6 +164,7 @@ export const Controlled = {
       </cds-button-set>
 
       <cds-accordion
+        ${ref(accordionRef)}
         alignment="${alignment}"
         size="${size}"
         ?isFlush="${isFlush}"

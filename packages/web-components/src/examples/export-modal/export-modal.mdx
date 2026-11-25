@@ -1,6 +1,6 @@
 import { ArgTypes, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import ExportModalStories from './export-modal.stories';
+import * as ExportModalStories from './export-modal.stories';
 
 <Meta of={ExportModalStories} />
 
@@ -24,12 +24,6 @@ To build this pattern, we recommend including the following components:
 These components are used within the `standard-export-modal` and
 `export-modal-preformatted-extension` wrapper components to handle state
 management.
-
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/export-modal/example)
-> example implementation.
-
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/export-modal/example)
 
 ## Basic implementation
 
