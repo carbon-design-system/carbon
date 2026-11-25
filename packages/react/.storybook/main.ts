@@ -18,8 +18,14 @@ import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
 import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
+import { getIbmAnalyticsHeads } from '../../../tasks/storybook-ibm-analytics.mjs';
+import { storybookStackBlitz } from '../../../tasks/storybook-stackblitz/vite-plugin.mjs';
+import { reactStackBlitz } from '../../../tasks/storybook-stackblitz/react.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
+const { managerAnalyticsHead, previewAnalyticsHead } = getIbmAnalyticsHeads(
+  'CarbonReactStorybook'
+);
 
 // Keep top level MDX docs pages in Storybook, but exclude component level docs
 // directories from story discovery because those pages are referenced through
@@ -54,6 +60,9 @@ const stories = glob.sync(storyGlobs, {
 });
 
 const config: StorybookConfig = {
+  // `head` contains manager-head.html/preview-head.html
+  managerHead: (head) => `${head}${managerAnalyticsHead}`,
+  previewHead: (head) => `${head}${previewAnalyticsHead}`,
   addons: [
     'storybook-addon-accessibility-checker',
     {
@@ -163,6 +172,8 @@ const config: StorybookConfig = {
         babel({
           presets: ['babel-preset-carbon'],
         }),
+        // "Open in StackBlitz" docs action, generated from each story
+        storybookStackBlitz(reactStackBlitz),
       ],
       resolve: {
         preserveSymlinks: true,

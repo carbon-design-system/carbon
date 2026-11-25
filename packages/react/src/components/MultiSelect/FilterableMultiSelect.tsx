@@ -25,6 +25,7 @@ import React, {
   useMemo,
   useRef,
   useState,
+  type FocusEvent,
   type ForwardedRef,
   type KeyboardEvent,
   type MouseEvent,
@@ -74,6 +75,7 @@ import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps'
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   InputBlur,
@@ -331,7 +333,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   ItemType,
 >(
   {
-    autoAlign = false,
+    autoAlign: autoAlignProp,
     className: containerClassName,
     clearSelectionDescription = 'Total items selected: ',
     clearSelectionText = 'To clear selection, press Delete or Backspace',
@@ -373,6 +375,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
+  const autoAlign = useAutoAlign(autoAlignProp);
   const { isFluid } = useContext(FormContext);
   const isFirstRender = useRef(true);
   const labelRef = useRef<HTMLLabelElement>(null);
@@ -464,9 +467,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           middleware: [
             flip({ crossAxis: false }),
             floatingSize({
-              apply({ rects, elements }) {
+              apply({ availableHeight, rects, elements }) {
                 Object.assign(elements.floating.style, {
                   width: `${rects.reference.width}px`,
+                  maxHeight: `${availableHeight}px`,
                 });
               },
             }),
@@ -489,9 +493,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         }
       });
     }
-  }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+  }, [autoAlign, floatingStyles, refs.floating, middlewareData]);
 
   const textInput = useRef<HTMLInputElement>(null);
+  const clearInputButton = useRef<HTMLButtonElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const filterableMultiSelectInstanceId = useId();
 
   const prefix = usePrefix();
@@ -575,10 +581,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const helperId = !hasHelper
     ? undefined
     : `filterablemultiselect-helper-text-${filterableMultiSelectInstanceId}`;
-  const labelId = `${id}-label`;
+  const instanceId = `${id}-${filterableMultiSelectInstanceId}`;
+  const labelId = `${instanceId}-label`;
   const titleClasses = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: readOnly && !disabled,
     [`${prefix}--visually-hidden`]: hideLabel,
   });
   const helperClasses = cx({
@@ -595,8 +603,13 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       {helperText}
     </div>
   );
-  const menuId = `${id}__menu`;
-  const inputId = `${id}-input`;
+  const menuId = `${instanceId}__menu`;
+  const inputId = `${instanceId}-input`;
+  const legacyMenuId = `${id}__menu`;
+  const inputAriaControls =
+    inputProps?.['aria-controls'] === legacyMenuId
+      ? menuId
+      : inputProps?.['aria-controls'];
 
   useEffect(() => {
     if (!isOpen) {
@@ -636,9 +649,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
       if (!(target instanceof Node)) return;
 
-      const wrapper = document
-        .getElementById(id)
-        ?.closest(`.${prefix}--multi-select__wrapper`);
+      const wrapper = wrapperRef.current;
 
       // If click is outside our component and menu is open or input is focused
       if (wrapper && !wrapper.contains(target)) {
@@ -657,7 +668,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [isOpen, inputFocused]);
 
   const {
@@ -675,7 +685,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     items: sortedItems,
     // defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
-    id,
+    id: instanceId,
     labelId,
     menuId,
     inputId,
@@ -858,7 +868,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       [`${prefix}--multi-select--selected`]:
         controlledSelectedItems?.length > 0,
       [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
-      [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--readonly`]: readOnly && !disabled,
       [`${prefix}--multi-select--selectall`]: selectAll,
     }
   );
@@ -893,7 +903,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const inputProp = getInputProps(
     getDropdownProps({
-      'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': hasHelper && showHelperText ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
@@ -903,6 +912,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       placeholder,
       preventKeyAction: isOpen,
       ...inputProps,
+      'aria-controls': inputAriaControls ?? (isOpen ? menuId : undefined),
 
       onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {
@@ -944,7 +954,21 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         }
       },
       onFocus: () => setInputFocused(true),
-      onBlur: () => {
+      onBlur: (
+        event: FocusEvent<HTMLInputElement> & {
+          preventDownshiftDefault: boolean;
+        }
+      ) => {
+        if (
+          clearInputButton.current !== null &&
+          event.relatedTarget === clearInputButton.current
+        ) {
+          // Focus moved to the clear input button, which is part of the
+          // field. Keep the focus styling, the filter value and the menu as
+          // they are so that the button survives long enough to be clicked.
+          event.preventDownshiftDefault = true;
+          return;
+        }
         setInputFocused(false);
         setInputValue('');
       },
@@ -992,7 +1016,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       : `${clearSelectionDescription} 0.`;
 
   return (
-    <div className={wrapperClasses}>
+    <div className={wrapperClasses} ref={wrapperRef}>
       {titleText ? (
         <label className={titleClasses} {...labelProps} ref={labelRef}>
           {titleText}
@@ -1035,7 +1059,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
-            readOnly={readOnly}
+            {...(readOnly && !disabled ? { readOnly: true } : {})}
           />
           {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
@@ -1052,7 +1076,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
               translateWithId={translateWithId}
               readOnly={readOnly}
               onMouseDown={(event) => {
+                // Browsers disagree on whether a <button> takes focus on
+                // mousedown, so focus is moved explicitly to render the focus
+                // state on every platform.
                 event.preventDefault();
+                clearInputButton.current = event.currentTarget;
+                event.currentTarget.focus();
               }}
               onMouseUp={(event: MouseEvent) => {
                 // If we do not stop this event from propagating,

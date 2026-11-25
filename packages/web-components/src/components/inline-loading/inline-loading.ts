@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,10 +38,12 @@ class CDSInlineLoading extends LitElement {
     this.iconDescription = value;
   }
   /**
-   * The assistive text for the spinner icon.
+   * The accessible label for the status icon. It is used for every status, so
+   * update it along with `status`. Defaults to "Loading", "finished" or
+   * "error".
    */
   @property({ attribute: 'icon-description' })
-  iconDescription = 'Loading';
+  iconDescription?: string;
 
   /**
    * Provide a delay for the setTimeout for success
@@ -57,7 +59,7 @@ class CDSInlineLoading extends LitElement {
     if (status === INLINE_LOADING_STATE.ERROR) {
       return iconLoader(ErrorFilled16, {
         class: `${prefix}--inline-loading--error`,
-        'aria-label': iconDescription,
+        'aria-label': iconDescription || 'error',
       });
     }
     const init = {
@@ -78,7 +80,7 @@ class CDSInlineLoading extends LitElement {
 
       return iconLoader(CheckmarkFilled16, {
         class: `${prefix}--inline-loading__checkmark-container`,
-        'aria-label': iconDescription,
+        'aria-label': iconDescription || 'finished',
       });
     }
     if (
@@ -92,7 +94,10 @@ class CDSInlineLoading extends LitElement {
       });
       return html`
         <div class="${classes}">
-          ${getLoadingIcon({ description: iconDescription, small: true })}
+          ${getLoadingIcon({
+            description: iconDescription || 'Loading',
+            small: true,
+          })}
         </div>
       `;
     }

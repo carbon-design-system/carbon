@@ -54,6 +54,22 @@ describe('FluidTextArea', () => {
       expect(screen.getByText('This is default text')).toBeInTheDocument();
     });
 
+    it('should prioritize disabled over readonly when both are true', () => {
+      const { getByRole } = render(
+        <FluidTextArea
+          id="input-1"
+          labelText="FluidTextArea label"
+          disabled
+          readOnly
+          data-testid="test-id-disabled-readonly"
+        />
+      );
+
+      const textarea = getByRole('textbox');
+      expect(textarea).toBeDisabled();
+      expect(textarea).not.toHaveAttribute('readonly');
+    });
+
     it('should respect disabled prop', () => {
       render(
         <FluidTextArea
@@ -192,6 +208,35 @@ describe('FluidTextArea', () => {
 
       await userEvent.click(screen.getByTestId('test-id-8'));
       expect(onClick).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('translateWithId', () => {
+    it('should forward `translateWithId` to `TextArea`', () => {
+      const translateWithId = (id, { count, maxCount }) => {
+        switch (id) {
+          case 'carbon.text-area.counter.characters.remaining':
+            return `Restam ${count} caracteres.`;
+          case 'carbon.text-area.counter.characters.limit':
+            return `Limite de ${maxCount} caracteres`;
+          default:
+            throw new Error(`Unsupported id: ${id}`);
+        }
+      };
+
+      render(
+        <FluidTextArea
+          id="textarea-1"
+          labelText="FluidTextArea label"
+          enableCounter
+          maxCount={10}
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAccessibleDescription(
+        'Limite de 10 caracteres'
+      );
     });
   });
 });

@@ -7,6 +7,7 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { createRef, ref } from 'lit/directives/ref.js';
 import { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from './combo-box';
 import './index';
 import View16 from '@carbon/icons/es/view/16.js';
@@ -60,7 +61,6 @@ const sizes = {
 
 const defaultArgs = {
   direction: DROPDOWN_DIRECTION.BOTTOM,
-  autoalign: false,
   allowCustomValue: false,
   disabled: false,
   helperText: 'Choose the region where your resources will be hosted.',
@@ -476,10 +476,9 @@ export const Controlled = {
       warnText,
     } = args ?? {};
 
+    const comboBoxRef = createRef<HTMLElement & { value: string }>();
     const setValue = (nextValue: string) => {
-      const comboBox = document.querySelector('cds-combo-box[controlled]') as
-        | (HTMLElement & { value: string })
-        | null;
+      const comboBox = comboBoxRef.value;
       if (comboBox) {
         comboBox.value = nextValue;
       }
@@ -513,6 +512,7 @@ export const Controlled = {
 
     return html`
       <cds-combo-box
+        ${ref(comboBoxRef)}
         .inputProps=${inputProps}
         controlled
         direction=${ifDefined(direction)}

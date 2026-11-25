@@ -69,6 +69,7 @@ import {
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   ItemClick,
@@ -297,7 +298,7 @@ export interface MultiSelectProps<ItemType>
 export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
-      autoAlign = false,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       id,
@@ -337,6 +338,7 @@ export const MultiSelect = React.forwardRef(
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const autoAlign = useAutoAlign(autoAlignProp);
     const filteredItems = useMemo(() => {
       return items.filter((item) => {
         if (typeof item === 'object' && item !== null) {
@@ -381,9 +383,10 @@ export const MultiSelect = React.forwardRef(
             middleware: [
               autoAlign && flip({ crossAxis: false }),
               floatingSize({
-                apply({ rects, elements }) {
+                apply({ availableHeight, rects, elements }) {
                   Object.assign(elements.floating.style, {
                     width: `${rects.reference.width}px`,
+                    maxHeight: `${availableHeight}px`,
                   });
                 },
               }),
@@ -408,13 +411,7 @@ export const MultiSelect = React.forwardRef(
           }
         });
       }
-    }, [
-      enableFloatingStyles,
-      floatingStyles,
-      refs.floating,
-      middlewareData,
-      open,
-    ]);
+    }, [enableFloatingStyles, floatingStyles, middlewareData, refs.floating]);
 
     const {
       selectedItems: controlledSelectedItems,
@@ -429,12 +426,27 @@ export const MultiSelect = React.forwardRef(
       filteredItems,
     });
 
-    const sortOptions = {
-      selectedItems: controlledSelectedItems,
+    const sortedItems = useMemo(() => {
+      return sortItems(filteredItems, {
+        selectedItems: {
+          top: controlledSelectedItems,
+          fixed: [],
+          'top-after-reopen': topItems,
+        }[selectionFeedback],
+        itemToString,
+        compareItems,
+        locale,
+      });
+    }, [
+      filteredItems,
+      sortItems,
+      selectionFeedback,
+      controlledSelectedItems,
+      topItems,
       itemToString,
       compareItems,
       locale,
-    };
+    ]);
 
     const selectProps: UseSelectProps<ItemType> = {
       stateReducer,
@@ -451,7 +463,7 @@ export const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems as ItemType,
-      items: filteredItems,
+      items: sortedItems,
       isItemDisabled,
       ...downshiftProps,
     };
@@ -466,7 +478,7 @@ export const MultiSelect = React.forwardRef(
       setHighlightedIndex,
     } = useSelect<ItemType>(selectProps);
 
-    const toggleButtonProps = getToggleButtonProps({
+    const downshiftToggleButtonProps = getToggleButtonProps({
       onFocus: () => {
         setInputFocused(true);
       },
@@ -509,6 +521,12 @@ export const MultiSelect = React.forwardRef(
         }
       },
     });
+
+    const toggleButtonProps = {
+      ...downshiftToggleButtonProps,
+      'aria-activedescendant':
+        downshiftToggleButtonProps['aria-activedescendant'] || undefined,
+    };
 
     const toggleButtonRef = useRef<HTMLButtonElement>(null);
     const titleRef = useRef<HTMLLabelElement>(null);
@@ -571,6 +589,7 @@ export const MultiSelect = React.forwardRef(
     );
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--readonly`]: readOnly && !disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
     const helperId = !helperText
@@ -590,16 +609,10 @@ export const MultiSelect = React.forwardRef(
       [`${prefix}--multi-select--selected`]:
         selectedItems && selectedItems.length > 0,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--readonly`]: readOnly && !disabled,
       [`${prefix}--autoalign`]: enableFloatingStyles,
       [`${prefix}--multi-select--selectall`]: selectAll,
     });
-
-    if (selectionFeedback === 'fixed') {
-      sortOptions.selectedItems = [];
-    } else if (selectionFeedback === 'top-after-reopen') {
-      sortOptions.selectedItems = topItems;
-    }
 
     function stateReducer(state, actionAndChanges) {
       const { changes, props, type } = actionAndChanges;
@@ -646,7 +659,7 @@ export const MultiSelect = React.forwardRef(
           } else {
             return {
               ...changes,
-              highlightedIndex: filteredItems.indexOf(highlightedIndex),
+              highlightedIndex: sortedItems.indexOf(highlightedIndex),
             };
           }
         case ToggleButtonKeyDownArrowDown:
@@ -819,7 +832,7 @@ export const MultiSelect = React.forwardRef(
               type="button"
               className={`${prefix}--list-box__field`}
               disabled={disabled}
-              aria-disabled={disabled || readOnly}
+              aria-disabled={readOnly ? true : undefined}
               aria-describedby={
                 !inline && showHelperText ? helperId : undefined
               }
@@ -849,7 +862,7 @@ export const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              sortItems(filteredItems, sortOptions).map((item, index) => {
+              sortedItems.map((item, index) => {
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,
@@ -896,6 +909,7 @@ export const MultiSelect = React.forwardRef(
                         title={useTitleInItem ? itemText : undefined}
                         indeterminate={isIndeterminate}
                         disabled={disabled}
+                        tabIndex={-1}
                       />
                     </div>
                   </ListBox.MenuItem>

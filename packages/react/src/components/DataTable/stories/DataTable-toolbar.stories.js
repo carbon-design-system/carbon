@@ -27,8 +27,8 @@ import {
   TableToolbarSearch,
   TableToolbarMenu,
 } from '..';
-import { EmptyState } from '../../../examples/EmptyState/example/components/EmptyState';
-import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found.svg';
+import { EmptyState } from '../../../examples/EmptyState/components/EmptyState';
+import notFoundIllustration from '../../../examples/EmptyState/assets/not-found.svg';
 import mdx from '../DataTable.mdx';
 import { dataTableArgs, dataTableArgTypes, headers, rows } from './shared';
 
@@ -49,6 +49,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+      source: {
+        type: 'code',
+      },
     },
   },
 };

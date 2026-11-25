@@ -79,13 +79,11 @@ describe('RadioButtonGroup', () => {
       </RadioButtonGroup>
     );
 
-    const fieldset = screen
-      .getByText('test', {
-        selector: 'legend',
-      })
-      // eslint-disable-next-line testing-library/no-node-access
-      .closest('fieldset');
-    expect(fieldset).toBeDefined();
+    const fieldset = screen.getByRole('group', { name: 'test' });
+    expect(fieldset).toHaveProperty('tagName', 'FIELDSET');
+    expect(fieldset).toContainElement(
+      screen.getByText('test', { selector: 'legend' })
+    );
   });
 
   it('should render <RadioButton> as children', () => {
@@ -96,12 +94,7 @@ describe('RadioButtonGroup', () => {
       </RadioButtonGroup>
     );
 
-    const fieldset = screen
-      .getByText('test', {
-        selector: 'legend',
-      })
-      // eslint-disable-next-line testing-library/no-node-access
-      .closest('fieldset');
+    const fieldset = screen.getByRole('group', { name: 'test' });
     expect(fieldset).toContainElement(screen.getByLabelText('test-1'));
     expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
   });
@@ -148,12 +141,7 @@ describe('RadioButtonGroup', () => {
       </RadioButtonGroup>
     );
 
-    const fieldset = screen
-      .getByText('test', {
-        selector: 'legend',
-      })
-      // eslint-disable-next-line testing-library/no-node-access
-      .closest('fieldset');
+    const fieldset = screen.getByRole('group', { name: 'test' });
     expect(fieldset).toContainElement(screen.getByLabelText('test-1'));
     expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
   });
@@ -185,12 +173,7 @@ describe('RadioButtonGroup', () => {
           <RadioButton labelText="test-2" value="test-2" />
         </RadioButtonGroup>
       );
-      const fieldset = screen
-        .getByText('test', {
-          selector: 'legend',
-        })
-        // eslint-disable-next-line testing-library/no-node-access
-        .closest('fieldset');
+      const fieldset = screen.getByRole('group', { name: 'test' });
       expect(fieldset).toBeDisabled();
     });
 

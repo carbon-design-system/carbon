@@ -1,0 +1,56 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/resolver.json",
+  "name": "Carbon themes",
+  "version": "2025.10",
+  "description": "Theme and component color tokens for the Carbon Design System. The `theme` modifier selects one of the four themes; every theme resolves against the `@carbon/colors` palette.",
+  "sets": {
+    "palette": {
+      "description": "The Carbon color palette from `@carbon/colors`. Theme and component tokens reference these tokens.",
+      "sources": [{ "$ref": "../../colors/tokens/colors.tokens.json" }]
+    }
+  },
+  "modifiers": {
+    "theme": {
+      "description": "The Carbon theme.",
+      "contexts": {
+        "white": [
+          { "$ref": "themes/white/theme.tokens.json" },
+          { "$ref": "themes/white/button.tokens.json" },
+          { "$ref": "themes/white/tag.tokens.json" },
+          { "$ref": "themes/white/notification.tokens.json" },
+          { "$ref": "themes/white/status.tokens.json" },
+          { "$ref": "themes/white/content-switcher.tokens.json" }
+        ],
+        "g10": [
+          { "$ref": "themes/g10/theme.tokens.json" },
+          { "$ref": "themes/g10/button.tokens.json" },
+          { "$ref": "themes/g10/tag.tokens.json" },
+          { "$ref": "themes/g10/notification.tokens.json" },
+          { "$ref": "themes/g10/status.tokens.json" },
+          { "$ref": "themes/g10/content-switcher.tokens.json" }
+        ],
+        "g90": [
+          { "$ref": "themes/g90/theme.tokens.json" },
+          { "$ref": "themes/g90/button.tokens.json" },
+          { "$ref": "themes/g90/tag.tokens.json" },
+          { "$ref": "themes/g90/notification.tokens.json" },
+          { "$ref": "themes/g90/status.tokens.json" },
+          { "$ref": "themes/g90/content-switcher.tokens.json" }
+        ],
+        "g100": [
+          { "$ref": "themes/g100/theme.tokens.json" },
+          { "$ref": "themes/g100/button.tokens.json" },
+          { "$ref": "themes/g100/tag.tokens.json" },
+          { "$ref": "themes/g100/notification.tokens.json" },
+          { "$ref": "themes/g100/status.tokens.json" },
+          { "$ref": "themes/g100/content-switcher.tokens.json" }
+        ]
+      },
+      "default": "white"
+    }
+  },
+  "resolutionOrder": [
+    { "$ref": "#/sets/palette" },
+    { "$ref": "#/modifiers/theme" }
+  ]
+}

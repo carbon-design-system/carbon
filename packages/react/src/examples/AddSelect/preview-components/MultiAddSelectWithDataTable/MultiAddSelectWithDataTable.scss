@@ -1,0 +1,29 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+// Multi Add Select with DataTable Preview Component Styles
+.example-container {
+  padding: $spacing-07;
+  margin: 0 auto;
+  max-inline-size: 1200px;
+
+  h3 {
+    font-weight: 600;
+    margin-block-end: $spacing-05;
+  }
+
+  p {
+    color: var(--cds-text-secondary);
+    margin-block-end: $spacing-06;
+  }
+
+  .launch-button {
+    margin-block-end: $spacing-07;
+  }
+}

@@ -10,8 +10,8 @@ import React, { useMemo, useState } from 'react';
 import Button from '../../Button';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
-import { EmptyState } from '../../../examples/EmptyState/example/components/EmptyState';
-import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found.svg';
+import { EmptyState } from '../../../examples/EmptyState/components/EmptyState';
+import notFoundIllustration from '../../../examples/EmptyState/assets/not-found.svg';
 import mdx from '../DataTable.mdx';
 import './datatable-story.scss';
 import { dataTableArgs, dataTableArgTypes, headers } from './shared';
@@ -49,6 +49,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+      source: {
+        type: 'code',
+      },
     },
   },
 };

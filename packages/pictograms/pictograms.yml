@@ -500,7 +500,7 @@
   aliases:
     - assess
     - evaluate
-    - guage
+    - gauge
 - name: assessment-used
   friendly_name: Assessment used
   aliases:
@@ -2195,7 +2195,7 @@
     - Code assistant
     - IBM Z
 - name: code--reverse-engineering
-  friendly_name: Code reverse engeneering
+  friendly_name: Code reverse engineering
   aliases:
     - analyze
     - inspect
@@ -6302,14 +6302,14 @@
     - mail
     - verse
 - name: mainframe-qualities-of-service
-  friendly_name: Mainframe qualties of service
+  friendly_name: Mainframe qualities of service
   aliases:
     - IBM
     - IBM Z
     - Z
     - mainframe
     - reliability
-    - availablility
+    - availability
     - serviceability
 - name: manage-applications-anywhere
   friendly_name: Manage applications anywhere
@@ -9921,7 +9921,7 @@
     - walkie-talkie,
     - communication
     - range
-    - handheld tranciever
+    - handheld transceiver
     - two-way communicator
     - portable
 - name: teammates

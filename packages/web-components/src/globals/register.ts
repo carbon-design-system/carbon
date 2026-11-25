@@ -102,7 +102,7 @@ export const defineCustomElement = <
   const existing = registry.get(name);
 
   if (existing) {
-    // Tag already definied, redefining with same class is a no-op. If more than
+    // Tag already defined, redefining with same class is a no-op. If more than
     // one copy fights for tag the first definition wins
     if (existing !== clazz && process.env.NODE_ENV === 'development') {
       globalThis.console?.warn(

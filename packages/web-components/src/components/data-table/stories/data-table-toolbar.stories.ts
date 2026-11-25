@@ -16,6 +16,7 @@ import '../index';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import '../../overflow-menu/';
 import '../../menu/index';
+import '../../link/index';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,

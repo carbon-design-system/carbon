@@ -1,27 +1,8 @@
-import {
-  Story,
-  ArgTypes,
-  Canvas,
-  Unstyled,
-  Meta,
-} from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Unstyled, Meta } from '@storybook/addon-docs/blocks';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { Add, TrashCan } from '@carbon/icons-react';
 import * as ButtonStories from './Button.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
-
-export const getIconFromStringImport =
-  "import { Add, Notification, Filter } from '@carbon/icons-react';";
-
-export const getIconFromStringDef = `const getIconFromString = (iconName) => {
-  const icons = {
-    Add: (props) => <Add {...props} />,
-    Notification: (props) => <Notification {...props} />,
-    Filter: (props) => <Filter {...props} />,
-  };
-  return icons[iconName];
-};`;
 
 <Meta isTemplate />
 
@@ -73,20 +54,7 @@ communicate calls to action to the user and allow users to interact with pages
 in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
-<Canvas
-  of={ButtonStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: ButtonStories.Default,
-          customImports: [getIconFromStringImport],
-          customFunctionDefs: [getIconFromStringDef],
-        }),
-    },
-  ]}
-/>
+<Canvas of={ButtonStories.Default} />
 
 ## Radius
 
@@ -340,20 +308,7 @@ Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
 most commonly will be styled as primary or ghost buttons. Icon only buttons do
 not support Danger, Danger tertiary, or Danger ghost.
 
-<Canvas
-  of={ButtonStories.IconButton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: ButtonStories.IconButton,
-          customImports: [getIconFromStringImport],
-          customFunctionDefs: [getIconFromStringDef],
-        }),
-    },
-  ]}
-/>
+<Canvas of={ButtonStories.IconButton} />
 
 ## Skeleton state
 
@@ -361,15 +316,7 @@ You can use the `ButtonSkeleton` component to render a skeleton variant of a
 button. This is useful to display on initial page load to indicate to users that
 content is being loaded.
 
-<Canvas
-  of={ButtonStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: ButtonStories.Skeleton }),
-    },
-  ]}
-/>
+<Canvas of={ButtonStories.Skeleton} />
 
 ## Component API
 

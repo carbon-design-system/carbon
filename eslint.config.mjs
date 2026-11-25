@@ -236,7 +236,9 @@ export default defineConfig(
       '**/types/',
 
       'packages/*/examples/*',
-      'packages/*/src/examples/**/example/**',
+
+      // Pattern code (stories are linted)
+      'packages/{react,web-components}/src/examples/**/!(*.stories).@(js|jsx|ts|tsx)',
 
       // Components
       'packages/components/demo/*.css',
@@ -257,7 +259,7 @@ export default defineConfig(
       '**/__testfixtures__/**',
 
       // React
-      '**/storybook-static/**',
+      '**/storybook-static*/**',
 
       // Templates
       'packages/cli/src/component/templates/**',

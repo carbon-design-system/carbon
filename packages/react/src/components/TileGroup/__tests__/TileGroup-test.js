@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,12 +45,7 @@ describe('TileGroup', () => {
         </TileGroup>
       );
 
-      const fieldset = screen
-        .getByText('TestGroup', {
-          selector: 'legend',
-        })
-        // eslint-disable-next-line testing-library/no-node-access
-        .closest('fieldset');
+      const fieldset = screen.getByRole('group', { name: 'TestGroup' });
       expect(fieldset).toContainElement(screen.getByDisplayValue('test-1'));
       expect(fieldset).toContainElement(screen.getByDisplayValue('test-2'));
     });
@@ -163,13 +158,30 @@ describe('TileGroup', () => {
         </TileGroup>
       );
 
-      const fieldset = screen
-        .getByText('TestGroup', {
-          selector: 'legend',
-        })
-        // eslint-disable-next-line testing-library/no-node-access
-        .closest('fieldset');
+      const fieldset = screen.getByRole('group', { name: 'TestGroup' });
       expect(fieldset).toBeDisabled();
+    });
+
+    it('should support passing in aria-label to the <fieldset>', () => {
+      render(
+        <TileGroup
+          aria-label="Radio tile options"
+          defaultSelected="test-1"
+          name="test">
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
+        </TileGroup>
+      );
+
+      expect(
+        screen.getByRole('group', {
+          name: 'Radio tile options',
+        })
+      ).toBeInTheDocument();
     });
 
     it('should support `defaultSelected` as a way to select a radio button', () => {

@@ -23,6 +23,7 @@ import styles from './number-input.scss?lit';
 import CDSTextInput, { INPUT_SIZE } from '../text-input/text-input';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NumberFormatter, NumberParser } from '@carbon/utilities';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 export { NUMBER_INPUT_VALIDATION_STATUS };
 
@@ -383,7 +384,7 @@ class CDSNumberInput extends CDSTextInput {
    * The input box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: INPUT_SIZE;
 
   /**
    * **Experimental**: Specify if the input should be of type text or number.
@@ -858,8 +859,8 @@ class CDSNumberInput extends CDSTextInput {
       buttonsDisabled: boolean;
     } = {
       disabled: this.disabled,
-      invalid: !this.readonly && !isValid,
-      warn: !this.readonly && isValid && this.warn,
+      invalid: !this.readonly && !this.disabled && !isValid,
+      warn: !this.readonly && !this.disabled && isValid && this.warn,
       'slot-name': '',
       'slot-text': '',
       icon: null,
@@ -868,7 +869,8 @@ class CDSNumberInput extends CDSTextInput {
 
     const wrapperClasses = classMap({
       [`${prefix}--number`]: true,
-      [`${prefix}--number--${this.size}`]: this.size,
+      [`${prefix}--number--${this.size}`]: this.size !== undefined, // TODO V12 - remove this class
+      [`${prefix}--layout--size-${this.size}`]: this.size !== undefined,
       [`${prefix}--number--nosteppers`]: this.hideSteppers,
       [`${prefix}--number--readonly`]: this.readonly,
     });
@@ -892,6 +894,8 @@ class CDSNumberInput extends CDSTextInput {
 
     const inputValue = this._getInputValue();
 
+    const enableV12Release = isFeatureFlagEnabled('enable-v12-release', this);
+
     const incrementButton = html`
       <button
         class="${prefix}--number__control-btn up-icon"
@@ -904,7 +908,9 @@ class CDSNumberInput extends CDSTextInput {
         @click=${handleUserInitiatedStepUp}>
         ${iconLoader(Add16)}
       </button>
-      <div class="${prefix}--number__rule-divider"></div>
+      ${!enableV12Release
+        ? html`<div class="${prefix}--number__rule-divider"></div>`
+        : null}
     `;
 
     const decrementButton = html`
@@ -919,12 +925,22 @@ class CDSNumberInput extends CDSTextInput {
         @click=${handleUserInitiatedStepDown}>
         ${iconLoader(Subtract16)}
       </button>
-      <div class="${prefix}--number__rule-divider"></div>
+      ${!enableV12Release
+        ? html`<div class="${prefix}--number__rule-divider"></div>`
+        : null}
     `;
+
+    let describedBy: string | undefined;
+    if (normalizedProps.invalid || normalizedProps.warn) {
+      describedBy = this._errorTextId;
+    } else if (this.helperText) {
+      describedBy = this._helperTextId;
+    }
 
     const input = html`
       <input
         autocomplete="${ifNonEmpty(this.autocomplete)}"
+        aria-describedby="${ifNonEmpty(describedBy)}"
         ?autofocus="${this.autofocus}"
         ?data-invalid="${normalizedProps.invalid}"
         ?disabled="${normalizedProps.disabled}"
@@ -933,7 +949,7 @@ class CDSNumberInput extends CDSTextInput {
         pattern="${this.type === NUMBER_INPUT_TYPE.TEXT
           ? ifNonEmpty(this.pattern)
           : ''}"
-        ?readonly="${this.readonly}"
+        ?readonly="${this.readonly && !normalizedProps.disabled}"
         ?required="${this.required}"
         type="${this.type}"
         inputmode="${this.type === NUMBER_INPUT_TYPE.TEXT
@@ -971,6 +987,7 @@ class CDSNumberInput extends CDSTextInput {
       normalizedProps.invalid || normalizedProps.warn
         ? html`<div
             class="${prefix}--form-requirement"
+            id="${this._errorTextId}"
             ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
             <slot name="${normalizedProps['slot-name']}">
               ${normalizedProps['slot-text']}
@@ -981,7 +998,7 @@ class CDSNumberInput extends CDSTextInput {
     const helper = this.helperText
       ? html`<div
           class="${helperTextClasses}"
-          id="helper-text"
+          id="${this._helperTextId}"
           ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
           <slot name="helper-text"> ${this.helperText} </slot>
         </div>`

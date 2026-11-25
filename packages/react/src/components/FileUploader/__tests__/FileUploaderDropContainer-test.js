@@ -9,7 +9,6 @@ import { fireEvent, render, screen, act } from '@testing-library/react';
 
 import { FileUploaderDropContainer } from '../';
 import React from 'react';
-import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
 
 const requiredProps = { labelText: 'Add file' };
@@ -55,51 +54,39 @@ describe('FileUploaderDropContainer', () => {
   });
 
   it('should support a custom class name on the drop area', () => {
-    const { container } = render(
-      <FileUploaderDropContainer className="test" {...requiredProps} />
-    );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const dropArea = container.querySelector('button');
+    render(<FileUploaderDropContainer className="test" {...requiredProps} />);
+    const dropArea = screen.getByRole('button', { name: 'Add file' });
     expect(dropArea).toHaveClass('test');
   });
 
   it('should have a unique id each time it is used', () => {
-    const { container } = render(
+    render(
       <>
         <FileUploaderDropContainer {...requiredProps} />
         <FileUploaderDropContainer {...requiredProps} />
       </>
     );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const inputs = container.querySelectorAll('input');
+    const inputs = screen.getAllByLabelText('Add file');
+    expect(inputs).toHaveLength(2);
     expect(inputs[0].getAttribute('id')).not.toBe(inputs[1].getAttribute('id'));
   });
 
   it('should render with the default labelText prop', () => {
-    const { container } = render(
-      <FileUploaderDropContainer {...requiredProps} />
-    );
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    const label = getByText(container, 'Add file');
+    render(<FileUploaderDropContainer {...requiredProps} />);
+    const label = screen.getByRole('button', { name: 'Add file' });
     expect(label).toBeInstanceOf(HTMLElement);
   });
 
   it('should render with multiple set to false by default', () => {
-    const { container } = render(
-      <FileUploaderDropContainer {...requiredProps} />
-    );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const input = container.querySelector('input');
+    render(<FileUploaderDropContainer {...requiredProps} />);
+    const input = screen.getByLabelText('Add file');
     expect(input.getAttribute('multiple')).toBeFalsy();
   });
 
   it('should pass required to the file input', () => {
-    const { container } = render(
-      <FileUploaderDropContainer required {...requiredProps} />
-    );
+    render(<FileUploaderDropContainer required {...requiredProps} />);
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    expect(container.querySelector('input')).toBeRequired();
+    expect(screen.getByLabelText('Add file')).toBeRequired();
   });
 
   it('should reset the value of the input when the drop area is clicked', async () => {
