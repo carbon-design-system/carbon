@@ -1,0 +1,87 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as HeadingStories from './Heading.stories';
+
+<Meta of={HeadingStories} />
+
+# Heading
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Heading)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/elements/typography/overview)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/elements/typography/overview)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Custom level](#custom-level)
+- [Section](#section)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+For people using screen readers, headings in HTML are one of the most common
+ways to navigate a page. Correctly using headings and levels helps with
+understanding a page and its hierarchy and can be used to jump between sections
+on a page.
+
+Normally, in a component you would have to specify the heading level manually.
+This can become problematic if your component is used in various parts of a page
+where the heading level needs to be different.
+
+To help address this, the `heading` component will automatically infer the
+appropriate heading level without you having to manually specify it. To do this,
+you use the `section` component for each section of your page. Every `heading`
+component in that `section` will use the correct heading level.
+
+### Importing
+
+```ts
+import { HeadingComponent, SectionComponent } from '@carbon/angular/heading';
+
+@Component({
+  standalone: true,
+  imports: [HeadingComponent, SectionComponent],
+  template: `
+    <cds-ng-heading>Project overview</cds-ng-heading>
+    <cds-ng-section>
+      <cds-ng-heading>Delivery milestones</cds-ng-heading>
+    </cds-ng-section>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={HeadingStories.Default} />
+
+## Custom level
+
+A `cds-ng-section` normally uses the level of its parent section plus one. Set
+its `level` input to override that, for example to start a section at `h5`.
+
+<Canvas of={HeadingStories.CustomLevel} />
+
+## Section
+
+The `cds-ng-section` component is documented with `cds-ng-heading` because the
+heading uses the nearest section to infer the correct heading level.
+
+| Input   | Type     | Description                                         |
+| ------- | -------- | --------------------------------------------------- |
+| `level` | `string` | The level of the heading. Defaults to parent + one. |
+
+`cds-ng-heading` has no inputs.
+
+## Angular-specific notes
+
+- Selectors are `cds-ng-heading` and `cds-ng-section`.
+- `cds-ng-section` reads its `level` once, when it is connected to the DOM. Set
+  it with a static attribute (`level="3"`), or wrap the section in a structural
+  directive that re-creates it when the level changes.
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).

@@ -1,0 +1,134 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as OverflowMenuStories from './OverflowMenu.stories';
+
+<Meta of={OverflowMenuStories} />
+
+# Overflow menu
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/OverflowMenu)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/overflow-menu/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/overflow-menu/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Render Custom Icon](#render-custom-icon)
+- [Menu Alignment](#menu-alignment)
+- [menuTarget Prop](#menutarget-prop)
+- [Dynamically set floating styles](#dynamically-set-floating-styles)
+- [Enable dynamic setting of floating styles](#enable-dynamic-setting-of-floating-styles)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-overflow-menu` component is a clickable element that contains
+additional options that are available to the user, but there is a space
+constraint. These stories use the v12 implementation, enabled with the
+`enable-v12-overflowmenu` feature flag (the `[enableV12Overflowmenu]` input in
+Angular), which supports the same `cds-ng-menu` composition patterns used by
+`cds-ng-menu-button` and `cds-ng-combo-button`.
+
+When the flag is enabled, `cds-ng-overflow-menu` expects a direct `cds-ng-menu`
+child.
+
+```ts
+import { OverflowMenuComponent } from '@carbon/angular/overflow-menu';
+import { MenuComponent, MenuItemComponent } from '@carbon/angular/menu';
+
+@Component({
+  standalone: true,
+  imports: [OverflowMenuComponent, MenuComponent, MenuItemComponent],
+  template: `
+    <cds-ng-overflow-menu [enableV12Overflowmenu]="true" label="Options">
+      <cds-ng-menu>
+        <cds-ng-menu-item label="Stop app"></cds-ng-menu-item>
+        <cds-ng-menu-item label="Restart app"></cds-ng-menu-item>
+        <cds-ng-menu-item label="Delete app" kind="danger"></cds-ng-menu-item>
+      </cds-ng-menu>
+    </cds-ng-overflow-menu>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={OverflowMenuStories.Default} />
+
+## Auto Align
+
+<Canvas of={OverflowMenuStories.AutoAlign} />
+
+## Floating Styles
+
+<Canvas of={OverflowMenuStories.FloatingStyles} />
+
+## Nested
+
+<Canvas of={OverflowMenuStories.Nested} />
+
+## Render Custom Icon
+
+<Canvas of={OverflowMenuStories.RenderCustomIcon} />
+
+## Menu Alignment
+
+The `menuAlignment` input enables you to define the preferred placement of the
+menu in relation to `cds-ng-overflow-menu`.
+
+For instance, setting `menuAlignment="top-start"` on `cds-ng-overflow-menu` will
+prefer rendering the menu above the trigger.
+
+If it seems your specified `menuAlignment` is not being used exactly, it's
+because we prioritize keeping the menu visible when positioning is computed.
+
+<Canvas of={OverflowMenuStories.WithMenuAlignment} />
+
+## menuTarget Prop
+
+React's `menuTarget` prop is not applicable to the Web Components (and Angular)
+implementation.
+
+`cds-ng-menu` remains a direct child of `cds-ng-overflow-menu` and positioning
+is handled by the FloatingUI controller relative to the trigger.
+
+## Dynamically set floating styles
+
+Components with `autoalign` use the
+[`floating-ui`](https://github.com/floating-ui/floating-ui) library to handle
+the dynamic positioning of floating elements relative to their trigger / anchor
+element. This also includes collision detection that repositions the floating
+element as necessary to keep it visible within the viewport.
+
+The `enable-v12-dynamic-floating-styles` flag enables this dynamic floating
+styling without collision detection.
+
+**Note**: The flag has no effect when used with `autoalign` because `autoalign`
+includes both dynamic floating styles and collision detection.
+
+## Enable dynamic setting of floating styles
+
+The `enable-v12-dynamic-floating-styles` flag is read from the nearest
+`<feature-flags>` ancestor, which has no Angular wrapper. Until one is
+available, wrap the component with the web component directly or use
+`[autoalign]="true"`, which includes dynamic floating styles.
+
+## Component API
+
+<ArgTypes of={OverflowMenuStories.Default} />
+
+## Angular-specific notes
+
+- Enable this implementation with `[enableV12Overflowmenu]="true"` on
+  `cds-ng-overflow-menu`. Import `OverflowMenuComponent` from
+  `@carbon/angular/overflow-menu` and the menu subcomponents from
+  `@carbon/angular/menu`.
+- The `autoAlign` control maps to the `[autoalign]` input.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/OverflowMenu/__stories__/OverflowMenu.mdx).

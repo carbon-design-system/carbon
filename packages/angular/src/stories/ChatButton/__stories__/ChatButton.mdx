@@ -1,0 +1,75 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ChatButtonStories from './ChatButton.stories';
+
+<Meta of={ChatButtonStories} />
+
+# Chat button
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The chat button is a button variant used in chat experiences. Set
+`isQuickAction` to render it as a quick action, which uses the `ghost` kind and
+the `sm` size.
+
+### Importing
+
+```ts
+import {
+  ChatButtonComponent,
+  ChatButtonSkeletonComponent,
+} from '@carbon/angular/chat-button';
+
+@Component({
+  standalone: true,
+  imports: [ChatButtonComponent],
+  template: `
+    <cds-ng-chat-button kind="primary" size="lg" (click)="onClick($event)">
+      Ask AI
+    </cds-ng-chat-button>
+  `,
+})
+export class MyComponent {
+  onClick(event: MouseEvent) {
+    /* ... */
+  }
+}
+```
+
+<Canvas of={ChatButtonStories.Default} />
+
+## Skeleton state
+
+Use `cds-ng-chat-button-skeleton` (`ChatButtonSkeletonComponent`) to indicate
+that a chat button is loading.
+
+<Canvas of={ChatButtonStories.Skeleton} />
+
+## Component API
+
+<ArgTypes of={ChatButtonStories.Default} />
+
+## Angular-specific notes
+
+- **Component import:**
+  `import { ChatButtonComponent, ChatButtonSkeletonComponent } from '@carbon/angular/chat-button'`
+- The host element in DevTools will be `cds-ng-chat-button` — this is the web
+  component running under a prefixed tag (ADR 0020). There is no inner element.
+- Inputs use camelCase property bindings, for example `[isQuickAction]="true"`
+  and `[isSelected]="true"`.
+- Project an icon with `slot="icon"` next to the label text.
+- `cds-ng-chat-button` has no custom click event. Bind the native `click` event
+  with `(click)="handler($event)"`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/ChatButton/__stories__/ChatButton.mdx).

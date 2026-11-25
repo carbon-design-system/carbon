@@ -1,0 +1,85 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as StackStories from './Stack.stories';
+
+<Meta of={StackStories} />
+
+# Stack
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Stack)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/elements/spacing/overview)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/elements/spacing/overview)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Horizontal](#horizontal)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The Stack component is a useful layout utility in a component-based model. This
+allows components to not use margin and instead delegate the responsibility of
+positioning and layout to parent components.
+
+In the case of the Stack component, it uses the spacing scale from the Design
+Language in order to determine how much space there should be between items
+rendered by the Stack component. It also supports a custom gap prop which will
+allow a user to provide a custom value for the gap of the layout.
+
+This component supports both horizontal and vertical orientations.
+
+Inspiration for this component:
+
+- https://paste.twilio.design/layout/stack/
+- https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
+
+### Importing
+
+```ts
+import { StackComponent } from '@carbon/angular/stack';
+
+@Component({
+  standalone: true,
+  imports: [StackComponent],
+  template: `
+    <cds-ng-stack gap="6" orientation="vertical">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </cds-ng-stack>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={StackStories.Default} />
+
+## Horizontal
+
+<Canvas of={StackStories.Horizontal} />
+
+## Component API
+
+<ArgTypes of={StackStories.Default} />
+
+## Angular-specific notes
+
+- The selector is `cds-ng-stack`. Use `useCustomGapValue` (camelCase) to turn on
+  custom gap values such as `gap="2rem"`:
+
+```html
+<cds-ng-stack gap="2rem" [useCustomGapValue]="true">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</cds-ng-stack>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).

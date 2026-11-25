@@ -1,0 +1,241 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as MenuStories from './Menu.stories';
+
+<Meta of={MenuStories} />
+
+# Menu
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Menu)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/menu/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/menu/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Positioning](#positioning)
+- [Subcomponents](#subcomponents)
+  - [cds-ng-menu-item](#cds-ng-menu-item)
+  - [cds-ng-menu-item-divider](#cds-ng-menu-item-divider)
+  - [cds-ng-menu-item-group](#cds-ng-menu-item-group)
+  - [cds-ng-menu-item-selectable](#cds-ng-menu-item-selectable)
+  - [cds-ng-menu-item-radio-group](#cds-ng-menu-item-radio-group)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+`cds-ng-menu` is a versatile component that can be used in a variety of
+situations. It implements the
+[menu design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) defined
+in the ARIA Authoring Practices Guide (APG).
+
+The `cds-ng-menu` component's children must be a collection of any of these
+subcomponents:
+
+- [cds-ng-menu-item](#cds-ng-menu-item)
+- [cds-ng-menu-item-divider](#cds-ng-menu-item-divider)
+- [cds-ng-menu-item-group](#cds-ng-menu-item-group)
+- [cds-ng-menu-item-selectable](#cds-ng-menu-item-selectable)
+- [cds-ng-menu-item-radio-group](#cds-ng-menu-item-radio-group)
+
+### Importing
+
+```ts
+import {
+  MenuComponent,
+  MenuItemComponent,
+  MenuItemDividerComponent,
+  MenuItemGroupComponent,
+  MenuItemRadioGroupComponent,
+  MenuItemSelectableComponent,
+} from '@carbon/angular/menu';
+
+@Component({
+  standalone: true,
+  imports: [MenuComponent, MenuItemComponent, MenuItemDividerComponent],
+  template: `
+    <cds-ng-menu [open]="true" size="sm" label="Edit">
+      <cds-ng-menu-item label="Cut" shortcut="⌘X"></cds-ng-menu-item>
+      <cds-ng-menu-item label="Copy" shortcut="⌘C"></cds-ng-menu-item>
+      <cds-ng-menu-item-divider></cds-ng-menu-item-divider>
+      <cds-ng-menu-item label="Delete" kind="danger"></cds-ng-menu-item>
+    </cds-ng-menu>
+  `,
+})
+export class MyComponent {}
+```
+
+You can listen to the `menuOpened` and `menuClosed` outputs to catch the opening
+and closing of the menu.
+
+```html
+<cds-ng-menu
+  [open]="open"
+  (menuOpened)="onOpened($event)"
+  (menuClosed)="onClosed($event)">
+  ...
+</cds-ng-menu>
+```
+
+<Canvas of={MenuStories.Default} />
+
+## Positioning
+
+You must provide a reference point for the `cds-ng-menu` to position itself at.
+The inputs `x` and `y` either accept a single number each or an array of two
+numbers.
+
+The latter option is used to specify the trigger boundaries. For example, Carbon
+uses this for the
+[next version of OverflowMenu](?path=/docs/components-overflowmenu--docs) where
+we pass `[x, x + width]` and `[y, y + height]` of the trigger button. This way,
+the `cds-ng-menu` is able to automatically determine its ideal position on the
+screen (which side to open at and in which direction) while always staying
+visually attached to the trigger. Each `cds-ng-menu-item` that has children and
+therefore a submenu uses the same approach under the hood to correctly position
+the submenu.
+
+## Subcomponents
+
+### cds-ng-menu-item
+
+A `cds-ng-menu-item` renders a basic menu item with a label and optionally a
+shortcut hint (_note: the component only renders this hint and doesn't actually
+register the shortcut in the browser_). Each `cds-ng-menu-item` can be clicked
+unless it's marked as `disabled`. If it triggers a destructive action, you can
+pass it `kind="danger"` to highlight it specially on hover and focus.
+
+```html
+<cds-ng-menu [open]="true">
+  <cds-ng-menu-item label="Cut" shortcut="⌘X"></cds-ng-menu-item>
+  <cds-ng-menu-item label="Copy" shortcut="⌘C"></cds-ng-menu-item>
+  <cds-ng-menu-item label="Paste" shortcut="⌘V" disabled></cds-ng-menu-item>
+</cds-ng-menu>
+```
+
+In order to render an icon for a menu item, you need to pass it as an element
+with `slot="render-icon"` inside the `cds-ng-menu-item`.
+
+```html
+<cds-ng-menu [open]="true">
+  <cds-ng-menu-item label="Cut" shortcut="⌘X">
+    <svg slot="render-icon" ...></svg>
+  </cds-ng-menu-item>
+</cds-ng-menu>
+```
+
+In order to render a submenu, pass it with `slot="submenu"` inside the
+`cds-ng-menu-item`.
+
+```html
+<cds-ng-menu [open]="true">
+  <cds-ng-menu-item label="Open"></cds-ng-menu-item>
+  <cds-ng-menu-item label="Save"></cds-ng-menu-item>
+  <cds-ng-menu-item label="Import">
+    <cds-ng-menu-item-radio-group slot="submenu" label="import list">
+      <cds-ng-menu-item label="None"></cds-ng-menu-item>
+      <cds-ng-menu-item label="Product team"></cds-ng-menu-item>
+      <cds-ng-menu-item label="Organization"></cds-ng-menu-item>
+      <cds-ng-menu-item label="Company"></cds-ng-menu-item>
+    </cds-ng-menu-item-radio-group>
+  </cds-ng-menu-item>
+</cds-ng-menu>
+```
+
+### cds-ng-menu-item-divider
+
+The `cds-ng-menu-item-divider` renders a thin dividing line, visually separating
+menu items. Use this to enhance grouping of related items.
+
+```html
+<cds-ng-menu [open]="true">
+  <cds-ng-menu-item label="Cut"></cds-ng-menu-item>
+  <cds-ng-menu-item label="Copy"></cds-ng-menu-item>
+  <cds-ng-menu-item label="Paste"></cds-ng-menu-item>
+  <cds-ng-menu-item-divider></cds-ng-menu-item-divider>
+  <cds-ng-menu-item label="Delete" kind="danger"></cds-ng-menu-item>
+</cds-ng-menu>
+```
+
+### cds-ng-menu-item-group
+
+You can logically group multiple menu items by wrapping them inside a
+`cds-ng-menu-item-group`. This doesn't affect the visual rendering but can
+tremendously improve the experience for assistive technology users. You'll
+always want to use a `cds-ng-menu-item-group` if you have multiple
+[`cds-ng-menu-item-selectable`](#cds-ng-menu-item-selectable) that are related
+to each other.
+
+### cds-ng-menu-item-selectable
+
+`cds-ng-menu-item-selectable` is a checkbox in a menu context. Each
+`cds-ng-menu-item-selectable` can be checked and unchecked unrelated to other
+items. If multiple items are related to each other, you'll want to wrap them in
+a `cds-ng-menu-item-group` for improved accessibility.
+
+```html
+<cds-ng-menu [open]="true">
+  <cds-ng-menu-item-group label="Font style">
+    <cds-ng-menu-item-selectable
+      label="Bold"
+      [selected]="true"
+      (itemChanged)="onItemChanged($event)"></cds-ng-menu-item-selectable>
+    <cds-ng-menu-item-selectable label="Italic"></cds-ng-menu-item-selectable>
+  </cds-ng-menu-item-group>
+</cds-ng-menu>
+```
+
+Use the `itemChanged` output to catch the selection change.
+
+### cds-ng-menu-item-radio-group
+
+`cds-ng-menu-item-radio-group` is a radio button group in a menu context. Only
+one item can be selected at a time. You need to pass the list of
+`cds-ng-menu-item` as children to render as radio button items.
+
+```html
+<cds-ng-menu [open]="true">
+  <cds-ng-menu-item-radio-group
+    label="Font family"
+    (itemChanged)="onItemChanged($event)">
+    <cds-ng-menu-item selected="true" label="Sans"></cds-ng-menu-item>
+    <cds-ng-menu-item label="Serif"></cds-ng-menu-item>
+    <cds-ng-menu-item label="Mono"></cds-ng-menu-item>
+  </cds-ng-menu-item-radio-group>
+  <cds-ng-menu-item-divider></cds-ng-menu-item-divider>
+  <cds-ng-menu-item-radio-group label="samples">
+    <cds-ng-menu-item label="None"></cds-ng-menu-item>
+    <cds-ng-menu-item selected="true" label="Overline"></cds-ng-menu-item>
+    <cds-ng-menu-item label="Line-through"></cds-ng-menu-item>
+    <cds-ng-menu-item label="Underline"></cds-ng-menu-item>
+  </cds-ng-menu-item-radio-group>
+</cds-ng-menu>
+```
+
+Use the `itemChanged` output to catch the selection change.
+
+## Component API
+
+<ArgTypes of={MenuStories.Default} />
+
+## Angular-specific notes
+
+- Import every menu subcomponent you use (`MenuItemComponent`,
+  `MenuItemDividerComponent`, `MenuItemGroupComponent`,
+  `MenuItemSelectableComponent`, `MenuItemRadioGroupComponent`) from
+  `@carbon/angular/menu` and add them to `imports`.
+- Inputs are forwarded to the web component as properties, so use camelCase
+  property bindings such as `[backgroundToken]` and `[menuAlignment]`.
+- Boolean inputs accept `[open]="true"` as well as the bare attribute form.
+- Events are exposed as outputs: `menuOpened` and `menuClosed` on `cds-ng-menu`,
+  and `itemChanged` on `cds-ng-menu-item-selectable` and
+  `cds-ng-menu-item-radio-group`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/Menu/__stories__/Menu.mdx).
