@@ -7452,9 +7452,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "@testing-library/jest-dom@npm:7.0.0"
+"@testing-library/jest-dom@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@testing-library/jest-dom@npm:8.0.0"
   dependencies:
     "@adobe/css-tools": "npm:^4.4.0"
     aria-query: "npm:^5.0.0"
@@ -7464,7 +7464,11 @@ __metadata:
     redent: "npm:^3.0.0"
   peerDependencies:
     "@testing-library/dom": ">=10 <11"
-  checksum: 10/ec6d50550d7ec87f60a19f1719d87e2d73a050fed4938f13d846d30639f85bd903e5aff2eaecbb1a9e67f3c71c98148b46edd4f77b15ca17c91f655f9c54f92b
+    vitest: ">=5 <6"
+  peerDependenciesMeta:
+    vitest:
+      optional: true
+  checksum: 10/fe3f6395e83ce64d81a12e77927bc411de4d9dee04779544ec7183d0863db86e2d8691ffac043679b42594c556d89e0c90e83c32db656439c0442a0e0c9336fd
   languageName: node
   linkType: hard
 
@@ -10494,7 +10498,7 @@ __metadata:
     "@figma/code-connect": "npm:1.5.3"
     "@playwright/test": "npm:^1.36.2"
     "@testing-library/dom": "npm:^10.1.0"
-    "@testing-library/jest-dom": "npm:^7.0.0"
+    "@testing-library/jest-dom": "npm:^8.0.0"
     "@testing-library/react": "npm:^16.0.0"
     "@testing-library/user-event": "npm:^14.4.3"
     "@types/prop-types": "npm:^15.7.13"

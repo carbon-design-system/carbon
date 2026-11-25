@@ -63,7 +63,7 @@
     "@figma/code-connect": "1.5.3",
     "@playwright/test": "^1.36.2",
     "@testing-library/dom": "^10.1.0",
-    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/jest-dom": "^8.0.0",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/prop-types": "^15.7.13",
