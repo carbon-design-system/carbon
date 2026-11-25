@@ -443,9 +443,8 @@ import { AddSelectData } from '@carbon/utilities';
   `@carbon-labs/react-*` packages. When any of these are not installed, the
   command detects your package manager (npm, Yarn, pnpm or Bun) and asks before
   installing them. Nothing else in `package.json` is changed. Without `--write`
-  nothing is installed.
-- `@carbon-labs/react-inline-tip` might not be published to npm yet. If an
-  install fails, the command prints the manual install command.
+  nothing is installed. If an install fails, the command prints the manual
+  install command.
 
 ## TypeScript Support
 
