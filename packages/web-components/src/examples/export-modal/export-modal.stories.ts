@@ -7,7 +7,7 @@
  */
 
 import { html } from 'lit';
-import './example/src/export-modal';
+import './export-modal';
 export default {
   title: 'Examples/Export',
 };

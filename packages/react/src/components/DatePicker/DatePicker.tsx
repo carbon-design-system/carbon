@@ -559,10 +559,12 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     const onHook = (_electedDates, _dateStr, instance) => {
       updateClassNames(instance, prefix, isFluid);
       if (startInputField?.current) {
-        startInputField.current.readOnly = readOnly;
+        startInputField.current.readOnly =
+          readOnly && !startInputField.current.disabled;
       }
       if (endInputField?.current) {
-        endInputField.current.readOnly = readOnly;
+        endInputField.current.readOnly =
+          readOnly && !endInputField.current.disabled;
       }
     };
 
@@ -705,8 +707,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
         todayDateElem: fpTodayDateElem,
       } = calendar;
 
-      if (match(event, keys.Escape)) {
-        calendarContainer.classList.remove('open');
+      if (match(event, keys.Escape) && calendar.isOpen) {
+        calendar.close();
       }
 
       if (match(event, keys.Tab)) {
@@ -853,9 +855,10 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       if (
         match(event, keys.Enter) &&
         closeOnSelect &&
-        datePickerType == 'single'
+        datePickerType == 'single' &&
+        calendar.isOpen
       ) {
-        calendar.calendarContainer.classList.remove('open');
+        calendar.close();
       }
     }
 

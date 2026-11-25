@@ -150,10 +150,9 @@ Carbon Design System core team, including:
 - `@carbon/ibm-products-web-components`
 
 This plan also includes all design guidance and design kit assets (figma, etc.)
-present in the
-[`carbon-website`](https://github.com/carbon-design-system/carbon-website) and
+on [carbondesignsystem.com](https://www.carbondesignsystem.com) and in the
 [`design-kit`](https://github.com/carbon-design-system/carbon-design-kit)
-repositories.
+repository.
 
 ## Acknowledgements
 

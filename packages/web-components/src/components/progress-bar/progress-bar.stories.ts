@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { createRef, ref } from 'lit/directives/ref.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {
   PROGRESS_BAR_SIZE,
@@ -146,8 +147,9 @@ export const Determinate = {
     const size = 728;
     let progress = 0;
 
+    const barRef = createRef<HTMLElement>();
     setTimeout(() => {
-      const bar = document.querySelector('cds-progress-bar');
+      const bar = barRef.value;
       const interval = setInterval(() => {
         const advancement = Math.random() * 8;
         if (progress + advancement < size) {
@@ -173,6 +175,7 @@ export const Determinate = {
 
     return html`
       <cds-progress-bar
+        ${ref(barRef)}
         max="${size}"
         ?hide-label="${hideLabel}"
         label="${ifDefined(label)}"

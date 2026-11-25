@@ -1,4 +1,4 @@
-import { Controls, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { Controls, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as ActionSetStories from './ActionSet.stories';
 
 <Meta isTemplate />
@@ -31,9 +31,7 @@ reversed so the primary action appears at the top.
 
 ## Example usage
 
-<Canvas>
-  <Story of={ActionSetStories.Default} />
-</Canvas>
+<Canvas of={ActionSetStories.Default} />
 
 ## Component API
 

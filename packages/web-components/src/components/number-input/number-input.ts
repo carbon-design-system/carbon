@@ -859,8 +859,8 @@ class CDSNumberInput extends CDSTextInput {
       buttonsDisabled: boolean;
     } = {
       disabled: this.disabled,
-      invalid: !this.readonly && !isValid,
-      warn: !this.readonly && isValid && this.warn,
+      invalid: !this.readonly && !this.disabled && !isValid,
+      warn: !this.readonly && !this.disabled && isValid && this.warn,
       'slot-name': '',
       'slot-text': '',
       icon: null,
@@ -949,7 +949,7 @@ class CDSNumberInput extends CDSTextInput {
         pattern="${this.type === NUMBER_INPUT_TYPE.TEXT
           ? ifNonEmpty(this.pattern)
           : ''}"
-        ?readonly="${this.readonly}"
+        ?readonly="${this.readonly && !normalizedProps.disabled}"
         ?required="${this.required}"
         type="${this.type}"
         inputmode="${this.type === NUMBER_INPUT_TYPE.TEXT

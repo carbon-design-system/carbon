@@ -265,8 +265,6 @@
   - '(carbon-components)'
 'package: elements':
   - '(@carbon/elements)'
-'package: eslint-config-carbon':
-  - '(eslint-config-carbon)'
 'package: feature-flags':
   - '(@carbon/feature-flags)'
 'package: grid':

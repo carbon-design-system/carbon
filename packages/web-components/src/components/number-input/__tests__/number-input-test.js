@@ -6,8 +6,11 @@
  */
 
 import '@carbon/web-components/es/components/number-input/index.js';
+import { prefix } from '@carbon/web-components/es/globals/settings.js';
 import { fixture, html, expect, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
+
+const blockClass = `${prefix}--number`;
 
 describe('<cds-number-input>', () => {
   it('should render a number input with correct type', async () => {
@@ -120,6 +123,55 @@ describe('<cds-number-input>', () => {
     const invalid = el.querySelector('[slot="invalid-text"]');
     expect(helper?.textContent).to.include('Helpful');
     expect(invalid?.textContent).to.include('Invalid');
+  });
+
+  it('should not show invalid state when disabled or readonly', async () => {
+    const states = ['disabled', 'readonly'];
+
+    for (const state of states) {
+      const el = await fixture(html`
+        <cds-number-input
+          ?disabled=${state === 'disabled'}
+          invalid
+          ?readonly=${state === 'readonly'}
+          label="Label">
+          <span slot="invalid-text">Invalid</span>
+        </cds-number-input>
+      `);
+      const input = el.shadowRoot.querySelector('input');
+      const wrapper = el.shadowRoot.querySelector(`.${blockClass}`);
+
+      expect(input.hasAttribute('data-invalid')).to.be.false;
+      expect(wrapper.hasAttribute('data-invalid')).to.be.false;
+      expect(el.shadowRoot.querySelector(`.${blockClass}__invalid`)).to.not
+        .exist;
+      expect(el.shadowRoot.querySelector(`.${prefix}--form-requirement`)).to.not
+        .exist;
+    }
+  });
+
+  it('should not show warning state when disabled or readonly', async () => {
+    const states = ['disabled', 'readonly'];
+
+    for (const state of states) {
+      const el = await fixture(html`
+        <cds-number-input
+          ?disabled=${state === 'disabled'}
+          ?readonly=${state === 'readonly'}
+          label="Label"
+          warn>
+          <span slot="warn-text">Warning</span>
+        </cds-number-input>
+      `);
+
+      expect(el.shadowRoot.querySelector(`.${blockClass}__invalid`)).to.not
+        .exist;
+      expect(
+        el.shadowRoot.querySelector(`.${blockClass}__input-wrapper--warning`)
+      ).to.not.exist;
+      expect(el.shadowRoot.querySelector(`.${prefix}--form-requirement`)).to.not
+        .exist;
+    }
   });
 
   it('should point aria-describedby at the helper or error text', async () => {
@@ -1476,6 +1528,24 @@ describe('<cds-number-input>', () => {
       expect(el._getInputValidity()).to.be.false;
       expect(input.hasAttribute('data-invalid')).to.be.true;
       expect(el.value).to.equal('-10');
+    });
+
+    it('should prioritize disabled over readOnly when both are true', async () => {
+      const el = await fixture(html`
+        <cds-number-input
+          disabled
+          readonly
+          label="NumberInput label"
+          value="5"></cds-number-input>
+      `);
+      await el.updateComplete;
+
+      const input = el.shadowRoot.querySelector('input');
+
+      expect(input.hasAttribute('disabled')).to.be.true;
+      expect(input.hasAttribute('readonly')).to.be.false;
+      expect(input.disabled).to.be.true;
+      expect(input.readOnly).to.be.false;
     });
   });
 });

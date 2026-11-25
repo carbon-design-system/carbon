@@ -3,32 +3,8 @@ import { InlineNotification } from '../Notification';
 import CodeSnippet from '../CodeSnippet';
 import * as ModalStories from './Modal.stories';
 import './Modal.stories.scss';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
-
-export const modalFooterDef = [
-  `const modalFooter = (numberOfButtons) => {
-  const secondaryButtons = () => {
-    switch (numberOfButtons) {
-      case '1':
-        return { secondaryButtons: [] };
-      case '2':
-        return { secondaryButtonText: 'Cancel' };
-      case '3':
-        return {
-          secondaryButtons: [
-            { buttonText: 'Keep both', onClick: () => {} },
-            { buttonText: 'Rename', onClick: () => {} },
-          ],
-        };
-      default:
-        return null;
-    }
-  };
-  return { ...secondaryButtons() };
-};`,
-];
 
 # Modal
 
@@ -67,20 +43,7 @@ the modal body content. You can also use `modalLabel`, `modalHeading`,
 `secondaryButtonText` and `primaryButtonText` props to change the corresponding
 text.
 
-<Canvas
-  of={ModalStories.WithStateManager}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: ModalStories.WithStateManager,
-          customImports: ["import ReactDOM from 'react-dom';"],
-          customFunctionDefs: modalFooterDef,
-        }),
-    },
-  ]}
-/>
+<Canvas of={ModalStories.WithStateManager} />
 
 ## Component API
 

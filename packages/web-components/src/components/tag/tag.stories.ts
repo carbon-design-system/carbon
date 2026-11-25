@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { createRef, ref } from 'lit/directives/ref.js';
 import { TAG_SIZE } from './tag';
 import './index';
 import styles from './tag-story.scss?lit';
@@ -189,8 +190,10 @@ export const Dismissible = {
       },
     ];
 
+    const tagGroupRef = createRef<HTMLElement>();
     const resetTags = () => {
-      const dismissibleTags = document.querySelectorAll('cds-dismissible-tag');
+      const dismissibleTags =
+        tagGroupRef.value?.querySelectorAll('cds-dismissible-tag') ?? [];
       const tags = [...dismissibleTags];
       tags.map((tag) => tag?.setAttribute('open', 'true'));
     };
@@ -198,7 +201,7 @@ export const Dismissible = {
     return html` <div style="margin-bottom: 3rem">
         <cds-button @click="${resetTags}">Reset</cds-button>
       </div>
-      <div class="tag-group">
+      <div class="tag-group" ${ref(tagGroupRef)}>
         ${tags.map(
           (tag) =>
             html`<cds-dismissible-tag

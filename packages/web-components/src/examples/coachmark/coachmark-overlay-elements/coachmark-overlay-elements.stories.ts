@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import './example/src/coachmark-overlay-elements';
+import './coachmark-overlay-elements';
 
 export default {
   title: 'Examples/Coachmark/CoachmarkOverlayElements',

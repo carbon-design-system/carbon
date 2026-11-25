@@ -4,7 +4,7 @@
 **/vendor/**
 **/_inlined/**
 **/coverage/**
-**/storybook-static/**
+**/storybook-static*/**
 
 # Generated SCSS
 packages/colors/index.scss

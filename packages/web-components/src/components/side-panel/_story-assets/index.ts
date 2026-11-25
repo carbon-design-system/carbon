@@ -12,6 +12,7 @@ import Settings16 from '@carbon/icons/es/settings/16';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import '../../breadcrumb/index';
 import '../../notification/index';
+import '../../slug/index';
 
 const storyPrefix = 'side-panel-stories__';
 

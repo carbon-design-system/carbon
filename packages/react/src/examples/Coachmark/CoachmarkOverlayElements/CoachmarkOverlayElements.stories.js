@@ -8,7 +8,7 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './CoachmarkOverlayElements.mdx';
-import { CoachmarkOverlayElementsExample } from './example/components/CoachmarkOverlayElementsExample.tsx';
+import { CoachmarkOverlayElementsExample } from './components/CoachmarkOverlayElementsExample.tsx';
 
 export default {
   title: 'Examples/Coachmark/Coachmark Overlay Elements',

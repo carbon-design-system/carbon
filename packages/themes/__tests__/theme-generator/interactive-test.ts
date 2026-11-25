@@ -1,0 +1,251 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { generateTheme } from '../../src/theme-generator/generate-theme';
+import { validateTheme } from '../../src/theme-generator/validate-theme';
+import { defaultSpecification } from '../../src/theme-generator/specification';
+
+describe('generateTheme — interactive tokens', () => {
+  const MODES = ['light', 'dark'] as const;
+  const STATES = ['hover', 'selected', 'active', 'disabled'] as const;
+
+  for (const mode of MODES) {
+    describe(`mode: ${mode}`, () => {
+      const theme = generateTheme(mode);
+
+      it('generates a token for every InteractiveState', () => {
+        for (const state of STATES) {
+          expect(theme.interactive[state]).toBeDefined();
+        }
+      });
+
+      it('lightness-delta tokens have no alpha', () => {
+        for (const state of ['hover', 'selected', 'active'] as const) {
+          expect(theme.interactive[state].alpha).toBeUndefined();
+        }
+      });
+
+      it('disabled token carries the configured alpha', () => {
+        const expectedAlpha = defaultSpecification[mode].interactive.disabled;
+        if (expectedAlpha.type !== 'opacity')
+          throw new Error('test setup error');
+        expect(theme.interactive.disabled.alpha).toBe(expectedAlpha.alpha);
+      });
+
+      it('lightness-delta tokens shift surface lightness by the configured delta', () => {
+        const surface = theme.surfaces['surface'];
+        const spec = defaultSpecification[mode].interactive;
+
+        for (const state of ['hover', 'selected', 'active'] as const) {
+          const stateSpec = spec[state];
+          if (stateSpec.type !== 'lightness-delta')
+            throw new Error('test setup error');
+          const expected = Math.min(
+            1,
+            Math.max(0, surface.color.lightness + stateSpec.delta)
+          );
+          expect(theme.interactive[state].color.lightness).toBeCloseTo(
+            expected,
+            10
+          );
+        }
+      });
+
+      it('all tokens have valid hex fallbacks', () => {
+        for (const state of STATES) {
+          expect(theme.interactive[state].fallback).toMatch(/^#[\da-f]{6}$/i);
+        }
+      });
+
+      it('all tokens have lightness in [0, 1]', () => {
+        for (const state of STATES) {
+          const { lightness } = theme.interactive[state].color;
+          expect(lightness).toBeGreaterThanOrEqual(0);
+          expect(lightness).toBeLessThanOrEqual(1);
+        }
+      });
+
+      it('source type matches the spec variant', () => {
+        for (const state of ['hover', 'selected', 'active'] as const) {
+          expect(theme.interactive[state].source.type).toBe(
+            'interactive-state'
+          );
+        }
+        expect(theme.interactive.disabled.source.type).toBe(
+          'interactive-opacity'
+        );
+      });
+    });
+  }
+
+  describe('Per-parent neutral interactive state tokens (18 v11 names)', () => {
+    it.each(['light', 'dark'] as const)(
+      'generates all 18 per-parent neutral interactive tokens for %s mode',
+      (mode) => {
+        const theme = generateTheme(mode);
+        const contexts = ['surface', 'surface-light', 'surface-dark'] as const;
+        const hoverDelta = defaultSpecification[mode].interactive.hover.delta;
+        const activeDelta = defaultSpecification[mode].interactive.active.delta;
+        const selectedDelta =
+          defaultSpecification[mode].interactive.selected.delta;
+
+        for (const context of contexts) {
+          // layer-hover-01..03
+          const surfaceL = theme.surfaces[context].color.lightness;
+          expect(theme.layerHover[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, surfaceL + hoverDelta)),
+            10
+          );
+          expect(theme.layerHover[context].color.chroma).toBe(
+            theme.surfaces[context].color.chroma
+          );
+          expect(theme.layerHover[context].color.hue).toBe(
+            theme.surfaces[context].color.hue
+          );
+
+          // layer-active-01..03
+          expect(theme.layerActive[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, surfaceL + activeDelta)),
+            10
+          );
+
+          // layer-selected-01..03
+          expect(theme.layerSelected[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, surfaceL + selectedDelta)),
+            10
+          );
+
+          // field-hover-01..03
+          const fieldL = theme.fields[context].color.lightness;
+          expect(theme.fieldHover[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, fieldL + hoverDelta)),
+            10
+          );
+
+          // layer-accent-hover-01..03
+          const accentL = theme.accents[context].color.lightness;
+          expect(theme.accentHover[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, accentL + hoverDelta)),
+            10
+          );
+
+          // layer-accent-active-01..03
+          expect(theme.accentActive[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, accentL + activeDelta)),
+            10
+          );
+        }
+      }
+    );
+
+    it('inherits each token status from its interactive state spec', () => {
+      const theme = generateTheme('light', {
+        light: {
+          interactive: {
+            hover: {
+              type: 'lightness-delta',
+              status: 'confirmed',
+              delta: -0.03,
+            },
+          },
+        } as never,
+      });
+
+      expect(theme.layerHover.surface.status).toBe('confirmed');
+      expect(theme.fieldHover.surface.status).toBe('confirmed');
+      expect(theme.accentHover.surface.status).toBe('confirmed');
+      expect(theme.layerActive.surface.status).toBe('experimental');
+    });
+  });
+});
+
+describe('validateTheme — interactive tokens', () => {
+  it('returns valid:true with no errors for a correctly generated theme', () => {
+    const result = validateTheme(generateTheme('light'));
+    expect(result.valid).toBe(true);
+    // errors only — warnings (e.g. gamut) do not affect validity
+    expect(result.issues).toHaveLength(0);
+    // result.warnings may contain gamut notices for wide-gamut tokens (e.g. brand)
+    expect(Array.isArray(result.warnings)).toBe(true);
+  });
+
+  it('gamut-mapped tokens produce warnings, not errors', () => {
+    const result = validateTheme(generateTheme('light'));
+    for (const w of result.warnings) {
+      expect(w.severity).toBe('warning');
+      expect(w.message).toMatch(/gamut/i);
+    }
+  });
+
+  it('reports an error when an opacity-state token is missing alpha', () => {
+    const theme = generateTheme('light');
+    const { alpha: _removed, ...withoutAlpha } = theme.interactive.disabled;
+    theme.interactive = { ...theme.interactive, disabled: withoutAlpha as any };
+
+    const result = validateTheme(theme);
+    expect(result.valid).toBe(false);
+    expect(
+      result.issues.some(
+        (i) => i.token === 'state-disabled' && i.severity === 'error'
+      )
+    ).toBe(true);
+  });
+
+  it('reports an error when a lightness-delta token unexpectedly carries alpha', () => {
+    const theme = generateTheme('light');
+    theme.interactive = {
+      ...theme.interactive,
+      hover: { ...theme.interactive.hover, alpha: 0.5 },
+    };
+
+    const result = validateTheme(theme);
+    expect(result.valid).toBe(false);
+    expect(
+      result.issues.some(
+        (i) => i.token === 'state-hover' && i.severity === 'error'
+      )
+    ).toBe(true);
+  });
+
+  it('throws on an interactive token with an unrecognised source type', () => {
+    const theme = generateTheme('light');
+    theme.interactive = {
+      ...theme.interactive,
+      hover: { ...theme.interactive.hover, source: { type: 'fixed' } as any },
+    };
+
+    expect(() => validateTheme(theme)).toThrow(/unexpected source type/);
+  });
+});
+
+describe('generateTheme — mergeSpecification (override semantics)', () => {
+  it('a partial interactive override preserves unaffected states', () => {
+    const base = generateTheme('light');
+    const custom = generateTheme('light', {
+      light: {
+        interactive: {
+          hover: { type: 'lightness-delta', status: 'confirmed', delta: -0.05 },
+        },
+      } as any,
+    });
+
+    // hover should be changed
+    expect(custom.interactive.hover.color.lightness).not.toBe(
+      base.interactive.hover.color.lightness
+    );
+    // selected/active/disabled must still exist and match base
+    expect(custom.interactive.selected.color.lightness).toBe(
+      base.interactive.selected.color.lightness
+    );
+    expect(custom.interactive.active.color.lightness).toBe(
+      base.interactive.active.color.lightness
+    );
+    expect(custom.interactive.disabled.alpha).toBe(
+      base.interactive.disabled.alpha
+    );
+  });
+});
