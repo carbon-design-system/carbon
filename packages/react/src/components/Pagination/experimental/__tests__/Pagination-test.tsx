@@ -101,6 +101,24 @@ describe('Preview Pagination', () => {
       );
     });
 
+    it('should change pages when onChange is omitted', async () => {
+      render(<Pagination totalItems={30} initialPage={2} />);
+
+      expect(screen.getByText('11–20 of 30 items')).toBeInTheDocument();
+
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Next page', hidden: true })
+      );
+
+      expect(screen.getByText('21–30 of 30 items')).toBeInTheDocument();
+
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Previous page', hidden: true })
+      );
+
+      expect(screen.getByText('11–20 of 30 items')).toBeInTheDocument();
+    });
+
     it('should reset to page 1 when changing page size using the dropdown', async () => {
       render(
         <Pagination
