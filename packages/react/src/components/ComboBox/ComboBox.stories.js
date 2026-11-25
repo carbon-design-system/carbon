@@ -136,7 +136,6 @@ const sharedArgTypes = {
 
 const sharedArgs = {
   allowCustomValue: false,
-  autoAlign: false,
   direction: 'bottom',
   disabled: false,
   helperText: 'Choose the region where your resources will be hosted.',
