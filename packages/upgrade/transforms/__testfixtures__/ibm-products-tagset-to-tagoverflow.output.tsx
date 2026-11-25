@@ -161,3 +161,55 @@ export function NestedTagSet() {
     </div>)
   );
 }
+
+// Shorthand `type` keeps referencing the variable
+export function ShorthandType() {
+  const type = 'red';
+  return (
+    // TODO: TagSet → TagOverflow migration: TagSet defaulted allTagsModalTitle, allTagsModalSearchLabel, allTagsModalSearchPlaceholderText, showAllTagsLabel; TagOverflow has no defaults. Provide translated values to keep the "view all" link, modal title and search field labelled.
+    <TagOverflow items={[{
+      id: 'shorthand',
+      tagType: type,
+      label: 'Shorthand',
+    }]} />
+  );
+}
+
+// Computed `type` keys cannot be renamed safely – transform adds a TODO
+export function ComputedType() {
+  return (
+    // TODO: TagSet → TagOverflow migration: rename `type` → `tagType` and add a unique `id` field to each item object.
+    // TODO: TagSet → TagOverflow migration: TagSet defaulted allTagsModalTitle, allTagsModalSearchLabel, allTagsModalSearchPlaceholderText, showAllTagsLabel; TagOverflow has no defaults. Provide translated values to keep the "view all" link, modal title and search field labelled.
+    <TagOverflow items={[{
+      id: 'computed',
+      ['type']: 'blue',
+      label: 'Computed',
+    }]} />
+  );
+}
+
+// onOverflowTagChange and allTagsModalTarget changed type – transform adds TODOs
+export function ChangedTypes({ onChange, target }) {
+  return (
+    // TODO: TagSet → TagOverflow migration: onOverflowTagChange was called by TagSet with the overflow tag elements (ReactNode[]). TagOverflow calls it with `{ hiddenItems, minWidth, maxWidth }`, so update the handler.
+    // TODO: TagSet → TagOverflow migration: allTagsModalTarget was a ReactNode in TagSet. TagOverflow expects an HTMLElement, so update the value.
+    // TODO: TagSet → TagOverflow migration: TagSet defaulted allTagsModalTitle, allTagsModalSearchLabel, allTagsModalSearchPlaceholderText, showAllTagsLabel; TagOverflow has no defaults. Provide translated values to keep the "view all" link, modal title and search field labelled.
+    (<TagOverflow
+      onOverflowTagChange={onChange}
+      allTagsModalTarget={target}
+      items={[{
+        id: 'changed',
+        tagType: 'red',
+        label: 'Changed',
+      }]}
+    />)
+  );
+}
+
+// Spread props cannot be migrated statically – transform adds a TODO
+export function SpreadProps(props) {
+  return (
+    // TODO: TagSet → TagOverflow migration: props are spread onto this element, so they could not be migrated. In the spread object rename `tags` → `items` and `overflowAutoAlign` → `autoAlign`, rename `type` → `tagType` and add an `id` in each item, remove onOverflowClick, containingElementRef, measurementOffset and multiline, update onOverflowTagChange and allTagsModalTarget, and provide allTagsModalTitle, allTagsModalSearchLabel, allTagsModalSearchPlaceholderText, showAllTagsLabel (TagSet defaulted them; TagOverflow does not).
+    <TagOverflow {...props} />
+  );
+}

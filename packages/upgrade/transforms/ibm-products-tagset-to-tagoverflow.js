@@ -9,7 +9,6 @@
  * Imports:
  *   import { TagSet } from '@carbon/ibm-products'
  *   → import { TagOverflow } from '@carbon/ibm-products'
- *   (or '@carbon/react' when the consumer opts into the core package)
  *
  * JSX element name:
  *   <TagSet …> → <TagOverflow …>
@@ -19,7 +18,8 @@
  *   overflowAutoAlign={…} → autoAlign={…}
  *
  * Per-item field renames (inside the items/tags array literal):
- *   type → tagType
+ *   type → tagType  (shorthand `{ type }` becomes `{ tagType: type }`; computed
+ *   keys cannot be renamed safely and get a TODO instead)
  *   Inject a stable `id` field when one is absent (slug from label, fallback
  *   to array index).
  *
@@ -28,6 +28,14 @@
  *   TagOverflow does not destructure these, so they would fall into `...rest`
  *   and be spread onto the root <div>.
  *
+ * Props whose type changed (kept, with a TODO):
+ *   onOverflowTagChange (ReactNode[] → { hiddenItems, minWidth, maxWidth }),
+ *   allTagsModalTarget (ReactNode → HTMLElement)
+ *
+ * Spread props:
+ *   `<TagSet {...props} />` cannot be analysed statically, so a TODO is added
+ *   asking for the spread object to be migrated manually.
+ *
  * Missing default labels:
  *   TagSet defaults allTagsModalTitle, allTagsModalSearchLabel,
  *   allTagsModalSearchPlaceholderText and showAllTagsLabel; TagOverflow does
@@ -35,13 +43,17 @@
  *   injected so that no untranslated text is hard-coded).
  *
  * Imports:
- *   When TagOverflow is already imported, the TagSet specifier is removed
- *   rather than renamed. When TagSet is still referenced outside JSX
+ *   When TagOverflow is already imported from '@carbon/ibm-products', the TagSet
+ *   specifier is removed rather than renamed. When a different `TagOverflow`
+ *   binding (from another package) exists, the migrated import is aliased as
+ *   `IbmProductsTagOverflow` to avoid a name clash. When TagSet is still referenced outside JSX
  *   (`typeof TagSet`, `React.createElement(TagSet)`, …) the TagSet specifier is
  *   kept, TagOverflow is added, and a TODO is left on the import.
  */
 
 'use strict';
+
+const IMPORT_SOURCE = '@carbon/ibm-products';
 
 const defaultOptions = {
   quote: 'single',
@@ -69,6 +81,17 @@ const REMOVED_PROPS = {
   multiline:
     'multiline was removed. TagOverflow only hides overflowing items, so the' +
     ' multiline layout is no longer available.',
+};
+
+// Props that are kept, but whose type changed; the value is the TODO
+const CHANGED_PROPS = {
+  onOverflowTagChange:
+    'onOverflowTagChange was called by TagSet with the overflow tag elements' +
+    ' (ReactNode[]). TagOverflow calls it with `{ hiddenItems, minWidth,' +
+    ' maxWidth }`, so update the handler.',
+  allTagsModalTarget:
+    'allTagsModalTarget was a ReactNode in TagSet. TagOverflow expects an' +
+    ' HTMLElement, so update the value.',
 };
 
 // TagSet provides default values for these; TagOverflow does not
@@ -113,6 +136,7 @@ function staticStringValue(valueNode) {
  */
 function getKeyName(prop) {
   if (prop.type !== 'ObjectProperty' && prop.type !== 'Property') return null;
+  if (prop.computed) return null;
   if (prop.key.type === 'Identifier') return prop.key.name;
   if (prop.key.type === 'StringLiteral') return prop.key.value;
   return null;
@@ -151,6 +175,11 @@ function transformItemObject(j, objExpr, index, usedIds) {
     const keyName = getKeyName(prop);
 
     if (keyName === 'type') {
+      if (prop.shorthand) {
+        // `{ type }` → `{ tagType: type }` so the variable stays referenced
+        prop.shorthand = false;
+        prop.value = j.identifier('type');
+      }
       prop.key = j.identifier('tagType');
     }
     if (keyName === 'id') {
@@ -208,7 +237,10 @@ function transformItemsArray(j, valueNode) {
     if (isObject(el)) transformItemObject(j, el, idx, usedIds);
   });
 
-  return expr.elements.every(isObject);
+  // Computed keys (`{ ['type']: … }`) cannot be renamed reliably
+  const hasComputedKey = (el) => el.properties.some((prop) => prop.computed);
+
+  return expr.elements.every((el) => isObject(el) && !hasComputedKey(el));
 }
 
 /**
@@ -270,26 +302,19 @@ function transform(fileInfo, api, options) {
   const root = j(fileInfo.source);
   const printOptions = options.printOptions || defaultOptions;
 
-  const tagSetLocalNames = new Map(); // localName → { importPath, sourceValue }
+  const tagSetLocalNames = new Map(); // localName → { importPath }
 
-  const IMPORT_SOURCES = ['@carbon/ibm-products', '@carbon/react'];
-
-  IMPORT_SOURCES.forEach((src) => {
-    root
-      .find(j.ImportDeclaration, { source: { value: src } })
-      .forEach((importPath) => {
-        importPath.node.specifiers.forEach((spec) => {
-          if (spec.type !== 'ImportSpecifier') return;
-          if (spec.imported.name === 'TagSet') {
-            const localName = spec.local ? spec.local.name : 'TagSet';
-            tagSetLocalNames.set(localName, {
-              importPath,
-              sourceValue: src,
-            });
-          }
-        });
+  root
+    .find(j.ImportDeclaration, { source: { value: IMPORT_SOURCE } })
+    .forEach((importPath) => {
+      importPath.node.specifiers.forEach((spec) => {
+        if (spec.type !== 'ImportSpecifier') return;
+        if (spec.imported.name === 'TagSet') {
+          const localName = spec.local ? spec.local.name : 'TagSet';
+          tagSetLocalNames.set(localName, { importPath });
+        }
       });
-  });
+    });
 
   if (tagSetLocalNames.size === 0) {
     return null; // nothing to transform
@@ -297,10 +322,27 @@ function transform(fileInfo, api, options) {
 
   let changed = false;
 
-  // A TagOverflow binding that is already imported must not be duplicated
-  const hasTagOverflowImport = root
-    .find(j.ImportSpecifier)
-    .some((p) => (p.node.local || p.node.imported).name === 'TagOverflow');
+  // A TagOverflow binding that is already imported must not be duplicated.
+  // A `TagOverflow` binding from another package must not be shadowed.
+  let hasTagOverflowImport = false;
+  let hasConflictingTagOverflow = false;
+  root.find(j.ImportDeclaration).forEach((p) => {
+    (p.node.specifiers || []).forEach((spec) => {
+      if (!spec.local || spec.local.name !== 'TagOverflow') return;
+      if (
+        p.node.source.value === IMPORT_SOURCE &&
+        spec.type === 'ImportSpecifier' &&
+        spec.imported.name === 'TagOverflow'
+      ) {
+        hasTagOverflowImport = true;
+      } else {
+        hasConflictingTagOverflow = true;
+      }
+    });
+  });
+  const tagOverflowName = hasConflictingTagOverflow
+    ? 'IbmProductsTagOverflow'
+    : 'TagOverflow';
 
   // Local names that are still referenced somewhere other than JSX / imports
   const otherRefs = new Set();
@@ -316,7 +358,7 @@ function transform(fileInfo, api, options) {
     // the alias must stay bound to TagSet for non-JSX references
     const jsxTargetName =
       localName === 'TagSet' || otherRefs.has(localName)
-        ? 'TagOverflow'
+        ? tagOverflowName
         : localName;
 
     root
@@ -334,8 +376,10 @@ function transform(fileInfo, api, options) {
         }
 
         const newAttrs = [];
+        let hasSpread = false;
         for (const attr of opening.attributes) {
           if (attr.type !== 'JSXAttribute') {
+            if (attr.type === 'JSXSpreadAttribute') hasSpread = true;
             newAttrs.push(attr);
             continue;
           }
@@ -365,6 +409,10 @@ function transform(fileInfo, api, options) {
             continue;
           }
 
+          if (Object.prototype.hasOwnProperty.call(CHANGED_PROPS, propName)) {
+            addTodo(j, elPath, CHANGED_PROPS[propName]);
+          }
+
           if (PROP_RENAMES[propName]) {
             attr.name = j.jsxIdentifier(PROP_RENAMES[propName]);
           }
@@ -379,7 +427,20 @@ function transform(fileInfo, api, options) {
             .map((a) => a.name.name)
         );
         const missingLabels = LABEL_PROPS.filter((name) => !present.has(name));
-        if (missingLabels.length > 0) {
+        if (hasSpread) {
+          addTodo(
+            j,
+            elPath,
+            'props are spread onto this element, so they could not be' +
+              ' migrated. In the spread object rename `tags` → `items` and' +
+              ' `overflowAutoAlign` → `autoAlign`, rename `type` → `tagType`' +
+              ' and add an `id` in each item, remove onOverflowClick,' +
+              ' containingElementRef, measurementOffset and multiline, update' +
+              ' onOverflowTagChange and allTagsModalTarget, and provide' +
+              ` ${LABEL_PROPS.join(', ')} (TagSet defaulted them; TagOverflow` +
+              ' does not).'
+          );
+        } else if (missingLabels.length > 0) {
           addTodo(
             j,
             elPath,
@@ -407,7 +468,9 @@ function transform(fileInfo, api, options) {
     const alias =
       existing.local && existing.local.name !== 'TagSet'
         ? existing.local.name
-        : null;
+        : hasConflictingTagOverflow
+          ? tagOverflowName
+          : null;
 
     if (otherRefs.has(localName)) {
       // Keep TagSet bound for the remaining references, add TagOverflow
@@ -421,7 +484,12 @@ function transform(fileInfo, api, options) {
         specifiers.splice(
           idx + 1,
           0,
-          j.importSpecifier(j.identifier('TagOverflow'))
+          hasConflictingTagOverflow
+            ? j.importSpecifier(
+                j.identifier('TagOverflow'),
+                j.identifier(tagOverflowName)
+              )
+            : j.importSpecifier(j.identifier('TagOverflow'))
         );
       }
       return;

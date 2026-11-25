@@ -101,3 +101,30 @@ export function NestedTagSet() {
     </div>
   );
 }
+
+// Shorthand `type` keeps referencing the variable
+export function ShorthandType() {
+  const type = 'red';
+  return <TagSet tags={[{ type, label: 'Shorthand' }]} />;
+}
+
+// Computed `type` keys cannot be renamed safely – transform adds a TODO
+export function ComputedType() {
+  return <TagSet tags={[{ ['type']: 'blue', label: 'Computed' }]} />;
+}
+
+// onOverflowTagChange and allTagsModalTarget changed type – transform adds TODOs
+export function ChangedTypes({ onChange, target }) {
+  return (
+    <TagSet
+      onOverflowTagChange={onChange}
+      allTagsModalTarget={target}
+      tags={[{ type: 'red', label: 'Changed' }]}
+    />
+  );
+}
+
+// Spread props cannot be migrated statically – transform adds a TODO
+export function SpreadProps(props) {
+  return <TagSet {...props} />;
+}

@@ -27,3 +27,11 @@ defineTest(__dirname, transformName, null, `${transformName}-other-references`);
 
 // No TagSet import: file is left unchanged
 defineTest(__dirname, transformName, null, `${transformName}-no-import`);
+
+// A `TagOverflow` imported from another package is not shadowed or duplicated
+defineTest(
+  __dirname,
+  transformName,
+  null,
+  `${transformName}-conflicting-import`
+);
