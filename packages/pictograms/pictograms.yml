@@ -51,6 +51,23 @@
     - new
     - additional
     - add
+- name: add--user-group
+  friendly_name: Add user group
+  aliases:
+    - new
+    - additional
+    - add
+    - plus
+    - plus symbol
+    - user group
+    - add users
+    - create group
+    - people
+    - team
+    - membership
+    - collaboration
+    - group management
+    - person
 - name: add-comments--mobile
   friendly_name: Add comments mobile
   aliases:
@@ -1763,6 +1780,30 @@
     - baseball
     - cleat
     - fantasy football
+- name: clerk--inventory
+  friendly_name: Inventory clerk
+  aliases:
+    - inventory clerk
+    - stock clerk
+    - warehouse worker
+    - storeroom
+    - stock management
+    - storage
+    - safety helmet
+    - materials handling
+    - person
+- name: clerk--inventory--alt
+  friendly_name: Inventory clerk alt
+  aliases:
+    - inventory clerk
+    - stock clerk
+    - warehouse worker
+    - storeroom
+    - stock management
+    - storage
+    - safety helmet
+    - materials handling
+    - person
 - name: cricket--ball
   friendly_name: Cricket ball
   aliases:
@@ -5588,6 +5629,18 @@
     - trust
     - assessment
     - security
+- name: import--items
+  friendly_name: Import items
+  aliases:
+    - import items
+    - data import
+    - spreadsheet
+    - CSV
+    - item records
+    - bulk import
+    - inventory
+    - tabular data
+    - arrow
 - name: incident-reporter
   friendly_name: Incident reporter
   aliases:
@@ -5746,6 +5799,18 @@
     - city
     - cities
     - internet of things
+- name: issue--item
+  friendly_name: Issue item
+  aliases:
+    - issue item
+    - inventory issuance
+    - stock withdrawal
+    - dispense
+    - distribute
+    - materials
+    - supplies
+    - work order
+    - arrow
 - name: it--infrastructure
   friendly_name: IT infrastructure
   aliases:
@@ -6703,6 +6768,28 @@
     - mobile
     - device interaction
     - device
+- name: mobile--notification
+  friendly_name: Mobile notification
+  aliases:
+    - mobile
+    - notification
+    - alert
+    - bell
+    - update
+    - reminder
+    - smartphone
+    - message
+- name: mobile--offline
+  friendly_name: Mobile offline
+  aliases:
+    - mobile
+    - offline
+    - disconnected
+    - no connection
+    - no network
+    - offline access
+    - smartphone
+    - fieldwork
 - name: mobile--phone
   friendly_name: Mobile phone
   aliases:
@@ -9476,6 +9563,18 @@
   aliases:
     - cloud
     - storage
+- name: store--room
+  friendly_name: Store room
+  aliases:
+    - inventory
+    - stock
+    - storage
+    - shelves
+    - boxes
+    - warehouse
+    - storeroom
+    - supplies
+    - stock management
 - name: storage--area-networks
   friendly_name: Storage area networks
   aliases:
