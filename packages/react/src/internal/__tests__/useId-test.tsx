@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { useId, useFallbackId, useCompatibleId } from '../useId';
@@ -23,7 +25,7 @@ describe('useId', () => {
 
   it('should generate a unique id when using the useFallbackId empty', () => {
     function Test() {
-      const id = useFallbackId();
+      const id = useFallbackId(undefined);
       return <span id={id}>test</span>;
     }
 
@@ -60,7 +62,7 @@ describe('useId', () => {
 
 describe('useCompatibleId', () => {
   it('should patch from null with default prefix for both context and non-context values', () => {
-    const Test = ({ testId }) => {
+    const Test = ({ testId }: { testId: string }) => {
       const id = useCompatibleId();
 
       return <span data-testid={testId}>{id ?? 'null'}</span>;
@@ -121,7 +123,7 @@ describe('useCompatibleId', () => {
   it('should select `useCompatibleId` when `React.useId` is unavailable', () => {
     jest.isolateModules(() => {
       jest.doMock('react', () => {
-        const actual = jest.requireActual('react');
+        const actual = jest.requireActual<typeof import('react')>('react');
 
         return {
           __esModule: true,
@@ -131,7 +133,8 @@ describe('useCompatibleId', () => {
         };
       });
 
-      const useIdModule = require('../useId');
+      const useIdModule =
+        jest.requireActual<typeof import('../useId')>('../useId');
 
       expect(useIdModule.useId).toBe(useIdModule.useCompatibleId);
 

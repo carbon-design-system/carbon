@@ -1,17 +1,29 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import React, { type ReactNode } from 'react';
 import { Selection } from '../Selection';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 
 describe('Selection', () => {
-  let mockProps;
+  type SelectionRenderProps = {
+    clearSelection: () => void;
+    onItemChange: (item: number) => void;
+    selectedItems: number[];
+  };
+
+  type SelectionTestProps = {
+    initialSelectedItems: number[];
+    render: (props: SelectionRenderProps) => ReactNode;
+  };
+
+  let mockProps: SelectionTestProps;
 
   beforeEach(() => {
     mockProps = {
@@ -22,18 +34,20 @@ describe('Selection', () => {
 
   describe('renders as expected - Component API', () => {
     it('should render', () => {
-      const { container } = render(<Selection {...mockProps} />);
+      const { container } = render(<Selection<number> {...mockProps} />);
       expect(container).toMatchSnapshot();
     });
   });
 
   describe('behaves as expected', () => {
     it('should be able to add or remove an item from the callback props', async () => {
-      let selectedItems = [];
-      const onChange = (selectionState) =>
-        (selectedItems = selectionState.selectedItems);
+      let selectedItems: number[] = [];
+      const onChange = (selectionState: { selectedItems: number[] }) => {
+        selectedItems = selectionState.selectedItems;
+      };
+
       render(
-        <Selection
+        <Selection<number>
           {...mockProps}
           render={({ onItemChange }) => (
             <button type="button" onClick={() => onItemChange(1)} />
@@ -50,7 +64,7 @@ describe('Selection', () => {
 
     it('should give a list of all selected items from the callback props', async () => {
       render(
-        <Selection
+        <Selection<number>
           {...mockProps}
           render={({ selectedItems, onItemChange }) => (
             <div>
@@ -70,11 +84,13 @@ describe('Selection', () => {
     });
 
     it('should be able to clear the selection from the callback props', async () => {
-      let selectedItems = [];
-      const onChange = (selectionState) =>
-        (selectedItems = selectionState.selectedItems);
+      let selectedItems: number[] = [];
+      const onChange = (selectionState: { selectedItems: number[] }) => {
+        selectedItems = selectionState.selectedItems;
+      };
+
       render(
-        <Selection
+        <Selection<number>
           {...mockProps}
           render={({ onItemChange, clearSelection }) => (
             <div>
@@ -103,11 +119,13 @@ describe('Selection', () => {
   });
 
   it('should disallow selection when disabled', async () => {
-    let selectedItems = [];
-    const onChange = (selectionState) =>
-      (selectedItems = selectionState.selectedItems);
+    let selectedItems: number[] = [];
+    const onChange = (selectionState: { selectedItems: number[] }) => {
+      selectedItems = selectionState.selectedItems;
+    };
+
     render(
-      <Selection
+      <Selection<number>
         {...mockProps}
         render={({ onItemChange }) => (
           <button type="button" onClick={() => onItemChange(1)} />
