@@ -180,6 +180,7 @@ describe('cds-checkbox', function () {
 
     const inputElement = el.shadowRoot.querySelector('input');
     expect(inputElement.hasAttribute('disabled')).to.be.true;
+    expect(inputElement.hasAttribute('aria-readonly')).to.be.false;
   });
 
   it('should respect warn prop', async () => {

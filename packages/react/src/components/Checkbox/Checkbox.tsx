@@ -168,7 +168,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       `${prefix}--checkbox-wrapper`,
       className,
       {
-        [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
+        [`${prefix}--checkbox-wrapper--readonly`]: readOnly && !disabled,
         [`${prefix}--checkbox-wrapper--invalid`]: normalizedProps.invalid,
         [`${prefix}--checkbox-wrapper--warning`]: showWarning,
         [`${prefix}--checkbox-wrapper--slug`]: slug,
@@ -217,7 +217,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           }}
           // readonly attribute not applicable to type="checkbox"
           // see - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
-          aria-readonly={readOnly}
+          aria-readonly={disabled ? undefined : readOnly}
           onClick={(evt) => {
             if (readOnly) {
               // prevent default stops the checkbox being updated
