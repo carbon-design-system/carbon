@@ -1,6 +1,5 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as FileUploaderStories from './FileUploader.stories.js';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -31,87 +30,40 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-<Canvas
-  of={FileUploaderStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FileUploaderStories.Default),
-    },
-  ]}
-/>
+When `size` is omitted, upload buttons and file items inherit their size from
+the surrounding
+[layout context](../?path=/docs/preview-preview-layout--overview), within their
+supported size ranges. Without a size context, upload buttons default to `md`
+and file items default to `lg`. An explicit `size` takes precedence over the
+inherited size.
+
+<Canvas of={FileUploaderStories.Default} />
 
 ## Drag And Drop
 
 #### Drag And Drop Upload Container Example Application
 
-<Canvas
-  of={FileUploaderStories.DragAndDropUploadContainerExampleApplication}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(
-          FileUploaderStories.DragAndDropUploadContainerExampleApplication
-        ),
-    },
-  ]}
-/>
+<Canvas of={FileUploaderStories.DragAndDropUploadContainerExampleApplication} />
 
 #### Drag And Drop Upload Single Container Example Application
 
 <Canvas
   of={FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(
-          FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication
-        ),
-    },
-  ]}
 />
 
 ## File
 
 #### File Uploader Drop Container
 
-<Canvas
-  of={FileUploaderStories._FileUploaderDropContainer}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(FileUploaderStories._FileUploaderDropContainer),
-    },
-  ]}
-/>
+<Canvas of={FileUploaderStories._FileUploaderDropContainer} />
 
 #### File Uploader Item
 
-<Canvas
-  of={FileUploaderStories._FileUploaderItem}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(FileUploaderStories._FileUploaderItem),
-    },
-  ]}
-/>
+<Canvas of={FileUploaderStories._FileUploaderItem} />
 
 ## Skeleton state
 
-<Canvas
-  of={FileUploaderStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FileUploaderStories.Skeleton),
-    },
-  ]}
-/>
+<Canvas of={FileUploaderStories.Skeleton} />
 
 ## Component API
 

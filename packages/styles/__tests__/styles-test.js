@@ -10,7 +10,6 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
 const { files } = require('../files');
 
 const { render } = SassRenderer.create(__dirname);
@@ -92,7 +91,7 @@ describe('@carbon/styles', () => {
 
     expect(output).toContain('@position-try --bottom-left {');
     expect(output).toContain(
-      'position-try-options: --bottom-left, --top-left, --bottom-right, --top-right'
+      'position-try-fallbacks: --bottom-left, --top-left, --bottom-right, --top-right'
     );
 
     expect(output).not.toMatch(

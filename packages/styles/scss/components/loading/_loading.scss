@@ -15,6 +15,7 @@
 @use '../../theme' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
 @use '../../utilities/z-index' as *;
 
 /// Loading styles
@@ -97,6 +98,10 @@
     inset-inline-start: 0;
     transition: background-color $duration-slow-02 motion(standard, expressive);
     user-select: none;
+  }
+
+  .#{$prefix}--loading-overlay > [tabindex='-1']:focus {
+    @include focus-outline('reset');
   }
 
   .#{$prefix}--loading-overlay--stop {

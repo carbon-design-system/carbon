@@ -16,6 +16,17 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 export { NAVIGATION_DIRECTION, CONTENT_SWITCHER_SIZE };
 
+export type ContentSwitcherSelectionInteractionType =
+  | 'mouse'
+  | 'keyboard'
+  | 'activation'
+  | 'programmatic';
+
+type UserInteractionType = Exclude<
+  ContentSwitcherSelectionInteractionType,
+  'programmatic'
+>;
+
 /**
  * @param index The index
  * @param length The length of the array.
@@ -42,6 +53,12 @@ const capIndex = (index: number, length: number) => {
  */
 @customElement(`${prefix}-content-switcher`)
 class CDSContentSwitcher extends LitElement {
+  /**
+   * `true` once the first `updated()` cycle has completed. Used to distinguish
+   * the mount update from subsequent programmatic property changes.
+   */
+  private _firstUpdatePassed = false;
+
   /**
    * Handles `mouseover`/`mouseout` events on `<slot>`.
    *
@@ -145,7 +162,7 @@ class CDSContentSwitcher extends LitElement {
    */
   protected _handleUserInitiatedSelectItem(
     item: CDSContentSwitcherItem,
-    interactionType?: 'mouse' | 'keyboard' | 'activation' | undefined
+    interactionType?: UserInteractionType
   ) {
     if (
       (item && !item.disabled && item.value !== this.value) ||
@@ -228,7 +245,7 @@ class CDSContentSwitcher extends LitElement {
 
   protected _selectionDidChange(
     itemToSelect: CDSContentSwitcherItem,
-    interactionType?: 'mouse' | 'keyboard' | 'activation' | undefined
+    interactionType?: ContentSwitcherSelectionInteractionType
   ) {
     if (this.selectionMode === 'manual' && interactionType === 'keyboard') {
       // In manual mode, only focus the item without changing the selection
@@ -251,7 +268,11 @@ class CDSContentSwitcher extends LitElement {
     itemToSelect.selected = true;
     // Waits for rendering with the new state that updates `tabindex`
     Promise.resolve().then(() => {
-      itemToSelect.focus();
+      // Only move focus for real user gestures; never on initial mount or
+      // programmatic `selectedIndex` updates (WCAG 2.4.3 Focus Order).
+      if (interactionType !== undefined && interactionType !== 'programmatic') {
+        itemToSelect.focus();
+      }
 
       const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
       const items = this.querySelectorAll(selectorItem);
@@ -305,11 +326,58 @@ class CDSContentSwitcher extends LitElement {
   lowContrast = false;
 
   firstUpdated() {
-    this._updateSelectedItemFromIndex();
+    this._selectInitialItem();
+  }
+
+  /**
+   * Consumer-aware initial selection, run once on mount. Resolves the item to
+   * select, considering only enabled children, in this order:
+   *   1. an enabled child already marked `selected` (consumer-set), then
+   *   2. an existing `value` matching an enabled child, then
+   *   3. the `selectedIndex` fallback among enabled children.
+   */
+  protected _selectInitialItem() {
+    const { selectorItemEnabled, selectorItemSelected } = this
+      .constructor as typeof CDSContentSwitcher;
+    const items = this.querySelectorAll(selectorItemEnabled);
+    if (items.length === 0) {
+      return;
+    }
+
+    const isContentSwitcherItem = (
+      item: Element
+    ): item is CDSContentSwitcherItem => item instanceof CDSContentSwitcherItem;
+
+    let itemToSelect =
+      Array.from(items).find(
+        (item): item is CDSContentSwitcherItem =>
+          isContentSwitcherItem(item) && item.matches(selectorItemSelected)
+      ) ?? null;
+    if (!itemToSelect && this.value) {
+      itemToSelect =
+        Array.from(items).find(
+          (item): item is CDSContentSwitcherItem =>
+            isContentSwitcherItem(item) && item.value === this.value
+        ) ?? null;
+    }
+    if (
+      !itemToSelect &&
+      this.selectedIndex >= 0 &&
+      this.selectedIndex < items.length
+    ) {
+      const indexed = items[this.selectedIndex];
+      if (isContentSwitcherItem(indexed)) {
+        itemToSelect = indexed;
+      }
+    }
+
+    if (itemToSelect) {
+      this._selectionDidChange(itemToSelect, 'programmatic');
+    }
   }
 
   // Validate a selected index for the initially selected content
-  _updateSelectedItemFromIndex() {
+  protected _updateSelectedItemFromIndex() {
     const { selectorItemEnabled } = this
       .constructor as typeof CDSContentSwitcher;
     const items = this.querySelectorAll(selectorItemEnabled);
@@ -319,10 +387,7 @@ class CDSContentSwitcher extends LitElement {
       this.selectedIndex < items.length
     ) {
       const itemToSelect = items[this.selectedIndex] as CDSContentSwitcherItem;
-      this._selectionDidChange(
-        itemToSelect,
-        this.selectionMode === 'manual' ? 'activation' : 'mouse'
-      );
+      this._selectionDidChange(itemToSelect, 'programmatic');
     }
   }
 
@@ -348,19 +413,32 @@ class CDSContentSwitcher extends LitElement {
   }
 
   updated(changedProperties) {
-    if (changedProperties.has('selectedIndex')) {
+    // Skip the selectedIndex-driven sync on the very first update
+    if (changedProperties.has('selectedIndex') && this._firstUpdatePassed) {
       this._updateSelectedItemFromIndex();
     }
 
     this._updateSelectedItemFromValue(changedProperties);
 
-    if (changedProperties.has('size')) {
-      const items = this.querySelectorAll(`${prefix}-content-switcher-item`);
-      items.forEach((item) => {
-        const size = this.size || 'md';
-        item.setAttribute('size', size);
-      });
+    if (changedProperties.has('size') || changedProperties.has('lowContrast')) {
+      this._syncItemAttributes();
     }
+
+    this._firstUpdatePassed = true;
+  }
+
+  /**
+   * Propagate `size` and `low-contrast` to items until `:host-context()` is
+   * supported in all major browsers.
+   */
+  private _syncItemAttributes() {
+    const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
+    const size = this.size || 'md';
+    forEach(this.querySelectorAll(selectorItem), (elem) => {
+      const item = elem as CDSContentSwitcherItem;
+      item.setAttribute('size', size);
+      item.lowContrast = this.lowContrast;
+    });
   }
 
   _handleSlotchange() {
@@ -377,6 +455,8 @@ class CDSContentSwitcher extends LitElement {
     if (nextItem) {
       (nextItem as CDSContentSwitcherItem).hideDivider = true;
     }
+
+    this._syncItemAttributes();
   }
 
   /**

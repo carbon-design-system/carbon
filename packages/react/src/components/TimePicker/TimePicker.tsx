@@ -11,7 +11,7 @@ import React, { forwardRef, useRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type ExcludedAttributes = 'id' | 'value';
 
@@ -216,7 +216,7 @@ const TimePicker = frFn((props, ref) => {
     [`${prefix}--time-picker--light`]: light,
     [`${prefix}--time-picker--invalid`]: normalizedProps.invalid,
     [`${prefix}--time-picker--warning`]: normalizedProps.warn,
-    [`${prefix}--time-picker--readonly`]: readOnly,
+    [`${prefix}--time-picker--readonly`]: readOnly && !disabled,
     [`${prefix}--time-picker--${size}`]: size,
     ...(pickerClassName && { [pickerClassName]: true }),
   });
@@ -224,6 +224,7 @@ const TimePicker = frFn((props, ref) => {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
   });
 
   const label = typeof labelText !== 'undefined' && labelText !== null && (
@@ -231,7 +232,7 @@ const TimePicker = frFn((props, ref) => {
       {labelText}
     </label>
   );
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     labelRef,
     'The TimePicker component `labelText` prop must have no interactive content'
   );
@@ -263,7 +264,9 @@ const TimePicker = frFn((props, ref) => {
         return React.cloneElement(item, {
           ...item.props,
           disabled: item.props.disabled ?? disabled,
-          readOnly: readOnly,
+          ...(readOnly && !(item.props.disabled ?? disabled)
+            ? { readOnly: true }
+            : {}),
           ...readOnlyEventHandlers,
         });
       }
@@ -272,9 +275,8 @@ const TimePicker = frFn((props, ref) => {
     return mappedChildren;
   }
 
-  const readOnlyProps = {
-    readOnly: readOnly,
-  };
+  const readOnlyProps =
+    readOnly && !normalizedProps.disabled ? { readOnly: true } : {};
   const describedBy =
     [
       normalizedProps.invalid

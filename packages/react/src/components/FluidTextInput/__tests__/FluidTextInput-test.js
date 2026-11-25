@@ -293,4 +293,46 @@ describe('FluidTextInput', () => {
       expect(onChange).toHaveBeenCalledTimes(0);
     });
   });
+
+  describe('translateWithId', () => {
+    it('should forward `translateWithId` to `TextInput`', () => {
+      const translateWithId = jest.fn(() => 'translated');
+
+      render(
+        <FluidTextInput
+          id="input-1"
+          labelText="FluidTextInput label"
+          enableCounter
+          maxCount={10}
+          defaultValue="123456789"
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(translateWithId).toHaveBeenCalledWith(
+        'carbon.text-input.counter.characters.remaining',
+        { count: 1, maxCount: 10 }
+      );
+    });
+
+    it('should not forward `translateWithId` to `PasswordInput`', () => {
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+      const translateWithId = jest.fn(() => 'translated');
+
+      render(
+        <FluidTextInput
+          id="input-1"
+          labelText="FluidTextInput label"
+          isPassword
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(errorSpy).not.toHaveBeenCalled();
+      expect(translateWithId).not.toHaveBeenCalled();
+      errorSpy.mockRestore();
+    });
+  });
 });

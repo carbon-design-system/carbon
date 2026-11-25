@@ -1,0 +1,210 @@
+import { ArgTypes, Meta, Unstyled } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as AddSelectStories from './add-select.stories';
+import '../notification/inline-notification';
+
+<Meta of={AddSelectStories} />
+
+# AddSelect
+
+AddSelect is a composable web component system for building add/select
+interfaces. It provides a flexible, slot-based approach where smaller, focused
+web components can be composed to build a full add-and-select experience.
+
+[Usage guidelines](https://ibm-products.carbondesignsystem.com/components/add-select/usage/)
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Unstyled style={{ marginBottom: '1.5rem' }}>
+  <cds-inline-notification
+    kind="info"
+    title="Migrated component:"
+    subtitle="This component has been migrated from Carbon for IBM Products. While visible in the v12 Storybook, migrated components are not available in the published v11 package and enabling enable-v12-release does not expose them — they will be part of the public @carbon/web-components API when v12 ships."
+  />
+</Unstyled>
+
+{/* <!-- prettier-ignore-end --> */}
+
+## Components
+
+### cds-add-select
+
+The root component that provides context for selection state.
+
+**Attributes:**
+
+- `multi` - Enable multi-select (checkboxes) or single-select (radio buttons)
+
+### cds-add-select-body
+
+Contains the search bar, breadcrumbs, and main content area.
+
+**Attributes:**
+
+- `items-label` - Label for the items section
+- `global-search-label` - Label for the search input
+- `global-search-placeholder` - Placeholder text for search
+- `item-count` - Total number of items
+
+### cds-add-select-column
+
+Optional column wrapper providing column-level search, title, and "Select All"
+functionality.
+
+**Attributes:**
+
+- `title` - Column title
+- `search-label` - Accessible label for column search
+- `search-placeholder` - Placeholder for column search
+- `hide-search` - Hide the column search input
+- `multi` - Enable checkbox (multi) or radio button (single) selection
+- `show-select-all` - Show "Select All" checkbox (requires `multi`)
+- `item-count` - Total items shown as badge
+- `all-selected` - Whether all items are selected
+- `all-indeterminate` - Whether select-all is in indeterminate state
+
+### cds-add-select-row
+
+Individual selectable item.
+
+**Attributes:**
+
+- `item-id` - Unique identifier
+- `title` - Item title
+- `subtitle` - Optional subtitle
+- `value` - Item value
+- `selected` - Whether item is selected
+- `disabled` - Whether item is disabled
+- `has-children` - Show navigation indicator for hierarchical lists
+- `has-item-panel` - Show item detail icon button
+- `item-panel-open` - Whether the item panel is open for this item
+- `skeleton` - Render as skeleton loading state
+
+### cds-add-select-selection-summary
+
+Displays the list of selected items.
+
+**Attributes:**
+
+- `title` - Panel title
+- `selected-item-count` - Number of selected items (drives count badge)
+- `show-edit-icon` - Show edit icon button
+- `edit-icon-description` - Accessible label for edit icon
+
+### cds-add-select-selection-summary-item
+
+Individual selected item display.
+
+**Attributes:**
+
+- `use-accordion` - Render with accordion expand/collapse pattern
+- `remove-button-label` - Accessible label for remove button
+- `hide-remove-button` - Hide the remove button
+
+### cds-add-select-item-panel
+
+Side panel displaying detailed information about a selected item.
+
+**Attributes:**
+
+- `title` - Panel title
+- `open` - Show/hide the panel (CSS-driven slide-in/out)
+- `close-icon-description` - Accessible label for close button
+- `show-close-button` - Whether to show the close button
+
+## Usage
+
+### Basic Multi-Select
+
+```html
+<cds-add-select multi>
+  <cds-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    item-count="5">
+    <cds-add-select-column multi title="Available items">
+      <cds-add-select-row
+        item-id="1"
+        title="Item 1"
+        subtitle="Description"
+        value="item-1"></cds-add-select-row>
+    </cds-add-select-column>
+  </cds-add-select-body>
+</cds-add-select>
+```
+
+### Single Select
+
+```html
+<cds-add-select>
+  <cds-add-select-body items-label="Select one item">
+    <cds-add-select-column title="Available items">
+      <cds-add-select-row
+        item-id="1"
+        title="Item 1"
+        value="item-1"></cds-add-select-row>
+    </cds-add-select-column>
+  </cds-add-select-body>
+</cds-add-select>
+```
+
+## Getting started
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/add-select/index.js';
+```
+
+### HTML
+
+```html
+<cds-add-select multi>
+  <cds-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+    item-count="5">
+    <cds-add-select-column multi title="Available items">
+      <cds-add-select-row
+        item-id="1"
+        title="Item 1"
+        subtitle="Description"
+        value="item-1"></cds-add-select-row>
+      <cds-add-select-row
+        item-id="2"
+        title="Item 2"
+        subtitle="Description"
+        value="item-2"></cds-add-select-row>
+    </cds-add-select-column>
+  </cds-add-select-body>
+</cds-add-select>
+```
+
+## `<cds-add-select>` attributes, properties and events
+
+<ArgTypes of="cds-add-select" />
+
+## `<cds-add-select-body>` attributes, properties and events
+
+<ArgTypes of="cds-add-select-body" />
+
+## `<cds-add-select-column>` attributes, properties and events
+
+<ArgTypes of="cds-add-select-column" />
+
+## `<cds-add-select-row>` attributes, properties and events
+
+<ArgTypes of="cds-add-select-row" />
+
+## `<cds-add-select-selection-summary>` attributes, properties and events
+
+<ArgTypes of="cds-add-select-selection-summary" />
+
+## `<cds-add-select-selection-summary-item>` attributes, properties and events
+
+<ArgTypes of="cds-add-select-selection-summary-item" />
+
+## `<cds-add-select-item-panel>` attributes, properties and events
+
+<ArgTypes of="cds-add-select-item-panel" />

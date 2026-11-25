@@ -39,8 +39,8 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   getInteractiveContent,
   getRoleContent,
-  useNoInteractiveChildren,
 } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
@@ -387,7 +387,8 @@ ClickableTile.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
+export interface SelectableTileProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   children?: ReactNode;
   className?: string;
   /**
@@ -467,7 +468,6 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   value?: string | number;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const SelectableTile = React.forwardRef<
   HTMLDivElement,
   SelectableTileProps
@@ -568,7 +568,7 @@ export const SelectableTile = React.forwardRef<
         {normalizedDecorator}
       </div>
     ) : null;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The SelectableTile component `children` prop must have no interactive content'
     );
@@ -610,6 +610,8 @@ export const SelectableTile = React.forwardRef<
     );
   }
 );
+
+SelectableTile.displayName = 'SelectableTile';
 
 SelectableTile.propTypes = {
   children: PropTypes.node,

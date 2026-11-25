@@ -202,7 +202,10 @@ export default defineConfig(
     rules: {
       ...jsxA11y.configs.recommended.rules,
       ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
+      // TODO: pin to the pre-v7 rule and refactor to fix
+      // compiler rules up in a follow-up.
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       // ...jsdoc.configs['flat/recommended'].rules, // Too noisy at the moment. Uncomment it to enable it.
     },
   },
@@ -234,6 +237,9 @@ export default defineConfig(
 
       'packages/*/examples/*',
 
+      // Pattern code (stories are linted)
+      'packages/{react,web-components}/src/examples/**/!(*.stories).@(js|jsx|ts|tsx)',
+
       // Components
       'packages/components/demo/*.css',
       'packages/components/demo/*.map',
@@ -253,7 +259,7 @@ export default defineConfig(
       '**/__testfixtures__/**',
 
       // React
-      '**/storybook-static/**',
+      '**/storybook-static*/**',
 
       // Templates
       'packages/cli/src/component/templates/**',

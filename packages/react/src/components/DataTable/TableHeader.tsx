@@ -26,7 +26,7 @@ import type { TFunc, TranslateWithId } from '../../types/common';
 import { sortStates, type DataTableSortState } from './state/sortStates';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const defaultScope = 'col';
 
@@ -184,7 +184,7 @@ const TableHeader = frFn((props, ref) => {
     [`${prefix}--table-header-label--decorator`]: decorator,
   });
 
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     headerLabelRef,
     'The TableHeader component `children` prop must have no interactive content when `isSortable` is true'
   );

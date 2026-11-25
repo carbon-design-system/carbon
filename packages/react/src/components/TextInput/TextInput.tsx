@@ -27,15 +27,39 @@ import { hasHelperText } from '../../internal/hasHelperText';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import type { TFunc, TranslateWithId } from '../../types/common';
+
+const translationIds = {
+  'carbon.text-input.counter.characters.remaining':
+    'carbon.text-input.counter.characters.remaining',
+  'carbon.text-input.counter.characters.max-reached':
+    'carbon.text-input.counter.characters.max-reached',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+type TranslationArgs = { count: number; maxCount: number };
+
+const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
+  messageId,
+  args
+) => {
+  const count = args?.count ?? 0;
+
+  switch (messageId) {
+    case translationIds['carbon.text-input.counter.characters.remaining']:
+      return `${count} ${count === 1 ? 'character' : 'characters'} left.`;
+    case translationIds['carbon.text-input.counter.characters.max-reached']:
+      return 'Maximum characters reached.';
+  }
+};
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
 
 export interface TextInputProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey, TranslationArgs> {
   /**
    * Specify an optional className to be applied to the `<input>` node
    */
@@ -189,6 +213,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       enableCounter = false,
       maxCount,
       slug,
+      translateWithId: t = defaultTranslateWithId,
       ...rest
     },
     ref
@@ -201,18 +226,20 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     const labelRef = useRef<HTMLLabelElement>(null);
     const mergedRef = useMergedRefs([ref, inputRef]);
 
-    function getInitialTextCount(): number {
-      const targetValue =
-        defaultValue || value || inputRef.current?.value || '';
-      return targetValue.toString().length;
-    }
-
-    const [textCount, setTextCount] = useState(getInitialTextCount());
+    const isControlled = value != null;
+    const [uncontrolledTextCount, setTextCount] = useState(
+      () => (defaultValue ?? '').toString().length
+    );
+    // Keep controlled counts derived so rapid input doesn't queue extra state updates.
+    const textCount = value?.toString().length ?? uncontrolledTextCount;
 
     useEffect(() => {
-      setTextCount(getInitialTextCount());
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [value, defaultValue, enableCounter]);
+      if (!isControlled) {
+        setTextCount(
+          (defaultValue || inputRef.current?.value || '').toString().length
+        );
+      }
+    }, [isControlled, defaultValue, enableCounter]);
 
     const normalizedProps = useNormalizedInputProps({
       id,
@@ -235,7 +262,9 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       id,
       onChange: (evt) => {
         if (!normalizedProps.disabled) {
-          setTextCount(evt.target.value?.length);
+          if (!isControlled) {
+            setTextCount(evt.target.value?.length);
+          }
           onChange(evt);
         }
       },
@@ -250,7 +279,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       className: textInputClasses,
       title: placeholder,
       disabled: normalizedProps.disabled,
-      readOnly,
+      ...(readOnly && !normalizedProps.disabled ? { readOnly: true } : {}),
       ['aria-describedby']:
         hasHelperText(helperText) && !normalizedProps.invalid
           ? normalizedProps.helperId
@@ -266,7 +295,8 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       [classNames(`${prefix}--form-item`, className)],
       `${prefix}--text-input-wrapper`,
       {
-        [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+        [`${prefix}--text-input-wrapper--readonly`]:
+          readOnly && !normalizedProps.disabled,
         [`${prefix}--text-input-wrapper--light`]: light,
         [`${prefix}--text-input-wrapper--inline`]: inline,
         [`${prefix}--text-input-wrapper--inline--invalid`]:
@@ -276,6 +306,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--label--inline`]: inline,
       [`${prefix}--label--inline--${size}`]: inline && !!size, // TODO v12 - remove this class
     });
@@ -321,7 +352,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       </Text>
     );
 
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The TextInput component `labelText` prop must have no interactive content'
     );
@@ -357,7 +388,15 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     const { isFluid } = useContext(FormContext);
     const announcerRef = useRef<HTMLSpanElement>(null);
     const [prevAnnouncement, setPrevAnnouncement] = useState('');
-    const ariaAnnouncement = getAnnouncement(textCount, maxCount);
+    const ariaAnnouncement = getAnnouncement(
+      textCount,
+      maxCount,
+      {
+        remaining: 'carbon.text-input.counter.characters.remaining',
+        maxReached: 'carbon.text-input.counter.characters.max-reached',
+      },
+      t
+    );
     useEffect(() => {
       if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
         const announcer = announcerRef.current as HTMLSpanElement | null;
@@ -551,6 +590,11 @@ TextInput.propTypes = {
     'The `slug` prop for `TextInput` has ' +
       'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
   ),
+
+  /**
+   * Translates component strings using your i18n tool.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * Specify the type of the `<input>`

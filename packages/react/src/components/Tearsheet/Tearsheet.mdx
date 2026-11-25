@@ -1,12 +1,5 @@
-import {
-  Controls,
-  Canvas,
-  Story,
-  Meta,
-  Unstyled,
-} from '@storybook/addon-docs/blocks';
+import { Controls, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as TearsheetStories from './Tearsheet.stories';
-import { InlineNotification } from '../Notification';
 
 <Meta isTemplate />
 
@@ -18,18 +11,6 @@ import { InlineNotification } from '../Notification';
 - [Usage](#usage)
 - [Examples](#examples)
 - [Component API](#component-api)
-
-{/* <!-- prettier-ignore-start --> */}
-
-<Unstyled>
-  <InlineNotification
-    kind="info"
-    title="Migrated component:"
-    subtitle="This component has been migrated from Carbon for IBM Products. While visible in the v12 Storybook, migrated components are not available in the published v11 package and enabling enable-v12-release does not expose them — they will be part of the public @carbon/react API when v12 ships."
-  />
-</Unstyled>
-
-{/* <!-- prettier-ignore-end --> */}
 
 ## Overview
 
@@ -281,24 +262,18 @@ Optionally specify `stackStepSize`: `sm` (0.5rem), `md` (0.75rem), or `lg`
 
 ## Default
 
-<Canvas>
-  <Story of={TearsheetStories.Default} />
-</Canvas>
+<Canvas of={TearsheetStories.Default} />
 
 ## With Influencer
 
-<Canvas>
-  <Story of={TearsheetStories.WithInfluencer} />
-</Canvas>
+<Canvas of={TearsheetStories.WithInfluencer} />
 
 ## With tabs
 
 Wrap the entire Tearsheet in `<Tabs>`. Render `<TabList>` inside
 `<Tearsheet.NavigationBar>` and `<TabPanels>` inside `<Tearsheet.MainContent>`.
 
-<Canvas>
-  <Story of={TearsheetStories.WithTabs} />
-</Canvas>
+<Canvas of={TearsheetStories.WithTabs} />
 
 ## Narrow
 
@@ -306,15 +281,11 @@ A narrow tearsheet is a slimmer variant that keeps users in-context while
 revealing more of the UI behind it. It comprises a Header, MainContent, and
 Footer. Influencer and SummaryContent are accessible via side panels.
 
-<Canvas>
-  <Story of={TearsheetStories.narrowTearsheet} />
-</Canvas>
+<Canvas of={TearsheetStories.narrowTearsheet} />
 
 ## Stacking
 
-<Canvas>
-  <Story of={TearsheetStories.StackingTearsheet} />
-</Canvas>
+<Canvas of={TearsheetStories.StackingTearsheet} />
 
 ## Component API
 

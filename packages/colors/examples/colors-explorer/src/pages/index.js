@@ -7,12 +7,12 @@
 
 import React from 'react';
 import { colors, hoverColors } from '../../../../src';
-import whiteJson from '@carbon/themes/src/dtcg/white.json';
-import g10Json from '@carbon/themes/src/dtcg/g10.json';
-import g90Json from '@carbon/themes/src/dtcg/g90.json';
-import g100Json from '@carbon/themes/src/dtcg/g100.json';
+import whiteTheme from '@carbon/themes/tokens/themes/white/theme.tokens.json';
+import g10Theme from '@carbon/themes/tokens/themes/g10/theme.tokens.json';
+import g90Theme from '@carbon/themes/tokens/themes/g90/theme.tokens.json';
+import g100Theme from '@carbon/themes/tokens/themes/g100/theme.tokens.json';
 
-// ── Flatten colors into a flat list of token objects ─────────────────────────
+// Flatten colors into a flat list of token objects
 // colors = { blue: { 10: '#edf5ff', 20: '#d0e2ff', ... }, ... }
 
 const allTokens = [];
@@ -72,29 +72,35 @@ const THEME_OPTIONS = [
   { value: 'g100', label: 'G100' },
 ];
 
-// ── Theme token → color alias reverse map ────────────────────────────────────
-// Flattens each theme's DTCG JSON and builds:
+// Theme token → color alias reverse map
+// Flattens each theme's token file and builds:
 //   colorToThemeTokens['blue-60'] = { white: ['background-brand', ...], g10: [...], ... }
 
-function flattenDtcg(obj, prefix = '') {
+// Maps every token in a theme's token file to the palette alias it uses. A
+// token value is either an alias string ("{blue.60}"), a color object that
+// references the components of a palette color (an alias with its own alpha),
+// or a color object of its own, which has no alias.
+function flattenThemeTokens(file) {
   const result = {};
-  for (const [key, val] of Object.entries(obj)) {
-    if (key.startsWith('$')) continue;
-    const name = prefix ? `${prefix}-${key}` : key;
-    if (val && typeof val === 'object' && '$value' in val) {
-      result[name] = val.$value;
-    } else if (val && typeof val === 'object') {
-      Object.assign(result, flattenDtcg(val, name));
+  for (const [name, token] of Object.entries(file)) {
+    if (name.startsWith('$')) continue;
+    const { $value } = token;
+    if (typeof $value === 'string') {
+      result[name] = $value;
+    } else if ($value.components.$ref) {
+      // "#/gray/50/$value/components" → "{gray.50}"
+      const tokenPath = $value.components.$ref.split('/').slice(1, -2);
+      result[name] = `{${tokenPath.join('.')}}`;
     }
   }
   return result;
 }
 
-const themeDtcg = {
-  white: flattenDtcg(whiteJson),
-  g10: flattenDtcg(g10Json),
-  g90: flattenDtcg(g90Json),
-  g100: flattenDtcg(g100Json),
+const themeTokens = {
+  white: flattenThemeTokens(whiteTheme),
+  g10: flattenThemeTokens(g10Theme),
+  g90: flattenThemeTokens(g90Theme),
+  g100: flattenThemeTokens(g100Theme),
 };
 
 // Convert DTCG alias "{blue.60}" → "blue-60"
@@ -105,7 +111,7 @@ function aliasToColorToken(alias) {
 
 // colorToThemeTokens['blue-60']['white'] = ['background-brand', 'focus', ...]
 const colorToThemeTokens = {};
-for (const [theme, flat] of Object.entries(themeDtcg)) {
+for (const [theme, flat] of Object.entries(themeTokens)) {
   for (const [tokenName, aliasVal] of Object.entries(flat)) {
     const colorToken = aliasToColorToken(aliasVal);
     if (!colorToken) continue;
@@ -115,7 +121,7 @@ for (const [theme, flat] of Object.entries(themeDtcg)) {
   }
 }
 
-// ── Graph layout constants ────────────────────────────────────────────────────
+// Graph layout constants
 
 const CAT_W = 110;
 const CAT_H = 44;
@@ -131,7 +137,7 @@ const REL_X = TOK_X + NODE_W + LEVEL_H;
 const DESC_W = 220;
 const DESC_GAP = 20;
 
-// ── Relations layout ──────────────────────────────────────────────────────────
+// Relations layout
 
 function buildRelationsLayout(filteredTokens, expandedSwatches, selectedColorToken, activeTheme) {
   const swatchMap = {};
@@ -288,7 +294,7 @@ function CurvedLink({ fromNode, toNode, isRelation }) {
   );
 }
 
-// ── Main page ─────────────────────────────────────────────────────────────────
+// Main page
 
 export default function IndexPage({ lastBuiltOn }) {
   const [activeView, setActiveView] = React.useState('table');
@@ -480,7 +486,7 @@ export default function IndexPage({ lastBuiltOn }) {
         </div>
       </header>
 
-      {/* ── TABLE VIEW ──────────────────────────────────────────────────── */}
+      {/* TABLE VIEW */}
       {!isGraph && (
         <div className="content">
           <table aria-labelledby="page-title">
@@ -535,7 +541,7 @@ export default function IndexPage({ lastBuiltOn }) {
         </div>
       )}
 
-      {/* ── GRAPH VIEW ──────────────────────────────────────────────────── */}
+      {/* GRAPH VIEW */}
       {isGraph && (
         <svg
           ref={svgRef}

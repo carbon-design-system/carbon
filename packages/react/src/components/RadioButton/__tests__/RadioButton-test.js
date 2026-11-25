@@ -28,8 +28,8 @@ describe('RadioButton', () => {
     expect(screen.getByRole('radio')).toHaveAttribute('id');
   });
 
-  it('should not allow interactive content in labelText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in labelText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -43,8 +43,12 @@ describe('RadioButton', () => {
           }
         />
       );
-    }).toThrow(
-      'The RadioButton component `labelText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The RadioButton component `labelText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();
@@ -237,5 +241,22 @@ describe('RadioButton', () => {
       />
     );
     expect(screen.getByRole('radio')).toHaveAttribute('required');
+  });
+
+  it('should prioritize disabled over readOnly when both are true', () => {
+    render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        disabled={true}
+        readOnly={true}
+      />
+    );
+
+    const radio = screen.getByRole('radio');
+    expect(radio).toHaveAttribute('disabled', '');
+    expect(radio.disabled).toBe(true);
+    expect(radio.readOnly).toBe(false);
   });
 });

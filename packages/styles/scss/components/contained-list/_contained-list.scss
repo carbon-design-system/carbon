@@ -9,7 +9,9 @@
 
 @use '../button';
 @use '../overflow-menu';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -28,6 +30,10 @@
   .#{$prefix}--contained-list {
     @include layout.use('size', $default: 'lg', $min: 'sm', $max: 'xl');
     @include layout.use('density', $default: 'normal');
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--contained-list .#{$prefix}--tag {
@@ -264,6 +270,21 @@
   .#{$prefix}--contained-list__action > *,
   .#{$prefix}--contained-list-item__action > * {
     pointer-events: all;
+  }
+
+  .#{$prefix}--contained-list-item--clickable.#{$prefix}--contained-list-item--with-action {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+
+    .#{$prefix}--contained-list-item__content {
+      position: relative;
+      padding-inline-end: layout.density('padding-inline');
+    }
+
+    .#{$prefix}--contained-list-item__action {
+      position: static;
+      align-self: start;
+    }
   }
 
   .#{$prefix}--contained-list-item--with-icon

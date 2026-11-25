@@ -1,6 +1,5 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as FluidComboBoxStories from './FluidComboBox.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -29,51 +28,19 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-<Canvas
-  of={FluidComboBoxStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidComboBoxStories.Default),
-    },
-  ]}
-/>
+<Canvas of={FluidComboBoxStories.Default} />
 
 ### Skeleton
 
-<Canvas
-  of={FluidComboBoxStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidComboBoxStories.Skeleton),
-    },
-  ]}
-/>
+<Canvas of={FluidComboBoxStories.Skeleton} />
 
 ### With AI Label
 
-<Canvas
-  of={FluidComboBoxStories.withAILabel}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidComboBoxStories.withAILabel),
-    },
-  ]}
-/>
+<Canvas of={FluidComboBoxStories.withAILabel} />
 
 ### Condensed
 
-<Canvas
-  of={FluidComboBoxStories.Condensed}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidComboBoxStories.Condensed),
-    },
-  ]}
-/>
+<Canvas of={FluidComboBoxStories.Condensed} />
 
 ## Accessibility Considerations
 

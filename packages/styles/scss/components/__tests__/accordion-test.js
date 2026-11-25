@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -50,14 +50,15 @@ describe('scss/components/accordion', () => {
     const { result } = await render(`
       @use '../accordion';
     `);
-    const { stylesheet } = css.parse(
-      removeAtRule(result.css.toString(), '@starting-style')
-    );
+    const stylesheet = postcss.parse(result.css.toString());
 
     function getAccordionHoverSelectors(rules, media = []) {
       return rules.flatMap((rule) => {
-        if (rule.type === 'media') {
-          return getAccordionHoverSelectors(rule.rules, [...media, rule.media]);
+        if (rule.type === 'atrule' && rule.name === 'media') {
+          return getAccordionHoverSelectors(rule.nodes, [
+            ...media,
+            rule.params,
+          ]);
         }
 
         if (rule.type !== 'rule') {
@@ -77,7 +78,7 @@ describe('scss/components/accordion', () => {
       });
     }
 
-    const hoverSelectors = getAccordionHoverSelectors(stylesheet.rules);
+    const hoverSelectors = getAccordionHoverSelectors(stylesheet.nodes);
 
     expect(hoverSelectors).toEqual(
       expect.arrayContaining([
@@ -96,32 +97,3 @@ describe('scss/components/accordion', () => {
     ).toBe(true);
   });
 });
-
-function removeAtRule(cssText, atRule) {
-  const start = cssText.indexOf(atRule);
-
-  if (start === -1) {
-    return cssText;
-  }
-
-  const blockStart = cssText.indexOf('{', start);
-  let blockEnd = blockStart;
-  let depth = 0;
-
-  for (let i = blockStart; i < cssText.length; i++) {
-    if (cssText[i] === '{') {
-      depth++;
-    }
-
-    if (cssText[i] === '}') {
-      depth--;
-    }
-
-    if (depth === 0) {
-      blockEnd = i + 1;
-      break;
-    }
-  }
-
-  return `${cssText.slice(0, start)}${cssText.slice(blockEnd)}`;
-}

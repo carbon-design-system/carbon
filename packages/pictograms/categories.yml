@@ -935,6 +935,7 @@ categories:
       - hashicorp--terraform
       - ibm--aptio
       - ibm--bob
+      - ibm--champion-star
       - ibm--concert
       - ibm--ibv
       - ibm--instana

@@ -24,7 +24,7 @@ import { PopoverAlignment } from '../Popover';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { hasHelperText } from '../../internal/hasHelperText';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type ExcludedAttributes = 'size';
 
@@ -253,7 +253,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       placeholder,
       type: inputType,
       className: textInputClasses,
-      readOnly,
+      ...(readOnly && !disabled ? { readOnly: true } : {}),
       ref,
       ...rest,
     };
@@ -262,7 +262,8 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       `${prefix}--text-input-wrapper`,
       `${prefix}--password-input-wrapper`,
       {
-        [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+        [`${prefix}--text-input-wrapper--readonly`]:
+          readOnly && !normalizedProps.disabled,
         [`${prefix}--text-input-wrapper--light`]: light,
         [`${prefix}--text-input-wrapper--inline`]: inline,
         [`${prefix}--text-input-wrapper--inline--invalid`]:
@@ -273,6 +274,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--readonly`]: readOnly && !disabled,
       [`${prefix}--label--inline`]: inline,
       [`${prefix}--label--inline--${size}`]: inline && !!size, // TODO v12 - remove this class
     });
@@ -304,7 +306,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
         {labelText}
       </label>
     );
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The PasswordInput component `labelText` prop must have no interactive content'
     );

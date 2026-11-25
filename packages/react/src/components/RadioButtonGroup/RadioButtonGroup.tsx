@@ -26,7 +26,7 @@ import { useId } from '../../internal/useId';
 import { hasHelperText } from '../../internal/hasHelperText';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 export const RadioButtonGroupContext = createContext(null);
 
@@ -257,7 +257,7 @@ const RadioButtonGroup = React.forwardRef(
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini', kind: 'default' })
       : candidate;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       legendRef,
       'The RadioButtonGroup component `legendText` prop must have no interactive content'
     );

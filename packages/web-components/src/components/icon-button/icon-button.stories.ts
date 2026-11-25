@@ -41,7 +41,6 @@ const tooltipAlignments = {
 
 const args = {
   align: ICON_BUTTON_TOOLTIP_ALIGNMENT.BOTTOM,
-  autoalign: false,
   closeOnActivation: true,
   defaultOpen: true,
   disabled: false,

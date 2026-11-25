@@ -8,11 +8,7 @@
 'use strict';
 
 module.exports = {
-  extends: [
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:jsx-a11y/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'plugin:jsx-a11y/recommended'],
   plugins: ['react', 'react-hooks'],
   settings: {
     react: {

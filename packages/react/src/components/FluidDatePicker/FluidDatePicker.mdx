@@ -1,6 +1,5 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as FluidDatePickerStories from './FluidDatePicker.stories.js';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -25,52 +24,19 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-<Canvas
-  of={FluidDatePickerStories.Simple}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Simple),
-    },
-  ]}
-/>
+<Canvas of={FluidDatePickerStories.Simple} />
 
 ### Skeleton
 
-<Canvas
-  of={FluidDatePickerStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Skeleton),
-    },
-  ]}
-/>
+<Canvas of={FluidDatePickerStories.Skeleton} />
 
 ### Single
 
-<Canvas
-  of={FluidDatePickerStories.Single}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Single),
-    },
-  ]}
-/>
+<Canvas of={FluidDatePickerStories.Single} />
 
 ### Range With Calendar
 
-<Canvas
-  of={FluidDatePickerStories.RangeWithCalendar}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(FluidDatePickerStories.RangeWithCalendar),
-    },
-  ]}
-/>
+<Canvas of={FluidDatePickerStories.RangeWithCalendar} />
 
 ## Accessibility Considerations
 

@@ -1,4 +1,5 @@
-import { ArgTypes, Meta, Unstyled } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta, Unstyled } from '@storybook/addon-docs/blocks';
+import * as FluidSelectStories from './FluidSelect.stories';
 
 import FluidSelect from './';
 
@@ -22,6 +23,18 @@ import SelectItem from '../SelectItem';
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+<Canvas of={FluidSelectStories.Default} />
+
+### With AI Label
+
+<Canvas of={FluidSelectStories.withAILabel} />
+
+### Skeleton
+
+<Canvas of={FluidSelectStories.Skeleton} />
 
 ## Default state
 

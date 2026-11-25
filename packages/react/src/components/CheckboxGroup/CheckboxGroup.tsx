@@ -23,7 +23,7 @@ import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps'
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { Checkbox } from '../Checkbox';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 export interface CheckboxGroupProps {
   children?: ReactNode;
@@ -97,7 +97,7 @@ const CheckboxGroup = ({
 
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
     [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',
-    [`${prefix}--checkbox-group--readonly`]: readOnly,
+    [`${prefix}--checkbox-group--readonly`]: readOnly && !disabled,
     [`${prefix}--checkbox-group--invalid`]: normalizedProps.invalid,
     [`${prefix}--checkbox-group--warning`]: showWarning,
     [`${prefix}--checkbox-group--slug`]: slug,
@@ -110,7 +110,7 @@ const CheckboxGroup = ({
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini', kind: 'default' })
     : candidate;
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     legendRef,
     'The CheckboxGroup component `legendText` prop must have no interactive content'
   );
@@ -153,7 +153,7 @@ const CheckboxGroup = ({
       disabled={disabled}
       data-invalid={normalizedProps.invalid ? true : undefined}
       aria-labelledby={rest['aria-labelledby'] || legendId}
-      aria-readonly={readOnly}
+      aria-readonly={disabled ? undefined : readOnly}
       aria-disabled={disabled}
       aria-describedby={
         !normalizedProps.invalid && !normalizedProps.warn && helper

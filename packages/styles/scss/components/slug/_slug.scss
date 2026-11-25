@@ -6,7 +6,9 @@
 //
 
 @use '../../config' as *;
+@use '../../border-radius' as *;
 @use '../../colors' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -14,6 +16,8 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/custom-property';
+@use '../button/radius' as button;
+@use '../../utilities/high-contrast-mode' as *;
 @use '../toggletip';
 @use '../popover';
 
@@ -1093,13 +1097,17 @@ $sizes: (
     position: absolute;
     justify-content: flex-end;
     backdrop-filter: blur(85px);
-    background: rgba(0, 0, 0, 0.01);
+    background: rgb(0, 0, 0, 0.01);
     border-end-end-radius: convert.to-rem(8px);
     border-end-start-radius: convert.to-rem(8px);
     column-gap: 0;
     inline-size: 100%;
     inset-block-end: 0;
     inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--ai-label .#{$prefix}--ai-label-actions .#{$prefix}--btn:focus,
@@ -1111,9 +1119,21 @@ $sizes: (
   }
 
   .#{$prefix}--ai-label .#{$prefix}--ai-label-actions .#{$prefix}--btn--primary,
+  .#{$prefix}--ai-label .#{$prefix}--ai-label-actions > :last-child,
+  .#{$prefix}--slug .#{$prefix}--slug-actions .#{$prefix}--btn--primary,
+  .#{$prefix}--slug .#{$prefix}--slug-actions > :last-child {
+    @if enabled('enable-v12-release') {
+      @include button.radius($ee: calc(#{$border-radius-08} - 1px));
+    }
+  }
+
+  .#{$prefix}--ai-label .#{$prefix}--ai-label-actions .#{$prefix}--btn--primary,
   .#{$prefix}--slug .#{$prefix}--slug-actions .#{$prefix}--btn--primary {
     order: 1;
-    border-end-end-radius: convert.to-rem(7px);
+
+    @if not enabled('enable-v12-release') {
+      border-end-end-radius: convert.to-rem(7px);
+    }
   }
 
   // Revert styles
@@ -1131,5 +1151,15 @@ $sizes: (
   .#{$prefix}--ai-label--revert .#{$prefix}--btn--icon-only svg,
   .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only svg {
     margin: 0;
+  }
+
+  //High Contrast Mode
+  //The callout background is painted by the AI gradient, which is dropped in
+  //Windows HCM, leaving the callout transparent over the page content behind it
+  @include high-contrast-mode {
+    .#{$prefix}--ai-label .#{$prefix}--ai-label-content,
+    .#{$prefix}--slug .#{$prefix}--slug-content {
+      background-color: Canvas;
+    }
   }
 }

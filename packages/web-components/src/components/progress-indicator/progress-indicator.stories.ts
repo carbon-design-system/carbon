@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,13 +8,16 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from 'storybook/actions';
+import { expect, fn, userEvent } from 'storybook/test';
+import type CDSProgressIndicator from './progress-indicator';
+import type CDSProgressStep from './progress-step';
+import type CDSProgressIndicatorSkeleton from './progress-indicator-skeleton';
 import './index';
 
 const args = {
-  currentIndex: 0,
+  currentIndex: 1,
   vertical: false,
   spaceEqually: false,
-  iconLabel: '',
   secondaryLabel: 'Optional label',
 };
 
@@ -22,31 +25,51 @@ const argTypes = {
   currentIndex: {
     control: 'number',
     description: 'Optionally specify the current step array index.',
+    table: { defaultValue: { summary: 0 } },
   },
   vertical: {
     control: 'boolean',
     description:
       'Determines whether or not the Progress Indicator should be rendered vertically.',
+    table: { defaultValue: { summary: false } },
   },
   spaceEqually: {
     control: 'boolean',
     description:
       'Specify whether progress steps should be split equally in size (horizontal only).',
-  },
-  iconLabel: {
-    table: {
-      disable: true,
-    },
+    table: { defaultValue: { summary: false } },
   },
   secondaryLabel: {
     control: 'text',
     description: 'The secondary progress label.',
+    table: {
+      category: 'ProgressStep',
+      defaultValue: { summary: 'undefined' },
+    },
   },
 };
 
 export const Default = {
   args,
   argTypes,
+  play: async ({ canvasElement, args }) => {
+    const indicator = canvasElement.querySelector(
+      'cds-progress-indicator'
+    ) as CDSProgressIndicator;
+    await indicator.updateComplete;
+    const steps = Array.from(
+      indicator.querySelectorAll('cds-progress-step')
+    ) as CDSProgressStep[];
+    await Promise.all(steps.map((step) => step.updateComplete));
+    await expect(indicator.currentIndex).toBe(args.currentIndex);
+    await expect(indicator.vertical).toBe(args.vertical);
+    await expect(indicator.spaceEqually).toBe(args.spaceEqually);
+    await expect(steps[0].secondaryLabel).toBe(args.secondaryLabel);
+    for (const [index, step] of steps.entries()) {
+      await expect(step.complete).toBe(index < args.currentIndex);
+      await expect(step.current).toBe(index === args.currentIndex);
+    }
+  },
   render: ({ secondaryLabel, spaceEqually, vertical, currentIndex }) => html`
     <cds-progress-indicator
       ?vertical="${vertical}"
@@ -55,12 +78,10 @@ export const Default = {
       <cds-progress-step
         description="Step 1: Getting started with Carbon Design System"
         label="First step"
-        secondary-label="${ifDefined(secondaryLabel)}"
-        complete></cds-progress-step>
+        secondary-label="${ifDefined(secondaryLabel)}"></cds-progress-step>
       <cds-progress-step
         description="Step 2: Getting started with Carbon Design System"
-        label="Second step with tooltip"
-        current></cds-progress-step>
+        label="Second step with tooltip"></cds-progress-step>
       <cds-progress-step
         description="Step 3: Getting started with Carbon Design System"
         label="Third step with tooltip"></cds-progress-step>
@@ -78,11 +99,56 @@ export const Default = {
 };
 
 export const Interactive = {
-  args: {
-    onChange: action('Clicked'),
+  play: async ({ canvasElement, args }) => {
+    const indicator = canvasElement.querySelector(
+      'cds-progress-indicator'
+    ) as CDSProgressIndicator;
+    await indicator.updateComplete;
+    await expect(indicator.currentIndex).toBe(args.currentIndex);
+    await expect(indicator.vertical).toBe(args.vertical);
+    await expect(indicator.spaceEqually).toBe(args.spaceEqually);
+
+    const step = indicator.querySelector(
+      'cds-progress-step'
+    ) as CDSProgressStep;
+    await step.updateComplete;
+    args.onChange.mockClear();
+    const button = step.shadowRoot?.querySelector('[role="button"]');
+    if (!button) {
+      throw new Error('Expected an interactive progress step button');
+    }
+    await userEvent.click(button);
+    await expect(args.onChange).toHaveBeenCalledTimes(1);
+    await expect(args.onChange).toHaveBeenCalledWith(
+      expect.objectContaining({ detail: { index: 0 } })
+    );
   },
-  render: ({ onChange }) => html`
-    <cds-progress-indicator current-index="1" .onChange=${onChange}>
+  args: {
+    currentIndex: 1,
+    onChange: fn(action('onChange')),
+    spaceEqually: false,
+    vertical: false,
+  },
+  argTypes: {
+    currentIndex: {
+      ...argTypes.currentIndex,
+      control: { type: 'number', min: 0, max: 2 },
+    },
+    onChange: {
+      action: 'onChange',
+      description:
+        'Optional callback called if a ProgressStep is clicked on. Returns the index of the step.',
+      table: { defaultValue: { summary: 'undefined' } },
+    },
+    spaceEqually: argTypes.spaceEqually,
+    vertical: argTypes.vertical,
+  },
+  render: ({ currentIndex, onChange, spaceEqually, vertical }) => html`
+    <cds-progress-indicator
+      current-index="${currentIndex}"
+      .onChange=${onChange}
+      ?space-equally="${spaceEqually}"
+      ?vertical="${vertical}">
       <cds-progress-step
         label="Click me"
         description="Step 1: Register an onChange event"
@@ -99,8 +165,21 @@ export const Interactive = {
 };
 
 export const Skeleton = {
-  render: () => html`
-    <cds-progress-indicator-skeleton>
+  args: {
+    vertical: false,
+  },
+  argTypes: {
+    vertical: argTypes.vertical,
+  },
+  play: async ({ canvasElement, args }) => {
+    const indicator = canvasElement.querySelector(
+      'cds-progress-indicator-skeleton'
+    ) as CDSProgressIndicatorSkeleton;
+    await indicator.updateComplete;
+    await expect(indicator.vertical).toBe(args.vertical);
+  },
+  render: ({ vertical }) => html`
+    <cds-progress-indicator-skeleton ?vertical="${vertical}">
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>

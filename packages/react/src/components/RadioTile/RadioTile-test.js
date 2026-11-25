@@ -14,8 +14,8 @@ import { FeatureFlags } from '../FeatureFlags';
 
 describe('RadioTile', () => {
   describe('renders as expected - Component API', () => {
-    it('should not allow interactive content in children', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in children', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -23,8 +23,12 @@ describe('RadioTile', () => {
             Option 1 <button type="button">Help</button>
           </RadioTile>
         );
-      }).toThrow(
-        'The RadioTile component `children` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The RadioTile component `children` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();

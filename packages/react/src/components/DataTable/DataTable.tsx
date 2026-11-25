@@ -16,6 +16,7 @@ import {
 } from 'react';
 import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
+import { isSelectedRow } from './state/selection';
 import { getNextSortState, type SortRowFn } from './state/sorting';
 import type { DataTableSortState } from './state/sortStates';
 import { getCellId } from './tools/cells';
@@ -238,7 +239,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   };
 
   getCellProps: (options: {
-    cell: DataTableCell<ColTypes>;
+    cell: DataTableCell<ColTypes[number]>;
     headers?: string;
     [key: string]: unknown;
   }) => {
@@ -298,7 +299,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   ) => ReactElement;
   experimentalAutoAlign?: boolean;
   filterRows?: (options: {
-    cellsById: Record<string, DataTableCell<ColTypes>>;
+    cellsById: Record<string, DataTableCell<ColTypes[number]>>;
     getCellId: (rowId: string, header: string) => string;
     headers: DataTableHeader[];
     inputValue: string;
@@ -318,7 +319,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   render?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
   ) => ReactElement;
-  rows: Omit<DataTableRow<ColTypes>, 'cells'>[];
+  rows: (Omit<DataTableRow<ColTypes>, 'cells'> & RowType)[];
   size?: DataTableSize;
   sortRow?: SortRowFn;
   stickyHeader?: boolean;
@@ -327,12 +328,13 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 interface DataTableState<ColTypes extends any[]> {
-  cellsById: Record<string, DataTableCell<ColTypes>>;
+  cellsById: Record<string, DataTableCell<ColTypes[number]>>;
   filterInputValue: string | null;
   initialRowOrder: string[];
   isExpandedAll: boolean;
   rowIds: string[];
   rowsById: Record<string, DataTableRow<ColTypes>>;
+  headers: DataTableHeader[];
   shouldShowBatchActions: boolean;
   sortDirection: DataTableSortState;
   sortHeaderKey: string | null;
@@ -378,22 +380,30 @@ export const DataTable = <RowType, ColTypes extends any[]>(
 
   useEffect(() => {
     const nextRowIds = rows.map((row) => row.id);
-    const nextHeaders = headers.map((header) => header.key);
     const hasRowIdsChanged = !isEqual(nextRowIds, state.rowIds);
-    const currentHeaders = Array.from(
-      new Set(Object.keys(state.cellsById).map((id) => id.split(':')[1]))
-    );
-    const hasHeadersChanged = !isEqual(nextHeaders, currentHeaders);
+    const hasHeadersChanged = !isEqual(headers, state.headers);
     const currentRows = state.rowIds.map((id) => {
       const row = state.rowsById[id];
-      return {
-        id: row.id,
-        disabled: row.disabled,
-        isExpanded: row.isExpanded,
-        isSelected: row.isSelected,
-      };
+      return headers.reduce(
+        (acc, { key }) => ({
+          ...acc,
+          [key]: state.cellsById[getCellId(row.id, key)]?.value,
+        }),
+        {
+          id: row.id,
+          disabled: row.disabled,
+          isExpanded: row.isExpanded,
+          isSelected: row.isSelected,
+        }
+      );
     });
-    const hasRowsChanged = !isEqual(rows, currentRows);
+    const nextRows = rows.map((row) => ({
+      ...row,
+      disabled: row.disabled ?? false,
+      isExpanded: row.isExpanded ?? false,
+      isSelected: row.isSelected ?? false,
+    }));
+    const hasRowsChanged = !isEqual(nextRows, currentRows);
 
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
       setState((prev) => getDerivedStateFromProps(props, prev));
@@ -642,18 +652,16 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   /**
    * Selected row IDs, excluding disabled rows.
    */
-  const selectedRows = state.rowIds.filter((id) => {
-    const row = state.rowsById[id];
-
-    return row.isSelected && !row.disabled;
-  });
+  const selectedRows = state.rowIds.filter((id) =>
+    isSelectedRow(state.rowsById[id])
+  );
 
   const filteredRowIds =
     typeof state.filterInputValue === 'string'
       ? filterRows({
           cellsById: state.cellsById,
           getCellId,
-          headers,
+          headers: state.headers,
           inputValue: state.filterInputValue,
           rowIds: state.rowIds,
         })
@@ -716,9 +724,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const handleSelectAll = () => {
     setState((prev) => {
       const { rowsById } = prev;
-      const isSelected = !Object.values(rowsById).filter(
-        (row) => row.isSelected && !row.disabled
-      ).length;
+      const isSelected = !Object.values(rowsById).filter(isSelectedRow).length;
 
       return {
         ...prev,
@@ -785,17 +791,18 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const handleOnExpandRow = (rowId: string) => () => {
     setState((prev) => {
       const row = prev.rowsById[rowId];
-      const { isExpandedAll } = prev;
+      const rowsById = {
+        ...prev.rowsById,
+        [rowId]: {
+          ...row,
+          isExpanded: !row.isExpanded,
+        },
+      };
+
       return {
         ...prev,
-        isExpandedAll: row.isExpanded ? false : isExpandedAll,
-        rowsById: {
-          ...prev.rowsById,
-          [rowId]: {
-            ...row,
-            isExpanded: !row.isExpanded,
-          },
-        },
+        isExpandedAll: prev.rowIds.every((id) => rowsById[id].isExpanded),
+        rowsById,
       };
     });
   };
@@ -851,7 +858,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const renderProps: RenderProps = {
     // Data derived from state
     rows: denormalize(filteredRowIds, state.rowsById, state.cellsById),
-    headers: headers,
+    headers: state.headers,
     selectedRows: denormalize(selectedRows, state.rowsById, state.cellsById),
 
     // Prop accessors/getters

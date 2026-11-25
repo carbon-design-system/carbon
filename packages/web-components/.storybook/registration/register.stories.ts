@@ -16,7 +16,7 @@ import CDSButton from '../../src/components/button/button';
 import { defineCustomElement } from '../../src/globals/register';
 import hostStyles from './register-story.scss?lit';
 
-// default barrel registraion
+// default barrel registration
 import '../../src/components/button/index';
 
 // The same component under a second tag. Declaring the subclass lets it carry

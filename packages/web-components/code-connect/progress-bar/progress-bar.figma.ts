@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=9506-402924&t=j280IIQF1o3iLkV2-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/progress-bar/progress-bar.ts
+// component=cds-progress-bar
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,87 +9,50 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import { renderStringAttribute } from '../template-helpers';
 
-const sharedProgressBarProps = {
-  label: figma.string('Label text'),
-  value: figma.enum('Progress', {
-    '0%': 0,
-    '25%': 25,
-    '50%': 50,
-    '75%': 75,
-  }),
-  type: figma.enum('Alignment', {
-    Inline: 'inline',
-    Indent: 'indented',
-  }),
-  status: figma.enum('Status', {
-    Active: 'active',
-    Success: 'finished',
-    Error: 'error',
-  }),
-  size: figma.enum('Size', {
-    Big: 'big',
-    Small: 'small',
-  }),
-  helperText: figma.string('Helper text'),
-  helperTextError: figma.string('Error text'),
-  helperTextSuccess: figma.string('Success text'),
+const instance = figma.selectedInstance;
+const label = instance.getString('Label text');
+const value = instance.getEnum('Progress', {
+  '0%': '0',
+  '25%': '25',
+  '50%': '50',
+  '75%': '75',
+});
+const type = instance.getEnum('Alignment', {
+  Inline: 'inline',
+  Indent: 'indented',
+});
+const status = instance.getEnum('Status', {
+  Active: 'active',
+  Success: 'finished',
+  Error: 'error',
+});
+const size = instance.getEnum('Size', {
+  Big: 'big',
+  Small: 'small',
+});
+const helperText = instance.getEnum('Status', {
+  Active: instance.getString('Helper text'),
+  Error: instance.getString('Error text'),
+  Success: instance.getString('Success text'),
+});
+
+export default {
+  id: 'cds-progress-bar',
+  imports: [
+    "import '@carbon/web-components/es/components/progress-bar/progress-bar.js'",
+  ],
+  example: figma.code`<cds-progress-bar${renderStringAttribute(
+    'helper-text',
+    helperText
+  )}${renderStringAttribute('label', label)}${renderStringAttribute(
+    'size',
+    size
+  )}${renderStringAttribute('status', status)}${renderStringAttribute(
+    'type',
+    type
+  )}${renderStringAttribute('value', value)}></cds-progress-bar>`,
+  metadata: { nestable: true },
 };
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=9506-402924&t=j280IIQF1o3iLkV2-4',
-  {
-    variant: { Status: 'Active' },
-    props: sharedProgressBarProps,
-    example: (props) =>
-      html`<cds-progress-bar
-        helper-text=${props.helperText}
-        label=${props.label}
-        size=${props.size}
-        status=${props.status}
-        type=${props.type}
-        value=${props.value}></cds-progress-bar>`,
-    imports: [
-      "import '@carbon/web-components/es/components/progress-bar/index.js'",
-    ],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=9506-402924&t=j280IIQF1o3iLkV2-4',
-  {
-    variant: { Status: 'Error' },
-    props: sharedProgressBarProps,
-    example: (props) =>
-      html`<cds-progress-bar
-        helper-text=${props.helperTextError}
-        label=${props.label}
-        size=${props.size}
-        status=${props.status}
-        type=${props.type}
-        value=${props.value}></cds-progress-bar>`,
-    imports: [
-      "import '@carbon/web-components/es/components/progress-bar/index.js'",
-    ],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=9506-402924&t=j280IIQF1o3iLkV2-4',
-  {
-    variant: { Status: 'Success' },
-    props: sharedProgressBarProps,
-    example: (props) =>
-      html`<cds-progress-bar
-        helper-text=${props.helperTextSuccess}
-        label=${props.label}
-        size=${props.size}
-        status=${props.status}
-        type=${props.type}
-        value=${props.value}></cds-progress-bar>`,
-    imports: [
-      "import '@carbon/web-components/es/components/progress-bar/index.js'",
-    ],
-  }
-);

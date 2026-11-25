@@ -82,6 +82,14 @@ export class CDSModalBase extends HostListenerMixin(LitElement) {
   preventClose = false;
 
   /**
+   * When true, suppresses the modal's built-in focus-on-open logic only.
+   * Focus-return on close is always handled by the modal (via _launcher) regardless
+   * of this flag, so the consumer does not need to wire up a launcher ref manually.
+   */
+  @property({ type: Boolean, attribute: 'managed-focus' })
+  managedFocus = false;
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange() {

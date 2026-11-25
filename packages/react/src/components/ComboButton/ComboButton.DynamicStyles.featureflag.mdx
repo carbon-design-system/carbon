@@ -1,6 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as ComboButtonFeatureflagStories from './ComboButton.featureflag.stories.js';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta title="Components/ComboButton/Feature Flag" name="Flag details" />
 
@@ -36,13 +35,4 @@ https://github.com/carbon-design-system/carbon/issues/18714.
 </FeatureFlags>
 ```
 
-<Canvas
-  of={ComboButtonFeatureflagStories.FloatingStyles}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(ComboButtonFeatureflagStories.FloatingStyles),
-    },
-  ]}
-/>
+<Canvas of={ComboButtonFeatureflagStories.FloatingStyles} />

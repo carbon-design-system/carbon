@@ -1,0 +1,28 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/config';
+
+.app {
+  margin: spacing.$spacing-04;
+  .#{config.$prefix}--inline-loading {
+    min-block-size: unset;
+  }
+}
+
+.notification {
+  position: absolute;
+  inset-block-start: spacing.$spacing-04;
+  inset-inline-end: spacing.$spacing-04;
+}
+
+.no-bullets {
+  margin: 0;
+  list-style-type: none;
+  padding-inline-start: spacing.$spacing-07;
+}

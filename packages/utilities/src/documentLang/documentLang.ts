@@ -8,7 +8,7 @@
 // Guard against hydration issues/SSR
 const isBrowser = typeof document !== 'undefined';
 
-// Used to cache the lang value and prevent unecessary updates
+// Used to cache the lang value and prevent unnecessary updates
 let currentLang = isBrowser ? document.documentElement.lang : '';
 let updateScheduled = false;
 

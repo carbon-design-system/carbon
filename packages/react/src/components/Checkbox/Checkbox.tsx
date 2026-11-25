@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { cloneElement, useRef, type ReactNode } from 'react';
+import React, { cloneElement, forwardRef, useRef, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import { deprecate } from '../../prop-types/deprecate';
@@ -18,7 +18,7 @@ import { noopFn } from '../../internal/noopFn';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
@@ -110,7 +110,7 @@ export interface CheckboxProps
   onClick?: (evt: React.MouseEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox = React.forwardRef(
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       className,
@@ -131,7 +131,7 @@ const Checkbox = React.forwardRef(
       disabled,
       slug,
       ...other
-    }: CheckboxProps,
+    },
     ref
   ) => {
     const prefix = usePrefix();
@@ -168,7 +168,7 @@ const Checkbox = React.forwardRef(
       `${prefix}--checkbox-wrapper`,
       className,
       {
-        [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
+        [`${prefix}--checkbox-wrapper--readonly`]: readOnly && !disabled,
         [`${prefix}--checkbox-wrapper--invalid`]: normalizedProps.invalid,
         [`${prefix}--checkbox-wrapper--warning`]: showWarning,
         [`${prefix}--checkbox-wrapper--slug`]: slug,
@@ -186,7 +186,7 @@ const Checkbox = React.forwardRef(
           size: candidate.props.kind === 'inline' ? 'md' : 'mini',
         })
       : candidate;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The Checkbox component `labelText` prop must have no interactive content'
     );
@@ -217,7 +217,7 @@ const Checkbox = React.forwardRef(
           }}
           // readonly attribute not applicable to type="checkbox"
           // see - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
-          aria-readonly={readOnly}
+          aria-readonly={disabled ? undefined : readOnly}
           onClick={(evt) => {
             if (readOnly) {
               // prevent default stops the checkbox being updated

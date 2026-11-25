@@ -18,7 +18,6 @@ import cx from 'classnames';
 import { TearsheetContext } from './context';
 import { usePrefix } from '../../internal/usePrefix';
 import { SidePanel } from '../SidePanel';
-import { Layer } from '../Layer';
 import { useCollapsible } from '../../internal/useCollapsible';
 /**
  * ----------------
@@ -103,15 +102,14 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
     });
 
     return (
-      <Layer
-        withBackground
+      <div
         className={cx(`${blockClass}__main-content`, className, {
           [`${blockClass}__flush`]: isFlush,
         })}
         ref={mainContentRef}
         {...rest}>
         {children}
-      </Layer>
+      </div>
     );
   }
 );

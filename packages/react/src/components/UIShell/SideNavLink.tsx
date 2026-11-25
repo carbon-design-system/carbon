@@ -42,7 +42,8 @@ export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
   className?: string;
 
   /**
-   * Specify whether the link is the current page
+   * Specify whether the link is the current page. When `true`, the link also
+   * receives `aria-current="page"` unless `aria-current` is passed explicitly.
    */
   isActive?: boolean;
 
@@ -78,7 +79,7 @@ export interface SideNavLinkComponent {
 // First define a non-generic base component to work with forwardRef
 type SideNavLinkPropsWithoutRef = Omit<SideNavLinkProps<'a'>, 'ref'>;
 
-const frFn = forwardRef<HTMLAnchorElement, SideNavLinkPropsWithoutRef>;
+const frFn = forwardRef<HTMLElement, SideNavLinkPropsWithoutRef>;
 
 const SideNavLink = frFn((props, ref) => {
   const {
@@ -89,6 +90,7 @@ const SideNavLink = frFn((props, ref) => {
     isSideNavExpanded,
     large = false,
     tabIndex,
+    'aria-current': ariaCurrent,
     ...rest
   } = props;
   const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
@@ -97,6 +99,7 @@ const SideNavLink = frFn((props, ref) => {
     isSideNavExpanded ?? contextIsSideNavExpanded;
 
   const prefix = usePrefix();
+  const linkProps = rest as LinkProps<ElementType>;
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
     [`${prefix}--side-nav__link--current`]: isActive,
@@ -106,7 +109,10 @@ const SideNavLink = frFn((props, ref) => {
   return (
     <SideNavItem large={large}>
       <Link
-        {...(rest as LinkProps<'a'>)}
+        {...linkProps}
+        // `isActive` marks the current page visually; expose the same state to
+        // assistive technology unless the consumer set `aria-current` themselves.
+        aria-current={ariaCurrent ?? (isActive ? 'page' : undefined)}
         className={className}
         ref={ref}
         tabIndex={
@@ -143,7 +149,8 @@ SideNavLink.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether the link is the current page
+   * Specify whether the link is the current page. When `true`, the link also
+   * receives `aria-current="page"` unless `aria-current` is passed explicitly.
    */
   isActive: PropTypes.bool,
 
@@ -170,9 +177,10 @@ SideNavLink.propTypes = {
   tabIndex: PropTypes.number,
 };
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
-export const createCustomSideNavLink = (element) => (props) => {
-  return <SideNavLink element={element} {...props} />;
+export const createCustomSideNavLink = (element) => {
+  return function CustomSideNavLink(props) {
+    return <SideNavLink element={element} {...props} />;
+  };
 };
 
 export default SideNavLink;

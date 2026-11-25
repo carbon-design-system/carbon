@@ -73,8 +73,8 @@ describe('PasswordInput', () => {
       );
     });
 
-    it('should not allow interactive content in labelText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -87,8 +87,12 @@ describe('PasswordInput', () => {
             }
           />
         );
-      }).toThrow(
-        'The PasswordInput component `labelText` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The PasswordInput component `labelText` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();
@@ -506,6 +510,22 @@ describe('PasswordInput', () => {
       const inputElement = getByPlaceholderText('Enter password');
       userEvent.type(inputElement, 'newpassword');
       expect(inputElement.value).toBe('');
+    });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          disabled={true}
+          readOnly={true}
+        />
+      );
+
+      const input = screen.getByLabelText('PasswordInput label');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
     });
   });
 });

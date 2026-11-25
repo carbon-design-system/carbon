@@ -1,6 +1,5 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as ComboButtonStories from './ComboButton.stories.js';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -37,39 +36,15 @@ disclosed list next to the primary action. These additional actions must be
 </ComboButton>
 ```
 
-<Canvas
-  of={ComboButtonStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboButtonStories.Default),
-    },
-  ]}
-/>
+<Canvas of={ComboButtonStories.Default} />
 
 ## With Icons
 
-<Canvas
-  of={ComboButtonStories.WithIcons}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboButtonStories.WithIcons),
-    },
-  ]}
-/>
+<Canvas of={ComboButtonStories.WithIcons} />
 
 ## With Danger
 
-<Canvas
-  of={ComboButtonStories.WithDanger}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboButtonStories.WithDanger),
-    },
-  ]}
-/>
+<Canvas of={ComboButtonStories.WithDanger} />
 
 ## Menu Alignment (experimental)
 
@@ -86,16 +61,7 @@ understand the `menuAlignment` prop.
 
 ## Experimental Auto Align
 
-<Canvas
-  of={ComboButtonStories.ExperimentalAutoAlign}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(ComboButtonStories.ExperimentalAutoAlign),
-    },
-  ]}
-/>
+<Canvas of={ComboButtonStories.ExperimentalAutoAlign} />
 
 ## Component API
 

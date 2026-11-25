@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,6 +17,11 @@ $css--plex: true !default;
   @include emit-layout-tokens();
 }
 
-:host(#{$prefix}-icon-button[kind='ghost']) ::slotted([slot='icon']) {
+:host(#{$prefix}-icon-button[kind='ghost']:not([disabled]))
+  ::slotted([slot='icon']) {
   color: $icon-primary;
+}
+
+:host(#{$prefix}-icon-button[kind='ghost'][disabled]) ::slotted([slot='icon']) {
+  color: $icon-disabled;
 }

@@ -1,6 +1,5 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as PopoverStories from './Popover.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -58,15 +57,7 @@ function CustomComponent() {
 }
 ```
 
-<Canvas
-  of={PopoverStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PopoverStories.Default),
-    },
-  ]}
-/>
+<Canvas of={PopoverStories.Default} />
 
 ## Visibility
 
@@ -81,15 +72,7 @@ clicks outside of a popover will close the popover. This is achieved by using
 state in conjunction with the callback prop to set `open` to false when
 `onRequestClose` is called.
 
-<Canvas
-  of={PopoverStories.TabTip}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PopoverStories.TabTip),
-    },
-  ]}
-/>
+<Canvas of={PopoverStories.TabTip} />
 
 ## Alignment
 
@@ -110,38 +93,11 @@ or right edges of the popover.
 If you are using `align="left"` or `align="right"`, you can use `top` or
 `bottom` to control this alignment.
 
-<Canvas
-  of={PopoverStories.ExperimentalAutoAlign}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlign),
-    },
-  ]}
-/>
+<Canvas of={PopoverStories.ExperimentalAutoAlign} />
 
-<Canvas
-  of={PopoverStories.ExperimentalAutoAlignBoundary}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlignBoundary),
-    },
-  ]}
-/>
+<Canvas of={PopoverStories.ExperimentalAutoAlignBoundary} />
 
-<Canvas
-  of={PopoverStories.TabTipExperimentalAutoAlign}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(PopoverStories.TabTipExperimentalAutoAlign),
-    },
-  ]}
-/>
+<Canvas of={PopoverStories.TabTipExperimentalAutoAlign} />
 
 ## Appearance
 

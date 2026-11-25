@@ -6,7 +6,10 @@
 //
 
 @use '../button';
+@use '../button/radius' as button-radius;
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -335,6 +338,10 @@
   .#{$prefix}--content-switcher--icon-only {
     justify-content: flex-start;
     inline-size: fit-content;
+
+    @if enabled('enable-v12-release') {
+      @include button-radius.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--content-switcher--icon-only .#{$prefix}--content-switcher-btn {

@@ -18,8 +18,9 @@ import React, {
   type ForwardedRef,
   type HTMLAttributes,
   type MouseEvent,
+  type ReactElement,
   type ReactNode,
-  type Ref,
+  type RefAttributes,
 } from 'react';
 import {
   useSelect,
@@ -63,7 +64,8 @@ import {
   isComponentElement,
   isItemDisabled,
 } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const { ItemMouseMove, MenuMouseLeave, ToggleButtonBlur, FunctionCloseMenu } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -289,7 +291,7 @@ function stateReducer(state, actionAndChanges) {
 const Dropdown = React.forwardRef(
   <ItemType,>(
     {
-      autoAlign = false,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       disabled = false,
@@ -323,6 +325,7 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const autoAlign = useAutoAlign(autoAlignProp);
     const enableFloatingStyles = useFeatureFlag(
       'enable-v12-dynamic-floating-styles'
     );
@@ -340,14 +343,15 @@ const Dropdown = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
+              autoAlign && flip(),
               floatingSize({
-                apply({ rects, elements }) {
+                apply({ availableHeight, rects, elements }) {
                   Object.assign(elements.floating.style, {
                     width: `${rects.reference.width}px`,
+                    maxHeight: `${availableHeight}px`,
                   });
                 },
               }),
-              autoAlign && flip(),
               autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
@@ -371,8 +375,13 @@ const Dropdown = React.forwardRef(
           }
         });
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [floatingStyles, autoAlign, refs.floating]);
+    }, [
+      enableFloatingStyles,
+      floatingStyles,
+      middlewareData,
+      autoAlign,
+      refs.floating,
+    ]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -467,7 +476,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--disabled`]: normalizedProps.disabled,
       [`${prefix}--dropdown--light`]: light,
-      [`${prefix}--dropdown--readonly`]: readOnly,
+      [`${prefix}--dropdown--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--autoalign`]: autoAlign,
@@ -475,6 +484,7 @@ const Dropdown = React.forwardRef(
 
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
@@ -618,11 +628,11 @@ const Dropdown = React.forwardRef(
     const labelProps = isValidElement(titleText)
       ? { id: allLabelProps.id }
       : allLabelProps;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       titleRef,
       'The Dropdown component `titleText` prop must have no interactive content'
     );
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The Dropdown component `label` prop must have no interactive content'
     );
@@ -743,8 +753,8 @@ const Dropdown = React.forwardRef(
 // See https://stackoverflow.com/questions/58469229/react-with-typescript-generics-while-using-react-forwardref.
 interface DropdownComponent {
   <ItemType>(
-    props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
-  ): React.ReactElement | null;
+    props: DropdownProps<ItemType> & RefAttributes<HTMLButtonElement>
+  ): ReactElement | null;
 }
 
 Dropdown.displayName = 'Dropdown';

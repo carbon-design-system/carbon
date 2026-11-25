@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -82,14 +82,17 @@ class CDSChatButton extends LitElement {
       CHAT_BUTTON_SIZE.LARGE,
     ];
 
+    // derive kind/size without mutating the public props, so turning
+    // `isQuickAction` off restores user-defined values
+    let kind = this.kind;
+    let size = this.size;
+
     if (this.isQuickAction) {
-      this.kind = CHAT_BUTTON_KIND.GHOST;
-      this.size = CHAT_BUTTON_SIZE.SMALL;
-    } else {
+      kind = CHAT_BUTTON_KIND.GHOST;
+      size = CHAT_BUTTON_SIZE.SMALL;
+    } else if (!allowedSizes.includes(size)) {
       // Do not allow size larger than `lg`
-      this.size = allowedSizes.includes(this.size)
-        ? this.size
-        : CHAT_BUTTON_SIZE.LARGE;
+      size = CHAT_BUTTON_SIZE.LARGE;
     }
 
     let classes = `${prefix}--chat-btn`;
@@ -102,8 +105,8 @@ class CDSChatButton extends LitElement {
     return html`
       <cds-button
         button-class-name="${classes}"
-        size="${this.size}"
-        kind="${this.kind}"
+        size="${size}"
+        kind="${kind}"
         ?disabled="${this.disabled}">
         <slot></slot
         ><slot

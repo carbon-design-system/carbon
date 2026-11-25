@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { GridSettings } from './GridContext';
 import { GridComponent, GridBaseProps } from './GridTypes';
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const FlexGrid = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
@@ -52,6 +51,8 @@ const FlexGrid = React.forwardRef<
     );
   }
 );
+
+FlexGrid.displayName = 'FlexGrid';
 
 FlexGrid.propTypes = {
   /**

@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './fluid-time-picker-story.scss?inline';
+
 import React from 'react';
 import FluidTimePicker from '../FluidTimePicker';
 import FluidTimePickerSelect from '../FluidTimePickerSelect';
@@ -12,13 +14,21 @@ import FluidTimePickerSkeleton from './FluidTimePicker.Skeleton';
 import SelectItem from '../SelectItem';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
-import './fluid-time-picker-story.scss';
 import mdx from './FluidTimePicker.mdx';
 
 export default {
   title: 'Components/Fluid Components/FluidTimePicker',
   component: FluidTimePicker,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -29,34 +39,36 @@ export default {
   },
 };
 
-const ClockToggletip = ({ className }) => (
-  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
-  <span className={`fluid-time-picker-story__toggletip ${className}`}>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </span>
-);
+export const Skeleton = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <FluidTimePickerSkeleton />
+      <br />
+      <br />
+      <FluidTimePickerSkeleton isOnlyTwo />
+    </div>
+  );
+};
 
-export const Skeleton = () => (
-  <div style={{ width: 300 }}>
-    <FluidTimePickerSkeleton />
-    <br />
-    <br />
-    <FluidTimePickerSkeleton isOnlyTwo />
-  </div>
-);
-
-export const Default = (timePickerArgs) => {
+export const Default = (args) => {
+  function ClockToggletip({ className }) {
+    return (
+      <span className={`fluid-time-picker-story__toggletip ${className}`}>
+        <Toggletip align="top-left">
+          <ToggletipButton label="Show information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Additional field information here.</p>
+          </ToggletipContent>
+        </Toggletip>
+      </span>
+    );
+  }
   return (
     <div style={{ width: '350px' }}>
       <div className="fluid-time-picker-story">
-        <FluidTimePicker id="time-picker-1" {...timePickerArgs}>
+        <FluidTimePicker id="time-picker-1" {...args}>
           <FluidTimePickerSelect id="select-1" labelText="Clock">
             <SelectItem value="am" text="AM" />
             <SelectItem value="pm" text="PM" />
@@ -77,7 +89,7 @@ export const Default = (timePickerArgs) => {
           id="time-picker-2"
           labelText="Time"
           placeholder="hh:mm"
-          {...timePickerArgs}>
+          {...args}>
           <FluidTimePickerSelect id="select-3" labelText="Clock">
             <SelectItem value="am" text="AM" />
             <SelectItem value="pm" text="PM" />

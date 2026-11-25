@@ -1,7 +1,6 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as PaginationNavStories from './PaginationNav.stories';
 import PaginationNav from '../PaginationNav';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -21,15 +20,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-<Canvas
-  of={PaginationNavStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PaginationNavStories.Default),
-    },
-  ]}
-/>
+<Canvas of={PaginationNavStories.Default} />
 
 ## Component API
 

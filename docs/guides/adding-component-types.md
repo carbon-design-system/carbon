@@ -130,7 +130,7 @@ the repository. There is an issue tracking curring status of this effort,
     e.g. `Closes #12513`
 - Ask questions if you get stuck!
   - The team is available on slack
-    [`#carbon-wg-typescript`](https://ibm-studios.slack.com/archives/C03C8VASVED),
+    [`#carbon-design-system`](https://ibm.enterprise.slack.com/archives/C0M053VPT),
     [discord](https://discord.gg/J7JEUEkTRX), or on
     [the issue itself](https://github.com/carbon-design-system/carbon/issues/12513).
 

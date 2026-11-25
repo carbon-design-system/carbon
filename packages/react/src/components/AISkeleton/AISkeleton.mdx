@@ -1,8 +1,7 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as AISkeletonStories from './AISkeletonIcon.stories';
 import * as AISkeletonPlaceholderStories from './AISkeletonPlaceholder.stories';
 import * as AISkeletonTextStories from './AISkeletonText.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -27,43 +26,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 #### AI Skeleton Icon
 
-<Canvas
-  of={AISkeletonStories._AISkeletonIcon}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AISkeletonStories._AISkeletonIcon),
-    },
-  ]}
-/>
+<Canvas of={AISkeletonStories._AISkeletonIcon} />
 
 #### AI Skeleton Placeholder
 
-<Canvas
-  of={AISkeletonPlaceholderStories._AISkeletonPlaceholder}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(
-          AISkeletonPlaceholderStories._AISkeletonPlaceholder
-        ),
-    },
-  ]}
-/>
+<Canvas of={AISkeletonPlaceholderStories._AISkeletonPlaceholder} />
 
 #### AI Skeleton Text
 
-<Canvas
-  of={AISkeletonTextStories._AISkeletonText}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(AISkeletonTextStories._AISkeletonText),
-    },
-  ]}
-/>
+<Canvas of={AISkeletonTextStories._AISkeletonText} />
 
 ## Component API
 

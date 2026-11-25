@@ -17,8 +17,8 @@ const prefix = 'cds';
 
 describe('Select', () => {
   describe('renders as expected - Component API', () => {
-    it('should not allow interactive content in labelText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -31,8 +31,12 @@ describe('Select', () => {
             }
           />
         );
-      }).toThrow(
-        'The Select component `labelText` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Select component `labelText` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();
@@ -589,21 +593,6 @@ describe('Select', () => {
       await expect(container).toHaveNoAxeViolations();
     });
 
-    it('should have no Accessibility Checker violations', async () => {
-      const { container } = render(
-        <main>
-          <Select
-            id="select"
-            labelText="Select an option"
-            aria-label="Select an option">
-            <SelectItem value="option-1" text="Option 1" />
-            <SelectItem value="option-2" text="Option 2" />
-          </Select>
-        </main>
-      );
-      await expect(container).toHaveNoACViolations('Select');
-    });
-
     it('should not set aria-invalid if disabled', () => {
       render(<Select id="select" labelText="Select" disabled invalid />);
 
@@ -614,6 +603,20 @@ describe('Select', () => {
       render(<Select id="select" labelText="Select" readOnly invalid />);
 
       expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
+    });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <Select id="select" labelText="Select" disabled={true} readOnly={true}>
+          <option value="option-1">Option 1</option>
+        </Select>
+      );
+
+      const select = screen.getByRole('combobox');
+      expect(select).toHaveAttribute('disabled', '');
+      expect(select.disabled).toBe(true);
+      // Select elements don't have native readOnly, check aria-readonly is not set when disabled
+      expect(select).not.toHaveAttribute('aria-readonly');
     });
   });
 });

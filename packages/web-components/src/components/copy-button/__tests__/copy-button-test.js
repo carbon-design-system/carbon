@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import '@carbon/web-components/es/components/copy-button/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 
 describe('CopyButton', () => {
@@ -46,6 +47,53 @@ describe('Button props', () => {
       ?.shadowRoot?.querySelector('button');
     expect(button).to.have.attribute('disabled');
     await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should set kind on the underlying cds-copy element', async () => {
+    const el = await fixture(html`
+      <cds-copy-button kind="primary" icon-description="Copy to clipboard">
+      </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('kind', 'primary');
+
+    const button = copy?.shadowRoot?.querySelector('button');
+    expect(button).to.have.class('cds--btn--primary');
+    await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should set size on the underlying cds-copy element', async () => {
+    const el = await fixture(html`
+      <cds-copy-button size="sm" icon-description="Copy to clipboard">
+      </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('size', 'sm');
+
+    const button = copy?.shadowRoot?.querySelector('button');
+    expect(button).to.have.class('cds--btn--sm');
+    await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should not set kind by default', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
+    `);
+
+    expect(el).to.not.have.attribute('kind');
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('kind', '');
+  });
+
+  it('should default size to lg', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('size', 'lg');
   });
 
   it('should call the click handler', async () => {
@@ -183,5 +231,229 @@ describe('Feedback', () => {
       }
     );
     await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should update button aria-label to feedback message when clicked and revert after timeout', async () => {
+    const el = await fixture(html`
+      <cds-copy-button
+        icon-description="Copy to clipboard"
+        feedback="Copied!"
+        feedback-timeout="200">
+      </cds-copy-button>
+    `);
+
+    const copyComponent = el.shadowRoot?.querySelector('cds-copy');
+    await el.updateComplete;
+    await copyComponent?.updateComplete;
+
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy to clipboard');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal('Copied!');
+
+    await waitUntil(
+      () => button?.getAttribute('aria-label') === 'Copy to clipboard',
+      'Expected aria-label to revert to icon description',
+      { timeout: 3000 }
+    );
+  });
+
+  it('should support custom feedback in button aria-label', async () => {
+    const customFeedback = 'Custom feedback message';
+    const el = await fixture(html`
+      <cds-copy-button
+        icon-description="Copy code"
+        feedback="${customFeedback}"
+        feedback-timeout="200">
+      </cds-copy-button>
+    `);
+
+    const copyComponent = el.shadowRoot?.querySelector('cds-copy');
+    await el.updateComplete;
+    await copyComponent?.updateComplete;
+
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy code');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal(customFeedback);
+
+    await waitUntil(
+      () => button?.getAttribute('aria-label') === 'Copy code',
+      'Expected aria-label to revert to custom icon description',
+      { timeout: 3000 }
+    );
+  });
+
+  it('should continue to handle feedback when disconnected and reconnected to DOM', async () => {
+    const container = await fixture(html`
+      <div>
+        <cds-copy-button
+          icon-description="Copy to clipboard"
+          feedback="Copied!"
+          feedback-timeout="200">
+        </cds-copy-button>
+      </div>
+    `);
+
+    const el = container.querySelector('cds-copy-button');
+    const copyComponent = el?.shadowRoot?.querySelector('cds-copy');
+    await el?.updateComplete;
+    await copyComponent?.updateComplete;
+
+    // Disconnect and reconnect
+    el?.remove();
+    container.appendChild(el);
+    await el?.updateComplete;
+    await copyComponent?.updateComplete;
+
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy to clipboard');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal('Copied!');
+
+    await waitUntil(
+      () => button?.getAttribute('aria-label') === 'Copy to clipboard',
+      'Expected aria-label to revert after timeout after reconnect',
+      { timeout: 3000 }
+    );
+  });
+
+  it('should update button aria-label when icon-description changes after render', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
+    `);
+
+    const copyComponent = el.shadowRoot?.querySelector('cds-copy');
+    await copyComponent?.updateComplete;
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy to clipboard');
+
+    el.iconDescription = 'Copy code';
+    await el.updateComplete;
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal('Copy code');
+  });
+
+  it('should clean up animation classes on animationend after first connection', async () => {
+    const el = await fixture(html`
+      <cds-copy-button
+        icon-description="Copy to clipboard"
+        feedback-timeout="100">
+      </cds-copy-button>
+    `);
+
+    const copyComponent = el.shadowRoot?.querySelector('cds-copy');
+    await copyComponent?.updateComplete;
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+    expect(button?.classList.contains('cds--copy-btn--animating')).to.be.true;
+
+    await waitUntil(
+      () => button?.classList.contains('cds--copy-btn--fade-out'),
+      'Expected fade-out class after feedback timeout',
+      { timeout: 3000 }
+    );
+
+    button?.dispatchEvent(new Event('animationend', { bubbles: true }));
+
+    expect(button?.classList.contains('cds--copy-btn--animating')).to.be.false;
+    expect(button?.classList.contains('cds--copy-btn--fade-out')).to.be.false;
+  });
+});
+
+describe('autoAlign', () => {
+  it('should default the tooltip autoalign to false', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"></cds-copy-button>
+    `);
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(copy.autoalign).to.be.false;
+  });
+
+  it('should default the tooltip autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-copy-button icon-description="Copy to clipboard"></cds-copy-button>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-copy-button');
+
+    await el.updateComplete;
+
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(copy.autoalign).to.be.true;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.true;
+  });
+
+  it('should keep the tooltip autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-copy-button
+          .autoAlign=${false}
+          icon-description="Copy to clipboard"></cds-copy-button>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-copy-button');
+
+    await el.updateComplete;
+
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(copy.autoalign).to.be.false;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
+  });
+
+  it('should keep the tooltip autoalign disabled when the attribute is "false" with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-copy-button
+          autoalign="false"
+          icon-description="Copy to clipboard"></cds-copy-button>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-copy-button');
+
+    await el.updateComplete;
+
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(el.autoAlign).to.be.false;
+    expect(copy.autoalign).to.be.false;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
+  });
+
+  it('should reflect autoAlign to the autoalign attribute', async () => {
+    const el = await fixture(html`
+      <cds-copy-button
+        .autoAlign=${true}
+        icon-description="Copy to clipboard"></cds-copy-button>
+    `);
+
+    await el.updateComplete;
+
+    expect(el).to.have.attribute('autoalign');
+    expect(el).to.not.have.attribute('auto-align');
   });
 });

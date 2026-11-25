@@ -40,6 +40,9 @@ export default {
 
     // Block
     'block-no-empty': true,
+    // TODO: re-evaluate when this issue is resolved
+    // https://github.com/carbon-design-system/carbon/issues/23136
+    'block-no-redundant-nested-style-rules': OFF,
 
     // Selector
     'selector-pseudo-class-no-unknown': true,

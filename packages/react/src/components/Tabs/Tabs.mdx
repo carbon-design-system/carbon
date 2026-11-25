@@ -1,8 +1,7 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
 import * as TabsStories from './Tabs.stories';
 import { Grid, Column } from '../Grid';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -50,101 +49,33 @@ what is in rendered inside of `Tab` and `TabPanel`.
 
 ### Line Tabs
 
-<Canvas
-  of={TabsStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Default),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.Default} />
 
 ### Contained Tabs
 
-<Canvas
-  of={TabsStories.Contained}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Contained),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.Contained} />
 
 ### Contained Full Width
 
-<Canvas
-  of={TabsStories.ContainedFullWidth}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedFullWidth),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.ContainedFullWidth} />
 
 ### Contained With Icons
 
-<Canvas
-  of={TabsStories.ContainedWithIcons}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedWithIcons),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.ContainedWithIcons} />
 
 ### Contained With Second Labels
 
-<Canvas
-  of={TabsStories.ContainedWithSecondaryLabels}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(TabsStories.ContainedWithSecondaryLabels),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.ContainedWithSecondaryLabels} />
 
 ### Contained With Second Labels and Icons
 
-<Canvas
-  of={TabsStories.ContainedWithSecondaryLabelsAndIcons}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(
-          TabsStories.ContainedWithSecondaryLabelsAndIcons
-        ),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.ContainedWithSecondaryLabelsAndIcons} />
 
 ### Icon Tabs Only
 
-<Canvas
-  of={TabsStories.IconOnly}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.IconOnly),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.IconOnly} />
 
-<Canvas
-  of={TabsStories.Icon20Only}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Icon20Only),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.Icon20Only} />
 
 ### Dismissable Tabs
 
@@ -266,74 +197,26 @@ return (
 
 And there you have it! Working dismissable tabs.
 
-<Canvas
-  of={TabsStories.Dismissable}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Dismissable),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.Dismissable} />
 
 Dismissable With Icons:
 
-<Canvas
-  of={TabsStories.DismissableWithIcons}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.DismissableWithIcons),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.DismissableWithIcons} />
 ### Manual
 
-<Canvas
-  of={TabsStories.Manual}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Manual),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.Manual} />
 
 ### Skeleton
 
-<Canvas
-  of={TabsStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Skeleton),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.Skeleton} />
 
 ### With Icons
 
-<Canvas
-  of={TabsStories.WithIcons}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.WithIcons),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.WithIcons} />
 
 ### Vertical tabs
 
-<Canvas
-  of={TabsStories.Vertical}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Vertical),
-    },
-  ]}
-/>
+<Canvas of={TabsStories.Vertical} />
 ### Tab - tab activation modes
 
 **Tabs With Automatic Activation**: A tabs widget where tabs are automatically
@@ -371,7 +254,7 @@ extra large screen sizes. The prop is a no-op for smaller screens and will also
 be ignored for `TabList`s with more than 8 tabs. `fullWidth` paired up with a
 wrapping `Grid` component will allow for "grid-aware" tabs:
 
-<Canvas>
+<Canvas additionalActions={[]}>
   <Grid condensed>
     <Column lg={16} md={8} sm={4}>
       <Tabs>
@@ -417,7 +300,7 @@ the `TabList`.
 
 For example, to have 5 tabs and each tab span exactly two columns:
 
-<Canvas>
+<Canvas additionalActions={[]}>
   <Grid condensed>
     <Column lg={10}>
       <Tabs>
@@ -465,7 +348,7 @@ For example, to have 5 tabs and each tab span exactly two columns:
 
 Or, to have 5 tabs and each tab span exactly three columns:
 
-<Canvas>
+<Canvas additionalActions={[]}>
   <Grid condensed>
     <Column lg={15}>
       <Tabs>

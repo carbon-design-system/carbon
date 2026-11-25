@@ -64,6 +64,7 @@ describe('cds-overflow-menu', () => {
       expect(document.activeElement).to.equal(el);
       expect(el.shadowRoot?.activeElement).to.equal(triggerButton);
       expect(el).not.to.have.attribute('data-programmatic-focus');
+      expect(tooltip).not.to.have.attribute('data-programmatic-focus');
     } finally {
       restoreMatches();
       el.shadowRoot.querySelector('button').blur();
@@ -80,12 +81,14 @@ describe('cds-overflow-menu', () => {
     try {
       el.focus();
       expect(el).to.have.attribute('data-programmatic-focus');
+      expect(tooltip).to.have.attribute('data-programmatic-focus');
 
       document.body.dispatchEvent(
         new PointerEvent('pointerdown', { bubbles: true, composed: true })
       );
 
       expect(el).not.to.have.attribute('data-programmatic-focus');
+      expect(tooltip).not.to.have.attribute('data-programmatic-focus');
     } finally {
       restoreMatches();
       el.shadowRoot.querySelector('button').blur();
@@ -102,12 +105,14 @@ describe('cds-overflow-menu', () => {
     try {
       el.focus();
       expect(el).to.have.attribute('data-programmatic-focus');
+      expect(tooltip).to.have.attribute('data-programmatic-focus');
 
       document.body.dispatchEvent(
         new FocusEvent('focusin', { bubbles: true, composed: true })
       );
 
       expect(el).not.to.have.attribute('data-programmatic-focus');
+      expect(tooltip).not.to.have.attribute('data-programmatic-focus');
     } finally {
       restoreMatches();
       el.shadowRoot.querySelector('button').blur();
@@ -181,6 +186,7 @@ describe('cds-overflow-menu', () => {
     el.focus();
 
     expect(el).not.to.have.attribute('data-programmatic-focus');
+    expect(tooltip).not.to.have.attribute('data-programmatic-focus');
   });
 
   describe('supports size', () => {
@@ -222,6 +228,92 @@ describe('cds-overflow-menu', () => {
 
     menuBody.dispatchEvent(event);
 
+    expect(menuBody.open).to.be.false;
+  });
+
+  it('should keep menu open when non-closing keys are pressed on a menu item', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+    const menuItem = menuBody.querySelector('cds-overflow-menu-item');
+
+    el.open = true;
+    menuBody.open = true;
+    await el.updateComplete;
+    await menuBody.updateComplete;
+    menuItem.shadowRoot.querySelector('button').focus();
+
+    ['Home', 'End', 'ArrowLeft', 'ArrowRight'].forEach((key) => {
+      const event = new KeyboardEvent('keydown', {
+        key,
+        bubbles: true,
+        composed: true,
+        cancelable: true,
+      });
+
+      menuItem.shadowRoot.querySelector('button').dispatchEvent(event);
+
+      expect(event.defaultPrevented).to.be.true;
+      expect(el.open).to.be.true;
+      expect(menuBody.open).to.be.true;
+    });
+  });
+
+  it('should keep menu open for non-closing keys when slotted menu item content has focus', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu>
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>
+            <span tabindex="0">Filter A</span>
+          </cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+    const slottedContent = menuBody.querySelector('[tabindex="0"]');
+
+    el.open = true;
+    menuBody.open = true;
+    await el.updateComplete;
+    await menuBody.updateComplete;
+    slottedContent.focus();
+
+    const event = new KeyboardEvent('keydown', {
+      key: 'Home',
+      bubbles: true,
+      composed: true,
+      cancelable: true,
+    });
+
+    menuBody.dispatchEvent(event);
+
+    expect(event.defaultPrevented).to.be.true;
+    expect(el.open).to.be.true;
+    expect(menuBody.open).to.be.true;
+  });
+
+  it('should close menu for closing keys when the menu item has focus', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+    const menuItem = menuBody.querySelector('cds-overflow-menu-item');
+
+    el.open = true;
+    menuBody.open = true;
+    await el.updateComplete;
+    await menuBody.updateComplete;
+    menuItem.focus();
+
+    const event = new KeyboardEvent('keydown', {
+      key: 'Enter',
+      bubbles: true,
+      composed: true,
+      cancelable: true,
+    });
+
+    menuBody.dispatchEvent(event);
+
+    expect(event.defaultPrevented).to.be.true;
+    expect(el.open).to.be.false;
     expect(menuBody.open).to.be.false;
   });
 
@@ -494,6 +586,107 @@ describe('cds-overflow-menu', () => {
       expect(menuSurface?.style.position).to.equal('');
       expect(menuSurface?.style.left).to.equal('');
       expect(menuSurface?.style.top).to.equal('');
+    });
+
+    ['ltr', 'rtl'].forEach((dir) => {
+      it(`should align the menu with the inline start edge of the trigger in ${dir.toUpperCase()}`, async () => {
+        const originalDir = document.dir;
+        document.dir = dir;
+
+        try {
+          const featureFlag = await fixture(html`
+            <feature-flags enable-v12-overflowmenu="true">
+              <div style="padding-inline-start: 300px">
+                <cds-overflow-menu label="Actions">
+                  <cds-menu>
+                    <cds-menu-item label="Stop app"></cds-menu-item>
+                  </cds-menu>
+                </cds-overflow-menu>
+              </div>
+            </feature-flags>
+          `);
+          const el = featureFlag.querySelector('cds-overflow-menu');
+
+          el.open = true;
+          await el.updateComplete;
+
+          const menu = el.querySelector('cds-menu');
+          await menu.updateComplete;
+
+          const triggerRect = el.shadowRoot
+            .querySelector('button')
+            .getBoundingClientRect();
+          const menuRect = menu.shadowRoot
+            .querySelector('.cds--menu')
+            .getBoundingClientRect();
+
+          if (dir === 'rtl') {
+            expect(menuRect.right).to.equal(triggerRect.right);
+          } else {
+            expect(menuRect.left).to.equal(triggerRect.left);
+          }
+          expect(menuRect.top).to.equal(triggerRect.bottom);
+        } finally {
+          document.dir = originalDir;
+        }
+      });
+    });
+
+    const renderNestedOverflowMenu = () =>
+      fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions" size="md">
+            <cds-menu>
+              <cds-menu-item label="Level 1">
+                <cds-menu-item-group slot="submenu">
+                  <cds-menu-item label="Level 2"></cds-menu-item>
+                </cds-menu-item-group>
+              </cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+
+    it('should render nested submenus with the overflow menu size', async () => {
+      const featureFlag = await renderNestedOverflowMenu();
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      const level1 = menu.querySelector('cds-menu-item[label="Level 1"]');
+      const level2 = menu.querySelector('cds-menu-item[label="Level 2"]');
+
+      level1._openSubmenu();
+      await level1.updateComplete;
+
+      const submenu = level1.shadowRoot.querySelector('cds-menu');
+      await submenu.updateComplete;
+
+      expect(submenu.size).to.equal('md');
+      expect(level2.getBoundingClientRect().height).to.equal(
+        level1.getBoundingClientRect().height
+      );
+    });
+
+    it('should update nested submenus when the overflow menu size changes', async () => {
+      const featureFlag = await renderNestedOverflowMenu();
+      const el = featureFlag.querySelector('cds-overflow-menu');
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      el.size = 'xs';
+      await el.updateComplete;
+      await menu.updateComplete;
+
+      const level1 = menu.querySelector('cds-menu-item[label="Level 1"]');
+      await level1.updateComplete;
+
+      expect(menu.size).to.equal('xs');
+      expect(level1.shadowRoot.querySelector('cds-menu').size).to.equal('xs');
     });
 
     it('should apply floating UI styles when dynamic floating styles are enabled', async () => {

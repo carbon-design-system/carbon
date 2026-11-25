@@ -84,6 +84,20 @@ test.describe('@avt CodeSnippet', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet skeleton');
   });
 
+  test('@avt-advanced-states multi skeleton', async ({ page }) => {
+    await visitStory(page, {
+      component: 'CodeSnippet',
+      id: 'components-codesnippet--skeleton',
+      globals: {
+        theme: 'white',
+      },
+      args: {
+        type: 'multi',
+      },
+    });
+    await expect(page).toHaveNoACViolations('CodeSnippet multi skeleton');
+  });
+
   test('@avt-keyboard-nav inline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',

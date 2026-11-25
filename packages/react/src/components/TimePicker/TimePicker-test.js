@@ -145,8 +145,8 @@ describe('TimePicker', () => {
       expect(screen.queryByLabelText('🐳')).not.toBeInTheDocument();
     });
 
-    it('should not allow interactive content in labelText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -159,8 +159,12 @@ describe('TimePicker', () => {
             }
           />
         );
-      }).toThrow(
-        'The TimePicker component `labelText` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The TimePicker component `labelText` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();
@@ -385,6 +389,15 @@ describe('TimePicker', () => {
         `${warningText.id} custom-hint`
       );
       expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-invalid');
+    });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(<TimePicker id="timepicker" disabled={true} readOnly={true} />);
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
     });
   });
 });

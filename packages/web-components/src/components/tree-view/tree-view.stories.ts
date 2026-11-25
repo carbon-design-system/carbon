@@ -19,7 +19,9 @@ const sizes = {
 };
 
 const defaultArgs = {
+  hideLabel: false,
   label: 'Tree View',
+  size: TREE_SIZE.SMALL,
 };
 
 const controls = {
@@ -36,6 +38,14 @@ const controls = {
     control: 'text',
     description: 'label',
   },
+};
+
+const setAllExpanded = (event: Event, isExpanded: boolean) => {
+  (event.currentTarget as HTMLElement).parentElement?.nextElementSibling
+    ?.querySelectorAll('cds-tree-node')
+    .forEach((node) => {
+      (node as HTMLElement & { isExpanded: boolean }).isExpanded = isExpanded;
+    });
 };
 
 export const Default = {
@@ -80,34 +90,25 @@ export const Default = {
 };
 
 export const withControlledExpansion = {
+  argTypes: controls,
+  args: defaultArgs,
   decorators: [
     (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
   ],
-  render: () => html`
-    <script>
-      function expandAll() {
-        document
-          .querySelector('cds-tree-view[controlled]')
-          .querySelectorAll('cds-tree-node')
-          .forEach((node) => {
-            node.isExpanded = true;
-          });
-      }
-
-      function collapseAll() {
-        document
-          .querySelector('cds-tree-view[controlled]')
-          .querySelectorAll('cds-tree-node')
-          .forEach((node) => {
-            node.isExpanded = false;
-          });
-      }
-    </script>
+  render: ({ hideLabel, label, size }) => html`
     <div style="margin-block-end: 1rem">
-      <cds-button onclick="expandAll()">Expand All</cds-button>
-      <cds-button onclick="collapseAll()">Collapse All</cds-button>
+      <cds-button @click=${(e: Event) => setAllExpanded(e, true)}
+        >Expand All</cds-button
+      >
+      <cds-button @click=${(e: Event) => setAllExpanded(e, false)}
+        >Collapse All</cds-button
+      >
     </div>
-    <cds-tree-view controlled label="Tree View">
+    <cds-tree-view
+      controlled
+      ?hide-label=${hideLabel}
+      label=${label}
+      size=${size}>
       <cds-tree-node label="Artificial intelligence"></cds-tree-node>
       <cds-tree-node label="Blockchain"></cds-tree-node>
       <cds-tree-node label="Business automation">
@@ -142,11 +143,13 @@ export const withControlledExpansion = {
 };
 
 export const withIcons = {
+  argTypes: controls,
+  args: defaultArgs,
   decorators: [
     (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
   ],
-  render: () => html`
-    <cds-tree-view label="Tree View">
+  render: ({ hideLabel, label, size }) => html`
+    <cds-tree-view ?hide-label=${hideLabel} label=${label} size=${size}>
       <cds-tree-node label="Artificial intelligence">
         ${iconLoader(Document16, { slot: 'icon' })}
       </cds-tree-node>
@@ -218,20 +221,26 @@ export const withIcons = {
 };
 
 export const withLinks = {
-  render: () => html`
-    <script>
-      document
-        .querySelector('cds-tree-view[links]')
-        .addEventListener('cds-tree-node-selected', (e) => {
-          document.querySelector('h3').innerText =
-            'The current page is: ' + e.detail.value;
-        });
-    </script>
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    hideLabel: true,
+  },
+  render: ({ hideLabel, label, size }) => html`
     <div id="page-body" style="display: flex">
       <cds-tree-view
+        @cds-tree-node-selected=${(e: CustomEvent) => {
+          const heading = (
+            e.currentTarget as HTMLElement
+          ).parentElement?.querySelector('h3');
+          if (heading) {
+            heading.innerText = `The current page is: ${e.detail.value}`;
+          }
+        }}
         links
-        hide-label
-        label="Tree view"
+        ?hide-label=${hideLabel}
+        label=${label}
+        size=${size}
         style="inline-size: 20rem">
         <cds-tree-node
           label="Artificial intelligence"
@@ -343,7 +352,7 @@ export const withLinks = {
         </cds-tree-node>
       </cds-tree-view>
       <main style="flex: 1">
-        <h3>The current page is: Artifical Intelligence</h3>
+        <h3>The current page is: Artificial Intelligence</h3>
       </main>
     </div>
   `,

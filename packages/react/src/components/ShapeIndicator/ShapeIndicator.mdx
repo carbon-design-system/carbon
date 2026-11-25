@@ -1,6 +1,5 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as ShapeIndicatorStories from './ShapeIndicator.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -37,15 +36,7 @@ function ExampleComponent() {
 }
 ```
 
-<Canvas
-  of={ShapeIndicatorStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ShapeIndicatorStories.Default),
-    },
-  ]}
-/>
+<Canvas of={ShapeIndicatorStories.Default} />
 
 ## Kind
 

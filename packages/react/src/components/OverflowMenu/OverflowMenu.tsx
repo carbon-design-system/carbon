@@ -256,7 +256,6 @@ export interface OverflowMenuProps
   innerRef?: Ref<any>;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
@@ -564,6 +563,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 
     const overflowMenuIconClasses = classNames(
       `${prefix}--overflow-menu__icon`,
+      `${prefix}--btn__icon`,
       iconClass
     );
 
@@ -650,9 +650,11 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   }
 );
 
+OverflowMenu.displayName = 'OverflowMenu';
+
 OverflowMenu.propTypes = {
   /**
-   * Specify how the trigger should align with the tooltip
+   * Specify how the tooltip should be aligned with the button
    */
   align: deprecateValuesWithin(
     PropTypes.oneOf([

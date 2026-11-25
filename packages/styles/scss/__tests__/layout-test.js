@@ -10,7 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const css = require('css');
+const postcss = require('postcss');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -56,6 +56,23 @@ describe('@carbon/styles/scss/layout', () => {
     expect(output).toContain('--cds-layout-size-height-2xl');
   });
 
+  test('emit-layout-tokens emits all icon gap tokens', async () => {
+    const { result } = await render(`
+      @use '../layout';
+      .test {
+        @include layout.emit-layout-tokens();
+      }
+    `);
+
+    const output = result.css.toString();
+    expect(output).toContain('--cds-layout-size-icon-gap-xs');
+    expect(output).toContain('--cds-layout-size-icon-gap-sm');
+    expect(output).toContain('--cds-layout-size-icon-gap-md');
+    expect(output).toContain('--cds-layout-size-icon-gap-lg');
+    expect(output).toContain('--cds-layout-size-icon-gap-xl');
+    expect(output).toContain('--cds-layout-size-icon-gap-2xl');
+  });
+
   test('emit-layout-tokens emits all density tokens', async () => {
     const { result } = await render(`
       @use '../layout';
@@ -89,15 +106,15 @@ describe('@carbon/styles/scss/layout', () => {
       @use '../layout';
     `);
 
-    const { stylesheet } = css.parse(result.css.toString());
+    const stylesheet = postcss.parse(result.css.toString());
 
     const findRule = (selector) =>
-      stylesheet.rules.find((rule) =>
+      stylesheet.nodes.find((rule) =>
         rule.selectors?.some((s) => s.includes(selector))
       );
 
     const findDeclaration = (rule, property) =>
-      rule?.declarations?.find((d) => d.property.includes(property));
+      rule?.nodes?.find((d) => d.prop.includes(property));
 
     expect(
       findDeclaration(
@@ -119,15 +136,15 @@ describe('@carbon/styles/scss/layout', () => {
       @use '../layout';
     `);
 
-    const { stylesheet } = css.parse(result.css.toString());
+    const stylesheet = postcss.parse(result.css.toString());
 
     const findRule = (selector) =>
-      stylesheet.rules.find((rule) =>
+      stylesheet.nodes.find((rule) =>
         rule.selectors?.some((s) => s.includes(selector))
       );
 
     const findDeclaration = (rule, property) =>
-      rule?.declarations?.find((d) => d.property.includes(property));
+      rule?.nodes?.find((d) => d.prop.includes(property));
 
     expect(
       findDeclaration(
@@ -193,16 +210,14 @@ describe('@carbon/styles/scss/layout', () => {
       @use '../layout';
     `);
 
-    const { stylesheet } = css.parse(result.css.toString());
-    const rootRule = stylesheet.rules.find((rule) =>
+    const stylesheet = postcss.parse(result.css.toString());
+    const rootRule = stylesheet.nodes.find((rule) =>
       rule.selectors?.includes(':root')
     );
 
     expect(rootRule).toBeDefined();
     expect(
-      rootRule.declarations.some((d) =>
-        d.property.includes('--cds-layout-size-height-xs')
-      )
+      rootRule.nodes.some((d) => d.prop.includes('--cds-layout-size-height-xs'))
     ).toBe(true);
   });
 });

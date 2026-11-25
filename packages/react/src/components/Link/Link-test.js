@@ -165,19 +165,6 @@ describe('Link', () => {
       );
       await expect(screen.getByText('A simple link')).toHaveNoAxeViolations();
     });
-
-    it('should have no Accessibility Checker violations', async () => {
-      render(
-        <main>
-          <Link href="/" className="some-class">
-            A simple link
-          </Link>
-        </main>
-      );
-      await expect(screen.getByText('A simple link')).toHaveNoACViolations(
-        'Link'
-      );
-    });
   });
 
   describe('Component API', () => {

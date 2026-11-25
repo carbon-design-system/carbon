@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -15,10 +15,121 @@ import DatePickerInput from '../DatePickerInput';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { useDocumentLang } from '../../internal/useDocumentLang';
 
 import mdx from './DatePicker.mdx';
+
+const sharedArgs = {
+  allowInput: true,
+  closeOnSelect: true,
+  dateFormat: 'm/d/Y',
+  maxDate: '',
+  minDate: '',
+  short: false,
+  disabled: false,
+  helperText: '',
+  invalid: false,
+  invalidText: 'Error message goes here',
+  placeholder: 'mm/dd/yyyy',
+  readOnly: false,
+  size: 'md',
+  warn: false,
+  warnText: 'Warning message goes here',
+};
+
+const sharedArgTypes = {
+  allowInput: {
+    control: 'boolean',
+  },
+  closeOnSelect: {
+    control: 'boolean',
+  },
+  dateFormat: {
+    control: 'text',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onClose: {
+    action: 'onClose',
+  },
+  onOpen: {
+    action: 'onOpen',
+  },
+  readOnly: {
+    control: 'boolean',
+  },
+  short: {
+    control: 'boolean',
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: 'select',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  disabled: {
+    control: 'boolean',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  invalid: {
+    control: 'boolean',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  invalidText: {
+    control: 'text',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  maxDate: {
+    control: 'text',
+  },
+  minDate: {
+    control: 'text',
+  },
+  placeholder: {
+    control: 'text',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  warn: {
+    control: 'boolean',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  warnText: {
+    control: 'text',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  helperText: {
+    control: 'text',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+};
+
+const datePickerTypeArgType = {
+  control: 'select',
+  options: ['single', 'simple', 'range'],
+};
+
+const sharedParameters = {
+  controls: {
+    include: Object.keys(sharedArgTypes),
+  },
+};
 
 export default {
   title: 'Components/DatePicker',
@@ -31,17 +142,7 @@ export default {
     docs: {
       page: mdx,
     },
-    controls: {
-      exclude: [
-        'appendTo',
-        'datePickerType',
-        'disable',
-        'enable',
-        'inline',
-        'locale',
-        'value',
-      ],
-    },
+    ...sharedParameters,
   },
   argTypes: {
     light: {
@@ -52,91 +153,27 @@ export default {
   },
 };
 
-const sharedArgs = {
-  invalidText: 'Error message goes here',
-  warnText: 'Warning message goes here',
-};
-
-const sharedArgTypes = {
-  onChange: {
-    action: 'onChange',
-  },
-  onClose: {
-    action: 'onClose',
-  },
-  onOpen: {
-    action: 'onOpen',
-  },
-  readOnly: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  size: {
-    options: ['sm', 'md', 'lg'],
-    control: { type: 'select' },
-    table: {
-      category: 'DatePickerInput',
-    },
-  },
-  disabled: {
-    control: { type: 'boolean' },
-    table: {
-      category: 'DatePickerInput',
-    },
-  },
-  invalid: {
-    control: { type: 'boolean' },
-    table: {
-      category: 'DatePickerInput',
-    },
-  },
-  invalidText: {
-    control: { type: 'text' },
-    table: {
-      category: 'DatePickerInput',
-    },
-  },
-  placeholder: {
-    control: { type: 'text' },
-    table: {
-      category: 'DatePickerInput',
-    },
-  },
-  warn: {
-    control: { type: 'boolean' },
-    table: {
-      category: 'DatePickerInput',
-    },
-  },
-  warnText: {
-    control: { type: 'text' },
-    table: {
-      category: 'DatePickerInput',
-    },
-  },
-  helperText: {
-    control: { type: 'text' },
-    table: {
-      category: 'DatePickerInput',
-    },
-  },
-};
-
-export const Default = ({ readOnly, ...args }) => {
+export const Default = (args) => {
   const locale = useDocumentLang().split('-')[0];
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
-    <DatePicker
-      datePickerType="single"
-      {...args}
-      readOnly={readOnly}
-      locale={locale}>
+    <DatePicker datePickerType="single" {...args} locale={locale}>
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
         id="date-picker-single"
-        {...sharedArgs}
-        {...args}
+        {...datePickerInputArgs}
       />
       {args.datePickerType === 'range' && (
         <DatePickerInput
@@ -144,8 +181,7 @@ export const Default = ({ readOnly, ...args }) => {
           labelText="End date"
           size="md"
           id="date-picker-input-2"
-          {...sharedArgs}
-          {...args}
+          {...datePickerInputArgs}
         />
       )}
     </DatePicker>
@@ -154,42 +190,85 @@ export const Default = ({ readOnly, ...args }) => {
 
 Default.argTypes = {
   ...sharedArgTypes,
-  datePickerType: {
-    options: ['single', 'simple', 'range'],
-    control: { type: 'select' },
+  datePickerType: datePickerTypeArgType,
+};
+Default.args = { ...sharedArgs };
+Default.parameters = {
+  controls: {
+    include: [...sharedParameters.controls.include, 'datePickerType'],
   },
 };
 
-export const Simple = (args) => (
-  <DatePicker datePickerType="simple" {...args}>
-    <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-simple"
-      {...sharedArgs}
-      {...args}
-    />
-  </DatePicker>
-);
+export const Simple = (args) => {
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
+  return (
+    <DatePicker datePickerType="simple" {...args}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id="date-picker-simple"
+        {...datePickerInputArgs}
+      />
+    </DatePicker>
+  );
+};
 
+Simple.args = { ...sharedArgs };
 Simple.argTypes = { ...sharedArgTypes };
 
-export const SingleWithCalendar = (args) => (
-  <DatePicker datePickerType="single" {...args}>
-    <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-single"
-      size="md"
-      {...sharedArgs}
-      {...args}
-    />
-  </DatePicker>
-);
+export const SingleWithCalendar = (args) => {
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
+  return (
+    <DatePicker datePickerType="single" {...args}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id="date-picker-single"
+        size="md"
+        {...datePickerInputArgs}
+      />
+    </DatePicker>
+  );
+};
 
+SingleWithCalendar.args = { ...sharedArgs };
 SingleWithCalendar.argTypes = { ...sharedArgTypes };
 
 export const RangeWithCalendar = (args) => {
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
     <DatePicker datePickerType="range" {...args}>
       <DatePickerInput
@@ -197,93 +276,178 @@ export const RangeWithCalendar = (args) => {
         placeholder="mm/dd/yyyy"
         labelText="Start date"
         size="md"
-        {...sharedArgs}
-        {...args}
+        {...datePickerInputArgs}
       />
       <DatePickerInput
         id="date-picker-input-id-finish"
         placeholder="mm/dd/yyyy"
         labelText="End date"
         size="md"
-        {...sharedArgs}
-        {...args}
+        {...datePickerInputArgs}
       />
     </DatePicker>
   );
 };
 
+RangeWithCalendar.args = { ...sharedArgs };
 RangeWithCalendar.argTypes = { ...sharedArgTypes };
 
-export const SimpleWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="simple" {...args}>
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id={`date-picker-simple-${layer}`}
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
+export const SimpleWithLayer = (args) => {
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
+  return (
+    <WithLayer>
+      {(layer) => (
+        <DatePicker datePickerType="simple" {...args}>
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id={`date-picker-simple-${layer}`}
+            size="md"
+            {...datePickerInputArgs}
+          />
+        </DatePicker>
+      )}
+    </WithLayer>
+  );
+};
 
-SimpleWithLayer.argTypes = { ...sharedArgTypes };
+SimpleWithLayer.args = { ...sharedArgs };
+SimpleWithLayer.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
+SimpleWithLayer.argTypes = Simple.argTypes;
 
-export const SingleWithCalendarWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="single" {...args}>
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id={`date-picker-single-${layer}`}
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
+export const SingleWithCalendarWithLayer = (args) => {
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
+  return (
+    <WithLayer>
+      {(layer) => (
+        <DatePicker datePickerType="single" {...args}>
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id={`date-picker-single-${layer}`}
+            size="md"
+            {...datePickerInputArgs}
+          />
+        </DatePicker>
+      )}
+    </WithLayer>
+  );
+};
 
-SingleWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
+SingleWithCalendarWithLayer.args = { ...sharedArgs };
+SingleWithCalendarWithLayer.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
+SingleWithCalendarWithLayer.argTypes = SingleWithCalendar.argTypes;
 
-export const RangeWithCalendarWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="range" {...args}>
-        <DatePickerInput
-          id={`date-picker-input-id-start-${layer}`}
-          placeholder="mm/dd/yyyy"
-          labelText="Start date"
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-        <DatePickerInput
-          id={`date-picker-input-id-finish-${layer}`}
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
+export const RangeWithCalendarWithLayer = (args) => {
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
+  return (
+    <WithLayer>
+      {(layer) => (
+        <DatePicker datePickerType="range" {...args}>
+          <DatePickerInput
+            id={`date-picker-input-id-start-${layer}`}
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            size="md"
+            {...datePickerInputArgs}
+          />
+          <DatePickerInput
+            id={`date-picker-input-id-finish-${layer}`}
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            size="md"
+            {...datePickerInputArgs}
+          />
+        </DatePicker>
+      )}
+    </WithLayer>
+  );
+};
 
-RangeWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
+RangeWithCalendarWithLayer.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
+RangeWithCalendarWithLayer.args = { ...sharedArgs };
+RangeWithCalendarWithLayer.argTypes = RangeWithCalendar.argTypes;
 
-export const Skeleton = () => {
-  return <DatePickerSkeleton range />;
+export const Skeleton = (args) => {
+  return <DatePickerSkeleton {...args} />;
+};
+
+Skeleton.args = {
+  hideLabel: false,
+  range: true,
+};
+Skeleton.argTypes = {
+  hideLabel: { control: 'boolean' },
+  range: { control: 'boolean' },
+};
+Skeleton.parameters = {
+  controls: { include: Object.keys(Skeleton.argTypes) },
 };
 
 export const withAILabel = (args) => {
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   const aiLabel = (
     <AILabel className="ai-label-container">
       <AILabelContent>
@@ -323,12 +487,14 @@ export const withAILabel = (args) => {
           size="md"
           id="date-picker"
           decorator={aiLabel}
-          {...sharedArgs}
-          {...args}
+          {...datePickerInputArgs}
         />
       </DatePicker>
     </div>
   );
 };
 
-withAILabel.argTypes = { ...sharedArgTypes };
+withAILabel.args = {
+  ...sharedArgs,
+};
+withAILabel.argTypes = SingleWithCalendar.argTypes;

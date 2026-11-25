@@ -6,8 +6,11 @@
 //
 
 @use 'mixins' as *;
+@use '../button/radius' as button;
 @use '../copy-button';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -35,6 +38,10 @@ $copy-btn-feedback: $background-inverse !default;
 @mixin code-snippet {
   .#{$prefix}--snippet {
     @include reset;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--snippet--disabled,
@@ -218,7 +225,7 @@ $copy-btn-feedback: $background-inverse !default;
     overflow-y: auto;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
-    &:focus {
+    &:focus-within {
       @include focus-outline('outline');
 
       outline-offset: 0;
@@ -233,14 +240,18 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext pre {
+    overflow-wrap: break-word;
     white-space: pre-wrap;
-    word-wrap: break-word;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     overflow: auto;
     padding-block-end: $spacing-06;
     padding-inline-end: $spacing-06;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
@@ -259,38 +270,31 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   //Copy Button
-  .#{$prefix}--snippet__icon {
+  .#{$prefix}--snippet .#{$prefix}--snippet__icon {
     block-size: convert.to-rem(16px);
     fill: $icon-primary;
     inline-size: convert.to-rem(16px);
     transition: all $duration-fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--btn > .#{$prefix}--snippet__icon {
+  .#{$prefix}--snippet .#{$prefix}--btn > .#{$prefix}--snippet__icon {
     margin-block-start: 0;
   }
 
-  .#{$prefix}--copy-btn {
-    @include reset;
-
-    display: flex;
-    overflow: visible;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: none;
+  .#{$prefix}--snippet .#{$prefix}--copy-btn {
     background-color: $layer;
-    cursor: pointer;
-    outline: none;
 
-    &:focus {
-      @include focus-outline('outline');
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
+    }
 
-      outline-color: $focus;
+    &:active {
+      background-color: $layer-active;
     }
   }
 
-  // TODO: remove copy button styles above
   .#{$prefix}--snippet .#{$prefix}--popover-container {
     @include font-family('sans');
 
