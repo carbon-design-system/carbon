@@ -1,6 +1,5 @@
-import { Story, Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
 import * as ProgressIndicatorStories from './ProgressIndicator.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -26,44 +25,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-<Canvas
-  of={ProgressIndicatorStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ProgressIndicatorStories.Default }),
-    },
-  ]}
-/>
+<Canvas of={ProgressIndicatorStories.Default} />
 
 ## Interactive
 
-<Canvas
-  of={ProgressIndicatorStories.Interactive}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: ProgressIndicatorStories.Interactive,
-        }),
-    },
-  ]}
-/>
+<Canvas of={ProgressIndicatorStories.Interactive} />
 
 ## Skeleton
 
-<Canvas
-  of={ProgressIndicatorStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ProgressIndicatorStories.Skeleton }),
-    },
-  ]}
-/>
+<Canvas of={ProgressIndicatorStories.Skeleton} />
 
 For React usage, `ProgressIndicator` holds the `currentIndex` state to indicate
 which `ProgressStep` is the current step. The `ProgressIndicator` component

@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import './create-tearsheet/example/src/index';
+import './create-tearsheet/index';
 import './_story-styles.scss';
 
 export default {

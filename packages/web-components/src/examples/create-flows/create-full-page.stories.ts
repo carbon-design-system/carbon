@@ -6,11 +6,11 @@
  */
 
 import { html } from 'lit';
-import './create-full-page/example/src/standard-create-full-page';
-import './create-full-page/example/src/create-full-page-with-sections';
-import './create-full-page/example/src/create-full-page-with-header';
-import './create-full-page/example/src/create-full-page-with-step-in-error-state';
-import './create-full-page/example/src/create-full-page-with-global-header';
+import './create-full-page/standard-create-full-page';
+import './create-full-page/create-full-page-with-sections';
+import './create-full-page/create-full-page-with-header';
+import './create-full-page/create-full-page-with-step-in-error-state';
+import './create-full-page/create-full-page-with-global-header';
 import './_story-styles.scss';
 
 export default {

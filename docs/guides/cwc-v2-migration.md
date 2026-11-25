@@ -13,8 +13,8 @@ For Carbon v11 migration guidance, see their
 
 > When using @carbon/web-components v2 you need to include theming to get all
 > the token values necessary for the components. This includes using white
-> theme, see the accordion stackblitz example
-> [here](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/accordion?file=src%2Fstyles.scss)
+> theme, see the StackBlitz starter's styles
+> [here](https://stackblitz.com/github/carbon-design-system/sandboxes/tree/main/web-components/latest/vite-lit?file=src%2Findex.scss)
 
 ## List of component changes
 

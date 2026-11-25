@@ -16,6 +16,7 @@ import './index';
 import '../ai-label';
 import '../icon-button';
 import '../link';
+import '../text-input';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import storyDocs from './tile.mdx';
 import styles from './tile-story.scss?lit';

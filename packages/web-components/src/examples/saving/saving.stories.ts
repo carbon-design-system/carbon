@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import './example/src/saving';
+import './saving';
 import './story-styles.scss';
 
 export default {

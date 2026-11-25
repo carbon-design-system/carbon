@@ -8,7 +8,7 @@ ts
 umd
 
 # React
-**/storybook-static/**
+**/storybook-static*/**
 packages/react/icons/index.js
 packages/react/icons/index.esm.js
 packages/react/icons/index.d.ts

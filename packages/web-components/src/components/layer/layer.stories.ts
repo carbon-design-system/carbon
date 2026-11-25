@@ -6,7 +6,6 @@
  */
 
 import { html } from 'lit';
-import { prefix } from '../../globals/settings';
 import styles from './layer-story.scss?lit';
 import './index';
 
@@ -94,14 +93,13 @@ export const UseLayer = {
     label: controls.label,
   },
   render: ({ label }) => {
-    document.addEventListener(`${prefix}-use-layer`, (e) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      const { layer, level } = (e as any).detail;
+    const onUseLayer = (e: CustomEvent) => {
+      const { layer, level } = e.detail;
       layer.querySelector('.use-layer-level').innerText = `${level + 1}`;
-    });
+    };
 
     return html`
-      <cds-layer>
+      <cds-layer @cds-use-layer=${onUseLayer}>
         <div class="example-layer-test-component use-layer">
           ${label}: <span class="use-layer-level"></span>
         </div>
