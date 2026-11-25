@@ -333,7 +333,7 @@ describe('cds-slider', () => {
 
   it('should raise the value with ArrowUp and lower it with ArrowDown', async () => {
     const el = await fixture(
-      html` <cds-slider
+      html`<cds-slider
         label-text="Slider Label"
         max="100"
         min="0"
@@ -345,7 +345,7 @@ describe('cds-slider', () => {
       </cds-slider>`
     );
     await el.updateComplete;
-    const thumb = el?.shadowRoot?.querySelector('#thumb');
+    const thumb = el.shadowRoot.querySelector('#thumb');
 
     thumb?.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true })
