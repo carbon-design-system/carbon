@@ -8,9 +8,9 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import DocsPage from './CreateTearsheet.mdx';
-import { Default } from './example/preview-components/Default';
-import { WithValidation } from './example/preview-components/WithValidation';
-import './example/styles/_story-styles.scss';
+import { Default } from './preview-components/Default';
+import { WithValidation } from './preview-components/WithValidation';
+import './styles/_story-styles.scss';
 
 export default {
   title: 'Examples/Create flows/Create Tearsheet Narrow',

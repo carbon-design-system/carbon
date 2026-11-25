@@ -15,7 +15,6 @@
     ".storybook/**/*",
     "icons/**/*",
     "**/_story-assets/**",
-    "src/examples/**/example/**",
     "src/examples/**/*"
   ]
 }

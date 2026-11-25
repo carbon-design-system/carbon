@@ -8,16 +8,16 @@
 import React from 'react';
 import '../_story-styles.scss';
 import DocsPage from './MultiAddSelect.mdx';
-import { MultiAddSelectDefault } from '../example/preview-components/MultiAddSelectDefault/MultiAddSelectDefault';
-import { MultiAddSelectWithHierarchyPreview } from '../example/preview-components/MultiAddSelectWithHierarchy/MultiAddSelectWithHierarchy';
-import { MultiAddSelectWithModifiers } from '../example/preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
-import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
-import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
-import { MultiSelectWithBulkActionsPreview } from '../example/preview-components/MultiSelectWithBulkActions/MultiSelectWithBulkActions';
-import { MultiAddSelectWithGlobalActionsPreview } from '../example/preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
-import { MultiAddSelectWithColumnActionsPreview } from '../example/preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
-import { MultiSelectWithScrollPreview } from '../example/preview-components/MultiSelectWithScroll/MultiSelectWithScroll';
-import { MultiAddSelectWithDataTablePreview } from '../example/preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
+import { MultiAddSelectDefault } from '../preview-components/MultiAddSelectDefault/MultiAddSelectDefault';
+import { MultiAddSelectWithHierarchyPreview } from '../preview-components/MultiAddSelectWithHierarchy/MultiAddSelectWithHierarchy';
+import { MultiAddSelectWithModifiers } from '../preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
+import { NonHierarchicalWithPeekInsideItemPreview } from '../preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
+import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
+import { MultiSelectWithBulkActionsPreview } from '../preview-components/MultiSelectWithBulkActions/MultiSelectWithBulkActions';
+import { MultiAddSelectWithGlobalActionsPreview } from '../preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
+import { MultiAddSelectWithColumnActionsPreview } from '../preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
+import { MultiSelectWithScrollPreview } from '../preview-components/MultiSelectWithScroll/MultiSelectWithScroll';
+import { MultiAddSelectWithDataTablePreview } from '../preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
 
 export default {
   title: 'Examples/Add and select/MultiAddSelect',

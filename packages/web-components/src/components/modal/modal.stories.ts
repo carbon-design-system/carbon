@@ -20,8 +20,12 @@ import '../select';
 import '../textarea';
 import '../combo-box';
 import '../checkbox';
-const toggleButton = () => {
-  document.querySelector('cds-modal')?.toggleAttribute('open');
+import '../multi-select';
+
+const toggleButton = (event: Event) => {
+  (event.currentTarget as HTMLElement).parentElement
+    ?.querySelector('cds-modal')
+    ?.toggleAttribute('open');
 };
 
 const sizes = {
@@ -659,8 +663,8 @@ export const WithInlineLoading = {
       size,
       shouldSubmitOnEnter,
     } = args ?? {};
-    const onDelete = () => {
-      const modal = document.querySelector('cds-modal') as HTMLElement;
+    const onDelete = (event: Event) => {
+      const modal = (event.currentTarget as HTMLElement).closest('cds-modal');
       if (!modal) return;
       // Start loading
       modal.setAttribute('loading-status', 'active');
@@ -673,8 +677,8 @@ export const WithInlineLoading = {
     };
 
     // Reset the loading description and status once finished successfully
-    const onSuccess = () => {
-      const modal = document.querySelector('cds-modal') as HTMLElement;
+    const onSuccess = (event: Event) => {
+      const modal = event.currentTarget as HTMLElement;
       modal.setAttribute('loading-description', 'Deleting...');
       modal.setAttribute('loading-status', 'inactive');
     };

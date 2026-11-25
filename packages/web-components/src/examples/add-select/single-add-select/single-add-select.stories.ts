@@ -8,9 +8,9 @@
  */
 
 import { html } from 'lit';
-import '../example/src/single-add-select/single-add-select';
-import '../example/src/single-add-select/single-add-select-with-hierarchy';
-import '../example/src/single-add-select/single-add-select-with-hierarchy-side-panel';
+import './single-add-select';
+import './single-add-select-with-hierarchy';
+import './single-add-select-with-hierarchy-side-panel';
 
 export default {
   title: 'Examples/Add and Select/Single add select',

@@ -8,7 +8,7 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './CoachmarkFixed.mdx';
-import { CoachmarkFixedExample } from './example/components/CoachmarkFixedExample';
+import { CoachmarkFixedExample } from './components/CoachmarkFixedExample';
 
 export default {
   title: 'Examples/Coachmark/Coachmark Fixed',

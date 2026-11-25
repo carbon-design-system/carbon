@@ -356,21 +356,18 @@ export const actions: ActionMap = {
   [DatePickerState.FOCUSED]: {
     INPUT_FOCUS: focusInput,
     /**
-     * Opening from a focused input jumps straight to the selection, or today,
-     * rather than to whatever month was last in view.
+     * Opening from a focused input jumps the view straight to the selection, or
+     * today, rather than to whatever month was last in view. Only a selection
+     * takes grid focus; today is shown but left unfocused.
      *
      * @param {DatePickerContext} context - Current context
      * @returns {Partial<DatePickerContext>} Updated context
      */
-    CALENDAR_OPEN: (context) => {
-      const focusedDate = context.startDate || Temporal.Now.plainDateISO();
-
-      return {
-        isOpen: true,
-        viewDate: focusedDate,
-        focusedDate,
-      };
-    },
+    CALENDAR_OPEN: (context) => ({
+      isOpen: true,
+      viewDate: context.startDate || Temporal.Now.plainDateISO(),
+      focusedDate: context.startDate || null,
+    }),
     CALENDAR_ICON_CLICK: openCalendar(preserveFocus),
   },
 

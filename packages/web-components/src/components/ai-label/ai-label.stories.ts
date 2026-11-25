@@ -12,6 +12,7 @@ import Folders16 from '@carbon/icons/es/folders/16.js';
 import './index';
 import '../icon-button/index';
 import '../button/index';
+import '../link/index';
 import styles from './ai-label-story.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
 

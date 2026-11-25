@@ -8,8 +8,8 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './AboutModal.mdx';
-import { StandardAboutModal } from './example/preview-components/StandardAboutModal';
-import { AboutModalWithAdditionalContent } from './example/preview-components/AboutModalWithAdditionalContent';
+import { StandardAboutModal } from './preview-components/StandardAboutModal';
+import { AboutModalWithAdditionalContent } from './preview-components/AboutModalWithAdditionalContent';
 
 export default {
   title: 'Examples/About Modal',

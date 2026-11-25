@@ -1,5 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as stories from './CreateSidePanel.stories';
 
 <Meta isTemplate />
@@ -45,12 +44,6 @@ import { Form, TextInput, Dropdown, FormGroup, Button } from '@carbon/react';
 
 ## Example usage
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateSidePanel/example)
-> example implementation.
-
-[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateSidePanel/example)
-
 ## Default
 
 The default CreateSidePanel pattern provides a focused single-form creation
@@ -60,15 +53,7 @@ experience inside a slide-in side panel with:
 - Form title and description sections
 - Submit and cancel action buttons in the panel footer
 
-<Canvas
-  of={stories.createSidePanel}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.createSidePanel),
-    },
-  ]}
-/>
+<Canvas of={stories.createSidePanel} />
 
 ## With form validation
 
@@ -79,15 +64,7 @@ The pattern can be extended to include form validation:
 - Invalid text displayed for fields with errors
 - Real-time validation on blur or change events
 
-<Canvas
-  of={stories.withFormValidation}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.withFormValidation),
-    },
-  ]}
-/>
+<Canvas of={stories.withFormValidation} />
 
 ## Feedback
 

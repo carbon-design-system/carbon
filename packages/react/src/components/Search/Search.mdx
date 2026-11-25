@@ -1,6 +1,5 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as SearchStories from './Search.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -25,28 +24,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-<Canvas
-  of={SearchStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: SearchStories.Default }),
-    },
-  ]}
-/>
+<Canvas of={SearchStories.Default} />
 
 ## Expandable
 
-<Canvas
-  of={SearchStories.Expandable}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: SearchStories.Expandable }),
-    },
-  ]}
-/>
+<Canvas of={SearchStories.Expandable} />
 
 When collapsed, the magnifier shows a tooltip above the trigger. Use
 `tooltipAlignment` to change its direction, for example when the search sits at

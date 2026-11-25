@@ -15,6 +15,8 @@ import glob from 'fast-glob';
 import remarkGfm from 'remark-gfm';
 import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
 import { getIbmAnalyticsHeads } from '../../../tasks/storybook-ibm-analytics.mjs';
+import { storybookStackBlitz } from '../../../tasks/storybook-stackblitz/vite-plugin.mjs';
+import { webComponentsStackBlitz } from '../../../tasks/storybook-stackblitz/web-components.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 
@@ -73,7 +75,12 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      plugins: [litStyleLoader(), litTemplateLoader()],
+      plugins: [
+        litStyleLoader(),
+        litTemplateLoader(),
+        // "Open in StackBlitz" docs action, generated from each story
+        storybookStackBlitz(webComponentsStackBlitz),
+      ],
       optimizeDeps: {
         include: ['@storybook/web-components-vite'],
         exclude: ['lit', 'lit-html'],
