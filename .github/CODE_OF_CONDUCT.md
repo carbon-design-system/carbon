@@ -1,4 +1,4 @@
-# Carbon Code of Conduct
+# Code of Conduct
 
 ## TL;DR
 
@@ -56,12 +56,12 @@ offensive, or harmful.
 ## Scope
 
 This Code of Conduct applies within all project spaces, including _but not
-limited to_ GitHub, e-mail and Slack. It also applies when an individual is
-representing the project or its community in public spaces. Examples of
-representing a project or community include using an official project e-mail
-address, posting via an official social media account, or acting as an appointed
-representative at an online or offline event. Representation of a project may be
-further defined and clarified by project maintainers.
+limited to_ GitHub, e-mail, Slack and Discord. It also applies when an
+individual is representing the project or its community in public spaces.
+Examples of representing a project or community include using an official
+project e-mail address, posting via an official social media account, or acting
+as an appointed representative at an online or offline event. Representation of
+a project may be further defined and clarified by project maintainers.
 
 ## Enforcement
 
@@ -81,22 +81,23 @@ members of the project's leadership.
 1.  Please, no `@here` or `@channel` unless it is a bug that is **breaking
     production code.** We have communities in many different time zones, and we
     would hate to disrupt someone not at the office.
-2.  There's no need to notify the Carbon team that you have made an issue in
-    Carbon's GitHub repositories. We check these several times a day, so we
-    promise we'll address your issue as soon as we can.
+2.  There's no need to notify the Carbon team that you have opened an issue in
+    Carbon's GitHub repositories. We review incoming issues as part of our
+    support process.
 3.  Reserve direct messages for sensitive discussions, such as privacy, legal,
     or HR reasons. Otherwise, we encourage posting in public channels so people
     with the same questions can benefit.
-4.  If you have a pressing bug fix, it is best to make a PR directly to get your
-    issues addressed.
-5.  `#carbon-react`, `#carbon-web-components`: These channels are for questions
-    about Carbon Components only. They are not the place to ask general coding
-    questions. Instead, use a dev community like
+4.  If you have a bug to report, please open a GitHub issue with steps to
+    reproduce it. If you have a fix, contributions through a PR are welcome.
+5.  `#carbon-design-system`: This channel is for questions about Carbon
+    components and design. It is not the place to ask general coding questions.
+    Instead, use a dev community like
     [StackOverflow](https://stackoverflow.com/).
-6.  `#carbon-design-system`: Please post any design questions with an in-context
-    screen shot (i.e. screen shot of the whole UI you are designing) with
-    background as to what you are trying to accomplish in this flow. We welcome
-    in-progress work to get community design feedback as well.
+
+    Please post any design questions with an in-context screenshot (i.e. a
+    screenshot of the whole UI you are designing), with background on what you
+    are trying to accomplish in this flow. We welcome in-progress work to get
+    community design feedback as well.
 
 ## Attribution
 

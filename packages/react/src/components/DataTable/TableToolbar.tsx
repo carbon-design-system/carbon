@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, type ReactNode } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 
@@ -34,7 +34,7 @@ export interface TableToolbarProps
   /**
    * Pass in the children that will be rendered inside the TableToolbar
    */
-  children: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * `lg` Change the row height of table

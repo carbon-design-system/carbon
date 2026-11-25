@@ -460,7 +460,7 @@ jobs:
         run: yarn build
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@2b75e3340bcec86b4ae38c6a10f14831114e8137 # v18.14.3
+        uses: chromaui/action@25d2d37fcbe164dfbf5479a432fbd73d03bae733 # v18.15.2
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects

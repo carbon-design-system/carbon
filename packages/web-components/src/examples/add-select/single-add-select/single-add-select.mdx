@@ -1,4 +1,4 @@
-import { Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 
 import * as SingleAddSelectStories from './single-add-select.stories';
 
@@ -30,37 +30,25 @@ To build this pattern, we recommend including the following components:
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview) - Action buttons
 - [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview) - Success feedback
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/add-select/example)
-> example implementation.
-
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/add-select/example)
-
 ## Variants
 
 ### Default
 
 Simple single selection from a flat list. The tearsheet is narrow and uses `cds-add-select-body` directly wrapping `cds-add-select-row` items.
 
-<Canvas withSource="none">
-  <Story of={SingleAddSelectStories.Default} />
-</Canvas>
+<Canvas of={SingleAddSelectStories.Default} sourceState="none" />
 
 ### With Hierarchy
 
 Single selection with hierarchical navigation and breadcrumbs. Uses `cds-add-select-column` (with `hide-search`) inside `cds-add-select-body`. Items with children show a chevron — clicking navigates deeper. Breadcrumbs update accordingly.
 
-<Canvas withSource="none">
-  <Story of={SingleAddSelectStories.WithHierarchy} />
-</Canvas>
+<Canvas of={SingleAddSelectStories.WithHierarchy} sourceState="none" />
 
 ### With Hierarchy and Side Panel
 
 Single selection with hierarchical multi-column navigation and a side panel for item details. Uses a wide tearsheet with `cds-tearsheet-summary-content` and `cds-add-select-selection-summary` to display selected item metadata. Clicking an item with `has-item-panel` shows details in the side panel.
 
-<Canvas withSource="none">
-  <Story of={SingleAddSelectStories.WithHierarchyAndSidePanel} />
-</Canvas>
+<Canvas of={SingleAddSelectStories.WithHierarchyAndSidePanel} sourceState="none" />
 
 ## Key features
 

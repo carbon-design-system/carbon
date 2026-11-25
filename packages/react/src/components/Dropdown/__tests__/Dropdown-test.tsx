@@ -1,0 +1,841 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import React, { createRef, type ComponentProps } from 'react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import {
+  assertMenuOpen,
+  assertMenuClosed,
+  openMenu,
+  generateItems,
+  generateGenericItem,
+  waitForPosition,
+} from '../../ListBox/test-helpers';
+import Dropdown from '..';
+import DropdownSkeleton from '../Dropdown.Skeleton';
+import { AILabel } from '../../AILabel';
+import { FeatureFlags } from '../../FeatureFlags';
+
+const prefix = 'cds';
+
+type Item = ReturnType<typeof generateGenericItem>;
+
+type DropdownMockProps = Pick<
+  ComponentProps<typeof Dropdown<Item>>,
+  'id' | 'items' | 'label' | 'titleText' | 'type'
+> & {
+  onChange: ReturnType<typeof jest.fn>;
+};
+
+describe('Dropdown', () => {
+  let mockProps: DropdownMockProps;
+  beforeEach(() => {
+    mockProps = {
+      id: 'test-dropdown',
+      items: generateItems(5, generateGenericItem),
+      onChange: jest.fn(),
+      label: 'input',
+      type: 'default',
+      titleText: 'Dropdown label',
+    };
+  });
+  afterEach(() => {
+    jest.useRealTimers(); // Restore real timers after each test
+  });
+
+  it('should initially render with the menu not open', async () => {
+    render(<Dropdown {...mockProps} />);
+    await waitForPosition();
+    assertMenuClosed();
+  });
+
+  it('should let the user open the menu by clicking on the control', async () => {
+    render(<Dropdown {...mockProps} />);
+    await openMenu();
+    assertMenuOpen(mockProps);
+  });
+
+  it('should render with strings as items', async () => {
+    render(<Dropdown {...mockProps} items={['zar', 'doz']} />);
+    await openMenu();
+
+    expect(screen.getByText('zar')).toBeInTheDocument();
+    expect(screen.getByText('doz')).toBeInTheDocument();
+  });
+
+  it('should render custom item components', async () => {
+    const itemToElement = jest.fn<
+      NonNullable<ComponentProps<typeof Dropdown<Item>>['itemToElement']>
+    >((item) => {
+      return <div className="mock-item">{item.label}</div>;
+    });
+
+    render(<Dropdown itemToElement={itemToElement} {...mockProps} />);
+    await openMenu();
+
+    expect(itemToElement).toHaveBeenCalled();
+  });
+
+  it('should render selectedItem as an element', async () => {
+    render(
+      <Dropdown
+        {...mockProps}
+        selectedItem={{
+          id: `id-1`,
+          label: `Item 1`,
+          value: 1,
+        }}
+        renderSelectedItem={(selectedItem) => (
+          <div id="a-custom-element-for-selected-item">
+            {selectedItem.label}
+          </div>
+        )}
+      />
+    );
+    await waitForPosition();
+    // custom element should be rendered for the selected item
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector('#a-custom-element-for-selected-item')
+    ).toBeInTheDocument();
+    // the title should use the normal itemToString method
+
+    expect(screen.getByText('Item 1')).toBeInTheDocument();
+  });
+
+  it('should render selectedItem as an element of type number', async () => {
+    const itemToElement = jest.fn<
+      NonNullable<ComponentProps<typeof Dropdown<Item>>['itemToElement']>
+    >((item) => {
+      return <div className="mock-item">{item.label}</div>;
+    });
+    const mockProps1 = { ...mockProps, label: 1 };
+    render(<Dropdown itemToElement={itemToElement} {...mockProps1} />);
+    await openMenu();
+    expect(itemToElement).toHaveBeenCalled();
+    await waitForPosition();
+    expect(screen.getByText(1)).toBeInTheDocument();
+  });
+
+  it('should render when defaultItemToString passed with null value', async () => {
+    const mockProps2 = { ...mockProps, label: [] };
+    const { container } = render(<Dropdown {...mockProps2} />);
+    const labelElement = screen.queryByText('shankar');
+    expect(labelElement).not.toBeInTheDocument();
+    const emptySpanTargeting = container.querySelector(
+      '.cds--list-box__label:not(:empty)'
+    );
+    expect(emptySpanTargeting).toBeNull();
+  });
+
+  describe('label', () => {
+    it('should warn without throwing for interactive content in label', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            label={
+              <>
+                Choose an option <a href="/">Help</a>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Dropdown component `label` prop must have no interactive content'
+        )
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in label', () => {
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            label={
+              <>
+                Choose an option <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+  });
+
+  describe('title', () => {
+    it('should warn without throwing for interactive content in titleText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            titleText={
+              <>
+                Dropdown label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Dropdown component `titleText` prop must have no interactive content'
+        )
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in titleText', () => {
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            titleText={
+              <>
+                Dropdown label <span>additional title content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
+    it('renders a title', async () => {
+      render(<Dropdown {...mockProps} titleText="Email Input" />);
+      await waitForPosition();
+      expect(screen.getByText('Email Input')).toBeInTheDocument();
+    });
+
+    it('has the expected classes', async () => {
+      render(<Dropdown {...mockProps} titleText="Email Input" />);
+      await waitForPosition();
+      expect(screen.getByText('Email Input')).toHaveClass(`${prefix}--label`);
+    });
+  });
+
+  describe('helper', () => {
+    it('renders a helper', async () => {
+      render(<Dropdown helperText="Email Input" {...mockProps} />);
+      await waitForPosition();
+      expect(screen.getByText('Email Input')).toBeInTheDocument();
+    });
+
+    it('renders children as expected', async () => {
+      render(
+        <Dropdown
+          helperText={
+            <span>
+              This helper text has <a href="/">a link</a>.
+            </span>
+          }
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      expect(screen.getByRole('link')).toBeInTheDocument();
+    });
+  });
+
+  it('should let the user select an option by clicking on the option node', async () => {
+    render(<Dropdown {...mockProps} />);
+    await openMenu();
+    await userEvent.click(screen.getByText('Item 0'));
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[0],
+    });
+    assertMenuClosed();
+
+    mockProps.onChange.mockClear();
+
+    await openMenu();
+    await userEvent.click(screen.getByText('Item 1'));
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[1],
+    });
+  });
+
+  it('should not open on arrowUp', async () => {
+    const ref = createRef<HTMLButtonElement>();
+    render(<Dropdown {...mockProps} readOnly={false} ref={ref} />);
+
+    const button = screen.getByRole('combobox');
+
+    assertMenuClosed();
+    // ArrowUp should not open the menu
+    fireEvent.keyDown(button, { key: 'ArrowUp' });
+    assertMenuClosed();
+    // ArrowDown should open the menu
+    fireEvent.keyDown(button, { key: 'ArrowDown' });
+    assertMenuOpen(mockProps);
+    // ArrowUp is allowed now that the menu is open
+    fireEvent.keyDown(button, { key: 'ArrowUp' });
+    assertMenuOpen(mockProps);
+  });
+
+  it('should respect readOnly prop', async () => {
+    const onChange = jest.fn();
+    const onKeyDown = jest.fn();
+    const ref = createRef<HTMLButtonElement>();
+    render(
+      <Dropdown
+        {...mockProps}
+        readOnly={true}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        ref={ref}
+      />
+    );
+    await openMenu(); // menu should not open
+    assertMenuClosed();
+
+    await waitForPosition();
+
+    const button = screen.getByRole('combobox');
+
+    fireEvent.click(button);
+    fireEvent.keyDown(button, { key: 'ArrowDown' });
+    fireEvent.keyDown(button, { code: 'ArrowDown' });
+
+    expect(onChange).toHaveBeenCalledTimes(0);
+    expect(onKeyDown).toHaveBeenCalledTimes(2);
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ key: 'ArrowDown' })
+    );
+    await openMenu(); // menu should not open
+    expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
+    assertMenuClosed();
+  });
+
+  it('should respect readOnly prop with false and respect call setTimeout function', async () => {
+    const onChange = jest.fn();
+    const onKeyDown = jest.fn();
+    const ref = createRef<HTMLButtonElement>();
+
+    render(
+      <Dropdown
+        {...mockProps}
+        readOnly={false}
+        onKeyDown={onKeyDown}
+        onChange={onChange}
+        ref={ref}
+      />
+    );
+
+    const button = screen.getByRole('combobox');
+    await waitForPosition();
+    act(() => {
+      jest.useFakeTimers();
+      fireEvent.keyDown(button, {
+        key: 'Space',
+        code: 'Space',
+      });
+      fireEvent.keyDown(button, {
+        key: 'ArrowLeft',
+        code: 'ArrowLeft',
+      });
+      jest.advanceTimersByTime(3000);
+    });
+    act(() => {
+      fireEvent.keyDown(button, {
+        key: 'Space',
+        code: 'Space',
+      });
+      fireEvent.keyDown(button, {
+        key: 'ArrowLeft',
+        code: 'ArrowLeft',
+      });
+    });
+
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ code: 'Space' })
+    );
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ code: 'ArrowLeft' })
+    );
+    expect(onChange).toHaveBeenCalledTimes(0);
+    assertMenuClosed();
+  });
+
+  it('should respect readOnly prop with false argument and respect clear activated Timeout', async () => {
+    const onChange = jest.fn();
+    const onKeyDown = jest.fn();
+    render(
+      <Dropdown
+        {...mockProps}
+        readOnly={false}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
+    );
+
+    await waitForPosition();
+    const button = screen.getByRole('combobox');
+    act(() => {
+      fireEvent.keyDown(button, {
+        key: 'Space',
+        code: 'Space',
+      });
+      fireEvent.keyDown(button, {
+        key: 'ArrowLeft',
+        code: 'ArrowLeft',
+      });
+    });
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ code: 'Space' })
+    );
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ code: 'ArrowLeft' })
+    );
+    expect(onChange).toHaveBeenCalledTimes(0);
+    assertMenuClosed();
+  });
+
+  it('should preserve selectedItem when menu is closed programmatically', async () => {
+    render(
+      <Dropdown {...mockProps} initialSelectedItem={mockProps.items[2]} />
+    );
+
+    await waitForPosition();
+
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+
+    await openMenu();
+    assertMenuOpen(mockProps);
+
+    const button = screen.getByRole('combobox');
+    fireEvent.keyDown(button, { key: 'ArrowDown' });
+
+    act(() => {
+      fireEvent.blur(button);
+    });
+
+    await waitForPosition();
+    assertMenuClosed();
+
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+  });
+
+  describe('should display initially selected item found in `initialSelectedItem`', () => {
+    it('using an object type for the `initialSelectedItem` prop', async () => {
+      render(
+        <Dropdown {...mockProps} initialSelectedItem={mockProps.items[0]} />
+      );
+      await waitForPosition();
+
+      expect(screen.getByText(mockProps.items[0].label)).toBeInTheDocument();
+    });
+
+    it('using a string type for the `initialSelectedItem` prop', async () => {
+      const stringItems = ['1', '2', '3'];
+
+      render(
+        <Dropdown
+          {...mockProps}
+          items={stringItems}
+          initialSelectedItem={stringItems[1]}
+        />
+      );
+      await waitForPosition();
+
+      expect(screen.getByText(stringItems[1])).toBeInTheDocument();
+    });
+  });
+
+  describe('Component API', () => {
+    window.HTMLElement.prototype.scrollIntoView = function () {};
+    it('should accept a `ref` for the underlying button element', async () => {
+      const ref = createRef<HTMLButtonElement>();
+      render(<Dropdown {...mockProps} ref={ref} />);
+      await waitForPosition();
+      expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
+    });
+
+    it('should respect decorator prop', async () => {
+      const { container } = render(
+        <Dropdown {...mockProps} decorator={<AILabel />} />
+      );
+      await waitForPosition();
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--list-box__wrapper--decorator`
+      );
+    });
+
+    it('should respect deprecated slug prop', async () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const { container } = render(
+        <Dropdown {...mockProps} slug={<AILabel />} />
+      );
+      await waitForPosition();
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--list-box__wrapper--slug`
+      );
+      spy.mockRestore();
+    });
+
+    it('should not enable `autoAlign` by default', async () => {
+      const { container } = render(<Dropdown {...mockProps} />);
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).not.toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
+
+    it('should enable `autoAlign` by default with `enable-v12-release`', async () => {
+      const { container } = render(
+        <FeatureFlags enableV12Release>
+          <Dropdown {...mockProps} />
+        </FeatureFlags>
+      );
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
+
+    it('should respect `autoAlign={false}` with `enable-v12-release`', async () => {
+      const { container } = render(
+        <FeatureFlags enableV12Release>
+          <Dropdown {...mockProps} autoAlign={false} />
+        </FeatureFlags>
+      );
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).not.toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
+  });
+});
+
+describe('Dropdown', () => {
+  let mockProps: DropdownMockProps;
+  beforeEach(() => {
+    mockProps = {
+      id: 'test-dropdown',
+      items: generateItems(5, generateGenericItem),
+      onChange: jest.fn(),
+      label: 'input',
+      type: 'default',
+      titleText: 'Dropdown label',
+    };
+  });
+
+  it('should initially render with the menu not open ', async () => {
+    render(<Dropdown {...mockProps} readOnly={true} />);
+    await waitForPosition();
+    assertMenuClosed();
+  });
+
+  it('should render custom item components when items are strings', async () => {
+    const items = ['mario', 'luigi'];
+
+    const itemToElement = jest.fn<
+      NonNullable<ComponentProps<typeof Dropdown<string>>['itemToElement']>
+    >((item) => <span data-testid={`${item}-item`}>{item}</span>);
+
+    render(
+      <Dropdown
+        {...mockProps}
+        items={items}
+        itemToString={(item) => item ?? ''}
+        itemToElement={itemToElement}
+      />
+    );
+
+    await openMenu();
+
+    expect(itemToElement).toHaveBeenCalledTimes(items.length);
+    expect(itemToElement).toHaveBeenCalledWith('mario');
+    expect(itemToElement).toHaveBeenCalledWith('luigi');
+
+    expect(screen.getByTestId('mario-item')).toBeInTheDocument();
+    expect(screen.getByTestId('luigi-item')).toBeInTheDocument();
+  });
+});
+
+describe('Validation states with disabled/readonly', () => {
+  let mockProps: DropdownMockProps;
+
+  beforeEach(() => {
+    mockProps = {
+      id: 'test-dropdown',
+      items: generateItems(5, generateGenericItem),
+      onChange: jest.fn(),
+      label: 'input',
+      titleText: 'Dropdown label',
+    };
+  });
+
+  it('should not show invalid state when disabled', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} disabled invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--invalid`)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Error message')).not.toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon`)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not show invalid state when readonly', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} readOnly invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--invalid`)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Error message')).not.toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon`)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not show warning state when disabled', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} disabled warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--warning`)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon--warning`)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not show warning state when readonly', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} readOnly warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--warning`)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon--warning`)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should show invalid state when interactive', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--invalid`)
+    ).toBeInTheDocument();
+    expect(screen.getByText('Error message')).toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon`)
+    ).toBeInTheDocument();
+  });
+
+  it('should show warning state when interactive', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--warning`)
+    ).toBeInTheDocument();
+    expect(screen.getByText('Warning message')).toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon--warning`)
+    ).toBeInTheDocument();
+  });
+
+  it('should show helper text instead of validation when disabled', async () => {
+    render(
+      <Dropdown
+        {...mockProps}
+        disabled
+        invalid
+        invalidText="Error"
+        helperText="Helper text"
+      />
+    );
+    await waitForPosition();
+
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+    expect(screen.queryByText('Error')).not.toBeInTheDocument();
+  });
+
+  it('should show helper text instead of validation when readonly', async () => {
+    render(
+      <Dropdown
+        {...mockProps}
+        readOnly
+        warn
+        warnText="Warning"
+        helperText="Helper text"
+      />
+    );
+    await waitForPosition();
+
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+    expect(screen.queryByText('Warning')).not.toBeInTheDocument();
+  });
+});
+
+describe('DropdownSkeleton', () => {
+  describe('Renders as expected', () => {
+    it('Has the expected classes', () => {
+      render(<DropdownSkeleton size="sm" />);
+
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--skeleton`)
+      ).toBeInTheDocument();
+    });
+  });
+});
+
+describe('Test useEffect ', () => {
+  let mockProps: DropdownMockProps;
+  beforeEach(() => {
+    mockProps = {
+      id: 'test-dropdown',
+      items: generateItems(5, generateGenericItem),
+      onChange: jest.fn(),
+      label: 'input',
+      type: 'default',
+      titleText: 'Dropdown label',
+    };
+  });
+
+  it('for auto-align features', async () => {
+    const { rerender } = render(<Dropdown {...mockProps} autoAlign={false} />);
+    //Initially, styles should not be set because autoAlign is false
+    //const floatingElement = getByTestId('test-dropdown');
+    rerender(<Dropdown {...mockProps} autoAlign={true} />);
+    await waitForPosition();
+    assertMenuClosed();
+  });
+
+  it('should set maxHeight on the floating menu when autoAlign is enabled', async () => {
+    render(<Dropdown {...mockProps} autoAlign />);
+    await openMenu();
+    await waitForPosition();
+
+    const menu = screen.getByRole('listbox', { hidden: true });
+    expect(menu.style.maxHeight).toBe('0px');
+  });
+
+  it('should add certain label props when `titleText` is a string', () => {
+    render(<Dropdown {...mockProps} titleText="Dropdown Title" />);
+
+    const label = screen.getByText('Dropdown Title').closest('label');
+    if (!label) {
+      throw new Error('Unable to find dropdown label.');
+    }
+    const attributes = Array.from(label.attributes).reduce<
+      Record<string, string>
+    >((acc, { name, value }) => ({ ...acc, [name]: value }), {});
+    const idPrefix = attributes.id.replace(/-label$/, '');
+
+    expect(attributes).toEqual({
+      class: 'cds--label',
+      for: attributes.for,
+      id: attributes.id,
+    });
+    expect(attributes.for).toBe(`${idPrefix}-toggle-button`);
+  });
+
+  it('should add certain label props when `titleText` is an element', () => {
+    render(<Dropdown {...mockProps} titleText={<span>Dropdown Title</span>} />);
+
+    const label = screen.getByText('Dropdown Title').closest('label');
+    if (!label) {
+      throw new Error('Unable to find dropdown label.');
+    }
+    const attributes = Array.from(label.attributes).reduce<
+      Record<string, string>
+    >((acc, { name, value }) => ({ ...acc, [name]: value }), {});
+
+    expect(attributes).toEqual({
+      class: 'cds--label',
+      id: attributes.id,
+    });
+  });
+});
+
+describe('Validation message ids', () => {
+  const mockProps = {
+    id: 'test-dropdown',
+    items: generateItems(5, generateGenericItem),
+    onChange: jest.fn(),
+    label: 'input',
+    type: 'default' as const,
+    titleText: 'Dropdown label',
+  };
+
+  it('should render a single invalid requirement element with a unique id', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(container.querySelectorAll('#test-dropdown-error-msg')).toHaveLength(
+      1
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-describedby',
+      'test-dropdown-error-msg'
+    );
+  });
+
+  it('should render a single warning requirement element with a unique id', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(container.querySelectorAll('#test-dropdown-warn-msg')).toHaveLength(
+      1
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-describedby',
+      'test-dropdown-warn-msg'
+    );
+  });
+});

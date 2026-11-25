@@ -8,7 +8,7 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './ImportAndUpload.mdx';
-import { StandardImportAndUpload } from './example/preview-components/StandardImportAndUpload';
+import { StandardImportAndUpload } from './preview-components/StandardImportAndUpload';
 
 export default {
   title: 'Examples/Import and upload',

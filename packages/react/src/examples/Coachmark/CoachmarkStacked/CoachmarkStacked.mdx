@@ -1,4 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as CoachmarkStackedStories from './CoachmarkStacked.stories';
 
 <Meta isTemplate />
@@ -48,15 +48,6 @@ explain, educate, and cultivate novice users into high-functioning power users.
 
 ## Example usage
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/Coachmark/CoachmarkStacked/example)
-> example implementation.
-
-[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/Coachmark/CoachmarkStacked/example)
 {/* TODO: One example per designed use case. */}
 
-<Canvas className="coachmarkExample" withSource="none">
-  <div className="CoachmarkBaseExampleUsage">
-    <Story of={CoachmarkStackedStories.CoachmarkStack} />
-  </div>
-</Canvas>
+<Canvas of={CoachmarkStackedStories.CoachmarkStack} className="coachmarkExample" sourceState="none" />

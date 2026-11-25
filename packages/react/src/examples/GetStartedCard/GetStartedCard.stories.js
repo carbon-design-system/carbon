@@ -6,15 +6,15 @@
  */
 
 import React from 'react';
-import './example/styles/_story-styles.scss';
+import './styles/_story-styles.scss';
 import DocsPage from './GetStartedCard.mdx';
-import { Default } from './example/preview-components/Default';
-import { WithSequence } from './example/preview-components/WithSequence';
-import { WithMediaAndPictogram } from './example/preview-components/WithMediaAndPictogram';
-import { WithMediaAndSequence } from './example/preview-components/WithMediaAndSequence';
-import { WithHorizontalMedia } from './example/preview-components/WithHorizontalMedia';
-import { WithAILabelAndActions } from './example/preview-components/WithAILabelAndActions';
-import { WithDisabled } from './example/preview-components/WithDisabled';
+import { Default } from './preview-components/Default';
+import { WithSequence } from './preview-components/WithSequence';
+import { WithMediaAndPictogram } from './preview-components/WithMediaAndPictogram';
+import { WithMediaAndSequence } from './preview-components/WithMediaAndSequence';
+import { WithHorizontalMedia } from './preview-components/WithHorizontalMedia';
+import { WithAILabelAndActions } from './preview-components/WithAILabelAndActions';
+import { WithDisabled } from './preview-components/WithDisabled';
 
 export default {
   title: 'Examples/GetStartedCard',
