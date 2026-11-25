@@ -310,7 +310,7 @@ class CDSCheckbox extends FormAssociatedMixin(FocusMixin(LitElement)) {
         type="checkbox"
         part="input"
         class="${`${prefix}--checkbox`}"
-        aria-readonly="${String(readonly)}"
+        aria-readonly="${ifDefined(disabled ? undefined : String(readonly))}"
         .checked="${checked}"
         ?data-invalid="${normalizedProps.invalid}"
         ?disabled="${disabled}"

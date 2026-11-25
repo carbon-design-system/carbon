@@ -6,8 +6,8 @@
  */
 
 import { html } from 'lit';
-import './create-modal/example/src/standard-create-modal';
-import './create-modal/example/src/create-modal-with-form-validation';
+import './create-modal/standard-create-modal';
+import './create-modal/create-modal-with-form-validation';
 import './_story-styles.scss';
 
 export default {

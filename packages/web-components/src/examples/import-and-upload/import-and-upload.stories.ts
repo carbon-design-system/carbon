@@ -7,8 +7,8 @@
  */
 
 import { html } from 'lit';
-import './example/src/import-modal';
-import type { FileType } from './example/src/import-modal';
+import './import-modal';
+import type { FileType } from './import-modal';
 
 export default {
   title: 'Examples/Import and Upload',

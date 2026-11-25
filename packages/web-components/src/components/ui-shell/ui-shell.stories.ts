@@ -101,8 +101,10 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
     [`${prefix}--col-lg-13`]: true,
     [`${prefix}--offset-lg-3`]: useResponsiveOffset,
   });
-  const toggleButton = () => {
-    document.querySelector('cds-modal')?.toggleAttribute('open');
+  const toggleButton = (event: Event) => {
+    (event.currentTarget as HTMLElement).parentElement
+      ?.querySelector('cds-modal')
+      ?.toggleAttribute('open');
   };
   return html`
     <style type="text/css">

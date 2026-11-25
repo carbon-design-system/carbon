@@ -64,9 +64,9 @@ started in case you get stuck.
 
 ### What does "ongoing support" mean regarding Slack?
 
-- A minimum of twice per day that maintainers monitor #carbon-design-system and
-  #carbon-react Slack support channels and respond to questions. Help our users
-  find solutions to their problems.
+- A minimum of twice per day, maintainers monitor the #carbon-design-system
+  Slack support channel and respond to questions. Help our users find solutions
+  to their problems.
 - The goal is to _respond_ to every thread on your day.
 - Go into threads where members of the community answer a question and validate
   the person in the community that answered it by adding an emoji or response
@@ -82,14 +82,9 @@ started in case you get stuck.
 - If a question is Carbon-related, but not necessarily related to the core
   components, route the person to the correct Slack channel where they might
   receive support.
-  - [ibmproducts-pal-dev](https://ibm.enterprise.slack.com/archives/C013ZTX0N6B)
-  - [ibmproducts-pal](https://ibm.enterprise.slack.com/archives/CQGR0HC05)
   - [carbon-ng](https://ibm.enterprise.slack.com/archives/CBZC0LM2N)
   - [carbon-for-cloud](https://ibm.enterprise.slack.com/archives/C0603NZDXRD)
-  - [carbon-charts](https://ibm.enterprise.slack.com/archives/CCA7L4MS9)
   - [carbon-for-ibm-dotcom](https://ibm.enterprise.slack.com/archives/C2PLX8GQ6)
-  - [carbon-web-components](https://ibm.enterprise.slack.com/archives/CL83LMKSA)
-  - [carbon-wg-typescript](https://ibm.enterprise.slack.com/archives/C03C8VASVED)
 
 ### Configuring the GitHub Slack integration
 
@@ -101,15 +96,14 @@ For additional guidance checkout their
 ### What repositories do we support?
 
 - carbon-design-system/carbon
-- carbon-design-system/carbon-website
 - carbon-design-system/carbon-design-kit
 
 ## Issues
 
-When our users want to submit a new issues to one of our repositories they're
-presented with the option to select from one of four templates. These templates
-ask a series of specific questions that make first-aid and triage go smoothly.
-They help us help them.
+When our users want to submit a new issue to one of our repositories, they're
+presented with the available issue templates. These templates ask a series of
+specific questions that make first-aid and triage go smoothly. They help us help
+them.
 
 _If the user hasn't taken the time to fill out one of our templates feel free to
 ask them to do so. Typically you'll need at least a good description of the
@@ -498,9 +492,9 @@ or update (a common occurrence).
 
 ### Pull requests with failing tests or merge conflicts
 
-When a new pull request comes in check and make sure our continuous integration
-system (Circle CI) doesn't have any failing tests or merge conflicts, if it does
-label it accordingly. Then politely ask the pull request maker to fix it.
+When a new pull request comes in, make sure its CI checks pass and it has no
+merge conflicts. If not, label it accordingly and politely ask the pull request
+maker to fix the issues.
 
 ### Pull Request Reviews
 

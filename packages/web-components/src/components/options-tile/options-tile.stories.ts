@@ -8,8 +8,8 @@
 import { html } from 'lit';
 import type { Args, Meta } from '@storybook/web-components';
 import './index';
-import '@carbon/web-components/es/components/toggle/index.js';
-import '@carbon/web-components/es/components/dropdown/index.js';
+import '../toggle/index';
+import '../dropdown/index';
 import { languages, locales, blockClass } from './option-tile-helpers.ts';
 import styles from './story-styles.scss?lit';
 

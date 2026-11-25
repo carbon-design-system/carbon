@@ -8,8 +8,8 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './Carousel.mdx';
-import { CarouselExample } from './example/components/CarouselExample';
-import { ViewStackExample } from './example/components/ViewStackExample';
+import { CarouselExample } from './components/CarouselExample';
+import { ViewStackExample } from './components/ViewStackExample';
 
 export default {
   title: 'Examples/Carousel',

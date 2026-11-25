@@ -18,6 +18,8 @@ import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
 import { getIbmAnalyticsHeads } from '../../../tasks/storybook-ibm-analytics.mjs';
+import { storybookStackBlitz } from '../../../tasks/storybook-stackblitz/vite-plugin.mjs';
+import { reactStackBlitz } from '../../../tasks/storybook-stackblitz/react.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 const { managerAnalyticsHead, previewAnalyticsHead } = getIbmAnalyticsHeads(
@@ -164,6 +166,8 @@ const config: StorybookConfig = {
         babel({
           presets: ['babel-preset-carbon'],
         }),
+        // "Open in StackBlitz" docs action, generated from each story
+        storybookStackBlitz(reactStackBlitz),
       ],
       resolve: {
         preserveSymlinks: true,

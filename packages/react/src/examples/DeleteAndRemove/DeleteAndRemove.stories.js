@@ -8,11 +8,11 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './DeleteAndRemove.mdx';
-import { HighImpactDeletion } from './example/preview-components/HighImpactDeletion';
-import { HighImpactDeletionWithConnectedItems } from './example/preview-components/HighImpactDeletionWithConnectedItems';
-import { HighImpactBatchDeletion } from './example/preview-components/HighImpactBatchDeletion';
-import { MediumImpactDeletion } from './example/preview-components/MediumImpactDeletion';
-import { LowImpactDeletion } from './example/preview-components/LowImpactDeletion';
+import { HighImpactDeletion } from './preview-components/HighImpactDeletion';
+import { HighImpactDeletionWithConnectedItems } from './preview-components/HighImpactDeletionWithConnectedItems';
+import { HighImpactBatchDeletion } from './preview-components/HighImpactBatchDeletion';
+import { MediumImpactDeletion } from './preview-components/MediumImpactDeletion';
+import { LowImpactDeletion } from './preview-components/LowImpactDeletion';
 
 export default {
   title: 'Examples/Delete and remove',

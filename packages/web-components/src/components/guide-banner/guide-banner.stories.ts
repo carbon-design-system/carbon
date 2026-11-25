@@ -9,8 +9,10 @@
 
 import { html } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
+import { ref } from 'lit/directives/ref.js';
 import { fn } from 'storybook/test';
 import './index';
+import '../link/index';
 import styles from './story-styles.scss?lit';
 import {
   snapScroll,
@@ -117,9 +119,11 @@ const renderTemplate = (args: Args) => {
     withLeftGutter,
   } = args;
 
-  document.addEventListener('DOMContentLoaded', () => {
-    snapScroll(`.${blockClass}__body`, `.${blockClass}__body-elm`);
-  });
+  const initSnapScroll = (el?: Element) => {
+    if (el) {
+      snapScroll(`.${blockClass}__body`, `.${blockClass}__body-elm`);
+    }
+  };
 
   const nextHandler = () => {
     scrollNext();
@@ -129,15 +133,18 @@ const renderTemplate = (args: Args) => {
     scrollPrevious();
   };
 
-  const scrollendHandler = () => {
-    const nextBtn = document.getElementById('next-btn');
+  const scrollendHandler = (evt: Event) => {
+    const banner = (evt.currentTarget as HTMLElement).closest(
+      'cds-guide-banner'
+    );
+    const nextBtn = banner?.querySelector('#next-btn');
     if (hasNextSiblingNotInView()) {
       nextBtn?.removeAttribute('disabled');
     } else {
       nextBtn?.setAttribute('disabled', '');
     }
 
-    const previousBtn = document.getElementById('previous-btn');
+    const previousBtn = banner?.querySelector('#previous-btn');
     if (hasPreviousSiblingNotInView()) {
       previousBtn?.removeAttribute('disabled');
     } else {
@@ -163,6 +170,7 @@ const renderTemplate = (args: Args) => {
         <div
           class="${blockClass}__body"
           dir="ltr"
+          ${ref(initSnapScroll)}
           @scrollend=${scrollendHandler}>
           ${repeat(
             items,
@@ -199,9 +207,9 @@ const renderTemplate = (args: Args) => {
                 | (HTMLElement & { open: boolean; _handleToggle(): void })
                 | null;
               const toggleBtn = evt.target as HTMLElement;
-              const footerRight = document.querySelector(
+              const footerRight = guideBanner?.querySelector(
                 `.${blockClass}__footer-right`
-              ) as HTMLElement;
+              ) as HTMLElement | null;
               if (guideBanner) {
                 guideBanner._handleToggle();
                 // Update button text and navigation visibility after toggle

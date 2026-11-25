@@ -8,7 +8,7 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './CoachmarkStacked.mdx';
-import { CoachmarkStackedExample } from './example/components/CoachmarkStackedExample';
+import { CoachmarkStackedExample } from './components/CoachmarkStackedExample';
 
 export default {
   title: 'Examples/Coachmark/Coachmark Stacked',

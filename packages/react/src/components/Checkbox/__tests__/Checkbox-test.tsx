@@ -218,7 +218,7 @@ describe('Checkbox', () => {
   });
 
   it('should remain disabled when readOnly and disabled are both true', () => {
-    render(
+    const { container } = render(
       <Checkbox
         defaultChecked
         labelText="Checkbox label"
@@ -228,7 +228,12 @@ describe('Checkbox', () => {
       />
     );
 
-    expect(screen.getByRole('checkbox')).toBeDisabled();
+    const checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toBeDisabled();
+    expect(checkbox).not.toHaveAttribute('aria-readonly');
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--readonly`
+    );
   });
 
   it('should display helperText when invalid is true but disabled', () => {

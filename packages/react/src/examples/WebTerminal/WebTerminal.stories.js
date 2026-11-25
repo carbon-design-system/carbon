@@ -14,7 +14,7 @@ import {
   Default,
   WithActions,
   WithDocumentationLinks,
-} from './example/preview-components';
+} from './preview-components';
 
 export default {
   title: 'Examples/Web Terminal',

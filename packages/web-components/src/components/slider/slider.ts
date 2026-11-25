@@ -1026,7 +1026,7 @@ class CDSSlider extends FormAssociatedMixin(
     const sliderClasses = classMap({
       [`${prefix}--slider`]: true,
       [`${prefix}--slider--disabled`]: disabled,
-      [`${prefix}--slider--readonly`]: readonly,
+      [`${prefix}--slider--readonly`]: readonly && !disabled,
     });
     const thumbLowerWrapperClasses = classMap({
       [`${prefix}--icon-tooltip`]: true,

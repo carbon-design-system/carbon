@@ -162,12 +162,16 @@ const onAction = async (e) => {
     proceed(false); // deny progression on error
   }
 };
-const toggleButton = () => {
-  document.querySelector('cds-interstitial-screen')?.toggleAttribute('open');
+const toggleButton = (event: Event) => {
+  (event.currentTarget as HTMLElement)
+    .closest('div')
+    ?.nextElementSibling?.toggleAttribute('open');
 };
 
-const handleClose = () => {
-  document.getElementById('launcherButton')?.focus();
+const handleClose = (event: Event) => {
+  (event.currentTarget as HTMLElement).previousElementSibling
+    ?.querySelector<HTMLElement>('cds-button')
+    ?.focus();
 };
 
 export const Modal = {
@@ -180,8 +184,8 @@ export const Modal = {
       };
     };
     return html`
-      <div id="page-content-selector">
-        <cds-button id="launcherButton" @click="${toggleButton}"
+      <div>
+        <cds-button @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
@@ -214,8 +218,8 @@ export const Modal = {
 export const ModalWithMultipleSteps = {
   render: (args) => {
     return html`
-      <div id="page-content-selector">
-        <cds-button id="launcherButton" @click="${toggleButton}"
+      <div>
+        <cds-button @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
@@ -239,8 +243,8 @@ export const ModalWithMultipleSteps = {
 export const ModalWithAsynchronousAction = {
   render: (args) => {
     return html`
-      <div id="page-content-selector">
-        <cds-button id="launcherButton" @click="${toggleButton}"
+      <div>
+        <cds-button @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
@@ -288,7 +292,7 @@ export const WithCustomActionButtons = {
         currentStep = currentStep - 1;
       } else {
         // handle 'skip' or 'submit' action here
-        document
+        container
           .querySelector('cds-interstitial-screen')
           ?.toggleAttribute('open');
       }
@@ -304,8 +308,8 @@ export const WithCustomActionButtons = {
     const rerender = () => {
       litRender(
         html`
-          <div id="page-content-selector">
-            <cds-button id="launcherButton" @click="${toggleButton}"
+          <div>
+            <cds-button @click="${toggleButton}"
               >Show Interstitial modal</cds-button
             >
           </div>
@@ -401,8 +405,8 @@ export const FullScreen = {
       };
     };
     return html`
-      <div id="page-content-selector">
-        <cds-button id="launcherButton" @click="${toggleButton}"
+      <div>
+        <cds-button @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
@@ -433,8 +437,8 @@ export const FullScreenWithMultipleSteps = {
   render: (args) => {
     const { open } = args;
     return html`
-      <div id="page-content-selector">
-        <cds-button id="launcherButton" @click="${toggleButton}"
+      <div>
+        <cds-button @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>

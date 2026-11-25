@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './side-panel';
 import './index';
-import { prefix } from '../../globals/settings';
 
 import '../button/index';
 import '../text-input/index';
@@ -27,21 +26,19 @@ import {
   getSlug,
 } from './_story-assets';
 
-const toggleButton = () => {
-  document.querySelector(`${prefix}-side-panel`)?.toggleAttribute('open');
+const toggleButton = (event: Event) => {
+  (event.currentTarget as HTMLElement)
+    .closest(`.${storyPrefix}story-container`)
+    ?.nextElementSibling?.toggleAttribute('open');
 };
 
-const nextStep = () => {
-  document
-    .querySelector(`${prefix}-side-panel`)
-    ?.setAttribute('current-step', '1');
+const setStep = (event: Event, step: string) => {
+  (event.currentTarget as HTMLElement)
+    .closest('cds-side-panel')
+    ?.setAttribute('current-step', step);
 };
-
-const prevStep = () => {
-  document
-    .querySelector(`${prefix}-side-panel`)
-    ?.setAttribute('current-step', '0');
-};
+const nextStep = (event: Event) => setStep(event, '1');
+const prevStep = (event: Event) => setStep(event, '0');
 
 const sizes = {
   // 'default (md)': null,

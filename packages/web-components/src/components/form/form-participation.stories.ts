@@ -8,6 +8,7 @@
 import { html, nothing } from 'lit';
 import { fn } from 'storybook/test';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { createRef, ref } from 'lit/directives/ref.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
@@ -249,7 +250,7 @@ const aiLabelStoryStyles = `
   }
 `;
 
-const wrapForm = (content, { showInModal, modalId }) => {
+const wrapForm = (content, { showInModal }) => {
   if (!showInModal) {
     return html`<div style="width: 100%; max-width: 600px; min-width: 0;">
       <style>
@@ -259,8 +260,10 @@ const wrapForm = (content, { showInModal, modalId }) => {
     </div>`;
   }
 
-  const openModal = () => {
-    document.getElementById(modalId)?.toggleAttribute('open');
+  const openModal = (event: Event) => {
+    (event.currentTarget as HTMLElement).nextElementSibling?.toggleAttribute(
+      'open'
+    );
   };
 
   return html`
@@ -268,7 +271,7 @@ const wrapForm = (content, { showInModal, modalId }) => {
       ${aiLabelStoryStyles}
     </style>
     <cds-button @click="${openModal}">Open form</cds-button>
-    <cds-modal id="${modalId}" size="md" prevent-close-on-click-outside>
+    <cds-modal size="md" prevent-close-on-click-outside>
       <cds-modal-header>
         <cds-modal-close-button></cds-modal-close-button>
         <cds-modal-heading>Create project</cds-modal-heading>
@@ -340,9 +343,10 @@ const renderPreviewForm = (args) => {
   const decorator = () => (aiLabel ? renderAILabel(revertActive) : nothing);
   const dateHelper = (text) =>
     invalid || warn ? nothing : html`<span slot="helper-text">${text}</span>`;
+  const formRef = createRef<HTMLFormElement>();
 
   const handleSubmit = () => {
-    const form = document.querySelector('#preview-form');
+    const form = formRef.value;
     if (!form) return;
     // No manual validation loop. `requestSubmit()` runs constraint validation
     // itself, because these controls are real form controls.
@@ -351,7 +355,7 @@ const renderPreviewForm = (args) => {
 
   // set up controls/actions
   requestAnimationFrame(() => {
-    const form = document.querySelector('#preview-form');
+    const form = formRef.value;
     if (!form) {
       return;
     }
@@ -406,7 +410,7 @@ const renderPreviewForm = (args) => {
     html`
       <cds-form>
         <form
-          id="preview-form"
+          ${ref(formRef)}
           aria-label="new project setup"
           @submit="${handleFormSubmit}"
           @reset="${handleReset}"
@@ -763,14 +767,14 @@ const renderPreviewForm = (args) => {
             <cds-button
               kind="secondary"
               type="reset"
-              @click="${() => document.querySelector('#preview-form')?.reset()}"
+              @click="${() => formRef.value?.reset()}"
               >Reset</cds-button
             >
           </cds-stack>
         </form>
       </cds-form>
     `,
-    { showInModal, modalId: 'preview-form-modal' }
+    { showInModal }
   );
 };
 

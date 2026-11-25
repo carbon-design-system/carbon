@@ -705,6 +705,23 @@ describe('Slider', () => {
       expect(invalidMessage).not.toBeInTheDocument();
     });
 
+    it('should prioritize disabled over readOnly when both are true', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        disabled: true,
+        readOnly: true,
+      });
+      const sliderInput = screen.getByRole('spinbutton');
+      expect(sliderInput).toBeDisabled();
+      expect(sliderInput).not.toHaveAttribute('readonly');
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(document.querySelector(`.${prefix}--slider--readonly`)).toBeNull();
+      expect(
+        // eslint-disable-next-line testing-library/no-node-access
+        document.querySelector(`.${prefix}--text-input-wrapper--readonly`)
+      ).toBeNull();
+    });
+
     describe('Error handling, expected behavior from event handlers', () => {
       it('handles non-number typed into input field', async () => {
         const { type, tab } = userEvent;
@@ -1637,6 +1654,28 @@ describe('Slider', () => {
       expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
       expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
       expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
+    });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      renderTwoHandleSlider({
+        disabled: true,
+        readOnly: true,
+      });
+
+      const lowerInput = screen.getByLabelText(defaultAriaLabelInput, {
+        selector: 'input',
+      });
+      const upperInput = screen.getByLabelText(defaultAriaLabelInputUpper, {
+        selector: 'input',
+      });
+      expect(lowerInput).toBeDisabled();
+      expect(upperInput).toBeDisabled();
+      expect(lowerInput).not.toHaveAttribute('readonly');
+      expect(upperInput).not.toHaveAttribute('readonly');
+      expect(
+        // eslint-disable-next-line testing-library/no-node-access
+        document.querySelector(`.${prefix}--slider-container--readonly`)
+      ).toBeNull();
     });
 
     it('should clear invalid state when invalid changes to false', async () => {
