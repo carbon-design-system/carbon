@@ -16,6 +16,26 @@ describe('cds-slider', () => {
     });
   };
 
+  it('should release within bounds changed during a drag', async () => {
+    const el = await fixture(html`
+      <cds-slider min="0" max="100" step="1" value="80"></cds-slider>
+    `);
+    await el.updateComplete;
+    const thumb = el.shadowRoot.querySelector('#thumb');
+    const slider = el.shadowRoot.querySelector('.cds--slider');
+    const values = [];
+    el.addEventListener('cds-slider-changed', (event) => {
+      values.push(event.detail.value);
+    });
+    thumb.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    el.max = 60;
+    await el.updateComplete;
+    slider.dispatchEvent(new Event('pointerup', { bubbles: true }));
+    await el.updateComplete;
+    expect(values).to.deep.equal([60]);
+    expect(el.value).to.equal(60);
+  });
+
   it('should display invalid state and message', async () => {
     const el = await fixture(
       html` <cds-slider
