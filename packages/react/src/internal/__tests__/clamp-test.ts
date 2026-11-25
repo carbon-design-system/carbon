@@ -1,10 +1,11 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import { clamp } from '../clamp';
 
 describe('clamp', () => {
@@ -25,8 +26,11 @@ describe('clamp', () => {
   });
 
   it('should return `NaN` if any argument is not a number', () => {
+    // @ts-expect-error: Pass a non-number value to test the fallback.
     expect(clamp('a', 0, 10)).toBeNaN();
+    // @ts-expect-error: Pass a non-number minimum to test the fallback.
     expect(clamp(5, 'a', 10)).toBeNaN();
+    // @ts-expect-error: Pass a non-number maximum to test the fallback.
     expect(clamp(5, 0, 'a')).toBeNaN();
   });
 

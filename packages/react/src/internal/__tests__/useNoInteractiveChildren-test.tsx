@@ -5,6 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { render } from '@testing-library/react';
 import React, { useRef } from 'react';
 import {
@@ -136,7 +144,7 @@ describe('getRoleContent', () => {
 });
 
 describe('noInteractiveChildren hooks in production', () => {
-  let originalNodeEnv;
+  let originalNodeEnv: string | undefined;
 
   beforeEach(() => {
     originalNodeEnv = process.env.NODE_ENV;

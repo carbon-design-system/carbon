@@ -1,37 +1,39 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { useIdPrefix, IdPrefixContext } from '../useIdPrefix';
+import { usePrefix, PrefixContext } from '../usePrefix';
 
 describe('usePrefix', () => {
   it('should emit the default prefix without context', () => {
-    let value = null;
+    let value: string | null = null;
 
     function TestComponent() {
-      value = useIdPrefix();
+      value = usePrefix();
       return null;
     }
 
     render(<TestComponent />);
-    expect(value).toBe(null);
+    expect(value).toBe('cds');
   });
 
   it('should emit the prefix in context', () => {
     function TestComponent() {
-      const contextValue = useIdPrefix();
+      const contextValue = usePrefix();
       return <span data-testid="test">{contextValue}</span>;
     }
 
     render(
-      <IdPrefixContext.Provider value="test">
+      <PrefixContext.Provider value="test">
         <TestComponent />
-      </IdPrefixContext.Provider>
+      </PrefixContext.Provider>
     );
 
     expect(screen.getByTestId('test')).toHaveTextContent('test');

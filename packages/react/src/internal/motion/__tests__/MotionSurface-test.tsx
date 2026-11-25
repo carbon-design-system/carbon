@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
+import React, { type ComponentProps } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 
 jest.mock('../useMotionEnabled', () => ({
@@ -15,20 +17,27 @@ jest.mock('../useMotionEnabled', () => ({
 // timer-based implementation before requiring anything that imports `motion/react`
 // to avoid infinite looping
 if (typeof global.performance === 'undefined') {
-  global.performance = { now: () => Date.now() };
+  Object.defineProperty(globalThis, 'performance', {
+    configurable: true,
+    value: { now: () => Date.now() },
+  });
 }
 global.requestAnimationFrame = (callback) =>
-  setTimeout(() => callback(performance.now()), 16);
-global.cancelAnimationFrame = (id) => clearTimeout(id);
+  window.setTimeout(() => callback(performance.now()), 16);
+global.cancelAnimationFrame = (id) => window.clearTimeout(id);
 
-const { MotionSurface, MotionSurfaceOrigin } = require('../MotionSurface');
-const { useMotionEnabled } = require('../useMotionEnabled');
+const { MotionSurface, MotionSurfaceOrigin } =
+  jest.requireActual<typeof import('../MotionSurface')>('../MotionSurface');
+const useMotionEnabled = jest.mocked(
+  jest.requireMock<typeof import('../useMotionEnabled')>('../useMotionEnabled')
+    .useMotionEnabled
+);
+
+afterEach(() => {
+  useMotionEnabled.mockReturnValue(true);
+});
 
 describe('MotionSurface', () => {
-  afterEach(() => {
-    useMotionEnabled.mockReturnValue(true);
-  });
-
   it('renders children when open', () => {
     render(
       <MotionSurface surface="expand" surfaceId="pair">
@@ -63,7 +72,7 @@ describe('MotionSurface', () => {
 
   // Custom surfaces compose a definition instead of taking a public name.
   it('accepts an inline definition', async () => {
-    const panelReveal = {
+    const panelReveal: ComponentProps<typeof MotionSurface>['surface'] = {
       kind: 'reveal',
       duration: 'slow-01',
       enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
@@ -158,10 +167,6 @@ describe('MotionSurface', () => {
 });
 
 describe('MotionSurfaceOrigin', () => {
-  afterEach(() => {
-    useMotionEnabled.mockReturnValue(true);
-  });
-
   it('stays mounted and renders its children', () => {
     render(
       <MotionSurfaceOrigin surface="expand" surfaceId="pair">

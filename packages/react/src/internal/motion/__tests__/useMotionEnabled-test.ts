@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { renderHook } from '@testing-library/react';
 import { useReducedMotion } from 'motion/react';
 import { useMotionEnabled } from '../useMotionEnabled';
@@ -15,7 +16,7 @@ jest.mock('motion/react', () => ({
 
 describe('useMotionEnabled', () => {
   it('is enabled when the user has no motion preference', () => {
-    useReducedMotion.mockReturnValue(false);
+    jest.mocked(useReducedMotion).mockReturnValue(false);
 
     const { result } = renderHook(() => useMotionEnabled());
 
@@ -23,7 +24,7 @@ describe('useMotionEnabled', () => {
   });
 
   it('disables motion when the user prefers reduced motion', () => {
-    useReducedMotion.mockReturnValue(true);
+    jest.mocked(useReducedMotion).mockReturnValue(true);
 
     const { result } = renderHook(() => useMotionEnabled());
 

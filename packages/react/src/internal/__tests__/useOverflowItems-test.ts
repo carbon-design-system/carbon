@@ -5,6 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { renderHook, act } from '@testing-library/react';
 import useOverflowItems from '../useOverflowItems';
 
@@ -32,24 +42,25 @@ jest.mock('../../internal/usePreviousValue', () => ({
 
 // Save original implementations
 const originalResizeObserver = window.ResizeObserver;
-const originalGetComputedStyle = window.getComputedStyle;
+let getComputedStyleMock: ReturnType<typeof jest.spyOn>;
 
 beforeAll(() => {
   // Mock ResizeObserver
   window.ResizeObserver = mockResizeObserver;
 
   // Mock getComputedStyle
-  window.getComputedStyle = jest.fn(() => ({
-    marginLeft: '0px',
-    marginRight: '0px',
-    getPropertyValue: jest.fn(() => ''),
-  }));
+  const style = document.createElement('div').style;
+  style.marginLeft = '0px';
+  style.marginRight = '0px';
+  getComputedStyleMock = jest
+    .spyOn(window, 'getComputedStyle')
+    .mockReturnValue(style);
 });
 
 afterAll(() => {
   // Restore originals
   window.ResizeObserver = originalResizeObserver;
-  window.getComputedStyle = originalGetComputedStyle;
+  getComputedStyleMock.mockRestore();
 });
 
 // Mock items for testing
@@ -61,8 +72,8 @@ const mockItems = [
 ];
 
 describe('useOverflowItems', () => {
-  let containerRef;
-  let offsetRef;
+  let containerRef: { current: HTMLElement | null };
+  let offsetRef: { current: HTMLElement | null };
 
   beforeEach(() => {
     // Create mock DOM elements
@@ -109,7 +120,7 @@ describe('useOverflowItems', () => {
 
     // Mock that all items fit
     act(() => {
-      mockItems.forEach((item, index) => {
+      mockItems.forEach((item) => {
         const mockNode = document.createElement('div');
         Object.defineProperty(mockNode, 'offsetWidth', { value: 50 });
         Object.defineProperty(mockNode, 'style', {
@@ -159,7 +170,7 @@ describe('useOverflowItems', () => {
       result.current.itemRefHandler('test-id', mockNode);
     });
 
-    expect(window.getComputedStyle).toHaveBeenCalledWith(mockNode);
+    expect(getComputedStyleMock.mock.calls).toContainEqual([mockNode]);
   });
 
   it('should handle container without offsetRef', () => {
@@ -214,6 +225,7 @@ describe('useOverflowItems', () => {
     expect(Array.isArray(result.current.hiddenItems)).toBe(true);
 
     expect(() => {
+      // @ts-expect-error: Pass a string to test non-array item handling.
       rerender({ items: 'not an array' });
     }).not.toThrow();
     expect(result.current.visibleItems).toEqual([]);

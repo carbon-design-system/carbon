@@ -1,16 +1,30 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import React, { StrictMode, useRef } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import { useResizeObserver } from '../useResizeObserver';
 
-const ResizeTest = ({ onResize, onRender }) => {
-  const ref = useRef(null);
+const ResizeTest = ({
+  onResize,
+  onRender,
+}: {
+  onResize?: (size: DOMRectReadOnly) => void;
+  onRender?: () => void;
+}) => {
+  const ref = useRef<HTMLDivElement | null>(null);
   const { width, height } = useResizeObserver({ ref, onResize });
   onRender?.();
   return (
@@ -22,23 +36,49 @@ const ResizeTest = ({ onResize, onRender }) => {
 
 const defaultSize = 100;
 describe('useResizeObserver', () => {
-  let savedObserverCb;
-  let observeMock;
-  let disconnectMock;
   const originalRequestAnimationFrame = requestAnimationFrame;
   const originalCancelAnimationFrame = cancelAnimationFrame;
+  let savedObserverCb: ResizeObserverCallback | undefined;
+  let resizeObserver: ResizeObserver | undefined;
+  let observeMock: ReturnType<typeof jest.fn<ResizeObserver['observe']>>;
+  let disconnectMock: ReturnType<typeof jest.fn<ResizeObserver['disconnect']>>;
+
+  const notifyResize = (entries: ResizeObserverEntry[]) => {
+    if (!savedObserverCb || !resizeObserver) {
+      throw new Error('Expected a ResizeObserver callback to be registered.');
+    }
+
+    savedObserverCb(entries, resizeObserver);
+  };
+
+  const createResizeEntry = (
+    target: Element,
+    width: number,
+    height: number
+  ) => ({
+    target,
+    borderBoxSize: [],
+    contentBoxSize: [],
+    devicePixelContentBoxSize: [],
+    contentRect: DOMRectReadOnly.fromRect({ width, height }),
+  });
 
   beforeEach(() => {
-    observeMock = jest.fn();
-    disconnectMock = jest.fn();
-    window.ResizeObserver = jest.fn().mockImplementation((cb) => {
-      savedObserverCb = cb;
-      return {
-        observe: observeMock,
-        unobserve: jest.fn(),
-        disconnect: disconnectMock,
-      };
-    });
+    observeMock = jest.fn<ResizeObserver['observe']>();
+    disconnectMock = jest.fn<ResizeObserver['disconnect']>();
+
+    class MockResizeObserver implements ResizeObserver {
+      constructor(callback: ResizeObserverCallback) {
+        savedObserverCb = callback;
+        resizeObserver = this;
+      }
+
+      observe = observeMock;
+      unobserve = jest.fn<ResizeObserver['unobserve']>();
+      disconnect = disconnectMock;
+    }
+
+    window.ResizeObserver = MockResizeObserver;
   });
 
   afterEach(() => {
@@ -49,12 +89,12 @@ describe('useResizeObserver', () => {
 
   /** Triggers resize from the saved resize observer callback */
   const triggerResize = async (
-    element,
+    element: Element,
     width = defaultSize,
     height = defaultSize
   ) =>
     act(() => {
-      savedObserverCb([{ target: element, contentRect: { width, height } }]);
+      notifyResize([createResizeEntry(element, width, height)]);
     });
 
   it('returns the initial size of the component', () => {
@@ -125,15 +165,19 @@ describe('useResizeObserver', () => {
     await triggerResize(element, 0, 0);
 
     expect(resizeFn).toHaveBeenCalledTimes(1);
-    expect(resizeFn).toHaveBeenLastCalledWith({ width: 0, height: 0 });
+    expect(resizeFn).toHaveBeenLastCalledWith(
+      expect.objectContaining({ width: 0, height: 0 })
+    );
   });
 
   it('coalesces multiple resize entries into one animation frame', () => {
-    const animationFrameCallbacks = [];
-    globalThis.requestAnimationFrame = jest.fn((callback) => {
-      animationFrameCallbacks.push(callback);
-      return animationFrameCallbacks.length;
-    });
+    const animationFrameCallbacks: FrameRequestCallback[] = [];
+    globalThis.requestAnimationFrame = jest.fn<typeof requestAnimationFrame>(
+      (callback) => {
+        animationFrameCallbacks.push(callback);
+        return animationFrameCallbacks.length;
+      }
+    );
     globalThis.cancelAnimationFrame = jest.fn();
 
     const resizeFn = jest.fn();
@@ -141,37 +185,35 @@ describe('useResizeObserver', () => {
     const element = screen.getByTestId('observed-element');
 
     act(() => {
-      savedObserverCb([
-        { target: element, contentRect: { width: 200, height: 300 } },
-      ]);
-      savedObserverCb([
-        { target: element, contentRect: { width: 400, height: 500 } },
-      ]);
+      notifyResize([createResizeEntry(element, 200, 300)]);
+      notifyResize([createResizeEntry(element, 400, 500)]);
     });
 
     expect(requestAnimationFrame).toHaveBeenCalledTimes(1);
     expect(resizeFn).not.toHaveBeenCalled();
 
     act(() => {
-      animationFrameCallbacks[0]();
+      animationFrameCallbacks[0](0);
     });
 
     expect(screen.getByText('width: 400, height: 500')).toBeInTheDocument();
     expect(resizeFn).toHaveBeenCalledTimes(1);
-    expect(resizeFn).toHaveBeenLastCalledWith({ width: 400, height: 500 });
+    expect(resizeFn).toHaveBeenLastCalledWith(
+      expect.objectContaining({ width: 400, height: 500 })
+    );
   });
 
   it('schedules a new animation frame after cleanup cancels a pending frame', () => {
-    const animationFrameCallbacks = [];
-    globalThis.requestAnimationFrame = jest.fn((callback) => {
-      animationFrameCallbacks.push(callback);
-      return animationFrameCallbacks.length;
-    });
+    const animationFrameCallbacks: FrameRequestCallback[] = [];
+    globalThis.requestAnimationFrame = jest.fn<typeof requestAnimationFrame>(
+      (callback) => {
+        animationFrameCallbacks.push(callback);
+        return animationFrameCallbacks.length;
+      }
+    );
     globalThis.cancelAnimationFrame = jest.fn();
     observeMock.mockImplementation((element) => {
-      savedObserverCb([
-        { target: element, contentRect: { width: 200, height: 300 } },
-      ]);
+      notifyResize([createResizeEntry(element, 200, 300)]);
     });
 
     render(
