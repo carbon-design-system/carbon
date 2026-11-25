@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { CodeSnippetSkeleton } from '../';
 
 const prefix = 'cds';
-const snippetTypes = ['single', 'multi'];
+const snippetTypes = ['single', 'multi'] as const;
 
 describe('CodeSnippetSkeleton', () => {
   describe('automated accessibility testing', () => {

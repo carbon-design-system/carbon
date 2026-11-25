@@ -5,27 +5,39 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
+import React, { createRef, type ComponentProps } from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { Coachmark } from '../../index';
 import { CoachmarkBeacon } from '../index';
+import { BEACON_KIND } from '../CoachmarkBeacon';
 import Button from '../../../Button';
 
 const prefix = 'cds';
 const blockClass = `${prefix}--coachmark-beacon`;
-const componentName = CoachmarkBeacon.displayName;
+const componentName = CoachmarkBeacon.displayName ?? 'CoachmarkBeacon';
 
 const childDataTestId = 'coachmark-beacon-test';
 const className = 'test-class-beacon';
 
-const renderCoachmarkWithBeacon = ({ ...rest } = {}) =>
+type CoachmarkBeaconTestProps = Partial<ComponentProps<typeof CoachmarkBeacon>>;
+
+const renderCoachmarkWithBeacon = (props: CoachmarkBeaconTestProps = {}) =>
   render(
     <Coachmark>
       <CoachmarkBeacon
         label="Show information"
         data-testid={childDataTestId}
-        {...rest}
+        {...props}
       />
       <Coachmark.Content aria-label="Coachmark content">
         <Coachmark.ContentHeader closeIconDescription="Close" />
@@ -69,7 +81,7 @@ describe(componentName, () => {
   });
 
   it('forwards a ref to the containing node', () => {
-    const testRef = React.createRef();
+    const testRef = createRef<HTMLDivElement>();
     renderCoachmarkWithBeacon({ ref: testRef });
     expect(testRef.current).toHaveClass(blockClass);
   });
@@ -83,7 +95,7 @@ describe(componentName, () => {
   });
 
   it('applies kind class to the containing node', () => {
-    renderCoachmarkWithBeacon({ kind: 'default' });
+    renderCoachmarkWithBeacon({ kind: BEACON_KIND.DEFAULT });
     expect(screen.getByTestId(childDataTestId)).toHaveClass(
       `${blockClass}-default`
     );
