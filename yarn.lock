@@ -2478,7 +2478,7 @@ __metadata:
     browserslist-config-carbon: "npm:^11.2.0"
     classnames: "npm:2.5.1"
     copy-to-clipboard: "npm:^4.0.0"
-    downshift: "npm:9.4.0"
+    downshift: "npm:9.5.0"
     enquirer: "npm:^2.3.6"
     es-toolkit: "npm:^1.27.0"
     fast-glob: "npm:^3.3.3"
@@ -12198,9 +12198,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:9.4.0":
-  version: 9.4.0
-  resolution: "downshift@npm:9.4.0"
+"downshift@npm:9.5.0":
+  version: 9.5.0
+  resolution: "downshift@npm:9.5.0"
   dependencies:
     "@babel/runtime": "npm:^7.28.6"
     compute-scroll-into-view: "npm:^3.1.1"
@@ -12209,7 +12209,7 @@ __metadata:
     tslib: "npm:^2.8.1"
   peerDependencies:
     react: ">=16.12.0"
-  checksum: 10/5beb71bd0babf7c38b2bc3066f0e49851580d96062483e4e5663f14c6a630ca3768e1c25524e7b1c8ac2787830f82688ffbb61901062fdcb06591681806e691d
+  checksum: 10/f525729a0d1a9b0f5e7a0f4624515f4a62995c6172be7a7a5eed0bef1bb947a9899739e1daadbba1aa965918ab99b08766f2275636b73f55a235a07a7aeb5ac3
   languageName: node
   linkType: hard
 
