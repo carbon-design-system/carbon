@@ -5,12 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
+import Header from '../Header';
+import HeaderGlobalAction from '../HeaderGlobalAction';
+import HeaderGlobalBar from '../HeaderGlobalBar';
+import { PrefixContext } from '../../../internal/usePrefix';
 import HeaderPanel from '../HeaderPanel';
 import Switcher from '../Switcher';
 import SwitcherItem from '../SwitcherItem';
-import HeaderGlobalAction from '../HeaderGlobalAction';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { act, render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('HeaderPanel', () => {
@@ -325,5 +328,147 @@ describe('HeaderPanel', () => {
 
     expect(panel).not.toHaveClass('cds--header-panel--expanded');
     expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+});
+
+describe('HeaderPanel Switcher focus boundary', () => {
+  function Fixture({ prefix = 'cds', addFocusListeners = true }) {
+    const [expanded, setExpanded] = useState(true);
+    return (
+      <PrefixContext.Provider value={prefix}>
+        <Header aria-label="Example header">
+          <a href="#brand">Brand</a>
+          <HeaderGlobalBar>
+            <HeaderGlobalAction aria-label="Search">
+              <span />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction aria-label="Notifications">
+              <span />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction aria-label="Switcher" aria-expanded={expanded}>
+              <span />
+            </HeaderGlobalAction>
+          </HeaderGlobalBar>
+          <HeaderPanel
+            aria-label="Panel"
+            expanded={expanded}
+            addFocusListeners={addFocusListeners}
+            onHeaderPanelFocus={() => setExpanded(false)}>
+            <Switcher aria-label="Applications" expanded={expanded}>
+              <SwitcherItem href="#one">One</SwitcherItem>
+              <SwitcherItem href="#two">Two</SwitcherItem>
+            </Switcher>
+          </HeaderPanel>
+        </Header>
+        <Header aria-label="Other header">
+          <HeaderGlobalAction aria-label="Other action">
+            <span />
+          </HeaderGlobalAction>
+        </Header>
+      </PrefixContext.Provider>
+    );
+  }
+
+  it.each(['cds', 'custom'])(
+    'keeps the panel open while reverse tabbing through %s header actions',
+    async (prefix) => {
+      render(<Fixture prefix={prefix} />);
+      screen.getByRole('link', { name: 'One' }).focus();
+
+      for (const name of ['Switcher', 'Notifications', 'Search']) {
+        await userEvent.tab({ shift: true });
+        expect(screen.getByRole('button', { name })).toHaveFocus();
+        expect(screen.getByLabelText('Panel')).toHaveClass(
+          `${prefix}--header-panel--expanded`
+        );
+      }
+
+      await userEvent.tab({ shift: true });
+      expect(screen.getByRole('link', { name: 'Brand' })).toHaveFocus();
+      expect(screen.getByLabelText('Panel')).not.toHaveClass(
+        `${prefix}--header-panel--expanded`
+      );
+    }
+  );
+
+  it('keeps the panel open when returning from an action to its links', async () => {
+    render(<Fixture />);
+    screen.getByRole('link', { name: 'One' }).focus();
+    await userEvent.tab({ shift: true });
+    await userEvent.tab();
+    expect(screen.getByRole('link', { name: 'One' })).toHaveFocus();
+    expect(screen.getByLabelText('Panel')).toHaveClass(
+      'cds--header-panel--expanded'
+    );
+  });
+
+  it('closes when tabbing from the panel into a different header', async () => {
+    render(<Fixture />);
+    screen.getByRole('link', { name: 'Two' }).focus();
+    await userEvent.tab();
+    expect(screen.getByRole('button', { name: 'Other action' })).toHaveFocus();
+    expect(screen.getByLabelText('Panel')).not.toHaveClass(
+      'cds--header-panel--expanded'
+    );
+  });
+
+  it.each([
+    ['link', 'One'],
+    ['button', 'Switcher'],
+  ])(
+    'closes when clicking another header action from a %s',
+    async (role, name) => {
+      render(<Fixture />);
+      act(() => screen.getByRole(role, { name }).focus());
+      await userEvent.click(screen.getByRole('button', { name: 'Search' }));
+      expect(screen.getByLabelText('Panel')).not.toHaveClass(
+        'cds--header-panel--expanded'
+      );
+    }
+  );
+
+  it('closes when an action loses focus without a related target', async () => {
+    render(<Fixture />);
+    screen.getByRole('link', { name: 'One' }).focus();
+    await userEvent.tab({ shift: true });
+    expect(screen.getByLabelText('Panel')).toHaveClass(
+      'cds--header-panel--expanded'
+    );
+    fireEvent.focusOut(screen.getByRole('button', { name: 'Switcher' }), {
+      relatedTarget: null,
+    });
+    expect(screen.getByLabelText('Panel')).not.toHaveClass(
+      'cds--header-panel--expanded'
+    );
+  });
+
+  it('respects addFocusListeners=false when focus leaves the header actions', async () => {
+    render(<Fixture addFocusListeners={false} />);
+    act(() => screen.getByRole('button', { name: 'Search' }).focus());
+    await userEvent.tab({ shift: true });
+    expect(screen.getByRole('link', { name: 'Brand' })).toHaveFocus();
+    expect(screen.getByLabelText('Panel')).toHaveClass(
+      'cds--header-panel--expanded'
+    );
+  });
+
+  it('subscribes to window focusout only while addFocusListeners is enabled', () => {
+    const add = jest.spyOn(window, 'addEventListener');
+    const remove = jest.spyOn(window, 'removeEventListener');
+
+    try {
+      const { rerender } = render(<Fixture addFocusListeners={false} />);
+      expect(add).not.toHaveBeenCalledWith('focusout', expect.any(Function));
+
+      rerender(<Fixture addFocusListeners />);
+      expect(add).toHaveBeenCalledWith('focusout', expect.any(Function));
+      const [, listener] = add.mock.calls.find(([name]) => name === 'focusout');
+
+      rerender(<Fixture addFocusListeners={false} />);
+      expect(remove).toHaveBeenCalledWith('focusout', listener);
+    } finally {
+      add.mockRestore();
+      remove.mockRestore();
+    }
   });
 });

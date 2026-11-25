@@ -6,7 +6,7 @@
  */
 
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
-import { resetMouse, sendMouse } from '@web/test-runner-commands';
+import { resetMouse, sendKeys, sendMouse } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/ui-shell/index.js';
 
 describe('cds-side-nav-link', () => {
@@ -82,6 +82,115 @@ describe('cds-side-nav-menu-item', () => {
 });
 
 describe('cds-header-global-action', () => {
+  describe('Switcher focus', () => {
+    let el, search, toggle, panel;
+
+    beforeEach(async () => {
+      el = await fixture(html`
+        <div>
+          <button>Before header</button>
+          <cds-header>
+            <cds-header-global-action>Search</cds-header-global-action>
+            <cds-header-global-action panel-id="switcher-panel">
+              Switcher
+            </cds-header-global-action>
+            <cds-header-panel id="switcher-panel">
+              <cds-switcher>
+                <cds-switcher-item href="#">App</cds-switcher-item>
+              </cds-switcher>
+            </cds-header-panel>
+          </cds-header>
+        </div>
+      `);
+      [search, toggle] = el.querySelectorAll('cds-header-global-action');
+      panel = el.querySelector('cds-header-panel');
+    });
+
+    it('keeps the switcher open until focus leaves the header actions', async () => {
+      toggle.click();
+      el.querySelector('cds-switcher-item')
+        .shadowRoot.querySelector('a')
+        .focus();
+      await sendKeys({ down: 'Shift' });
+      try {
+        await sendKeys({ press: 'Tab' });
+        expect(document.activeElement).to.equal(toggle);
+        await sendKeys({ press: 'Tab' });
+        expect(document.activeElement).to.equal(search);
+        expect(panel).to.have.attribute('expanded');
+        expect(toggle.active).to.be.true;
+        await sendKeys({ press: 'Tab' });
+        expect(document.activeElement).to.equal(el.querySelector('button'));
+        expect(panel).not.to.have.attribute('expanded');
+        expect(toggle.active).to.be.false;
+      } finally {
+        await sendKeys({ up: 'Shift' });
+      }
+    });
+
+    it('closes when a header action loses focus without a destination', () => {
+      for (const action of [toggle, search]) {
+        toggle.click();
+        const button = action.shadowRoot.querySelector('button');
+        button.focus();
+        button.blur();
+        expect(panel).not.to.have.attribute('expanded');
+        expect(toggle.active).to.be.false;
+      }
+    });
+
+    it('closes once when the toggle is clicked from a focused sibling', async () => {
+      toggle.click();
+      const searchButton = search.shadowRoot.querySelector('button');
+      searchButton.focus();
+      let expandedAfterBlur;
+      search.addEventListener(
+        'focusout',
+        (event) => {
+          expect(event.relatedTarget).to.be.null;
+          expandedAfterBlur = panel.hasAttribute('expanded');
+        },
+        { once: true }
+      );
+      // Reproduce a browser that blurs the focused action on mousedown
+      // without moving focus to the toggle.
+      toggle.addEventListener('mousedown', () => searchButton.blur(), {
+        once: true,
+      });
+      const button = toggle.shadowRoot.querySelector('button');
+      const { x, y, width, height } = button.getBoundingClientRect();
+      await sendMouse({
+        type: 'click',
+        position: [Math.round(x + width / 2), Math.round(y + height / 2)],
+      });
+      expect(expandedAfterBlur).to.be.true;
+      expect(panel).not.to.have.attribute('expanded');
+      expect(toggle.active).to.be.false;
+    });
+
+    it('closes on a sibling click or focus in another header', async () => {
+      const otherHeader = await fixture(html`
+        <cds-header>
+          <cds-header-global-action>Other header</cds-header-global-action>
+        </cds-header>
+      `);
+      const other = otherHeader.querySelector('cds-header-global-action');
+      toggle.click();
+      search.click();
+      expect(panel).not.to.have.attribute('expanded');
+      toggle.click();
+      other.shadowRoot.querySelector('button').focus();
+      expect(panel).not.to.have.attribute('expanded');
+    });
+
+    it('still closes a plain panel on focus in another action', () => {
+      panel.querySelector('cds-switcher').remove();
+      toggle.click();
+      search.shadowRoot.querySelector('button').focus();
+      expect(panel).not.to.have.attribute('expanded');
+    });
+  });
+
   describe('Handling click', () => {
     it('should set expanded on the linked panel when the panel is collapsed', async () => {
       const el = await fixture(html`

@@ -83,6 +83,14 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       [customClassName as string]: !!customClassName,
     });
 
+    const isChildASwitcher = isComponentElement(children, Switcher);
+    const isHeaderAction = (target: EventTarget | null) =>
+      target instanceof Element &&
+      !!target.closest(`.${prefix}--header__action`) &&
+      !!headerPanelReference.current
+        ?.closest(`.${prefix}--header`)
+        ?.contains(target);
+
     const eventHandlers: Partial<
       Pick<ComponentProps<'header'>, 'onBlur' | 'onKeyDown'>
     > = {};
@@ -107,12 +115,21 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
         event.target instanceof Element ? event.target : null;
     });
 
+    const isPanelToggleOrKeyboardAction = (relatedTarget: EventTarget | null) =>
+      isPanelToggle(
+        relatedTarget instanceof Element
+          ? relatedTarget
+          : mouseDownTarget.current
+      ) ||
+      (isChildASwitcher &&
+        !mouseDownTarget.current &&
+        isHeaderAction(relatedTarget));
+
     if (addFocusListeners) {
       eventHandlers.onBlur = (event) => {
-        const nextFocus = event.relatedTarget ?? mouseDownTarget.current;
         if (
           !event.currentTarget.contains(event.relatedTarget) &&
-          !isPanelToggle(nextFocus) &&
+          !isPanelToggleOrKeyboardAction(event.relatedTarget) &&
           !lastClickedElement?.classList?.contains(
             `${prefix}--switcher__item-link`
           )
@@ -135,13 +152,30 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       };
     }
 
+    useWindowEvent(addFocusListeners ? 'focusout' : null, (event) => {
+      if (
+        isChildASwitcher &&
+        expandedProp &&
+        isHeaderAction(event.target) &&
+        !isPanelToggleOrKeyboardAction(event.relatedTarget) &&
+        !(
+          event.relatedTarget instanceof Node &&
+          headerPanelReference.current?.contains(event.relatedTarget)
+        )
+      ) {
+        setExpandedState(false);
+        setLastClickedElement(null);
+        if (expanded) {
+          onHeaderPanelFocus();
+        }
+      }
+    });
+
     useWindowEvent('click', (event: MouseEvent) => {
       const { target } = event;
       mouseDownTarget.current = null;
       if (!(target instanceof Element)) return;
       setLastClickedElement(target);
-
-      const isChildASwitcher = isComponentElement(children, Switcher);
 
       if (
         isChildASwitcher &&

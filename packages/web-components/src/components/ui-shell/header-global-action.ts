@@ -57,58 +57,84 @@ class CDSHeaderGlobalAction extends CDSButton {
     this.kind = BUTTON_KIND.GHOST;
     this.size = BUTTON_SIZE.LARGE;
     super.connectedCallback();
-  }
-
-  firstUpdated() {
-    document.addEventListener('click', this._handleDocumentClick, true);
-    document.addEventListener('focusin', this._handleDocumentFocusIn, true);
+    const doc = this.ownerDocument;
+    doc.addEventListener('click', this._handleDocumentClick, true);
+    doc.addEventListener('focusin', this._handleDocumentFocusIn, true);
+    doc.addEventListener('focusout', this._handleDocumentFocusOut, true);
   }
 
   disconnectedCallback() {
-    document.removeEventListener('click', this._handleDocumentClick, true);
-    document.removeEventListener('focusin', this._handleDocumentFocusIn, true);
+    const doc = this.ownerDocument;
+    doc.removeEventListener('click', this._handleDocumentClick, true);
+    doc.removeEventListener('focusin', this._handleDocumentFocusIn, true);
+    doc.removeEventListener('focusout', this._handleDocumentFocusOut, true);
     super.disconnectedCallback();
   }
 
   private _handleDocumentClick = (event: MouseEvent) => {
-    const path = event.composedPath();
-    this._handlePanelCloseIfFocusOutside(path);
+    this._closePanelIfOutside(event.composedPath(), false);
   };
 
   private _handleDocumentFocusIn = (event: FocusEvent) => {
-    const path = event.composedPath();
-    this._handlePanelCloseIfFocusOutside(path);
+    this._closePanelIfOutside(event.composedPath(), true);
   };
 
-  private _handlePanelCloseIfFocusOutside(path: EventTarget[]) {
-    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
-    const isInside = path.some(
-      (el) =>
-        el instanceof HTMLElement && (panel?.contains(el) || this.contains(el))
-    );
+  private get _panel() {
+    return this.panelId
+      ? this.ownerDocument.getElementById(this.panelId)
+      : null;
+  }
 
-    if (panel && !isInside) {
-      panel.removeAttribute('expanded');
-      this.active = false;
+  private _handleDocumentFocusOut = (event: FocusEvent) => {
+    const panel = this._panel;
+    if (
+      !panel?.hasAttribute('expanded') ||
+      !this._isInsidePanel(panel, event.composedPath(), true)
+    ) {
+      return;
+    }
+
+    if (event.relatedTarget) {
+      this._closePanelIfOutside([event.relatedTarget], true);
+    } else if (
+      panel.querySelector(`${prefix}-switcher`) &&
+      !this.matches(':active')
+    ) {
+      // Safari blurs the focused action before a mouse click toggles the panel.
+      this._closePanel(panel);
+    }
+  };
+
+  private _isInsidePanel(
+    panel: Element,
+    path: EventTarget[],
+    movingFocus: boolean
+  ) {
+    const header =
+      movingFocus &&
+      panel.querySelector(`${prefix}-switcher`) &&
+      panel.closest(`${prefix}-header`);
+    return path.some(
+      (el) =>
+        el instanceof Element &&
+        (panel.contains(el) ||
+          this.contains(el) ||
+          (header &&
+            el.closest(`${prefix}-header-global-action`) &&
+            el.closest(`${prefix}-header`) === header))
+    );
+  }
+
+  private _closePanelIfOutside(path: EventTarget[], movingFocus: boolean) {
+    const panel = this._panel;
+    if (panel && !this._isInsidePanel(panel, path, movingFocus)) {
+      this._closePanel(panel);
     }
   }
 
-  @HostListener('focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore
-  private _handleFocusOut(event: FocusEvent) {
-    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
-    const relatedTarget = event.relatedTarget as HTMLElement;
-
-    if (
-      panel &&
-      relatedTarget &&
-      !this.contains(relatedTarget) &&
-      !panel.contains(relatedTarget)
-    ) {
-      panel.removeAttribute('expanded');
-      this.active = false;
-    }
+  private _closePanel(panel: Element) {
+    panel.removeAttribute('expanded');
+    this.active = false;
   }
 
   @HostListener('click', { capture: true })
@@ -119,7 +145,7 @@ class CDSHeaderGlobalAction extends CDSButton {
     if (disabled) {
       event.stopPropagation();
     } else {
-      const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+      const panel = this._panel;
 
       // see if there is related panel for header-global-action button first
       // and then set the expanded attr of it accordingly
@@ -143,7 +169,7 @@ class CDSHeaderGlobalAction extends CDSButton {
       event.preventDefault();
       this._handleClick(event);
     } else if (key === 'Escape') {
-      const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+      const panel = this._panel;
       if (panel) {
         panel.removeAttribute('expanded');
       }
