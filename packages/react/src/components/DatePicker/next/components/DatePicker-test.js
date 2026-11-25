@@ -283,6 +283,86 @@ describe('DatePicker v12 focus restoration', () => {
     expect(sentinel).toBeTruthy();
   });
 
+  describe('DatePicker v12 closeOnSelect', () => {
+    it('keeps the calendar open after selecting a date when closeOnSelect is false', async () => {
+      const user = userEvent.setup();
+      const onChange = jest.fn();
+
+      render(
+        <DatePicker
+          datePickerType="single"
+          closeOnSelect={false}
+          onChange={onChange}>
+          <DatePickerInput id="close-on-select-false" labelText="Date input" />
+        </DatePicker>
+      );
+
+      const dateInput = screen.getByLabelText('Date input');
+      await user.click(dateInput);
+      expect(screen.getByRole('grid', { name: 'Calendar' })).toBeTruthy();
+
+      const firstDate = await screen.findByRole('button', {
+        name: 'January 1, 2026',
+      });
+      await user.click(firstDate);
+
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalled();
+      });
+      expect(screen.getByRole('grid', { name: 'Calendar' })).toBeTruthy();
+      expect(dateInput).toHaveValue('01/01/2026');
+
+      // Subsequent selection while the calendar stays open must still update
+      // the value (DATE_SELECTED must accept another DATE_SELECT).
+      const secondDate = await screen.findByRole('button', {
+        name: 'January 2, 2026',
+      });
+      await user.click(secondDate);
+
+      await waitFor(() => {
+        expect(dateInput).toHaveValue('01/02/2026');
+      });
+      expect(screen.getByRole('grid', { name: 'Calendar' })).toBeTruthy();
+    });
+
+    it('closes the calendar on outside click when closeOnSelect is false', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <div>
+          <DatePicker datePickerType="single" closeOnSelect={false}>
+            <DatePickerInput
+              id="close-on-select-outside"
+              labelText="Date input"
+            />
+          </DatePicker>
+          <button type="button">Outside</button>
+        </div>
+      );
+
+      const dateInput = screen.getByLabelText('Date input');
+      await user.click(dateInput);
+
+      const dateButton = await screen.findByRole('button', {
+        name: 'January 1, 2026',
+      });
+      await user.click(dateButton);
+      expect(screen.getByRole('grid', { name: 'Calendar' })).toBeTruthy();
+
+      await user.click(screen.getByRole('button', { name: 'Outside' }));
+
+      await waitFor(() => {
+        expect(screen.queryByRole('grid', { name: 'Calendar' })).toBe(null);
+      });
+
+      // Calendar must still be openable after an outside-click close.
+      await user.click(dateInput);
+      await waitFor(() => {
+        expect(screen.getByRole('grid', { name: 'Calendar' })).toBeTruthy();
+      });
+    });
+  });
+
   describe('DatePicker v12 input click reopens calendar', () => {
     it('reopens the calendar when clicking the input after a date has been selected', async () => {
       const user = userEvent.setup();

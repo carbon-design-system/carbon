@@ -188,6 +188,105 @@ describe('cds-preview-date-picker calendar interaction', () => {
     expect(el.shadowRoot?.querySelector('cds-preview-date-picker-calendar')).to
       .exist;
   });
+
+  it('allows selecting another date while open when close-on-select is false', async () => {
+    const el = await fixture(html`
+      <cds-preview-date-picker>
+        <cds-preview-date-picker-input
+          kind="single"
+          label-text="Date"
+          placeholder="mm/dd/yyyy">
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
+    `);
+    el.closeOnSelect = false;
+    await el.updateComplete;
+
+    el._adapter.send('INPUT_FOCUS', { inputType: 'from' });
+    el._adapter.send('CALENDAR_OPEN');
+    await el.updateComplete;
+
+    const calendar = el.shadowRoot?.querySelector(
+      'cds-preview-date-picker-calendar'
+    );
+    expect(calendar).to.exist;
+    await calendar.updateComplete;
+
+    const firstSelect = oneEvent(el, 'cds-preview-date-picker-state-change');
+    calendar.dispatchEvent(
+      new CustomEvent('cds-preview-date-picker-calendar-date-select', {
+        detail: { date: parseISOToPlainDate('2026-01-01') },
+        bubbles: true,
+        composed: true,
+      })
+    );
+    await firstSelect;
+    await el.updateComplete;
+
+    expect(el.open).to.be.true;
+    expect(el._adapter.getContext().startDate?.toString()).to.equal(
+      '2026-01-01'
+    );
+
+    const secondSelect = oneEvent(el, 'cds-preview-date-picker-state-change');
+    calendar.dispatchEvent(
+      new CustomEvent('cds-preview-date-picker-calendar-date-select', {
+        detail: { date: parseISOToPlainDate('2026-01-02') },
+        bubbles: true,
+        composed: true,
+      })
+    );
+    await secondSelect;
+    await el.updateComplete;
+
+    expect(el.open).to.be.true;
+    expect(el._adapter.getContext().startDate?.toString()).to.equal(
+      '2026-01-02'
+    );
+  });
+
+  it('closes the calendar on outside click when close-on-select is false', async () => {
+    const el = await fixture(html`
+      <cds-preview-date-picker>
+        <cds-preview-date-picker-input
+          kind="single"
+          label-text="Date"
+          placeholder="mm/dd/yyyy">
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
+    `);
+    el.closeOnSelect = false;
+    await el.updateComplete;
+
+    el._adapter.send('INPUT_FOCUS', { inputType: 'from' });
+    el._adapter.send('CALENDAR_OPEN');
+    await el.updateComplete;
+
+    const calendar = el.shadowRoot?.querySelector(
+      'cds-preview-date-picker-calendar'
+    );
+    expect(calendar).to.exist;
+    await calendar.updateComplete;
+
+    const selectPromise = oneEvent(el, 'cds-preview-date-picker-state-change');
+    calendar.dispatchEvent(
+      new CustomEvent('cds-preview-date-picker-calendar-date-select', {
+        detail: { date: parseISOToPlainDate('2026-01-01') },
+        bubbles: true,
+        composed: true,
+      })
+    );
+    await selectPromise;
+    await el.updateComplete;
+    expect(el.open).to.be.true;
+
+    el._adapter.send('OUTSIDE_CLICK');
+    await el.updateComplete;
+
+    expect(el.open).to.be.false;
+    expect(el.shadowRoot?.querySelector('cds-preview-date-picker-calendar')).to
+      .not.exist;
+  });
 });
 
 describe('cds-preview-date-picker input click reopens calendar', () => {

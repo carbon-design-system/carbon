@@ -27,6 +27,7 @@ const sizes = {
 };
 
 const defaultArgs = {
+  closeOnSelect: true,
   dateFormat: 'm/d/Y',
   disabled: false,
   locale: 'en',
@@ -44,6 +45,11 @@ const defaultArgs = {
 };
 
 const controls = {
+  closeOnSelect: {
+    control: 'boolean',
+    description:
+      'Whether the calendar closes when a date is selected. When false, the calendar stays open until dismissed.',
+  },
   dateFormat: {
     control: 'text',
     description: 'The date format (e.g., m/d/Y, Y-m-d).',
@@ -140,6 +146,7 @@ export const Default = {
     },
   },
   render: ({
+    closeOnSelect,
     dateFormat,
     disabled,
     invalid,
@@ -156,6 +163,7 @@ export const Default = {
   }) => {
     return html`
       <cds-preview-date-picker
+        ?close-on-select="${closeOnSelect}"
         date-format="${dateFormat}"
         ?disabled="${disabled}"
         locale="${locale}"

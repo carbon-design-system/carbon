@@ -38,6 +38,11 @@ export default {
 };
 
 const sharedArgTypes = {
+  closeOnSelect: {
+    control: {
+      type: 'boolean',
+    },
+  },
   onChange: {
     action: 'onChange',
   },
@@ -125,6 +130,10 @@ export const Default = (args) => {
       )}
     </DatePicker>
   );
+};
+
+Default.args = {
+  closeOnSelect: true,
 };
 
 Default.argTypes = {
