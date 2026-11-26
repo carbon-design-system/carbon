@@ -13,11 +13,6 @@ export type { CoachmarkTaglineProps } from './CoachmarkTagline';
 
 export type { CoachmarkProps, CoachmarkComponent } from './Coachmark';
 
-export { CoachmarkBeacon } from './CoachmarkBeacon';
-export type { CoachmarkBeaconProps } from './CoachmarkBeacon';
-export { CoachmarkTagline } from './CoachmarkTagline';
-export type { CoachmarkTaglineProps } from './CoachmarkTagline';
-
 export type { CoachmarkContentBodyProps } from './CoachmarkContentBody';
 export type { CoachmarkContentHeaderProps } from './CoachmarkContentHeader';
 export type {
