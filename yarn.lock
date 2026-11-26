@@ -2556,7 +2556,7 @@ __metadata:
     "@carbon/type": "npm:^11.71.0"
     "@ibm/plex": "npm:6.4.1"
     "@ibm/plex-mono": "npm:2.5.0"
-    "@ibm/plex-sans": "npm:1.1.0"
+    "@ibm/plex-sans": "npm:2.0.0"
     "@ibm/plex-sans-arabic": "npm:1.1.0"
     "@ibm/plex-sans-devanagari": "npm:1.1.0"
     "@ibm/plex-sans-hebrew": "npm:1.1.0"
@@ -4228,6 +4228,15 @@ __metadata:
   dependencies:
     "@ibm/telemetry-js": "npm:^1.6.1"
   checksum: 10/065c244f5f741d60423bd714554365b323d551e8227861244d51e03c05bcd1808caa041f4909284120b3ab2bf4a5d4d0a54469013af4701b741875cf29a77b2d
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-sans@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@ibm/plex-sans@npm:2.0.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+  checksum: 10/549963d69d7100152595dd3dcb83958a767a80a5a0b7595b6edbbf38c500af05792d2c6def602b2a0bb512c4fa59146d53ae37b6255f8e7c4857ec16e682acff
   languageName: node
   linkType: hard
 
