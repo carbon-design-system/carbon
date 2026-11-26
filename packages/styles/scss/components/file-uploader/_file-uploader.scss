@@ -5,8 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 @use '../../breakpoint' as *;
+@use '../../border-radius' as *;
 
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -161,7 +163,11 @@ $-file-row-gap: clamp(
   }
 
   .#{$prefix}--file__selected-file {
-    @include layout.use('size', $default: 'lg', $min: 'xs', $max: 'lg');
+    @if enabled('enable-v12-release') {
+      @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+    } @else {
+      @include layout.use('size', $default: 'lg', $min: 'xs', $max: 'lg');
+    }
 
     display: grid;
     align-items: center;
@@ -174,6 +180,17 @@ $-file-row-gap: clamp(
     max-inline-size: convert.to-rem(320px);
     min-block-size: layout.size('height');
     word-break: break-word;
+
+    @if enabled('enable-v12-release') {
+      border-radius: clamp(
+        $border-radius-04,
+        layout.size('height') - $spacing-06,
+        $border-radius-08
+      );
+      column-gap: $spacing-03;
+      grid-template-columns: minmax(0, 1fr) auto;
+      margin-block-end: $spacing-02;
+    }
 
     &:last-child {
       margin-block-end: 0;
@@ -222,6 +239,14 @@ $-file-row-gap: clamp(
         @-moz-document url-prefix() {
           inline-size: -moz-available;
         }
+      }
+    }
+
+    @if enabled('enable-v12-release') {
+      .#{$prefix}--file-filename-container-wrap,
+      .#{$prefix}--file-filename-container-wrap-invalid {
+        max-inline-size: 100%;
+        min-inline-size: 0;
       }
     }
 
@@ -280,7 +305,16 @@ $-file-row-gap: clamp(
         --#{$prefix}-layout-size-height-#{$size}
       );
 
-      gap: $-file-row-gap 0;
+      @if enabled('enable-v12-release') {
+        --#{$prefix}-layout-size-icon-gap-local: var(
+          --#{$prefix}-layout-size-icon-gap-#{$size}
+        );
+
+        row-gap: $-file-row-gap;
+      } @else {
+        gap: $-file-row-gap 0;
+      }
+
       min-block-size: layout.size('height');
     }
   }
@@ -305,6 +339,12 @@ $-file-row-gap: clamp(
 
     padding-block: $-file-row-gap;
     padding-inline: 0;
+
+    @if enabled('enable-v12-release') {
+      grid-template-rows: minmax(layout.size('height'), auto);
+      padding-block: 0;
+      row-gap: 0;
+    }
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
@@ -315,6 +355,12 @@ $-file-row-gap: clamp(
         calc(layout.size('height') - $spacing-07)
       )
       max(0px, calc(($spacing-07 - layout.size('height')) / 2));
+
+    @if enabled('enable-v12-release') {
+      border-block-start: 0;
+      padding-block: 0
+        max($spacing-03, calc((layout.size('height') - $spacing-05) / 2));
+    }
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -324,6 +370,14 @@ $-file-row-gap: clamp(
     @include type-style('helper-text-01');
 
     padding: 0 $spacing-05;
+
+    @if enabled('enable-v12-release') {
+      padding-inline-end: clamp(
+        $spacing-02,
+        layout.size('height') - $spacing-07,
+        $spacing-03
+      );
+    }
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -361,6 +415,24 @@ $-file-row-gap: clamp(
     min-inline-size: 1.5rem;
     padding-inline-end: convert.to-rem(12px);
 
+    @if enabled('enable-v12-release') {
+      gap: layout.size('icon-gap');
+      min-inline-size: 0;
+      padding-inline-end: clamp(
+        $spacing-02,
+        layout.size('height') - $spacing-06,
+        $spacing-05
+      );
+
+      &:has(.#{$prefix}--file-close) {
+        padding-inline-end: clamp(
+          0rem,
+          layout.size('height') - ($spacing-06 + $spacing-02),
+          $spacing-03
+        );
+      }
+    }
+
     .#{$prefix}--loading__svg {
       stroke: $icon-primary;
     }
@@ -375,12 +447,21 @@ $-file-row-gap: clamp(
     background-color: transparent;
     block-size: $spacing-05;
     inline-size: $spacing-06;
+
+    @if enabled('enable-v12-release') {
+      padding: 0;
+      inline-size: $spacing-05;
+    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
     // TODO: Should this be $icon-interactive instead?
     fill: $interactive;
     inline-size: $spacing-06;
+
+    @if enabled('enable-v12-release') {
+      inline-size: $spacing-05;
+    }
 
     &:focus {
       @include focus-outline('border');
@@ -409,6 +490,28 @@ $-file-row-gap: clamp(
     block-size: $spacing-06;
     cursor: pointer;
     inline-size: $spacing-06;
+
+    @if enabled('enable-v12-release') {
+      $button-size: clamp(
+        $spacing-06,
+        layout.size('height') - $spacing-05,
+        $spacing-07
+      );
+
+      border-radius: $border-radius-max;
+      block-size: $button-size;
+      inline-size: $button-size;
+
+      @media (any-hover: hover) {
+        &:hover:not(:disabled) {
+          background-color: $background-hover;
+        }
+      }
+
+      &:active:not(:disabled) {
+        background-color: $background-active;
+      }
+    }
 
     svg {
       fill: $icon-primary;
@@ -442,6 +545,19 @@ $-file-row-gap: clamp(
     padding: $spacing-05;
     border: 1px dashed $border-strong;
     block-size: convert.to-rem(96px);
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--file__drop-container,
+    .#{$prefix}--file-browse-btn:has(> .#{$prefix}--file__drop-container) {
+      @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+      border-radius: clamp(
+        $border-radius-04,
+        layout.size('height') - $spacing-06,
+        $border-radius-08
+      );
+    }
   }
 
   .#{$prefix}--file-browse-btn--disabled.#{$prefix}--file__drop-container,
