@@ -7,7 +7,9 @@
 
 $css--plex: true !default;
 
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
@@ -43,13 +45,20 @@ $css--plex: true !default;
   flex: 1 0 auto;
 }
 
+// The host elements are the actual flex children of .cds--card__content.
+// flex: 1 0 auto on the inner shadow div has no effect — it must be on the host.
+:host(#{$prefix}-card-body):host-context(#{$prefix}-card[horizontal]) {
+  flex: 1 0 auto;
+}
+
 :host-context(#{$prefix}-card[horizontal]) .#{$prefix}--card__footer {
   margin-block-start: auto;
 }
 
-// ─── AI Label clearance ──────────────────────────────────────────────────────
-// The shared `:has()` rules cannot see across shadow roots, so the header
-// reproduces them from its own `data-has-ai-label` / `data-has-actions` flags.
+// Same issue for footer: margin-block-start: auto must be on the host element.
+:host(#{$prefix}-card-footer):host-context(#{$prefix}-card[horizontal]) {
+  margin-block-start: auto;
+}
 
 // Without actions the title must not run under the absolutely-positioned
 // decorator: reserve its width ($spacing-07) plus end inset ($spacing-03).
@@ -134,17 +143,66 @@ $css--plex: true !default;
   display: block;
 }
 
-// Standalone `cds-card-header-media` is superseded by the header's
-// `header-media` slot, which owns the spacing.
-:host(#{$prefix}-card-header-media) {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  max-block-size: $spacing-10;
+// In horizontal mode, cds-card-media is assigned into <slot name="media"> inside
+// cds-card's shadow DOM and therefore becomes a direct flex child of
+// .cds--card--horizontal. The sizing CSS must target the host itself; rules on
+// the inner shadow <div> (.cds--card__media--horizontal) cannot be reached by
+// the card's flex container. The CSS custom property --cds--card--media-width is
+// forwarded to the host via card-media.ts so `var()` resolves here.
+// `cds-card-media` sets `slot="media"` only while the card is horizontal, so
+// the slot attribute is used instead of `:host-context()`, which Firefox and
+// Safari do not support.
+:host(#{$prefix}-card-media[slot='media']) {
+  overflow: hidden;
+  flex-basis: var(--#{$prefix}--card--media-width, 33.33%);
+  flex-shrink: 0;
+  align-self: stretch;
 }
 
-:host(#{$prefix}-card-header-media) .#{$prefix}--card__header-media {
-  display: contents;
+@if flags.enabled('enable-v12-release') {
+  // The inner shadow <div> is the only child of cds-card-media's shadow root,
+  // so the shared `:first-child` / `:last-child` radius rules always match it
+  // regardless of `media-position`. Reset them and round the host instead,
+  // where the card's shadow DOM knows which side the media slot is on.
+  :host(#{$prefix}-card-media[slot='media'])
+    .#{$prefix}--card__media--horizontal {
+    &:first-child,
+    &:last-child {
+      border-radius: 0;
+    }
+  }
+
+  // Media-start: the slot is the first child of the card, so clip the card's
+  // start-start and end-start outer corners.
+  .#{$prefix}--card--horizontal
+    > slot[name='media']:first-child::slotted(#{$prefix}-card-media) {
+    border-end-start-radius: $border-radius-08;
+    border-start-start-radius: $border-radius-08;
+  }
+
+  // Media-end: the slot follows the content div, so clip the card's
+  // start-end and end-end outer corners.
+  .#{$prefix}--card--horizontal
+    > .#{$prefix}--card__content
+    + slot[name='media']::slotted(#{$prefix}-card-media) {
+    border-end-end-radius: $border-radius-08;
+    border-start-end-radius: $border-radius-08;
+  }
+
+  // Clickable card has a 1px border — inset the media radius so it sits flush
+  // inside that border without creating a visible gap.
+  .#{$prefix}--card--horizontal.#{$prefix}--card--clickable
+    > slot[name='media']:first-child::slotted(#{$prefix}-card-media) {
+    border-end-start-radius: calc(#{$border-radius-08} - 1px);
+    border-start-start-radius: calc(#{$border-radius-08} - 1px);
+  }
+
+  .#{$prefix}--card--horizontal.#{$prefix}--card--clickable
+    > .#{$prefix}--card__content
+    + slot[name='media']::slotted(#{$prefix}-card-media) {
+    border-end-end-radius: calc(#{$border-radius-08} - 1px);
+    border-start-end-radius: calc(#{$border-radius-08} - 1px);
+  }
 }
 
 // The title is a flex item of the header: it is as wide as its content and
@@ -158,10 +216,6 @@ $css--plex: true !default;
 // With `header-media` the title drops to a full-width second row.
 .#{$prefix}--card__header-top-row + slot::slotted(#{$prefix}-card-title) {
   inline-size: 100%;
-}
-
-:host(#{$prefix}-card-title-media) {
-  display: block;
 }
 
 // Plays the role of the React `__actions` element: the width needed to show

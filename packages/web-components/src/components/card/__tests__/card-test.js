@@ -637,43 +637,95 @@ describe('cds-card-media', function () {
     const div = media.shadowRoot.querySelector('div');
     expect(div.classList.contains('cds--card__media--horizontal')).to.be.true;
   });
-});
 
-// ─── cds-card-header-media ───────────────────────────────────────────────────
-
-describe('cds-card-header-media', function () {
-  it('should render slot content', async () => {
+  it('should forward the default media width to the host in a horizontal card', async () => {
     const el = await fixture(html`
-      <cds-card-header-media><span id="icon">★</span></cds-card-header-media>
+      <cds-card horizontal>
+        <cds-card-media id="media"></cds-card-media>
+      </cds-card>
     `);
-    expect(el.querySelector('#icon')).to.exist;
-  });
-
-  it('should render with header-media BEM class', async () => {
-    const el = await fixture(
-      html`<cds-card-header-media></cds-card-header-media>`
+    const media = el.querySelector('#media');
+    await media.updateComplete;
+    expect(media.getAttribute('slot')).to.equal('media');
+    expect(media.style.getPropertyValue('--cds--card--media-width')).to.equal(
+      '33.33%'
     );
-    const div = el.shadowRoot.querySelector('.cds--card__header-media');
-    expect(div).to.exist;
   });
-});
 
-// ─── cds-card-title-media ────────────────────────────────────────────────────
-
-describe('cds-card-title-media', function () {
-  it('should render slot content', async () => {
+  it('should forward a custom media-width to the host in a horizontal card', async () => {
     const el = await fixture(html`
-      <cds-card-title-media><span id="icon">★</span></cds-card-title-media>
+      <cds-card horizontal>
+        <cds-card-media id="media" media-width="50%"></cds-card-media>
+      </cds-card>
     `);
-    expect(el.querySelector('#icon')).to.exist;
+    const media = el.querySelector('#media');
+    await media.updateComplete;
+    expect(media.style.getPropertyValue('--cds--card--media-width')).to.equal(
+      '50%'
+    );
   });
 
-  it('should render with title-media BEM class', async () => {
-    const el = await fixture(
-      html`<cds-card-title-media></cds-card-title-media>`
+  it('should update the host media width when media-width changes', async () => {
+    const el = await fixture(html`
+      <cds-card horizontal>
+        <cds-card-media id="media" media-width="50%"></cds-card-media>
+      </cds-card>
+    `);
+    const media = el.querySelector('#media');
+    await media.updateComplete;
+    media.setAttribute('media-width', '200px');
+    await media.updateComplete;
+    expect(media.style.getPropertyValue('--cds--card--media-width')).to.equal(
+      '200px'
     );
-    const div = el.shadowRoot.querySelector('.cds--card__title-media');
-    expect(div).to.exist;
+  });
+
+  it('should size the host from the media width in a horizontal card', async () => {
+    const el = await fixture(html`
+      <cds-card horizontal style="width: 600px">
+        <cds-card-media id="media" media-width="50%"></cds-card-media>
+      </cds-card>
+    `);
+    const media = el.querySelector('#media');
+    await media.updateComplete;
+    const style = getComputedStyle(media);
+    expect(style.flexShrink).to.equal('0');
+    expect(style.flexBasis).to.equal('50%');
+  });
+
+  it('should not set the media width on the host in a vertical card', async () => {
+    const el = await fixture(html`
+      <cds-card>
+        <cds-card-media id="media" media-width="50%"></cds-card-media>
+      </cds-card>
+    `);
+    const media = el.querySelector('#media');
+    await media.updateComplete;
+    expect(media.hasAttribute('slot')).to.be.false;
+    expect(media.style.getPropertyValue('--cds--card--media-width')).to.equal(
+      ''
+    );
+  });
+
+  it('should remove the host media width and slot when horizontal is turned off', async () => {
+    const el = await fixture(html`
+      <cds-card horizontal>
+        <cds-card-media id="media" media-width="50%"></cds-card-media>
+      </cds-card>
+    `);
+    const media = el.querySelector('#media');
+    await media.updateComplete;
+    expect(media.style.getPropertyValue('--cds--card--media-width')).to.equal(
+      '50%'
+    );
+
+    el.horizontal = false;
+    await el.updateComplete;
+    await media.updateComplete;
+    expect(media.hasAttribute('slot')).to.be.false;
+    expect(media.style.getPropertyValue('--cds--card--media-width')).to.equal(
+      ''
+    );
   });
 });
 

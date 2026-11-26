@@ -22,6 +22,7 @@
 // Metadata row used in horizontal card footer (WithHorizontalMedia story)
 .card-story-time {
   display: flex;
+  flex: 1;
   align-items: center;
   padding: 0 spacing.$spacing-05;
   font-size: calc(spacing.$spacing-04 + spacing.$spacing-01);
