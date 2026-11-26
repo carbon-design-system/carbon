@@ -1,10 +1,11 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import React from 'react';
 import IconSwitch from '../IconSwitch';
 import userEvent from '@testing-library/user-event';
@@ -104,6 +105,9 @@ describe('IconSwitch', () => {
           <Workspace />
         </IconSwitch>
       );
+      /* eslint-disable-next-line testing-library/no-node-access --
+       * Alignment is on the Popover wrapper.
+       */
       expect(container.firstChild).toHaveClass(`${prefix}--popover--bottom`);
     });
   });

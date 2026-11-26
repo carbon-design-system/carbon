@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
@@ -103,7 +104,6 @@ describe('Feedback', () => {
     await user.click(button);
 
     expect(button).toHaveClass(`${prefix}--copy-btn--animating`);
-    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-btn-5'), {
@@ -139,7 +139,6 @@ describe('Feedback', () => {
     await user.click(button);
 
     expect(button).toHaveClass(`${prefix}--copy-btn--animating`);
-    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-btn-7'), {
