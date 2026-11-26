@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,9 +14,41 @@ import SelectItem from '../../SelectItem';
 import { IconButton } from '../../IconButton';
 import { usePrefix } from '../../../internal/usePrefix';
 
+/** @typedef {import('react').ReactNode} ReactNode */
+
+/**
+ * @typedef {Object} PaginationRenderProps
+ * @property {number} currentPage
+ * @property {number} currentPageSize
+ * @property {(page: number) => void} onSetPage
+ * @property {number | undefined} totalPages
+ */
+
+/**
+ * @typedef {Object} PaginationProps
+ * @property {string} [backwardText]
+ * @property {(state: PaginationRenderProps) => ReactNode} [children]
+ * @property {string | null} [className]
+ * @property {boolean} [disabled]
+ * @property {string} [forwardText]
+ * @property {string | number} [id]
+ * @property {number} [initialPage]
+ * @property {string} [itemsPerPageText]
+ * @property {(min: number, max: number, total: number) => string} [itemRangeText]
+ * @property {(min: number, max: number) => string} [itemText]
+ * @property {(state: { page: number, pageSize: number }) => void} [onChange]
+ * @property {(current: number, total: number) => string} [pageRangeText]
+ * @property {number} [pageSize]
+ * @property {number[]} [pageSizes]
+ * @property {(page: number) => string} [pageText]
+ * @property {boolean} [pagesUnknown]
+ * @property {number} [totalItems]
+ */
+
 /**
  * @deprecated Use the stable `Pagination` component with the `renderPageSelect`
  * prop instead. `unstable_Pagination` / `preview_Pagination` will be removed in v12.
+ * @param {PaginationProps} props
  */
 function Pagination({
   backwardText = 'Previous page',
@@ -65,13 +97,13 @@ function Pagination({
   function incrementPage() {
     const page = currentPage + 1;
     setCurrentPage(page);
-    onChange({ page, pageSize: currentPageSize });
+    onChange?.({ page, pageSize: currentPageSize });
   }
 
   function decrementPage() {
     const page = currentPage - 1;
     setCurrentPage(page);
-    onChange({ page, pageSize: currentPageSize });
+    onChange?.({ page, pageSize: currentPageSize });
   }
 
   const namespace = `${prefix}--unstable-pagination`;
@@ -209,7 +241,7 @@ Pagination.propTypes = {
   /**
    * The children of the pagination component.
    */
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  children: PropTypes.func,
 
   /**
    * Extra classes to add.

@@ -4,7 +4,13 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useEffect, useRef, forwardRef, RefObject } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useRef,
+  type ReactElement,
+  type RefObject,
+} from 'react';
 import classnames from 'classnames';
 import { type BreadcrumbItemProps } from '../Breadcrumb/BreadcrumbItem';
 import { type BreadcrumbProps } from '../Breadcrumb/Breadcrumb';
@@ -14,7 +20,7 @@ import { createOverflowHandler as localOverflowHandler } from './overflowHandler
 export interface PageHeaderBreadcrumbOverflowProps extends BreadcrumbProps {
   renderOverflowBreadcrumb?: (
     hiddenBreadcrumbs: HTMLElement[]
-  ) => React.ReactElement<BreadcrumbItemProps>;
+  ) => ReactElement<BreadcrumbItemProps> | null;
 }
 
 // This component is a wrapper for the Breadcrumb, and renders breadcrumb items as children

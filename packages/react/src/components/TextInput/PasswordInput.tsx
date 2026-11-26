@@ -178,7 +178,7 @@ export interface PasswordInputProps
   warnText?: ReactNode;
 }
 
-const PasswordInput = forwardRef<unknown, PasswordInputProps>(
+const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   (
     {
       className,

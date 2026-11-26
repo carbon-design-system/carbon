@@ -5,6 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
@@ -64,11 +72,11 @@ describe('Preview Pagination', () => {
       render(<Pagination disabled pageSizes={[10]} onChange={() => {}} />);
 
       expect(
-        screen.getByLabelText('Next page', { hidden: true })
+        screen.getByRole('button', { name: 'Next page', hidden: true })
       ).toBeDisabled();
 
       expect(
-        screen.getByLabelText('Previous page', { hidden: true })
+        screen.getByRole('button', { name: 'Previous page', hidden: true })
       ).toBeDisabled();
     });
 
@@ -91,6 +99,24 @@ describe('Preview Pagination', () => {
       expect(onChange).toHaveBeenCalledWith(
         expect.objectContaining({ page: 1, pageSize: 20 })
       );
+    });
+
+    it('should change pages when onChange is omitted', async () => {
+      render(<Pagination totalItems={30} initialPage={2} />);
+
+      expect(screen.getByText('11–20 of 30 items')).toBeInTheDocument();
+
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Next page', hidden: true })
+      );
+
+      expect(screen.getByText('21–30 of 30 items')).toBeInTheDocument();
+
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Previous page', hidden: true })
+      );
+
+      expect(screen.getByText('11–20 of 30 items')).toBeInTheDocument();
     });
 
     it('should reset to page 1 when changing page size using the dropdown', async () => {

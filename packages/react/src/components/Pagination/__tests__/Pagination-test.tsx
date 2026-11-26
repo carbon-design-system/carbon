@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import React from 'react';
 import Pagination from '../Pagination';
 import userEvent from '@testing-library/user-event';
@@ -44,11 +45,11 @@ describe('Pagination', () => {
       render(<Pagination disabled pageSizes={[10]} />);
 
       expect(
-        screen.getByLabelText('Next page', { hidden: true })
+        screen.getByRole('button', { name: 'Next page', hidden: true })
       ).toBeDisabled();
 
       expect(
-        screen.getByLabelText('Previous page', { hidden: true })
+        screen.getByRole('button', { name: 'Previous page', hidden: true })
       ).toBeDisabled();
     });
 

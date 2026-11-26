@@ -5,8 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { cloneElement } from 'react';
-import { render, screen, act, waitFor } from '@testing-library/react';
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import React, {
+  cloneElement,
+  createRef,
+  type ComponentProps,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
+import { render, screen, act, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as PageHeader from '../PageHeader';
 import {
@@ -16,7 +31,7 @@ import {
 } from '../PageHeader';
 import { PageHeaderBreadcrumbPageActions } from '../PageHeaderBreadcrumbPageActions';
 import { blockClass, scrollableAncestor, getHeaderOffset } from '../utils';
-import { usePageHeader } from '../context';
+import type { PageHeaderObserverState } from '../context';
 import { breakpoints } from '@carbon/layout';
 import {
   Breadcrumb,
@@ -34,7 +49,11 @@ import {
 import { Bee } from '@carbon/icons-react';
 
 // Minimal fixture components used instead of story imports
-const DefaultFixture = (props) => {
+const DefaultFixture = (
+  props: ComponentProps<typeof PageHeader.Root> & {
+    'data-testid'?: string;
+  }
+) => {
   const { className, 'data-testid': testId, role, ...rest } = props;
   return (
     <Tabs>
@@ -108,7 +127,8 @@ const CompactFixture = () => (
   </PageHeader.Root>
 );
 
-let mockOverflowOnChange = jest.fn();
+let mockOverflowOnChange =
+  jest.fn<(visible: HTMLElement[], hidden: HTMLElement[]) => void>();
 
 jest.mock('@carbon/utilities', () => ({
   createOverflowHandler: jest.fn(({ onChange }) => {
@@ -131,6 +151,33 @@ jest.mock('../overflowHandler', () => ({
 const prefix = 'cds';
 const carbonPrefix = 'cds';
 
+type MockIntersectionEntry = Pick<
+  IntersectionObserverEntry,
+  'target' | 'isIntersecting'
+>;
+
+const setIntersectionObserver = (
+  factory: (callback: (entries: MockIntersectionEntry[]) => void) => object
+) => {
+  Object.defineProperty(window, 'IntersectionObserver', {
+    configurable: true,
+    writable: true,
+    value: jest.fn(factory),
+  });
+};
+
+const createOverflowElements = (length: number) =>
+  Array.from({ length }, () => document.createElement('li'));
+
+const createOverflowTagElements = (tags: ReactElement<{ id?: string }>[]) =>
+  tags.map((tag) => {
+    const element = document.createElement('li');
+    if (tag.props.id) {
+      element.id = tag.props.id;
+    }
+    return element;
+  });
+
 // Flush any pending floating-ui / React microtask state updates after each test
 // to prevent act() warnings from leaking into subsequent tests.
 afterEach(async () => {
@@ -139,11 +186,20 @@ afterEach(async () => {
 
 beforeAll(() => {
   // IntersectionObserver is not in the global jest setup — mock it here.
-  window.IntersectionObserver = jest.fn(() => ({
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn(),
-  }));
+  Object.defineProperty(window, 'IntersectionObserver', {
+    configurable: true,
+    writable: true,
+    value: jest.fn(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+      takeRecords: () => [],
+      root: null,
+      rootMargin: '0px',
+      scrollMargin: '0px',
+      thresholds: [],
+    })),
+  });
 
   // matchMedia is used by internal Carbon hooks — provide a minimal mock.
   if (!window.matchMedia) {
@@ -163,16 +219,20 @@ beforeAll(() => {
 
 describe('PageHeader', () => {
   describe('export configuration', () => {
-    let savedObserverCb;
+    let savedObserverCb: ResizeObserverCallback | undefined;
 
     beforeEach(() => {
-      window.ResizeObserver = jest.fn().mockImplementation((cb) => {
-        savedObserverCb = cb;
-        return {
-          observe: jest.fn(),
-          unobserve: jest.fn(),
-          disconnect: jest.fn(),
-        };
+      Object.defineProperty(window, 'ResizeObserver', {
+        configurable: true,
+        writable: true,
+        value: jest.fn((cb: ResizeObserverCallback) => {
+          savedObserverCb = cb;
+          return {
+            observe: jest.fn(),
+            unobserve: jest.fn(),
+            disconnect: jest.fn(),
+          };
+        }),
       });
     });
 
@@ -181,9 +241,26 @@ describe('PageHeader', () => {
     });
 
     // Triggers resize from the saved resize observer callback
-    const triggerResize = (element, width = 500) =>
+    const triggerResize = (
+      element = document.createElement('div'),
+      width = 500
+    ) =>
       act(() => {
-        savedObserverCb([{ target: element, contentRect: { width } }]);
+        if (!savedObserverCb) {
+          throw new Error('Expected ResizeObserver to capture a callback.');
+        }
+        savedObserverCb(
+          [
+            {
+              target: element,
+              contentRect: new DOMRect(0, 0, width, 0),
+              borderBoxSize: [],
+              contentBoxSize: [],
+              devicePixelContentBoxSize: [],
+            },
+          ],
+          window.ResizeObserver.prototype
+        );
       });
 
     it('should update css variable for sticky positioning', () => {
@@ -193,10 +270,10 @@ describe('PageHeader', () => {
       const computedStyle = window.getComputedStyle(screen.getByTestId(testId));
       expect(
         computedStyle.getPropertyValue(`--${prefix}-page-header-header-top`)
-      ).toBeDefined();
+      ).not.toBe('');
       expect(
         computedStyle.getPropertyValue(`--${prefix}-page-header-breadcrumb-top`)
-      ).toBeDefined();
+      ).not.toBe('');
     });
 
     it('supports dot notation component namespacing from the main entrypoint', () => {
@@ -294,7 +371,7 @@ describe('PageHeader', () => {
           <PageHeader.BreadcrumbBar className="custom-class" />
         </PageHeader.Root>
       );
-      expect(container.firstChild.firstChild).toHaveClass('custom-class');
+      expect(container.firstChild?.firstChild).toHaveClass('custom-class');
     });
 
     it('should render an icon', () => {
@@ -401,7 +478,7 @@ describe('PageHeader', () => {
         </PageHeader.Root>
       );
       expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
-      expect(container.firstChild.firstChild).toHaveClass('custom-class');
+      expect(container.firstChild?.firstChild).toHaveClass('custom-class');
     });
 
     it('should support a custom titleAs heading level', () => {
@@ -502,16 +579,17 @@ describe('PageHeader', () => {
 
     it('should pass live observerState to functional pageActions', () => {
       // Capture each IntersectionObserver callback and the element it observes
-      const observerInstances = [];
-      window.IntersectionObserver = jest.fn().mockImplementation((cb) => {
-        let observedElement = null;
+      const observerInstances: { fire: (isIntersecting: boolean) => void }[] =
+        [];
+      setIntersectionObserver((cb) => {
+        let observedElement: Element | null = null;
         const instance = {
-          observe: jest.fn((el) => {
+          observe: jest.fn((el: Element) => {
             observedElement = el;
           }),
           unobserve: jest.fn(),
           disconnect: jest.fn(),
-          fire: (isIntersecting) => {
+          fire: (isIntersecting: boolean) => {
             if (observedElement) {
               cb([{ isIntersecting, target: observedElement }]);
             }
@@ -521,7 +599,9 @@ describe('PageHeader', () => {
         return instance;
       });
 
-      const pageActionsSpy = jest.fn(({ fullyCollapsed }) => (
+      const pageActionsSpy = jest.fn<
+        (state: PageHeaderObserverState) => ReactNode
+      >(({ fullyCollapsed }) => (
         <button>{fullyCollapsed ? 'collapsed state' : 'expanded state'}</button>
       ));
 
@@ -611,7 +691,7 @@ describe('PageHeader', () => {
 
       act(() => {
         mockOverflowOnChange(
-          [mockPageActions[0]], // visible
+          createOverflowElements(1), // visible
           [] // no hidden elements
         );
       });
@@ -636,8 +716,8 @@ describe('PageHeader', () => {
 
       act(() => {
         mockOverflowOnChange(
-          [mockPageActions[0]], // visible
-          [mockPageActions[1]] // hidden
+          createOverflowElements(1), // visible
+          createOverflowElements(1) // hidden
         );
       });
 
@@ -669,7 +749,7 @@ describe('PageHeader', () => {
           />
         </PageHeader.Root>
       );
-      expect(container.firstChild.firstChild).toHaveClass('custom-class');
+      expect(container.firstChild?.firstChild).toHaveClass('custom-class');
     });
 
     it('should use a custom menuButtonLabel if provided', () => {
@@ -688,8 +768,8 @@ describe('PageHeader', () => {
 
       act(() => {
         mockOverflowOnChange(
-          [mockPageActions[0]], // visible
-          [mockPageActions[1]] // hidden
+          createOverflowElements(1), // visible
+          createOverflowElements(1) // hidden
         );
       });
 
@@ -733,7 +813,7 @@ describe('PageHeader', () => {
           <PageHeader.ContentText className="custom-class" />
         </PageHeader.Root>
       );
-      expect(container.firstChild.firstChild).toHaveClass('custom-class');
+      expect(container.firstChild?.firstChild).toHaveClass('custom-class');
     });
 
     it('should render a subtitle', () => {
@@ -764,7 +844,7 @@ describe('PageHeader', () => {
           <PageHeader.HeroImage className="custom-class" />
         </PageHeader.Root>
       );
-      expect(container.firstChild.firstChild).toHaveClass('custom-class');
+      expect(container.firstChild?.firstChild).toHaveClass('custom-class');
     });
 
     it('should use a 2x1 ratio on large screens', () => {
@@ -802,7 +882,7 @@ describe('PageHeader', () => {
         </PageHeader.Root>
       );
 
-      expect(container.firstChild.firstChild).toHaveClass(
+      expect(container.firstChild?.firstChild).toHaveClass(
         `${carbonPrefix}--aspect-ratio--2x1`
       );
     });
@@ -830,7 +910,7 @@ describe('PageHeader', () => {
         </PageHeader.Root>
       );
 
-      expect(container.firstChild.firstChild).toHaveClass(
+      expect(container.firstChild?.firstChild).toHaveClass(
         `${carbonPrefix}--aspect-ratio--3x2`
       );
     });
@@ -852,7 +932,7 @@ describe('PageHeader', () => {
           <PageHeader.TabBar className="custom-class" />
         </PageHeader.Root>
       );
-      expect(container.firstChild.firstChild).toHaveClass('custom-class');
+      expect(container.firstChild?.firstChild).toHaveClass('custom-class');
     });
   });
 
@@ -979,7 +1059,7 @@ describe('PageHeader', () => {
       expect(screen.getByText('Tag 3')).toBeInTheDocument();
     });
 
-    const WithTagOverflow = ({ noTags }) => (
+    const WithTagOverflow = ({ noTags }: { noTags?: boolean }) => (
       <PageHeader.Root>
         <PageHeader.TabBar
           tags={
@@ -1005,12 +1085,15 @@ describe('PageHeader', () => {
               renderPopoverContent={(hiddenItems) => {
                 return hiddenItems.map((i, index) => {
                   const foundJSXTag = mockTags.find(
-                    (c) => c.props.id === (i.id ?? i.props.id)
+                    (tag) => tag.props.id === i.id
                   );
-                  return cloneElement(foundJSXTag, {
-                    id: `cloned-tag-node-id-${index}`,
-                    key: `cloned-tag-key-${index}`,
-                  });
+                  return foundJSXTag
+                    ? cloneElement(foundJSXTag, {
+                        id: `cloned-tag-node-id-${index}`,
+                        key: `cloned-tag-key-${index}`,
+                        'data-testid': 'hidden-tag',
+                      })
+                    : null;
                 });
               }}>
               {!noTags ? mockTags : null}
@@ -1032,7 +1115,7 @@ describe('PageHeader', () => {
 
         act(() => {
           mockOverflowOnChange(
-            mockTags, // visible
+            createOverflowTagElements(mockTags), // visible
             [] // no hidden elements
           );
         });
@@ -1044,8 +1127,8 @@ describe('PageHeader', () => {
 
         act(() => {
           mockOverflowOnChange(
-            mockTags.slice(0, 3), // visible, first 3 items
-            mockTags.slice(-3) // hidden elements, last 3 items
+            createOverflowTagElements(mockTags.slice(0, 3)), // visible, first 3 items
+            createOverflowTagElements(mockTags.slice(-3)) // hidden elements, last 3 items
           );
         });
 
@@ -1063,7 +1146,7 @@ describe('PageHeader', () => {
         // All tags should be visible
         act(() => {
           mockOverflowOnChange(
-            mockTags, // visible
+            createOverflowTagElements(mockTags), // visible
             [] // no hidden elements
           );
         });
@@ -1082,7 +1165,7 @@ describe('PageHeader', () => {
         act(() => {
           mockOverflowOnChange(
             [], // visible tags
-            mockTags // hidden tags
+            createOverflowTagElements(mockTags) // hidden tags
           );
         });
 
@@ -1098,6 +1181,15 @@ describe('PageHeader', () => {
         await waitFor(() => {
           expect(overflowButton).toHaveAttribute('aria-expanded', 'true');
         });
+
+        const hiddenTagsList = screen.getByRole('list', {
+          name: 'Hidden tags',
+        });
+        expect(
+          within(hiddenTagsList)
+            .getAllByTestId('hidden-tag')
+            .map((tag) => tag.textContent)
+        ).toEqual(['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6']);
       });
 
       it('should close popover when clicked outside', async () => {
@@ -1106,7 +1198,7 @@ describe('PageHeader', () => {
         act(() => {
           mockOverflowOnChange(
             [], // visible tags
-            mockTags // hidden tags
+            createOverflowTagElements(mockTags) // hidden tags
           );
         });
 
@@ -1135,7 +1227,7 @@ describe('PageHeader', () => {
         act(() => {
           mockOverflowOnChange(
             [], // visible
-            mockTags // no hidden elements
+            createOverflowTagElements(mockTags) // no hidden elements
           );
         });
 
@@ -1176,16 +1268,16 @@ describe('PageHeader', () => {
   });
   describe('PageHeader.TabBar with scroller button', () => {
     beforeEach(() => {
-      window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-        observe: () => null,
-        unobserve: () => null,
-        disconnect: () => null,
+      setIntersectionObserver(() => ({
+        observe: () => {},
+        unobserve: () => {},
+        disconnect: () => {},
       }));
     });
     it('should render a tab bar with scroller button and tags', () => {
       render(
         <PageHeader.Root>
-          <PageHeader.Content>Hello</PageHeader.Content>
+          <PageHeader.Content title="Page title">Hello</PageHeader.Content>
           <PageHeaderTabBarDirect
             tags={
               <>
@@ -1211,7 +1303,7 @@ describe('PageHeader', () => {
     it('should render a tab bar with scroller button and without passing tags', () => {
       render(
         <PageHeader.Root>
-          <PageHeader.Content>Hello</PageHeader.Content>
+          <PageHeader.Content title="Page title">Hello</PageHeader.Content>
           <PageHeaderTabBarDirect scroller={<PageHeader.ScrollButton />} />
         </PageHeader.Root>
       );
@@ -1221,7 +1313,7 @@ describe('PageHeader', () => {
       const scrollerOnClick = jest.fn();
       render(
         <PageHeader.Root>
-          <PageHeader.Content>Hello</PageHeader.Content>
+          <PageHeader.Content title="Page title">Hello</PageHeader.Content>
           <PageHeaderTabBarDirect
             scroller={<PageHeader.ScrollButton onClick={scrollerOnClick} />}
           />
@@ -1257,7 +1349,7 @@ describe('PageHeader', () => {
       expect(screen.getByText('Virtual Machine DAL')).toBeInTheDocument();
     });
     it('should accept a ref', () => {
-      const ref = React.createRef();
+      const ref = createRef<HTMLElement>();
       render(
         <PageHeader.Root>
           <PageHeader.BreadcrumbBar>
@@ -1272,7 +1364,7 @@ describe('PageHeader', () => {
       );
     });
     it('should render children without overflow breadcrumb', () => {
-      const ref = React.createRef();
+      const ref = createRef<HTMLElement>();
       render(
         <PageHeader.Root>
           <PageHeader.BreadcrumbBar>
@@ -1284,12 +1376,12 @@ describe('PageHeader', () => {
           </PageHeader.BreadcrumbBar>
         </PageHeader.Root>
       );
-      const breadcrumbParent = ref.current.firstChild;
-      expect(breadcrumbParent.childElementCount).toEqual(3);
+      const breadcrumbParent = ref.current?.firstElementChild;
+      expect(breadcrumbParent?.childElementCount).toEqual(3);
     });
     it('should render children with overflow breadcrumb', () => {
       const renderPropFn = jest.fn();
-      const ref = React.createRef();
+      const ref = createRef<HTMLElement>();
       render(
         <PageHeader.Root>
           <PageHeader.BreadcrumbBar>
@@ -1314,18 +1406,20 @@ describe('PageHeader', () => {
           </PageHeader.BreadcrumbBar>
         </PageHeader.Root>
       );
-      const breadcrumbParent = ref.current.firstChild;
-      expect(breadcrumbParent.childElementCount).toEqual(4);
+      const breadcrumbParent = ref.current?.firstElementChild;
+      expect(breadcrumbParent?.childElementCount).toEqual(4);
       expect(renderPropFn).toHaveBeenCalled();
     });
   });
 
   describe('PageHeader.Root observer callbacks', () => {
-    let savedIntersectionCallbacks;
+    let savedIntersectionCallbacks: ((
+      entries: MockIntersectionEntry[]
+    ) => void)[];
 
     beforeEach(() => {
       savedIntersectionCallbacks = [];
-      window.IntersectionObserver = jest.fn().mockImplementation((callback) => {
+      setIntersectionObserver((callback) => {
         savedIntersectionCallbacks.push(callback);
         return {
           observe: jest.fn(),
@@ -1340,9 +1434,13 @@ describe('PageHeader', () => {
     });
 
     // Helper: fire the nth IntersectionObserver callback with a synthetic entry
-    const fireIntersection = (cbIndex, target, isIntersecting) =>
+    const fireIntersection = (
+      cbIndex: number,
+      target: Element,
+      isIntersecting: boolean
+    ) =>
       act(() => {
-        savedIntersectionCallbacks[cbIndex]([{ target, isIntersecting }]);
+        savedIntersectionCallbacks[cbIndex]?.([{ target, isIntersecting }]);
       });
 
     it('calls onContentFullyCollapsed with true when content scrolls out of view and false when it scrolls back in', async () => {
@@ -1360,6 +1458,9 @@ describe('PageHeader', () => {
       const contentEl = container.querySelector(
         `.${prefix}--page-header__content`
       );
+      if (!contentEl) {
+        throw new Error('Expected the PageHeader content element to render.');
+      }
 
       fireIntersection(0, contentEl, false);
       expect(onContentFullyCollapsed).toHaveBeenLastCalledWith(true);
@@ -1382,6 +1483,9 @@ describe('PageHeader', () => {
       const titleEl = container.querySelector(
         `.${prefix}--page-header__content__title`
       );
+      if (!titleEl) {
+        throw new Error('Expected the PageHeader title element to render.');
+      }
 
       fireIntersection(1, titleEl, false);
       expect(onTitleClipped).toHaveBeenLastCalledWith(true);
@@ -1413,6 +1517,9 @@ describe('PageHeader', () => {
       const actionsEl = container.querySelector(
         `.${prefix}--page-header__content__page-actions`
       );
+      if (!actionsEl) {
+        throw new Error('Expected the page actions element to render.');
+      }
 
       // Fire each captured callback; only the one whose entry.target matches
       // refs.contentActions.current will invoke onContentActionsClipped
@@ -1433,11 +1540,13 @@ describe('PageHeader', () => {
   });
 
   describe('PageHeaderContent pageActions render prop receives live observerState', () => {
-    let savedIntersectionCallbacks;
+    let savedIntersectionCallbacks: ((
+      entries: MockIntersectionEntry[]
+    ) => void)[];
 
     beforeEach(() => {
       savedIntersectionCallbacks = [];
-      window.IntersectionObserver = jest.fn().mockImplementation((callback) => {
+      setIntersectionObserver((callback) => {
         savedIntersectionCallbacks.push(callback);
         return {
           observe: jest.fn(),
@@ -1452,7 +1561,9 @@ describe('PageHeader', () => {
     });
 
     it('passes the live observer state to a functional pageActions prop', async () => {
-      const pageActionsFn = jest.fn(() => <button>page action</button>);
+      const pageActionsFn = jest.fn<
+        (state: PageHeaderObserverState) => ReactNode
+      >(() => <button>page action</button>);
       const { container } = render(
         <PageHeader.Root>
           <PageHeader.Content title="title" pageActions={pageActionsFn} />
@@ -1465,8 +1576,11 @@ describe('PageHeader', () => {
       const contentEl = container.querySelector(
         `.${prefix}--page-header__content`
       );
+      if (!contentEl) {
+        throw new Error('Expected the PageHeader content element to render.');
+      }
       act(() => {
-        savedIntersectionCallbacks[0]([
+        savedIntersectionCallbacks[0]?.([
           { target: contentEl, isIntersecting: false },
         ]);
       });
@@ -1482,17 +1596,19 @@ describe('PageHeader', () => {
 
   describe('PageHeaderBreadcrumbOverflow with renderOverflowBreadcrumb and overflow trigger', () => {
     it('renders the overflow breadcrumb in second-to-last position and passes hidden breadcrumbs to render prop', () => {
-      const renderOverflowBreadcrumb = jest.fn((hiddenBreadcrumbs) => (
-        <BreadcrumbItem>
-          <OverflowMenu aria-label="Overflow menu">
-            {hiddenBreadcrumbs.map((el, i) => (
-              <OverflowMenuItem key={i} itemText={`hidden-${i}`} />
-            ))}
-          </OverflowMenu>
-        </BreadcrumbItem>
-      ));
+      const renderOverflowBreadcrumb = jest.fn(
+        (hiddenBreadcrumbs: HTMLElement[]) => (
+          <BreadcrumbItem>
+            <OverflowMenu aria-label="Overflow menu">
+              {hiddenBreadcrumbs.map((_, i) => (
+                <OverflowMenuItem key={i} itemText={`hidden-${i}`} />
+              ))}
+            </OverflowMenu>
+          </BreadcrumbItem>
+        )
+      );
 
-      const ref = React.createRef();
+      const ref = createRef<HTMLElement>();
       render(
         <PageHeader.Root>
           <PageHeader.BreadcrumbBar>
@@ -1520,16 +1636,16 @@ describe('PageHeader', () => {
       });
 
       // renderOverflowBreadcrumb should have been called with the hidden items
-      expect(renderOverflowBreadcrumb).toHaveBeenCalledWith(hiddenItems);
+      expect(renderOverflowBreadcrumb.mock.calls).toContainEqual([hiddenItems]);
 
       // The breadcrumb list should now contain 5 items:
       // Breadcrumb 1, Breadcrumb 2, Breadcrumb 3, overflow item (2nd to last), Title
-      const breadcrumbParent = ref.current.firstChild;
-      expect(breadcrumbParent.childElementCount).toEqual(5);
+      const breadcrumbParent = ref.current?.firstElementChild;
+      expect(breadcrumbParent?.childElementCount).toEqual(5);
 
       // Overflow item is at second-to-last index (index 3, before Title at index 4)
-      const children = breadcrumbParent.children;
-      expect(children[3]).toHaveClass(
+      const children = breadcrumbParent?.children;
+      expect(children?.[3]).toHaveClass(
         `${prefix}--page-header-breadcrumb-overflow-item`
       );
     });
@@ -1537,7 +1653,7 @@ describe('PageHeader', () => {
 
   describe('PageHeader.TabBar disableStickyTabBar', () => {
     it('adds the disable-sticky-tab-bar class to PageHeader.Root when disableStickyTabBar is true', () => {
-      const { container } = render(
+      render(
         <PageHeader.Root role="banner">
           <PageHeader.TabBar disableStickyTabBar={true} />
         </PageHeader.Root>
@@ -1548,7 +1664,7 @@ describe('PageHeader', () => {
     });
 
     it('does not add the disable-sticky-tab-bar class to PageHeader.Root when disableStickyTabBar is false', () => {
-      const { container } = render(
+      render(
         <PageHeader.Root role="banner">
           <PageHeader.TabBar disableStickyTabBar={false} />
         </PageHeader.Root>
@@ -1576,7 +1692,9 @@ describe('PageHeader', () => {
       },
     ];
 
-    afterEach(() => jest.clearAllMocks());
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
     it('renders action buttons for each action item', () => {
       render(
@@ -1609,10 +1727,12 @@ describe('PageHeader', () => {
 
       // Trigger overflow: a2 is hidden
       act(() => {
-        mockOverflowOnChange(
-          [{ dataset: { id: 'a1' } }],
-          [{ dataset: { id: 'a2' } }]
-        );
+        const visibleAction = document.createElement('li');
+        visibleAction.dataset.id = 'a1';
+        const hiddenAction = document.createElement('li');
+        hiddenAction.dataset.id = 'a2';
+
+        mockOverflowOnChange([visibleAction], [hiddenAction]);
       });
 
       // The overflow menu button is always present; verify hidden item label appears in DOM
@@ -1693,10 +1813,12 @@ describe('PageHeader', () => {
 
       scrollable.style.overflow = 'scroll';
 
-      jest.spyOn(inner, 'getBoundingClientRect').mockReturnValue({ top: -50 });
+      jest
+        .spyOn(inner, 'getBoundingClientRect')
+        .mockReturnValue(new DOMRect(0, -50, 0, 0));
       jest
         .spyOn(scrollable, 'getBoundingClientRect')
-        .mockReturnValue({ top: -10 });
+        .mockReturnValue(new DOMRect(0, -10, 0, 0));
 
       const result = getHeaderOffset(inner);
       // totalHeaderOffset = -50 - (-10) = -40 → clamped to 0
@@ -1713,10 +1835,12 @@ describe('PageHeader', () => {
 
       scrollable.style.overflow = 'scroll';
 
-      jest.spyOn(inner, 'getBoundingClientRect').mockReturnValue({ top: 100 });
+      jest
+        .spyOn(inner, 'getBoundingClientRect')
+        .mockReturnValue(new DOMRect(0, 100, 0, 0));
       jest
         .spyOn(scrollable, 'getBoundingClientRect')
-        .mockReturnValue({ top: 60 });
+        .mockReturnValue(new DOMRect(0, 60, 0, 0));
 
       const result = getHeaderOffset(inner);
       // totalHeaderOffset = 100 - 60 = 40
@@ -1732,7 +1856,7 @@ describe('PageHeader', () => {
 
     beforeEach(() => {
       intersectionCallbacks = [];
-      window.IntersectionObserver = jest.fn().mockImplementation((cb) => {
+      setIntersectionObserver((cb) => {
         intersectionCallbacks.push(cb);
         return {
           observe: jest.fn(),
@@ -1769,12 +1893,16 @@ describe('PageHeader', () => {
 
   // ─── PageHeader.ScrollButton ──────────────────────────────────────────────
   describe('PageHeader.ScrollButton', () => {
-    afterEach(() => jest.restoreAllMocks());
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
 
     it('scrolls the page to the top when expand is clicked while the content is fully collapsed', async () => {
       const scrollToMock = jest.fn();
-      const intersectionCallbacks = [];
-      window.IntersectionObserver = jest.fn().mockImplementation((cb) => {
+      const intersectionCallbacks: ((
+        entries: MockIntersectionEntry[]
+      ) => void)[] = [];
+      setIntersectionObserver((cb) => {
         intersectionCallbacks.push(cb);
         return {
           observe: jest.fn(),
@@ -1784,6 +1912,7 @@ describe('PageHeader', () => {
       });
 
       document.body.style.overflow = 'scroll';
+      const originalScrollTo = document.body.scrollTo;
       document.body.scrollTo = scrollToMock;
 
       try {
@@ -1803,6 +1932,9 @@ describe('PageHeader', () => {
         const contentEl = container.querySelector(
           `.${prefix}--page-header__content`
         );
+        if (!contentEl) {
+          throw new Error('Expected the PageHeader content element to render.');
+        }
 
         // Fire the captured callbacks with the contentEl as target to
         // trigger fullyCollapsed = true in the Root
@@ -1826,7 +1958,7 @@ describe('PageHeader', () => {
         );
       } finally {
         document.body.style.overflow = '';
-        delete document.body.scrollTo;
+        document.body.scrollTo = originalScrollTo;
       }
     });
 
@@ -1915,14 +2047,16 @@ describe('PageHeader', () => {
       },
     ];
 
-    afterEach(() => jest.clearAllMocks());
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
     it('does not apply the clipped modifier in the content zone before the content scrolls away', async () => {
       // isInBreadcrumbBar=false, contentActionsClipped=false (initial state)
       // → clipped modifier class must be absent on first render.
       // Wrap render in act so all mount effects (setRefs, setPageActionsInstance)
       // settle before asserting.
-      let container;
+      let container: HTMLElement | undefined;
       await act(async () => {
         ({ container } = render(
           <PageHeader.Root>
@@ -1933,7 +2067,7 @@ describe('PageHeader', () => {
       });
 
       await waitFor(() => {
-        const actionsEl = container.querySelector(
+        const actionsEl = container?.querySelector(
           `.${prefix}--page-header__content__page-actions`
         );
         expect(actionsEl).not.toBeNull();
@@ -1992,12 +2126,18 @@ describe('PageHeader', () => {
   // ─── PageHeader.HeroImage ─────────────────────────────────────────────────
   describe('PageHeader.HeroImage', () => {
     it('switches from 3x2 to 2x1 aspect ratio when the lg breakpoint is crossed', async () => {
-      let mediaChangeListener;
+      type MediaChangeListener = (
+        event: Pick<MediaQueryListEvent, 'matches'>
+      ) => void;
+
+      let mediaChangeListener: MediaChangeListener | undefined;
       const mockMQL = {
         matches: false,
-        addEventListener: jest.fn((_, fn) => {
-          mediaChangeListener = fn;
-        }),
+        addEventListener: jest.fn(
+          (_event: string, listener: MediaChangeListener) => {
+            mediaChangeListener = listener;
+          }
+        ),
         removeEventListener: jest.fn(),
         dispatchEvent: jest.fn(),
       };
@@ -2022,7 +2162,7 @@ describe('PageHeader', () => {
 
       // Fire the change listener as if the viewport crossed the lg breakpoint
       act(() => {
-        mediaChangeListener({ matches: true });
+        mediaChangeListener?.({ matches: true });
       });
 
       await waitFor(() => {
@@ -2074,7 +2214,7 @@ describe('PageHeader', () => {
 
       // Trigger overflow via the local overflow handler mock
       act(() => {
-        mockOverflowOnChange([], mockTags);
+        mockOverflowOnChange([], createOverflowTagElements(mockTags));
       });
 
       const overflowButton = screen.getByRole('button', { name: '+2' });
@@ -2129,12 +2269,16 @@ describe('PageHeader', () => {
 
   // ─── getHeaderOffset ──────────────────────────────────────────────────────
   describe('getHeaderOffset', () => {
-    afterEach(() => jest.restoreAllMocks());
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
 
     it('returns 0 when the element sits at the top of the document viewport', () => {
       const el = document.createElement('div');
       document.body.appendChild(el);
-      jest.spyOn(el, 'getBoundingClientRect').mockReturnValue({ top: 0 });
+      jest
+        .spyOn(el, 'getBoundingClientRect')
+        .mockReturnValue(new DOMRect(0, 0, 0, 0));
       expect(getHeaderOffset(el)).toBe(0);
       document.body.removeChild(el);
     });
@@ -2146,10 +2290,12 @@ describe('PageHeader', () => {
       document.body.appendChild(scrollParent);
       scrollParent.style.overflow = 'scroll';
 
-      jest.spyOn(inner, 'getBoundingClientRect').mockReturnValue({ top: 80 });
+      jest
+        .spyOn(inner, 'getBoundingClientRect')
+        .mockReturnValue(new DOMRect(0, 80, 0, 0));
       jest
         .spyOn(scrollParent, 'getBoundingClientRect')
-        .mockReturnValue({ top: 20 });
+        .mockReturnValue(new DOMRect(0, 20, 0, 0));
 
       // totalHeaderOffset = 80 - 20 = 60 → positive → returned as-is
       expect(getHeaderOffset(inner)).toBe(60);
