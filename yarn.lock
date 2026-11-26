@@ -3822,7 +3822,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^2.0.0-alpha.17, @carbon/react@workspace:packages/react":
+"@carbon/react@npm:^2.0.0-alpha.18, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -3840,7 +3840,7 @@ __metadata:
     "@carbon/layout": "npm:^12.0.0-alpha.9"
     "@carbon/motion": "npm:^12.0.0-alpha.11"
     "@carbon/pictograms-react": "npm:^11.114.0"
-    "@carbon/styles": "npm:^2.0.0-alpha.16"
+    "@carbon/styles": "npm:^2.0.0-alpha.17"
     "@carbon/test-utils": "npm:^10.43.0-alpha.3"
     "@carbon/themes": "npm:^12.0.0-alpha.11"
     "@carbon/utilities": "npm:^0.27.0"
@@ -3941,7 +3941,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^2.0.0-alpha.16, @carbon/styles@workspace:^, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@npm:^2.0.0-alpha.17, @carbon/styles@workspace:^, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -4210,7 +4210,7 @@ __metadata:
     "@carbon/layout": "npm:^12.0.0-alpha.9"
     "@carbon/motion": "npm:^12.0.0-alpha.11"
     "@carbon/pictograms": "npm:^13.0.0-alpha.6"
-    "@carbon/styles": "npm:^2.0.0-alpha.16"
+    "@carbon/styles": "npm:^2.0.0-alpha.17"
     "@carbon/utilities": "npm:^1.0.0-alpha.6"
     "@custom-elements-manifest/analyzer": "npm:^0.11.0"
     "@floating-ui/dom": "npm:^1.6.3"
@@ -13644,8 +13644,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^8.0.0"
     "@babel/preset-env": "npm:^8.0.0"
     "@babel/preset-react": "npm:^8.0.0"
-    "@carbon/react": "npm:^2.0.0-alpha.17"
-    "@carbon/styles": "npm:^2.0.0-alpha.16"
+    "@carbon/react": "npm:^2.0.0-alpha.18"
+    "@carbon/styles": "npm:^2.0.0-alpha.17"
     "@carbon/test-utils": "npm:^10.43.0-alpha.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
@@ -13668,7 +13668,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": "npm:^2.0.0-alpha.16"
+    "@carbon/styles": "npm:^2.0.0-alpha.17"
     "@carbon/test-utils": "npm:^10.43.0-alpha.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
     chalk: "npm:6.0.1"
