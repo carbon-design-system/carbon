@@ -11,6 +11,8 @@ import docs from './Tearsheet.mdx';
 import React, { useRef, useState } from 'react';
 import { AILabel, AILabelContent } from '../AILabel';
 import Button from '../Button';
+import { ButtonSet } from '../ButtonSet';
+import { useFeatureFlag } from '../FeatureFlags';
 import Form from '../Form';
 import FormGroup from '../FormGroup';
 import { NumberInput } from '../NumberInput';
@@ -35,33 +37,74 @@ import { TruncatedText } from '../TruncatedText';
 import { TearsheetWithSteps } from './TearsheetWithSteps';
 const storyClass = 'tearsheet-stories';
 
+// v12: header action buttons are a fixed `md` size. v11: they shrink to `xs`
+// when the header is collapsed.
+const useHeaderActionSize = () => {
+  const enableV12Release = useFeatureFlag('enable-v12-release');
+  return (isCollapsed) => (enableV12Release ? 'md' : isCollapsed ? 'xs' : 'sm');
+};
+
+const sampleAILabel = (
+  <AILabel className="decorator-container" size="xs">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h3>84%</h3>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </AILabelContent>
+  </AILabel>
+);
+
 const sharedArgTypes = {
-  decorator: {
+  title: {
+    control: { type: 'text' },
+    description: 'Main title of the tearsheet.',
+  },
+  label: {
+    control: { type: 'text' },
+    description: 'Label text displayed above the title.',
+  },
+  description: {
+    control: { type: 'text' },
+    description: 'Description text displayed below the title.',
+  },
+  headerActionCount: {
+    control: { type: 'select' },
+    options: [0, 1, 3],
+    description: 'Number of header actions to render (0, 1 or 3).',
+  },
+  hasTitleStart: {
     control: { type: 'boolean' },
-    description: 'When true, an AI Label decorator is shown in the header.',
+    description: 'Toggle the icon shown before the title (`titleStart`).',
+  },
+  hasTitleEnd: {
+    control: { type: 'boolean' },
+    description: 'Toggle the icon shown after the title (`titleEnd`).',
+  },
+  hasAILabel: {
+    control: {
+      type: 'boolean',
+    },
+    description: 'Toggle AI Label in the tearsheet header.',
+  },
+  variant: {
+    control: { type: 'radio' },
+    options: ['wide', 'narrow'],
+    description: 'Tearsheet variant. Defaults to "wide".',
   },
   isFlush: {
     control: { type: 'boolean' },
     description:
       'When true, the main content area takes full width without padding.',
-  },
-  influencerWidth: {
-    control: { type: 'text' },
-  },
-  keepMounted: {
-    control: { type: 'boolean' },
-    description:
-      'If true, the tearsheet will remain mounted in the DOM when closed. By default (false), the tearsheet unmounts after the exit animation completes.',
-  },
-  summaryContentWidth: {
-    control: { type: 'text' },
-  },
-  verticalGap: {
-    control: { type: 'text' },
-  },
-  variant: {
-    control: { type: 'radio' },
-    options: ['wide', 'narrow'],
   },
   hideCloseButton: {
     control: { type: 'boolean' },
@@ -77,6 +120,62 @@ const sharedArgTypes = {
     control: { type: 'text' },
     description: 'The accessibility title for the close icon (if shown).',
   },
+  influencerWidth: {
+    control: { type: 'text' },
+    description:
+      'Override the default influencer width (256px). Accepts any valid CSS length, e.g. "300px" or "20rem".',
+  },
+  summaryContentWidth: {
+    control: { type: 'text' },
+    description:
+      'Override the default summary content width (256px). Accepts any valid CSS length.',
+  },
+  verticalGap: {
+    control: { type: 'text' },
+    description: 'Gap from the top of the viewport. Defaults to 88px.',
+  },
+  preventCloseOnClickOutside: {
+    control: { type: 'boolean' },
+    description: 'Prevent closing when clicking outside the tearsheet.',
+  },
+  selectorPrimaryFocus: {
+    control: { type: 'text' },
+    description: 'CSS selector of the element that receives focus when opened.',
+  },
+  keepMounted: {
+    control: { type: 'boolean' },
+    description:
+      'If true, the tearsheet will remain mounted in the DOM when closed. By default (false), the tearsheet unmounts after the exit animation completes.',
+  },
+  ariaLabel: {
+    control: { type: 'text' },
+    description: 'Accessible label for the tearsheet dialog.',
+  },
+};
+
+const defaultDescription =
+  'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page';
+
+const defaultArgs = {
+  ariaLabel: '',
+  closeIconDescription: 'Close',
+  description: defaultDescription,
+  disableHeaderCollapse: false,
+  hasAILabel: false,
+  hasTitleEnd: false,
+  hasTitleStart: true,
+  headerActionCount: 3,
+  hideCloseButton: false,
+  influencerWidth: '256px',
+  isFlush: false,
+  keepMounted: false,
+  label: 'Customer data',
+  preventCloseOnClickOutside: true,
+  selectorPrimaryFocus: '#input1',
+  summaryContentWidth: '256px',
+  title: 'Title of the tearsheet',
+  variant: 'wide',
+  verticalGap: '88px',
 };
 
 export default {
@@ -108,9 +207,13 @@ export default {
     StackProvider: StackProvider,
   },
   argTypes: {
-    // ── hide props Tearsheet inherits from ComposedModal but controls internally ──
+    // ── hide props Tearsheet inherits from ComposedModal or manages internally ──
+    'aria-describedby': { table: { disable: true } },
+    'aria-label': { table: { disable: true } },
+    'aria-labelledby': { table: { disable: true } },
     children: { table: { disable: true } },
     className: { table: { disable: true } },
+    containerClassName: { table: { disable: true } },
     // size is set internally (sm for narrow, undefined for wide) — not a consumer prop
     size: { table: { disable: true } },
     // always forced true internally
@@ -118,9 +221,14 @@ export default {
     // not meaningful on a tearsheet
     danger: { table: { disable: true } },
     // deprecated, use decorator instead
+    decorator: { table: { disable: true } },
     slug: { table: { disable: true } },
-    // low-level event, not part of tearsheet API
+    // low-level event / handlers, not part of tearsheet controls
+    onClose: { table: { disable: true } },
     onKeyDown: { table: { disable: true } },
+    // internal state managed by story launcher button
+    open: { table: { disable: true } },
+    launcherButtonRef: { table: { disable: true } },
     // internal — managed by StackProvider
     selectorsFloatingMenus: { table: { disable: true } },
     // portal props not useful in controls panel
@@ -128,52 +236,18 @@ export default {
     disablePortal: { table: { disable: true } },
     ...sharedArgTypes,
   },
+  args: {
+    ...defaultArgs,
+  },
 };
 
-const sampleDecorator = (decorator) => {
-  switch (decorator) {
-    case 1:
-      return (
-        <AILabel className="decorator-container" size="xs">
-          <AILabelContent>
-            <div>
-              <p className="secondary">AI Explained</p>
-              <h3>84%</h3>
-              <p className="secondary bold">Confidence score</p>
-              <p className="secondary">
-                This is not really Lorem Ipsum but the spell checker did not
-                like the previous text with it&apos;s non-words which is why
-                this unwieldy sentence, should one choose to call it that, here.
-              </p>
-              <hr />
-              <p className="secondary">Model type</p>
-              <p className="bold">Foundation model</p>
-            </div>
-          </AILabelContent>
-        </AILabel>
-      );
-    case 2:
-      return (
-        <Toggletip>
-          <ToggletipButton label="Additional information">
-            <Information />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>Custom content here</p>
-          </ToggletipContent>
-        </Toggletip>
-      );
-    default:
-      return;
-  }
-};
 const description = (
   <TruncatedText
     id={`header-description__truncatedText`}
     expandLabel={'Read more'}
     collapseLabel={'Read less'}
     expandAriaLabel={'Read more about tearsheet description'}
-    value="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page"
+    value={defaultDescription}
     type="expand"
   />
 );
@@ -183,23 +257,36 @@ const description = (
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 export const Default = {
+  args: {
+    ...defaultArgs,
+  },
   render: (
     {
-      decorator,
-      isFlush,
-      influencerWidth,
-      keepMounted,
-      summaryContentWidth,
-      verticalGap,
-      variant,
-      hideCloseButton,
-      disableHeaderCollapse,
+      ariaLabel,
       closeIconDescription,
+      description: descriptionText,
+      disableHeaderCollapse,
+      hasAILabel,
+      hasTitleEnd,
+      hasTitleStart,
+      headerActionCount,
+      hideCloseButton,
+      influencerWidth,
+      isFlush,
+      keepMounted,
+      label,
+      preventCloseOnClickOutside,
+      selectorPrimaryFocus,
+      summaryContentWidth,
+      title,
+      variant,
+      verticalGap,
     },
     context
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef = useRef(null);
     const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
     const summaryPanelTriggerRef = useRef(null);
@@ -218,13 +305,14 @@ export const Default = {
         </Button>
 
         <Tearsheet
+          ariaLabel={ariaLabel || undefined}
           open={open}
           variant={variant ?? 'wide'}
-          decorator={decorator ? sampleDecorator(1) : undefined}
+          decorator={hasAILabel ? sampleAILabel : undefined}
           onClose={() => setOpen(false)}
-          preventCloseOnClickOutside={true}
+          preventCloseOnClickOutside={preventCloseOnClickOutside}
           launcherButtonRef={launcherButtonRef}
-          selectorPrimaryFocus={'#input1'}
+          selectorPrimaryFocus={selectorPrimaryFocus}
           influencerWidth={influencerWidth}
           keepMounted={keepMounted}
           summaryContentWidth={summaryContentWidth}
@@ -239,43 +327,59 @@ export const Default = {
             }}>
             <Tearsheet.HeaderContent
               open
-              label="Customer data"
-              title="Title of the tearsheet "
-              titleStart={<Bee size={32} />}
-              description={description}
+              label={label}
+              title={title}
+              titleStart={hasTitleStart ? <Bee size={32} /> : undefined}
+              titleEnd={hasTitleEnd ? <Information size={32} /> : undefined}
+              description={
+                descriptionText ? (
+                  <TruncatedText
+                    id={`header-description__truncatedText`}
+                    expandLabel={'Read more'}
+                    collapseLabel={'Read less'}
+                    expandAriaLabel={'Read more about tearsheet description'}
+                    value={descriptionText}
+                    type="expand"
+                  />
+                ) : undefined
+              }
               headerActions={
-                <Tearsheet.HeaderActions
-                  menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
-                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
-                      Action 1
-                    </Button>
-                  </Tearsheet.HeaderActionItem>
-                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
-                      Action 2
-                    </Button>
-                  </Tearsheet.HeaderActionItem>
-                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
-                      Action 3
-                    </Button>
-                  </Tearsheet.HeaderActionItem>
-                </Tearsheet.HeaderActions>
+                Number(headerActionCount) > 0 ? (
+                  <Tearsheet.HeaderActions
+                    menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
+                    {Array.from(
+                      { length: Number(headerActionCount) },
+                      (_, index) => (
+                        <Tearsheet.HeaderActionItem
+                          key={index}
+                          overflowItemLabel={`Action ${index + 1}`}>
+                          <Button
+                            kind="tertiary"
+                            size={getActionSize(isCollapsed)}>
+                            Action {index + 1}
+                          </Button>
+                        </Tearsheet.HeaderActionItem>
+                      )
+                    )}
+                  </Tearsheet.HeaderActions>
+                ) : undefined
               }></Tearsheet.HeaderContent>
           </Tearsheet.Header>
           <Tearsheet.Body>
             <Tearsheet.MainContent isFlush={isFlush}>
-              <div className="summaryPanelTrigger">
+              <div className="panelTriggers">
                 <Button
                   ref={summaryPanelTriggerRef}
+                  wrapperClasses="summaryPanelTrigger"
                   kind="ghost"
-                  label="Open right panel"
+                  iconDescription="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
-                  renderIcon={() => <RightPanelClose />}
                   aria-expanded={summaryPanelOpen}
                   aria-controls="summary-panel"
-                  size="md"></Button>
+                  size="md"
+                  hasIconOnly
+                  renderIcon={() => <RightPanelClose />}
+                />
               </div>
 
               <Section className="main-content">
@@ -433,9 +537,13 @@ export const Default = {
   },
 };
 export const WithInfluencer = {
+  args: {
+    ...defaultArgs,
+    hasAILabel: true,
+  },
   render: (
     {
-      decorator,
+      hasAILabel,
       isFlush,
       influencerWidth,
       keepMounted,
@@ -450,6 +558,7 @@ export const WithInfluencer = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef = useRef(null);
     const influencerPanelTriggerRef = useRef(null);
     const currentStep = 1;
@@ -472,7 +581,7 @@ export const WithInfluencer = {
         <Tearsheet
           open={open}
           variant={variant ?? 'wide'}
-          decorator={decorator ? sampleDecorator(1) : undefined}
+          decorator={hasAILabel ? sampleAILabel : undefined}
           onClose={() => setOpen(false)}
           preventCloseOnClickOutside={true}
           launcherButtonRef={launcherButtonRef}
@@ -497,17 +606,17 @@ export const WithInfluencer = {
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 1
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 2
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 3
                     </Button>
                   </Tearsheet.HeaderActionItem>
@@ -539,16 +648,19 @@ export const WithInfluencer = {
           </Tearsheet.Influencer>
           <Tearsheet.Body>
             <Tearsheet.MainContent isFlush={isFlush}>
-              <div className="influencerPanelTrigger">
+              <div className="panelTriggers">
                 <Button
                   ref={influencerPanelTriggerRef}
+                  wrapperClasses="influencerPanelTrigger"
                   kind="ghost"
-                  label="Open influencer panel"
+                  iconDescription="Open influencer panel"
                   onClick={() => setInfluencerPanelOpen(true)}
-                  renderIcon={() => <RightPanelClose />}
                   aria-expanded={influencerPanelOpen}
                   aria-controls="influencer-panel"
-                  size="md"></Button>
+                  size="md"
+                  hasIconOnly
+                  renderIcon={() => <RightPanelClose />}
+                />
               </div>
 
               <Section className="main-content">
@@ -678,7 +790,7 @@ export const WithInfluencer = {
 export const WithTabs = {
   render: (
     {
-      decorator,
+      hasAILabel,
       isFlush,
       influencerWidth,
       keepMounted,
@@ -693,6 +805,7 @@ export const WithTabs = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef = useRef(null);
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
@@ -711,7 +824,7 @@ export const WithTabs = {
           <Tearsheet
             open={open}
             variant={variant ?? 'wide'}
-            decorator={decorator ? sampleDecorator(1) : undefined}
+            decorator={hasAILabel ? sampleAILabel : undefined}
             onClose={() => setOpen(false)}
             launcherButtonRef={launcherButtonRef}
             influencerWidth={influencerWidth}
@@ -732,17 +845,17 @@ export const WithTabs = {
                   <Tearsheet.HeaderActions
                     menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                      <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 1
                       </Button>
                     </Tearsheet.HeaderActionItem>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                      <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 2
                       </Button>
                     </Tearsheet.HeaderActionItem>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                      <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 3
                       </Button>
                     </Tearsheet.HeaderActionItem>
@@ -763,13 +876,16 @@ export const WithTabs = {
             </Tearsheet.Header>
             <Tearsheet.Body>
               <Tearsheet.MainContent isFlush={isFlush}>
-                <div className="summaryPanelTrigger">
+                <div className="panelTriggers">
                   <Button
+                    wrapperClasses="summaryPanelTrigger"
                     kind="ghost"
-                    label="Open right panel"
+                    iconDescription="Open right panel"
                     onClick={() => setSummaryPanelOpen(true)}
+                    size="md"
+                    hasIconOnly
                     renderIcon={() => <RightPanelClose />}
-                    size="md"></Button>
+                  />
                 </div>
                 <TabPanels>
                   <TabPanel className="page-header-story--tall-tab-panel">
@@ -827,9 +943,13 @@ export const WithTabs = {
   },
 };
 export const narrowTearsheet = {
+  args: {
+    ...defaultArgs,
+    variant: 'narrow',
+  },
   render: (
     {
-      decorator,
+      hasAILabel,
       isFlush,
       hideCloseButton,
       disableHeaderCollapse,
@@ -840,6 +960,7 @@ export const narrowTearsheet = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
     const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
     const launcherButtonRef = useRef(null);
@@ -862,7 +983,7 @@ export const narrowTearsheet = {
             open={open}
             variant={'narrow'}
             verticalGap="5.5rem"
-            decorator={decorator ? sampleDecorator(1) : undefined}
+            decorator={hasAILabel ? sampleAILabel : undefined}
             onClose={() => setOpen(false)}
             className="narrowTearsheet"
             launcherButtonRef={launcherButtonRef}
@@ -881,17 +1002,17 @@ export const narrowTearsheet = {
                   <Tearsheet.HeaderActions
                     menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                      <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 1
                       </Button>
                     </Tearsheet.HeaderActionItem>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                      <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 2
                       </Button>
                     </Tearsheet.HeaderActionItem>
                     <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                      <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                      <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                         Action 3
                       </Button>
                     </Tearsheet.HeaderActionItem>
@@ -923,27 +1044,31 @@ export const narrowTearsheet = {
             </Tearsheet.Influencer>
             <Tearsheet.Body>
               <Tearsheet.MainContent isFlush={isFlush}>
-                <div className="influencerPanelTrigger">
+                <div className="panelTriggers">
                   <Button
                     ref={influencerPanelTriggerRef}
+                    wrapperClasses="influencerPanelTrigger"
                     kind="ghost"
-                    label="Open influencer"
+                    iconDescription="Open influencer"
                     onClick={() => setInfluencerPanelOpen(true)}
-                    renderIcon={() => <RightPanelClose />}
                     aria-expanded={influencerPanelOpen}
                     aria-controls="influencer-panel"
-                    size="md"></Button>
-                </div>
-                <div className="summaryPanelTrigger">
+                    size="md"
+                    hasIconOnly
+                    renderIcon={() => <RightPanelClose />}
+                  />
                   <Button
                     ref={summaryPanelTriggerRef}
+                    wrapperClasses="summaryPanelTrigger"
                     kind="ghost"
-                    label="Open summary panel"
+                    iconDescription="Open summary panel"
                     onClick={() => setSummaryPanelOpen(true)}
-                    renderIcon={() => <RightPanelClose />}
                     aria-expanded={summaryPanelOpen}
                     aria-controls="summary-panel"
-                    size="md"></Button>
+                    size="md"
+                    hasIconOnly
+                    renderIcon={() => <RightPanelClose />}
+                  />
                 </div>
 
                 <Section className="main-content">
@@ -1104,8 +1229,8 @@ export const narrowTearsheet = {
 export const StackingTearsheet = {
   render: (
     {
-      variant = ['wide', 'wide', 'wide'],
-      decorator,
+      variant: variantProp = ['wide', 'wide', 'wide'],
+      hasAILabel,
       isFlush,
       hideCloseButton,
       disableHeaderCollapse,
@@ -1113,11 +1238,17 @@ export const StackingTearsheet = {
     },
     context
   ) => {
+    // The story-level `variant` arg is a string ('wide' | 'narrow') from the
+    // shared controls; the stacking stories pass one variant per tearsheet.
+    const variant = Array.isArray(variantProp)
+      ? variantProp
+      : [variantProp, variantProp, variantProp];
     const [open1, setOpen1] = useState(context?.viewMode !== 'docs');
     const [open2, setOpen2] = useState(false);
     const [open3, setOpen3] = useState(false);
     const [isCollapsed1, setIsCollapsed1] = useState(false);
     const [isCollapsed2, setIsCollapsed2] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef1 = useRef(null);
     const launcherButtonRef2 = useRef(null);
     const launcherButtonRef3 = useRef(null);
@@ -1152,7 +1283,7 @@ export const StackingTearsheet = {
             variant={variant[0]}
             verticalGap={variant[0] === 'narrow' ? '5.5rem' : ''}
             launcherButtonRef={launcherButtonRef1}
-            decorator={decorator ? sampleDecorator(1) : undefined}>
+            decorator={hasAILabel ? sampleAILabel : undefined}>
             <Tearsheet.Header
               hideCloseButton={hideCloseButton}
               disableHeaderCollapse={disableHeaderCollapse}
@@ -1166,7 +1297,7 @@ export const StackingTearsheet = {
                       <Button
                         ref={launcherButtonRef2}
                         kind="tertiary"
-                        size={isCollapsed1 ? 'xs' : 'sm'}
+                        size={getActionSize(isCollapsed1)}
                         onClick={() => {
                           setOpen2(true);
                         }}
@@ -1269,7 +1400,7 @@ export const StackingTearsheet = {
             variant={variant[1]}
             verticalGap={variant[1] === 'narrow' ? '5.5rem' : ''}
             launcherButtonRef={launcherButtonRef2}
-            decorator={decorator ? sampleDecorator(1) : undefined}>
+            decorator={hasAILabel ? sampleAILabel : undefined}>
             <Tearsheet.Header
               hideCloseButton={hideCloseButton}
               disableHeaderCollapse={disableHeaderCollapse}
@@ -1286,7 +1417,7 @@ export const StackingTearsheet = {
                       <Button
                         ref={launcherButtonRef3}
                         kind="tertiary"
-                        size={isCollapsed2 ? 'xs' : 'sm'}
+                        size={getActionSize(isCollapsed2)}
                         onClick={() => {
                           setOpen3(true);
                         }}
@@ -1386,7 +1517,7 @@ export const StackingTearsheet = {
             verticalGap={variant[2] === 'narrow' ? '5.5rem' : ''}
             onClose={() => setOpen3(false)}
             launcherButtonRef={launcherButtonRef3}
-            decorator={decorator ? sampleDecorator(1) : undefined}>
+            decorator={hasAILabel ? sampleAILabel : undefined}>
             <Tearsheet.Header
               hideCloseButton={hideCloseButton}
               disableHeaderCollapse={disableHeaderCollapse}
@@ -1499,7 +1630,7 @@ export const stackingNarrowTearsheets = {
 export const WithCustomFooterActions = {
   render: (
     {
-      decorator,
+      hasAILabel,
       isFlush,
       influencerWidth,
       keepMounted,
@@ -1514,6 +1645,7 @@ export const WithCustomFooterActions = {
   ) => {
     const [open, setOpen] = useState(context?.viewMode !== 'docs');
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const getActionSize = useHeaderActionSize();
     const launcherButtonRef = useRef(null);
     const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
@@ -1533,7 +1665,7 @@ export const WithCustomFooterActions = {
         <Tearsheet
           open={open}
           variant={variant ?? 'wide'}
-          decorator={decorator ? sampleDecorator(1) : undefined}
+          decorator={hasAILabel ? sampleAILabel : undefined}
           onClose={() => setOpen(false)}
           preventCloseOnClickOutside={true}
           launcherButtonRef={launcherButtonRef}
@@ -1557,17 +1689,17 @@ export const WithCustomFooterActions = {
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 1
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 2
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+                    <Button kind="tertiary" size={getActionSize(isCollapsed)}>
                       Action 3
                     </Button>
                   </Tearsheet.HeaderActionItem>
@@ -1576,13 +1708,16 @@ export const WithCustomFooterActions = {
           </Tearsheet.Header>
           <Tearsheet.Body>
             <Tearsheet.MainContent isFlush={isFlush}>
-              <div className="summaryPanelTrigger">
+              <div className="panelTriggers">
                 <Button
+                  wrapperClasses="summaryPanelTrigger"
                   kind="ghost"
-                  label="Open right panel"
+                  iconDescription="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
+                  size="md"
+                  hasIconOnly
                   renderIcon={() => <RightPanelClose />}
-                  size="md"></Button>
+                />
               </div>
 
               <Section className="main-content">
@@ -1666,7 +1801,7 @@ export const WithCustomFooterActions = {
             </Tearsheet.SummaryContent>
           </Tearsheet.Body>
           <Tearsheet.Footer>
-            <div className="default__action-buttons">
+            <ButtonSet fluid className="cds--tearsheet__footer-button-set">
               <Button
                 kind="ghost"
                 onClick={() => setOpen(false)}
@@ -1689,7 +1824,7 @@ export const WithCustomFooterActions = {
                 size={buttonSize}>
                 Submit
               </Button>
-            </div>
+            </ButtonSet>
           </Tearsheet.Footer>
         </Tearsheet>
       </>
@@ -1700,7 +1835,7 @@ export const WithCustomFooterActions = {
 export const withSteps = {
   render: (
     {
-      decorator,
+      hasAILabel,
       variant,
       hideCloseButton,
       disableHeaderCollapse,
@@ -1724,7 +1859,7 @@ export const withSteps = {
           open={open}
           setOpen={setOpen}
           launcherButtonRef={launcherButtonRef}
-          decorator={decorator ? sampleDecorator(1) : undefined}
+          decorator={hasAILabel ? sampleAILabel : undefined}
           variant={variant ?? 'wide'}
           hideCloseButton={hideCloseButton}
           disableHeaderCollapse={disableHeaderCollapse}
@@ -1740,7 +1875,7 @@ export const withSteps = {
 export const withStepsAndHorizontalProgressIndicator = {
   render: (
     {
-      decorator,
+      hasAILabel,
       variant,
       hideCloseButton,
       disableHeaderCollapse,
@@ -1765,7 +1900,7 @@ export const withStepsAndHorizontalProgressIndicator = {
           setOpen={setOpen}
           progressIndicator="horizontal"
           launcherButtonRef={launcherButtonRef}
-          decorator={decorator ? sampleDecorator(1) : undefined}
+          decorator={hasAILabel ? sampleAILabel : undefined}
           variant={variant ?? 'wide'}
           hideCloseButton={hideCloseButton}
           disableHeaderCollapse={disableHeaderCollapse}
