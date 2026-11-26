@@ -965,7 +965,7 @@ export const upgrades = [
         name: 'enable-v12-structured-list-visible-icons',
         description: `
         Updates selectable StructuredList components with new v12 selection pattern.
-        https://react.carbondesignsystem.com/?path=/story/components-structuredlist-feature-flag--selection
+        https://react.carbondesignsystem.com/?path=/story/components-structuredlist--selection
     
         Key Changes:
         • Replaces checkmark icons with radio buttons
@@ -994,11 +994,7 @@ export const upgrades = [
         messageConfig: {
           name: 'StructuredList',
           nextSteps: [
-            '⚠️ IMPORTANT: Additional SASS Changes Required!',
-            'This migration requires enabling "enable-v12-structured-list-visible-icons" SASS feature flag in your stylesheet.',
-            '$enable-v12-structured-list-visible-icons: true',
-            '📚 For detailed instructions on enabling SASS feature flags, visit:',
-            'https://react.carbondesignsystem.com/iframe.html?args=size%3Amini&viewMode=docs&id=getting-started-feature-flags--overview&globals=#turning-on-feature-flags-in-sass',
+            'The "enable-v12-structured-list-visible-icons" feature flag has been removed. Selection icons are always visible in v12, so no Sass configuration is required.',
             '',
           ],
         },
