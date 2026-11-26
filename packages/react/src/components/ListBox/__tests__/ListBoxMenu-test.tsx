@@ -1,12 +1,13 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { type RefCallback } from 'react';
 import ListBox from '../';
 
 describe('ListBoxMenu', () => {
@@ -21,8 +22,10 @@ describe('ListBoxMenu', () => {
   });
 
   it('should support a `ref` on the element with role="listbox"', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLUListElement>>();
     render(<ListBox.Menu id="test" ref={ref} />);
-    expect(ref).toHaveBeenCalledWith(screen.getByRole('listbox'));
+    expect(ref.mock.calls).toContainEqual([
+      screen.getByRole<HTMLUListElement>('listbox'),
+    ]);
   });
 });

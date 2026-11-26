@@ -1,13 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { type MouseEventHandler, type RefCallback } from 'react';
 import Link from '../Link';
 
 const prefix = 'cds';
@@ -90,14 +91,17 @@ describe('Link', () => {
     expect(screen.getByRole('link')).toHaveClass(`${prefix}--link--inline`);
   });
 
-  it.each(['sm', 'md', 'lg'])('should support the %s size variant', (size) => {
-    render(
-      <Link href="https://carbondesignsystem.com" size={size}>
-        test
-      </Link>
-    );
-    expect(screen.getByRole('link')).toHaveClass(`${prefix}--link--${size}`);
-  });
+  it.each(['sm', 'md', 'lg'] as const)(
+    'should support the %s size variant',
+    (size) => {
+      render(
+        <Link href="https://carbondesignsystem.com" size={size}>
+          test
+        </Link>
+      );
+      expect(screen.getByRole('link')).toHaveClass(`${prefix}--link--${size}`);
+    }
+  );
 
   it('should add rel="noopener" automatically if target="_blank"', () => {
     render(
@@ -133,7 +137,7 @@ describe('Link', () => {
 
   // check for disabled onclick handler
   it('should not call onClick when disabled', async () => {
-    const onClick = jest.fn();
+    const onClick = jest.fn<MouseEventHandler<HTMLAnchorElement>>();
     render(
       <Link href="/" disabled onClick={onClick} className="some-class">
         A simple link
@@ -145,7 +149,7 @@ describe('Link', () => {
   });
 
   it('should call onClick when not disabled', async () => {
-    const onClick = jest.fn();
+    const onClick = jest.fn<MouseEventHandler<HTMLAnchorElement>>();
     render(
       <Link href="/" onClick={onClick} className="some-class">
         A simple link
@@ -169,13 +173,15 @@ describe('Link', () => {
 
   describe('Component API', () => {
     it('should support a `ref` on the element with role of link', () => {
-      const ref = jest.fn();
+      const ref = jest.fn<RefCallback<HTMLAnchorElement>>();
       render(
         <Link href="https://carbondesignsystem.com" ref={ref}>
           A simple link
         </Link>
       );
-      expect(ref).toHaveBeenCalledWith(screen.getByRole('link'));
+      expect(ref.mock.calls).toContainEqual([
+        screen.getByRole<HTMLAnchorElement>('link'),
+      ]);
     });
   });
 });

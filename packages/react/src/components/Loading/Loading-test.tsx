@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { describe, expect, it } from '@jest/globals';
+import React, { type ReactNode } from 'react';
 import Loading from './Loading';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -254,10 +255,15 @@ describe('Loading', () => {
       expect(document.activeElement).toBe(modalButton);
     });
 
-    const stubModalSelector = (element, isModal) => {
-      const { matches } = element;
-      element.matches = (selector) =>
-        selector === ':modal' ? isModal : matches.call(element, selector);
+    const stubModalSelector = (
+      element: HTMLDialogElement,
+      isModal: boolean
+    ) => {
+      const matches = element.matches.bind(element);
+      Object.defineProperty(element, 'matches', {
+        value: (selector: string) =>
+          selector === ':modal' ? isModal : matches(selector),
+      });
     };
 
     const renderWithNativeDialog = async () => {
@@ -277,7 +283,7 @@ describe('Loading', () => {
         );
       });
 
-      return screen.getByTestId('native-dialog');
+      return screen.getByTestId<HTMLDialogElement>('native-dialog');
     };
 
     it('should not steal focus from a native dialog layered on top', async () => {
@@ -437,7 +443,7 @@ describe('Loading', () => {
     });
 
     it('should not restore focus to a non-HTML element', () => {
-      const withGlyph = (loader) => (
+      const withGlyph = (loader: ReactNode) => (
         <div>
           <svg data-testid="glyph" tabIndex={-1} />
           {loader}
@@ -459,7 +465,7 @@ describe('Loading', () => {
     });
 
     it('should restore focus next to the trigger when the trigger is disabled', () => {
-      const withForm = (loader, disabled) => (
+      const withForm = (loader: ReactNode, disabled: boolean) => (
         <div data-testid="form">
           <button data-testid="trigger" disabled={disabled}>
             Submit
@@ -487,7 +493,7 @@ describe('Loading', () => {
     });
 
     it('should keep a tabindex the fallback already owned', () => {
-      const withForm = (loader, disabled) => (
+      const withForm = (loader: ReactNode, disabled: boolean) => (
         <div data-testid="form" tabIndex={-1}>
           <button data-testid="trigger" disabled={disabled}>
             Submit
@@ -514,7 +520,7 @@ describe('Loading', () => {
     });
 
     it('should drop the borrowed tabindex when the fallback cannot keep focus', () => {
-      const withForm = (loader, disabled) => (
+      const withForm = (loader: ReactNode, disabled: boolean) => (
         <div>
           <div data-testid="form">
             <button data-testid="trigger" disabled={disabled}>
@@ -534,7 +540,7 @@ describe('Loading', () => {
       screen.getByRole('dialog', { name: 'loading' }).focus();
 
       const rival = screen.getByTestId('rival');
-      const steal = (event) => {
+      const steal = (event: FocusEvent) => {
         if (event.target !== rival) {
           rival.focus();
         }
@@ -551,7 +557,7 @@ describe('Loading', () => {
       expect(screen.getByTestId('form')).not.toHaveAttribute('tabindex');
     });
 
-    const withLayeredModal = (loader) => (
+    const withLayeredModal = (loader: ReactNode) => (
       <div>
         <div role="dialog" aria-modal="true" aria-label="Layered modal">
           <button data-testid="modal-button">Confirm</button>

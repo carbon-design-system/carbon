@@ -1,17 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, test } from '@jest/globals';
 import { render } from '@testing-library/react';
 import React from 'react';
 import { Layer, useLayer } from '../../Layer';
 
 describe('useLayer', () => {
   test('default value', () => {
-    const values = [];
+    const values: ReturnType<typeof useLayer>[] = [];
 
     function TestComponent() {
       const value = useLayer();
@@ -29,7 +30,7 @@ describe('useLayer', () => {
   });
 
   test('nesting', () => {
-    const values = [];
+    const values: ReturnType<typeof useLayer>[] = [];
 
     function TestComponent() {
       const value = useLayer();
