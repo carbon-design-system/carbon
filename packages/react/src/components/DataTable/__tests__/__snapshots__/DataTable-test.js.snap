@@ -645,7 +645,11 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <span
                 class="cds--popover-content cds--tooltip-content"
               >
-                Settings
+                <span
+                  class="cds--icon-button-tooltip__label"
+                >
+                  Settings
+                </span>
               </span>
               <span
                 class="cds--popover-caret"
@@ -1095,7 +1099,11 @@ exports[`DataTable renders as expected - Component API should render and match s
               <span
                 class="cds--popover-content cds--tooltip-content"
               >
-                Settings
+                <span
+                  class="cds--icon-button-tooltip__label"
+                >
+                  Settings
+                </span>
               </span>
               <span
                 class="cds--popover-caret"

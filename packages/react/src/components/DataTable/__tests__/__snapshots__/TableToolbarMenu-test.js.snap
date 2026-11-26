@@ -48,7 +48,11 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
         <span
           class="cds--popover-content cds--tooltip-content"
         >
-          Add
+          <span
+            class="cds--icon-button-tooltip__label"
+          >
+            Add
+          </span>
         </span>
         <span
           class="cds--popover-caret"

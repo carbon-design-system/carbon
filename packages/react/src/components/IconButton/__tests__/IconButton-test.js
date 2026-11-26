@@ -6,11 +6,46 @@
  */
 
 import { Edit } from '@carbon/icons-react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 import { IconButton } from '../';
 
+const mockUseResizeObserver = jest.fn();
+
+jest.mock('../../../internal/useResizeObserver', () => ({
+  useResizeObserver: (args) => mockUseResizeObserver(args),
+}));
+
 describe('IconButton', () => {
+  it('uses multiline padding only while the label wraps', () => {
+    render(
+      <IconButton label="Application development and integration solutions">
+        <Edit />
+      </IconButton>
+    );
+    const wrapper = screen
+      .getByRole('button')
+      .closest('.cds--popover-container');
+    screen.getByText(
+      'Application development and integration solutions'
+    ).style.lineHeight = '20px';
+    const resizeLabel = (height) => {
+      act(() => {
+        mockUseResizeObserver.mock.calls.at(-1)[0].onResize({ height });
+      });
+    };
+
+    resizeLabel(20);
+    expect(wrapper).not.toHaveClass('cds--icon-button-tooltip--multiline');
+    resizeLabel(40);
+    expect(wrapper).toHaveClass('cds--icon-button-tooltip--multiline');
+    // Closing the tooltip should not reset its measured layout.
+    resizeLabel(0);
+    expect(wrapper).toHaveClass('cds--icon-button-tooltip--multiline');
+    resizeLabel(20);
+    expect(wrapper).not.toHaveClass('cds--icon-button-tooltip--multiline');
+  });
+
   it('should support labelling with label', () => {
     render(
       <IconButton label="edit">

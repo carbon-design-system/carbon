@@ -103,7 +103,14 @@ $tooltip-padding-inline: custom-property.get-var(
     @include type.type-style('body-compact-01');
   }
 
-  .#{$prefix}--icon-button-tooltip .#{$prefix}--tooltip-content {
-    padding-block: spacing.$spacing-05;
+  .#{$prefix}--icon-button-tooltip__label {
+    display: block;
+  }
+
+  .#{$prefix}--icon-button-tooltip--multiline {
+    @include custom-property.declaration(
+      'tooltip-padding-block',
+      spacing.$spacing-05
+    );
   }
 }

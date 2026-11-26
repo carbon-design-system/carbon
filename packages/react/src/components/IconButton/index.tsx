@@ -6,12 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { forwardRef, ReactNode } from 'react';
+import React, { forwardRef, ReactNode, useRef, useState } from 'react';
 import { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import ButtonBase from '../Button/ButtonBase';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import BadgeIndicator from '../BadgeIndicator';
@@ -147,6 +148,34 @@ export interface IconButtonProps
   wrapperClasses?: string;
 }
 
+function IconButtonTooltipLabel({
+  children,
+  onMultilineChange,
+}: {
+  children: ReactNode;
+  onMultilineChange: (isMultiline: boolean) => void;
+}) {
+  const prefix = usePrefix();
+  const labelRef = useRef<HTMLSpanElement>(null);
+
+  useResizeObserver({
+    ref: labelRef,
+    onResize: ({ height }) => {
+      if (!labelRef.current || height === 0) {
+        return;
+      }
+      const { lineHeight } = window.getComputedStyle(labelRef.current);
+      onMultilineChange(height > parseFloat(lineHeight));
+    },
+  });
+
+  return (
+    <span ref={labelRef} className={`${prefix}--icon-button-tooltip__label`}>
+      {children}
+    </span>
+  );
+}
+
 const IconButton = forwardRef<unknown, IconButtonProps>(
   (
     {
@@ -172,6 +201,7 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
     ref
   ) => {
     const prefix = usePrefix();
+    const [isMultiline, setIsMultiline] = useState(false);
 
     const tooltipClasses = classNames(
       wrapperClasses,
@@ -179,6 +209,7 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
       `${prefix}--icon-button-tooltip`,
       {
         [`${prefix}--icon-tooltip--disabled`]: disabled,
+        [`${prefix}--icon-button-tooltip--multiline`]: isMultiline,
       }
     );
 
@@ -200,7 +231,15 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
         dropShadow={dropShadow}
         enterDelayMs={enterDelayMs}
         highContrast={highContrast}
-        label={label}
+        label={
+          label ? (
+            <IconButtonTooltipLabel onMultilineChange={setIsMultiline}>
+              {label}
+            </IconButtonTooltipLabel>
+          ) : (
+            label
+          )
+        }
         leaveDelayMs={leaveDelayMs}>
         <ButtonBase
           {...rest}
