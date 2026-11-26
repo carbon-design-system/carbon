@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import React from 'react';
 import ProgressBar from './ProgressBar';
 import { render, screen } from '@testing-library/react';
@@ -18,14 +19,12 @@ describe('ProgressBar', () => {
   let wrapper;
 
   beforeEach(() => {
-    // eslint-disable-next-line testing-library/no-render-in-lifecycle
     wrapper = render(<ProgressBar {...props} />);
   });
 
   describe('renders as expected', () => {
     it('progress bar and label ids match', () => {
       const bar = screen.getByRole('progressbar');
-      // eslint-disable-next-line testing-library/no-node-access
       const label = wrapper.container.querySelector(
         `.${prefix}--progress-bar__label`
       );
@@ -45,7 +44,6 @@ describe('ProgressBar', () => {
       const text = 'ProgressBar helper text';
       wrapper.rerender(<ProgressBar {...props} helperText={text} />);
       const live = () =>
-        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector('[aria-live="polite"]');
 
       expect(live()).toHaveTextContent(/^Loading$/);
@@ -63,7 +61,6 @@ describe('ProgressBar', () => {
 
     it('still renders accessible label when hideLabel is passed', () => {
       wrapper.rerender(<ProgressBar {...props} hideLabel />);
-      // eslint-disable-next-line testing-library/no-node-access
       const label = wrapper.container.querySelector(
         `.${prefix}--progress-bar__label`
       );
@@ -79,7 +76,6 @@ describe('ProgressBar', () => {
       expect(bar).not.toHaveAttribute('aria-valuemax');
       expect(bar).not.toHaveAttribute('aria-valuemin');
       expect(
-        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector(`.${prefix}--progress-bar`)
       ).toHaveClass(`${prefix}--progress-bar--indeterminate`);
     });
@@ -109,7 +105,6 @@ describe('ProgressBar', () => {
       wrapper.rerender(<ProgressBar {...props} className={className} />);
 
       expect(
-        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector(`.${prefix}--progress-bar`)
       ).toHaveClass(className);
     });
@@ -118,7 +113,6 @@ describe('ProgressBar', () => {
       wrapper.rerender(<ProgressBar {...props} status="finished" />);
 
       expect(
-        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector(`.${prefix}--progress-bar`)
       ).toHaveClass(`${prefix}--progress-bar--finished`);
 
@@ -132,7 +126,6 @@ describe('ProgressBar', () => {
       wrapper.rerender(<ProgressBar {...props} status="error" />);
 
       expect(
-        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector(`.${prefix}--progress-bar`)
       ).toHaveClass(`${prefix}--progress-bar--error`);
 

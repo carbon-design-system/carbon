@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
+import React, { createRef } from 'react';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
@@ -240,7 +241,7 @@ describe('ProgressStep', () => {
         <ProgressStep label="First step" data-testid="test-id" />
       );
 
-      expect(container.firstChild.firstChild).toHaveAttribute(
+      expect(container.firstChild?.firstChild).toHaveAttribute(
         'data-testid',
         'test-id'
       );
@@ -255,13 +256,13 @@ describe('ProgressStep', () => {
     });
 
     it('should support a ref on the outermost element', () => {
-      const ref = React.createRef();
+      const ref = createRef<HTMLLIElement>();
       const { container } = render(
         <ProgressStep label="First step" ref={ref} />
       );
 
       expect(ref.current).toBe(container.firstChild);
-      expect(ref.current.tagName).toBe('LI');
+      expect(ref.current?.tagName).toBe('LI');
     });
 
     it('should respect complete prop', () => {

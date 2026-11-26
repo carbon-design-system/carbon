@@ -12280,17 +12280,7 @@ Map {
         "type": "string",
       },
       "children": {
-        "args": [
-          [
-            {
-              "type": "node",
-            },
-            {
-              "type": "func",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "func",
       },
       "className": {
         "type": "string",
@@ -14600,17 +14590,7 @@ Map {
         "type": "string",
       },
       "children": {
-        "args": [
-          [
-            {
-              "type": "node",
-            },
-            {
-              "type": "func",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "func",
       },
       "className": {
         "type": "string",

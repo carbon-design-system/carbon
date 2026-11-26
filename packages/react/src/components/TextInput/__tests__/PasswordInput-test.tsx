@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
+import React, { type RefCallback } from 'react';
 import PasswordInput from '../PasswordInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
@@ -444,14 +445,14 @@ describe('PasswordInput', () => {
     });
 
     it('should support a `ref` that is placed on the <input> element', () => {
-      const ref = jest.fn();
+      const ref = jest.fn<RefCallback<HTMLInputElement>>();
       render(
         <PasswordInput id="input-1" labelText="PasswordInput label" ref={ref} />
       );
 
-      expect(ref).toHaveBeenCalledWith(
-        screen.getByLabelText('PasswordInput label')
-      );
+      expect(ref.mock.calls).toContainEqual([
+        screen.getByLabelText('PasswordInput label'),
+      ]);
     });
 
     it('should render input as read-only when readOnly is true', () => {
@@ -508,6 +509,9 @@ describe('PasswordInput', () => {
         />
       );
       const inputElement = getByPlaceholderText('Enter password');
+      if (!(inputElement instanceof HTMLInputElement)) {
+        throw new Error('Expected the password field to be an input element.');
+      }
       userEvent.type(inputElement, 'newpassword');
       expect(inputElement.value).toBe('');
     });
