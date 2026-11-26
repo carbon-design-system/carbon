@@ -131,6 +131,111 @@ describe('cds-tag', function () {
     });
   });
 
+  describe('ellipsis measurement', () => {
+    function spyLabelScrollWidth(label) {
+      let gets = 0;
+      Object.defineProperty(label, 'scrollWidth', {
+        configurable: true,
+        get() {
+          gets += 1;
+          return 200;
+        },
+      });
+      Object.defineProperty(label, 'clientWidth', {
+        configurable: true,
+        get() {
+          return 50;
+        },
+      });
+      return {
+        get gets() {
+          return gets;
+        },
+      };
+    }
+
+    it('does not measure text width on plain cds-tag', async () => {
+      const el = document.createElement('cds-tag');
+      el.setAttribute('type', 'red');
+      el.textContent = 'test-tag';
+
+      // Spy on the label before the first `updated()` so an initial
+      // scrollWidth read during list rendering would be detected.
+      let spy;
+      const originalUpdated = Object.getPrototypeOf(el).updated;
+      el.updated = function (changedProperties) {
+        const label = this.shadowRoot?.querySelector('.cds--tag__label');
+        if (label && !spy) {
+          spy = spyLabelScrollWidth(label);
+        }
+        return originalUpdated.call(this, changedProperties);
+      };
+
+      const parent = await fixture(html`<div></div>`);
+      parent.appendChild(el);
+      await el.updateComplete;
+
+      expect(el._shouldMeasureEllipsis()).to.equal(false);
+      expect(spy.gets).to.equal(0);
+      expect(el._hasEllipsisApplied).to.equal(false);
+
+      el.type = 'blue';
+      await el.updateComplete;
+      expect(spy.gets).to.equal(0);
+    });
+
+    it('measures text width on cds-dismissible-tag', async () => {
+      const el = await fixture(
+        html`<cds-dismissible-tag text="Tag content"></cds-dismissible-tag>`
+      );
+      await el.updateComplete;
+
+      expect(el._shouldMeasureEllipsis()).to.equal(true);
+
+      const spy = spyLabelScrollWidth(el._textContainer);
+      el._hasEllipsisApplied = false;
+      el.requestUpdate();
+      await el.updateComplete;
+
+      expect(spy.gets).to.be.greaterThan(0);
+      expect(el._hasEllipsisApplied).to.equal(true);
+    });
+
+    it('measures text width on cds-operational-tag', async () => {
+      const el = await fixture(
+        html`<cds-operational-tag text="Tag content"></cds-operational-tag>`
+      );
+      await el.updateComplete;
+
+      const tag = el.shadowRoot.querySelector('cds-tag');
+      const spy = spyLabelScrollWidth(tag._textContainer);
+      el._hasEllipsisApplied = false;
+      el.requestUpdate();
+      await el.updateComplete;
+      await el.updateComplete;
+
+      expect(spy.gets).to.be.greaterThan(0);
+      expect(el._hasEllipsisApplied).to.equal(true);
+    });
+
+    it('measures text width on cds-selectable-tag', async () => {
+      const el = await fixture(
+        html`<cds-selectable-tag text="Tag content"></cds-selectable-tag>`
+      );
+      await el.updateComplete;
+
+      const tag = el.shadowRoot.querySelector('cds-tag');
+      const spy = spyLabelScrollWidth(tag._textContainer);
+      el._hasEllipsisApplied = false;
+      el.requestUpdate();
+      await el.updateComplete;
+      await el.updateComplete;
+
+      expect(spy.gets).to.be.greaterThan(0);
+      expect(el._hasEllipsisApplied).to.equal(true);
+    });
+  });
+
   it('should allow for a custom label', async () => {
     const tag = html`<cds-tag type="red">Johnny Ramone</cds-tag>`;
     const el = await fixture(tag);
