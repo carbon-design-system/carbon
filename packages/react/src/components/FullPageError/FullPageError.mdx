@@ -28,18 +28,14 @@ product level.
 The default error page can be used for full-page errors that are not 403 or 404
 errors, and not caused by server connectivity issues.
 
-<Canvas>
-  <Story of={FullPageErrorStories.Default} />
-</Canvas>
+<Canvas of={FullPageErrorStories.Default} />
 
 ### 403 variant
 
 Display an Access Denied (403) error message when the user lacks permission to
 access the page or data, or when login is required.
 
-<Canvas>
-  <Story of={FullPageErrorStories.Error403} />
-</Canvas>
+<Canvas of={FullPageErrorStories.Error403} />
 
 ### 404 variant
 
@@ -47,9 +43,7 @@ Show a Page Not Found (404) error message when the requested page cannot be
 located on the server, typically due to outdated bookmarks, mistyped URLs, or
 broken links.
 
-<Canvas>
-  <Story of={FullPageErrorStories.Error404} />
-</Canvas>
+<Canvas of={FullPageErrorStories.Error404} />
 
 ## Component API
 

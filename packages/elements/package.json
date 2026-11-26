@@ -1,7 +1,7 @@
 {
   "name": "@carbon/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
-  "version": "12.0.0-alpha.12",
+  "version": "12.0.0-alpha.13",
   "license": "Apache-2.0",
   "sideEffects": [
     "index.scss"
@@ -43,13 +43,13 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@carbon/colors": "^12.0.0-alpha.7",
-    "@carbon/grid": "^12.0.0-alpha.8",
+    "@carbon/colors": "^12.0.0-alpha.8",
+    "@carbon/grid": "^12.0.0-alpha.9",
     "@carbon/icons": "^12.0.0-alpha.7",
-    "@carbon/layout": "^12.0.0-alpha.8",
-    "@carbon/motion": "^12.0.0-alpha.10",
-    "@carbon/themes": "^12.0.0-alpha.10",
-    "@carbon/type": "^12.0.0-alpha.8",
+    "@carbon/layout": "^12.0.0-alpha.9",
+    "@carbon/motion": "^12.0.0-alpha.11",
+    "@carbon/themes": "^12.0.0-alpha.11",
+    "@carbon/type": "^12.0.0-alpha.9",
     "@ibm/telemetry-js": "^1.5.0"
   },
   "devDependencies": {

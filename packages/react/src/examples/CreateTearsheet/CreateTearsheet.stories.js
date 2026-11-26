@@ -7,12 +7,12 @@
 
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
-import './example/styles/_create-tearsheet.scss';
-import './example/styles/_story-styles.scss';
+import './styles/_create-tearsheet.scss';
+import './styles/_story-styles.scss';
 import DocsPage from './CreateTearsheet.mdx';
-import { MultiStepTearsheet } from './example/preview-components/MultiStepTearsheet';
-import { MultiStepWithIntro } from './example/preview-components/MultiStepWithIntro';
-import { MultiStepWithStepInErrorState } from './example/preview-components/MultiStepWithStepInErrorState';
+import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
+import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
+import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWithStepInErrorState';
 import { TruncatedText } from '../../components/TruncatedText';
 
 export default {

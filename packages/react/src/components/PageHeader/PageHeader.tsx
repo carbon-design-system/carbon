@@ -4,7 +4,14 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useRef, RefObject, useEffect, useMemo } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type HTMLAttributes,
+  type RefObject,
+} from 'react';
 import classnames from 'classnames';
 import { blockClass, getHeaderOffset, scrollableAncestor } from './utils';
 import {
@@ -63,9 +70,7 @@ import {
  * PageHeader
  * ----------
  */
-export interface PageHeaderProps {
-  children?: React.ReactNode;
-  className?: string;
+export interface PageHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Callback fired when the content area becomes fully collapsed
    */

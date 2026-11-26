@@ -456,7 +456,7 @@ class CDSComboBox extends CDSDropdown {
         aria-autocomplete="list"
         aria-expanded="${String(open)}"
         aria-activedescendant="${open ? (activeDescendant ?? '') : ''}"
-        ?readonly=${readOnly}
+        ?readonly=${readOnly && !disabled}
         @input=${handleInput}
         @keydown=${handleInputKeydown}
         ...="${spread(this._normalizeInputProps(inputProps))}" />

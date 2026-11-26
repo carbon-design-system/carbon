@@ -1,5 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as stories from './CreateModal.stories';
 
 <Meta isTemplate />
@@ -54,35 +53,13 @@ import {
 
 ## Example usage
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateModal/example)
-> example implementation.
-
-[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateModal/example)
-
 ### Create Modal
 
-<Canvas
-  of={stories.CreateModal}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.CreateModal),
-    },
-  ]}
-/>
+<Canvas of={stories.CreateModal} />
 
 ### With Form Validation
 
-<Canvas
-  of={stories.WithFormValidation}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.WithFormValidation),
-    },
-  ]}
-/>
+<Canvas of={stories.WithFormValidation} />
 
 ### Form validation
 

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/test-utils",
   "private": true,
-  "version": "10.43.0-alpha.2",
+  "version": "10.43.0-alpha.3",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
     "glob": "^14.0.0",
-    "npm-packlist": "^10.0.1",
+    "npm-packlist": "^11.0.0",
     "prettier": "^3.3.3",
     "react": "^19.2.3",
     "resolve": "^1.12.0",

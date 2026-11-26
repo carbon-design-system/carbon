@@ -7,6 +7,7 @@
 
 import './index';
 import { html } from 'lit';
+import { createRef, ref } from 'lit/directives/ref.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
@@ -297,9 +298,11 @@ export const Controlled = {
   argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
+    const multiSelectRef = createRef<HTMLSelectElement>();
     const toggleSelectAll = (selectAll) => {
-      const items = document.querySelectorAll('cds-multi-select-item');
-      const multiSelect = document.querySelector('cds-multi-select');
+      const multiSelect = multiSelectRef.value;
+      const items =
+        multiSelect?.querySelectorAll('cds-multi-select-item') ?? [];
 
       if (selectAll) {
         items.forEach(
@@ -317,7 +320,9 @@ export const Controlled = {
         .map((item) => item.getAttribute('value'))
         .join(',');
 
-      (multiSelect as HTMLSelectElement).value = selectedValues;
+      if (multiSelect) {
+        multiSelect.value = selectedValues;
+      }
     };
     const {
       autoalign,
@@ -341,6 +346,7 @@ export const Controlled = {
     } = args ?? {};
     return html`
       <cds-multi-select
+        ${ref(multiSelectRef)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
@@ -745,6 +751,7 @@ export const SelectAllWithDynamicItems = {
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
 
   render: (args) => {
+    const multiSelectRef = createRef<HTMLElement>();
     const updateLabel = (e) => {
       const multiSelect = e.target;
       if (multiSelect.value && multiSelect.value.length > 0) {
@@ -776,6 +783,7 @@ export const SelectAllWithDynamicItems = {
     } = args ?? {};
     return html`
       <cds-multi-select
+        ${ref(multiSelectRef)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
@@ -808,7 +816,7 @@ export const SelectAllWithDynamicItems = {
         kind="primary"
         id="all"
         @click=${() => {
-          const multiSelect = document.querySelector('cds-multi-select');
+          const multiSelect = multiSelectRef.value;
           const now = Date.now();
           [
             `item-added-via-button-1-${now}`,

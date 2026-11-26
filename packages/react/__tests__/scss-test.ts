@@ -8,6 +8,8 @@
  */
 
 import { describe, expect, it } from '@jest/globals';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { files } from '@carbon/styles/files';
 import { SassRenderer } from '@carbon/test-utils/scss';
 
@@ -15,16 +17,18 @@ declare const __dirname: string;
 
 const { render } = SassRenderer.create(__dirname);
 
-const relativePaths = files.map((file) => {
-  return file.relativePath;
-});
-
+// All files here are just a `@forward` of a `@carbon/styles` entrypoint. Check
+// that each wrapper forwards the correct module and compile once
 describe('@carbon/react/scss', () => {
-  describe.each(relativePaths)('%s', (relativePath) => {
-    it('should be importable', async () => {
-      await expect(
-        render(`@use '../${relativePath}' as test;`)
-      ).resolves.toBeDefined();
-    });
+  it.each(files)(
+    '$filepath forwards $importPath',
+    ({ filepath, importPath }) => {
+      const contents = readFileSync(join(__dirname, '..', filepath), 'utf8');
+      expect(contents).toContain(`@forward '${importPath}';`);
+    }
+  );
+
+  it('should be importable', async () => {
+    await expect(render(`@use '../index' as test;`)).resolves.toBeDefined();
   });
 });

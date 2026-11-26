@@ -1,6 +1,5 @@
-import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as PageHeaderStories from '../PageHeader.stories';
-import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -23,136 +22,9 @@ import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
 The `PageHeader` is a large family of components, composed of three zones; the
 Breadcrumb, Content, and Tabs.
 
-export const customFunctionArr = [
-  `const BreadcrumbBeeIcon = () => <Bee size={16} />;`,
-  `const pageActionButtonItems = [
-  {
-    // props used for both collapse menu item and non-collapsed action form
-    id: 'action1',
-    onClick: () => console.log('Action 1'),
-    // component to render when non-collapsed
-    body: (
-      <Button
-        renderIcon={AiGenerate}
-        iconDescription="Icon Description 1"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    // props to pass to the corresponding collapsed menu item
-    menuItem: {
-      label: 'action 1',
-    },
-  },
-  {
-    id: 'action2',
-    onClick: () => console.log('Action 2'),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 2"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 2',
-    },
-  },
-  {
-    id: 'action3',
-    onClick: () => console.log('Action 3'),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 3"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 3',
-    },
-  },
-  {
-    id: 'action4',
-    onClick: () => console.log('Action 4'),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 4"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 4',
-    },
-  },
-  {
-    id: 'primary-action',
-    onClick: () => console.log('Primary action'),
-    body: (
-      <Button kind="primary" renderIcon={Add} size="md">
-        Primary action
-      </Button>
-    ),
-    menuItem: {
-      label: 'Primary action',
-    },
-  },
-];`,
-  `const breadcrumbPageActions = (
-    <>
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 1"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-      <Button
-        renderIcon={AiGenerate}
-        iconDescription="Icon Description 2"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-      <Button
-        renderIcon={CloudFoundry_1}
-        iconDescription="Icon Description 3"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    </>
-  );`,
-];
-
 <Canvas
   className="page-header--docs-demo" 
   of={PageHeaderStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: PageHeaderStories.Default,
-          status: {
-            preview: ['PageHeader']
-          },
-          customFunctionDefs: customFunctionArr,
-          customImports: [
-            `import { Button } from '@carbon/react';`,
-            `import { Add, Bee, CloudFoundry_1, AiGenerate, Activity } from '@carbon/react/icons';`,
-          ],
-        }),
-    },
-  ]}
 
 />
 
@@ -344,23 +216,6 @@ area:
 <Canvas
   className="page-header--docs-demo"
   of={PageHeaderStories.CustomRenderWithCallbacks}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: PageHeaderStories.CustomRenderWithCallbacks,
-          status: {
-            preview: ['PageHeader'],
-          },
-          customFunctionDefs: customFunctionArr,
-          customImports: [
-            `import { Button } from '@carbon/react';`,
-            `import { Add, Bee, CloudFoundry_1, AiGenerate, Activity } from '@carbon/react/icons';`,
-          ],
-        }),
-    },
-  ]}
 />
 
 ```jsx
@@ -419,23 +274,6 @@ area:
 <Canvas
   className="page-header--docs-demo"
   of={PageHeaderStories.ContentWithContextualActionsAndPageActions}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: PageHeaderStories.ContentWithContextualActionsAndPageActions,
-          status: {
-            preview: ['PageHeader'],
-          },
-          customFunctionDefs: customFunctionArr,
-          customImports: [
-            `import { Add, AiGenerate, Activity, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
-            `import { Button } from '@carbon/react';`,
-          ],
-        }),
-    },
-  ]}
 />
 
 The
@@ -522,28 +360,6 @@ return (
 <Canvas
   className="page-header--docs-demo"
   of={PageHeaderStories.ContentWithHeroImage}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: PageHeaderStories.ContentWithHeroImage,
-          status: {
-            preview: ['PageHeader'],
-          },
-          customFunctionDefs: [
-            `const BreadcrumbBeeIcon = () => <Bee size={16} />;`,
-            `const image1 = 'https://placehold.co/600x400';`,
-            `const image2 = 'https://placehold.co/600x400';`,
-          ],
-          customImports: [
-            `import { Button } from '@carbon/react';`,
-            `import { breakpoints } from '@carbon/layout';`,
-            `import { Bee } from '@carbon/react/icons';`,
-          ],
-        }),
-    },
-  ]}
 />
 
 When including a hero image within the `PageHeader`, the `Grid` and `Column`
@@ -633,57 +449,6 @@ associated panel.
 <Canvas
   className="page-header--docs-demo"
   of={PageHeaderStories.TabBarWithTabsAndTags}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: PageHeaderStories.TabBarWithTabsAndTags,
-          status: {
-            preview: ['PageHeader'],
-          },
-          customFunctionDefs: [
-            ...customFunctionArr,
-            `const renderUIShellHeader = () => (
-              <HeaderContainer
-                render={() => (
-                  <Header aria-label="Application header">
-                    <HeaderName href="/">Application header</HeaderName>
-                  </Header>
-                )}
-              />
-            );`,
-            `const tabBarTags = [
-              <Tag type="blue" id="example-tag-1" key="example-tag-1">
-                Tag 1
-              </Tag>,
-              <Tag type="purple" id="example-tag-2" key="example-tag-2">
-                Tag 2
-              </Tag>,
-              <Tag type="red" id="example-tag-3" key="example-tag-3">
-                Tag 3
-              </Tag>,
-              <OperationalTag
-                type="blue"
-                id="example-tag-4"
-                key="example-tag-4"
-                text="Tag 4"
-              />,
-              <Tag type="purple" id="example-tag-5" key="example-tag-5">
-                Tag 5
-              </Tag>,
-              <Tag type="red" id="example-tag-6" key="example-tag-6">
-                Tag 6
-              </Tag>,
-            ];`,
-          ],
-          customImports: [
-            `import { Button, Tag, HeaderContainer, Header, HeaderName } from '@carbon/react';`,
-            `import { Add, AiGenerate, Activity, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
-          ],
-        }),
-    },
-  ]}
 />
 
 The `PageHeader.TabBar` component accepts a `tags` prop expecting a react node.
@@ -838,7 +603,7 @@ All sub-components are accessed directly on the namespace object, e.g.
 | Old `PageHeader` prop             | New equivalent                                                                                            |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `title` (string)                  | `<PageHeader.Content title="…" />`                                                                        |
-| `title.icon` / `renderIcon`       | `<PageHeader.Content renderIcon={Icon} />`                                                                |
+| `title.icon` / `renderIcon`       | `<PageHeader.Content title="…" renderIcon={Icon} />`                                                      |
 | `title.loading`                   | Render a `<SkeletonText>` inside `<PageHeader.Content>`                                                   |
 | `subtitle`                        | `<PageHeader.ContentText subtitle="…">`                                                                   |
 | `breadcrumbs`                     | `<Breadcrumb>` / `<BreadcrumbItem>` children of `<PageHeader.BreadcrumbBar>`                              |
