@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { Button } from '@carbon/react';
-import { Activity, Add, AiGenerate } from '@carbon/react/icons';
+import Button from '../../Button';
+import { Activity, Add, AiGenerate } from '@carbon/icons-react';
 
 export const pageActionButtonItems = [
   {

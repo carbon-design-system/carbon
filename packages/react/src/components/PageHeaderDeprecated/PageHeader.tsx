@@ -9,12 +9,14 @@
  * See https://github.com/carbon-design-system/carbon/issues/21926
  */
 import React, {
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
+  cloneElement,
   useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
   type ElementType,
+  type ReactElement,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -319,6 +321,13 @@ PageHeaderContent.propTypes = {
   pageActions: PropTypes.node,
 };
 
+interface PageHeaderContentPageActionItem {
+  id: string;
+  onClick?: () => void;
+  body: ReactElement<{ onClick?: () => void }>;
+  menuItem: MenuItemProps;
+}
+
 /**
  * ----------------
  * PageHeaderContentPageActions
@@ -340,7 +349,7 @@ interface PageHeaderContentPageActionsProps {
   /**
    * The PageHeaderContent's page actions
    */
-  actions?: React.ReactNode;
+  actions?: PageHeaderContentPageActionItem[];
 }
 const PageHeaderContentPageActions = ({
   className,
@@ -359,17 +368,12 @@ const PageHeaderContentPageActions = ({
     className
   );
 
-  type action = {
-    id: string;
-    onClick?: () => void;
-    body: React.ReactNode;
-    menuItem: MenuItemProps;
-  };
-
   const containerRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef<HTMLDivElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
-  const [hiddenItems, setHiddenItems] = useState<action[]>([]);
+  const [hiddenItems, setHiddenItems] = useState<
+    PageHeaderContentPageActionItem[]
+  >([]);
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
@@ -408,10 +412,7 @@ const PageHeaderContentPageActions = ({
             <>
               {actions.map((action) => (
                 <div key={action.id}>
-                  {React.cloneElement(action.body, {
-                    ...action.body.props,
-                    onClick: action.onClick,
-                  })}
+                  {cloneElement(action.body, { onClick: action.onClick })}
                 </div>
               ))}
               <span data-offset data-hidden ref={offsetRef}>
@@ -577,8 +578,10 @@ interface TagItem {
   type: keyof typeof TYPES;
   text: string;
   size?: 'sm' | 'md' | 'lg';
-  id: string;
+  id?: string;
 }
+
+type TagWithId = TagItem & { id: string };
 
 interface PageHeaderTabBarProps {
   children?: React.ReactNode;
@@ -634,7 +637,7 @@ const PageHeaderTabBar = React.forwardRef<
       visibleItems = [],
       hiddenItems = [],
       itemRefHandler = () => {},
-    } = useOverflowItems<TagItem>(
+    } = useOverflowItems<TagWithId>(
       tagsWithIds,
       tagsContainerRef as React.RefObject<HTMLDivElement>,
       offsetRef as React.RefObject<HTMLDivElement>

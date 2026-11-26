@@ -1,8 +1,5 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as FileUploaderStories from './FileUploader.stories.js';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
-import dropContainerSrc from './stories/drop-container.js?raw';
-import dragAndDropSingleSrc from './stories/drag-and-drop-single.js?raw';
 
 <Meta isTemplate />
 
@@ -33,107 +30,40 @@ import dragAndDropSingleSrc from './stories/drag-and-drop-single.js?raw';
 
 ## Overview
 
-<Canvas
-  of={FileUploaderStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FileUploaderStories.Default }),
-    },
-  ]}
-/>
+When `size` is omitted, upload buttons and file items inherit their size from
+the surrounding
+[layout context](../?path=/docs/preview-preview-layout--overview), within their
+supported size ranges. Without a size context, upload buttons default to `md`
+and file items default to `lg`. An explicit `size` takes precedence over the
+inherited size.
+
+<Canvas of={FileUploaderStories.Default} />
 
 ## Drag And Drop
 
 #### Drag And Drop Upload Container Example Application
 
-<Canvas
-  of={FileUploaderStories.DragAndDropUploadContainerExampleApplication}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story:
-            FileUploaderStories.DragAndDropUploadContainerExampleApplication,
-          customImports: [
-            "import ExampleDropContainerApp from './stories/drop-container';",
-          ],
-          additionalFiles: {
-            'src/stories/drop-container.tsx': dropContainerSrc,
-          },
-        }),
-    },
-  ]}
-/>
+<Canvas of={FileUploaderStories.DragAndDropUploadContainerExampleApplication} />
 
 #### Drag And Drop Upload Single Container Example Application
 
 <Canvas
   of={FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story:
-            FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication,
-          customImports: [
-            "import ExampleDropContainerAppSingle from './stories/drag-and-drop-single';",
-          ],
-          additionalFiles: {
-            'src/stories/drag-and-drop-single.tsx': dragAndDropSingleSrc,
-          },
-        }),
-    },
-  ]}
 />
 
 ## File
 
 #### File Uploader Drop Container
 
-<Canvas
-  of={FileUploaderStories._FileUploaderDropContainer}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: FileUploaderStories._FileUploaderDropContainer,
-        }),
-    },
-  ]}
-/>
+<Canvas of={FileUploaderStories._FileUploaderDropContainer} />
 
 #### File Uploader Item
 
-<Canvas
-  of={FileUploaderStories._FileUploaderItem}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: FileUploaderStories._FileUploaderItem,
-        }),
-    },
-  ]}
-/>
+<Canvas of={FileUploaderStories._FileUploaderItem} />
 
 ## Skeleton state
 
-<Canvas
-  of={FileUploaderStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FileUploaderStories.Skeleton }),
-    },
-  ]}
-/>
+<Canvas of={FileUploaderStories.Skeleton} />
 
 ## Component API
 

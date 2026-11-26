@@ -18,8 +18,9 @@ import React, {
   type ForwardedRef,
   type HTMLAttributes,
   type MouseEvent,
+  type ReactElement,
   type ReactNode,
-  type Ref,
+  type RefAttributes,
 } from 'react';
 import {
   useSelect,
@@ -475,7 +476,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--disabled`]: normalizedProps.disabled,
       [`${prefix}--dropdown--light`]: light,
-      [`${prefix}--dropdown--readonly`]: readOnly,
+      [`${prefix}--dropdown--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--autoalign`]: autoAlign,
@@ -483,6 +484,7 @@ const Dropdown = React.forwardRef(
 
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
@@ -751,8 +753,8 @@ const Dropdown = React.forwardRef(
 // See https://stackoverflow.com/questions/58469229/react-with-typescript-generics-while-using-react-forwardref.
 interface DropdownComponent {
   <ItemType>(
-    props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
-  ): React.ReactElement | null;
+    props: DropdownProps<ItemType> & RefAttributes<HTMLButtonElement>
+  ): ReactElement | null;
 }
 
 Dropdown.displayName = 'Dropdown';

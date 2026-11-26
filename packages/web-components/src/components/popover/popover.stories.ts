@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { ref } from 'lit/directives/ref.js';
 import './popover';
 import './popover-content';
 import '../radio-button/index';
@@ -14,6 +15,7 @@ import { prefix } from '../../globals/settings';
 import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
 import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../checkbox';
+import '../form/form-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
@@ -148,6 +150,14 @@ const sharedAutoAlignArgTypes = {
   onClose: sharedArgTypes.onClose,
 };
 
+const scrollIntoCenter = (el?: Element) => {
+  if (el) {
+    requestAnimationFrame(() =>
+      el.scrollIntoView({ block: 'center', inline: 'center' })
+    );
+  }
+};
+
 export const Default = {
   argTypes: sharedArgTypes,
   args: {
@@ -220,18 +230,13 @@ export const ExperimentalAutoAlign = {
     (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
   ],
   render: (args) => {
-    requestAnimationFrame(() => {
-      document.querySelector('cds-popover')?.scrollIntoView({
-        block: 'center',
-        inline: 'center',
-      });
-    });
     return html`
       <style>
         ${styles}
       </style>
       <div style="${autoAlignStoryContainerStyle}">
         <cds-popover
+          ${ref(scrollIntoCenter)}
           ?open=${args.open}
           align=${args.align}
           alignment-axis-offset=${args.alignmentAxisOffset}
@@ -286,12 +291,6 @@ export const ExperimentalAutoAlignWithBoundary = {
     (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
   ],
   render: (args) => {
-    requestAnimationFrame(() => {
-      document.querySelector('cds-popover')?.scrollIntoView({
-        block: 'center',
-        inline: 'center',
-      });
-    });
     return html`
       <style>
         ${styles}
@@ -304,6 +303,7 @@ export const ExperimentalAutoAlignWithBoundary = {
         <div style="width:2100px;height:1px;"></div>
         <div style="place-items:center;height:32px;width:32px;">
           <cds-popover
+            ${ref(scrollIntoCenter)}
             ?open=${args.open}
             align=${args.align}
             alignment-axis-offset=${args.alignmentAxisOffset}
@@ -515,18 +515,13 @@ export const TabTipExperimentalAutoAlign = {
     (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
   ],
   render: (args) => {
-    requestAnimationFrame(() => {
-      document.querySelector('cds-popover')?.scrollIntoView({
-        block: 'center',
-        inline: 'center',
-      });
-    });
     return html`
       <style>
         ${styles}
       </style>
       <div style="${autoAlignStoryContainerStyle}">
         <cds-popover
+          ${ref(scrollIntoCenter)}
           ?open=${args.open}
           align=${args.align}
           alignment-axis-offset=${args.alignmentAxisOffset}

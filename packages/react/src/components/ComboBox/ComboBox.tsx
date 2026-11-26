@@ -866,12 +866,13 @@ const ComboBox = forwardRef(
       [`${prefix}--combo-box--invalid--focused`]: invalid && isFocused,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: normalizedProps.warn,
-      [`${prefix}--combo-box--readonly`]: readOnly,
+      [`${prefix}--combo-box--readonly`]: readOnly && !disabled,
       [`${prefix}--autoalign`]: enableFloatingStyles,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--readonly`]: readOnly && !disabled,
     });
     const helperTextId = `combobox-helper-text-${comboBoxInstanceId}`;
     const warnTextId = `combobox-warn-text-${comboBoxInstanceId}`;
@@ -1273,7 +1274,7 @@ const ComboBox = forwardRef(
               })}
               {...rest}
               {...readOnlyEventHandlers}
-              readOnly={readOnly}
+              {...(readOnly && !disabled ? { readOnly: true } : {})}
               aria-describedby={ariaDescribedBy}
             />
 

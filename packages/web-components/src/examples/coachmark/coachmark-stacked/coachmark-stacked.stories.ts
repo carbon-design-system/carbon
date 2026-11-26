@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import './example/src/coachmark-stacked';
+import './coachmark-stacked';
 
 export default {
   title: 'Examples/Coachmark/CoachmarkStacked',

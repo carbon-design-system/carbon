@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { PropsWithChildren, HTMLElementType } from 'react';
+import React, { type ElementType, type PropsWithChildren } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
 const aspectRatios = [
@@ -35,7 +35,7 @@ export interface AspectRatioProps {
    * <AspectRatio as="article">My content</AspectRatio>
    * ```
    */
-  as?: HTMLElementType;
+  as?: ElementType;
 
   /**
    * Specify a class name for the outermost node

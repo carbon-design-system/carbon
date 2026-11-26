@@ -1,0 +1,436 @@
+/**
+ * Copyright IBM Corp. 2022, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { describe, expect, it, jest } from '@jest/globals';
+import React, { createRef } from 'react';
+import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+
+describe('ProgressIndicator', () => {
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto outermost element', () => {
+      const { container } = render(
+        <ProgressIndicator data-testid="test-id">
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
+    });
+
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <ProgressIndicator className="custom-class">
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should respect currentIndex prop', () => {
+      render(
+        <ProgressIndicator currentIndex={0}>
+          <ProgressStep
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getAllByRole('listitem')[0]).toHaveClass(
+        'cds--progress-step--current'
+      );
+    });
+
+    it('should update current step when currentIndex changes', () => {
+      const { rerender } = render(
+        <ProgressIndicator currentIndex={0}>
+          <ProgressStep
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getAllByRole('listitem')[0]).toHaveClass(
+        'cds--progress-step--current'
+      );
+      expect(screen.getAllByRole('listitem')[1]).not.toHaveClass(
+        'cds--progress-step--current'
+      );
+
+      rerender(
+        <ProgressIndicator currentIndex={1}>
+          <ProgressStep
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getAllByRole('listitem')[1]).toHaveClass(
+        'cds--progress-step--current'
+      );
+      expect(screen.getAllByRole('listitem')[0]).not.toHaveClass(
+        'cds--progress-step--current'
+      );
+    });
+
+    it('should call onChange when expected', async () => {
+      const onChange = jest.fn();
+      render(
+        <ProgressIndicator onChange={onChange} currentIndex={1}>
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      await userEvent.click(screen.getByTitle('First step'));
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onChange once when Enter or Space is pressed on non-current step', async () => {
+      const onChange = jest.fn();
+      render(
+        <ProgressIndicator onChange={onChange} currentIndex={1}>
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      const button = screen.getByTitle('First step');
+      button.focus();
+      await userEvent.keyboard('{Enter}');
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      await userEvent.keyboard(' ');
+      expect(onChange).toHaveBeenCalledTimes(2);
+    });
+
+    it('should not call onChange when Enter or Space is pressed on current step', async () => {
+      const onChange = jest.fn();
+      render(
+        <ProgressIndicator onChange={onChange} currentIndex={1}>
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      const currentButton = screen.getByTitle('Second step with tooltip');
+      currentButton.focus();
+      await userEvent.keyboard('{Enter}');
+      await userEvent.keyboard(' ');
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should respect spaceEqually prop', () => {
+      render(
+        <ProgressIndicator spaceEqually>
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getByRole('list')).toHaveClass(
+        'cds--progress--space-equal'
+      );
+    });
+
+    it('should respect vertical prop', () => {
+      render(
+        <ProgressIndicator vertical>
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getByRole('list')).toHaveClass('cds--progress--vertical');
+    });
+  });
+});
+
+describe('ProgressStep', () => {
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto outermost element', () => {
+      const { container } = render(
+        <ProgressStep label="First step" data-testid="test-id" />
+      );
+
+      expect(container.firstChild?.firstChild).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
+    });
+
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <ProgressStep label="First step" className="custom-class" />
+      );
+
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should support a ref on the outermost element', () => {
+      const ref = createRef<HTMLLIElement>();
+      const { container } = render(
+        <ProgressStep label="First step" ref={ref} />
+      );
+
+      expect(ref.current).toBe(container.firstChild);
+      expect(ref.current?.tagName).toBe('LI');
+    });
+
+    it('should respect complete prop', () => {
+      render(<ProgressStep label="First step" complete />);
+
+      expect(screen.getByText('Complete')).toBeInTheDocument();
+      expect(screen.getByRole('listitem')).toHaveClass(
+        'cds--progress-step--complete'
+      );
+    });
+
+    it('should respect current prop', () => {
+      render(<ProgressStep label="First step" current />);
+
+      expect(screen.getByText('Current')).toBeInTheDocument();
+      expect(screen.getByRole('listitem')).toHaveClass(
+        'cds--progress-step--current'
+      );
+    });
+
+    it('should respect description prop', () => {
+      render(<ProgressStep label="First step" description="Step 1" />);
+
+      expect(screen.getByText('First step')).toBeInTheDocument();
+    });
+
+    it('should respect disabled prop', () => {
+      render(<ProgressStep label="First step" disabled />);
+
+      expect(screen.getByRole('listitem')).toHaveClass(
+        'cds--progress-step--disabled'
+      );
+      expect(screen.getByRole('button')).toBeDisabled();
+      expect(screen.getByRole('button')).toHaveClass(
+        'cds--progress-step-button--unclickable'
+      );
+    });
+
+    it('should respect index prop', () => {
+      render(<ProgressStep label="First step" index={3} />);
+
+      expect(screen.getByRole('button')).toHaveAttribute('index', '3');
+    });
+
+    it('should respect invalid prop', () => {
+      render(<ProgressStep label="First step" invalid />);
+
+      expect(screen.getByText('Invalid')).toBeInTheDocument();
+    });
+
+    it('should respect label prop', () => {
+      render(<ProgressStep label="First step" />);
+
+      expect(screen.getByRole('button')).toHaveAttribute('title', 'First step');
+    });
+
+    it('should call onClick when expected', async () => {
+      const onClick = jest.fn();
+      render(<ProgressStep label="First step" onClick={onClick} />);
+
+      await userEvent.click(screen.getByRole('button'));
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onClick once when Enter or Space is pressed', async () => {
+      const onClick = jest.fn();
+      render(<ProgressStep label="First step" onClick={onClick} />);
+
+      const button = screen.getByRole('button');
+      button.focus();
+      await userEvent.keyboard('{Enter}');
+      expect(onClick).toHaveBeenCalledTimes(1);
+
+      await userEvent.keyboard(' ');
+      expect(onClick).toHaveBeenCalledTimes(2);
+    });
+
+    it('should not call onClick when Enter or Space is pressed on current step', async () => {
+      const onClick = jest.fn();
+      render(<ProgressStep label="First step" current onClick={onClick} />);
+
+      const button = screen.getByRole('button');
+      button.focus();
+      await userEvent.keyboard('{Enter}');
+      await userEvent.keyboard(' ');
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('should respect secondaryLabel prop', () => {
+      render(
+        <ProgressStep label="First step" secondaryLabel="Prompt for step" />
+      );
+
+      expect(screen.getByText('Prompt for step')).toBeInTheDocument();
+    });
+
+    it('should respect translateWithId prop', () => {
+      const translations = {
+        'carbon.progress-step.complete': 'Terminé',
+        'carbon.progress-step.incomplete': 'Partiel',
+        'carbon.progress-step.current': 'Actuel',
+        'carbon.progress-step.invalid': 'Non valide',
+      };
+
+      render(
+        <ProgressIndicator>
+          <ProgressStep
+            label="First step"
+            complete
+            translateWithId={(messageId) => {
+              return translations[messageId];
+            }}
+          />
+          <ProgressStep
+            label="First step"
+            invalid
+            translateWithId={(messageId) => {
+              return translations[messageId];
+            }}
+          />
+          <ProgressStep
+            label="First step"
+            current
+            translateWithId={(messageId) => {
+              return translations[messageId];
+            }}
+          />
+          <ProgressStep
+            label="First step"
+            translateWithId={(messageId) => {
+              return translations[messageId];
+            }}
+          />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getByText('Terminé')).toBeInTheDocument();
+      expect(screen.getByText('Actuel')).toBeInTheDocument();
+      expect(screen.getByText('Non valide')).toBeInTheDocument();
+      expect(screen.getByText('Partiel')).toBeInTheDocument();
+    });
+
+    it('sets tabindex to 0 for enabled steps and -1 for disabled steps', () => {
+      render(
+        <ProgressIndicator>
+          <ProgressStep label="First step" />
+          <ProgressStep label="Second step" disabled />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getByTitle('First step')).toHaveAttribute('tabindex', '0');
+      expect(screen.getByTitle('Second step')).toHaveAttribute(
+        'tabindex',
+        '-1'
+      );
+    });
+
+    it('renders labels and secondary labels as spans for valid button content', () => {
+      const { container } = render(
+        <ProgressStep label="First step" secondaryLabel="Optional label" />
+      );
+
+      expect(container.querySelector('.cds--progress-label')?.tagName).toBe(
+        'SPAN'
+      );
+      expect(container.querySelector('.cds--progress-optional')?.tagName).toBe(
+        'SPAN'
+      );
+    });
+  });
+});

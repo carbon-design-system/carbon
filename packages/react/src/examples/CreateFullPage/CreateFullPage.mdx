@@ -1,5 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as stories from './CreateFullPage.stories';
 
 <Meta isTemplate />
@@ -25,12 +24,6 @@ The `CreateFullPage` is a **pattern** (not a component) that provides a recipe
 for building multi-step workflow interfaces for creating resources using a full
 page experience. It demonstrates how to compose a full-page layout with StepFlow
 from `@carbon/utilities-react` for managing step navigation and state.
-
-> 💡 Try our
-> [StackBlitz example](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateFullPage/example)
-> for a complete implementation.
-
-[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateFullPage/example)
 
 ## What is a Pattern?
 
@@ -58,7 +51,7 @@ The CreateFullPage pattern consists of:
 ## Getting Started
 
 1. **Copy the pattern code** from the
-   [example directory](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateFullPage/example/components)
+   [example directory](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateFullPage/components)
    into your project
 2. **Install dependencies**: `@carbon/react`, `@carbon/utilities-react`
 3. **Import and use** the pattern components in your application
@@ -96,73 +89,31 @@ The pattern uses:
 
 ### Standard CreateFullPage
 
-<Canvas
-  of={stories.CreateFullPage}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.CreateFullPage),
-    },
-  ]}
-/>
+<Canvas of={stories.CreateFullPage} />
 
 ### With Sections
 
 Demonstrates how to organize form fields into logical sections within a step.
 
-<Canvas
-  of={stories.CreateFullPageWithSections}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.CreateFullPageWithSections),
-    },
-  ]}
-/>
+<Canvas of={stories.CreateFullPageWithSections} />
 
 ### With Header
 
 Shows breadcrumbs and page title in the header.
 
-<Canvas
-  of={stories.CreateFullPageWithHeader}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.CreateFullPageWithHeader),
-    },
-  ]}
-/>
+<Canvas of={stories.CreateFullPageWithHeader} />
 
 ### With Step in Error State
 
 Demonstrates error handling and validation in steps.
 
-<Canvas
-  of={stories.CreateFullPageWithStepInErrorState}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(stories.CreateFullPageWithStepInErrorState),
-    },
-  ]}
-/>
+<Canvas of={stories.CreateFullPageWithStepInErrorState} />
 
 ### With Global Header
 
 Shows integration with Carbon's global header and side navigation.
 
-<Canvas
-  of={stories.CreateFullPageWithGlobalHeader}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(stories.CreateFullPageWithGlobalHeader),
-    },
-  ]}
-/>
+<Canvas of={stories.CreateFullPageWithGlobalHeader} />
 
 ## Customization
 

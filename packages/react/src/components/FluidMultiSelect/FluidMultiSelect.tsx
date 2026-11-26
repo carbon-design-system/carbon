@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef, RefObject, type ComponentProps } from 'react';
+import React, {
+  type ComponentProps,
+  type ForwardedRef,
+  type ReactElement,
+  type RefAttributes,
+  type RefObject,
+} from 'react';
 import classnames from 'classnames';
 import {
   FilterableMultiSelect,
@@ -374,4 +380,10 @@ FluidMultiSelect.propTypes = {
   warnText: PropTypes.node,
 };
 
-export default FluidMultiSelect;
+interface FluidMultiSelectComponent {
+  <ItemType>(
+    props: FluidMultiSelectProps<ItemType> & RefAttributes<HTMLButtonElement>
+  ): ReactElement | null;
+}
+
+export default FluidMultiSelect as FluidMultiSelectComponent;

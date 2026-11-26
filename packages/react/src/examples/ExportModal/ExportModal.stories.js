@@ -8,9 +8,9 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './ExportModal.mdx';
-import { StandardExportModal } from './example/preview-components/StandardExportModal';
-import { ExportModalWithExtensionValidation } from './example/preview-components/ExportModalWithExtensionValidation';
-import { ExportModalWithPreformattedExtensions } from './example/preview-components/ExportModalWithPreformattedExtensions';
+import { StandardExportModal } from './preview-components/StandardExportModal';
+import { ExportModalWithExtensionValidation } from './preview-components/ExportModalWithExtensionValidation';
+import { ExportModalWithPreformattedExtensions } from './preview-components/ExportModalWithPreformattedExtensions';
 
 export default {
   title: 'Examples/ExportModal',

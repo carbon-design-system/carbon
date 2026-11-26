@@ -1,6 +1,6 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 
-import SavingStories from './saving.stories';
+import * as SavingStories from './saving.stories';
 
 <Meta of={SavingStories} />
 
@@ -42,16 +42,12 @@ import '@carbon/web-components/es/components/inline-loading/index.js';
 
 ## Example usage
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/saving/example)
-
 ### Auto saving
 
 Changes are saved as the user types. A status message below the field shows
 whether the save is in progress, has succeeded, or has failed.
 
-<Canvas withSource="none">
-  <Story of={SavingStories.Auto} />
-</Canvas>
+<Canvas of={SavingStories.Auto} sourceState="none" />
 
 #### HTML
 
@@ -73,9 +69,7 @@ whether the save is in progress, has succeeded, or has failed.
 The user saves explicitly by selecting a button. The button label and icon
 reflect the save state: default, in progress, saved, or failed.
 
-<Canvas withSource="none">
-  <Story of={SavingStories.Manual} />
-</Canvas>
+<Canvas of={SavingStories.Manual} sourceState="none" />
 
 #### HTML
 

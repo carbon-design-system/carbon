@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2025
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,9 +59,15 @@ export const useSidePanelPresence = (
     }
 
     let cancelled = false;
-    Promise.all(animations.map((a) => a.finished)).finally(() => {
-      if (!cancelled) setShouldRender(false);
-    });
+    Promise.all(animations.map((a) => a.finished))
+      .finally(() => {
+        if (!cancelled) setShouldRender(false);
+      })
+      .catch(() => {
+        // `finished` rejects with an `AbortError` when an animation is
+        // canceled, e.g. when the panel unmounts mid-exit. The exit is over
+        // either way, so the rejection is expected and safe to ignore.
+      });
 
     return () => {
       cancelled = true;

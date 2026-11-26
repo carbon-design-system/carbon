@@ -695,9 +695,7 @@ commands one after another. Refer to the documentation of your shell.
 
 #### Recipes
 
-Below are some common recipes for component testing. Many of the pattern/syntax
-details contained within these recipes are enforced via eslint rules declared in
-`eslint-config-carbon`.
+Below are some common recipes for component testing.
 
 ##### `ComponentName-test.js`
 

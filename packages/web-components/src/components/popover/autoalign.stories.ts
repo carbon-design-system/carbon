@@ -11,6 +11,7 @@ import '../toggle-tip/index';
 import '../ai-label/index';
 import '../icon-button/index';
 import '../data-table/index';
+import '../link/index';
 import { POPOVER_ALIGNMENT } from './defs';
 import { AI_LABEL_SIZE } from '../ai-label/defs';
 import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
@@ -110,8 +111,10 @@ export const Popover = {
   render: (args) => {
     const { caret, highContrast, align, dropShadow } = args ?? {};
 
-    const handleClick = (id) => {
-      const popover = document.querySelector(id);
+    const handleClick = (event: Event) => {
+      const popover = (event.currentTarget as HTMLElement).closest(
+        'cds-popover'
+      );
       const open = popover?.hasAttribute('open');
       if (open) {
         popover?.removeAttribute('open');
@@ -136,7 +139,7 @@ export const Popover = {
           class="playground-trigger"
           aria-label="Settings"
           type="button"
-          @click="${() => handleClick('#popover-one')}">
+          @click="${handleClick}">
           ${iconLoader(Checkbox16)}
         </button>
         <cds-popover-content>
