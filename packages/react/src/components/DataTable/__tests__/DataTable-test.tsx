@@ -1809,6 +1809,8 @@ describe('DataTable', () => {
         initialSortHeaderKey: 'fieldA',
         initialSortDirection: 'DESC' as const,
       };
+      const newRow = { id: 'd', fieldA: 'Field 4:A', fieldB: 'Field 0:B' };
+
       const { rerender } = render(<DataTable {...props} />);
       const [firstHeader, secondHeader] = screen.getAllByRole('columnheader');
       const secondButton = within(secondHeader).getByRole('button');
@@ -1816,15 +1818,18 @@ describe('DataTable', () => {
         getLastCallFor(mockProps.render)[0].rows.map((row) => row.id);
 
       await userEvent.click(secondButton);
-      const newRow = { id: 'd', fieldA: 'Field 4:A', fieldB: 'Field 0:B' };
+
       rerender(<DataTable {...props} rows={[...rows, newRow]} />);
+
       expect(firstHeader).toHaveAttribute('aria-sort', 'none');
       expect(secondHeader).toHaveAttribute('aria-sort', 'ascending');
       expect(renderedIds()).toEqual(['d', 'a', 'b', 'c']);
 
       await userEvent.click(secondButton);
       await userEvent.click(secondButton);
+
       rerender(<DataTable {...props} rows={[newRow, ...rows]} />);
+
       expect(firstHeader).toHaveAttribute('aria-sort', 'none');
       expect(secondHeader).toHaveAttribute('aria-sort', 'none');
       expect(renderedIds()).toEqual(['d', 'b', 'a', 'c']);
