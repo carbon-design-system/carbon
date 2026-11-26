@@ -48,7 +48,10 @@ export interface SideNavProps {
   enterDelayMs?: number;
 }
 
-const frFn = forwardRef<HTMLElement, SideNavProps & ComponentProps<'nav'>>;
+const frFn = forwardRef<
+  HTMLElement,
+  SideNavProps & Omit<ComponentProps<'nav'>, keyof SideNavProps>
+>;
 
 const SideNav = frFn((props, ref) => {
   const {

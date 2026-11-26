@@ -1,13 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { type RefCallback } from 'react';
 import { HeaderGlobalAction } from '../';
 
 describe('HeaderGlobalAction', () => {
@@ -42,13 +43,13 @@ describe('HeaderGlobalAction', () => {
   });
 
   it('should support a `ref` that is placed on the <button> element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLButtonElement>>();
     render(
       <HeaderGlobalAction aria-label="test" ref={ref}>
         <svg />
       </HeaderGlobalAction>
     );
-    expect(ref).toHaveBeenCalledWith(screen.getByLabelText('test'));
+    expect(ref.mock.calls).toContainEqual([screen.getByLabelText('test')]);
   });
 
   it('should toggle the active class when `isActive` is set', () => {

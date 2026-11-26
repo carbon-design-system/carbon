@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { type KeyboardEventHandler, type RefCallback } from 'react';
 import { SideNavMenu, SideNavMenuItem } from '../';
 import { SideNavContext } from '../SideNavContext';
 
@@ -89,7 +90,7 @@ describe('SideNavMenu', () => {
   });
 
   it('should support a `ref` on the <button> element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLElement>>();
     render(
       <SideNavMenu ref={ref} title="test-title">
         <SideNavMenuItem>a</SideNavMenuItem>
@@ -97,7 +98,7 @@ describe('SideNavMenu', () => {
         <SideNavMenuItem>c</SideNavMenuItem>
       </SideNavMenu>
     );
-    expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
+    expect(ref.mock.calls).toContainEqual([screen.getByRole('button')]);
   });
 
   it('should spread extra props onto the outermost element', () => {
@@ -283,7 +284,11 @@ describe('SideNavMenu', () => {
     );
 
     // Trigger keydown on the li element
-    fireEvent.keyDown(container.firstChild, { key: 'Escape' });
+    const menu = container.firstElementChild;
+    if (!menu) {
+      throw new Error('Expected the side nav menu to render.');
+    }
+    fireEvent.keyDown(menu, { key: 'Escape' });
 
     expect(onKeyDown).toHaveBeenCalled();
     // Verify internal handler still works (menu collapses)
@@ -294,7 +299,7 @@ describe('SideNavMenu', () => {
   });
 
   it('should not collapse the menu when consumer `onKeyDown` prevents default', () => {
-    const onKeyDown = jest.fn((event) => {
+    const onKeyDown = jest.fn<KeyboardEventHandler<HTMLLIElement>>((event) => {
       event.preventDefault();
     });
 
@@ -309,7 +314,11 @@ describe('SideNavMenu', () => {
       </SideNavMenu>
     );
 
-    fireEvent.keyDown(container.firstChild, { key: 'Escape' });
+    const menu = container.firstElementChild;
+    if (!menu) {
+      throw new Error('Expected the side nav menu to render.');
+    }
+    fireEvent.keyDown(menu, { key: 'Escape' });
 
     expect(onKeyDown).toHaveBeenCalled();
     // Menu should remain expanded because consumer prevented default
