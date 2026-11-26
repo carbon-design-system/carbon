@@ -15,8 +15,9 @@ const babelOptions: InputOptions = {
     [
       '@babel/preset-env',
       {
+        // tests run in Node, so only complike what this Node version is missing
         targets: {
-          browsers: ['extends browserslist-config-carbon'],
+          node: 'current',
         },
       },
     ],

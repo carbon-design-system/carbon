@@ -5761,6 +5761,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "id": {
+        "type": "string",
+      },
       "isActive": {
         "type": "bool",
       },

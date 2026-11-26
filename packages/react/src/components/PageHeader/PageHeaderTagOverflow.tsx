@@ -5,11 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  useEffect,
-  useState,
-  useRef,
   useCallback,
-  RefObject,
+  useEffect,
+  useRef,
+  useState,
+  type ReactElement,
+  type ReactNode,
+  type RefObject,
 } from 'react';
 import classnames from 'classnames';
 import { Popover, PopoverContent } from '../Popover';
@@ -25,10 +27,8 @@ export interface PageHeaderTagOverflowProps {
     handleOverflowClick: (event: React.MouseEvent) => void,
     openPopover: boolean,
     triggerId?: string
-  ) => React.ReactElement;
-  renderPopoverContent?: (
-    hiddenBreadcrumbs: HTMLElement[]
-  ) => React.ReactElement;
+  ) => ReactElement | null | undefined;
+  renderPopoverContent?: (hiddenBreadcrumbs: HTMLElement[]) => ReactNode;
 }
 
 export const PageHeaderTagOverflow = React.forwardRef<

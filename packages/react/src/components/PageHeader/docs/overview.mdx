@@ -603,7 +603,7 @@ All sub-components are accessed directly on the namespace object, e.g.
 | Old `PageHeader` prop             | New equivalent                                                                                            |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `title` (string)                  | `<PageHeader.Content title="…" />`                                                                        |
-| `title.icon` / `renderIcon`       | `<PageHeader.Content renderIcon={Icon} />`                                                                |
+| `title.icon` / `renderIcon`       | `<PageHeader.Content title="…" renderIcon={Icon} />`                                                      |
 | `title.loading`                   | Render a `<SkeletonText>` inside `<PageHeader.Content>`                                                   |
 | `subtitle`                        | `<PageHeader.ContentText subtitle="…">`                                                                   |
 | `breadcrumbs`                     | `<Breadcrumb>` / `<BreadcrumbItem>` children of `<PageHeader.BreadcrumbBar>`                              |
