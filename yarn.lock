@@ -6575,7 +6575,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.36.2":
+"@playwright/test@npm:1.65.1, @playwright/test@npm:^1.36.2":
   version: 1.65.1
   resolution: "@playwright/test@npm:1.65.1"
   dependencies:
@@ -9062,7 +9062,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^4.0.17":
+"accessibility-checker@npm:4.0.35":
   version: 4.0.35
   resolution: "accessibility-checker@npm:4.0.35"
   dependencies:
@@ -10234,14 +10234,14 @@ __metadata:
     "@eslint/compat": "npm:^2.0.1"
     "@eslint/js": "npm:^9.24.0"
     "@figma/code-connect": "npm:1.5.3"
-    "@playwright/test": "npm:^1.36.2"
+    "@playwright/test": "npm:1.65.1"
     "@testing-library/dom": "npm:^10.1.0"
     "@testing-library/jest-dom": "npm:^8.0.0"
     "@testing-library/react": "npm:^16.0.0"
     "@testing-library/user-event": "npm:^14.4.3"
     "@types/prop-types": "npm:^15.7.13"
     "@types/react-is": "npm:^19.0.0"
-    accessibility-checker: "npm:^4.0.17"
+    accessibility-checker: "npm:4.0.35"
     cross-env: "npm:^10.0.0"
     cross-spawn: "npm:^7.0.0"
     doctoc: "npm:^2.0.0"
@@ -18824,10 +18824,9 @@ __metadata:
   linkType: hard
 
 "pacote@npm:^21.0.0, pacote@npm:^21.0.2":
-  version: 21.5.3
-  resolution: "pacote@npm:21.5.3"
+  version: 21.0.4
+  resolution: "pacote@npm:21.0.4"
   dependencies:
-    "@gar/promise-retry": "npm:^1.0.0"
     "@npmcli/git": "npm:^7.0.0"
     "@npmcli/installed-package-contents": "npm:^4.0.0"
     "@npmcli/package-json": "npm:^7.0.0"
@@ -18841,12 +18840,13 @@ __metadata:
     npm-pick-manifest: "npm:^11.0.1"
     npm-registry-fetch: "npm:^19.0.0"
     proc-log: "npm:^6.0.0"
+    promise-retry: "npm:^2.0.1"
     sigstore: "npm:^4.0.0"
     ssri: "npm:^13.0.0"
     tar: "npm:^7.4.3"
   bin:
     pacote: bin/index.js
-  checksum: 10/df8671f40d0538c261a281afb3e9e28891c3f010d6ef1498dc33269244eae04fc66344d10d707b937ffee43b4e40ff32ea8a72d3ab38e7ef615be09adefc00ee
+  checksum: 10/1c706ee45a683b559d0c9591e820627861eb58596507072a63e122c073af3f69f170017f453e44186496a9058feb430a21a43a8531739c5651f279be5fb065f1
   languageName: node
   linkType: hard
 

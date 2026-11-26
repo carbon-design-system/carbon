@@ -64,7 +64,7 @@ test.describe('@avt Dialog', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('textbox', { name: 'Name' })).toBeFocused();
 
-    page.getByRole('button', { name: 'Cancel' }).focus();
+    await page.getByRole('button', { name: 'Cancel' }).focus();
     await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
 
     await page.keyboard.press('Tab');
