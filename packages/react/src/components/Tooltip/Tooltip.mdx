@@ -1,6 +1,5 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as TooltipStories from './Tooltip.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -67,19 +66,7 @@ function CustomTrigger(props) {
 You can specify the contents of the popup through the `label` or `description`
 prop.
 
-<Canvas
-  of={TooltipStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: TooltipStories.Default,
-          styles: TooltipStories.default.parameters.styles,
-        }),
-    },
-  ]}
-/>
+<Canvas of={TooltipStories.Default} />
 
 ### Toggletips vs Tooltips
 
@@ -116,19 +103,7 @@ relative to the tooltip. For example, if you provide `align="top"` to the
 Similarly, if you provide `align="bottom"` then the tooltip will render below
 your component.
 
-<Canvas
-  of={TooltipStories.Alignment}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: TooltipStories.Alignment,
-          styles: TooltipStories.default.parameters.styles,
-        }),
-    },
-  ]}
-/>
+<Canvas of={TooltipStories.Alignment} />
 
 You can also configure the placement of the caret, if it is enabled, by choosing
 between `left` and `right` or `bottom` and `top`, depending on where your
@@ -147,19 +122,7 @@ You can customize the delay between when a tooltip is invoked and its contents
 are shown. You can also customize the delay between when a tooltip is dismissed
 and its contents are hidden.
 
-<Canvas
-  of={TooltipStories.Duration}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: TooltipStories.Duration,
-          styles: TooltipStories.default.parameters.styles,
-        }),
-    },
-  ]}
-/>
+<Canvas of={TooltipStories.Duration} />
 
 The `enterDelayMs` prop allows you to provide a time, in milliseconds, that the
 component will wait before showing the tooltip. The `exitDelayMs` prop allows

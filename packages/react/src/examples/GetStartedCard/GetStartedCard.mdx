@@ -1,5 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as stories from './GetStartedCard.stories';
 
 <Meta isTemplate />
@@ -35,7 +34,7 @@ disabled behavior.
 > be built and extended further.
 
 To build this pattern, you can use the `GetStartedCard` component recipe from
-`example/components/GetStartedCard.tsx`, which composes:
+`components/GetStartedCard.tsx`, which composes:
 
 - `Card`, `Card.Header`, `Card.Title` and `Card.Body` from
   `preview__Card`
@@ -49,12 +48,6 @@ const { Card } = preview__Card;
 ```
 
 ## Example usage
-
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/GetStartedCard/example)
-> example implementation.
-
-[![Edit get-started-card-pattern](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/GetStartedCard/example)
 
 ### Example
 
@@ -78,30 +71,14 @@ Here's a quick example to get you started.
 
 Use a pictogram at the top of the card to represent the topic.
 
-<Canvas
-  of={stories.defaultCard}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.defaultCard),
-    },
-  ]}
-/>
+<Canvas of={stories.defaultCard} />
 
 ## With sequence
 
 When cards describe ordered steps, pass `sequence` to show a step number in
 place of the pictogram. The number is included in the card's accessible name.
 
-<Canvas
-  of={stories.withSequence}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.withSequence),
-    },
-  ]}
-/>
+<Canvas of={stories.withSequence} />
 
 ## With media and pictogram
 
@@ -119,15 +96,7 @@ below the `lg` breakpoint, so do not rely on it to convey information.
 />
 ```
 
-<Canvas
-  of={stories.withMediaAndPictogram}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.withMediaAndPictogram),
-    },
-  ]}
-/>
+<Canvas of={stories.withMediaAndPictogram} />
 
 ## With media and sequence
 
@@ -145,15 +114,7 @@ breakpoint.
 />
 ```
 
-<Canvas
-  of={stories.withMediaAndSequence}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.withMediaAndSequence),
-    },
-  ]}
-/>
+<Canvas of={stories.withMediaAndSequence} />
 
 ## With horizontal media
 
@@ -178,15 +139,7 @@ activate the card. Keep it decorative; do not use it to convey information.
 />
 ```
 
-<Canvas
-  of={stories.withHorizontalMedia}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.withHorizontalMedia),
-    },
-  ]}
-/>
+<Canvas of={stories.withHorizontalMedia} />
 
 ## With AI label and actions
 
@@ -223,15 +176,7 @@ clickable card, so the whole surface stops being a button. Instead:
 />
 ```
 
-<Canvas
-  of={stories.withAILabelAndActions}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.withAILabelAndActions),
-    },
-  ]}
-/>
+<Canvas of={stories.withAILabelAndActions} />
 
 ## With disabled
 
@@ -249,15 +194,7 @@ interactive, drops the brand gradient and uses the Card's disabled colors.
 />
 ```
 
-<Canvas
-  of={stories.withDisabled}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.withDisabled),
-    },
-  ]}
-/>
+<Canvas of={stories.withDisabled} />
 
 ## Feedback
 

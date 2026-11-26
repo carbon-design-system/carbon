@@ -8,13 +8,13 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './GenerateAnAPIKey.mdx';
-import { InstantGenerate } from './example/preview-components/InstantGenerate';
-import { Generate } from './example/preview-components/Generate';
-import { Edit } from './example/preview-components/Edit';
-import { GenerateWithError } from './example/preview-components/GenerateWithError';
-import { EditWithError } from './example/preview-components/EditWithError';
-import { CustomGenerate } from './example/preview-components/CustomGenerate';
-import { CustomEdit } from './example/preview-components/CustomEdit';
+import { InstantGenerate } from './preview-components/InstantGenerate';
+import { Generate } from './preview-components/Generate';
+import { Edit } from './preview-components/Edit';
+import { GenerateWithError } from './preview-components/GenerateWithError';
+import { EditWithError } from './preview-components/EditWithError';
+import { CustomGenerate } from './preview-components/CustomGenerate';
+import { CustomEdit } from './preview-components/CustomEdit';
 
 export default {
   title: 'Examples/Generate an API Key',

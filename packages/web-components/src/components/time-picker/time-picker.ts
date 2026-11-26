@@ -212,7 +212,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       invalid: boolean;
       warn: boolean;
     } = {
-      disabled: !readOnly && disabled,
+      disabled: disabled,
       invalid: !readOnly && !disabled && invalid,
       warn: !readOnly && !invalid && !disabled && warning,
     };
@@ -227,7 +227,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--time-picker`]: true,
       [`${prefix}--time-picker--invalid`]: normalizedProps.invalid,
       [`${prefix}--time-picker--warning`]: normalizedProps.warn,
-      [`${prefix}--time-picker--readonly`]: readOnly,
+      [`${prefix}--time-picker--readonly`]: readOnly && !disabled,
       [`${prefix}--time-picker--${size}`]: size,
       ...(className && { [className]: true }),
     });
@@ -257,7 +257,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(pattern)}"
               placeholder="${ifNonEmpty(placeholder)}"
-              ?readonly="${readOnly}"
+              ?readonly="${readOnly && !normalizedProps.disabled}"
               type="${ifNonEmpty(type)}"
               .value="${value}"
               @input="${handleInput}" />

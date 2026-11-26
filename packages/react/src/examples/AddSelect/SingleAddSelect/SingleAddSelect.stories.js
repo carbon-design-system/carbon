@@ -8,9 +8,9 @@
 import React from 'react';
 import '../_story-styles.scss';
 import DocsPage from './SingleAddSelect.mdx';
-import { SingleAddSelectDefaultPreview } from '../example/preview-components/SingleAddSelectDefault/SingleAddSelectDefault';
-import { SingleAddSelectWithHierarchyPreview } from '../example/preview-components/SingleAddSelectWithHierarchy/SingleAddSelectWithHierarchy';
-import { AddSingleItemFromHierarchyPreview } from '../example/preview-components/AddSingleItemFromHierarchy/AddSingleItemFromHierarchy';
+import { SingleAddSelectDefaultPreview } from '../preview-components/SingleAddSelectDefault/SingleAddSelectDefault';
+import { SingleAddSelectWithHierarchyPreview } from '../preview-components/SingleAddSelectWithHierarchy/SingleAddSelectWithHierarchy';
+import { AddSingleItemFromHierarchyPreview } from '../preview-components/AddSingleItemFromHierarchy/AddSingleItemFromHierarchy';
 
 export default {
   title: 'Examples/Add and select/SingleAddSelect',

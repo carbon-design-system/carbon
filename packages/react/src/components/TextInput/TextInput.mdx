@@ -1,23 +1,7 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as TextInputStories from './TextInput.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
-
-export const getTextInputStoryArgsDef = [
-  `const getTextInputStoryArgs = ({ defaultWidth, onChange, onClick, ...textInputArgs }) => {
-  const handleChange = (event) => {
-    onChange?.({ value: event.target.value });
-  };
-  const handleClick = (event) => {
-    onClick?.({ value: event.target.value });
-  };
-  return {
-    defaultWidth,
-    textInputArgs: { ...textInputArgs, onChange: handleChange, onClick: handleClick },
-  };
-};`,
-];
 
 # TextInput
 
@@ -49,64 +33,19 @@ Text inputs enable users to enter free-form text data. The type of text field
 used should reflect the length of the content you expect the user to enter. The
 default text input is for short, one-line content.
 
-<Canvas
-  of={TextInputStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: TextInputStories.Default,
-          customFunctionDefs: getTextInputStoryArgsDef,
-        }),
-    },
-  ]}
-/>
+<Canvas of={TextInputStories.Default} />
 
 ### Read Only
 
-<Canvas
-  of={TextInputStories.ReadOnly}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: TextInputStories.ReadOnly,
-          customFunctionDefs: getTextInputStoryArgsDef,
-        }),
-    },
-  ]}
-/>
+<Canvas of={TextInputStories.ReadOnly} />
 
 ### Skeleton
 
-<Canvas
-  of={TextInputStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: TextInputStories.Skeleton }),
-    },
-  ]}
-/>
+<Canvas of={TextInputStories.Skeleton} />
 
 ### AI Label
 
-<Canvas
-  of={TextInputStories.withAILabel}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: TextInputStories.withAILabel,
-          customFunctionDefs: getTextInputStoryArgsDef,
-        }),
-    },
-  ]}
-/>
+<Canvas of={TextInputStories.withAILabel} />
 
 ### With Layer
 
