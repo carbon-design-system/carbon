@@ -1,6 +1,6 @@
 # Purpose: Package the issue-triage Node action and the pinned Bob CLI into one
 # reproducible Docker action image.
-FROM node:24-slim
+FROM node:26-slim
 
 # Pin both the Bob release and archive checksum so an upstream replacement
 # cannot silently change the executable used by triage.
