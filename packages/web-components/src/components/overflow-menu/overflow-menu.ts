@@ -227,9 +227,11 @@ class CDSOverflowMenu
 
   /**
    * Experimental property. Enables automatic menu placement flipping to avoid clipping.
+   * Defaults to `true` when `enable-v12-autoalign` is enabled, and to `false`
+   * otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * `true` if the dropdown should be open.
@@ -699,7 +701,7 @@ class CDSOverflowMenu
     }
 
     const { left, right, top, bottom } = trigger.getBoundingClientRect();
-    menu.x = [left, right];
+    menu.x = menu._toInlineRange([left, right]);
     menu.y = [top, bottom];
   }
 

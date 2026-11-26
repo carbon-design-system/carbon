@@ -46,7 +46,15 @@ interface SwitcherWithAriaLabelledBy extends BaseSwitcherProps {
   'aria-labelledby': string;
 }
 
-type SwitcherProps = SwitcherWithAriaLabel | SwitcherWithAriaLabelledBy;
+interface SwitcherWithBothAriaLabels extends BaseSwitcherProps {
+  'aria-label': string;
+  'aria-labelledby': string;
+}
+
+type SwitcherProps =
+  | SwitcherWithAriaLabel
+  | SwitcherWithAriaLabelledBy
+  | SwitcherWithBothAriaLabels;
 
 const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
   (props, forwardRef) => {

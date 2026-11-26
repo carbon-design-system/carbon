@@ -12,7 +12,8 @@ import { usePageHeader } from './context';
 import { scrollableAncestor } from './utils';
 import { usePrefix } from '../../internal/usePrefix';
 
-export interface PageHeaderScrollButtonProps extends IconButtonProps {
+export interface PageHeaderScrollButtonProps
+  extends Omit<IconButtonProps, 'label'> {
   collapseText?: string;
   expandText?: string;
 }
@@ -24,7 +25,6 @@ export const PageHeaderScrollButton = React.forwardRef<
   {
     className,
     children,
-    label,
     onClick,
     collapseText = 'Collapse',
     expandText = 'Expand',
@@ -60,10 +60,10 @@ export const PageHeaderScrollButton = React.forwardRef<
   return (
     <IconButton
       ref={ref}
-      label={fullyCollapsed ? expandText : collapseText}
       size="md"
       kind="ghost"
       {...other}
+      label={fullyCollapsed ? expandText : collapseText}
       onClick={(event) => {
         onClick?.(event);
         handleScroller(!!fullyCollapsed);

@@ -56,6 +56,7 @@ const actions = html`
 `;
 
 const sizes = {
+  [`Extra small size (${INPUT_SIZE.EXTRA_SMALL})`]: INPUT_SIZE.EXTRA_SMALL,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
   [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
@@ -472,10 +473,12 @@ export const WithTypeOfCustomValidation = {
         })}
       </cds-form-item>
       <button
-        @click="${() => {
-          const input = document.querySelector(
-            '#custom-validation-number-input'
-          ) as HTMLElement & { value: string };
+        @click="${(event: Event) => {
+          const input = (
+            event.currentTarget as HTMLElement
+          ).previousElementSibling?.querySelector('cds-number-input') as
+            | (HTMLElement & { value: string })
+            | null;
           if (input) {
             input.value = '1000';
           }
@@ -520,10 +523,12 @@ export const WithTypeOfTextControlled = {
         ${renderNumberInput(args, { id: 'controlled-number-input' })}
       </cds-form-item>
       <button
-        @click="${() => {
-          const input = document.querySelector(
-            '#controlled-number-input'
-          ) as HTMLElement & { value: string };
+        @click="${(event: Event) => {
+          const input = (
+            event.currentTarget as HTMLElement
+          ).previousElementSibling?.querySelector('cds-number-input') as
+            | (HTMLElement & { value: string })
+            | null;
           if (input) {
             input.value = '50';
           }
@@ -702,10 +707,11 @@ export const TypeTextTestScenarios = {
             @cds-number-input="${onInput}">
           </cds-number-input>
           <button
-            @click="${() => {
-              const input = document.querySelector(
-                '#allow-empty-input'
-              ) as HTMLElement & { value: string };
+            @click="${(event: Event) => {
+              const input = (event.currentTarget as HTMLElement)
+                .previousElementSibling as
+                | (HTMLElement & { value: string })
+                | null;
               if (input) input.value = '';
             }}">
             Clear

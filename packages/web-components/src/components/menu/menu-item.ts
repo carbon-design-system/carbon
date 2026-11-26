@@ -13,7 +13,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
 import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
-import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
 import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -108,7 +107,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   async dispatchIconDetect() {
     const hasRenderIcon = !!this.querySelector('[slot="render-icon"]');
     if (hasRenderIcon) {
-      await undefined; // this is used to replace setTimeout with 0 time out, which is much fater.
+      await undefined; // this is used to replace setTimeout with 0 time out, which is much faster.
       this.dispatchEvent(
         new CustomEvent('icon-detect', {
           bubbles: true, // Allows event to bubble up the DOM
@@ -220,7 +219,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       shortcut,
       submenuOpen,
       boundaries,
-      isRtl,
       kind,
       dangerDescription,
     } = this;
@@ -252,12 +250,11 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       ${this.hasSubmenu
         ? html`
             <div class="${prefix}--menu-item__shortcut">
-              ${isRtl ? iconLoader(CaretLeft16) : iconLoader(CaretRight16)}
+              ${iconLoader(CaretRight16)}
             </div>
             <cds-menu
               className=${menuClassName}
-              size=${this.parentElement?.getAttribute('size') ??
-              MENU_SIZE.LARGE}
+              size=${this._parentMenu?.size ?? MENU_SIZE.LARGE}
               ?isChild="${this.hasSubmenu}"
               label="${label}"
               .open="${submenuOpen}"

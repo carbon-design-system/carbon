@@ -6,6 +6,8 @@
  */
 
 import { html } from 'lit';
+import { createRef, ref } from 'lit/directives/ref.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { INLINE_LOADING_STATE } from './inline-loading';
 import '../button/index';
 
@@ -19,7 +21,6 @@ const states = {
 const noop = () => {};
 const defaultArgs = {
   description: 'Loading data...',
-  iconDescription: 'Loading',
   status: INLINE_LOADING_STATE.ACTIVE,
 };
 
@@ -32,7 +33,7 @@ const getControls = ({ disableControl }) => {
     iconDescription: {
       control: disableControl || 'text',
       description:
-        'Specify a description that would be used to best describe the loading state.',
+        'Specify the accessible label for the status icon. It is used for every status.',
     },
     status: {
       control: disableControl || 'select',
@@ -50,7 +51,7 @@ export const Default = {
       <cds-inline-loading
         status="${status}"
         success-delay=${2000}
-        icon-description=${iconDescription}
+        icon-description=${ifDefined(iconDescription)}
         }>
         ${description}
       </cds-inline-loading>
@@ -66,14 +67,14 @@ export const UxExample = {
       html`<cds-button-set style="width:300px">${story()}</cds-button-set>`,
   ],
   render: ({ onSuccess = noop }) => {
+    const submitRef = createRef<HTMLElement>();
+    const cancelRef = createRef<HTMLElement & { disabled: boolean }>();
+    const loadingRef = createRef<HTMLElement>();
+
     const onSubmit = () => {
-      const submit = document.querySelector('#submit');
-      const cancel = document
-        .querySelector('#cancel')
-        ?.shadowRoot?.querySelector('button');
-      const loadingElem = document.querySelector(
-        'cds-inline-loading[controlled]'
-      );
+      const submit = submitRef.value;
+      const cancel = cancelRef.value;
+      const loadingElem = loadingRef.value;
 
       if (loadingElem) {
         (loadingElem as HTMLElement).style.display = 'inherit';
@@ -120,13 +121,13 @@ export const UxExample = {
     };
 
     return html`
-      <cds-button kind="secondary" id="cancel"> Cancel </cds-button>
-      <cds-button @click=${onSubmit} id="submit">Submit</cds-button>
+      <cds-button kind="secondary" ${ref(cancelRef)}> Cancel </cds-button>
+      <cds-button @click=${onSubmit} ${ref(submitRef)}>Submit</cds-button>
       <cds-inline-loading
+        ${ref(loadingRef)}
         controlled
         style="display:none;margin-left:1rem"
         success-delay=${2000}
-        icon-description="Submitting"
         aria-live="off"
         @cds-inline-loading-onsuccess=${onSuccess}>
         Submitting

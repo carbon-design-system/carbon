@@ -1,6 +1,5 @@
-import { Story, Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
 import * as FlexGridStories from './FlexGrid.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -55,16 +54,7 @@ import { FlexGrid, Row, Column } from '@carbon/react';
 );
 ```
 
-<Canvas
-  of={FlexGridStories.ResponsiveGrid}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FlexGridStories.ResponsiveGrid }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.ResponsiveGrid} />
 
 ## Overview
 
@@ -107,16 +97,7 @@ You can pair up multiple breakpoint props to specify how many columns the
 we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 `Column` components should span at the small, medium, and large breakpoints.
 
-<Canvas
-  of={FlexGridStories.ResponsiveGrid}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FlexGridStories.ResponsiveGrid }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.ResponsiveGrid} />
 
 ## Gutter modes
 
@@ -134,54 +115,19 @@ need to mix-and-match certain gutter modes to achieve a particular layout.
 
 ### Wide grid
 
-<Canvas
-  of={FlexGridStories.FullWidth}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FlexGridStories.FullWidth }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.FullWidth} />
 
 ### Narrow grid
 
-<Canvas
-  of={FlexGridStories.Narrow}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: FlexGridStories.Narrow }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.Narrow} />
 
 ### Condensed grid
 
-<Canvas
-  of={FlexGridStories.Condensed}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FlexGridStories.Condensed }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.Condensed} />
 
 ### Mix-and-match
 
-<Canvas
-  of={FlexGridStories.MixedGutterModes}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FlexGridStories.MixedGutterModes }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.MixedGutterModes} />
 
 ## Auto columns
 
@@ -199,16 +145,7 @@ For example, if you have on `Column` component it would span 100%, two `Column`
 components would span 50% each, four `Column` components would span 25% each,
 and so on.
 
-<Canvas
-  of={FlexGridStories.AutoColumns}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FlexGridStories.AutoColumns }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.AutoColumns} />
 
 ## Offset columns
 
@@ -227,15 +164,7 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 <Column sm={2} md={{ span: 4, offset: 2 }} />
 ```
 
-<Canvas
-  of={FlexGridStories.Offset}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: FlexGridStories.Offset }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.Offset} />
 
 ## Row gap
 
@@ -299,16 +228,7 @@ You can combine `withRowGap` with different gutter modes:
 </FlexGrid>;
 ```
 
-<Canvas
-  of={FlexGridStories.WithRowGap}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: FlexGridStories.WithRowGap }),
-    },
-  ]}
-/>
+<Canvas of={FlexGridStories.WithRowGap} />
 
 ## Component API
 

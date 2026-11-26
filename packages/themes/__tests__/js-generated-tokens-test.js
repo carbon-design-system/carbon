@@ -14,9 +14,10 @@
  *
  * Two sets of assertions:
  *
- * 1. js/generated/ ↔ DTCG JSON source (convertDTCGToTheme / convertDTCGComponentTokens)
- *    The authoritative check: every token in the JSON must appear in the
- *    generated file with the correct value, and nothing extra must be generated.
+ * 1. js/generated/ ↔ token files (convertThemeTokens / convertComponentTokens)
+ *    The authoritative check: every token in `tokens/themes/` must appear in
+ *    the generated file with the correct value, and nothing extra must be
+ *    generated.
  *
  * 2. js/generated/ ↔ lib/ (built bundle)
  *    Confirms the bundler faithfully re-exports what the generated files declare.
@@ -29,13 +30,13 @@ const path = require('path');
 
 const JS_GENERATED_DIR = path.resolve(__dirname, '../js/generated');
 const LIB_DIR = path.resolve(__dirname, '../lib');
-const DTCG_DIR = path.resolve(__dirname, '../src/dtcg');
-
-// SD transform pipeline helpers (replaces dtcg-converter which was deleted)
-const alphaModifierTransform = require('../style-dictionary/transforms/alpha-modifier');
-const colorFlattenTransform = require('../style-dictionary/transforms/color-flatten');
-const componentTokensPreprocessor = require('../style-dictionary/preprocessors/component-tokens');
-const themeMetadataPreprocessor = require('../style-dictionary/preprocessors/theme-metadata');
+const TOKENS_DIR = path.resolve(__dirname, '../tokens/themes');
+const PALETTE_FILE = path.resolve(
+  __dirname,
+  '../../colors/tokens/colors.tokens.json'
+);
+const EXTENSION_NAMESPACE = 'com.ibm.carbon';
+const THEME_NAMES = ['white', 'g10', 'g90', 'g100'];
 
 /**
  * Normalize component theme key for JS output, e.g. 'white' → 'whiteTheme'.
@@ -45,148 +46,89 @@ function normalizeComponentThemeName(theme) {
   return theme;
 }
 
-function buildPaletteAliasMap() {
-  const palette = JSON.parse(
-    fs.readFileSync(path.join(DTCG_DIR, 'color-palette.json'), 'utf8')
-  );
-  const map = new Map();
-  for (const [family, scales] of Object.entries(palette)) {
-    if (family.startsWith('$')) continue;
-    for (const [scale, token] of Object.entries(scales)) {
-      if (token.$value?.hex) map.set(`{${family}.${scale}}`, token.$value.hex);
-    }
-  }
-  return map;
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
-const paletteMap = buildPaletteAliasMap();
+// The expected values are derived here without Style Dictionary, so that the
+// build's reference resolution and color conversion are checked independently.
+const palette = readJson(PALETTE_FILE);
 
-function resolveAlias(value) {
-  if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}'))
-    return paletteMap.get(value) ?? value;
-  return value;
-}
-
-function applyTransforms(node) {
-  const resolvedValue = resolveAlias(node.$value);
-  const syntheticToken = {
-    $type: node.$type ?? 'color',
-    $value: node.$value,
-    value: resolvedValue,
-    $extensions: node.$extensions,
-    extensions: node.$extensions,
-  };
-  if (alphaModifierTransform.filter(syntheticToken))
-    syntheticToken.value = syntheticToken.$value =
-      alphaModifierTransform.transform(syntheticToken);
-  if (colorFlattenTransform.filter(syntheticToken))
-    syntheticToken.value = colorFlattenTransform.transform(syntheticToken);
-  return syntheticToken.value;
+/**
+ * Resolve a curly-brace alias to a palette color, e.g. '{gray.50}'.
+ */
+function resolveAlias(alias) {
+  return alias
+    .slice(1, -1)
+    .split('.')
+    .reduce((node, key) => node[key], palette).$value;
 }
 
 /**
- * Convert the unified themes.json for a single theme into a flat token map.
- *
- * Pipeline mirrors sd.config.js themeConfig():
- *   1. carbonComponentTokensPreprocessor  — expands carbon.themes entries into
- *      _by_theme.<theme> synthetic leaves (handles {value,alpha} objects too)
- *   2. themeMetadataPreprocessor          — lifts color-scheme into color.scheme
- *   3. Walk the tree, pick each token's value for `themeName` from _by_theme,
- *      synthesise a $value node, apply transforms, collect keyed by kebab name.
+ * Resolve a JSON Pointer into the palette,
+ * e.g. '#/gray/50/$value/components'.
  */
-const THEME_COLOR_SCHEME = {
-  white: 'light',
-  g10: 'light',
-  g90: 'dark',
-  g100: 'dark',
-};
+function resolvePointer(pointer) {
+  return pointer
+    .slice(2)
+    .split('/')
+    .reduce((node, key) => node[key], palette);
+}
 
-function convertDTCGToTheme(dtcgTokens, themeName) {
-  // Step 1: expand carbon.themes → _by_theme per-theme leaves
-  const expanded = componentTokensPreprocessor.preprocessor(dtcgTokens);
-  // Step 2: re-inject per-theme color-scheme onto root $extensions so
-  // themeMetadataPreprocessor can lift it into the synthetic color.scheme token
-  // (mirrors what themeConfig() does in sd.config.js).
-  const expandedWithScheme = {
-    ...expanded,
-    $extensions: {
-      ...(expanded.$extensions ?? {}),
-      'org.carbon': {
-        ...(expanded.$extensions?.['org.carbon'] ?? {}),
-        'color-scheme': THEME_COLOR_SCHEME[themeName],
-      },
-    },
-  };
-  // Step 3: lift color-scheme metadata
-  const preprocessed =
-    themeMetadataPreprocessor.preprocessor(expandedWithScheme);
-
-  const theme = {};
-
-  const colorSchemeNode = preprocessed.color?.scheme;
-  if (colorSchemeNode?.$value !== undefined)
-    theme['color-scheme'] = applyTransforms(colorSchemeNode);
-
-  // Step 3: walk tree; each leaf-or-dual-role node now has a `_by_theme` child
-  function traverse(obj, pathParts = []) {
-    for (const [key, value] of Object.entries(obj)) {
-      if (key.startsWith('$') || !value || typeof value !== 'object') continue;
-      let tokenPath = pathParts;
-      if (pathParts[0] === 'color' && key !== 'scheme')
-        tokenPath = pathParts.slice(1);
-      const tokenPath2 = [...tokenPath, key];
-
-      const role = value.$extensions?.['org.carbon']?.role;
-
-      if (key === '_by_theme') {
-        // _by_theme group itself — skip; parent handles it below.
-        continue;
-      }
-
-      if (value._by_theme) {
-        // Node was a leaf/dual-role in themes.json — pick this theme's leaf.
-        const leaf = value._by_theme[themeName];
-        if (leaf && role !== 'reference') {
-          const name = tokenPath2.join('-');
-          if (name !== 'color-scheme') theme[name] = applyTransforms(leaf);
-        }
-        // Also recurse into group children (dual-role nodes have both _by_theme
-        // AND non-$ child keys for their sub-tokens).
-        for (const [childKey, childValue] of Object.entries(value)) {
-          if (childKey.startsWith('$') || childKey === '_by_theme') continue;
-          if (!childValue || typeof childValue !== 'object') continue;
-          traverse({ [childKey]: childValue }, tokenPath2);
-        }
-      } else if (role !== 'reference' && value.$value !== undefined) {
-        // Fallback: plain $value token (palette reference tokens from source:)
-        const name = tokenPath2.join('-');
-        if (name !== 'color-scheme') theme[name] = applyTransforms(value);
-      } else if (Object.keys(value).some((k) => !k.startsWith('$'))) {
-        traverse(value, tokenPath2);
-      }
-    }
+/**
+ * Convert a token `$value` to the CSS color the build should emit.
+ */
+function toCssColor($value) {
+  if (typeof $value === 'string') {
+    return resolveAlias($value).hex;
   }
-  traverse(preprocessed);
+  if ($value.alpha === undefined) {
+    return $value.hex;
+  }
+  const components = $value.components.$ref
+    ? resolvePointer($value.components.$ref)
+    : $value.components;
+  const [r, g, b] = components.map((c) => Math.round(c * 255));
+  return `rgba(${r}, ${g}, ${b}, ${$value.alpha})`;
+}
+
+function readTokenFile(themeName, name) {
+  const { $schema, $description, $extensions, ...tokens } = readJson(
+    path.join(TOKENS_DIR, themeName, `${name}.tokens.json`)
+  );
+  return { $extensions, tokens };
+}
+
+/**
+ * Convert the token file of a single theme into a flat token map.
+ */
+function convertThemeTokens(themeName) {
+  const { $extensions, tokens } = readTokenFile(themeName, 'theme');
+  const theme = {};
+  for (const [name, token] of Object.entries(tokens)) {
+    theme[name] = toCssColor(token.$value);
+  }
+  theme['color-scheme'] = $extensions[EXTENSION_NAMESPACE]['color-scheme'];
   return theme;
 }
 
-function convertDTCGComponentTokens(dtcgTokens) {
-  const preprocessed = componentTokensPreprocessor.preprocessor(dtcgTokens);
+/**
+ * Convert the token files of a component into a map of token name to its
+ * value in every theme.
+ */
+function convertComponentTokens(name) {
   const result = {};
-  function walk(obj, pathParts = []) {
-    for (const [key, value] of Object.entries(obj)) {
-      if (key.startsWith('$') || !value || typeof value !== 'object') continue;
-      if (key === '_by_theme') {
-        const tokenName = pathParts.join('-');
-        result[tokenName] = result[tokenName] ?? {};
-        for (const [theme, themeNode] of Object.entries(value))
-          result[tokenName][theme] = applyTransforms(themeNode);
-        continue;
+  for (const themeName of THEME_NAMES) {
+    const { tokens } = readTokenFile(themeName, name);
+    for (const [tokenName, token] of Object.entries(tokens)) {
+      result[tokenName] ??= {};
+      const fallback = token.$extensions?.[EXTENSION_NAMESPACE]?.fallback;
+      if (fallback !== undefined) {
+        result[tokenName].fallback = toCssColor(fallback);
       }
-      walk(value, [...pathParts, key]);
+      result[tokenName][themeName] = toCssColor(token.$value);
     }
   }
-  walk(preprocessed);
   return result;
 }
 
@@ -201,17 +143,12 @@ if (!jsGeneratedExists || !libExists) {
   );
 }
 
-// ---------------------------------------------------------------------------
-// kebab-case → camelCase (mirrors dtcg-js-themes.js / dtcg-js-component-tokens.js)
-// ---------------------------------------------------------------------------
+// kebab-case → camelCase (mirrors style-dictionary/formats/js.js)
 function kebabToCamel(str) {
   return str.replace(/-([a-z0-9])/g, (_, ch) => ch.toUpperCase());
 }
 
-// ---------------------------------------------------------------------------
 // Helpers
-// ---------------------------------------------------------------------------
-
 /**
  * Parse named exports from a generated JS file.
  * Handles:
@@ -333,10 +270,7 @@ function diffTokenMaps(generated, lib) {
   return { missingInGenerated, extraInGenerated, valueMismatches };
 }
 
-// ---------------------------------------------------------------------------
 // Utilities to build a human-readable failure message
-// ---------------------------------------------------------------------------
-
 function formatDiff({ missingInGenerated, extraInGenerated, valueMismatches }) {
   const lines = [];
   if (missingInGenerated.length) {
@@ -361,10 +295,7 @@ function formatDiff({ missingInGenerated, extraInGenerated, valueMismatches }) {
   return lines.join('\n');
 }
 
-// ---------------------------------------------------------------------------
 // Themes
-// ---------------------------------------------------------------------------
-
 describe('JS generated theme files match lib output', () => {
   const themes = ['white', 'g10', 'g90', 'g100'];
 
@@ -430,10 +361,7 @@ describe('JS generated theme files match lib output', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
 // Component tokens
-// ---------------------------------------------------------------------------
-
 describe('JS generated component token files match lib output', () => {
   const components = [
     { name: 'button', libKey: 'buttonTokens' },
@@ -494,11 +422,8 @@ describe('JS generated component token files match lib output', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// DTCG JSON → js/generated/ parity
-// ---------------------------------------------------------------------------
-
-describe('JS generated theme files match DTCG JSON source', () => {
+// Token files → js/generated/ parity
+describe('JS generated theme files match the token files', () => {
   const themes = ['white', 'g10', 'g90', 'g100'];
 
   themes.forEach((themeName) => {
@@ -513,30 +438,28 @@ describe('JS generated theme files match DTCG JSON source', () => {
           path.join(JS_GENERATED_DIR, 'themes', `${themeName}.js`)
         );
 
-        // Build the expected map the same way the builder does:
-        // convertDTCGToTheme(themeName) → kebab keys → camelCase
-        // Source is now the unified themes.json, not individual theme files.
-        const dtcgJson = JSON.parse(
-          fs.readFileSync(path.join(DTCG_DIR, 'themes.json'), 'utf8')
-        );
-        const rawTheme = convertDTCGToTheme(dtcgJson, themeName);
+        // convertThemeTokens(themeName) → kebab keys → camelCase
+        const rawTheme = convertThemeTokens(themeName);
         expected = {};
         for (const [kebabKey, value] of Object.entries(rawTheme)) {
           expected[kebabToCamel(kebabKey)] = value;
         }
       });
 
-      testOrSkip('every DTCG token is present in the generated file', () => {
+      testOrSkip('every token is present in the generated file', () => {
         const missing = Object.keys(expected).filter((k) => !(k in generated));
         expect(missing).toEqual([]);
       });
 
-      testOrSkip('no extra tokens in generated file beyond DTCG source', () => {
-        const extra = Object.keys(generated).filter((k) => !(k in expected));
-        expect(extra).toEqual([]);
-      });
+      testOrSkip(
+        'no extra tokens in generated file beyond the token files',
+        () => {
+          const extra = Object.keys(generated).filter((k) => !(k in expected));
+          expect(extra).toEqual([]);
+        }
+      );
 
-      testOrSkip('all token values match DTCG source exactly', () => {
+      testOrSkip('all token values match the token files exactly', () => {
         const { valueMismatches } = diffTokenMaps(generated, expected);
         expect(
           formatDiff({
@@ -550,7 +473,7 @@ describe('JS generated theme files match DTCG JSON source', () => {
   });
 });
 
-describe('JS generated component token files match DTCG JSON source', () => {
+describe('JS generated component token files match the token files', () => {
   const components = [
     { name: 'button' },
     { name: 'tag' },
@@ -571,16 +494,9 @@ describe('JS generated component token files match DTCG JSON source', () => {
           path.join(JS_GENERATED_DIR, 'component-tokens', `${name}.js`)
         );
 
-        // Build expected map the same way dtcg-js-component-tokens.js does:
-        // convertDTCGComponentTokens → kebab token name → camelCase
-        //                            → theme keys normalised → camelCase
-        const dtcgJson = JSON.parse(
-          fs.readFileSync(
-            path.join(DTCG_DIR, 'components', `${name}.json`),
-            'utf8'
-          )
-        );
-        const rawTokens = convertDTCGComponentTokens(dtcgJson);
+        // convertComponentTokens → kebab token name → camelCase
+        //                        → theme keys normalised → camelCase
+        const rawTokens = convertComponentTokens(name);
         expected = {};
         for (const [kebabName, themeValues] of Object.entries(rawTokens)) {
           const camelName = kebabToCamel(kebabName);
@@ -593,18 +509,21 @@ describe('JS generated component token files match DTCG JSON source', () => {
         }
       });
 
-      testOrSkip('every DTCG token is present in the generated file', () => {
+      testOrSkip('every token is present in the generated file', () => {
         const missing = Object.keys(expected).filter((k) => !(k in generated));
         expect(missing).toEqual([]);
       });
 
-      testOrSkip('no extra tokens in generated file beyond DTCG source', () => {
-        const extra = Object.keys(generated).filter((k) => !(k in expected));
-        expect(extra).toEqual([]);
-      });
+      testOrSkip(
+        'no extra tokens in generated file beyond the token files',
+        () => {
+          const extra = Object.keys(generated).filter((k) => !(k in expected));
+          expect(extra).toEqual([]);
+        }
+      );
 
       testOrSkip(
-        'all token values and theme entries match DTCG source exactly',
+        'all token values and theme entries match the token files exactly',
         () => {
           const { valueMismatches } = diffTokenMaps(generated, expected);
           expect(

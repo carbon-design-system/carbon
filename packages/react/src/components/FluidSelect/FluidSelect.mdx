@@ -1,6 +1,5 @@
 import { ArgTypes, Canvas, Meta, Unstyled } from '@storybook/addon-docs/blocks';
 import * as FluidSelectStories from './FluidSelect.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 import FluidSelect from './';
 
@@ -27,51 +26,15 @@ import SelectItem from '../SelectItem';
 
 ## Overview
 
-<Canvas
-  of={FluidSelectStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: FluidSelectStories.Default,
-          styles: FluidSelectStories.default.parameters.styles,
-        }),
-    },
-  ]}
-/>
+<Canvas of={FluidSelectStories.Default} />
 
 ### With AI Label
 
-<Canvas
-  of={FluidSelectStories.withAILabel}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: FluidSelectStories.withAILabel,
-          styles: FluidSelectStories.default.parameters.styles,
-        }),
-    },
-  ]}
-/>
+<Canvas of={FluidSelectStories.withAILabel} />
 
 ### Skeleton
 
-<Canvas
-  of={FluidSelectStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: FluidSelectStories.Skeleton,
-          styles: FluidSelectStories.default.parameters.styles,
-        }),
-    },
-  ]}
-/>
+<Canvas of={FluidSelectStories.Skeleton} />
 
 ## Default state
 

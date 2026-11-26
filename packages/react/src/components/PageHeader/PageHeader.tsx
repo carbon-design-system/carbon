@@ -4,7 +4,14 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useRef, RefObject, useEffect, useMemo } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type HTMLAttributes,
+  type RefObject,
+} from 'react';
 import classnames from 'classnames';
 import { blockClass, getHeaderOffset, scrollableAncestor } from './utils';
 import {
@@ -63,9 +70,7 @@ import {
  * PageHeader
  * ----------
  */
-export interface PageHeaderProps {
-  children?: React.ReactNode;
-  className?: string;
+export interface PageHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Callback fired when the content area becomes fully collapsed
    */
@@ -216,13 +221,14 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       // We add a small buffer (4px) to avoid false positives at exact boundary.
       const breadcrumbBarHeight =
         refs?.contentRef?.current
-          ?.closest(`.cds--page-header__next`)
-          ?.querySelector(`.cds--page-header__breadcrumb-bar`)?.offsetHeight ??
-        40;
+          ?.closest(`.${blockClass}__next`)
+          ?.querySelector<HTMLElement>(`.${blockClass}__breadcrumb-bar`)
+          ?.offsetHeight ?? 40;
       const tabBarHeight =
         refs?.contentRef?.current
-          ?.closest(`.cds--page-header__next`)
-          ?.querySelector(`.cds--page-header__tab-bar`)?.offsetHeight ?? 0;
+          ?.closest(`.${blockClass}__next`)
+          ?.querySelector<HTMLElement>(`.${blockClass}__tab-bar`)
+          ?.offsetHeight ?? 0;
       const stickyTopHeight =
         totalHeaderOffset + breadcrumbBarHeight + tabBarHeight + 4;
 

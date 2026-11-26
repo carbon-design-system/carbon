@@ -1,7 +1,6 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as ToggleStories from './Toggle.stories';
 import Toggle from '../Toggle';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -28,53 +27,19 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-<Canvas
-  of={ToggleStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: ToggleStories.Default }),
-    },
-  ]}
-/>
+<Canvas of={ToggleStories.Default} />
 
 ## Small Toggle
 
-<Canvas
-  of={ToggleStories.SmallToggle}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ToggleStories.SmallToggle }),
-    },
-  ]}
-/>
+<Canvas of={ToggleStories.SmallToggle} />
 
 ## Skeleton
 
-<Canvas
-  of={ToggleStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: ToggleStories.Skeleton }),
-    },
-  ]}
-/>
+<Canvas of={ToggleStories.Skeleton} />
 
 ## With Accessible Labels
 
-<Canvas
-  of={ToggleStories.WithAccessibleLabels}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ToggleStories.WithAccessibleLabels }),
-    },
-  ]}
-/>
+<Canvas of={ToggleStories.WithAccessibleLabels} />
 
 ## Component API
 

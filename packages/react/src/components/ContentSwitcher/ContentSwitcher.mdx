@@ -8,7 +8,6 @@ import {
 import { ContentSwitcher } from '../ContentSwitcher';
 import Switch from '../Switch';
 import * as ContentSwitcherStories from './ContentSwitcher.stories.js';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -49,29 +48,11 @@ Content switchers allow users to toggle between two or more content sections
 within the same space on screen. Only one content section is shown at a time.
 Create Switch components for each section in the content switcher.
 
-<Canvas
-  of={ContentSwitcherStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ContentSwitcherStories.Default }),
-    },
-  ]}
-/>
+<Canvas of={ContentSwitcherStories.Default} />
 
 ## Icon Only
 
-<Canvas
-  of={ContentSwitcherStories.IconOnly}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({ story: ContentSwitcherStories.IconOnly }),
-    },
-  ]}
-/>
+<Canvas of={ContentSwitcherStories.IconOnly} />
 
 ## Icon Only With Layer
 

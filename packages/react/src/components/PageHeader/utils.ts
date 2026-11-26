@@ -46,9 +46,6 @@ const windowExists = typeof window !== `undefined`;
 
 /**
  * Determines if the given target is scrollable
- *
- * @param {HTMLElement} target
- * @returns {boolean}
  */
 const scrollable = (target: HTMLElement): boolean => {
   const style = window.getComputedStyle(target);
@@ -80,11 +77,8 @@ const scrollableAncestorInner = (target: HTMLElement) => {
 
 /**
  * Walks up the parent nodes to identify the first scrollable ancestor
- *
- * @param {HTMLElement} target
- * @returns {HTMLElement}
  */
-export const scrollableAncestor = (target: HTMLElement) => {
+export const scrollableAncestor = (target: HTMLElement | null) => {
   if (!windowExists || !target) {
     return null;
   }

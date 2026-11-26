@@ -38,8 +38,13 @@ export default {
   ],
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|@babel/|temporal-polyfill|temporal-utils)',
+    // Built package output is already compiled
+    '/packages/[^/]+/(lib|es|umd)/',
   ],
   moduleNameMapper: {
+    // Test against source, tests don't need `@carbon/react` built first
+    '^@carbon/react$': '<rootDir>/packages/react/src/index.ts',
+    '^@carbon/react/icons$': '<rootDir>/packages/react/icons/src/index.ts',
     // Jest uses identity-obj-proxy to mock CSS/SCSS imports.
     '\\.(css|scss)$': 'identity-obj-proxy',
     // Some packages (e.g. @carbon/utilities) write relative imports with an

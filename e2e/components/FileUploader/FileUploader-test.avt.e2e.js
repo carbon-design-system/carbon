@@ -103,7 +103,9 @@ test.describe('@avt FileUploader', () => {
       },
     });
 
-    const addFileButton = page.getByRole('button');
+    // the hidden <input type="file"> also has the button role, so match the
+    // visible <button> by its text
+    const addFileButton = page.locator('button', { hasText: 'Add file' });
 
     // Testing the button focus
     await expect(addFileButton).toBeVisible();
@@ -157,7 +159,7 @@ test.describe('@avt FileUploader', () => {
         page.getByText('test-upload-file-long-text-for-tooltip-to-show-up')
       ).toBeVisible();
 
-      // Deleteing the long file
+      // Deleting the long file
       await page.keyboard.press('Tab');
       await page.keyboard.press('Tab');
       await page.keyboard.press('Tab');
@@ -177,7 +179,11 @@ test.describe('@avt FileUploader', () => {
       },
     });
 
-    const addFileButton = page.getByRole('button');
+    // the hidden <input type="file"> also has the button role, so match the
+    // visible <button> by its text
+    const addFileButton = page.locator('button', {
+      hasText: 'Drag and drop a file here or click to upload',
+    });
 
     // Testing the button focus
     await expect(addFileButton).toBeVisible();
@@ -203,7 +209,7 @@ test.describe('@avt FileUploader', () => {
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Tab');
 
-    // Deleteing all files
+    // Deleting all files
     await page.keyboard.press('Enter');
     await expect(
       page.locator('#test-upload-file-long-text-for-tooltip-to-show-up.jpg')

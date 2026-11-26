@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { ref } from 'lit/directives/ref.js';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
@@ -17,7 +18,6 @@ import mdx from './overflow-menu.feature-flag.mdx';
 import '../../../.storybook/templates/with-feature-flags';
 
 const args = {
-  autoAlign: false,
   open: false,
   label: 'Options',
   menuAlignment: 'bottom-start',
@@ -99,7 +99,7 @@ const renderDefaultMenu = () => html`
 `;
 
 const renderOverflowMenu = ({
-  autoAlign = false,
+  autoAlign,
   label = 'Options',
   menu = renderDefaultMenu(),
   menuAlignment = 'bottom-start',
@@ -117,6 +117,14 @@ const renderOverflowMenu = ({
     ${renderOverflowMenuIcon()} ${menu}
   </cds-overflow-menu>
 `;
+
+const scrollIntoCenter = (el?: Element) => {
+  if (el) {
+    requestAnimationFrame(() =>
+      el.scrollIntoView({ block: 'center', inline: 'center' })
+    );
+  }
+};
 
 export const Default = {
   parameters: {
@@ -146,18 +154,13 @@ export const AutoAlign = {
     },
   },
   render: (args) => {
-    requestAnimationFrame(() => {
-      document.querySelector('cds-overflow-menu[autoalign]')?.scrollIntoView({
-        block: 'center',
-        inline: 'center',
-      });
-    });
-
     return html`
       <sb-template-feature-flags>
         <feature-flags enable-v12-overflowmenu="true">
           <div style="width: 4900px; height: 4900px; position: relative;">
-            <div style="position: absolute; top: 2450px; left: 2450px;">
+            <div
+              ${ref(scrollIntoCenter)}
+              style="position: absolute; top: 2450px; left: 2450px;">
               ${renderOverflowMenu(args)}
             </div>
           </div>

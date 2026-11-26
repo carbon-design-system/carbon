@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import { action } from 'storybook/actions';
-import { TrashCan, Save, Download, Add } from '@carbon/icons-react';
+import { TrashCan, Save, Download } from '@carbon/icons-react';
 
 import Button from '../../Button';
 import DataTable, {
@@ -31,8 +31,8 @@ import DataTable, {
 
 import { Toggletip, ToggletipButton, ToggletipContent } from '../../Toggletip';
 
-import { EmptyState } from '../../../examples/EmptyState/example/components/EmptyState';
-import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found.svg';
+import { EmptyState } from '../../../examples/EmptyState/components/EmptyState';
+import notFoundIllustration from '../../../examples/EmptyState/assets/not-found.svg';
 import {
   batchActionClick,
   dataTableArgs,
@@ -67,6 +67,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+      source: {
+        type: 'code',
+      },
     },
   },
 };

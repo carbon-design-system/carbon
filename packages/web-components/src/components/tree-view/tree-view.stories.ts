@@ -40,6 +40,14 @@ const controls = {
   },
 };
 
+const setAllExpanded = (event: Event, isExpanded: boolean) => {
+  (event.currentTarget as HTMLElement).parentElement?.nextElementSibling
+    ?.querySelectorAll('cds-tree-node')
+    .forEach((node) => {
+      (node as HTMLElement & { isExpanded: boolean }).isExpanded = isExpanded;
+    });
+};
+
 export const Default = {
   argTypes: controls,
   args: defaultArgs,
@@ -88,28 +96,13 @@ export const withControlledExpansion = {
     (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
   ],
   render: ({ hideLabel, label, size }) => html`
-    <script>
-      function expandAll() {
-        document
-          .querySelector('cds-tree-view[controlled]')
-          .querySelectorAll('cds-tree-node')
-          .forEach((node) => {
-            node.isExpanded = true;
-          });
-      }
-
-      function collapseAll() {
-        document
-          .querySelector('cds-tree-view[controlled]')
-          .querySelectorAll('cds-tree-node')
-          .forEach((node) => {
-            node.isExpanded = false;
-          });
-      }
-    </script>
     <div style="margin-block-end: 1rem">
-      <cds-button onclick="expandAll()">Expand All</cds-button>
-      <cds-button onclick="collapseAll()">Collapse All</cds-button>
+      <cds-button @click=${(e: Event) => setAllExpanded(e, true)}
+        >Expand All</cds-button
+      >
+      <cds-button @click=${(e: Event) => setAllExpanded(e, false)}
+        >Collapse All</cds-button
+      >
     </div>
     <cds-tree-view
       controlled
@@ -234,16 +227,16 @@ export const withLinks = {
     hideLabel: true,
   },
   render: ({ hideLabel, label, size }) => html`
-    <script>
-      document
-        .querySelector('cds-tree-view[links]')
-        .addEventListener('cds-tree-node-selected', (e) => {
-          document.querySelector('h3').innerText =
-            'The current page is: ' + e.detail.value;
-        });
-    </script>
     <div id="page-body" style="display: flex">
       <cds-tree-view
+        @cds-tree-node-selected=${(e: CustomEvent) => {
+          const heading = (
+            e.currentTarget as HTMLElement
+          ).parentElement?.querySelector('h3');
+          if (heading) {
+            heading.innerText = `The current page is: ${e.detail.value}`;
+          }
+        }}
         links
         ?hide-label=${hideLabel}
         label=${label}
@@ -359,7 +352,7 @@ export const withLinks = {
         </cds-tree-node>
       </cds-tree-view>
       <main style="flex: 1">
-        <h3>The current page is: Artifical Intelligence</h3>
+        <h3>The current page is: Artificial Intelligence</h3>
       </main>
     </div>
   `,

@@ -6,14 +6,15 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import TextInput from '../TextInput';
 import { PasswordInput } from '../PasswordInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-export interface FluidTextInputProps {
+export interface FluidTextInputProps
+  extends Pick<ComponentProps<typeof TextInput>, 'translateWithId'> {
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
@@ -103,7 +104,7 @@ export interface FluidTextInputProps {
 }
 
 const FluidTextInput = React.forwardRef<HTMLInputElement, FluidTextInputProps>(
-  ({ className, isPassword, ...other }, ref) => {
+  ({ className, isPassword, translateWithId, ...other }, ref) => {
     const prefix = usePrefix();
     const classNames = classnames(className, {
       [`${prefix}--text-input--fluid`]: !isPassword,
@@ -114,7 +115,12 @@ const FluidTextInput = React.forwardRef<HTMLInputElement, FluidTextInputProps>(
         {isPassword ? (
           <PasswordInput className={classNames} ref={ref} {...other} />
         ) : (
-          <TextInput className={classNames} ref={ref} {...other} />
+          <TextInput
+            className={classNames}
+            ref={ref}
+            translateWithId={translateWithId}
+            {...other}
+          />
         )}
       </FormContext.Provider>
     );
@@ -190,6 +196,11 @@ FluidTextInput.propTypes = {
    * Specify the placeholder attribute for the `<input>`
    */
   placeholder: PropTypes.string,
+
+  /**
+   * Translates component strings using your i18n tool.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * Specify the value of the `<input>`

@@ -8,6 +8,7 @@
 import { html } from 'lit';
 import { TABLE_SIZE } from '../table';
 import '../index';
+import '../../link/index';
 import storyDocs from './data-table.mdx';
 
 const sizes = {

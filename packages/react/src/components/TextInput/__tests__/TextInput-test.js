@@ -8,7 +8,7 @@
 import React from 'react';
 import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { AILabel } from '../../AILabel';
 import { FeatureFlags } from '../../FeatureFlags';
 
@@ -400,6 +400,61 @@ describe('TextInput', () => {
   });
 
   describe('behaves as expected - Component API', () => {
+    it.each([false, true])(
+      'should process rapid controlled input with enableCounter=%s',
+      async (enableCounter) => {
+        const onChange = jest.fn();
+        const onError = jest.fn((event) => event.preventDefault());
+        const previousActEnvironment = globalThis.IS_REACT_ACT_ENVIRONMENT;
+        function ControlledInput() {
+          const [value, setValue] = React.useState('');
+          return (
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              value={value}
+              enableCounter={enableCounter}
+              maxCount={200}
+              onChange={(event) => {
+                onChange(event);
+                setValue(event.target.value);
+              }}
+            />
+          );
+        }
+
+        const { unmount } = render(<ControlledInput />);
+        const input = screen.getByRole('textbox');
+        const setValue = Object.getOwnPropertyDescriptor(
+          HTMLInputElement.prototype,
+          'value'
+        ).set;
+        window.addEventListener('error', onError);
+        // Preserve the microtask burst instead of flushing each event with act.
+        globalThis.IS_REACT_ACT_ENVIRONMENT = false;
+        try {
+          for (let count = 1; count <= 150; count++) {
+            setValue.call(input, 'x'.repeat(count));
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            await Promise.resolve();
+          }
+          await waitFor(() => {
+            expect(input).toHaveValue('x'.repeat(150));
+            if (enableCounter) {
+              expect(screen.getByText('150/200')).toBeInTheDocument();
+            }
+          });
+
+          expect(onError).not.toHaveBeenCalled();
+          expect(onChange).toHaveBeenCalledTimes(150);
+        } finally {
+          unmount();
+          window.removeEventListener('error', onError);
+          globalThis.IS_REACT_ACT_ENVIRONMENT = previousActEnvironment;
+        }
+      }
+    );
+
     it('should respect onChange prop', async () => {
       const onChange = jest.fn();
       render(
@@ -514,6 +569,47 @@ describe('TextInput', () => {
       expect(counter).toBeInTheDocument();
     });
 
+    it.each(['', 0, 'updated'])(
+      'should count programmatic controlled value %p',
+      (value) => {
+        const props = {
+          id: 'input-1',
+          labelText: 'TextInput label',
+          enableCounter: true,
+          maxCount: 20,
+          onChange: jest.fn(),
+        };
+        const { rerender } = render(<TextInput {...props} value="initial" />);
+
+        rerender(<TextInput {...props} value={value} />);
+
+        expect(screen.getByRole('textbox')).toHaveValue(value.toString());
+        expect(
+          screen.getByText(`${value.toString().length}/20`)
+        ).toBeInTheDocument();
+      }
+    );
+
+    it('should count the controlled value when the consumer rejects an edit', async () => {
+      const onChange = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          value="abc"
+          onChange={onChange}
+          enableCounter
+          maxCount={20}
+        />
+      );
+
+      await userEvent.type(screen.getByRole('textbox'), 'd');
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(screen.getByRole('textbox')).toHaveValue('abc');
+      expect(screen.getByText('3/20')).toBeInTheDocument();
+    });
+
     it('should count ref value when enableCounter is toggled)', async () => {
       // Test for issue #18520: TextInput missing ref check for initial value
       const TestComponent = () => {
@@ -550,6 +646,168 @@ describe('TextInput', () => {
       // Enable counter
       await userEvent.click(screen.getByText('Enable Counter'));
       expect(screen.getByText('9/15')).toBeInTheDocument();
+    });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          disabled={true}
+          readOnly={true}
+        />
+      );
+
+      const input = screen.getByLabelText('TextInput label');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
+    });
+  });
+
+  describe('translateWithId', () => {
+    const translateWithId = (id, { count, maxCount }) => {
+      switch (id) {
+        case 'carbon.text-input.counter.characters.remaining':
+          return count === 1
+            ? `Resta 1 caractere de ${maxCount}.`
+            : `Restam ${count} caracteres de ${maxCount}.`;
+        case 'carbon.text-input.counter.characters.max-reached':
+          return `Limite de ${maxCount} caracteres atingido.`;
+        default:
+          throw new Error(`Unsupported id: ${id}`);
+      }
+    };
+
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it('should update announcements for controlled values without a visible counter', () => {
+      const props = {
+        id: 'input-1',
+        labelText: 'TextInput label',
+        maxCount: 10,
+        onChange: jest.fn(),
+      };
+      const { rerender } = render(<TextInput {...props} value="" />);
+
+      rerender(<TextInput {...props} value="abcdef" />);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+
+      expect(screen.getByRole('alert')).toHaveTextContent('4 characters left.');
+    });
+
+    it.each([
+      ['123456789', '1 character left.'],
+      ['12345', '5 characters left.'],
+      ['1234567890', 'Maximum characters reached.'],
+    ])(
+      'should announce the default English message for "%s"',
+      (defaultValue, message) => {
+        render(
+          <TextInput
+            id="input-1"
+            labelText="TextInput label"
+            enableCounter
+            maxCount={10}
+            defaultValue={defaultValue}
+          />
+        );
+
+        act(() => {
+          jest.advanceTimersByTime(1000);
+        });
+
+        expect(screen.getByRole('alert')).toHaveTextContent(message);
+      }
+    );
+
+    it.each([
+      ['123456789', 'Resta 1 caractere de 10.'],
+      ['12345', 'Restam 5 caracteres de 10.'],
+      ['1234567890', 'Limite de 10 caracteres atingido.'],
+    ])(
+      'should announce the translated message for "%s"',
+      (defaultValue, message) => {
+        render(
+          <TextInput
+            id="input-1"
+            labelText="TextInput label"
+            enableCounter
+            maxCount={10}
+            defaultValue={defaultValue}
+            translateWithId={translateWithId}
+          />
+        );
+
+        act(() => {
+          jest.advanceTimersByTime(1000);
+        });
+
+        expect(screen.getByRole('alert')).toHaveTextContent(message);
+      }
+    );
+
+    it('should not pass `translateWithId` to the `<input>`', () => {
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'translatewithid'
+      );
+      expect(errorSpy).not.toHaveBeenCalled();
+      errorSpy.mockRestore();
+    });
+
+    it('should not restart the announcement when `translateWithId` changes identity', () => {
+      const props = {
+        id: 'input-1',
+        labelText: 'TextInput label',
+        enableCounter: true,
+        maxCount: 10,
+        defaultValue: '123456789',
+      };
+      const { rerender } = render(
+        <TextInput
+          {...props}
+          translateWithId={(...args) => translateWithId(...args)}
+        />
+      );
+
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+
+      rerender(
+        <TextInput
+          {...props}
+          translateWithId={(...args) => translateWithId(...args)}
+        />
+      );
+
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Resta 1 caractere de 10.'
+      );
     });
   });
 });

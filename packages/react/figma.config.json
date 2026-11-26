@@ -1,11 +1,6 @@
 {
   "codeConnect": {
-    "parser": "react",
-    "importPaths": {
-      "packages/react/src/*": "@carbon/react"
-    },
-    "paths": {},
-    "include": ["code-connect/**/*.figma.ts", "code-connect/**/*.figma.tsx"],
+    "include": ["code-connect/**/*.figma.ts"],
     "documentUrlSubstitutions": {
       "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/": "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/"
     },

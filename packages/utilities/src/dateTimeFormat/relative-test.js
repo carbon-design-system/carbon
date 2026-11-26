@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,6 +40,24 @@ describe(locale, () => {
       });
 
       const rtf = new Intl.RelativeTimeFormat(locale, { style });
+
+      test(`+8 days → ${rtf.format(1, 'weeks')}`, () => {
+        const date = Date.now() + 1000 * 60 * 60 * 24 * 8;
+        const actualOutput = relative.format(date, { locale, style });
+        expect(actualOutput).toBe(rtf.format(1, 'weeks'));
+      });
+
+      test(`-364 days → ${rtf.format(-12, 'months')}`, () => {
+        const date = Date.now() - 1000 * 60 * 60 * 24 * 364;
+        const actualOutput = relative.format(date, { locale, style });
+        expect(actualOutput).toBe(rtf.format(-12, 'months'));
+      });
+
+      test(`+364 days → ${rtf.format(12, 'months')}`, () => {
+        const date = Date.now() + 1000 * 60 * 60 * 24 * 364;
+        const actualOutput = relative.format(date, { locale, style });
+        expect(actualOutput).toBe(rtf.format(12, 'months'));
+      });
 
       tests.forEach(([unit, unitsPassed, secondsInUnit]) => {
         const datePast = Date.now() - 1000 * unitsPassed * secondsInUnit;

@@ -1,5 +1,4 @@
-import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
-import { cdnJs } from '../../globals/internal/storybook-cdn';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as AutoAlignStories from './autoalign.stories';
 
 <Meta of={AutoAlignStories} />
@@ -37,6 +36,7 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
 ## Popover
 
 <Canvas
+  additionalActions={[]}
   source={{
     code: `
       <cds-popover open="" autoalign caret="" align="top-right" dropshadow="">
@@ -58,6 +58,7 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
 ## Toggletip
 
 <Canvas
+  additionalActions={[]}
   source={{
     code: `
       <cds-toggletip autoalign alignment="bottom">
@@ -75,6 +76,7 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
 ## Tooltip
 
 <Canvas
+  additionalActions={[]}
   source={{
     code: `<cds-tooltip autoalign="" align="top" enter-delay-ms="100" leave-delay-ms="300" highcontrast="" caret="" dropshadow="" size="false" timeoutid="57">
       <button class="sb-tooltip-trigger" role="button" aria-labelledby="content">
@@ -90,6 +92,7 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
 ## AI Label
 
 <Canvas
+  additionalActions={[]}
   source={{
     code: `
       <cds-ai-label

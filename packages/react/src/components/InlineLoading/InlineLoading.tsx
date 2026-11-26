@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,7 +40,9 @@ export interface InlineLoadingProps
   description?: React.ReactNode;
 
   /**
-   * Specify the description for the inline loading text
+   * Specify the accessible label for the status icon. It is used for every
+   * status, so update it along with `status`. Defaults to "loading",
+   * "finished" or "error".
    */
   iconDescription?: string;
 
@@ -95,7 +97,9 @@ const InlineLoading = ({
     let iconLabel = iconDescription ? iconDescription : status;
     if (status === 'error') {
       return (
-        <ErrorFilled className={`${prefix}--inline-loading--error`}>
+        <ErrorFilled
+          aria-label={iconLabel}
+          className={`${prefix}--inline-loading--error`}>
           <title>{iconLabel}</title>
         </ErrorFilled>
       );
@@ -103,6 +107,7 @@ const InlineLoading = ({
     if (status === 'finished') {
       return (
         <CheckmarkFilled
+          aria-label={iconLabel}
           className={`${prefix}--inline-loading__checkmark-container`}>
           <title>{iconLabel}</title>
         </CheckmarkFilled>
@@ -158,7 +163,9 @@ InlineLoading.propTypes = {
   description: PropTypes.node,
 
   /**
-   * Specify the description for the inline loading text
+   * Specify the accessible label for the status icon. It is used for every
+   * status, so update it along with `status`. Defaults to "loading",
+   * "finished" or "error".
    */
   iconDescription: PropTypes.string,
 
