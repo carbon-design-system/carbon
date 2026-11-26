@@ -17,6 +17,7 @@ import * as CardStories from './card.stories';
 - [Overview](#overview)
 - [Clickable](#clickable)
 - [Disabled](#disabled)
+- [Title heading](#title-heading)
 - [Productive and Expressive](#productive-and-expressive)
 - [With AI Label](#with-ai-label)
 - [With Flush Body](#with-flush-body)
@@ -45,27 +46,53 @@ elements handle each visual region.
 ## Clickable
 
 A clickable card makes the entire surface interactive. Set `aria-label` or
-`aria-labelledby` to provide an accessible name. When `href` is set the card
-renders as an `<a>` element; otherwise it uses `role="button"` with full
-keyboard support (Enter / Space).
+`aria-labelledby` on `cds-card` to provide an accessible name; it is applied to
+the interactive element inside the card. When `href` is set the card renders as
+an `<a>` element; otherwise it uses `role="button"` with full keyboard support
+(Enter / Space).
 
 <Canvas of={CardStories.Clickable} />
 
 ## Disabled
 
+`disabled` mutes the card and exposes its disabled state to assistive
+technology. A disabled card that is not `clickable` is exposed as a group with
+`aria-disabled="true"`; set `aria-label` or `aria-labelledby` on `cds-card` so
+the group has an accessible name. Pass `disabled` separately to interactive
+elements inside the card, because the card does not set their native disabled
+state.
+
 <Canvas of={CardStories.Disabled} />
+
+## Title heading
+
+`cds-card-title` renders the title text in a heading element, so assistive
+technology users can navigate cards by heading. The default is `<h2>`, which
+assumes the page has an `<h1>`. Set `title-level` (`h1`–`h6`) to continue the
+heading hierarchy of the page without skipping a level. The label and
+description are not part of the heading, and a title with no text does not
+expose an empty heading.
+
+Inside a clickable card without `href`, which has `role="button"`, assistive
+technology reads the card by its accessible name and does not list the heading.
+A card with `href` is a link, and its heading stays in the heading list.
+
+```html
+<cds-card-title title-level="h3">Usage report</cds-card-title>
+```
 
 ## Productive and Expressive
 
 The `density` attribute controls the heading typography token used inside the
 card title.
 
-<Canvas of={CardStories.ProductiveAndExpressive} />
+<Canvas of={CardStories.WithDensities} />
 
 ## With AI Label
 
-Place `cds-ai-label` in the `decorator` slot. The card automatically adds the
-`has-ai-label` attribute and applies the AI gradient border treatment.
+Place `cds-ai-label` in the `decorator` slot of `cds-card-header`. The card
+automatically adds the `has-ai-label` attribute and applies the AI gradient
+border treatment.
 
 <Canvas of={CardStories.WithAILabel} />
 
@@ -117,12 +144,13 @@ Set `horizontal` on `cds-card`. `cds-card-media` will self-assign to the `media`
 slot and the card renders a flex row layout. Use `media-position="end"` to move
 media to the right.
 
-<Canvas of={CardStories.WithMedia} />
+<Canvas of={CardStories.WithHorizontalMedia} />
 
 ## With Icon
 
 Override the default `ArrowRight` icon in the clickable footer via the
-`footer-icon` slot.
+`footer-icon` slot. A disabled clickable card always shows the `Error` icon
+instead, as in the React card.
 
 <Canvas of={CardStories.WithIcon} />
 
