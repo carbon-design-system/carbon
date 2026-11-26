@@ -383,6 +383,72 @@ Custom page-select children are removed and a `TODO` comment is left to migrate
 them with `renderPageSelect` if needed. Omit `pageSizes` to hide the items per
 page selector.
 
+### IBM Products TagSet to TagOverflow
+
+Migrates the deprecated `TagSet` from `@carbon/ibm-products` to `TagOverflow`.
+
+**Usage:**
+
+```bash
+npx @carbon/upgrade migrate ibm-products-tagset-to-tagoverflow --write
+```
+
+**Example:**
+
+```jsx
+// Before
+import { TagSet } from '@carbon/ibm-products';
+
+<TagSet
+  overflowAutoAlign
+  tags={[
+    { type: 'red', label: 'Danger' },
+    { type: 'blue', label: 'Info' },
+  ]}
+/>;
+
+// After
+import { TagOverflow } from '@carbon/ibm-products';
+
+<TagOverflow
+  autoAlign
+  items={[
+    { id: 'danger', tagType: 'red', label: 'Danger' },
+    { id: 'info', tagType: 'blue', label: 'Info' },
+  ]}
+/>;
+```
+
+What the codemod does:
+
+- Renames the import and JSX element, `tags` to `items` and `overflowAutoAlign`
+  to `autoAlign`.
+- In inline item arrays, renames `type` to `tagType` and adds a unique `id` when
+  missing. Shorthand `{ type }` becomes `{ tagType: type }`. Other arrays
+  (spreads, variables) and items with a computed `['type']` key get a `TODO`
+  comment.
+- Adds a `TODO` when props are spread onto the element
+  (`<TagSet {...props} />`), because the spread object cannot be migrated
+  statically.
+- Keeps `onOverflowTagChange` and `allTagsModalTarget` but adds a `TODO`, since
+  their types changed. `onOverflowTagChange` now receives
+  `{ hiddenItems, minWidth, maxWidth }` instead of `ReactNode[]`, and
+  `allTagsModalTarget` is now an `HTMLElement` instead of a `ReactNode`.
+- Removes `onOverflowClick`, `containingElementRef`, `measurementOffset` and
+  `multiline`, which `TagOverflow` no longer supports, and leaves a `TODO`
+  describing the behavior that is lost.
+- Adds a `TODO` when `allTagsModalTitle`, `allTagsModalSearchLabel`,
+  `allTagsModalSearchPlaceholderText` or `showAllTagsLabel` is not set. `TagSet`
+  provided English defaults for these, `TagOverflow` does not, so provide
+  translated values to keep the "view all" link, modal and search field
+  labelled.
+- If `TagOverflow` is already imported from `@carbon/ibm-products`, the `TagSet`
+  specifier is removed instead of renamed. If a different `TagOverflow` is
+  imported from another package, the migrated element uses the alias
+  `IbmProductsTagOverflow` to avoid a name clash. If `TagSet` is still
+  referenced outside JSX (for example `typeof TagSet`), the `TagSet` import is
+  kept and a `TODO` is added.
+
 ### FeatureFlag deprecate flags prop
 
 Updates FeatureFlags component to use individual boolean props instead of the
