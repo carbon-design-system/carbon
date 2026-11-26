@@ -2090,7 +2090,7 @@ __metadata:
     tinyclip: "npm:^1.0.0"
     tsdown: "npm:^0.23.0"
     typescript: "npm:^6.0.3"
-    yargs: "npm:^17.7.2"
+    yargs: "npm:^18.0.0"
   bin:
     carbon-cli: ./bin/carbon-cli.js
   languageName: unknown
@@ -2694,7 +2694,7 @@ __metadata:
     rimraf: "npm:^6.0.1"
     semver: "npm:^7.7.2"
     tsdown: "npm:^0.23.0"
-    yargs: "npm:^17.0.1"
+    yargs: "npm:^18.0.0"
   bin:
     carbon-upgrade: ./bin/carbon-upgrade.js
   languageName: unknown
@@ -23925,7 +23925,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:17.7.2, yargs@npm:^17.0.1, yargs@npm:^17.7.2":
+"yargs@npm:17.7.2, yargs@npm:^17.7.2":
   version: 17.7.2
   resolution: "yargs@npm:17.7.2"
   dependencies:
