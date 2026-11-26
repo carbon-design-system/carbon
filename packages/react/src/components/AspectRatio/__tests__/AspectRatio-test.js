@@ -83,11 +83,8 @@ describe('AspectRatio', () => {
       );
 
       expect(screen.getByTestId('aspect-ratio')).toHaveClass(
-        'cds--aspect-ratio--2x1',
-        'cds--aspect-ratio--md--4x3',
-        'cds--aspect-ratio--lg--16x9',
-        'cds--aspect-ratio--xlg--3x2',
-        'cds--aspect-ratio--max--2x3'
+        'cds--aspect-ratio cds--aspect-ratio--2x1 cds--aspect-ratio--md--4x3 cds--aspect-ratio--lg--16x9 cds--aspect-ratio--xlg--3x2 cds--aspect-ratio--max--2x3',
+        { exact: true }
       );
     });
   });

@@ -51,27 +51,31 @@ export interface AspectRatioProps {
   ratio?: AspectRatioRatio;
 
   /**
-   * Specify the ratio to be used at the small breakpoint.
+   * Aspect ratio applied from the small breakpoint upward until a larger
+   * breakpoint ratio is defined.
    */
   ratioSm?: AspectRatioRatio;
 
   /**
-   * Specify the ratio to be used at the medium breakpoint.
+   * Aspect ratio applied from the medium breakpoint upward until a larger
+   * breakpoint ratio is defined.
    */
   ratioMd?: AspectRatioRatio;
 
   /**
-   * Specify the ratio to be used at the large breakpoint.
+   * Aspect ratio applied from the large breakpoint upward until a larger
+   * breakpoint ratio is defined.
    */
   ratioLg?: AspectRatioRatio;
 
   /**
-   * Specify the ratio to be used at the x-large breakpoint.
+   * Aspect ratio applied from the x-large breakpoint upward until a larger
+   * breakpoint ratio is defined.
    */
   ratioXlg?: AspectRatioRatio;
 
   /**
-   * Specify the ratio to be used at the max breakpoint.
+   * Aspect ratio applied from the max breakpoint onward.
    */
   ratioMax?: AspectRatioRatio;
 }
@@ -143,27 +147,31 @@ AspectRatio.propTypes = {
   ratio: PropTypes.oneOf(aspectRatios),
 
   /**
-   * Specify the ratio to be used at the small breakpoint.
+   * Aspect ratio applied from the small breakpoint upward until a larger
+   * breakpoint ratio is defined.
    */
   ratioSm: PropTypes.oneOf(aspectRatios),
 
   /**
-   * Specify the ratio to be used at the medium breakpoint.
+   * Aspect ratio applied from the medium breakpoint upward until a larger
+   * breakpoint ratio is defined.
    */
   ratioMd: PropTypes.oneOf(aspectRatios),
 
   /**
-   * Specify the ratio to be used at the large breakpoint.
+   * Aspect ratio applied from the large breakpoint upward until a larger
+   * breakpoint ratio is defined.
    */
   ratioLg: PropTypes.oneOf(aspectRatios),
 
   /**
-   * Specify the ratio to be used at the x-large breakpoint.
+   * Aspect ratio applied from the x-large breakpoint upward until a larger
+   * breakpoint ratio is defined.
    */
   ratioXlg: PropTypes.oneOf(aspectRatios),
 
   /**
-   * Specify the ratio to be used at the max breakpoint.
+   * Aspect ratio applied from the max breakpoint onward.
    */
   ratioMax: PropTypes.oneOf(aspectRatios),
 };

@@ -39,20 +39,39 @@ describe('scss/components/aspect-ratio', () => {
         rule.selector === '.cds--aspect-ratio--max--2x3::before'
       ) {
         rule.walkDecls('padding-block-start', (decl) => {
-          selectors.push(`${rule.selector}: ${decl.value}`);
+          expect(rule.parent.type).toBe('atrule');
+          expect(rule.parent.name).toBe('media');
+          selectors.push({
+            selector: rule.selector,
+            value: decl.value,
+            media: rule.parent.params,
+          });
         });
       }
     });
 
-    expect(selectors).toEqual(
-      expect.arrayContaining([
-        '.cds--aspect-ratio--lg--16x9::before: 56.25%',
-        '.cds--aspect-ratio--md--4x3::before: 75%',
-        '.cds--aspect-ratio--xlg--3x2::before: 66.6666666667%',
-        '.cds--aspect-ratio--max--2x3::before: 150%',
-      ])
-    );
-    expect(selectors).toHaveLength(4);
+    expect(selectors).toEqual([
+      {
+        selector: '.cds--aspect-ratio--md--4x3::before',
+        value: '75%',
+        media: '(min-width: 42rem)',
+      },
+      {
+        selector: '.cds--aspect-ratio--lg--16x9::before',
+        value: '56.25%',
+        media: '(min-width: 66rem)',
+      },
+      {
+        selector: '.cds--aspect-ratio--xlg--3x2::before',
+        value: '66.6666666667%',
+        media: '(min-width: 82rem)',
+      },
+      {
+        selector: '.cds--aspect-ratio--max--2x3::before',
+        value: '150%',
+        media: '(min-width: 99rem)',
+      },
+    ]);
   });
 
   test('emits base ratios before responsive ratios in breakpoint order', async () => {

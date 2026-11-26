@@ -101,8 +101,9 @@ proportion across grid breakpoints:
 </AspectRatio>
 ```
 
-The `ratio` prop remains the default ratio. If `ratioSm` is provided, it is used
-as the small breakpoint ratio instead.
+The `ratio` prop sets the base ratio. `ratioSm` overrides the base ratio from
+the small breakpoint upward. `ratioMd`, `ratioLg`, `ratioXlg`, and `ratioMax`
+override the active ratio at their respective breakpoints.
 
 ## Feedback
 
