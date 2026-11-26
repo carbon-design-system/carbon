@@ -107,6 +107,19 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   private _handleInput({ target }: Event) {
     const { value } = target as HTMLInputElement;
     this.value = value;
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSDatePickerInput).eventInputChange,
+        {
+          bubbles: true,
+          composed: true,
+          detail: {
+            value,
+            inputType: this.kind || 'from',
+          },
+        }
+      )
+    );
   }
 
   /**
@@ -281,6 +294,20 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   value!: string;
 
   /**
+   * Whether manual typing is allowed. When false, the input is read-only for
+   * typing but the calendar button stays enabled.
+   */
+  @property({
+    reflect: true,
+    attribute: 'allow-input',
+    converter: {
+      fromAttribute: (value: string | null) => value !== 'false',
+      toAttribute: (value: boolean) => (value ? '' : 'false'),
+    },
+  })
+  allowInput = true;
+
+  /**
    * Specify whether the control is currently in warning state
    */
   @property({ type: Boolean, reflect: true })
@@ -300,6 +327,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   render() {
     const constructor = this.constructor as typeof CDSDatePickerInput;
     const {
+      allowInput,
       disabled,
       _hasHelperText: hasHelperText,
       hideLabel,
@@ -399,7 +427,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
             @focus="${handleFocus}"
             @blur="${handleBlur}"
             @click="${handleInputClick}"
-            ?readonly="${readonly}" />
+            ?readonly="${readonly || !allowInput}" />
           ${normalizedProps.icon || this._renderIcon()}
           <slot
             name="ai-label"
@@ -482,6 +510,13 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   static get inputClickEventName() {
     return `${prefix}-preview-date-picker-input-click`;
+  }
+
+  /**
+   * The name of the custom event fired when the input value changes.
+   */
+  static get eventInputChange() {
+    return `${prefix}-preview-date-picker-input-changed`;
   }
 
   static shadowRootOptions = {

@@ -201,6 +201,7 @@ export function useDatePicker(
     minDate = null,
     maxDate = null,
     dateFormat = 'm/d/Y',
+    allowInput = true,
     closeOnSelect = true,
     disabled = false,
     readOnly = false,
@@ -230,6 +231,8 @@ export function useDatePicker(
       minDate: parseDateToPlainDate(minDate),
       maxDate: parseDateToPlainDate(maxDate),
       dateFormat,
+      allowInput,
+      closeOnSelect,
       isDisabled: disabled,
       isReadonly: readOnly,
     });
@@ -361,13 +364,20 @@ export function useDatePicker(
     if (newMaxDate) {
       machine.send(DatePickerEvent.SET_MAX_DATE, { date: newMaxDate });
     }
+
+    if (allowInput !== context.allowInput) {
+      machine.updateContext({ allowInput });
+      setContext(machine.getContext());
+    }
   }, [
     disabled,
     readOnly,
+    allowInput,
     minDate,
     maxDate,
     context.isDisabled,
     context.isReadonly,
+    context.allowInput,
   ]);
 
   // Event handlers
@@ -433,9 +443,12 @@ export function useDatePicker(
 
   const handleInputChange = useCallback(
     (value: string, inputType: 'from' | 'to' = 'from') => {
+      if (!allowInput || readOnly || disabled) {
+        return;
+      }
       send(DatePickerEvent.VALUE_CHANGE, { value, inputType });
     },
-    [send]
+    [allowInput, disabled, readOnly, send]
   );
 
   // Handle click outside to close calendar using shared utility

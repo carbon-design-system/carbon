@@ -206,6 +206,25 @@ class CDSDatePicker extends FormAssociatedMixin(
   };
 
   /**
+   * Handles typed value changes from date-picker-input.
+   *
+   * @param {CustomEvent} event - The input change event
+   */
+  @HostListener('eventInputChange')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore: The decorator refers to this method, but TS thinks this method is not referred to
+  private _handleInputChange = (event: CustomEvent) => {
+    if (!this._adapter || this.disabled || this.readonly || !this.allowInput) {
+      return;
+    }
+    const { value, inputType } = event.detail || {};
+    this._adapter.send(DatePickerEvent.VALUE_CHANGE, {
+      value,
+      inputType: inputType === 'to' ? 'to' : 'from',
+    });
+  };
+
+  /**
    * Handles form data event
    *
    * @param {FormDataEvent} event - The form data event
@@ -243,7 +262,7 @@ class CDSDatePicker extends FormAssociatedMixin(
    * @param {DatePickerContext} transition.context - Current context
    */
   private _handleStateChange = (transition: StateTransition) => {
-    const { to, from, context } = transition;
+    const { to, from, context, event } = transition;
     const newState = to as DatePickerState;
 
     // Update open property based on state
@@ -286,13 +305,30 @@ class CDSDatePicker extends FormAssociatedMixin(
     }
 
     // Dispatch change event and update input when dates are selected
-    // This handles DATE_SELECTED state, FOCUSED state (from ENTER_KEY), and SELECTING_END state (after start date selected)
+    // This handles DATE_SELECTED state, FOCUSED state (from ENTER_KEY),
+    // SELECTING_END state (after start date selected), and typed VALUE_CHANGE.
+    const typedValue =
+      event?.type === DatePickerEvent.VALUE_CHANGE
+        ? (event.payload as { value?: string; inputType?: string } | undefined)
+            ?.value
+        : undefined;
+    const typedDateMatches =
+      !!typedValue &&
+      ((event?.payload as { inputType?: string } | undefined)?.inputType ===
+      'to'
+        ? !!context.endDate &&
+          formatPlainDate(context.endDate, context.dateFormat) === typedValue
+        : !!context.startDate &&
+          formatPlainDate(context.startDate, context.dateFormat) ===
+            typedValue);
+
     const shouldUpdateInput =
       newState === DatePickerState.DATE_SELECTED ||
       newState === DatePickerState.SELECTING_END ||
       (newState === DatePickerState.FOCUSED &&
         from === DatePickerState.CALENDAR_OPEN &&
-        context.startDate);
+        context.startDate) ||
+      typedDateMatches;
 
     if (shouldUpdateInput) {
       // Only include non-null dates in selectedDates array
@@ -487,6 +523,10 @@ class CDSDatePicker extends FormAssociatedMixin(
     this._releaseDatePicker();
     const { _dateInteractNode: dateInteractNode, _mode: mode } = this;
 
+    // Keep input editable state in sync even when the calendar adapter is not
+    // created (simple mode / inputs not ready yet).
+    this._syncInputEditableState();
+
     // Don't instantiate in simple mode
     if (!dateInteractNode || !dateInteractNode.input || mode === 'simple') {
       return;
@@ -548,9 +588,39 @@ class CDSDatePicker extends FormAssociatedMixin(
   }
 
   /**
-   * Allows the user to enter a date directly into the input field
+   * Syncs disabled/readonly/allowInput state onto slotted inputs.
+   * `allowInput=false` mirrors Flatpickr: typing is blocked on the field while
+   * the calendar button stays enabled for selection.
    */
-  @property({ type: Boolean, reflect: true, attribute: 'allow-input' })
+  private _syncInputEditableState() {
+    const { selectorInputFrom, selectorInputTo } = this
+      .constructor as typeof CDSDatePicker;
+    const inputFrom = this.querySelector(selectorInputFrom);
+    const inputTo = this.querySelector(selectorInputTo);
+
+    [inputFrom, inputTo].forEach((input) => {
+      if (input instanceof CDSDatePickerInput) {
+        input.disabled = this.disabled;
+        input.readonly = this.readonly;
+        input.allowInput = this.allowInput;
+      }
+    });
+  }
+
+  /**
+   * Allows the user to enter a date directly into the input field.
+   * Defaults to `true`. A custom converter is required because Lit's Boolean
+   * attribute converter treats a missing attribute as `false`, which would
+   * incorrectly override this default.
+   */
+  @property({
+    reflect: true,
+    attribute: 'allow-input',
+    converter: {
+      fromAttribute: (value: string | null) => value !== 'false',
+      toAttribute: (value: boolean) => (value ? '' : 'false'),
+    },
+  })
   allowInput = true;
 
   /**
@@ -944,9 +1014,18 @@ class CDSDatePicker extends FormAssociatedMixin(
    * @param {Map<string, unknown>} changedProperties - Map of changed properties
    */
   updated(changedProperties: Map<string, unknown>) {
+    const inputInteractionChanged =
+      changedProperties.has('disabled') ||
+      changedProperties.has('readonly') ||
+      changedProperties.has('allowInput');
+
     // Update click outside handler when open state changes
     if (changedProperties.has('open')) {
       this._clickOutsideHandler?.updateConfig({ isOpen: this.open });
+    }
+
+    if (inputInteractionChanged) {
+      this._syncInputEditableState();
     }
 
     if (this._adapter) {
@@ -977,29 +1056,11 @@ class CDSDatePicker extends FormAssociatedMixin(
         this._adapter.updateContext({ closeOnSelect: this.closeOnSelect });
       }
 
-      if (
-        changedProperties.has('disabled') ||
-        changedProperties.has('readonly')
-      ) {
-        const { selectorInputFrom, selectorInputTo } = this
-          .constructor as typeof CDSDatePicker;
-        const inputFrom = this.querySelector(
-          selectorInputFrom
-        ) as CDSDatePickerInput;
-        const inputTo = this.querySelector(
-          selectorInputTo
-        ) as CDSDatePickerInput;
-
-        [inputFrom, inputTo].forEach((input) => {
-          if (input) {
-            input.disabled = this.disabled;
-            input.readonly = this.readonly;
-          }
-        });
-
+      if (inputInteractionChanged) {
         this._adapter.updateContext({
           isDisabled: this.disabled,
           isReadonly: this.readonly,
+          allowInput: this.allowInput,
         });
       }
 
@@ -1189,6 +1250,13 @@ class CDSDatePicker extends FormAssociatedMixin(
    */
   static get eventInputClick() {
     return `${prefix}-preview-date-picker-input-click`;
+  }
+
+  /**
+   * The name of the custom event fired when an input value changes.
+   */
+  static get eventInputChange() {
+    return `${prefix}-preview-date-picker-input-changed`;
   }
 
   static styles = styles;

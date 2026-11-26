@@ -30,12 +30,14 @@ const stateTransitions: TransitionMap = {
     [DatePickerEventEnum.CALENDAR_ICON_CLICK]: DatePickerState.CALENDAR_OPEN,
     [DatePickerEventEnum.DISABLE]: DatePickerState.DISABLED,
     [DatePickerEventEnum.SET_READONLY]: DatePickerState.READONLY,
+    [DatePickerEventEnum.VALUE_CHANGE]: DatePickerState.IDLE,
   },
   [DatePickerState.FOCUSED]: {
     [DatePickerEventEnum.INPUT_BLUR]: DatePickerState.IDLE,
     [DatePickerEventEnum.CALENDAR_OPEN]: DatePickerState.CALENDAR_OPEN,
     [DatePickerEventEnum.CALENDAR_ICON_CLICK]: DatePickerState.CALENDAR_OPEN,
     [DatePickerEventEnum.DISABLE]: DatePickerState.DISABLED,
+    [DatePickerEventEnum.VALUE_CHANGE]: DatePickerState.FOCUSED,
   },
   [DatePickerState.CALENDAR_OPEN]: {
     [DatePickerEventEnum.DATE_SELECT]: DatePickerState.DATE_SELECTED,
@@ -58,6 +60,8 @@ const stateTransitions: TransitionMap = {
     [DatePickerEventEnum.PAGE_DOWN]: DatePickerState.CALENDAR_OPEN,
     [DatePickerEventEnum.HOME_KEY]: DatePickerState.CALENDAR_OPEN,
     [DatePickerEventEnum.END_KEY]: DatePickerState.CALENDAR_OPEN,
+    // Typed dates commit without leaving the open calendar
+    [DatePickerEventEnum.VALUE_CHANGE]: DatePickerState.CALENDAR_OPEN,
     // ENTER_KEY is handled by guards - will dispatch DATE_SELECT or RANGE_START_SELECT
   },
   [DatePickerState.SELECTING_START]: {
@@ -83,6 +87,7 @@ const stateTransitions: TransitionMap = {
     [DatePickerEventEnum.ENTER_KEY]: DatePickerState.DATE_SELECTED,
     [DatePickerEventEnum.PREV_MONTH]: DatePickerState.SELECTING_END,
     [DatePickerEventEnum.NEXT_MONTH]: DatePickerState.SELECTING_END,
+    [DatePickerEventEnum.VALUE_CHANGE]: DatePickerState.SELECTING_END,
   },
   [DatePickerState.DATE_SELECTED]: {
     [DatePickerEventEnum.CALENDAR_CLOSE]: DatePickerState.IDLE,

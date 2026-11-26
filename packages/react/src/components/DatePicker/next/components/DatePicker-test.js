@@ -283,6 +283,83 @@ describe('DatePicker v12 focus restoration', () => {
     expect(sentinel).toBeTruthy();
   });
 
+  describe('DatePicker v12 allowInput', () => {
+    it('allows typing into the input when allowInput is true (default)', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput id="allow-input-true" labelText="Date input" />
+        </DatePicker>
+      );
+
+      const dateInput = screen.getByLabelText('Date input');
+
+      await user.click(dateInput);
+      await user.keyboard('01/15/2026');
+
+      expect(dateInput).toHaveValue('01/15/2026');
+      expect(dateInput).not.toHaveAttribute('readonly');
+    });
+
+    it('sets the input read-only when allowInput is false', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DatePicker datePickerType="single" allowInput={false}>
+          <DatePickerInput id="allow-input-false" labelText="Date input" />
+        </DatePicker>
+      );
+
+      const dateInput = screen.getByLabelText('Date input');
+
+      expect(dateInput).toHaveAttribute('readonly');
+
+      await user.click(dateInput);
+      await user.keyboard('01/15/2026');
+
+      expect(dateInput).toHaveValue('');
+    });
+
+    it('keeps the calendar button enabled when allowInput is false', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <DatePicker datePickerType="single" allowInput={false}>
+          <DatePickerInput id="allow-input-calendar" labelText="Date input" />
+        </DatePicker>
+      );
+
+      const calendarButton = screen.getByRole('button', {
+        name: /open calendar/i,
+      });
+      expect(calendarButton).not.toBeDisabled();
+
+      await user.click(calendarButton);
+      expect(
+        document.querySelector('.cds--date-picker__calendar-container')
+      ).toBeInTheDocument();
+    });
+
+    it('calls onChange when a complete valid date is typed', async () => {
+      const user = userEvent.setup();
+      const onChange = jest.fn();
+
+      render(
+        <DatePicker datePickerType="single" onChange={onChange}>
+          <DatePickerInput id="allow-input-onchange" labelText="Date input" />
+        </DatePicker>
+      );
+
+      const dateInput = screen.getByLabelText('Date input');
+      await user.click(dateInput);
+      await user.keyboard('01/15/2026');
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange.mock.calls[0][0][0]).toEqual(new Date(2026, 0, 15));
+    });
+  });
+
   describe('DatePicker v12 input click reopens calendar', () => {
     it('reopens the calendar when clicking the input after a date has been selected', async () => {
       const user = userEvent.setup();

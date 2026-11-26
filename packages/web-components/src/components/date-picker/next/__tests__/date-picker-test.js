@@ -6,7 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/date-picker/next/index.js';
-import { fixture, html, expect } from '@open-wc/testing';
+import { fixture, html, expect, oneEvent } from '@open-wc/testing';
 
 describe('cds-preview-date-picker', () => {
   describe('Invalid and Warning States with Disabled/ReadOnly', () => {
@@ -183,6 +183,78 @@ describe('cds-preview-date-picker', () => {
       `);
       await el.updateComplete;
       expect(el.readonly).to.be.true;
+    });
+
+    it('defaults allowInput to true and keeps the input editable', async () => {
+      const el = await fixture(html`
+        <cds-preview-date-picker>
+          <cds-preview-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
+      `);
+      await el.updateComplete;
+
+      expect(el.allowInput).to.be.true;
+
+      const input = el
+        .querySelector('cds-preview-date-picker-input')
+        ?.shadowRoot?.querySelector('input');
+      expect(input).to.exist;
+      expect(input?.hasAttribute('readonly')).to.be.false;
+    });
+
+    it('sets the input read-only when allowInput is false', async () => {
+      const el = await fixture(html`
+        <cds-preview-date-picker allow-input="false">
+          <cds-preview-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
+      `);
+      await el.updateComplete;
+
+      expect(el.allowInput).to.be.false;
+
+      const inputEl = el.querySelector('cds-preview-date-picker-input');
+      const input = inputEl?.shadowRoot?.querySelector('input');
+      const calendarButton = inputEl?.shadowRoot?.querySelector(
+        'button.cds--date-picker__icon'
+      );
+      expect(input).to.exist;
+      expect(input?.hasAttribute('readonly')).to.be.true;
+      expect(calendarButton).to.exist;
+      expect(calendarButton?.disabled).to.be.false;
+    });
+
+    it('commits a typed valid date and fires the change event', async () => {
+      const el = await fixture(html`
+        <cds-preview-date-picker>
+          <cds-preview-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
+      `);
+      await el.updateComplete;
+
+      const inputEl = el.querySelector('cds-preview-date-picker-input');
+      const input = inputEl?.shadowRoot?.querySelector('input');
+      expect(input).to.exist;
+
+      const changePromise = oneEvent(el, 'cds-preview-date-picker-changed');
+      input.value = '01/15/2026';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      const { detail } = await changePromise;
+      expect(detail.selectedDates).to.have.length(1);
+      expect(String(detail.selectedDates[0])).to.equal('2026-01-15');
     });
 
     it('should handle different sizes', async () => {

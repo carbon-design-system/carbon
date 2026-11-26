@@ -175,6 +175,7 @@ export interface KeyboardPayload {
 
 export interface ValueChangePayload {
   value: string;
+  inputType?: InputType;
 }
 
 export interface ValidationErrorPayload {
