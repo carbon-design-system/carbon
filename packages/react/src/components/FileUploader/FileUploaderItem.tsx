@@ -39,6 +39,8 @@ export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
   disabled?: boolean;
 
   /**
+   * @deprecated [Deprecated in v12] Use `errorSubject` for the error message.
+   *
    * Error message body for an invalid file upload
    */
   errorBody?: string;
@@ -265,6 +267,8 @@ FileUploaderItem.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
+   * @deprecated [Deprecated in v12] Use `errorSubject` for the error message.
+   *
    * Error message body for an invalid file upload
    */
   errorBody: PropTypes.string,

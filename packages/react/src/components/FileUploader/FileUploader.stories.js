@@ -67,7 +67,8 @@ const fileUploaderItemArgTypes = {
   },
   errorBody: {
     control: 'text',
-    description: 'Error message body for an invalid file upload',
+    description:
+      'Deprecated in v12. Error message body for an invalid file upload. Use errorSubject for new implementations.',
   },
   errorSubject: {
     control: 'text',
