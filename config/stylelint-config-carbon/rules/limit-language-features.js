@@ -94,10 +94,6 @@ export default {
     // https://github.com/carbon-design-system/carbon/issues/23136
     'declaration-property-value-keyword-no-deprecated': OFF,
 
-    // Declaration block
-    // Limit the number of declaration within single line declaration blocks.
-    'declaration-block-single-line-max-declarations': 1,
-
     // Selector
     // Specify a blacklist of disallowed attribute operators.
     'selector-attribute-operator-disallowed-list': OFF,
