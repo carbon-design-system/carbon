@@ -197,8 +197,6 @@ Next you will need to:
 - [ ] Post the release announcement in slack
   - [ ] #carbon-announcements
   - [ ] #carbon-design-system
-  - [ ] #carbon-react
-  - [ ] #carbon-web-components
 
 <details>
   <summary>Click to view slack announcement template</summary>
@@ -483,12 +481,8 @@ git push upstream vX.Y.Z
 In some cases, a single package in the monorepo may need a major version bump.
 This can be done without having to do a major version bump across all packages.
 
-For instance:
-
-- `eslint-config-carbon` needs a new major
-- All other packages should only be bumped as a new patch
-- The tag for the release should remain at the current major `v11.x`, and not be
-  bumped to `v12.x`
+For example, if one package needs a major bump, bump only that package and patch
+the others. Keep the release tag at the current major version.
 
 To do this, packages must be versioned manually.
 

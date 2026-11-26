@@ -1297,6 +1297,9 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
     warn,
   });
 
+  // Disabled takes precedence over read-only
+  const isReadOnly = readOnly && !disabled;
+
   const passthroughProps = {
     ...other,
     onBlur,
@@ -1326,12 +1329,12 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
   const containerClasses = classNames(`${prefix}--slider-container`, {
     [`${prefix}--slider-container--two-handles`]: twoHandles,
     [`${prefix}--slider-container--disabled`]: disabled,
-    [`${prefix}--slider-container--readonly`]: readOnly,
+    [`${prefix}--slider-container--readonly`]: isReadOnly,
     [`${prefix}--slider-container--rtl`]: isRtl,
   });
   const sliderClasses = classNames(`${prefix}--slider`, {
     [`${prefix}--slider--disabled`]: disabled,
-    [`${prefix}--slider--readonly`]: readOnly,
+    [`${prefix}--slider--readonly`]: isReadOnly,
   });
 
   const fixedInputClasses = [
@@ -1366,7 +1369,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
     `${prefix}--slider-text-input-wrapper`,
     `${prefix}--slider-text-input-wrapper--lower`,
     {
-      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+      [`${prefix}--text-input-wrapper--readonly`]: isReadOnly,
       [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
     },
   ]);
@@ -1375,7 +1378,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
     `${prefix}--slider-text-input-wrapper`,
     `${prefix}--slider-text-input-wrapper--upper`,
     {
-      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+      [`${prefix}--text-input-wrapper--readonly`]: isReadOnly,
       [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
     },
   ]);
@@ -1440,7 +1443,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
               data-invalid={normalizedProps.invalid ? true : null}
               data-handle-position={HandlePosition.LOWER}
               aria-invalid={normalizedProps.invalid ? true : undefined}
-              readOnly={readOnly}
+              readOnly={isReadOnly}
             />
             {normalizedProps.invalid && (
               <WarningFilled className={`${prefix}--slider__invalid-icon`} />
@@ -1598,7 +1601,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
                 ? true
                 : undefined
             }
-            readOnly={readOnly}
+            readOnly={isReadOnly}
           />
           {(twoHandles
             ? normalizedUpperProps.invalid

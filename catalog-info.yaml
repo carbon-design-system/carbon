@@ -32,8 +32,8 @@ metadata:
   links:
     - url: http://react.carbondesignsystem.com
       title: Storybook
-    - url: https://ibm-studios.slack.com/archives/C2K6RFJ1G
-      title: Internal carbon-react slack channel
+    - url: https://ibm-studios.slack.com/archives/C0M053VPT
+      title: Internal carbon-design-system Slack channel
     - url: https://carbondesignsystem.com/developing/frameworks/react/
       title: How-to docs and guidelines
 spec:

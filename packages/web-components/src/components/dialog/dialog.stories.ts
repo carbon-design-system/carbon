@@ -12,8 +12,10 @@ import '../button';
 import '../select';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-const toggleButton = () => {
-  document.querySelector('cds-dialog')?.toggleAttribute('open');
+const toggleButton = (event: Event) => {
+  (event.currentTarget as HTMLElement).parentElement
+    ?.querySelector('cds-dialog')
+    ?.toggleAttribute('open');
 };
 
 const defaultArgs = {

@@ -14,9 +14,9 @@ import {
   HeaderName,
 } from '@carbon/react';
 import DocsPage from './CreateSidePanel.mdx';
-import { Default } from './example/preview-components/Default';
-import { WithValidation } from './example/preview-components/WithValidation';
-import './example/styles/_story-styles.scss';
+import { Default } from './preview-components/Default';
+import { WithValidation } from './preview-components/WithValidation';
+import './styles/_story-styles.scss';
 
 const prefix = 'create-side-panel-stories__';
 
