@@ -202,9 +202,24 @@ const transform = (fileInfo, api) => {
     return null;
   };
 
+  // Only the old `Coachmark` of `@carbon/ibm-products` has to be rewritten.
+  // Once it is imported as `preview__Coachmark` or from `@carbon/react`, it
+  // already has the new API and running the transform again must not touch it.
+  const importsLegacyCoachmark = root
+    .find(j.ImportDeclaration, { source: { value: '@carbon/ibm-products' } })
+    .some((path) =>
+      (path.node.specifiers || []).some(
+        (specifier) =>
+          specifier.type === 'ImportSpecifier' &&
+          specifier.imported.name === 'Coachmark' &&
+          (specifier.local ? specifier.local.name : 'Coachmark') === 'Coachmark'
+      )
+    );
+
   // Transform Coachmark components
   root
     .find(j.JSXElement, { openingElement: { name: { name: 'Coachmark' } } })
+    .filter(() => importsLegacyCoachmark)
     .forEach((path) => {
       const attributes = path.node.openingElement.attributes;
       const newAttributes = [];

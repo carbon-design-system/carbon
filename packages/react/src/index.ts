@@ -13,7 +13,13 @@ import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
 export { AddSelect } from './components/AddSelect';
-export type { AddSelectProps } from './components/AddSelect';
+export type {
+  AddSelectProps,
+  AddSelectComponentType,
+  AddSelectBodyProps,
+  AddSelectRowProps,
+  AddSelectContextType,
+} from './components/AddSelect';
 export {
   BigNumber as preview__BigNumber,
   BigNumberSkeleton as preview__BigNumberSkeleton,
