@@ -2471,7 +2471,7 @@ __metadata:
     flatpickr: "npm:4.6.13"
     fs-extra: "npm:^11.0.0"
     invariant: "npm:^2.2.3"
-    motion: "npm:^13.0.0"
+    motion: "npm:^14.0.0"
     prettier: "npm:^3.3.3"
     prettier-config-carbon: "workspace:^0.12.0"
     process: "npm:^0.11.10"
@@ -2556,7 +2556,7 @@ __metadata:
     "@carbon/type": "npm:^11.71.0"
     "@ibm/plex": "npm:6.4.1"
     "@ibm/plex-mono": "npm:2.5.0"
-    "@ibm/plex-sans": "npm:1.1.0"
+    "@ibm/plex-sans": "npm:2.0.0"
     "@ibm/plex-sans-arabic": "npm:1.1.0"
     "@ibm/plex-sans-devanagari": "npm:1.1.0"
     "@ibm/plex-sans-hebrew": "npm:1.1.0"
@@ -2596,7 +2596,7 @@ __metadata:
     ajv: "npm:^8.20.0"
     ajv-formats: "npm:^3.0.1"
     glob: "npm:^14.0.0"
-    npm-packlist: "npm:^10.0.1"
+    npm-packlist: "npm:^11.0.0"
     prettier: "npm:^3.3.3"
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
@@ -4228,6 +4228,15 @@ __metadata:
   dependencies:
     "@ibm/telemetry-js": "npm:^1.6.1"
   checksum: 10/065c244f5f741d60423bd714554365b323d551e8227861244d51e03c05bcd1808caa041f4909284120b3ab2bf4a5d4d0a54469013af4701b741875cf29a77b2d
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-sans@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@ibm/plex-sans@npm:2.0.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+  checksum: 10/549963d69d7100152595dd3dcb83958a767a80a5a0b7595b6edbbf38c500af05792d2c6def602b2a0bb512c4fa59146d53ae37b6255f8e7c4857ec16e682acff
   languageName: node
   linkType: hard
 
@@ -13250,22 +13259,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^13.1.1":
-  version: 13.1.1
-  resolution: "framer-motion@npm:13.1.1"
+"framer-motion@npm:14.14.0":
+  version: 14.14.0
+  resolution: "framer-motion@npm:14.14.0"
   dependencies:
-    motion-dom: "npm:^13.1.1"
-    motion-utils: "npm:^13.0.0"
+    motion-dom: "npm:14.14.0"
+    motion-utils: "npm:14.7.0"
     tslib: "npm:^2.4.0"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
+    remix: ^3.1.0
   peerDependenciesMeta:
     react:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/78904da047762834e69810660d1aa73c99f07d69097c80e07b3c8b5bbd6f1dbf488e243fe5a482705baf1608903096d494a3be7322ee4af0e979766ce3aae11f
+    remix:
+      optional: true
+  checksum: 10/563b51a3d9030d91362e374d32bb2a2011a27ad22795dcb5935d544ad3c9a7054a25792d4736616fcb305aec4c8ce4d9941f59cb1e1601bdcdcfcf619991aba8
   languageName: node
   linkType: hard
 
@@ -14128,7 +14140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore-walk@npm:^9.0.0":
+"ignore-walk@npm:^9.0.0, ignore-walk@npm:^9.0.1":
   version: 9.0.1
   resolution: "ignore-walk@npm:9.0.1"
   dependencies:
@@ -17544,37 +17556,40 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:^13.1.1":
-  version: 13.1.1
-  resolution: "motion-dom@npm:13.1.1"
+"motion-dom@npm:14.14.0":
+  version: 14.14.0
+  resolution: "motion-dom@npm:14.14.0"
   dependencies:
-    motion-utils: "npm:^13.0.0"
-  checksum: 10/88f0d90946b292f94e0f964fb97540de64c0d648f3801295955da420608a529546be63214456dcb16420bc3e3fc8cb23e140a86f451933ac34fc0bf4e09397d3
+    motion-utils: "npm:14.7.0"
+  checksum: 10/fdb045a3efb315ec5f9ba29767e6872dd2cb2c9c97ff8910f2ef31adeeca176312b1b8b558014bf285447559e3a431a3612b07c95813b3d69fc19fd639060ff0
   languageName: node
   linkType: hard
 
-"motion-utils@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "motion-utils@npm:13.0.0"
-  checksum: 10/ee6296263ed6fd16a46eced143446e9335facdf72d1922ecdcfb945fb498d3723e9c94f3036fed4cc3cda7fca59de9b2971c11496fdfb8511cefb70eb2ec2da3
+"motion-utils@npm:14.7.0":
+  version: 14.7.0
+  resolution: "motion-utils@npm:14.7.0"
+  checksum: 10/411e24ba7f1bd736180a9bcf2dec92f41fc6300fa92c89e3cc6dc384e20fd2961314da2daf147750b3fc80739190f2693c7cbb696d0176905c1a9d54ad22bef6
   languageName: node
   linkType: hard
 
-"motion@npm:^13.0.0":
-  version: 13.1.1
-  resolution: "motion@npm:13.1.1"
+"motion@npm:^14.0.0":
+  version: 14.14.0
+  resolution: "motion@npm:14.14.0"
   dependencies:
-    framer-motion: "npm:^13.1.1"
+    framer-motion: "npm:14.14.0"
     tslib: "npm:^2.4.0"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
+    remix: ^3.1.0
   peerDependenciesMeta:
     react:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/5bf9082926cea1bd65da6830d46bcd730b3ffc556181d2b28804ad7798c9ccf3c4b63a8dea6cf2e828726dff3bf222b5e7998094da2591d7d6ac9a160cf594e0
+    remix:
+      optional: true
+  checksum: 10/0f20ee2faa1e677bb582449eec328e57b1f3578cd818914aff9e55ba62df784cdb41e3e8dd6974dfcb7aed2cd49294222899c3fda684c8802b8e0b88af8afdae
   languageName: node
   linkType: hard
 
@@ -17924,14 +17939,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-packlist@npm:^11.2.0":
-  version: 11.3.1
-  resolution: "npm-packlist@npm:11.3.1"
+"npm-packlist@npm:^11.0.0, npm-packlist@npm:^11.2.0":
+  version: 11.3.2
+  resolution: "npm-packlist@npm:11.3.2"
   dependencies:
     glob: "npm:^14.0.3"
-    ignore-walk: "npm:^9.0.0"
+    ignore-walk: "npm:^9.0.1"
     proc-log: "npm:^7.0.0"
-  checksum: 10/83e2b1ec5d5534e81bf265d03c8c93ef3e19516211f1b014ae5a4a841676ee57526be6aafc264bf169cdb5cfc5c3349774b2b9ff816d2e5871b48e0266356f45
+  checksum: 10/5ddc5fa5c80bbca549bbcd4db3e25d1b7b361cb9bb93c51211f0af0fd4108b694189fa04842b36dce00fe447f9189e72923d754105378fa206e7736496005fa6
   languageName: node
   linkType: hard
 
