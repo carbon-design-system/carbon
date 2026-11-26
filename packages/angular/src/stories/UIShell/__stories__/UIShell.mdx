@@ -1,0 +1,173 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as UIShellStories from './UIShell.stories';
+
+<Meta of={UIShellStories} />
+
+# UI Shell
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/UIShell)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/UI-shell-header/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/UI-shell-header/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Header Base](#header-base)
+- [Header Base with Actions](#header-base-with-actions)
+- [Header Base with Actions and Right Panel](#header-base-with-actions-and-right-panel)
+- [Header Base with Actions and Switcher](#header-base-with-actions-and-switcher)
+- [Header Base with Navigation](#header-base-with-navigation)
+- [Header Base with Navigation and Actions](#header-base-with-navigation-and-actions)
+- [Header Base with Navigation, Actions and Side Nav](#header-base-with-navigation-actions-and-side-nav)
+- [Header Base with Side Nav](#header-base-with-side-nav)
+- [Header Base with SkipToContent](#header-base-with-skiptocontent)
+- [Fixed Side Nav](#fixed-side-nav)
+- [Fixed Side Nav with Divider](#fixed-side-nav-with-divider)
+- [Fixed Side Nav with Mixed Buttons and Links](#fixed-side-nav-with-mixed-buttons-and-links)
+- [Fixed Side Nav with Icons](#fixed-side-nav-with-icons)
+- [Side Nav Rail](#side-nav-rail)
+- [Side Nav Rail with Header](#side-nav-rail-with-header)
+- [Side Nav with Large Side Nav Items](#side-nav-with-large-side-nav-items)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The UI Shell is the shared navigation framework for Carbon. It ties products
+together with consistent, reliable topmost navigation and side navigation.
+
+### Importing
+
+```ts
+import {
+  HeaderComponent,
+  HeaderGlobalActionComponent,
+  HeaderMenuButtonComponent,
+  HeaderNameComponent,
+  HeaderNavComponent,
+  HeaderNavItemComponent,
+  HeaderPanelComponent,
+  SideNavComponent,
+  SideNavItemsComponent,
+  SideNavLinkComponent,
+  SideNavMenuComponent,
+  SideNavMenuItemComponent,
+} from '@carbon/angular/ui-shell';
+
+@Component({
+  standalone: true,
+  imports: [
+    HeaderComponent,
+    HeaderGlobalActionComponent,
+    HeaderMenuButtonComponent,
+    HeaderNameComponent,
+    HeaderNavComponent,
+    HeaderNavItemComponent,
+    HeaderPanelComponent,
+    SideNavComponent,
+    SideNavItemsComponent,
+    SideNavLinkComponent,
+    SideNavMenuComponent,
+    SideNavMenuItemComponent,
+  ],
+  template: `
+    <cds-ng-header aria-label="IBM Cloud">
+      <cds-ng-header-name href="/" prefix="IBM"
+        >Cloud console</cds-ng-header-name
+      >
+      <cds-ng-header-nav menuBarLabel="IBM Cloud">
+        <cds-ng-header-nav-item href="/link1">Link 1</cds-ng-header-nav-item>
+        <cds-ng-header-nav-item href="/link2">Link 2</cds-ng-header-nav-item>
+      </cds-ng-header-nav>
+    </cds-ng-header>
+  `,
+})
+export class MyComponent {}
+```
+
+## Header Base
+
+<Canvas of={UIShellStories.HeaderBase} />
+
+## Header Base with Actions
+
+<Canvas of={UIShellStories.HeaderBaseWActions} />
+
+## Header Base with Actions and Right Panel
+
+<Canvas of={UIShellStories.HeaderBaseWActionsRightPanel} />
+
+## Header Base with Actions and Switcher
+
+<Canvas of={UIShellStories.HeaderBaseWActionsSwitcher} />
+
+## Header Base with Navigation
+
+<Canvas of={UIShellStories.HeaderBaseWNavigation} />
+
+## Header Base with Navigation and Actions
+
+<Canvas of={UIShellStories.HeaderBaseWNavigationActions} />
+
+## Header Base with Navigation, Actions and Side Nav
+
+<Canvas of={UIShellStories.HeaderBaseWNavigationActionsAndSideNav} />
+
+## Header Base with Side Nav
+
+<Canvas of={UIShellStories.HeaderBaseWSideNav} />
+
+## Header Base with SkipToContent
+
+<Canvas of={UIShellStories.HeaderBaseWSkipToContent} />
+
+## Fixed Side Nav
+
+<Canvas of={UIShellStories.FixedSideNav} />
+
+## Fixed Side Nav with Divider
+
+<Canvas of={UIShellStories.FixedSideNavDivider} />
+
+## Fixed Side Nav with Mixed Buttons and Links
+
+<Canvas of={UIShellStories.FixedSideNavWMixedLinksAndButtons} />
+
+## Fixed Side Nav with Icons
+
+<Canvas of={UIShellStories.FixedSideNavIcons} />
+
+## Side Nav Rail
+
+<Canvas of={UIShellStories.SideNavRail} />
+
+## Side Nav Rail with Header
+
+<Canvas of={UIShellStories.SideNavRailWHeader} />
+
+## Side Nav with Large Side Nav Items
+
+<Canvas of={UIShellStories.SideNavWLargeSideNavItems} />
+
+## Component API
+
+<ArgTypes of={UIShellStories.HeaderBase} />
+
+## Angular-specific notes
+
+- All sub-components (`HeaderComponent`, `SideNavComponent`,
+  `SwitcherComponent`, etc.) must be imported individually from
+  `@carbon/angular/ui-shell`.
+- Selectors use the `cds-ng-*` prefix (`cds-ng-header`, `cds-ng-side-nav`, etc.)
+  to ensure encapsulation and coexistence with other custom elements.
+- For icons in slots, use SVG string projection or Carbon icon helpers with
+  `slot="icon"` or `slot="title-icon"`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/UIShell/__stories__/UIShell.mdx).
