@@ -2596,7 +2596,7 @@ __metadata:
     ajv: "npm:^8.20.0"
     ajv-formats: "npm:^3.0.1"
     glob: "npm:^14.0.0"
-    npm-packlist: "npm:^10.0.1"
+    npm-packlist: "npm:^11.0.0"
     prettier: "npm:^3.3.3"
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
@@ -14198,7 +14198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore-walk@npm:^9.0.0":
+"ignore-walk@npm:^9.0.0, ignore-walk@npm:^9.0.1":
   version: 9.0.1
   resolution: "ignore-walk@npm:9.0.1"
   dependencies:
@@ -18008,14 +18008,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-packlist@npm:^11.2.0":
-  version: 11.3.1
-  resolution: "npm-packlist@npm:11.3.1"
+"npm-packlist@npm:^11.0.0, npm-packlist@npm:^11.2.0":
+  version: 11.3.2
+  resolution: "npm-packlist@npm:11.3.2"
   dependencies:
     glob: "npm:^14.0.3"
-    ignore-walk: "npm:^9.0.0"
+    ignore-walk: "npm:^9.0.1"
     proc-log: "npm:^7.0.0"
-  checksum: 10/83e2b1ec5d5534e81bf265d03c8c93ef3e19516211f1b014ae5a4a841676ee57526be6aafc264bf169cdb5cfc5c3349774b2b9ff816d2e5871b48e0266356f45
+  checksum: 10/5ddc5fa5c80bbca549bbcd4db3e25d1b7b361cb9bb93c51211f0af0fd4108b694189fa04842b36dce00fe447f9189e72923d754105378fa206e7736496005fa6
   languageName: node
   linkType: hard
 
