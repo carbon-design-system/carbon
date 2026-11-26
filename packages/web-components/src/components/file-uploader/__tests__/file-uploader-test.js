@@ -11,6 +11,26 @@ import { FILE_UPLOADER_ITEM_SIZE } from '@carbon/web-components/es/components/fi
 import { expect, fixture, html } from '@open-wc/testing';
 
 describe('file uploader layout size', () => {
+  it('should keep the deprecated error-body message visible', async () => {
+    const item = await fixture(html`
+      <cds-file-uploader-item
+        state="edit"
+        invalid
+        error-subject="File exceeds size limit"
+        error-body="Select a smaller file and try again.">
+        test.png
+      </cds-file-uploader-item>
+    `);
+
+    const body = item.shadowRoot.querySelector(
+      '.cds--form-requirement__supplement'
+    );
+    expect(body).to.be.visible;
+    expect(body.textContent.trim()).to.equal(
+      'Select a smaller file and try again.'
+    );
+  });
+
   it('should preserve the medium default size without a layout context', async () => {
     const el = await fixture(html`
       <div>
@@ -107,7 +127,7 @@ describe('file uploader layout size', () => {
     ).to.equal('48px');
   });
 
-  it('should size invalid file spacing from the layout context', async () => {
+  it('should size v12 invalid file spacing from the layout context', async () => {
     const layout = await fixture(html`
       <cds-layout size="xs">
         <cds-file-uploader-item
@@ -123,16 +143,16 @@ describe('file uploader layout size', () => {
 
     expect(getComputedStyle(item).rowGap).to.equal('0px');
     expect(getComputedStyle(item).paddingBlockStart).to.equal('0px');
-    expect(getComputedStyle(error).paddingBlockStart).to.equal('3px');
-    expect(getComputedStyle(error).paddingBlockEnd).to.equal('4px');
+    expect(getComputedStyle(error).paddingBlockStart).to.equal('0px');
+    expect(getComputedStyle(error).paddingBlockEnd).to.equal('8px');
 
     layout.size = 'sm';
     await layout.updateComplete;
 
-    expect(getComputedStyle(item).rowGap).to.equal('4px');
-    expect(getComputedStyle(item).paddingBlockStart).to.equal('4px');
-    expect(getComputedStyle(error).paddingBlockStart).to.equal('7px');
-    expect(getComputedStyle(error).paddingBlockEnd).to.equal('0px');
+    expect(getComputedStyle(item).rowGap).to.equal('0px');
+    expect(getComputedStyle(item).paddingBlockStart).to.equal('0px');
+    expect(getComputedStyle(error).paddingBlockStart).to.equal('0px');
+    expect(getComputedStyle(error).paddingBlockEnd).to.equal('8px');
   });
 });
 
