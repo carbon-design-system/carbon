@@ -230,6 +230,7 @@ export function useDatePicker(
       minDate: parseDateToPlainDate(minDate),
       maxDate: parseDateToPlainDate(maxDate),
       dateFormat,
+      closeOnSelect,
       isDisabled: disabled,
       isReadonly: readOnly,
     });
@@ -361,13 +362,22 @@ export function useDatePicker(
     if (newMaxDate) {
       machine.send(DatePickerEvent.SET_MAX_DATE, { date: newMaxDate });
     }
+
+    // Keep machine closeOnSelect in sync with the React prop so DATE_SELECT
+    // (and related actions) honour closeOnSelect={false}.
+    if (closeOnSelect !== context.closeOnSelect) {
+      machine.updateContext({ closeOnSelect });
+      setContext(machine.getContext());
+    }
   }, [
     disabled,
     readOnly,
+    closeOnSelect,
     minDate,
     maxDate,
     context.isDisabled,
     context.isReadonly,
+    context.closeOnSelect,
   ]);
 
   // Event handlers

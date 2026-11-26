@@ -85,6 +85,13 @@ const stateTransitions: TransitionMap = {
     [DatePickerEventEnum.NEXT_MONTH]: DatePickerState.SELECTING_END,
   },
   [DatePickerState.DATE_SELECTED]: {
+    // When closeOnSelect is false the calendar stays open in DATE_SELECTED;
+    // allow re-selection and the same dismiss paths as CALENDAR_OPEN.
+    [DatePickerEventEnum.DATE_SELECT]: DatePickerState.DATE_SELECTED,
+    [DatePickerEventEnum.RANGE_END_SELECT]: DatePickerState.DATE_SELECTED,
+    [DatePickerEventEnum.OUTSIDE_CLICK]: DatePickerState.IDLE,
+    [DatePickerEventEnum.ESCAPE_KEY]: DatePickerState.FOCUSED,
+    [DatePickerEventEnum.TAB_KEY]: DatePickerState.IDLE,
     [DatePickerEventEnum.CALENDAR_CLOSE]: DatePickerState.IDLE,
     [DatePickerEventEnum.INPUT_FOCUS]: DatePickerState.FOCUSED,
     [DatePickerEventEnum.CALENDAR_ICON_CLICK]: DatePickerState.CALENDAR_OPEN,

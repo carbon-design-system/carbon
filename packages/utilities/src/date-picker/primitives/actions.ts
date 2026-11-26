@@ -546,6 +546,9 @@ export const actions: ActionMap = {
         shouldRestoreFocus: context.closeOnSelect,
       };
     },
+    OUTSIDE_CLICK: dismissCalendar,
+    ESCAPE_KEY: closeCalendarAndCancelRestore,
+    TAB_KEY: closeCalendarAndCancelRestore,
     CALENDAR_CLOSE: closeCalendarRestoringFocus,
   },
 
