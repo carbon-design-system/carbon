@@ -771,6 +771,8 @@ categories:
       - mobile--add
       - mobile--chat
       - mobile--devices
+      - mobile--offline
+      - mobile--notification
       - mobile--phone
       - rotate--device
       - swipe--left
@@ -960,6 +962,8 @@ categories:
       - cargo--crane
       - cargo--ship
       - cheese
+      - clerk--inventory
+      - clerk--inventory--alt
       - complete-work--technician
       - construction-worker--mask
       - construction-worker
@@ -970,7 +974,9 @@ categories:
       - farmer--02
       - fragile
       - green-energy
+      - import--items
       - insurance
+      - issue--item
       - keep-dry
       - mission-control
       - nuclear
@@ -989,6 +995,7 @@ categories:
       - stack-limitation
       - start-work--technician
       - steel
+      - store--room
       - supervisor
       - supervisor-close--work
       - sustainability
@@ -1189,6 +1196,7 @@ categories:
       - workday
   - name: People
     members:
+      - add--user-group
       - advocate
       - advocate--mask
       - agility--02
