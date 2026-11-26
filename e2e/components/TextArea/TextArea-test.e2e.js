@@ -65,3 +65,44 @@ test.describe('TextArea', () => {
     expect(dimensions.scrollHeight).toBeGreaterThan(dimensions.clientHeight);
   });
 });
+
+test.describe('TextArea resizing', () => {
+  for (const state of ['disabled', 'enabled', 'readOnly']) {
+    test(`allows vertical resizing when ${state}`, async ({ page }) => {
+      await visitStory(page, {
+        component: 'TextArea',
+        id: 'components-textarea--default',
+        args: {
+          disabled: state === 'disabled',
+          readOnly: state === 'readOnly',
+        },
+      });
+
+      const textarea = page.getByRole('textbox');
+      await expect(textarea).toBeVisible();
+      if (state === 'disabled') {
+        await expect(textarea).toBeDisabled();
+      }
+      if (state !== 'enabled') {
+        await expect(textarea).not.toBeEditable();
+      }
+
+      const before = await textarea.boundingBox();
+      const x = before.x + before.width - 3;
+      const y = before.y + before.height - 3;
+
+      await page.mouse.move(x, y);
+      await page.mouse.down();
+      await page.mouse.move(x + 80, y + 80, { steps: 10 });
+      await page.mouse.up();
+
+      await expect
+        .poll(async () => (await textarea.boundingBox()).height)
+        .toBeGreaterThan(before.height + 40);
+      expect((await textarea.boundingBox()).width).toBeCloseTo(before.width);
+      if (state !== 'enabled') {
+        await expect(textarea).not.toBeEditable();
+      }
+    });
+  }
+});
