@@ -26,6 +26,7 @@ import {
   mapKeyboardToStateMachineEvent,
   ClickOutsideHandler,
 } from '@carbon/utilities/date-picker';
+import formStyles from '../../../form/form.scss?lit';
 import styles from './date-picker.scss?lit';
 import { carbonElement as customElement } from '../../../../globals/decorators/carbon-element';
 
@@ -1191,7 +1192,7 @@ class CDSDatePicker extends FormAssociatedMixin(
     return `${prefix}-preview-date-picker-input-click`;
   }
 
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSDatePicker;

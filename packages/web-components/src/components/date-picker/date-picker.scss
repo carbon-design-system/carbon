@@ -14,9 +14,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
-@use '@carbon/styles/scss/components/form';
-@use '@carbon/styles/scss/components/date-picker/date-picker' as *;
+@use '@carbon/styles/scss/components/form/form-mixin' as form;
+@use '@carbon/styles/scss/components/date-picker/date-picker-mixin' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/layer';
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include date-picker;

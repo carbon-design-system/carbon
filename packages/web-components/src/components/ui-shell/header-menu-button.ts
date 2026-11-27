@@ -15,6 +15,9 @@ import Close16 from '@carbon/icons/es/close/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
 import { SIDE_NAV_COLLAPSE_MODE } from './side-nav';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './header.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -123,7 +126,7 @@ class CDSHeaderMenuButton extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSHeaderMenuButton;

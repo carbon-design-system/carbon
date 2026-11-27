@@ -8,6 +8,10 @@
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import formStyles from '../form/form.scss?lit';
+import checkboxStyles from '../checkbox/checkbox.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
+import dropdownStyles from '../dropdown/dropdown.scss?lit';
 import styles from './fluid-multi-select.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
 import CDSMultiSelect from '../multi-select/multi-select';
@@ -52,7 +56,14 @@ class CDSFluidMultiSelect extends CDSMultiSelect {
     return html`<div class="${wrapperClasses}">${super.render()}</div>`;
   }
 
-  static styles = [CDSMultiSelect.styles, styles];
+  static styles = [
+    CDSMultiSelect.styles,
+    formStyles,
+    checkboxStyles,
+    textInputStyles,
+    dropdownStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidMultiSelect;

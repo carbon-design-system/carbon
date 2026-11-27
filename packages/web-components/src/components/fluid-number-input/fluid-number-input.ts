@@ -9,6 +9,9 @@ import { prefix } from '../../globals/settings';
 import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSNumberInput from '../number-input/number-input';
+import formStyles from '../form/form.scss?lit';
+import numberInputStyles from '../number-input/number-input.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './fluid-number-input.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
 
@@ -40,7 +43,13 @@ class CDSFluidNumberInput extends CDSNumberInput {
     return html`<div class="${wrapperClasses}">${super.render()}</div>`;
   }
 
-  static styles = [CDSNumberInput.styles, styles];
+  static styles = [
+    CDSNumberInput.styles,
+    formStyles,
+    numberInputStyles,
+    textInputStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidNumberInput;

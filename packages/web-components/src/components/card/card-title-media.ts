@@ -8,6 +8,9 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './card.scss?lit';
 
 /**
@@ -22,7 +25,7 @@ class CDSCardTitleMedia extends LitElement {
     return html`<div class="${prefix}--card__title-media"><slot></slot></div>`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSCardTitleMedia;

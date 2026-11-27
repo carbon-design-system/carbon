@@ -10,6 +10,9 @@ import { prefix } from '../../globals/settings';
 import Close20 from '@carbon/icons/es/close/20.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './dialog.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalCloseButton from '../modal/modal-close-button';
@@ -44,7 +47,7 @@ class CDSDialogCloseButton extends CDSModalCloseButton {
     `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSDialogCloseButton;

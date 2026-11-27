@@ -13,10 +13,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/components/link';
 @use '@carbon/styles/scss/components/tile/index' as *;
-@use '@carbon/styles/scss/components/form/index' as *;
+@use '@carbon/styles/scss/components/form/form-mixin' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/layer';
 
 :host(#{$prefix}-tile) {
   @extend .#{$prefix}--tile;

@@ -13,6 +13,7 @@ import '../tooltip/index';
 import '../button/index';
 import CDSButton from '../button/button';
 import { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
 import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './icon-button.scss?lit';
@@ -78,6 +79,7 @@ class CDSIconButton extends AutoAlignMixin(CDSButton) {
     super.connectedCallback();
 
     adoptStyles(this.renderRoot as ShadowRoot, [
+      popoverStyles,
       tooltipStyles,
       buttonStyles,
       styles,

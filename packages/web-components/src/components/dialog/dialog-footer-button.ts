@@ -8,6 +8,8 @@
 import { prefix } from '../../globals/settings';
 import CDSButton from '../button/button';
 import buttonStyles from '../button/button.scss?lit';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './dialog.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -18,7 +20,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-dialog-footer-button`)
 class CDSDialogFooterButton extends CDSButton {
-  static styles = [buttonStyles, styles];
+  static styles = [buttonStyles, popoverStyles, tooltipStyles, styles];
 }
 
 export default CDSDialogFooterButton;

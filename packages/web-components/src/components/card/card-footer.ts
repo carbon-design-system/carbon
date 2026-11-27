@@ -15,6 +15,9 @@ import {
   cardDefaultContext,
   type CardContextValue,
 } from './card-context';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './card.scss?lit';
 
 /**
@@ -75,7 +78,7 @@ class CDSCardFooter extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSCardFooter;

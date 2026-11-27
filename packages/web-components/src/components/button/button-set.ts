@@ -9,6 +9,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { BUTTON_KIND } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
 import CDSButtonSetBase from './button-set-base';
@@ -114,7 +116,7 @@ class CDSButtonSet extends CDSButtonSetBase {
     return `${prefix}-button`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, styles];
 }
 
 export default CDSButtonSet;

@@ -9,6 +9,8 @@
 import { LitElement, PropertyValues, html } from 'lit';
 import { property, state, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './tearsheet.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSTearsheetStack from './tearsheet-stack';
@@ -672,7 +674,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     </cds-modal>`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, styles];
 
   /**
    * Public event fired when the header collapse state changes.

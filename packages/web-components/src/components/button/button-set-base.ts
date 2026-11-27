@@ -6,6 +6,8 @@
  */
 
 import { LitElement, html } from 'lit';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -26,7 +28,7 @@ class CDSButtonSetBase extends LitElement {
     this.setAttribute('role', 'list');
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, styles];
 }
 
 export default CDSButtonSetBase;

@@ -7,9 +7,10 @@
 
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
-@use '@carbon/styles/scss/components/fluid-combo-box/index';
-@use '@carbon/styles/scss/components/combo-box' as *;
-@use '@carbon/styles/scss/components/list-box' as *;
+@use '@carbon/styles/scss/components/fluid-combo-box/fluid-combo-box-mixin' as
+  index;
+@use '@carbon/styles/scss/components/combo-box/combo-box-mixin' as *;
+@use '@carbon/styles/scss/components/list-box/list-box-mixin' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/spacing' as *;
@@ -20,6 +21,15 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/components/dropdown/dropdown-mixin' as dropdown-styles;
+@use '@carbon/styles/scss/components/fluid-list-box';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include list-box;
+@include dropdown-styles.dropdown;
+@include index.fluid-combo-box;
 
 :host(#{$prefix}-fluid-combo-box) {
   @extend .#{$prefix}--list-box__wrapper;

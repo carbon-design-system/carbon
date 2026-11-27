@@ -12,6 +12,8 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit-html/directives/class-map.js';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './tearsheet.scss?lit';
 import type { ActionButton, ButtonSize } from '../action-set/index.js';
 import {
@@ -118,7 +120,7 @@ class CDSTearsheetFooter extends HostListenerMixin(LitElement) {
     </footer>`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, styles];
 }
 
 export default CDSTearsheetFooter;

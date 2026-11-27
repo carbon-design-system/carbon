@@ -14,6 +14,8 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './slider.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -280,7 +282,7 @@ class CDSSliderInput extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [formStyles, textInputStyles, styles];
 }
 
 export default CDSSliderInput;

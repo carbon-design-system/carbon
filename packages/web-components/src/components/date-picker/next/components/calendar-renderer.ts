@@ -21,6 +21,7 @@ import {
   getMonthYearLabel,
   getWeekdayLabels,
 } from '@carbon/utilities/date-picker';
+import formStyles from '../../../form/form.scss?lit';
 import styles from './date-picker.scss?lit';
 
 /**
@@ -411,7 +412,7 @@ class CDSDatePickerCalendar extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSDatePickerCalendar;

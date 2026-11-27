@@ -12,12 +12,17 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/components/button';
-@use '@carbon/styles/scss/components/popover/index';
-@use '@carbon/styles/scss/components/tooltip';
-@use '@carbon/styles/scss/components/ui-shell/header';
+@use '@carbon/styles/scss/components/button/button-mixin' as button;
+@use '@carbon/styles/scss/components/popover/popover-mixin' as index;
+@use '@carbon/styles/scss/components/tooltip/tooltip-mixin' as tooltip;
+@use '@carbon/styles/scss/components/ui-shell/header/header-mixin' as header;
 @use '@carbon/styles/scss/components/ui-shell/header-panel';
 @use '@carbon/styles/scss/components/ui-shell/switcher';
+@use '@carbon/styles/scss/layer';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include header.header;
 
 :host(#{$prefix}-header) {
   @extend .#{$prefix}--header;

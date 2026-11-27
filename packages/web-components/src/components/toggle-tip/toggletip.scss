@@ -12,8 +12,13 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/components/toggletip/index' as *;
+@use '@carbon/styles/scss/components/toggletip/toggletip-mixin' as *;
 @use '@carbon/styles/scss/utilities/button-reset';
+@use '@carbon/styles/scss/layer';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include toggletip;
 
 :host(#{$prefix}-toggletip),
 :host(#{$prefix}-ai-label),

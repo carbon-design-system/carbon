@@ -6,7 +6,8 @@
  */
 
 $css--plex: true !default;
-@use '@carbon/styles/scss/components/fluid-multiselect/index';
+@use '@carbon/styles/scss/components/fluid-multiselect/fluid-multiselect-mixin'
+  as index;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/config' as *;
@@ -14,12 +15,23 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/components/multiselect' as *;
+@use '@carbon/styles/scss/components/multiselect/multiselect-mixin' as *;
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use '@carbon/styles/scss/components/list-box/list-box';
+@use '@carbon/styles/scss/components/list-box/list-box-mixin' as list-box;
 @use '@carbon/styles/scss/components/fluid-list-box';
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/components/tag';
+@use '@carbon/styles/scss/components/fluid-combo-box/fluid-combo-box-mixin' as
+  fluid-combo-box-styles;
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include list-box.list-box;
+@include multiselect;
+@include fluid-combo-box-styles.fluid-combo-box;
+@include index.fluid-multiselect;
 
 :host(#{$prefix}-fluid-multi-select) {
   @include emit-layout-tokens();

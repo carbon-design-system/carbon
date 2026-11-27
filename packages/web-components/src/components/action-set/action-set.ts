@@ -11,6 +11,8 @@ import { property, state } from 'lit/decorators.js';
 import { ref } from 'lit/directives/ref.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './action-set.scss?lit';
 import CDSButton from '../button/button';
 import '../button/index';
@@ -203,7 +205,7 @@ export class CDSActionSet extends LitElement {
   @property({ type: Array })
   actions: ActionButton[] = [];
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, styles];
 
   /**
    * Applies common button styling (size, classes, expressive attribute)

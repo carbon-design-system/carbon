@@ -11,6 +11,8 @@ import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../button/button';
 import { CHAT_BUTTON_SIZE, CHAT_BUTTON_KIND } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './chat-button.scss?lit';
 
@@ -72,7 +74,12 @@ class CDSChatButton extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    adoptStyles(this.renderRoot as ShadowRoot, [buttonStyles, styles]);
+    adoptStyles(this.renderRoot as ShadowRoot, [
+      popoverStyles,
+      tooltipStyles,
+      buttonStyles,
+      styles,
+    ]);
   }
 
   render() {

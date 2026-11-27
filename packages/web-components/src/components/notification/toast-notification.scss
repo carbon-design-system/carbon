@@ -11,8 +11,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/notification/index' as *;
-@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/button/button-mixin' as button;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include toast-notification;

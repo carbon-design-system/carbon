@@ -8,16 +8,22 @@
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
-@use '@carbon/styles/scss/components/fluid-number-input/index';
-@use '@carbon/styles/scss/components/fluid-text-input' as *;
+@use '@carbon/styles/scss/components/fluid-number-input/fluid-number-input-mixin'
+  as index;
+@use '@carbon/styles/scss/components/fluid-text-input/fluid-text-input-mixin' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
-@use '@carbon/styles/scss/components/number-input/index' as *;
+@use '@carbon/styles/scss/components/number-input/number-input-mixin' as *;
+@use '@carbon/styles/scss/layer';
 
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include index.fluid-number-input;
+@include fluid-text-input;
 :host(#{$prefix}-fluid-number-input) {
   @include emit-layout-tokens();
 

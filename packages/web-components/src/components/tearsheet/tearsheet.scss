@@ -17,8 +17,13 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/focus-outline';
 @use '@carbon/styles/scss/config' as *;
 
-@use '@carbon/styles/scss/components/Tearsheet';
+@use '@carbon/styles/scss/components/Tearsheet/Tearsheet-mixin' as Tearsheet;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/components/Tearsheet/tearsheet' as Tearsheet-tearsheet;
 
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include Tearsheet-tearsheet.tearsheet;
 $block-class: #{$prefix}--tearsheet;
 $motion-duration: $duration-moderate-02;
 

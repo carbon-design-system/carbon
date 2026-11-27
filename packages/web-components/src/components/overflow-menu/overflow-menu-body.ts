@@ -19,6 +19,9 @@ import { html } from 'lit';
 import { indexOf } from '../../globals/internal/collection-helpers';
 import { prefix } from '../../globals/settings';
 import { property } from 'lit/decorators.js';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './overflow-menu.scss?lit';
 
 /**
@@ -266,7 +269,7 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
     return `${prefix}-overflow-menu-item:not([disabled])`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSOverflowMenuBody;

@@ -14,8 +14,13 @@ $css--plex: true !default;
 // `@use` runs the module's `_index.scss` once, which already includes the
 // `card.card` mixin — do not `@include` it again here or every rule from
 // the shared @carbon/styles card mixin gets emitted twice.
-@use '@carbon/styles/scss/components/card' as card;
+@use '@carbon/styles/scss/components/card/card-mixin' as card;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
 
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include card.card;
 :host(#{$prefix}-card-title) .#{$prefix}--card__title-text-row {
   // Base / fallback — productive is the default density.
   @include type-style('heading-compact-02');

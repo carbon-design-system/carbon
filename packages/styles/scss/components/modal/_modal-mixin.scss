@@ -1,0 +1,726 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Side-effect-free module: loading it emits no modal CSS; CSS is emitted only
+// where its mixins are included. Web Components build shared, adoptable
+// stylesheets from it. Do not @use modules that emit CSS on load here (use the
+// `*-mixin` module of another component instead of its partial or folder).
+
+// Only `button.radius` is used here.
+@use '../button/radius' as button;
+@use '../../border-radius' as *;
+@use '../../config' as *;
+@use '../../feature-flags' as *;
+@use '../../breakpoint' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
+@use '../../utilities/custom-property';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/update_fields_on_layer' as *;
+@use '../../utilities/z-index' as *;
+
+/// Modal styles
+/// @access public
+/// @group modal
+@mixin modal(
+  $enable-experimental-focus-wrap-without-sentinels: false,
+  $enable-focus-wrap-without-sentinels: false,
+  $enable-dialog-element: false,
+  $enable-presence: false
+) {
+  .#{$prefix}--modal {
+    // For modals using the native dialog element, the modal visibility is handled
+    // by the Dialog styles.
+    @if not(enabled('enable-dialog-element') or $enable-dialog-element) {
+      position: fixed;
+      z-index: z('modal');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $overlay;
+      block-size: 100vh;
+      content: '';
+      inline-size: 100vw;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+
+      &.#{$prefix}--modal--enable-presence {
+        @include modal-animations($has-presence: true);
+      }
+
+      &:not(.#{$prefix}--modal--enable-presence) {
+        @include modal-animations(
+          $has-presence: enabled('enable-presence') or $enable-presence
+        );
+      }
+    }
+
+    @include update_fields_on_layer;
+  }
+
+  // For modals using the native dialog element, the modal visibility is handled
+  // by the Dialog styles.
+  @if not(enabled('enable-dialog-element') or $enable-dialog-element) {
+    .#{$prefix}--modal--enable-presence {
+      @include modal-container-animations($has-presence: true);
+    }
+
+    :not(.#{$prefix}--modal--enable-presence) {
+      @include modal-container-animations(
+        $has-presence: enabled('enable-presence') or $enable-presence
+      );
+    }
+  }
+
+  // -----------------------------
+  // Modal container
+  // -----------------------------
+  .#{$prefix}--modal-container {
+    position: fixed;
+    display: grid;
+    border: 1px solid $border-subtle-01;
+    background-color: $layer;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+    inline-size: 100%;
+    inset-block-start: 0;
+    max-block-size: 100%;
+    // make modal edge visible on high contrast themes (#3880)
+    outline: 3px solid transparent;
+    outline-offset: -3px;
+    transform-origin: top center;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-08;
+    }
+
+    @include breakpoint(md) {
+      position: relative;
+      inline-size: 84%;
+      max-block-size: 90%;
+    }
+
+    @include breakpoint(lg) {
+      inline-size: 60%;
+      max-block-size: 84%;
+    }
+
+    @include breakpoint(xlg) {
+      inline-size: 48%;
+    }
+
+    .#{$prefix}--modal-container-body {
+      display: contents;
+    }
+  }
+
+  // -----------------------------
+  // Modal content
+  // -----------------------------
+  .#{$prefix}--modal-content {
+    @include type-style('body-01');
+
+    position: relative;
+    color: $text-primary;
+    font-weight: 400;
+    grid-column: 1/-1;
+    grid-row: 2/-2;
+    overflow-y: auto;
+    padding-block: $spacing-03 $spacing-09;
+    // Required to accommodate focus outline's negative offset:
+    // anything besides text/p spans full width, with just 16px padding
+    padding-inline: $spacing-05 $spacing-05;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  // fluid form in modal
+  .#{$prefix}--modal-content .#{$prefix}--form--fluid {
+    margin-inline: -$spacing-03 - $spacing-03;
+  }
+
+  // TODO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
+  // text/p gets 20% right padding
+  .#{$prefix}--modal-content > p,
+  .#{$prefix}--modal-content__regular-content {
+    @include type-style('body-01');
+    // padding should take into account the left and right padding of modal container
+    padding-inline-end: calc(20% - $spacing-07);
+  }
+
+  // TODO: remove .#{$prefix}--modal-content--with-form in v11 since hasForm has been deprecated\
+  // anything besides text/p spans full width, with just 16px padding
+  .#{$prefix}--modal-content--with-form {
+    padding-inline-end: $spacing-05;
+  }
+
+  // -----------------------------
+  // Modal header
+  // -----------------------------
+  // Close button geometry (v12): inset from the container edge and md size
+  $close-button-inset: $spacing-05;
+  $close-button-size: $spacing-08;
+
+  // Space reserved at the end of the header for the absolutely positioned
+  // close button, also used as the end offset of the AI label and decorator.
+  // In v12: inset (16px) + md size (40px) + gap (8px)
+  $header-padding-end: $spacing-09;
+
+  @if enabled('enable-v12-release') {
+    $header-padding-end: $close-button-inset + $close-button-size + $spacing-03;
+  }
+
+  .#{$prefix}--modal-header {
+    grid-column: 1/-1;
+    grid-row: 1/1;
+    margin-block-end: $spacing-03;
+    max-block-size: 50vh;
+    overflow-y: auto;
+    padding-block-start: $spacing-05;
+    padding-inline: $spacing-05 $header-padding-end;
+
+    @if enabled('enable-v12-release') {
+      margin-block-end: $spacing-05;
+    }
+  }
+
+  .#{$prefix}--modal-header__label {
+    @include component-reset.reset;
+    @include type-style('label-01');
+
+    color: $text-secondary;
+    margin-block-end: $spacing-02;
+  }
+
+  .#{$prefix}--modal-header__heading {
+    @include component-reset.reset;
+    @include type-style('heading-03');
+
+    color: $text-primary;
+    // padding should take into account the left and right padding of modal container
+    padding-inline-end: calc(20% - $header-padding-end);
+  }
+
+  // -----------------------------
+  // XS Modal
+  // -----------------------------
+  .#{$prefix}--modal-container--xs {
+    //text always spans full width in xs modals
+    .#{$prefix}--modal-content__regular-content {
+      padding-inline-end: $spacing-05;
+    }
+
+    .#{$prefix}--modal-content > p {
+      //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
+      padding-inline-end: 0;
+    }
+
+    @include breakpoint(md) {
+      inline-size: 48%;
+    }
+
+    @include breakpoint(lg) {
+      inline-size: 32%;
+      max-block-size: 48%;
+    }
+
+    @include breakpoint(xlg) {
+      inline-size: 24%;
+    }
+  }
+
+  // -----------------------------
+  // SM Modal
+  // -----------------------------
+  .#{$prefix}--modal-container--sm {
+    //text spans full width in sm modals below 1056
+    .#{$prefix}--modal-content__regular-content {
+      padding-inline-end: $spacing-05;
+    }
+
+    .#{$prefix}--modal-content > p {
+      //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
+      padding-inline-end: 0;
+    }
+
+    @include breakpoint(md) {
+      inline-size: 60%;
+    }
+
+    @include breakpoint(lg) {
+      inline-size: 42%;
+      max-block-size: 72%;
+
+      .#{$prefix}--modal-content > p,
+      .#{$prefix}--modal-content__regular-content {
+        padding-inline-end: 20%;
+      }
+    }
+
+    @include breakpoint(xlg) {
+      inline-size: 36%;
+    }
+  }
+
+  // -----------------------------
+  // LG Modal
+  // -----------------------------
+  .#{$prefix}--modal-container--lg {
+    @include breakpoint(md) {
+      inline-size: 96%;
+    }
+
+    @include breakpoint(lg) {
+      inline-size: 84%;
+      max-block-size: 96%;
+    }
+
+    @include breakpoint(xlg) {
+      inline-size: 72%;
+    }
+  }
+
+  // -----------------------------
+  // Modal overflow
+  // -----------------------------
+  .#{$prefix}--modal-scroll-content {
+    // Required to accommodate focus outline's negative offset when scrolling in Chrome
+    border-block-end: 2px solid transparent;
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
+  }
+
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
+  .#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
+  .#{$prefix}--modal-scroll-content--no-fade {
+    mask-image: none;
+  }
+
+  //removing mask image in case we have dropdown in modal
+  .#{$prefix}--modal-scroll-content:has(.#{$prefix}--autoalign) {
+    mask-image: none;
+  }
+
+  // Required so overflow-indicator disappears at end of content
+  .#{$prefix}--modal-scroll-content > *:last-child {
+    margin-block-end: $spacing-06;
+  }
+
+  // -----------------------------
+  // Modal footer
+  // -----------------------------
+  .#{$prefix}--modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    block-size: convert.to-rem(64px);
+    grid-column: 1/-1;
+    grid-row: -1/-1;
+    margin-block-start: auto;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
+  }
+
+  // Round the outer footer corners so buttons follow the container radius
+  // (container radius minus its 1px border)
+  //todo:  this can be revisited when we do design intent for modal footer
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--modal-footer .#{$prefix}--btn:first-child {
+      @include button.radius($es: calc(#{$border-radius-08} - 1px));
+    }
+
+    .#{$prefix}--modal-footer .#{$prefix}--btn:last-child {
+      @include button.radius($ee: calc(#{$border-radius-08} - 1px));
+    }
+  }
+
+  .#{$prefix}--modal-footer .#{$prefix}--btn {
+    flex: 0 1 50%;
+    align-items: baseline;
+    margin: 0;
+    block-size: convert.to-rem(64px);
+    max-inline-size: none;
+  }
+
+  .#{$prefix}--modal-footer .#{$prefix}--btn:not(.#{$prefix}--skeleton) {
+    padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
+  }
+
+  .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
+    flex: 0 1 25%;
+    align-items: flex-start;
+  }
+
+  // -----------------------------
+  // Modal close btn
+  // -----------------------------
+
+  .#{$prefix}--modal-close-button {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      inset-block-start: $close-button-inset;
+      inset-inline-end: $close-button-inset;
+    }
+  }
+
+  .#{$prefix}--modal-close {
+    padding: convert.to-rem(12px);
+    border: 2px solid transparent;
+    background-color: transparent;
+    block-size: 3rem;
+    cursor: pointer;
+    inline-size: 3rem;
+    transition: background-color $duration-fast-02 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      padding: 0;
+      block-size: $spacing-08;
+      inline-size: $spacing-08;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
+    }
+
+    &:focus {
+      border-color: $focus;
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--modal-close::-moz-focus-inner {
+    border: 0;
+  }
+
+  .#{$prefix}--modal-close__icon {
+    block-size: convert.to-rem(20px);
+    fill: $icon-primary;
+    inline-size: convert.to-rem(20px);
+  }
+
+  .#{$prefix}--body--with-modal-open {
+    overflow: hidden;
+  }
+
+  .#{$prefix}--body--with-modal-open .#{$prefix}--modal .#{$prefix}--tooltip,
+  .#{$prefix}--body--with-modal-open
+    .#{$prefix}--modal
+    .#{$prefix}--overflow-menu-options,
+  .#{$prefix}--body--with-modal-open .#{$prefix}--overflow-menu-options {
+    z-index: z('modal');
+  }
+
+  // Fluid Modal (No padding)
+  .#{$prefix}--modal-container--full-width .#{$prefix}--modal-content {
+    padding: 0;
+    margin: 0;
+  }
+
+  // AIlabel styles
+  .#{$prefix}--modal--slug.#{$prefix}--modal,
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label).#{$prefix}--modal {
+    background-color: $ai-overlay;
+  }
+
+  .#{$prefix}--modal--slug .#{$prefix}--modal-container,
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label)
+    .#{$prefix}--modal-container {
+    @include ai-popover-gradient('default', 0, 'layer');
+
+    border: 1px solid transparent;
+    background-color: $layer;
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 24px 40px -24px $ai-drop-shadow;
+  }
+
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer),
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label)
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer) {
+    @include ai-popover-gradient('default', 64px, 'layer');
+
+    box-shadow:
+      inset 0 -80px 0 -16px $layer,
+      inset 0 -160px 70px -65px $ai-inner-shadow,
+      0 24px 40px -24px $ai-drop-shadow;
+  }
+
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content,
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
+  }
+
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:has(
+      + .#{$prefix}--modal-close-button
+    )
+    > *,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--modal--inner__decorator
+    > *,
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--modal--inner__decorator
+    > *,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--ai-label:has(+ .#{$prefix}--modal-close-button),
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--ai-label,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close-button),
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: convert.to-rem(10px);
+    inset-inline-end: $header-padding-end;
+
+    // 20px from the top; the end offset (above) leaves 8px before the 40px
+    // (md) close button in v12
+    @if enabled('enable-v12-release') {
+      inset-block-start: custom-property.get-var(
+        'modal-decorator-offset',
+        convert.to-rem(20px)
+      );
+    }
+  }
+
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:not(:has(.#{$prefix}--ai-label))
+    > * {
+    inset-block-start: 1rem;
+  }
+
+  // Custom decorators have an unknown height, so in v12 their center line is
+  // placed on the center of the md (40px) close button: offset + half the
+  // close button size, then shifted up by half of their own height
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--modal-header
+      > .#{$prefix}--modal--inner__decorator:not(:has(.#{$prefix}--ai-label))
+      > *,
+    .#{$prefix}--modal--decorator
+      .#{$prefix}--modal-container-body
+      > .#{$prefix}--modal--inner__decorator:not(:has(.#{$prefix}--ai-label))
+      > * {
+      inset-block-start: calc(
+        #{custom-property.get-var(
+            'modal-decorator-offset',
+            $close-button-inset
+          )} +
+          #{$close-button-size *
+          0.5}
+      );
+      transform: translateY(-50%);
+    }
+  }
+
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:has(.#{$prefix}--ai-label--revert)
+    > * {
+    inset-block-start: 1.475rem;
+  }
+
+  // The revert AI label is shifted up by half its height (`translateY(-50%)`
+  // in the AI label styles), so `inset-block-start` is its center line. In v12
+  // that is the center of the md (40px) close button: offset + half the close
+  // button size
+  //
+  // Horizontally, the same transform also moves the 32px box 8px toward the
+  // close button, while the 16px icon sits 8px inside that box. The two 8px
+  // shifts cancel, so the icon keeps the same `inset-inline-end` (64px) as the
+  // plain AI label and no extra inline offset is needed.
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--modal-header
+      > .#{$prefix}--modal--inner__decorator:has(.#{$prefix}--ai-label--revert)
+      > *,
+    .#{$prefix}--modal--decorator
+      .#{$prefix}--modal-container-body
+      > .#{$prefix}--modal--inner__decorator:has(.#{$prefix}--ai-label--revert)
+      > * {
+      inset-block-start: calc(
+        #{custom-property.get-var(
+            'modal-decorator-offset',
+            $close-button-inset
+          )} +
+          #{$close-button-size *
+          0.5}
+      );
+    }
+  }
+
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-content--overflow-indicator::before,
+  .#{$prefix}--modal--decorator .#{$prefix}--modal-content--overflow-indicator {
+    display: none;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--modal-close:focus {
+    @include high-contrast-mode('focus');
+  }
+}
+
+@mixin modal-animations($has-presence: false) {
+  @if not($has-presence) {
+    opacity: 0;
+    transition:
+      opacity $duration-moderate-02 motion(exit, expressive),
+      visibility 0ms linear $duration-moderate-02;
+    visibility: hidden;
+
+    &.is-visible {
+      opacity: 1;
+      transition:
+        opacity $duration-moderate-02 motion(entrance, expressive),
+        visibility 0ms linear;
+      visibility: inherit;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  } @else {
+    animation: #{$prefix}--presence-modal__enter
+      $duration-moderate-02
+      motion(entrance, expressive)
+      forwards;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+
+    &[data-exiting] {
+      animation: #{$prefix}--presence-modal__exit
+        $duration-moderate-02
+        motion(exit, expressive)
+        forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal__enter {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal__exit {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@mixin modal-container-animations($has-presence: false) {
+  @if not($has-presence) {
+    &.is-visible .#{$prefix}--modal-container {
+      transform: translate3d(0, 0, 0);
+      transition: transform $duration-moderate-02 motion(entrance, expressive);
+    }
+
+    .#{$prefix}--modal-container {
+      transform: translate3d(0, -24px, 0);
+      transition: transform $duration-moderate-02 motion(exit, expressive);
+    }
+  } @else {
+    &[data-exiting] .#{$prefix}--modal-container {
+      animation: #{$prefix}--presence-modal-container__exit
+        $duration-moderate-02
+        motion(exit, expressive)
+        forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    .#{$prefix}--modal-container {
+      animation: #{$prefix}--presence-modal-container__enter
+        $duration-moderate-02
+        motion(entrance, expressive)
+        forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal-container__enter {
+      from {
+        transform: translate3d(0, -24px, 0);
+      }
+
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal-container__exit {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(0, -24px, 0);
+      }
+    }
+  }
+}

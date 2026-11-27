@@ -14,9 +14,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/border-radius' as *;
-@use '@carbon/styles/scss/components/text-input/index';
+@use '@carbon/styles/scss/components/text-input/text-input-mixin' as index;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/layer';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include index.text-input;
 
 @include emit-layout-context-classes();
 

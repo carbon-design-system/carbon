@@ -15,10 +15,12 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/components/notification/index' as *;
-@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/button/button-mixin' as button;
 @use '@carbon/styles/scss/components/button/mixins' as button-mixins;
 @use '@carbon/styles/scss/components/button/vars' as button-vars;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
 
 @include actionable-notification;
 

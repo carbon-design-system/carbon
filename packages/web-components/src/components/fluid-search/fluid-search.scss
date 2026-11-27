@@ -8,15 +8,21 @@
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
-@use '@carbon/styles/scss/components/fluid-search/index';
+@use '@carbon/styles/scss/components/fluid-search/fluid-search-mixin' as index;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/components/fluid-text-input' as *;
-@use '@carbon/styles/scss/components/search' as *;
+@use '@carbon/styles/scss/components/fluid-text-input/fluid-text-input-mixin' as *;
+@use '@carbon/styles/scss/components/search/search-mixin' as *;
+@use '@carbon/styles/scss/layer';
 
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include search;
+@include index.fluid-search;
+@include fluid-text-input;
 :host(#{$prefix}-fluid-search) {
   @extend .#{$prefix}--search;
   @extend .#{$prefix}--search--fluid;

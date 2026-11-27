@@ -27,6 +27,7 @@ import {
   INPUT_TOOLTIP_DIRECTION,
   INPUT_TYPE,
 } from './defs';
+import formStyles from '../form/form.scss?lit';
 import styles from './text-input.scss?lit';
 
 export {
@@ -648,7 +649,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSTextInput;

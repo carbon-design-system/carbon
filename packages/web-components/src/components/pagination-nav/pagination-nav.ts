@@ -10,6 +10,9 @@ import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './pagination-nav.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
 import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
@@ -513,7 +516,7 @@ class CDSPaginationNav extends LitElement {
     return `${prefix}-page-changed`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSPaginationNav;

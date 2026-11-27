@@ -11,6 +11,9 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import { TABLE_SIZE } from './defs';
+import formStyles from '../form/form.scss?lit';
+import checkboxStyles from '../checkbox/checkbox.scss?lit';
+import radioButtonStyles from '../radio-button/radio-button.scss?lit';
 import styles from './data-table.scss?lit';
 
 /**
@@ -163,7 +166,7 @@ class CDSTableSkeleton extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [formStyles, checkboxStyles, radioButtonStyles, styles];
 }
 
 export default CDSTableSkeleton;
