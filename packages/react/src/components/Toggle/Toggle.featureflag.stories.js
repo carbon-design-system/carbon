@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Toggle } from '.';
 import './toggle-story.scss';
 
@@ -27,26 +27,81 @@ export default {
 const previewClassname = 'v12-toggle';
 
 export const _Toggle = (args) => {
+  const { toggled: toggledArg } = args;
+  const [toggled, setToggled] = useState(toggledArg);
+
+  useEffect(() => {
+    setToggled(toggledArg);
+  }, [toggledArg]);
+
   return (
     <div className={previewClassname}>
-      <Toggle
-        labelText="Label"
-        labelA="Off"
-        labelB="On"
-        defaultToggled
-        id="toggle-3"
-        {...args}
-      />
+      <Toggle {...args} toggled={toggled} onToggle={setToggled} />
     </div>
   );
 };
 
 _Toggle.args = {
+  defaultToggled: true,
   disabled: false,
+  hideLabel: false,
+  id: 'toggle-3',
+  labelA: 'Off',
+  labelB: 'On',
+  labelText: 'Label',
+  readOnly: false,
+  size: 'md',
+  toggled: true,
 };
 
 _Toggle.argTypes = {
+  'aria-labelledby': {
+    control: {
+      type: 'text',
+    },
+  },
+  defaultToggled: {
+    control: {
+      type: 'boolean',
+    },
+  },
   disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  labelA: {
+    control: {
+      type: 'text',
+    },
+  },
+  labelB: {
+    control: {
+      type: 'text',
+    },
+  },
+  labelText: {
+    control: {
+      type: 'text',
+    },
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  size: {
+    control: {
+      type: 'radio',
+    },
+    options: ['sm', 'md'],
+  },
+  toggled: {
     control: {
       type: 'boolean',
     },
