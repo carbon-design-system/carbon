@@ -14,7 +14,7 @@ import userEvent from '@testing-library/user-event';
 import copy from 'copy-to-clipboard';
 
 const mockUseResizeObserver =
-  jest.fn<(args: { onResize: () => void }) => void>();
+  jest.fn<(args: { onResize: (rect: DOMRectReadOnly) => void }) => void>();
 const mockCopy = jest.mocked(copy);
 
 jest.mock('copy-to-clipboard', () => jest.fn());
@@ -76,13 +76,12 @@ const multi15 = `  "scripts": {
     "react": "~16.9.0",`;
 
 const triggerResizeObserver = () => {
-  const latestCall =
-    mockUseResizeObserver.mock.calls[
-      mockUseResizeObserver.mock.calls.length - 1
-    ];
+  const latestCall = [...mockUseResizeObserver.mock.calls]
+    .reverse()
+    .find(([{ onResize }]) => onResize.length === 0);
 
   act(() => {
-    latestCall[0].onResize();
+    latestCall?.[0].onResize({ height: 0 } as DOMRectReadOnly);
   });
 };
 
