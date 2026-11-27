@@ -91,7 +91,7 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "rimraf": "^6.0.1",
-    "stylelint": "^17.0.0",
+    "stylelint": "^18.0.0",
     "typescript-eslint": "^8.34.0"
   },
   "commitlint": {

@@ -14,6 +14,8 @@
   /// v2.0 | 20110126
   /// License: none (public domain)
   /// Start vendor reset
+  // The reset intentionally covers legacy elements
+  // stylelint-disable selector-no-deprecated
   html,
   body,
   div,
@@ -104,6 +106,7 @@
     vertical-align: baseline;
   }
 
+  // stylelint-enable selector-no-deprecated
   sup {
     vertical-align: super;
   }
