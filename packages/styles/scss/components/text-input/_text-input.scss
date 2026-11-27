@@ -302,7 +302,7 @@
   }
 
   .#{$prefix}--text-input--invalid:focus {
-    @include focus-outline('outline-lg');
+    @include high-contrast-mode('focus-lg');
   }
 
   //-----------------------------
