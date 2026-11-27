@@ -9,6 +9,8 @@ import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './slider.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -89,7 +91,7 @@ class CDSSliderSkeleton extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [formStyles, textInputStyles, styles];
 }
 
 export default CDSSliderSkeleton;

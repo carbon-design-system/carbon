@@ -9,6 +9,8 @@ import { prefix } from '../../globals/settings';
 import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSTextareaSkeleton from '../textarea/textarea-skeleton';
+import formStyles from '../form/form.scss?lit';
+import textareaStyles from '../textarea/textarea.scss?lit';
 import styles from './fluid-textarea.scss?lit';
 
 /**
@@ -26,7 +28,12 @@ class CDSFluidTextareaSkeleton extends CDSTextareaSkeleton {
     `;
   }
 
-  static styles = [CDSTextareaSkeleton.styles, styles];
+  static styles = [
+    CDSTextareaSkeleton.styles,
+    formStyles,
+    textareaStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidTextareaSkeleton;

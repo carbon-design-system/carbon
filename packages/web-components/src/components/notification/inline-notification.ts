@@ -20,6 +20,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import { NOTIFICATION_KIND, NOTIFICATION_TYPE } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './inline-notification.scss?lit';
 
 export { NOTIFICATION_KIND, NOTIFICATION_TYPE };
@@ -282,7 +285,7 @@ class CDSInlineNotification extends FocusMixin(LitElement) {
     return `${prefix}-notification-closed`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSInlineNotification;

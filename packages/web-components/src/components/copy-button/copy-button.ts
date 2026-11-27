@@ -12,6 +12,9 @@ import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
 import AutoAlignMixin from '../../globals/mixins/auto-align';
 import FocusMixin from '../../globals/mixins/focus';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './copy-button.scss?lit';
 import { BUTTON_KIND } from '../button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
@@ -136,7 +139,7 @@ class CDSCopyButton extends AutoAlignMixin(
     `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSCopyButton;

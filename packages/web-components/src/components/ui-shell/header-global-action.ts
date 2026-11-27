@@ -15,6 +15,9 @@ import {
 } from '../button/button';
 import CDSButton from '../button/button';
 import HostListener from '../../globals/decorators/host-listener';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './header.scss?lit';
 import { prefix } from '../../globals/settings';
 
@@ -199,7 +202,7 @@ class CDSHeaderGlobalAction extends CDSButton {
     delegatesFocus: true,
   };
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSHeaderGlobalAction;

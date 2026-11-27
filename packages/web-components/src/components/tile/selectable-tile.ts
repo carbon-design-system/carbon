@@ -14,6 +14,7 @@ import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
+import formStyles from '../form/form.scss?lit';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -259,7 +260,7 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
     delegatesFocus: true,
   };
 
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSSelectableTile;

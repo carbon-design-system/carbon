@@ -8,6 +8,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import formStyles from '../form/form.scss?lit';
 import styles from './textarea.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -34,7 +35,7 @@ class CDSTextareaSkeleton extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSTextareaSkeleton;

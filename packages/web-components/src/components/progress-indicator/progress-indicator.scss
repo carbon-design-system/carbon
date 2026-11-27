@@ -11,8 +11,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
-@use '@carbon/styles/scss/components/progress-indicator/progress-indicator' as *;
+@use '@carbon/styles/scss/components/progress-indicator/progress-indicator-mixin'
+  as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include progress-indicator;

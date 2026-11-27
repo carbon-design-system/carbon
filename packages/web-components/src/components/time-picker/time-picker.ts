@@ -15,6 +15,8 @@ import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ValidityMixin from '../../globals/mixins/validity';
 import FormMixin from '../../globals/mixins/form';
 import { prefix } from '../../globals/settings';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './time-picker.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { TIME_PICKER_SIZE } from './defs';
@@ -314,7 +316,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
     delegatesFocus: true,
   };
 
-  static styles = styles;
+  static styles = [formStyles, textInputStyles, styles];
 }
 
 export default CDSTimePicker;

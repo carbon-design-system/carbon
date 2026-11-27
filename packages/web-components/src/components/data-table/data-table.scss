@@ -15,8 +15,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
-@use '@carbon/styles/scss/components/checkbox';
-@use '@carbon/styles/scss/components/data-table' as *;
+@use '@carbon/styles/scss/components/checkbox/checkbox-mixin' as checkbox;
+@use '@carbon/styles/scss/components/data-table/data-table-mixin' as *;
 @use '@carbon/styles/scss/components/link' as *;
 @use '@carbon/styles/scss/components/data-table/expandable';
 @use '@carbon/styles/scss/components/data-table/skeleton';
@@ -27,3 +27,8 @@ $css--plex: true !default;
 @use 'table-sizes';
 @use 'table-selection';
 @use 'table-sort';
+@use '@carbon/styles/scss/layer';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include data-table;

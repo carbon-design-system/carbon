@@ -10,6 +10,9 @@ import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './dialog.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalBase from '../modal/modal-base';
@@ -327,7 +330,7 @@ class CDSDialog extends CDSModalBase {
     return `${prefix}-dialog-on-loadingsuccess`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSDialog;

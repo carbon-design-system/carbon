@@ -11,6 +11,10 @@ import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
+import menuStyles from '../menu/menu.scss?lit';
 import styles from './combo-button.scss?lit';
 import '../button/index';
 import '../menu/index';
@@ -160,7 +164,13 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
     `;
   }
 
-  static styles = styles;
+  static styles = [
+    popoverStyles,
+    tooltipStyles,
+    buttonStyles,
+    menuStyles,
+    styles,
+  ];
 }
 
 export default CDSComboButton;

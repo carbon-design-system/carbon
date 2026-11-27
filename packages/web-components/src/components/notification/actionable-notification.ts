@@ -17,6 +17,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NOTIFICATION_TYPE, NOTIFICATION_KIND } from './defs';
 import CDSInlineNotification from './inline-notification';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './actionable-notification.scss?lit';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -350,7 +353,7 @@ class CDSActionableNotification extends HostListenerMixin(
     return `${prefix}-actionable-notification-button`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSActionableNotification;

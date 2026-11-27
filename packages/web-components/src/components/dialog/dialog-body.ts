@@ -6,6 +6,9 @@
  */
 
 import { prefix } from '../../globals/settings';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './dialog.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalBody from '../modal/modal-body';
@@ -34,7 +37,7 @@ class CDSDialogBody extends CDSModalBody {
     const dialog = this.closest(`${prefix}-dialog`);
     return dialog?.hasAttribute('has-scrolling-content') ?? false;
   }
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSDialogBody;

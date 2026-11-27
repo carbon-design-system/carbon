@@ -10,6 +10,8 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import CDSButton from './button';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -74,7 +76,7 @@ class CDSButtonSkeleton extends CDSButton {
         `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, styles];
 }
 
 export default CDSButtonSkeleton;

@@ -8,6 +8,9 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './header.scss?lit';
 import { prefix } from '../../globals/settings';
 
@@ -33,7 +36,7 @@ class CDSHeaderPanel extends LitElement {
     delegatesFocus: true,
   };
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSHeaderPanel;

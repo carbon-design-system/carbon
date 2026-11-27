@@ -11,6 +11,9 @@ import { prefix } from '../../globals/settings';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
+import formStyles from '../form/form.scss?lit';
+import checkboxStyles from '../checkbox/checkbox.scss?lit';
+import radioButtonStyles from '../radio-button/radio-button.scss?lit';
 import styles from './data-table.scss?lit';
 import '../checkbox';
 import '../radio-button';
@@ -508,7 +511,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
     return `${prefix}-table-row-expando-toggled`;
   }
 
-  static styles = styles;
+  static styles = [formStyles, checkboxStyles, radioButtonStyles, styles];
 }
 
 export default CDSTableRow;

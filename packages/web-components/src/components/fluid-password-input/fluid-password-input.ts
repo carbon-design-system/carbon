@@ -9,6 +9,9 @@ import { prefix } from '../../globals/settings';
 import { html } from 'lit';
 import { query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
+import fluidTextInputStyles from '../fluid-text-input/fluid-text-input.scss?lit';
 import styles from './fluid-password-input.scss?lit';
 import CDSPasswordInput from '../password-input/password-input';
 
@@ -37,7 +40,13 @@ class CDSFluidPasswordInput extends CDSPasswordInput {
     return html`${super.render()}`;
   }
 
-  static styles = [CDSPasswordInput.styles, styles];
+  static styles = [
+    CDSPasswordInput.styles,
+    formStyles,
+    textInputStyles,
+    fluidTextInputStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidPasswordInput;

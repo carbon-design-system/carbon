@@ -8,6 +8,9 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import formStyles from '../form/form.scss?lit';
+import checkboxStyles from '../checkbox/checkbox.scss?lit';
+import radioButtonStyles from '../radio-button/radio-button.scss?lit';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -95,7 +98,7 @@ class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
     return `${prefix}-table-row`;
   }
 
-  static styles = styles;
+  static styles = [formStyles, checkboxStyles, radioButtonStyles, styles];
 }
 
 export default CDSTableExpandedRow;

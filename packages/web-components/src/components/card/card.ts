@@ -20,6 +20,9 @@ import {
   type CardContextValue,
 } from './card-context';
 import { CARD_DENSITY, CARD_MEDIA_POSITION } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './card.scss?lit';
 
 export { CARD_DENSITY, CARD_MEDIA_POSITION };
@@ -255,7 +258,7 @@ class CDSCard extends CDSLink {
     return `${prefix}-ai-label`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSCard;

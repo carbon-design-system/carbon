@@ -18,6 +18,9 @@ import {
   TABLE_SORT_DIRECTION,
 } from './defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import formStyles from '../form/form.scss?lit';
+import checkboxStyles from '../checkbox/checkbox.scss?lit';
+import radioButtonStyles from '../radio-button/radio-button.scss?lit';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -273,7 +276,7 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [formStyles, checkboxStyles, radioButtonStyles, styles];
 
   /**
    * Mapping of table sort cycles to table sort states.

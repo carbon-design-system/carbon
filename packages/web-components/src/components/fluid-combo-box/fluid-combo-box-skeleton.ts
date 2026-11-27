@@ -8,6 +8,10 @@
 import { prefix } from '../../globals/settings';
 import { html, LitElement } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
+import tagStyles from '../tag/tag.scss?lit';
+import comboBoxStyles from '../combo-box/combo-box.scss?lit';
 import styles from './fluid-combo-box.scss?lit';
 
 /**
@@ -28,7 +32,13 @@ class CDSFluidComboBoxSkeleton extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [
+    formStyles,
+    textInputStyles,
+    tagStyles,
+    comboBoxStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidComboBoxSkeleton;

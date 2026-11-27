@@ -13,11 +13,16 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/keyframes' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/components/button';
-@use '@carbon/styles/scss/components/tooltip';
-@use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
-@use '@carbon/styles/scss/components/copy-button/index';
+@use '@carbon/styles/scss/components/button/button-mixin' as button;
+@use '@carbon/styles/scss/components/tooltip/tooltip-mixin' as tooltip;
+@use '@carbon/styles/scss/components/code-snippet/code-snippet-mixin' as *;
+@use '@carbon/styles/scss/components/copy-button/copy-button-mixin' as index;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/layer';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include index.copy-button;
 
 @include code-snippet;
 

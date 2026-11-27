@@ -11,6 +11,9 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './header.scss?lit';
 
 /**
@@ -82,7 +85,7 @@ class CDSSwitcherItem extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSSwitcherItem;

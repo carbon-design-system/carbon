@@ -12,11 +12,20 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use '@carbon/styles/scss/components/content-switcher/content-switcher' as *;
+@use '@carbon/styles/scss/components/content-switcher/content-switcher-mixin' as *;
 @use '@carbon/styles/scss/components/content-switcher/tokens' as *;
 @use '@carbon/styles/scss/layout' as *;
-@use '@carbon/styles/scss/components/button/index' as *;
+@use '@carbon/styles/scss/components/button/button-mixin' as *;
+@use '@carbon/styles/scss/components/button/vars' as *;
+@use '@carbon/styles/scss/components/button/radius' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/components/popover/popover-mixin' as popover-styles;
 
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include popover-styles.popover;
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include content-switcher;
 

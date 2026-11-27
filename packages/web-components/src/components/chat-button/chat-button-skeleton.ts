@@ -10,6 +10,8 @@ import { adoptStyles, LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { CHAT_BUTTON_SIZE } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './chat-button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -31,7 +33,12 @@ class CDSChatButtonSkeleton extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    adoptStyles(this.renderRoot as ShadowRoot, [buttonStyles, styles]);
+    adoptStyles(this.renderRoot as ShadowRoot, [
+      popoverStyles,
+      tooltipStyles,
+      buttonStyles,
+      styles,
+    ]);
   }
 
   render() {

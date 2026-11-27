@@ -8,6 +8,9 @@
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import formStyles from '../form/form.scss?lit';
+import numberInputStyles from '../number-input/number-input.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './fluid-number-input.scss?lit';
 import CDSNumberInputSkeleton from '../number-input/number-input-skeleton';
 
@@ -22,7 +25,13 @@ class CDSFluidNumberInputSkeleton extends CDSNumberInputSkeleton {
     return html` ${super.render()} `;
   }
 
-  static styles = [CDSNumberInputSkeleton.styles, styles];
+  static styles = [
+    CDSNumberInputSkeleton.styles,
+    formStyles,
+    numberInputStyles,
+    textInputStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidNumberInputSkeleton;
