@@ -603,7 +603,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           class="cds--overflow-menu__wrapper"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip cds--icon-button-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -645,7 +645,11 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <span
                 class="cds--popover-content cds--tooltip-content"
               >
-                Settings
+                <span
+                  class="cds--icon-button-tooltip__label"
+                >
+                  Settings
+                </span>
               </span>
               <span
                 class="cds--popover-caret"
@@ -1053,7 +1057,7 @@ exports[`DataTable renders as expected - Component API should render and match s
           class="cds--overflow-menu__wrapper"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip cds--icon-button-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -1095,7 +1099,11 @@ exports[`DataTable renders as expected - Component API should render and match s
               <span
                 class="cds--popover-content cds--tooltip-content"
               >
-                Settings
+                <span
+                  class="cds--icon-button-tooltip__label"
+                >
+                  Settings
+                </span>
               </span>
               <span
                 class="cds--popover-caret"
