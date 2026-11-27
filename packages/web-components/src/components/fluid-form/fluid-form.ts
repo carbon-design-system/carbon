@@ -7,6 +7,7 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
+import formStyles from '../form/form.scss?lit';
 import styles from './fluid-form.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -28,7 +29,7 @@ class CDSFluidForm extends LitElement {
     </form>`;
   }
 
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSFluidForm;

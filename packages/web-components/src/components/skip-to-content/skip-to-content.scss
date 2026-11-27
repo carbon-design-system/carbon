@@ -6,8 +6,13 @@
  */
 
 @use '@carbon/styles/scss/config' as *;
-@use '@carbon/styles/scss/components/ui-shell/header';
+@use '@carbon/styles/scss/components/ui-shell/header/header-mixin' as header;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
 
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include header.header;
 :host(#{$prefix}-skip-to-content) {
   display: block;
 }

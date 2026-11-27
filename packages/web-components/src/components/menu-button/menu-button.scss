@@ -7,8 +7,13 @@
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/components/menu-button/index' as *;
+@use '@carbon/styles/scss/components/menu-button/menu-button-mixin' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
 
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include menu-button;
 :host(#{$prefix}-menu-button) {
   @extend .#{$prefix}--menu-button__container;
 }

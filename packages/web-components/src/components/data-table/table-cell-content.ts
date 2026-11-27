@@ -7,6 +7,9 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
+import formStyles from '../form/form.scss?lit';
+import checkboxStyles from '../checkbox/checkbox.scss?lit';
+import radioButtonStyles from '../radio-button/radio-button.scss?lit';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -21,7 +24,7 @@ class CDSTableCellContent extends LitElement {
     return html` <slot></slot> `;
   }
 
-  static styles = styles;
+  static styles = [formStyles, checkboxStyles, radioButtonStyles, styles];
 }
 
 export default CDSTableCellContent;

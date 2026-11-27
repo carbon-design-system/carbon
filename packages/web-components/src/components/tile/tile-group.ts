@@ -11,6 +11,7 @@ import { prefix } from '../../globals/settings';
 import { NAVIGATION_DIRECTION } from '../../globals/internal/radio-group-manager';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
+import formStyles from '../form/form.scss?lit';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -300,7 +301,7 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
     return `${prefix}-current-selectable-tile-selections`;
   }
 
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSTileGroup;

@@ -11,6 +11,9 @@ import { prefix } from '../../globals/settings';
 import { forEach, indexOf } from '../../globals/internal/collection-helpers';
 import { NAVIGATION_DIRECTION, CONTENT_SWITCHER_SIZE } from './defs';
 import CDSContentSwitcherItem from './content-switcher-item';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './content-switcher.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -525,7 +528,7 @@ class CDSContentSwitcher extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSContentSwitcher;

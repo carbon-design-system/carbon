@@ -14,6 +14,9 @@ import CDSActionableNotification, {
   iconsForKinds,
 } from './actionable-notification';
 import { NOTIFICATION_KIND } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './actionable-notification.scss?lit';
 
 /**
@@ -91,6 +94,6 @@ class CDSCalloutNotification extends CDSActionableNotification {
       }
     }
   }
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 export default CDSCalloutNotification;

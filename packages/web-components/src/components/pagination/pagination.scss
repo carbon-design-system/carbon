@@ -12,9 +12,18 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/components/pagination' as *;
+@use '@carbon/styles/scss/components/pagination/pagination-mixin' as *;
 @use '@carbon/styles/scss/utilities/visually-hidden' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/components/pagination/unstable_pagination' as
+  pagination-unstable_pagination;
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include pagination;
+@include pagination-unstable_pagination.unstable_pagination;
 
 :host(#{$prefix}-pagination) {
   @extend .#{$prefix}--pagination;

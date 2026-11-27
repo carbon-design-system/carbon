@@ -8,6 +8,9 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './progress-indicator.scss?lit';
 import CircleDash from '@carbon/icons/es/circle-dash/16.js';
 import '../skeleton-text';
@@ -38,5 +41,5 @@ export default class CDSProgressStepSkeleton extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }

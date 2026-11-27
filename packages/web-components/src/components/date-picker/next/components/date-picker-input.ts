@@ -16,6 +16,7 @@ import {
   DATE_PICKER_INPUT_COLOR_SCHEME,
   DATE_PICKER_INPUT_KIND,
 } from '../../defs';
+import formStyles from '../../../form/form.scss?lit';
 import styles from './date-picker.scss?lit';
 import Calendar16 from '@carbon/icons/es/calendar/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
@@ -488,7 +489,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSDatePickerInput;

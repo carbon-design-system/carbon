@@ -10,6 +10,9 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import CDSProgressStepSkeleton from './progress-step-skeleton';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './progress-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -49,5 +52,5 @@ export default class CDSProgressIndicatorSkeleton extends LitElement {
     return `${prefix}-progress-step-skeleton`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }

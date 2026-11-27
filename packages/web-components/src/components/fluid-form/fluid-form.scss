@@ -9,8 +9,8 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/components/form';
-
+@use '@carbon/styles/scss/components/form/form-mixin' as form;
+@use '@carbon/styles/scss/layer';
 :host(#{$prefix}-fluid-form) {
   @include form.form;
 }

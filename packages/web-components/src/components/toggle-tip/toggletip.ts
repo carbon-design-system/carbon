@@ -17,6 +17,8 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import FloatingUIController from '../../globals/controllers/floating-controller';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './toggletip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -107,7 +109,12 @@ class CDSToggletip extends AutoAlignMixin(
       this.open = true;
     }
 
-    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
+    adoptStyles(this.renderRoot as ShadowRoot, [
+      popoverStyles,
+      tooltipStyles,
+      buttonStyles,
+      styles,
+    ]);
   }
 
   /**

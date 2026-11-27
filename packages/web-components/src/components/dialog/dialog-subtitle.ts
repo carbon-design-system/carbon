@@ -8,6 +8,9 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './dialog.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalLabel from '../modal/modal-label';
@@ -29,7 +32,7 @@ class CDSDialogSubtitle extends CDSModalLabel {
     return html` <slot></slot> `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSDialogSubtitle;

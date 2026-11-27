@@ -8,6 +8,8 @@
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './fluid-search.scss?lit';
 import CDSSearchSkeleton from '../search/search-skeleton';
 
@@ -22,7 +24,12 @@ class CDSFluidSearchSkeleton extends CDSSearchSkeleton {
     return html`${super.render()}`;
   }
 
-  static styles = [CDSSearchSkeleton.styles, styles];
+  static styles = [
+    CDSSearchSkeleton.styles,
+    formStyles,
+    textInputStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidSearchSkeleton;

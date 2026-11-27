@@ -11,10 +11,16 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/components/time-picker/index';
-@use '@carbon/styles/scss/components/select';
+@use '@carbon/styles/scss/components/time-picker/time-picker-mixin' as index;
+@use '@carbon/styles/scss/components/select/select-mixin' as select;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/convert' as convert;
+@use '@carbon/styles/scss/layer';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include select.select;
+@include index.time-picker;
 
 :host(#{$prefix}-time-picker) {
   @include emit-layout-tokens();

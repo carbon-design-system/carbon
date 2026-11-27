@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { LitElement, html } from 'lit';
+import { LitElement, html, type CSSResultGroup } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -18,6 +18,8 @@ import {
   BUTTON_TOOLTIP_ALIGNMENT,
   BUTTON_TOOLTIP_POSITION,
 } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './button.scss?lit';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -433,7 +435,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles: CSSResultGroup = [popoverStyles, tooltipStyles, styles];
 }
 
 export default CDSButton;

@@ -8,6 +8,9 @@
 import type { PropertyValues } from 'lit';
 import { prefix } from '../../globals/settings';
 import CDSDropdownItem from '../dropdown/dropdown-item';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
+import tagStyles from '../tag/tag.scss?lit';
 import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -81,7 +84,7 @@ class CDSComboBoxItem extends CDSDropdownItem {
     }
   }
 
-  static styles = styles;
+  static styles = [formStyles, textInputStyles, tagStyles, styles];
 }
 
 export default CDSComboBoxItem;

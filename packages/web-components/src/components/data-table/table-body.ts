@@ -9,6 +9,9 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSTableRow from './table-row';
+import formStyles from '../form/form.scss?lit';
+import checkboxStyles from '../checkbox/checkbox.scss?lit';
+import radioButtonStyles from '../radio-button/radio-button.scss?lit';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -91,7 +94,7 @@ class CDSTableBody extends LitElement {
     return `${prefix}-table-body-content-change`;
   }
 
-  static styles = styles;
+  static styles = [formStyles, checkboxStyles, radioButtonStyles, styles];
 }
 
 export default CDSTableBody;

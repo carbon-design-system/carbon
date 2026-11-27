@@ -20,6 +20,11 @@ import { PAGINATION_SIZE, PAGINATION_TOOLTIP_POSITION } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { prefix } from '../../globals/settings';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
+import formStyles from '../form/form.scss?lit';
+import selectStyles from '../select/select.scss?lit';
 import styles from './pagination.scss?lit';
 
 const selectorPagesSelect = `${prefix}-select#pages-select`;
@@ -616,7 +621,14 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [
+    popoverStyles,
+    tooltipStyles,
+    buttonStyles,
+    formStyles,
+    selectStyles,
+    styles,
+  ];
 }
 
 export default CDSPagination;

@@ -7,12 +7,18 @@
 
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
-@use '@carbon/styles/scss/components/fluid-text-input/index';
+@use '@carbon/styles/scss/components/fluid-text-input/fluid-text-input-mixin' as
+  index;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/layer';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include index.fluid-text-input;
 
 :host(#{$prefix}-fluid-text-input) {
   @include emit-layout-tokens();

@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
+import formStyles from '../form/form.scss?lit';
 import styles from './text-input.scss?lit';
 import { INPUT_SIZE } from './defs';
 
@@ -50,7 +51,7 @@ class CDSTextInputSkeleton extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSTextInputSkeleton;

@@ -15,8 +15,9 @@
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 @use '@carbon/styles/scss/components/button/radius' as button;
-@use '@carbon/styles/scss/components/overflow-menu/overflow-menu' as *;
-
+@use '@carbon/styles/scss/components/overflow-menu/overflow-menu-mixin' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include overflow-menu;
 

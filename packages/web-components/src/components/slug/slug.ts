@@ -12,6 +12,8 @@ import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
 import styles from './slug.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import toggletipStyles from '../toggle-tip/toggletip.scss?lit';
 import { SLUG_SIZE, SLUG_KIND } from './defs';
 import Undo16 from '@carbon/icons/es/undo/16.js';
@@ -78,6 +80,8 @@ export default class CDSSlug extends CDSToggleTip {
 
     adoptStyles(this.renderRoot as ShadowRoot, [
       popoverStyles,
+      tooltipStyles,
+      buttonStyles,
       toggletipStyles,
       styles,
     ]);

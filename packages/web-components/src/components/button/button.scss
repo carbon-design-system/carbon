@@ -11,12 +11,22 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/components/button' as *;
-@use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
-@use '@carbon/styles/scss/components/chat-button' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/components/button/button-mixin' as *;
+@use '@carbon/styles/scss/components/button/vars' as *;
+@use '@carbon/styles/scss/components/copy-button/copy-button-mixin' as *;
+@use '@carbon/styles/scss/components/code-snippet/code-snippet-mixin' as *;
+@use '@carbon/styles/scss/components/chat-button/chat-button-mixin' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+
+// Popover and tooltip CSS is not compiled in here: components using this sheet
+// also adopt the shared popover and tooltip sheets.
+@include add-component-tokens(button-tokens.$button-tokens);
+@include button;
+@include copy-button;
+@include chat-button;
 
 @include emit-layout-context-classes();
 @include code-snippet;

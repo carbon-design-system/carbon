@@ -6,6 +6,9 @@
  */
 
 import { prefix } from '../../globals/settings';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './dialog.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalFooter from '../modal/modal-footer';
@@ -24,7 +27,7 @@ class CDSDialogFooter extends CDSModalFooter {
     return `${prefix}-button,${prefix}-dialog-footer-button`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSDialogFooter;

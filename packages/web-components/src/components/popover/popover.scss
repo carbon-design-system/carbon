@@ -13,8 +13,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/components/popover' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/components/popover/popover-mixin' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
+
+@include popover;
 
 // The distance between the popover container and the triggering element
 // Specify the distance between the popover and the trigger. This value must

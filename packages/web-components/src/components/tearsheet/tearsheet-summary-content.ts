@@ -13,6 +13,8 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import '../side-panel/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit-html/directives/class-map.js';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import styles from './tearsheet.scss?lit';
 import { consume } from '@lit/context';
 import {
@@ -87,6 +89,6 @@ class CDSTearsheetSummaryContent extends HostListenerMixin(LitElement) {
         </cds-side-panel>`;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, styles];
 }
 export default CDSTearsheetSummaryContent;

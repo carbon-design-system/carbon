@@ -13,9 +13,17 @@
 @use '@carbon/styles/scss/layer' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use '@carbon/styles/scss/components/dialog' as *;
-@use '@carbon/styles/scss/components/button' as *;
+@use '@carbon/styles/scss/components/dialog/dialog-mixin' as *;
+@use '@carbon/styles/scss/components/button/button-mixin' as *;
+@use '@carbon/styles/scss/components/button/vars' as *;
+@use '@carbon/styles/scss/components/button/radius' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/utilities';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include dialog;
 
 :host(#{$prefix}-dialog[has-scrolling-content])
   ::slotted(#{$prefix}-dialog-body),

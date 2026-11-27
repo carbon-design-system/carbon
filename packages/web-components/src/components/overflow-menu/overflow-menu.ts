@@ -21,6 +21,9 @@ import { isFeatureFlagEnabled } from '../feature-flags/index';
 import FloatingUIController from '../../globals/controllers/floating-controller';
 
 import iconButtonStyles from '../icon-button/icon-button.scss?lit';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './overflow-menu.scss?lit';
 import CDSIconButton from '../icon-button/icon-button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -370,7 +373,13 @@ class CDSOverflowMenu
     }
     super.connectedCallback();
 
-    adoptStyles(this.renderRoot as ShadowRoot, [iconButtonStyles, styles]);
+    adoptStyles(this.renderRoot as ShadowRoot, [
+      iconButtonStyles,
+      popoverStyles,
+      tooltipStyles,
+      buttonStyles,
+      styles,
+    ]);
 
     this.addEventListener(
       CDSMenu.eventOnClose,

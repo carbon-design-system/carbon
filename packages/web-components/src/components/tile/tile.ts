@@ -9,6 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { TILE_COLOR_SCHEME } from './defs';
+import formStyles from '../form/form.scss?lit';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -96,7 +97,7 @@ class CDSTile extends LitElement {
     return `${prefix}-ai-label`;
   }
 
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSTile;

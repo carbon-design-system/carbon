@@ -9,6 +9,10 @@ import { prefix } from '../../globals/settings';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSComboBox from '../combo-box/combo-box';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
+import tagStyles from '../tag/tag.scss?lit';
+import comboBoxStyles from '../combo-box/combo-box.scss?lit';
 import styles from './fluid-combo-box.scss?lit';
 
 /**
@@ -42,7 +46,14 @@ class CDSFluidComboBox extends CDSComboBox {
     }
   }
 
-  static styles = [CDSComboBox.styles, styles];
+  static styles = [
+    CDSComboBox.styles,
+    formStyles,
+    textInputStyles,
+    tagStyles,
+    comboBoxStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidComboBox;

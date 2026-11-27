@@ -8,6 +8,10 @@
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSButton from '../button/button';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
+import toggletipStyles from '../toggle-tip/toggletip.scss?lit';
 import styles from './slug.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -25,5 +29,11 @@ export default class CDSSlugActionButton extends CDSButton {
   @property({ reflect: true })
   slot = 'actions';
 
-  static styles = styles;
+  static styles = [
+    popoverStyles,
+    tooltipStyles,
+    buttonStyles,
+    toggletipStyles,
+    styles,
+  ];
 }

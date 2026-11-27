@@ -13,6 +13,8 @@ import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import { filter } from '../../globals/internal/collection-helpers';
+import formStyles from '../form/form.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './time-picker.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { TIME_PICKER_SIZE } from './defs';
@@ -227,7 +229,7 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
     delegatesFocus: true,
   };
 
-  static styles = styles;
+  static styles = [formStyles, textInputStyles, styles];
 }
 
 export default CDSTimePickerSelect;

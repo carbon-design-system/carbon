@@ -14,6 +14,7 @@ import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import CDSTextInput from '../text-input/text-input';
+import formStyles from '../form/form.scss?lit';
 import styles from './textarea.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -368,7 +369,7 @@ class CDSTextarea extends CDSTextInput {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [formStyles, styles];
 }
 
 export default CDSTextarea;

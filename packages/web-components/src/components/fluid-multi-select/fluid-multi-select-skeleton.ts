@@ -8,6 +8,10 @@
 import { prefix } from '../../globals/settings';
 import { LitElement, html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import formStyles from '../form/form.scss?lit';
+import checkboxStyles from '../checkbox/checkbox.scss?lit';
+import textInputStyles from '../text-input/text-input.scss?lit';
+import dropdownStyles from '../dropdown/dropdown.scss?lit';
 import styles from './fluid-multi-select.scss?lit';
 
 /**
@@ -27,7 +31,13 @@ class CDSFluidMultiSelectSkeleton extends LitElement {
       </div>
     `;
   }
-  static styles = styles;
+  static styles = [
+    formStyles,
+    checkboxStyles,
+    textInputStyles,
+    dropdownStyles,
+    styles,
+  ];
 }
 
 export default CDSFluidMultiSelectSkeleton;

@@ -16,8 +16,13 @@
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/button/radius' as button;
 @use '@carbon/styles/scss/utilities/high-contrast-mode' as *;
-@use '@carbon/styles/scss/components/slug/index' as *;
+@use '@carbon/styles/scss/components/slug/slug-mixin' as *;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
 
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include slug;
 :host(#{$prefix}-ai-label) {
   @extend .#{$prefix}--slug;
 

@@ -18,6 +18,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import '../overflow-menu/index';
 import '../menu/index';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './card.scss?lit';
 
 const _overflowIcon = iconLoader(OverflowMenuVertical16, {
@@ -311,7 +314,7 @@ class CDSCardActions extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSCardActions;

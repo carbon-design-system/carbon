@@ -14,6 +14,9 @@ import Warning16 from '@carbon/icons/es/warning/16.js';
 import Incomplete16 from '@carbon/icons/es/incomplete/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import { PROGRESS_STEP_STAT } from './defs';
+import popoverStyles from '../popover/popover.scss?lit';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './progress-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -246,5 +249,5 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [popoverStyles, tooltipStyles, buttonStyles, styles];
 }

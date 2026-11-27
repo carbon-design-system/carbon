@@ -15,10 +15,15 @@
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/high-contrast-mode' as *;
-@use '@carbon/styles/scss/components/slug/index' as *;
-
+@use '@carbon/styles/scss/components/slug/slug-mixin' as *;
 // importing tag color tokens for the styling slug in tag component
 @use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/utilities';
+
+// Other components' CSS is not compiled in here: components using this sheet
+// also adopt their shared sheets.
+@include slug;
 
 $colorMap: (
   'red': tag-tokens.$tag-color-red,
