@@ -7,9 +7,9 @@
 
 import React from 'react';
 import DocsPage from './EmptyState.mdx';
-import { EmptyStateWithIsometricIllustration } from './example/preview-components/EmptyStateWithIsometricIllustration';
-import { EmptyStateWithPictogramIllustration } from './example/preview-components/EmptyStateWithPictogramIllustration';
-import { EmptyStateUnit } from './example/preview-components/EmptyStateUnit';
+import { EmptyStateWithIsometricIllustration } from './preview-components/EmptyStateWithIsometricIllustration';
+import { EmptyStateWithPictogramIllustration } from './preview-components/EmptyStateWithPictogramIllustration';
+import { EmptyStateUnit } from './preview-components/EmptyStateUnit';
 
 export default {
   title: 'Examples/EmptyState',
@@ -82,7 +82,7 @@ emptyStatePictogram.argTypes = {
 
 // ─── Story: empty state unit ──────────────────────────────────────────────────
 export const emptyStateInUI = (args) => <EmptyStateUnit {...args} />;
-emptyStateInUI.storyName = 'Empty State unit';
+emptyStateInUI.storyName = 'Empty State in a UI';
 emptyStateInUI.args = { placement: 'left' };
 emptyStateInUI.argTypes = {
   placement: {

@@ -19,7 +19,7 @@ import * as notificationTokens from '../js/generated/component-tokens/notificati
 import * as statusTokens from '../js/generated/component-tokens/status.js';
 import * as contentSwitcherTokens from '../js/generated/component-tokens/content-switcher.js';
 import { formatTokenName } from './tools';
-import { unstable_metadata } from './tokens';
+import { unstable_metadata } from './metadata';
 
 const themes = {
   white,

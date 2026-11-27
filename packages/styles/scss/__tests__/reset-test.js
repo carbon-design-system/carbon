@@ -10,6 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
+const postcss = require('postcss');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -24,5 +25,52 @@ describe('@carbon/styles/scss/reset', () => {
 
     const { value: mixin } = get('mixin');
     expect(mixin).toBe(true);
+  });
+
+  test.each([
+    ['default reset', "@use '../reset';", ''],
+    [
+      'scoped reset mixin',
+      `
+        @use '../config' with ($css--reset: false);
+        @use '../reset';
+
+        .content {
+          @include reset.reset();
+        }
+      `,
+      '.content ',
+    ],
+  ])(
+    '%s preserves subscript and superscript alignment',
+    async (_, source, scope) => {
+      const { result } = await render(source);
+      const stylesheet = postcss.parse(result.css.toString());
+
+      for (const [element, alignment] of [
+        ['sub', 'sub'],
+        ['sup', 'super'],
+      ]) {
+        const declarations = stylesheet.nodes
+          .filter((rule) => rule.selectors?.includes(`${scope}${element}`))
+          .flatMap((rule) => rule.nodes)
+          .filter((declaration) => declaration.prop === 'vertical-align');
+
+        expect(declarations.at(-1)?.value).toBe(alignment);
+      }
+    }
+  );
+
+  test('does not emit reset styles when disabled', async () => {
+    const { result } = await render(`
+      @use '../config' with (
+        $css--reset: false,
+        $css--default-type: false,
+      );
+      @use '../reset';
+    `);
+    const stylesheet = postcss.parse(result.css.toString());
+
+    expect(stylesheet.nodes.filter((rule) => rule.type === 'rule')).toEqual([]);
   });
 });

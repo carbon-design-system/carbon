@@ -29,11 +29,14 @@ const scssTokens = require('./formats/scss-tokens');
 const scssComponentTokens = require('./formats/scss-component-tokens');
 const jsThemes = require('./formats/js-themes');
 const jsComponentTokens = require('./formats/js-component-tokens');
+const jsMetadata = require('./formats/js-metadata');
+const { legacyOrder } = require('./legacy-order');
 
 const ROOT = path.resolve(__dirname, '..');
 const RESOLVER = path.join(ROOT, 'tokens', 'themes.resolver.json');
 const SCSS_GENERATED = path.join(ROOT, 'scss', 'generated');
 const JS_GENERATED = path.join(ROOT, 'js', 'generated');
+const V12_RESOLVER = path.join(ROOT, 'tokens', 'next', 'themes.resolver.json');
 
 const EXTENSION_NAMESPACE = 'com.ibm.carbon';
 const TOKEN_FILE_EXTENSION = '.tokens.json';
@@ -58,10 +61,15 @@ const tokenFileParser = {
  *
  * @param {ReturnType<typeof readResolver>} resolver
  * @param {string} themeName
+ * Tokens keep the order of their token file. `color-scheme` comes from the
+ * theme file's metadata; it follows `overlay`, where the `$color-scheme` Sass
+ * variable and its `unstable_metadata` entry have always been listed.
+ *
  * @returns {Promise<{
  *   name: string,
  *   tokens: Array<{ name: string, value: string }>,
  *   components: Record<string, Array<{ name: string, value: string, fallback?: string }>>,
+ *   contextual: string[],
  * }>}
  */
 async function resolveTheme(resolver, themeName) {
@@ -81,7 +89,13 @@ async function resolveTheme(resolver, themeName) {
   });
   const { allTokens } = await sd.getPlatformTokens('css');
 
-  const theme = { name: themeName, tokens: [], components: {} };
+  const metadata = sd.tokens.$extensions?.[EXTENSION_NAMESPACE] ?? {};
+  const theme = {
+    name: themeName,
+    tokens: [],
+    components: {},
+    contextual: metadata.contextual ?? [],
+  };
   for (const token of allTokens) {
     // palette tokens are only there to be referenced
     if (!token.isSource) {
@@ -103,10 +117,12 @@ async function resolveTheme(resolver, themeName) {
     theme.components[file].push(entry);
   }
 
-  const colorScheme =
-    sd.tokens.$extensions?.[EXTENSION_NAMESPACE]?.['color-scheme'];
-  if (colorScheme) {
-    theme.tokens.push({ name: 'color-scheme', value: colorScheme });
+  if (metadata['color-scheme']) {
+    const index = theme.tokens.findIndex(({ name }) => name === 'overlay');
+    theme.tokens.splice(index + 1, 0, {
+      name: 'color-scheme',
+      value: metadata['color-scheme'],
+    });
   }
 
   return theme;
@@ -122,6 +138,20 @@ async function resolveThemes() {
     themes.push(await resolveTheme(resolver, themeName));
   }
   return themes;
+}
+
+/**
+ * Sorts a theme's tokens into the order of the published outputs, with
+ * `color-scheme` kept last.
+ *
+ * @param {Awaited<ReturnType<typeof resolveTheme>>['tokens']} tokens
+ */
+function legacyThemeOrder(tokens) {
+  const colorScheme = tokens.filter(({ name }) => name === 'color-scheme');
+  return [
+    ...legacyOrder(tokens.filter(({ name }) => name !== 'color-scheme')),
+    ...colorScheme,
+  ];
 }
 
 /**
@@ -151,7 +181,7 @@ function combineComponentTokens(themes) {
   return Object.fromEntries(
     Object.entries(components).map(([component, tokens]) => [
       component,
-      Array.from(tokens, ([name, values]) => ({ name, values })),
+      legacyOrder(Array.from(tokens, ([name, values]) => ({ name, values }))),
     ])
   );
 }
@@ -164,8 +194,13 @@ function combineComponentTokens(themes) {
 async function runScss() {
   const themes = await resolveThemes();
   const files = {
-    '_tokens.scss': await scssTokens.format(),
-    '_themes.scss': scssThemes(themes),
+    '_tokens.scss': await scssTokens(themes[0].tokens),
+    '_themes.scss': scssThemes(
+      themes.map((theme) => ({
+        ...theme,
+        tokens: legacyThemeOrder(theme.tokens),
+      }))
+    ),
   };
   for (const [component, tokens] of Object.entries(
     combineComponentTokens(themes)
@@ -182,13 +217,16 @@ async function runScss() {
 // Generates:
 //   js/generated/themes/{white,g10,g90,g100}.{js,d.ts}
 //   js/generated/component-tokens/{button,tag,…}.{js,d.ts}
+//   js/generated/metadata.{js,d.ts}
 async function runJs() {
   const themes = await resolveThemes();
   const files = {};
   for (const { name, tokens } of themes) {
-    files[`themes/${name}.js`] = jsThemes(tokens, 'js');
-    files[`themes/${name}.d.ts`] = jsThemes(tokens, 'dts');
+    files[`themes/${name}.js`] = jsThemes(legacyThemeOrder(tokens), 'js');
+    files[`themes/${name}.d.ts`] = jsThemes(legacyThemeOrder(tokens), 'dts');
   }
+  files['metadata.js'] = jsMetadata(themes[0], 'js');
+  files['metadata.d.ts'] = jsMetadata(themes[0], 'dts');
   for (const [component, tokens] of Object.entries(
     combineComponentTokens(themes)
   )) {
@@ -204,16 +242,58 @@ async function runJs() {
   }
 }
 
+// V12 build
+// Generates:
+//   scss/generated/_v12-{light,dark}.scss
+//   js/generated/v12/{light,dark}.{js,d.ts}
+async function runV12() {
+  const resolver = readResolver(V12_RESOLVER);
+  const files = {};
+  for (const name of resolver.contexts('theme')) {
+    const base = new StyleDictionary({});
+    base.registerParser(tokenFileParser);
+    base.registerTransform(colorFlatten);
+
+    const sd = await base.extend({
+      ...resolver.resolve({ theme: name }),
+      parsers: [tokenFileParser.name],
+      platforms: {
+        css: { transforms: [colorFlatten.name] },
+      },
+      log: { warnings: 'error' },
+    });
+    const { allTokens } = await sd.getPlatformTokens('css');
+    const theme = allTokens.map((token) => ({
+      name: token.path.join('-'),
+      value: token.$value,
+    }));
+
+    files[`v12/${name}.js`] = jsThemes(theme, 'js');
+    files[`v12/${name}.d.ts`] = jsThemes(theme, 'dts');
+    fs.outputFileSync(
+      path.join(SCSS_GENERATED, `_v12-${name}.scss`),
+      scssThemes([{ name, tokens: theme }]),
+      'utf8'
+    );
+  }
+
+  for (const [file, content] of Object.entries(files)) {
+    fs.outputFileSync(path.join(JS_GENERATED, file), content, 'utf8');
+  }
+}
+
 // Full build (SCSS + JS)
 async function run() {
   await runScss();
   await runJs();
+  await runV12();
 }
 
 module.exports = {
   run,
   runScss,
   runJs,
+  runV12,
   resolveThemes,
   combineComponentTokens,
 };

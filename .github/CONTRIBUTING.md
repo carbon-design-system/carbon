@@ -136,8 +136,8 @@ yarn storybook
 > to find the correct command.
 
 Once the development server is running, you can edit the source code or create
-new components. The system automatically bundles your changes. Visit
-http://localhost:3000 to see your changes live.
+new components. The system automatically bundles your changes. For the React
+example above, visit http://localhost:3011 to see your changes live.
 
 Refer to the [developer handbook](../docs/developer-handbook.md#coding-style)
 for guidance on coding style (e.g., naming conventions, file structure).
@@ -164,6 +164,10 @@ For detailed testing information, see the
 When you're ready to submit your changes for review, commit and push your
 branch. Use a descriptive commit message that follows the conventions in our
 [developer handbook](../docs/developer-handbook.md#commit-conventions).
+
+Before opening a PR, follow the
+[pull request review guide](../docs/guides/reviewing-pull-requests.md) and fill
+out the [pull request template](./PULL_REQUEST_TEMPLATE.md).
 
 Then, create a PR to the main Carbon repo by following GitHub's
 [guide to creating a pull request from a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
@@ -227,16 +231,15 @@ on GitHub. Sign up on https://github.com.
   practices.
 - **Design:** Contribute visual assets, UX interactions, motion design, Figma
   kit fixes, and more.
-- **Content:** If you want to contribute content for
-  [carbondesignsystem.com](https://carbondesignsystem.com), such as
-  [patterns](https://carbondesignsystem.com/patterns/overview/), please
-  contribute in
-  [carbon-design-system/carbon-website](https://github.com/carbon-design-system/carbon-website).
-  Documentation that lives in this repository (e.g., package READMEs, `docs/`,
-  and component `.mdx` files) should still be contributed here.
-  - **Research:** If you have findings to improve the Carbon user experience,
-    share them — ideally with supporting design and development details in a
-    GitHub issue and subsequent PR.
+- **Content:** If you want to contribute content for the
+  [Carbon website](https://www.carbondesignsystem.com), such as
+  [patterns](https://www.carbondesignsystem.com/building-blocks/core/patterns/overview),
+  please see our
+  [contact page](https://www.carbondesignsystem.com/support/contact-us) for more
+  information.
+- **Research:** If you have findings to improve the Carbon user experience,
+  share them — ideally with supporting design and development details in a
+  GitHub issue and subsequent PR.
 
 ### How else can I contribute?
 
@@ -244,9 +247,9 @@ Great question! You can contribute without directly creating or maintaining
 assets:
 
 - **Join our community:**
-  - _For IBMers_: Join our internal Slack channels like `#carbon-react`,
-    `#carbon-web-components`, `#carbon-design-system`, `#carbon-ng`,
-    `#carbon-vue`, and `#carbon-announcements`.
+  - _For IBMers_: Join our internal Slack channel `#carbon-design-system` for
+    questions about Carbon components and design. Other community channels
+    include `#carbon-ng`, `#carbon-vue`, and `#carbon-announcements`.
   - _For everyone else_: Join our
     [Discord server](https://discord.gg/J7JEUEkTRX) to engage with maintainers,
     ask questions, and stay in the loop.

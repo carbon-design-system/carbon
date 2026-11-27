@@ -1,5 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as stories from './DeleteAndRemove.stories';
 
 <Meta isTemplate />
@@ -54,12 +53,6 @@ import {
 ```
 
 ## Example usage
-
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/DeleteAndRemove/example)
-> example implementation.
-
-[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/DeleteAndRemove/example)
 
 ### Example
 
@@ -145,15 +138,7 @@ user which displays:
 - This action cannot be undone.
 - An editable text field for the name of the resource to be entered
 
-<Canvas
-  of={stories.highImpactDeletion}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.highImpactDeletion),
-    },
-  ]}
-/>
+<Canvas of={stories.highImpactDeletion} />
 
 ## High impact deletion with connected items
 
@@ -163,16 +148,7 @@ also displays:
 - A list of all the connected items
 - A checkbox to confirm the deletion of all its connected items
 
-<Canvas
-  of={stories.highImpactDeletionWithConnectedItems}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(stories.highImpactDeletionWithConnectedItems),
-    },
-  ]}
-/>
+<Canvas of={stories.highImpactDeletionWithConnectedItems} />
 
 ## High impact batch deletion
 
@@ -185,16 +161,7 @@ displays:
 - A checkbox to confirm the deletion of the selected resources
 - A note of items that cannot be deleted in batch selection (optional)
 
-<Canvas
-  of={stories.highImpactBatchDeletion}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(stories.highImpactBatchDeletion),
-    },
-  ]}
-/>
+<Canvas of={stories.highImpactBatchDeletion} />
 
 ## Medium impact deletion or removal
 
@@ -205,15 +172,7 @@ name by typing it into a text field.
 > pattern, with the only difference being the usage of "remove" or "delete" in
 > the text. Use "remove" when the action is reversible or not truly destructive.
 
-<Canvas
-  of={stories.mediumImpactDeletion}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.mediumImpactDeletion),
-    },
-  ]}
-/>
+<Canvas of={stories.mediumImpactDeletion} />
 
 ## Low impact deletion or removal
 
@@ -223,12 +182,4 @@ In low impact situations, user confirmation may not be required.
 > pattern, with the only difference being the usage of "remove" or "delete" in
 > the text.
 
-<Canvas
-  of={stories.lowImpactDeletion}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.lowImpactDeletion),
-    },
-  ]}
-/>
+<Canvas of={stories.lowImpactDeletion} />

@@ -160,6 +160,34 @@ describe('NumberInput', () => {
       expect(input).toHaveValue(10);
     });
 
+    it('should delete the characters before the cursor when deleting repeatedly in the middle of the input', async () => {
+      const ControlledNumberInput = () => {
+        const [value, setValue] = useState(12345);
+        return (
+          <NumberInput
+            type="number"
+            label="NumberInput label"
+            id="number-input"
+            value={value}
+            onChange={(_, state) => setValue(state.value)}
+          />
+        );
+      };
+
+      render(<ControlledNumberInput />);
+
+      const input = screen.getByLabelText('NumberInput label');
+
+      // Delete characters in input with the cursor between "3" and "4" (e.g. 123|45).
+      await userEvent.type(input, '{backspace}{backspace}', {
+        initialSelectionStart: 3,
+        initialSelectionEnd: 3,
+      });
+
+      // "3" and "2" should be removed from the input.
+      expect(input).toHaveValue(145);
+    });
+
     it('formats decimals with formatOptions={{ maximumFractionDigits: 0 }} and passes the formatted number to onBlur (controlled, type="text")', async () => {
       const onBlur = jest.fn();
 
@@ -2795,6 +2823,22 @@ describe('NumberInput', () => {
       expect(parseNumberWithLocale('1234', 'en-US')).toBe(1234);
 
       numberFormatSpy.mockRestore();
+    });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <NumberInput
+          id="input-1"
+          label="NumberInput label"
+          disabled={true}
+          readOnly={true}
+        />
+      );
+
+      const input = screen.getByRole('spinbutton');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
     });
   });
 

@@ -8,6 +8,7 @@
 import { html, PropertyValues, TemplateResult } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import Close16 from '@carbon/icons/es/close/16.js';
 import { filter, forEach } from '../../globals/internal/collection-helpers';
@@ -212,7 +213,8 @@ class CDSMultiSelect extends CDSDropdown {
     ) as CDSMultiSelectItem | null;
     if (
       this._selectionButtonNode?.contains(event.target as Node) &&
-      !this.readOnly
+      !this.readOnly &&
+      !this.disabled
     ) {
       this._handleUserInitiatedSelectItem();
       if (this.filterable) {
@@ -410,6 +412,7 @@ class CDSMultiSelect extends CDSDropdown {
 
     return html`
       <label
+        id="dropdown-label"
         part="title-text"
         class="${labelClasses}"
         ?hidden="${!hasTitleText}">
@@ -492,9 +495,9 @@ class CDSMultiSelect extends CDSDropdown {
             role="combobox"
             aria-controls="menu-body"
             aria-expanded="${String(this.open)}"
-            aria-activedescendant="${this.open
-              ? (this._activeDescendant ?? '')
-              : ''}"
+            aria-activedescendant="${ifDefined(
+              this.open ? (this._activeDescendant ?? undefined) : undefined
+            )}"
             aria-autocomplete="list"
             autocomplete="${autocomplete}"
             @input="${this._handleInput}" />
@@ -693,7 +696,7 @@ class CDSMultiSelect extends CDSDropdown {
       [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
       [`${prefix}--multi-select--warn`]: normalizedProps.warn,
       [`${prefix}--multi-select--inline`]: inline,
-      [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--readonly`]: readOnly && !disabled,
       [`${prefix}--multi-select--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel, // inherited from CDSDropdown
       [`${prefix}--multi-select--selectall`]: this.selectAll,
@@ -926,6 +929,10 @@ class CDSMultiSelect extends CDSDropdown {
 
   firstUpdated(changedProperties) {
     super.firstUpdated?.(changedProperties);
+
+    this.shadowRoot
+      ?.getElementById('menu-body')
+      ?.setAttribute('aria-multiselectable', 'true');
 
     // whenever more items are added/removed, recompute the state of the select all option
     if (!this.selectAll) return;

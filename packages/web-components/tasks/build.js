@@ -41,7 +41,7 @@ async function build() {
     '!src/**/*.d.ts',
     '!src/globals/internal/storybook-cdn.ts',
     '!src/polyfills',
-    '!src/examples/**/example/**',
+    '!src/examples/**',
   ]);
 
   const libInputs = await globby([
@@ -116,6 +116,10 @@ async function build() {
       tsconfig: tsconfigPath,
     });
   }
+
+  await fs.writeJson(path.join(packageRoot, 'lib', 'package.json'), {
+    type: 'commonjs',
+  });
 
   await copyScssSources();
   await generateDeclarations();

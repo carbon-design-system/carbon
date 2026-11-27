@@ -9,7 +9,9 @@ import PropTypes from 'prop-types';
 import React, { forwardRef, type Ref } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { MenuItem, type MenuItemProps } from '../Menu';
-import OverflowMenuItem from '../OverflowMenuItem';
+import OverflowMenuItem, {
+  type OverflowMenuItemProps,
+} from '../OverflowMenuItem/OverflowMenuItem';
 
 export interface TableToolbarActionProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onClick'> {
@@ -17,6 +19,11 @@ export interface TableToolbarActionProps
    * Pass in the children that will be rendered inside the TableToolbarAction
    */
   children?: React.ReactNode;
+
+  /**
+   * Callback to close the parent menu.
+   */
+  closeMenu?: () => void;
 
   /**
    * onClick handler for the TableToolbarAction
@@ -51,12 +58,14 @@ const TableToolbarAction = frFn((props, ref) => {
     );
   }
 
+  const overflowMenuItemProps = rest as OverflowMenuItemProps;
+
   return (
     <OverflowMenuItem
       ref={ref as Ref<HTMLElement>}
       itemText={children}
       onClick={onClick as React.MouseEventHandler<HTMLDivElement>}
-      {...rest}
+      {...overflowMenuItemProps}
     />
   );
 });
@@ -65,6 +74,7 @@ TableToolbarAction.displayName = 'TableToolbarAction';
 TableToolbarAction.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  closeMenu: PropTypes.func,
   onClick: PropTypes.func.isRequired,
 };
 

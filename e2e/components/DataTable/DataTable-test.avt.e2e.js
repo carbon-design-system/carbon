@@ -257,8 +257,9 @@ test.describe('@avt DataTable', () => {
       // Presisng the primary button Apply Filter
       await page.keyboard.press('Enter');
 
-      //
-      await expect(page.getByText('443')).not.toBeVisible();
+      await expect(
+        page.getByRole('cell', { name: '443', exact: true })
+      ).toHaveCount(0);
 
       // Coming back to the filtering button and pressing Enter to open
       await page.keyboard.press('Shift+Tab');

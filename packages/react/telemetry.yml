@@ -412,12 +412,15 @@ collect:
         - clickable
         - horizontal
         - renderFooterIcon
+        # CardHeader
+        - headerMedia
         # CardMedia
         - mediaWidth
         # CardTitle
         - descriptionTruncate
         - labelTruncate
         - maxWidth
+        - titleMedia
         # ChatButton
         - isQuickAction
         # ClickableTile
@@ -1082,6 +1085,9 @@ collect:
         - critical
         - custom
         - danger
+        - danger--ghost
+        - danger--primary
+        - danger--tertiary
         - default
         - disclosed
         - draft
@@ -1254,9 +1260,21 @@ collect:
         - g90
         - white
         # General - tooltipAlignment
+        - bottom
+        - bottom-end
+        - bottom-start
         - center
         - end
+        - left
+        - left-end
+        - left-start
+        - right
+        - right-end
+        - right-start
         - start
+        - top
+        - top-end
+        - top-start
         # General - tooltipPosition
         - bottom
         - left

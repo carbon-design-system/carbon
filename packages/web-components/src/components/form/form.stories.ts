@@ -247,7 +247,7 @@ const aiLabelStoryStyles = `
   }
 `;
 
-const wrapForm = (content, { showInModal, modalId }) => {
+const wrapForm = (content, { showInModal }) => {
   if (!showInModal) {
     return html`<div style="width: 100%; max-width: 600px; min-width: 0;">
       <style>
@@ -257,8 +257,10 @@ const wrapForm = (content, { showInModal, modalId }) => {
     </div>`;
   }
 
-  const openModal = () => {
-    document.getElementById(modalId)?.toggleAttribute('open');
+  const openModal = (event: Event) => {
+    (event.currentTarget as HTMLElement).nextElementSibling?.toggleAttribute(
+      'open'
+    );
   };
 
   return html`
@@ -266,7 +268,7 @@ const wrapForm = (content, { showInModal, modalId }) => {
       ${aiLabelStoryStyles}
     </style>
     <cds-button @click="${openModal}">Open form</cds-button>
-    <cds-modal id="${modalId}" size="md" prevent-close-on-click-outside>
+    <cds-modal size="md" prevent-close-on-click-outside>
       <cds-modal-header>
         <cds-modal-close-button></cds-modal-close-button>
         <cds-modal-heading>Create project</cds-modal-heading>
@@ -306,16 +308,13 @@ const renderDefaultForm = (args) => {
   const decorator = () => (aiLabel ? renderAILabel(revertActive) : nothing);
   const dateHelper = (text) =>
     invalid || warn ? nothing : html`<span slot="helper-text">${text}</span>`;
-
-  const handleSubmit = () => {
-    const form =
-      (document
-        .getElementById('test-form')
-        ?.shadowRoot?.querySelector('form') as HTMLFormElement) || null;
-    if (!form) return;
+  const handleSubmit = (event: Event) => {
+    const cdsForm = (event.currentTarget as HTMLElement).closest('cds-form');
+    const form = cdsForm?.shadowRoot?.querySelector('form');
+    if (!cdsForm || !form) return;
 
     const hasInvalidRequired = Array.from(
-      document.querySelectorAll('[required]')
+      cdsForm.querySelectorAll('[required]')
     ).some((el: Element) => {
       const input = el.shadowRoot?.querySelector('input');
       return input ? !input.reportValidity() : false;
@@ -329,7 +328,7 @@ const renderDefaultForm = (args) => {
   if (skeleton) {
     return wrapForm(
       html`
-        <cds-form id="test-form" aria-label="new project setup">
+        <cds-form aria-label="new project setup">
           <cds-stack gap="5">
             <cds-search-skeleton></cds-search-skeleton>
             ${row(html`
@@ -368,13 +367,13 @@ const renderDefaultForm = (args) => {
           </cds-stack>
         </cds-form>
       `,
-      { showInModal, modalId: 'form-default-modal' }
+      { showInModal }
     );
   }
 
   return wrapForm(
     html`
-      <cds-form id="test-form" aria-label="new project setup">
+      <cds-form aria-label="new project setup">
         <cds-stack gap="5">
           <cds-search
             size="${ifDefined(size)}"
@@ -708,7 +707,7 @@ const renderDefaultForm = (args) => {
         </cds-stack>
       </cds-form>
     `,
-    { showInModal, modalId: 'form-default-modal' }
+    { showInModal }
   );
 };
 

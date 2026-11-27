@@ -6,12 +6,14 @@
  */
 
 import chalk from 'chalk';
-import { exec } from 'child-process-promise';
+import { exec as execCallback } from 'node:child_process';
 import inquirer from 'inquirer';
 import path from 'path';
 import createLogger from 'progress-estimator';
+import { promisify } from 'node:util';
 import getGitHubClient from './tools/getGitHubClient.js';
 
+const exec = promisify(execCallback);
 const logger = createLogger();
 
 chalk.link = chalk.dim.underline.italic;
@@ -175,46 +177,6 @@ const availableProjects = [
           command: 'yarn build',
           estimate: 60 * 1000 * 5,
           reason: `to build all the project's packages`,
-        },
-      ],
-    },
-  },
-  {
-    name: 'carbon-website',
-    value: {
-      owner: 'carbon-design-system',
-      repo: 'carbon-website',
-      gitCloneEstimate: 180 * 1000,
-      commands: [
-        {
-          command: 'yarn install --immutable',
-          estimate: 45 * 1000,
-          reason: "to install the project's dependencies",
-        },
-        {
-          command: 'cd packages/addons-website && yarn build',
-          estimate: 30 * 1000,
-          reason: "to build all the project's packages",
-        },
-      ],
-    },
-  },
-  {
-    name: 'gatsby-theme-carbon',
-    value: {
-      owner: 'carbon-design-system',
-      repo: 'gatsby-theme-carbon',
-      gitCloneEstimate: 10 * 1000,
-      commands: [
-        {
-          command: 'yarn install',
-          estimate: 60 * 1000,
-          reason: "to install the project's dependencies",
-        },
-        {
-          command: 'yarn build',
-          estimate: 150 * 1000,
-          reason: "to build all the project's packages",
         },
       ],
     },

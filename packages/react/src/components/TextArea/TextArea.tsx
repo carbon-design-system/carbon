@@ -210,6 +210,16 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
+const getTextCount = (
+  value: NonNullable<TextAreaProps['value']>,
+  counterMode: TextAreaProps['counterMode']
+): number => {
+  const strValue = value.toString();
+  return counterMode === 'character'
+    ? strValue.length
+    : strValue.match(/\p{L}+/gu)?.length || 0;
+};
+
 const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
 
 const TextArea = frFn((props, forwardRef) => {
@@ -236,6 +246,7 @@ const TextArea = frFn((props, forwardRef) => {
     rows = 4,
     slug,
     translateWithId: t = defaultTranslateWithId,
+    readOnly,
     ...other
   } = props;
   const prefix = usePrefix();
@@ -253,24 +264,31 @@ const TextArea = frFn((props, forwardRef) => {
 
   const ref = useMergedRefs([forwardRef, textareaRef]);
 
-  function getInitialTextCount(): number {
-    const targetValue =
-      defaultValue || value || textareaRef.current?.value || '';
-    const strValue = targetValue.toString();
+  const isControlled = value != null;
+  const [uncontrolledTextCount, setUncontrolledTextCount] = useState(() =>
+    getTextCount(defaultValue ?? '', counterMode)
+  );
+  // Keep controlled counts derived so rapid input doesn't queue extra state updates.
+  const textCount = isControlled
+    ? getTextCount(value, counterMode)
+    : uncontrolledTextCount;
 
-    if (counterMode === 'character') {
-      return strValue.length;
-    } else {
-      return strValue.match(/\p{L}+/gu)?.length || 0;
+  const setTextCount = (count: number) => {
+    if (!isControlled) {
+      setUncontrolledTextCount(count);
     }
-  }
-
-  const [textCount, setTextCount] = useState(getInitialTextCount());
+  };
 
   useEffect(() => {
-    setTextCount(getInitialTextCount());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, defaultValue, counterMode]);
+    if (!isControlled) {
+      setUncontrolledTextCount(
+        getTextCount(
+          defaultValue || textareaRef.current?.value || '',
+          counterMode
+        )
+      );
+    }
+  }, [isControlled, defaultValue, counterMode]);
 
   useIsomorphicEffect(() => {
     if (other.cols && textareaRef.current) {
@@ -341,6 +359,11 @@ const TextArea = frFn((props, forwardRef) => {
           if (totalWords > maxCount) {
             evt.preventDefault();
 
+            // The consumer owns the value of a controlled field.
+            if (isControlled) {
+              return;
+            }
+
             const allowedWords = existingWords
               .concat(pastedWords)
               .slice(0, maxCount);
@@ -358,7 +381,7 @@ const TextArea = frFn((props, forwardRef) => {
       if (!disabled) {
         if (counterMode == 'character') {
           evt?.persist?.();
-          // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
+          // Read the final DOM value after the change handler has run.
           setTimeout(() => {
             setTextCount(evt.target?.value?.length);
           }, 0);
@@ -402,7 +425,7 @@ const TextArea = frFn((props, forwardRef) => {
 
   const textAreaWrapperClasses = classNames(`${prefix}--text-area__wrapper`, {
     [`${prefix}--text-area__wrapper--cols`]: other.cols,
-    [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+    [`${prefix}--text-area__wrapper--readonly`]: readOnly && !disabled,
     [`${prefix}--text-area__wrapper--warn`]: warn,
     [`${prefix}--text-area__wrapper--slug`]: slug,
     [`${prefix}--text-area__wrapper--decorator`]: decorator,
@@ -570,14 +593,14 @@ const TextArea = frFn((props, forwardRef) => {
       {...other}
       {...textareaProps}
       placeholder={placeholder}
-      aria-readonly={other.readOnly}
+      aria-readonly={readOnly && !disabled ? true : undefined}
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
       aria-errormessage={ariaErrorMessage}
       disabled={disabled}
       rows={rows}
-      readOnly={other.readOnly}
+      readOnly={readOnly && !disabled}
       ref={ref}
     />
   );
