@@ -1,0 +1,469 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+// Side-effect-free module: loading it emits no file-uploader CSS; CSS is emitted only
+// where its mixins are included. Web Components build shared, adoptable
+// stylesheets from it. Do not @use modules that emit CSS on load here (use the
+// `*-mixin` module of another component instead of its partial or folder).
+
+@use '../../breakpoint' as *;
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+
+@use '../../utilities/button-reset';
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
+@use '../../utilities/visually-hidden' as *;
+
+// Only button tokens are used here (`button.$*`).
+@use '../button/tokens' as button;
+@use '../form/form-mixin' as form;
+@use '../loading/loading-mixin' as loading;
+
+/// Gap between the filename row and the error message, also used as block
+/// padding on invalid file items.
+/// Resolves to 0px for `xs`, 4px for `sm`, 8px for `md`, and 12px for `lg`.
+/// @access private
+/// @group file-uploader
+$-file-row-gap: clamp(
+  0px,
+  (layout.size('height') - $spacing-06) / 2,
+  $spacing-04
+);
+
+/// File uploader styles
+/// @access public
+/// @group file-uploader
+@mixin file-uploader {
+  .#{$prefix}--file {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--file-uploader-button {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: '2xl');
+  }
+
+  .#{$prefix}--file--invalid {
+    fill: $support-error;
+    margin-inline-end: $spacing-03;
+  }
+
+  // TODO: sync with type
+  .#{$prefix}--file--label {
+    @include reset;
+    @include type-style('heading-compact-01');
+
+    color: $text-primary;
+    margin-block-end: $spacing-03;
+  }
+
+  .#{$prefix}--file--label--disabled {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--file-input {
+    @include visually-hidden;
+  }
+
+  // This class is of old markup with "select file" button
+  // New code should use link-style "select file" UI (`.cds--file-browse-btn`)
+  // TODO: deprecate this block
+  .#{$prefix}--file-btn {
+    display: inline-flex;
+    margin: 0;
+    padding-inline-end: convert.to-rem(64px);
+  }
+
+  .#{$prefix}--file-browse-btn {
+    display: inline-block;
+
+    color: $link-primary;
+    cursor: pointer;
+    inline-size: 100%;
+    max-inline-size: convert.to-rem(320px);
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    transition: $duration-fast-02 motion(standard, productive);
+
+    @media (any-hover: hover) {
+      &:hover {
+        outline: 2px solid $focus;
+        text-decoration: underline;
+      }
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      text-decoration: underline;
+    }
+
+    &:active,
+    &:active:visited {
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $text-primary;
+    }
+  }
+
+  .#{$prefix}--file-browse-btn--disabled {
+    color: $text-disabled;
+    cursor: no-drop;
+    text-decoration: none;
+    transition: none;
+    @media (any-hover: hover) {
+      &:hover {
+        color: $text-disabled;
+        outline: none;
+        text-decoration: none;
+      }
+    }
+
+    &:focus {
+      color: $text-disabled;
+      outline: none;
+      text-decoration: none;
+    }
+  }
+
+  .#{$prefix}--label-description {
+    @include reset;
+    @include type-style('body-compact-01');
+
+    color: $text-secondary;
+    margin-block-end: $spacing-05;
+  }
+
+  .#{$prefix}--label-description--disabled {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--file-container--drop {
+    inline-size: 100%;
+  }
+
+  // For backwards compatibility
+  .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
+    margin-block-start: $spacing-06;
+  }
+
+  .#{$prefix}--btn ~ .#{$prefix}--file-container {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--file .#{$prefix}--file-container,
+  .#{$prefix}--file ~ .#{$prefix}--file-container {
+    margin-block-start: $spacing-03;
+  }
+
+  .#{$prefix}--file__selected-file {
+    @include layout.use('size', $default: 'lg', $min: 'xs', $max: 'lg');
+
+    display: grid;
+    align-items: center;
+    background-color: $layer;
+    gap: $-file-row-gap 0;
+    grid-auto-rows: auto;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: minmax($spacing-06, auto);
+    margin-block-end: $spacing-03;
+    max-inline-size: convert.to-rem(320px);
+    min-block-size: layout.size('height');
+    word-break: break-word;
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+
+    .#{$prefix}--form-requirement {
+      display: block;
+      margin: 0;
+      grid-column: 1 / -1;
+      max-block-size: none;
+    }
+
+    .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
+      // Vanilla markup has `.cds--inline-loading__animation` which is used for `margin-right` adjustment
+      margin-inline-end: 0;
+    }
+
+    .#{$prefix}--file-filename {
+      @include type-style('body-compact-01');
+
+      overflow: hidden;
+      margin-inline-start: $spacing-05;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .#{$prefix}--file-filename-container-wrap {
+      margin-block-start: 1px;
+      max-inline-size: 17.5rem;
+      padding-inline-start: $spacing-05;
+      @include breakpoint-down(410px) {
+        max-inline-size: 13.5rem;
+      }
+    }
+
+    .#{$prefix}--file-filename-container-wrap-invalid {
+      max-inline-size: 15.5rem;
+
+      .#{$prefix}--file-filename-tooltip {
+        inline-size: -webkit-fill-available;
+        padding-inline-start: $spacing-05;
+
+        /* This is for targeting styles specific to firefox */
+        /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+        /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+        @-moz-document url-prefix() {
+          inline-size: -moz-available;
+        }
+      }
+    }
+
+    .#{$prefix}--file-filename-tooltip {
+      inline-size: -webkit-fill-available;
+
+      /* This is for targeting styles specific to firefox */
+      /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+      /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+      @-moz-document url-prefix() {
+        inline-size: -moz-available;
+      }
+    }
+
+    .#{$prefix}--file-filename-button {
+      @include type-style('body-compact-01');
+
+      overflow: hidden;
+      padding: 0;
+      border: none;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      inline-size: -webkit-fill-available;
+      outline: inherit;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      /* This is for targeting styles specific to firefox */
+      /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+      /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+      @-moz-document url-prefix() {
+        inline-size: -moz-available;
+      }
+    }
+    .#{$prefix}--file-filename-button:focus {
+      outline: revert;
+    }
+  }
+
+  // TODO: V12 - Remove these aliases alongside the legacy React size classes.
+  // Keep the height local so legacy classes do not create a layout context.
+  @each $size in ('md', 'sm') {
+    .#{$prefix}--file__selected-file--#{$size}:not(
+        :where(
+            .#{$prefix}--layout--size-xs,
+            .#{$prefix}--layout--size-sm,
+            .#{$prefix}--layout--size-md,
+            .#{$prefix}--layout--size-lg,
+            .#{$prefix}--layout--size-xl,
+            .#{$prefix}--layout--size-2xl
+          )
+      ) {
+      --#{$prefix}-layout-size-height-local: var(
+        --#{$prefix}-layout-size-height-#{$size}
+      );
+
+      gap: $-file-row-gap 0;
+      min-block-size: layout.size('height');
+    }
+  }
+
+  // TODO: deprecate this block
+  .#{$prefix}--file__selected-file--invalid__wrapper {
+    @include focus-outline('invalid');
+
+    background-color: $layer;
+    margin-block-end: $spacing-03;
+    max-inline-size: convert.to-rem(320px);
+    outline-width: 1px;
+  }
+
+  .#{$prefix}--file__selected-file--disabled {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--file__selected-file--invalid {
+    @include focus-outline('invalid');
+
+    padding-block: $-file-row-gap;
+    padding-inline: 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
+    border-block-start: 1px solid $border-subtle;
+    // Account for the 1px divider and preserve existing error spacing.
+    padding-block: max(
+        calc((layout.size('height') - $spacing-05) / 2 - 1px),
+        calc(layout.size('height') - $spacing-07)
+      )
+      max(0px, calc(($spacing-07 - layout.size('height')) / 2));
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__title,
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    @include type-style('helper-text-01');
+
+    padding: 0 $spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__title {
+    color: $text-error;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    color: $text-primary;
+  }
+
+  // TODO: deprecate
+  .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    @include type-style('helper-text-01');
+
+    display: block;
+    overflow: visible;
+    padding: $spacing-03 $spacing-05;
+    color: $text-error;
+    font-weight: 400;
+    max-block-size: convert.to-rem(200px);
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    + .#{$prefix}--form-requirement
+    .#{$prefix}--form-requirement__supplement {
+    color: $text-primary;
+    padding-block-end: $spacing-03;
+  }
+  .#{$prefix}--file__state-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: 1.5rem;
+    padding-inline-end: convert.to-rem(12px);
+
+    .#{$prefix}--loading__svg {
+      stroke: $icon-primary;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-02;
+    border: none;
+    background-color: transparent;
+    block-size: $spacing-05;
+    inline-size: $spacing-06;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+    // TODO: Should this be $icon-interactive instead?
+    fill: $interactive;
+    inline-size: $spacing-06;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+
+    // for checkmark contrast
+    [data-icon-path='inner-path'] {
+      fill: $icon-inverse;
+      opacity: 1;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
+    block-size: $spacing-05;
+    fill: $support-error;
+    inline-size: $spacing-05;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    block-size: $spacing-06;
+    cursor: pointer;
+    inline-size: $spacing-06;
+
+    svg {
+      fill: $icon-primary;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+
+      svg {
+        fill: $icon-disabled;
+      }
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
+    margin-inline-end: -$spacing-03;
+  }
+
+  .#{$prefix}--file__drop-container {
+    @include button-reset.reset;
+    @include type-style('body-compact-01');
+
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: $spacing-05;
+    border: 1px dashed $border-strong;
+    block-size: convert.to-rem(96px);
+  }
+
+  .#{$prefix}--file-browse-btn--disabled.#{$prefix}--file__drop-container,
+  .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
+    border: 1px dashed button.$button-disabled;
+    cursor: no-drop;
+  }
+
+  .#{$prefix}--file__drop-container--drag-over {
+    background: none;
+    outline: 2px solid $focus;
+    outline-offset: -2px;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--file__selected-file {
+    @include high-contrast-mode('outline');
+  }
+}

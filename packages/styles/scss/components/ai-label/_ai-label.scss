@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024
+// Copyright IBM Corp. 2024, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,11 +8,9 @@
 //-----------------------------
 // AILabel
 //-----------------------------
-@use '../slug';
+// Public entry point, kept for backwards compatibility: loading this file still
+// emits the CSS it always has (the dependencies below), then forwards the mixins
+// from `_ai-label-mixin.scss`, which emits nothing when loaded.
 
-/// AILabel styles
-/// @access public
-/// @group AI
-@mixin ai-label {
-  // Style overrides can be added here as needed
-}
+@use '../slug';
+@forward 'ai-label-mixin';
