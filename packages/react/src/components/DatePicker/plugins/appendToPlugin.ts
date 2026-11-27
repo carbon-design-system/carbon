@@ -26,6 +26,13 @@ export const appendToPlugin =
           _positionElement: positionElement,
         } = fp;
 
+        // The calendar may be destroyed before this microtask runs (e.g. the
+        // DatePicker unmounts right after opening), and `destroy()` deletes
+        // these fields from the flatpickr instance.
+        if (!fpConfig || !calendarContainer || !positionElement) {
+          return;
+        }
+
         const appendTo = fpConfig.appendTo;
 
         if (!appendTo) {
