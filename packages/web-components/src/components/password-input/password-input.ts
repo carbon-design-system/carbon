@@ -176,7 +176,7 @@ class CDSPasswordInput extends CDSTextInput {
       'slot-text': string;
       icon: ReturnType<typeof iconLoader>;
     } = {
-      disabled: !readonly && disabled,
+      disabled,
       invalid: isInteractive && invalid,
       warn: isInteractive && !invalid && warn,
       'slot-name': '',
@@ -199,7 +199,7 @@ class CDSPasswordInput extends CDSTextInput {
       [`${prefix}--text-input-wrapper`]: true,
       [`${prefix}--password-input-wrapper`]: true,
       [`${prefix}--text-input-wrapper--inline`]: inline,
-      [`${prefix}--text-input-wrapper--readonly`]: readonly,
+      [`${prefix}--text-input-wrapper--readonly`]: readonly && !disabled,
       [`${prefix}--text-input-wrapper--inline--invalid`]:
         inline && normalizedProps.invalid,
     });
@@ -263,7 +263,7 @@ class CDSPasswordInput extends CDSTextInput {
     const helper = helperText
       ? html`<div
           class="${helperTextClasses}"
-          id="helper-text"
+          id="${this._helperTextId}"
           ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
           <slot name="helper-text"> ${helperText} </slot>
         </div>`
@@ -273,12 +273,20 @@ class CDSPasswordInput extends CDSTextInput {
       normalizedProps.invalid || normalizedProps.warn
         ? html`<div
             class="${prefix}--form-requirement"
+            id="${this._errorTextId}"
             ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
             <slot name="${normalizedProps['slot-name']}">
               ${normalizedProps['slot-text']}
             </slot>
           </div>`
         : null;
+
+    let describedBy: string | undefined;
+    if (normalizedProps.invalid || normalizedProps.warn) {
+      describedBy = this._errorTextId;
+    } else if (helperText && !isFluid) {
+      describedBy = this._helperTextId;
+    }
 
     let align = '';
 
@@ -318,12 +326,12 @@ class CDSPasswordInput extends CDSTextInput {
               class="${inputClasses}"
               ?data-invalid="${normalizedProps.invalid}"
               ?disabled="${disabled}"
-              aria-describedby="helper-text"
+              aria-describedby="${ifNonEmpty(describedBy)}"
               id="input"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(this.pattern)}"
               placeholder="${ifNonEmpty(this.placeholder)}"
-              ?readonly="${readonly}"
+              ?readonly="${readonly && !disabled}"
               ?required="${required}"
               type="${ifNonEmpty(type)}"
               .value="${this._value}"

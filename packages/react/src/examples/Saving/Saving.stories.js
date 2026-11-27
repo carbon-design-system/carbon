@@ -8,8 +8,8 @@
 import React from 'react';
 import './_story-styles.scss';
 import DocsPage from './Saving.mdx';
-import { AutoSaving } from './example/preview-components/AutoSaving';
-import { ManualSaving } from './example/preview-components/ManualSaving';
+import { AutoSaving } from './preview-components/AutoSaving';
+import { ManualSaving } from './preview-components/ManualSaving';
 
 export default {
   title: 'Examples/Saving',

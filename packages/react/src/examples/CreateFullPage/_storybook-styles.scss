@@ -11,7 +11,7 @@
 @use '@carbon/styles/scss/config' as carbon-config;
 
 // Import example component styles for use in Storybook
-@use './example/index';
+@use './index';
 
 $story-class: 'create-full-page-stories';
 $block-class: create-full-page-pattern;

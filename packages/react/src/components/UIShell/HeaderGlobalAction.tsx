@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,6 +13,11 @@ import Button from '../Button';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface HeaderGlobalActionProps {
+  /**
+   * The ID of the underlying button.
+   */
+  id?: string;
+
   /**
    * Required props for the accessibility label of the button
    */
@@ -123,6 +128,11 @@ const HeaderGlobalAction = React.forwardRef<
 );
 
 HeaderGlobalAction.propTypes = {
+  /**
+   * The ID of the underlying button.
+   */
+  id: PropTypes.string,
+
   /**
    * Required props for the accessibility label of the button
    */

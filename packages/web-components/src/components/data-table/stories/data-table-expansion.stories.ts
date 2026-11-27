@@ -6,9 +6,11 @@
  */
 
 import { html } from 'lit';
+import { createRef, ref } from 'lit/directives/ref.js';
 import './data-table-story.scss';
 import { TABLE_SIZE } from '../table';
 import '../index';
+import '../../link/index';
 import storyDocs from './data-table.mdx';
 
 const sizes = {
@@ -55,8 +57,9 @@ export const Default = {
   args: defaultArgs,
   argTypes: controls,
   render: ({ isSortable, locale, size, useStaticWidth, useZebraStyles }) => {
+    const tableBodyRef = createRef<HTMLElement>();
     setTimeout(() => {
-      const tableBody = document.querySelector('cds-table-body');
+      const tableBody = tableBodyRef.value;
       if (tableBody) {
         tableBody.innerHTML = `<cds-table-row>
             <cds-table-cell>Load Balancer 3</cds-table-cell>
@@ -106,7 +109,7 @@ export const Default = {
               ><cds-link disabled>Disabled</cds-link></cds-table-cell
             >
           </cds-table-row>
-          
+
           <cds-table-row>
             <cds-table-cell>Load Balancer 4</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
@@ -155,7 +158,7 @@ export const Default = {
             <cds-table-header-cell>Status</cds-table-header-cell>
           </cds-table-header-row>
         </cds-table-head>
-        <cds-table-body> </cds-table-body>
+        <cds-table-body ${ref(tableBodyRef)}> </cds-table-body>
       </cds-table>
     `;
   },

@@ -14,6 +14,7 @@ import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../index';
 import '../../overflow-menu/';
 import '../../menu/index';
+import '../../link/index';
 import storyDocs from './data-table.mdx';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 

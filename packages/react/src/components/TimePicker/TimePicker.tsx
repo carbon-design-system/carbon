@@ -216,7 +216,7 @@ const TimePicker = frFn((props, ref) => {
     [`${prefix}--time-picker--light`]: light,
     [`${prefix}--time-picker--invalid`]: normalizedProps.invalid,
     [`${prefix}--time-picker--warning`]: normalizedProps.warn,
-    [`${prefix}--time-picker--readonly`]: readOnly,
+    [`${prefix}--time-picker--readonly`]: readOnly && !disabled,
     [`${prefix}--time-picker--${size}`]: size,
     ...(pickerClassName && { [pickerClassName]: true }),
   });
@@ -224,6 +224,7 @@ const TimePicker = frFn((props, ref) => {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
   });
 
   const label = typeof labelText !== 'undefined' && labelText !== null && (
@@ -263,7 +264,9 @@ const TimePicker = frFn((props, ref) => {
         return React.cloneElement(item, {
           ...item.props,
           disabled: item.props.disabled ?? disabled,
-          readOnly: readOnly,
+          ...(readOnly && !(item.props.disabled ?? disabled)
+            ? { readOnly: true }
+            : {}),
           ...readOnlyEventHandlers,
         });
       }
@@ -272,9 +275,8 @@ const TimePicker = frFn((props, ref) => {
     return mappedChildren;
   }
 
-  const readOnlyProps = {
-    readOnly: readOnly,
-  };
+  const readOnlyProps =
+    readOnly && !normalizedProps.disabled ? { readOnly: true } : {};
   const describedBy =
     [
       normalizedProps.invalid

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode } from 'react';
+import React, { type AnchorHTMLAttributes, type ReactNode } from 'react';
 
 /**
  * Base props shared across card components
@@ -33,6 +33,10 @@ export interface CardProps extends CardBaseProps {
    * @example <Card as={RouterLink} clickable to="/dashboard">...</Card>
    */
   as?: React.ElementType;
+  /**
+   * Destination for cards rendered as an anchor.
+   */
+  href?: AnchorHTMLAttributes<HTMLAnchorElement>['href'];
   /**
    * Makes the entire card clickable. When true, the card gains interactive
    * styles (hover, focus, active) and renders a built-in footer affordance

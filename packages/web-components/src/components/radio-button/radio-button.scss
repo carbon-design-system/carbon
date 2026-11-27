@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -130,10 +130,19 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-radio-button-group) .#{$prefix}--radio-button-group--slug,
+:host(#{$prefix}-radio-button-group) .#{$prefix}--radio-button-group--decorator,
 :host(#{$prefix}-radio-button[ai-label]) {
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     margin-inline-start: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-radio-button-group)
+  .#{$prefix}--radio-button-group--decorator {
+  display: flex;
+
+  legend.#{$prefix}--label {
+    float: none;
   }
 }

@@ -424,14 +424,54 @@ describe('cds-text-input', () => {
     const input = el.shadowRoot.querySelector('input');
     const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
 
-    expect(input.getAttribute('aria-describedby')).to.equal('helper-text');
-    expect(helper.id).to.equal('helper-text');
+    expect(helper.id).to.exist;
+    expect(input.getAttribute('aria-describedby')).to.equal(helper.id);
+  });
+
+  it('should give each instance its own helper and error text ids', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-text-input label="First" helper-text="Help"></cds-text-input>
+        <cds-text-input label="Second" helper-text="Help"></cds-text-input>
+        <cds-text-input
+          label="Third"
+          invalid
+          invalid-text="Wrong"></cds-text-input>
+        <cds-text-input
+          label="Fourth"
+          invalid
+          invalid-text="Wrong"></cds-text-input>
+      </div>
+    `);
+    const [first, second, third, fourth] = Array.from(
+      el.querySelectorAll('cds-text-input')
+    ).map((input) =>
+      input.shadowRoot.querySelector('input').getAttribute('aria-describedby')
+    );
+
+    expect(first).to.not.equal('helper-text');
+    expect(first).to.not.equal(second);
+    expect(third).to.not.equal('error-text');
+    expect(third).to.not.equal(fourth);
   });
 
   it('should not set aria-describedby when there is no helper text', async () => {
     const el = await fixture(defaultInput);
     const input = el.shadowRoot.querySelector('input');
 
+    expect(input.hasAttribute('aria-describedby')).to.be.false;
+  });
+
+  it('should not reference the helper text when isFluid hides it', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="Text input label"
+        isFluid
+        helper-text="Helpful info"></cds-text-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(el.shadowRoot.querySelector('.cds--form__helper-text')).to.not.exist;
     expect(input.hasAttribute('aria-describedby')).to.be.false;
   });
 
@@ -446,8 +486,8 @@ describe('cds-text-input', () => {
     const input = el.shadowRoot.querySelector('input');
     const errorText = el.shadowRoot.querySelector('.cds--form-requirement');
 
-    expect(input.getAttribute('aria-describedby')).to.equal('error-text');
-    expect(errorText.id).to.equal('error-text');
+    expect(errorText.id).to.exist;
+    expect(input.getAttribute('aria-describedby')).to.equal(errorText.id);
   });
 
   describe('AI label and slug slot (@query decorator)', () => {
@@ -552,5 +592,23 @@ describe('cds-text-input', () => {
       const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
       expect(slugSlot.classList.contains('cds--slug--revert')).to.be.true;
     });
+  });
+
+  it('should prioritize disabled over readOnly when both are true', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        disabled
+        readonly
+        label-text="TextInput label"
+        placeholder="Placeholder text"></cds-text-input>
+    `);
+    await el.updateComplete;
+
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(input.hasAttribute('disabled')).to.be.true;
+    expect(input.hasAttribute('readonly')).to.be.false;
+    expect(input.disabled).to.be.true;
+    expect(input.readOnly).to.be.false;
   });
 });

@@ -310,6 +310,46 @@ describe('Slider', () => {
       expect(onChange).toHaveBeenLastCalledWith({ value: 999 });
     });
 
+    it('should treat zero as a defined range handle value', async () => {
+      renderTwoHandleSlider({
+        value: 0,
+        unstable_valueUpper: 0,
+        min: 0,
+        max: 100,
+        onChange,
+      });
+      const lowerInput = screen.getByLabelText(defaultAriaLabelInput, {
+        selector: 'input',
+      });
+
+      fireEvent.change(lowerInput, { target: { value: '1' } });
+
+      await waitFor(() => {
+        expect(lowerInput.value).toBe('1');
+      });
+      expect(
+        screen.getByRole('slider', { name: defaultAriaLabelInput })
+      ).toHaveAttribute('aria-valuenow', '0');
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should keep non-numeric input separate from the slider value', async () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        value: initialValue,
+        max: 100,
+        onChange,
+      });
+      const inputElement = screen.getByLabelText(inputAriaValue);
+      const slider = screen.getByRole('slider');
+
+      await userEvent.clear(inputElement);
+
+      expect(inputElement.value).toBe('');
+      expect(slider).toHaveAttribute('aria-valuenow', `${initialValue}`);
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
     it('should keep controlled invalid state after dragging to another invalid value', async () => {
       const ControlledSlider = () => {
         const [value, setValue] = useState(20);
@@ -649,6 +689,23 @@ describe('Slider', () => {
       expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
       const invalidMessage = screen.queryByText('Error message');
       expect(invalidMessage).not.toBeInTheDocument();
+    });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        disabled: true,
+        readOnly: true,
+      });
+      const sliderInput = screen.getByRole('spinbutton');
+      expect(sliderInput).toBeDisabled();
+      expect(sliderInput).not.toHaveAttribute('readonly');
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(document.querySelector(`.${prefix}--slider--readonly`)).toBeNull();
+      expect(
+        // eslint-disable-next-line testing-library/no-node-access
+        document.querySelector(`.${prefix}--text-input-wrapper--readonly`)
+      ).toBeNull();
     });
 
     describe('Error handling, expected behavior from event handlers', () => {
@@ -1583,6 +1640,28 @@ describe('Slider', () => {
       expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
       expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
       expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
+    });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      renderTwoHandleSlider({
+        disabled: true,
+        readOnly: true,
+      });
+
+      const lowerInput = screen.getByLabelText(defaultAriaLabelInput, {
+        selector: 'input',
+      });
+      const upperInput = screen.getByLabelText(defaultAriaLabelInputUpper, {
+        selector: 'input',
+      });
+      expect(lowerInput).toBeDisabled();
+      expect(upperInput).toBeDisabled();
+      expect(lowerInput).not.toHaveAttribute('readonly');
+      expect(upperInput).not.toHaveAttribute('readonly');
+      expect(
+        // eslint-disable-next-line testing-library/no-node-access
+        document.querySelector(`.${prefix}--slider-container--readonly`)
+      ).toBeNull();
     });
 
     it('should clear invalid state when invalid changes to false', async () => {

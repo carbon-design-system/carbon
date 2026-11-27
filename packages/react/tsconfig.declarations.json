@@ -14,7 +14,7 @@
     "**/*.snap",
     ".storybook/**/*",
     "icons/**/*",
-    "src/examples/**/example/**",
+    "**/_story-assets/**",
     "src/examples/**/*"
   ]
 }

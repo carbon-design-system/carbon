@@ -18,8 +18,14 @@ import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
 import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
+import { getIbmAnalyticsHeads } from '../../../tasks/storybook-ibm-analytics.mjs';
+import { storybookStackBlitz } from '../../../tasks/storybook-stackblitz/vite-plugin.mjs';
+import { reactStackBlitz } from '../../../tasks/storybook-stackblitz/react.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
+const { managerAnalyticsHead, previewAnalyticsHead } = getIbmAnalyticsHeads(
+  'CarbonReactStorybook'
+);
 
 // Keep top level MDX docs pages in Storybook, but exclude component level docs
 // directories from story discovery because those pages are referenced through
@@ -54,6 +60,9 @@ const stories = glob.sync(storyGlobs, {
 });
 
 const config: StorybookConfig = {
+  // `head` contains manager-head.html/preview-head.html
+  managerHead: (head) => `${head}${managerAnalyticsHead}`,
+  previewHead: (head) => `${head}${previewAnalyticsHead}`,
   addons: [
     'storybook-addon-accessibility-checker',
     {
@@ -152,6 +161,17 @@ const config: StorybookConfig = {
         },
       },
       plugins: [
+        // Storybook sets `resolve.preserveSymlinks` from its own `pre` plugin,
+        // which resolves to `false` whenever NODE_OPTIONS is set (without
+        // `--preserve-symlinks`) and overrides `resolve` below. Workspace
+        // packages then resolve to `packages/*/es` instead of
+        // `node_modules/@carbon/*`, so react-docgen parses the generated
+        // icons and pictograms bundles. Set it again here,
+        // after Storybook's plugin
+        {
+          name: 'carbon:preserve-symlinks',
+          config: () => ({ resolve: { preserveSymlinks: true } }),
+        },
         react({
           // use a regex instead of a glob.Vite 8 (Rolldown)
           // globs `**/*.{jsx,js,ts,tsx}` seem to mishandle the transform
@@ -163,6 +183,8 @@ const config: StorybookConfig = {
         babel({
           presets: ['babel-preset-carbon'],
         }),
+        // "Open in StackBlitz" docs action, generated from each story
+        storybookStackBlitz(reactStackBlitz),
       ],
       resolve: {
         preserveSymlinks: true,

@@ -1,4 +1,4 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as stories from './AboutModal.stories';
 
 <Meta isTemplate />
@@ -32,15 +32,7 @@ To build this pattern, we recommend including the following ingredients:
 
 ### Example usage
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/AboutModal/example)
-> example implementation.
-
-[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/AboutModal/example)
-
-<Canvas withSource="none">
-  <Story of={stories.Standard} />
-</Canvas>
+<Canvas of={stories.Standard} sourceState="none" />
 
 ### With additional content
 
@@ -51,6 +43,4 @@ While the about modal supports a list of Carbon `Link` components, these should
 be used to display product information and not to direct users to find help
 content.
 
-<Canvas withSource="none">
-  <Story of={stories.WithAdditionalContent} />
-</Canvas>
+<Canvas of={stories.WithAdditionalContent} sourceState="none" />

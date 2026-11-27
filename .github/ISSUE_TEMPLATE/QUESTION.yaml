@@ -19,26 +19,16 @@ body:
   - type: markdown
     attributes:
       value:
-        If you're an IBMer, we have a couple of Slack channels available across
-        all IBM Workspaces.
-  - type: markdown
-    attributes:
-      value: '- `#carbon-design-system` for questions about the Design System.'
-  - type: markdown
-    attributes:
-      value: '- `#carbon-react` for questions about `@carbon/react`.'
+        If you're an IBMer, you can ask questions about the Carbon Design
+        System, `@carbon/react`, and `@carbon/web-components` in
+        `#carbon-design-system`, available across all IBM Slack workspaces.
   - type: markdown
     attributes:
       value:
-        '- `#carbon-web-components` for questions about
-        `@carbon/web-components`.'
-  - type: markdown
-    attributes:
-      value:
-        "For non-IBMer's, you can ask a question on our [GitHub Discussions
+        For everyone else, you can ask a question on our [GitHub Discussions
         board](https://github.com/carbon-design-system/carbon/discussions/new)
         or join [our Discord server](https://discord.gg/J7JEUEkTRX) to chat with
-        Carbon maintainers and fellow community members."
+        Carbon maintainers and fellow community members.
   - type: textarea
     id: summary
     attributes:
@@ -54,7 +44,7 @@ body:
       options:
         - label:
             I agree to follow this project's [Code of
-            Conduct](https://github.com/carbon-design-system/carbon/blob/f555616971a03fd454c0f4daea184adf41fff05b/.github/CODE_OF_CONDUCT.md)
+            Conduct](https://github.com/carbon-design-system/carbon/blob/main/.github/CODE_OF_CONDUCT.md)
           required: true
   - type: markdown
     attributes:

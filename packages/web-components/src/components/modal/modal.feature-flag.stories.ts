@@ -22,8 +22,10 @@ import { MODAL_SIZE } from './modal';
  * and <Meta title="Components/Modal/Feature Flags" ... > in the mdx file
  */
 
-const toggleButton = () => {
-  document.querySelector('cds-modal')?.toggleAttribute('open');
+const toggleButton = (event: Event) => {
+  (event.currentTarget as HTMLElement).parentElement
+    ?.querySelector('cds-modal')
+    ?.toggleAttribute('open');
 };
 
 const sizes = {
