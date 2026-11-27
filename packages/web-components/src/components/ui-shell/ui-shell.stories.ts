@@ -221,11 +221,7 @@ export const FixedSideNav = {
             <cds-side-nav-menu-item href="${linksHref}">
               L0 menu item
             </cds-side-nav-menu-item>
-            <cds-side-nav-menu-item
-              active
-              aria-current="page"
-              target="_blank"
-              href="${linksHref}">
+            <cds-side-nav-menu-item active target="_blank" href="${linksHref}">
               L0 menu item
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item href="${linksHref}">
@@ -286,10 +282,7 @@ export const FixedSideNavDivider = {
             <cds-side-nav-menu-item href="${linksHref}">
               L0 menu item
             </cds-side-nav-menu-item>
-            <cds-side-nav-menu-item
-              active
-              aria-current="page"
-              href="${linksHref}">
+            <cds-side-nav-menu-item active href="${linksHref}">
               L0 menu item
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item href="${linksHref}">
@@ -399,10 +392,7 @@ export const FixedSideNavIcons = {
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
-            <cds-side-nav-menu-item
-              active
-              aria-current="page"
-              href="${linksHref}">
+            <cds-side-nav-menu-item active href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item href="${linksHref}">
@@ -701,7 +691,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
-              <cds-side-nav-menu-item aria-current="page" href="${linksHref}">
+              <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
               <cds-side-nav-menu-item href="${linksHref}">
@@ -967,10 +957,7 @@ export const HeaderBaseWSideNav = {
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
-              <cds-side-nav-menu-item
-                active
-                aria-current="page"
-                href="${linksHref}">
+              <cds-side-nav-menu-item active href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
               <cds-side-nav-menu-item href="${linksHref}">
@@ -1061,10 +1048,7 @@ export const SideNavRail = {
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
-            <cds-side-nav-menu-item
-              active
-              aria-current="page"
-              href="${linksHref}">
+            <cds-side-nav-menu-item active href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item href="${linksHref}">
@@ -1192,10 +1176,7 @@ export const SideNavRailWHeader = {
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
-              <cds-side-nav-menu-item
-                active
-                aria-current="page"
-                href="${linksHref}">
+              <cds-side-nav-menu-item active href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
               <cds-side-nav-menu-item href="${linksHref}">
