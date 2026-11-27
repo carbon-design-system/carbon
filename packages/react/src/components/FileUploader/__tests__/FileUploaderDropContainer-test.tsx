@@ -5,15 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent, render, screen, act } from '@testing-library/react';
 
 import { FileUploaderDropContainer } from '../';
+import type { FileUploaderDropContainerProps } from '../FileUploaderDropContainer';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-const requiredProps = { labelText: 'Add file' };
+const requiredProps = { labelText: 'Add file' } satisfies Pick<
+  FileUploaderDropContainerProps,
+  'labelText'
+>;
 
-function createDropEvent(files) {
+function createDropEvent(files: FileList) {
   const event = new Event('drop', {
     bubbles: true,
     cancelable: true,
@@ -22,7 +27,7 @@ function createDropEvent(files) {
   return event;
 }
 
-function mockDataTransfer(files) {
+function mockDataTransfer(files: FileList) {
   const dataTransferDescriptor = Object.getOwnPropertyDescriptor(
     window,
     'DataTransfer'
@@ -39,7 +44,7 @@ function mockDataTransfer(files) {
       if (dataTransferDescriptor) {
         Object.defineProperty(window, 'DataTransfer', dataTransferDescriptor);
       } else {
-        delete window.DataTransfer;
+        Reflect.deleteProperty(window, 'DataTransfer');
       }
     },
   };
@@ -94,20 +99,24 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer labelText="test" />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
 
     await userEvent.upload(
       input,
       new File(['content'], 'test.png', { type: 'image/png' })
     );
-    expect(input.files.length).toBe(1);
+    expect(input.files?.length).toBe(1);
 
     await userEvent.click(input);
-    expect(input.files.length).toBe(0);
+    expect(input.files?.length).toBe(0);
   });
 
   it('should call `onAddFiles` when a file is selected', async () => {
-    const onAddFiles = jest.fn();
+    const onAddFiles =
+      jest.fn<NonNullable<FileUploaderDropContainerProps['onAddFiles']>>();
     const { container } = render(
       <FileUploaderDropContainer
         multiple
@@ -116,7 +125,10 @@ describe('FileUploaderDropContainer', () => {
       />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     // Let's simplify to a single file first to fix the test
     const file = new File(['foo'], 'foo.txt', { type: 'text/plain' });
 
@@ -132,7 +144,8 @@ describe('FileUploaderDropContainer', () => {
   });
 
   it('should mark invalid files using default pattern', async () => {
-    const onAddFiles = jest.fn();
+    const onAddFiles =
+      jest.fn<NonNullable<FileUploaderDropContainerProps['onAddFiles']>>();
     const { container } = render(
       <FileUploaderDropContainer
         accept={['.txt']}
@@ -142,7 +155,10 @@ describe('FileUploaderDropContainer', () => {
       />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
 
     const files = [
       new File(['foo'], 'foo.txt', { type: 'text/plain' }),
@@ -153,9 +169,6 @@ describe('FileUploaderDropContainer', () => {
 
     // Use a direct approach similar to your original uploadFiles function
     await act(async () => {
-      const dataTransfer = {
-        files,
-      };
       fireEvent.change(input, { target: { files } });
     });
 
@@ -172,7 +185,8 @@ describe('FileUploaderDropContainer', () => {
   });
 
   it('should be case insensitive when marking files invalid', async () => {
-    const onAddFiles = jest.fn();
+    const onAddFiles =
+      jest.fn<NonNullable<FileUploaderDropContainerProps['onAddFiles']>>();
     const { container } = render(
       <FileUploaderDropContainer
         accept={['.jpeg']}
@@ -182,7 +196,10 @@ describe('FileUploaderDropContainer', () => {
       />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
 
     const files = [
       new File(['foo'], 'foo.JPEG', { type: 'image/jpeg' }),
@@ -207,7 +224,8 @@ describe('FileUploaderDropContainer', () => {
   });
 
   it('should mark files over maxFileSize as invalid', async () => {
-    const onAddFiles = jest.fn();
+    const onAddFiles =
+      jest.fn<NonNullable<FileUploaderDropContainerProps['onAddFiles']>>();
     const { container } = render(
       <FileUploaderDropContainer
         multiple
@@ -217,7 +235,10 @@ describe('FileUploaderDropContainer', () => {
       />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const files = [
       new File(['a'], 'small.txt', { type: 'text/plain' }), // size 1, at limit
       new File(['ab'], 'max-filesize.txt', { type: 'text/plain' }), // size 2, over limit
@@ -233,7 +254,8 @@ describe('FileUploaderDropContainer', () => {
   });
 
   it('should not mark any invalid files using custom pattern', async () => {
-    const onAddFiles = jest.fn();
+    const onAddFiles =
+      jest.fn<NonNullable<FileUploaderDropContainerProps['onAddFiles']>>();
     const { container } = render(
       <FileUploaderDropContainer
         accept={['.txt', '.a_a', '.b-b', '.a-b_c']}
@@ -244,7 +266,10 @@ describe('FileUploaderDropContainer', () => {
       />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
 
     const files = [
       new File(['foo'], 'foo.txt', { type: 'text/plain' }),
@@ -279,13 +304,17 @@ describe('FileUploaderDropContainer', () => {
     );
 
     const dropArea = container.querySelector('button');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
     fireEvent.click(dropArea);
 
     expect(onAddFiles).not.toHaveBeenCalled();
   });
 
   it('should filter files based on the accept prop', async () => {
-    const onAddFiles = jest.fn();
+    const onAddFiles =
+      jest.fn<NonNullable<FileUploaderDropContainerProps['onAddFiles']>>();
     const { container } = render(
       <FileUploaderDropContainer
         accept={['.png']}
@@ -295,7 +324,10 @@ describe('FileUploaderDropContainer', () => {
       />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
 
     const files = [
       new File(['foo'], 'foo.txt', { type: 'text/plain' }),
@@ -323,6 +355,9 @@ describe('FileUploaderDropContainer', () => {
     );
 
     const dropArea = container.querySelector('button');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
     fireEvent.click(dropArea);
 
     expect(onClick).toHaveBeenCalled();
@@ -333,7 +368,10 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer labelText="test" />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
 
     // Create a mock file list
     const file = new File(['content'], 'test.png', { type: 'image/png' });
@@ -345,10 +383,14 @@ describe('FileUploaderDropContainer', () => {
     // Trigger change event
     fireEvent.change(input);
 
-    expect(input.files.length).toBe(1);
+    expect(input.files?.length).toBe(1);
 
     // Click the button
-    fireEvent.click(container.querySelector('button'));
+    const dropArea = container.querySelector('button');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
+    fireEvent.click(dropArea);
 
     // Mock the file list being cleared - this is what the component would do
     Object.defineProperty(input, 'files', {
@@ -356,7 +398,7 @@ describe('FileUploaderDropContainer', () => {
       writable: true,
     });
 
-    expect(input.files.length).toBe(0);
+    expect(input.files?.length).toBe(0);
   });
 
   it('should call the onClick handler when the drop area is clicked', () => {
@@ -365,29 +407,30 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer onClick={onClick} {...requiredProps} />
     );
     const dropArea = container.querySelector('button');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
     fireEvent.click(dropArea);
     expect(onClick).toHaveBeenCalled();
   });
 
   it('should handle the case when no files are added', () => {
     const onAddFiles = jest.fn();
-    const { container } = render(
+    render(
       <FileUploaderDropContainer onAddFiles={onAddFiles} {...requiredProps} />
     );
-    const input = container.querySelector('input');
-
     expect(onAddFiles).not.toHaveBeenCalled();
   });
 
   it('should have a properly associated label for accessibility', () => {
     const { container } = render(
-      <FileUploaderDropContainer
-        labelText="Upload your files"
-        {...requiredProps}
-      />
+      <FileUploaderDropContainer {...requiredProps} />
     );
     const label = container.querySelector('label');
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!label || !input) {
+      throw new Error('Expected the file input and label to render.');
+    }
     expect(label).toHaveAttribute('for', input.id);
   });
   it('should not set active state on drag over when disabled', () => {
@@ -396,6 +439,9 @@ describe('FileUploaderDropContainer', () => {
     );
 
     const dropArea = container.firstChild;
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
 
     const dragOverEvent = {
       preventDefault: jest.fn(),
@@ -416,6 +462,9 @@ describe('FileUploaderDropContainer', () => {
     );
 
     const dropArea = container.querySelector('button');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
     fireEvent.click(dropArea);
 
     expect(onAddFiles).not.toHaveBeenCalled();
@@ -424,8 +473,10 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer labelText="Upload" />
     );
-    const input = container.querySelector('input');
-    expect(input).not.toBeNull();
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     expect(input.multiple).toBe(false);
   });
 
@@ -434,7 +485,10 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer labelText="Upload" />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
 
     // Add files to input
     const file = new File(['content'], 'test.txt', { type: 'text/plain' });
@@ -444,10 +498,14 @@ describe('FileUploaderDropContainer', () => {
     });
     fireEvent.change(input);
 
-    expect(input.files.length).toBe(1);
+    expect(input.files?.length).toBe(1);
 
     // Click and manually simulate the reset behavior
-    fireEvent.click(container.querySelector('button'));
+    const dropArea = container.querySelector('button');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
+    fireEvent.click(dropArea);
 
     // In real implementation, the component would reset the input
     // Manually simulate this since it's not happening in the test environment
@@ -456,7 +514,7 @@ describe('FileUploaderDropContainer', () => {
       configurable: true,
     });
 
-    expect(input.files.length).toBe(0);
+    expect(input.files?.length).toBe(0);
   });
 
   it('should not set active state when disabled on drag over', () => {
@@ -465,6 +523,9 @@ describe('FileUploaderDropContainer', () => {
     );
 
     const dropArea = container.firstChild;
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
 
     const dragOverEvent = new Event('dragover', { bubbles: true });
     dragOverEvent.preventDefault = jest.fn();
@@ -494,7 +555,11 @@ describe('FileUploaderDropContainer', () => {
       preventDefault: jest.fn(),
       stopPropagation: jest.fn(),
     };
-    fireEvent.drop(container.firstChild, event);
+    const dropArea = container.firstChild;
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
+    fireEvent.drop(dropArea, event);
     expect(onAddFilesMock).toHaveBeenCalledWith(expect.anything(), {
       addedFiles: [
         expect.objectContaining({
@@ -516,6 +581,9 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer {...requiredProps} />
     );
     const dropArea = container.querySelector('button');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
     const preventDefault = jest.fn();
     const event = new KeyboardEvent('keydown', {
       key: ' ',
@@ -532,7 +600,13 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer {...requiredProps} />
     );
     const dropArea = container.querySelector('button');
-    const input = container.querySelector('input');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const clickMock = jest.spyOn(input, 'click').mockImplementation(() => {});
     dropArea.focus();
     fireEvent.keyDown(dropArea, { key: 'Enter', code: 'Enter', charCode: 13 });
@@ -550,6 +624,9 @@ describe('FileUploaderDropContainer', () => {
       />
     );
     const dropArea = container.firstChild;
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
     const dropEvent = new Event('drop', {
       bubbles: true,
       cancelable: true,
@@ -569,7 +646,13 @@ describe('FileUploaderDropContainer', () => {
       />
     );
     const dropArea = container.firstChild;
-    const input = container.querySelector('input');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const files = [
       new File(['content'], 'file1.txt', { type: 'text/plain' }),
       new File(['content'], 'file2.txt', { type: 'text/plain' }),
@@ -581,13 +664,21 @@ describe('FileUploaderDropContainer', () => {
     const singleFileInput = document.createElement('input');
     singleFileInput.type = 'file';
     await userEvent.upload(singleFileInput, files[0]);
-    const dataTransfer = mockDataTransfer(singleFileInput.files);
+    const singleFileInputFiles = singleFileInput.files;
+    if (!singleFileInputFiles) {
+      throw new Error('Expected the selected files to be available.');
+    }
+    const sourceFiles = sourceInput.files;
+    if (!sourceFiles) {
+      throw new Error('Expected the dropped files to be available.');
+    }
+    const dataTransfer = mockDataTransfer(singleFileInputFiles);
     const filesSetter = jest
       .spyOn(input, 'files', 'set')
       .mockImplementation(() => {});
 
     try {
-      fireEvent(dropArea, createDropEvent(sourceInput.files));
+      fireEvent(dropArea, createDropEvent(sourceFiles));
 
       expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
         addedFiles: [files[0]],
@@ -604,20 +695,33 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer multiple {...requiredProps} />
     );
     const dropArea = container.firstChild;
-    const input = container.querySelector('input');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const file = new File(['content'], 'example.png', { type: 'image/png' });
     const sourceInput = document.createElement('input');
     sourceInput.type = 'file';
     await userEvent.upload(sourceInput, file);
-    const dataTransfer = mockDataTransfer(sourceInput.files);
+    const sourceFiles = sourceInput.files;
+    if (!sourceFiles) {
+      throw new Error('Expected the dropped files to be available.');
+    }
+    const dataTransfer = mockDataTransfer(sourceFiles);
     const filesSetter = jest.spyOn(input, 'files', 'set');
 
     try {
-      fireEvent(dropArea, createDropEvent(sourceInput.files));
+      fireEvent(dropArea, createDropEvent(sourceFiles));
 
       expect(dataTransfer.add).toHaveBeenCalledWith(file);
-      expect(filesSetter).toHaveBeenCalledWith(sourceInput.files);
+      expect(filesSetter).toHaveBeenCalledWith(sourceFiles);
       const [droppedFiles] = filesSetter.mock.calls[0];
+      if (!droppedFiles) {
+        throw new Error('Expected the dropped files to be set on the input.');
+      }
       expect(droppedFiles).toHaveLength(1);
       expect(droppedFiles[0]).toEqual(
         expect.objectContaining({
@@ -641,12 +745,22 @@ describe('FileUploaderDropContainer', () => {
       />
     );
     const dropArea = container.firstChild;
-    const input = container.querySelector('input');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const file = new File(['content'], 'example.png', { type: 'image/png' });
     const sourceInput = document.createElement('input');
     sourceInput.type = 'file';
     await userEvent.upload(sourceInput, file);
-    const dataTransfer = mockDataTransfer(sourceInput.files);
+    const sourceFiles = sourceInput.files;
+    if (!sourceFiles) {
+      throw new Error('Expected the dropped files to be available.');
+    }
+    const dataTransfer = mockDataTransfer(sourceFiles);
     const filesSetter = jest
       .spyOn(input, 'files', 'set')
       .mockImplementation(() => {
@@ -655,10 +769,10 @@ describe('FileUploaderDropContainer', () => {
 
     try {
       expect(() => {
-        fireEvent(dropArea, createDropEvent(sourceInput.files));
+        fireEvent(dropArea, createDropEvent(sourceFiles));
       }).not.toThrow();
 
-      expect(filesSetter).toHaveBeenCalledWith(sourceInput.files);
+      expect(filesSetter).toHaveBeenCalledWith(sourceFiles);
       expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
         addedFiles: [file],
       });
@@ -679,13 +793,23 @@ describe('FileUploaderDropContainer', () => {
       />
     );
     const dropArea = container.firstChild;
-    const input = container.querySelector('input');
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const acceptedFile = new File(['content'], 'accepted.txt', {
       type: 'text/plain',
     });
-    const invalidFile = new File(['content'], 'invalid.pdf', {
-      type: 'application/pdf',
-    });
+    const invalidFile: File & { invalidFileType?: boolean } = new File(
+      ['content'],
+      'invalid.pdf',
+      {
+        type: 'application/pdf',
+      }
+    );
     const filteredFile = new File(['content'], 'README', {
       type: 'text/plain',
     });
@@ -701,13 +825,21 @@ describe('FileUploaderDropContainer', () => {
     addedFilesInput.type = 'file';
     addedFilesInput.multiple = true;
     await userEvent.upload(addedFilesInput, [acceptedFile, invalidFile]);
-    const dataTransfer = mockDataTransfer(addedFilesInput.files);
+    const addedFiles = addedFilesInput.files;
+    if (!addedFiles) {
+      throw new Error('Expected the selected files to be available.');
+    }
+    const sourceFiles = sourceInput.files;
+    if (!sourceFiles) {
+      throw new Error('Expected the dropped files to be available.');
+    }
+    const dataTransfer = mockDataTransfer(addedFiles);
     const filesSetter = jest
       .spyOn(input, 'files', 'set')
       .mockImplementation(() => {});
 
     try {
-      fireEvent(dropArea, createDropEvent(sourceInput.files));
+      fireEvent(dropArea, createDropEvent(sourceFiles));
 
       expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
         addedFiles: [acceptedFile, invalidFile],
@@ -716,7 +848,7 @@ describe('FileUploaderDropContainer', () => {
       expect(dataTransfer.add).toHaveBeenCalledTimes(2);
       expect(dataTransfer.add).toHaveBeenNthCalledWith(1, acceptedFile);
       expect(dataTransfer.add).toHaveBeenNthCalledWith(2, invalidFile);
-      expect(filesSetter).toHaveBeenCalledWith(addedFilesInput.files);
+      expect(filesSetter).toHaveBeenCalledWith(addedFiles);
     } finally {
       dataTransfer.restore();
     }
@@ -728,6 +860,9 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer onAddFiles={onAddFiles} {...requiredProps} />
     );
     const dropArea = container.firstChild;
+    if (!dropArea) {
+      throw new Error('Expected the drop area to render.');
+    }
     const directoryItem = {
       kind: 'file',
       getAsFile: jest.fn(() => null),

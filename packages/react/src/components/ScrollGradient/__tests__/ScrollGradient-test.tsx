@@ -5,22 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { beforeAll, describe, expect, it } from '@jest/globals';
+import React, { createRef, type ComponentProps } from 'react';
 import { render, screen } from '@testing-library/react';
 import { ScrollGradient } from '../ScrollGradient';
 
 // IntersectionObserver is not implemented in jsdom — provide a no-op mock.
 beforeAll(() => {
-  window.IntersectionObserver = jest.fn(() => ({
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn(),
-  }));
+  window.IntersectionObserver = class implements IntersectionObserver {
+    readonly root = null;
+    readonly rootMargin = '';
+    readonly scrollMargin = '';
+    readonly thresholds: ReadonlyArray<number> = [];
+    observe(_target: Element) {}
+    unobserve(_target: Element) {}
+    disconnect() {}
+
+    takeRecords() {
+      return [];
+    }
+  };
 });
 
 const prefix = 'cds';
 const blockClass = `${prefix}--scroll-gradient`;
-const componentName = ScrollGradient.displayName;
+const componentName = ScrollGradient.displayName ?? 'ScrollGradient';
 
 const childDataTestId = 'scroll-gradient-child';
 const childrenContent = (
@@ -34,8 +43,12 @@ const childrenContent = (
   </div>
 );
 
-const renderComponent = (props = {}, children = childrenContent) =>
-  render(<ScrollGradient {...props}>{children}</ScrollGradient>);
+const renderComponent = (
+  props?: ComponentProps<typeof ScrollGradient> & {
+    'data-testid'?: string;
+    'data-custom'?: string;
+  }
+) => render(<ScrollGradient {...props}>{childrenContent}</ScrollGradient>);
 
 describe(componentName, () => {
   it('renders the component', () => {
@@ -65,13 +78,13 @@ describe(componentName, () => {
   });
 
   it('forwards a ref to the root element', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     renderComponent({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('forwards a ref to the scroll element via getScrollElementRef', () => {
-    const scrollRef = React.createRef();
+    const scrollRef = createRef<HTMLDivElement>();
     renderComponent({ getScrollElementRef: (el) => (scrollRef.current = el) });
     expect(scrollRef.current).toHaveClass(`${blockClass}__content`);
   });

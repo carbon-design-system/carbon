@@ -12,7 +12,9 @@ import React, {
   useCallback,
   useImperativeHandle,
   useState,
+  type ChangeEvent,
   type HTMLAttributes,
+  type SyntheticEvent,
 } from 'react';
 import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
@@ -41,6 +43,34 @@ export interface FileDeleteData {
   deletedFile: FileItem;
   remainingFiles: FileItem[];
 }
+
+type FileUploaderEventTarget = SyntheticEvent<Element>['target'] & {
+  action?: FileChangeData['action'];
+  addedFiles?: FileItem[];
+  clearedFiles?: FileItem[];
+  currentFiles?: FileItem[];
+  deletedFile?: FileItem;
+  deletedFileName?: string;
+  files?: FileList | null | (File[] & { item: (index: number) => File | null });
+  remainingFiles?: FileItem[];
+};
+
+type FileUploaderSyntheticEvent = SyntheticEvent<Element> & {
+  target: FileUploaderEventTarget;
+};
+
+type FileUploaderClearEvent = {
+  target: {
+    action: 'clear';
+    clearedFiles: FileItem[];
+    currentFiles: FileItem[];
+    files: File[] & { item: (index: number) => File | null };
+  };
+  preventDefault: () => void;
+  stopPropagation: () => void;
+};
+
+type FileUploaderEvent = FileUploaderSyntheticEvent | FileUploaderClearEvent;
 
 export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -116,7 +146,7 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * Event handler that is called after files are added to the uploader
    */
   onAddFiles?: (
-    event: React.SyntheticEvent<HTMLElement>,
+    event: SyntheticEvent<HTMLElement>,
     content: { addedFiles: Array<File & { invalidFileType?: boolean }> }
   ) => void;
 
@@ -126,26 +156,20 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * - Also fires for file deletions and clearFiles operations
    * - Event includes enhanced file information in event.target
    */
-  onChange?: (
-    event: React.SyntheticEvent<HTMLElement>,
-    data?: FileChangeData
-  ) => void;
+  onChange?: (event: FileUploaderEvent, data?: FileChangeData) => void;
 
   /**
    * Provide an optional `onClick` hook that is called each time the
    * FileUploader is clicked
    */
-  onClick?: (event: React.SyntheticEvent<HTMLElement>) => void;
+  onClick?: (event: SyntheticEvent<Element>) => void;
 
   /**
    * Provide an optional `onDelete` hook that is called when an uploaded item is removed.
    * When 'enable-enhanced-file-uploader' feature flag is enabled:
    * - Event includes deleted file information in event.target
    */
-  onDelete?: (
-    event: React.SyntheticEvent<HTMLElement>,
-    data?: FileDeleteData
-  ) => void;
+  onDelete?: (event: FileUploaderSyntheticEvent, data?: FileDeleteData) => void;
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available
@@ -208,7 +232,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     >([]);
 
     const uploaderButton = React.createRef<HTMLLabelElement>();
-    const nodes: HTMLElement[] = [];
 
     const createFileItem = useCallback(
       (file: File & { invalidFileType?: boolean }): FileItem => ({
@@ -247,7 +270,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     );
 
     const handleChange = useCallback(
-      (evt) => {
+      (evt: ChangeEvent<HTMLInputElement>) => {
         evt.stopPropagation();
         const incomingFiles = Array.from(evt.target.files as FileList);
         const filesToValidate = multiple ? incomingFiles : [incomingFiles[0]];
@@ -286,7 +309,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
           if (onChange) {
             const allFiles = updatedFileItems.map((item) => item.file);
-            const enhancedEvent = {
+            const enhancedEvent: FileUploaderSyntheticEvent = {
               ...evt,
               target: {
                 ...evt.target,
@@ -327,7 +350,16 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     );
 
     const handleClick = useCallback(
-      (evt, { index, filenameStatus }) => {
+      (
+        evt: SyntheticEvent<Element>,
+        {
+          index,
+          filenameStatus,
+        }: {
+          index: number;
+          filenameStatus: FileUploaderProps['filenameStatus'];
+        }
+      ) => {
         if (filenameStatus === 'edit') {
           evt.stopPropagation();
 
@@ -340,7 +372,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
             const remainingFiles = remainingItems.map((item) => item.file);
 
-            const enhancedEvent = {
+            const enhancedEvent: FileUploaderSyntheticEvent = {
               ...evt,
               target: {
                 ...evt.target,
@@ -402,7 +434,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
             setFileItems([]);
 
             if (onChange && previousItems.length > 0) {
-              const enhancedEvent = {
+              const enhancedEvent: FileUploaderClearEvent = {
                 target: {
                   files: Object.assign([], { item: () => null }),
                   clearedFiles: previousItems,
@@ -411,7 +443,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                 },
                 preventDefault: () => {},
                 stopPropagation: () => {},
-              } as unknown as React.SyntheticEvent<HTMLElement>;
+              };
               onChange(enhancedEvent);
             }
           } else {
@@ -435,7 +467,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       [`${prefix}--form-item`]: true,
       [className as string]: className,
     });
-    const getHelperLabelClasses = (baseClass) =>
+    const getHelperLabelClasses = (baseClass: string) =>
       classNames(baseClass, {
         [`${prefix}--label-description--disabled`]: disabled,
       });
@@ -445,7 +477,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         ? { field: 'md', small: 'sm' }[size]
         : size;
 
-    const getSelectedFileClasses = (file) =>
+    const getSelectedFileClasses = (file: { disabled?: boolean }) =>
       classNames(`${prefix}--file__selected-file`, {
         [`${prefix}--layout--size-${normalizedSize}`]: normalizedSize,
         [`${prefix}--file__selected-file--md`]:
@@ -455,7 +487,12 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         [`${prefix}--file__selected-file--disabled`]: file.disabled,
       });
 
-    const displayFiles = enhancedFileUploaderEnabled
+    const displayFiles: {
+      name: string | undefined;
+      disabled?: boolean;
+      key: string | number;
+      index: number;
+    }[] = enhancedFileUploaderEnabled
       ? fileItems.map((item, index) => ({
           name: item.name,
           disabled: item.disabled,
@@ -499,9 +536,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                 <span
                   key={file.key}
                   className={getSelectedFileClasses(file)}
-                  ref={(node) => {
-                    nodes[file.index] = node as HTMLSpanElement;
-                  }}
                   {...other}>
                   <Text
                     as="p"
@@ -538,13 +572,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       </div>
     );
   }
-) as {
-  (props: FileUploaderProps): React.ReactElement;
-  displayName?: string;
-  propTypes?: unknown;
-  contextTypes?: unknown;
-  defaultProps?: unknown;
-};
+);
 
 FileUploader.displayName = 'FileUploader';
 

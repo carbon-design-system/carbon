@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
@@ -12,7 +13,7 @@ import { FileUploaderItem } from '../';
 import { FeatureFlags } from '../../FeatureFlags';
 import { keys } from '../../../internal/keyboard';
 
-const statuses = ['uploading', 'edit', 'complete'];
+const statuses = ['uploading', 'edit', 'complete'] as const;
 
 describe('FileUploaderItem', () => {
   it('should apply xs size and invalid classes to an invalid file', () => {
@@ -58,7 +59,10 @@ describe('FileUploaderItem', () => {
       />
     );
 
-    let removeFile = getByLabel(edit.container, 'test-description - edit');
+    const removeFile = getByLabel(edit.container, 'test-description - edit');
+    if (!removeFile) {
+      throw new Error('Expected the edit filename control to render.');
+    }
     fireEvent.click(removeFile);
     expect(onDelete).toHaveBeenCalledTimes(1);
 
@@ -81,15 +85,18 @@ describe('FileUploaderItem', () => {
       />
     );
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    removeFile = getByText(uploading.container, description);
+    const uploadingFilename = getByText(uploading.container, description);
+    if (!uploadingFilename) {
+      throw new Error('Expected the uploading filename to render.');
+    }
 
-    fireEvent.click(removeFile);
+    fireEvent.click(uploadingFilename);
     expect(onDelete).not.toHaveBeenCalled();
 
-    fireEvent.keyDown(removeFile, keys.Enter);
+    fireEvent.keyDown(uploadingFilename, keys.Enter);
     expect(onDelete).not.toHaveBeenCalled();
 
-    fireEvent.keyDown(removeFile, keys.Space);
+    fireEvent.keyDown(uploadingFilename, keys.Space);
     expect(onDelete).not.toHaveBeenCalled();
   });
 
@@ -141,7 +148,7 @@ describe('FileUploaderItem', () => {
       );
     });
 
-    it.each(['top', 'left', 'right-end', 'bottom-start'])(
+    it.each(['top', 'left', 'right-end', 'bottom-start'] as const)(
       'should align the tooltip with `align="%s"`',
       (align) => {
         mockTruncation(true);

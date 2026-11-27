@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import React from 'react';
 import Search from './Search';
 import SearchSkeleton from './Search.Skeleton';
@@ -115,9 +116,9 @@ describe('Search', () => {
     it('should respect labelText prop', () => {
       render(<Search labelText="test-search" />);
 
-      expect(screen.getByRole('searchbox').labels[0]).toHaveTextContent(
-        'test-search'
-      );
+      expect(
+        screen.getByRole<HTMLInputElement>('searchbox').labels?.[0]
+      ).toHaveTextContent('test-search');
     });
 
     it('should warn without throwing for interactive content in labelText', () => {
@@ -259,7 +260,7 @@ describe('Search', () => {
           isExpanded={false}
         />
       );
-      const input = container.querySelector('input');
+      const input = container.querySelector<HTMLInputElement>('input');
 
       expect(screen.getAllByRole('button')[0]).toHaveAttribute('tabIndex', '0');
       expect(input).toHaveAttribute('inert');
@@ -271,14 +272,16 @@ describe('Search', () => {
         <Search labelText="test-search" onExpand={() => {}} isExpanded />
       );
 
-      expect(container.querySelector('input')).not.toHaveAttribute('inert');
+      expect(
+        container.querySelector<HTMLInputElement>('input')
+      ).not.toHaveAttribute('inert');
     });
 
     it('should respect input tabIndex and inert props if not expandable', () => {
       const { container } = render(
         <Search labelText="test-search" inert tabIndex={-1} />
       );
-      const input = container.querySelector('input');
+      const input = container.querySelector<HTMLInputElement>('input');
 
       expect(input).toHaveAttribute('inert');
       expect(input).toHaveAttribute('tabIndex', '-1');
@@ -294,7 +297,7 @@ describe('Search', () => {
           tabIndex={-1}
         />
       );
-      const input = container.querySelector('input');
+      const input = container.querySelector<HTMLInputElement>('input');
 
       expect(input).toHaveAttribute('inert');
       expect(input).toHaveAttribute('tabIndex', '-1');
@@ -310,7 +313,7 @@ describe('Search', () => {
           tabIndex={0}
         />
       );
-      const input = container.querySelector('input');
+      const input = container.querySelector<HTMLInputElement>('input');
 
       expect(input).toHaveAttribute('inert');
       expect(input).toHaveAttribute('tabIndex', '-1');
@@ -330,10 +333,9 @@ describe('Search', () => {
         'tabIndex',
         '-1'
       );
-      expect(container.querySelector('input')).toHaveAttribute(
-        'tabIndex',
-        '-1'
-      );
+      expect(
+        container.querySelector<HTMLInputElement>('input')
+      ).toHaveAttribute('tabIndex', '-1');
     });
 
     it('should not make the expand button tabbable if expandable and disabled', () => {

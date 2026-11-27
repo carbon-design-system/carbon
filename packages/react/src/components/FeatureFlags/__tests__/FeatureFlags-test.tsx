@@ -5,6 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { add } from '@carbon/feature-flags';
 import { render } from '@testing-library/react';
 import React from 'react';
@@ -1068,7 +1076,7 @@ describe('FeatureFlags', () => {
   // Notices are deduped per flag for the lifetime of the module, so each test
   // uses a flag name of its own rather than resetting shared state.
   describe('v12 flag notice', () => {
-    let info;
+    let info: jest.SpiedFunction<typeof console.info>;
 
     beforeEach(() => {
       info = jest.spyOn(console, 'info').mockImplementation(() => {});

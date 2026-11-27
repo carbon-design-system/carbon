@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { beforeAll, describe, expect, it, jest } from '@jest/globals';
 import { render, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FileUploader from '../';
+import type { FileUploaderHandle, FileUploaderProps } from '../FileUploader';
 import { FeatureFlags } from '../../FeatureFlags';
-import React from 'react';
+import React, { createRef } from 'react';
 
 const iconDescription = 'test description';
 const requiredProps = {
@@ -18,7 +20,10 @@ const requiredProps = {
   filenameStatus: 'uploading',
   labelTitle: 'Upload files',
   labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
-};
+} satisfies Pick<
+  FileUploaderProps,
+  'iconDescription' | 'filenameStatus' | 'labelTitle' | 'labelDescription'
+>;
 
 describe('FileUploader', () => {
   it.each([false, true])(
@@ -52,22 +57,25 @@ describe('FileUploader', () => {
   it.each([
     ['small', 'sm'],
     ['field', 'md'],
-  ])('should preserve the %s size alias', async (size, expectedSize) => {
-    render(
-      <FileUploader {...requiredProps} buttonLabel="Upload" size={size} />
-    );
+  ] as const)(
+    'should preserve the %s size alias',
+    async (size, expectedSize) => {
+      render(
+        <FileUploader {...requiredProps} buttonLabel="Upload" size={size} />
+      );
 
-    expect(screen.getByRole('button', { name: 'Upload' })).toHaveClass(
-      `cds--layout--size-${expectedSize}`
-    );
+      expect(screen.getByRole('button', { name: 'Upload' })).toHaveClass(
+        `cds--layout--size-${expectedSize}`
+      );
 
-    const file = new File(['test'], 'test.png', { type: 'image/png' });
-    await userEvent.upload(screen.getByLabelText('Upload'), file);
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+      await userEvent.upload(screen.getByLabelText('Upload'), file);
 
-    expect(screen.getByText('test.png').closest('span')).toHaveClass(
-      `cds--layout--size-${expectedSize}`
-    );
-  });
+      expect(screen.getByText('test.png').closest('span')).toHaveClass(
+        `cds--layout--size-${expectedSize}`
+      );
+    }
+  );
 
   it('should support a custom class name on the root element', () => {
     const { container } = render(
@@ -81,7 +89,10 @@ describe('FileUploader', () => {
       <FileUploader {...requiredProps} buttonLabel="upload" />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const file = new File(['test'], 'test.png', { type: 'image/png' });
 
     const uploadButton = screen.getByRole('button', { name: 'upload' });
@@ -94,10 +105,13 @@ describe('FileUploader', () => {
   });
 
   it('should clear all uploaded files when `clearFiles` is called on a ref', async () => {
-    const ref = React.createRef();
+    const ref = createRef<FileUploaderHandle>();
     const { container } = render(<FileUploader {...requiredProps} ref={ref} />);
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const filename = 'test.png';
     const file = new File(['test'], filename, { type: 'image/png' });
 
@@ -106,7 +120,11 @@ describe('FileUploader', () => {
     expect(screen.getByText(filename)).toBeInTheDocument();
 
     await act(async () => {
-      ref.current.clearFiles();
+      const fileUploader = ref.current;
+      if (!fileUploader) {
+        throw new Error('Expected the FileUploader ref to be set.');
+      }
+      fileUploader.clearFiles();
     });
 
     expect(screen.queryByText(filename)).not.toBeInTheDocument();
@@ -117,7 +135,10 @@ describe('FileUploader', () => {
       <FileUploader {...requiredProps} filenameStatus="edit" />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const file = new File(['test'], 'test.png', { type: 'image/png' });
 
     await userEvent.upload(input, file);
@@ -133,11 +154,14 @@ describe('FileUploader', () => {
     const { container } = render(
       <FileUploader {...requiredProps} disabled buttonLabel="disabled upload" />
     );
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     expect(input).toBeDisabled();
   });
   it('should render with different button kinds', () => {
-    const buttonKinds = ['primary', 'secondary', 'danger', 'ghost'];
+    const buttonKinds = ['primary', 'secondary', 'danger', 'ghost'] as const;
     buttonKinds.forEach((kind) => {
       const { container } = render(
         <FileUploader {...requiredProps} buttonKind={kind} />
@@ -156,7 +180,10 @@ describe('FileUploader', () => {
       />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const file = new File(['test'], 'test.png', { type: 'image/png' });
 
     await userEvent.upload(input, file);
@@ -175,7 +202,10 @@ describe('FileUploader', () => {
       <FileUploader {...requiredProps} filenameStatus="edit" />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const file = new File(['test'], 'test.png', { type: 'image/png' });
 
     await userEvent.upload(input, file);
@@ -199,7 +229,10 @@ describe('FileUploader', () => {
         <FileUploader {...requiredProps} filenameStatus="edit" />
       );
 
-      const input = container.querySelector('input');
+      const input = container.querySelector<HTMLInputElement>('input');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
       const file = new File(['test'], 'test.png', { type: 'image/png' });
 
       await userEvent.upload(input, file);
@@ -221,7 +254,10 @@ describe('FileUploader', () => {
       <FileUploader {...requiredProps} onChange={onChange} />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const file = new File(['test'], 'test.png', { type: 'image/png' });
 
     await userEvent.upload(input, file);
@@ -230,7 +266,7 @@ describe('FileUploader', () => {
   });
 
   it('should filter out files larger than maxFileSize', async () => {
-    const onAddFiles = jest.fn();
+    const onAddFiles = jest.fn<NonNullable<FileUploaderProps['onAddFiles']>>();
     const onChange = jest.fn();
     const { container } = render(
       <FileUploader
@@ -241,7 +277,10 @@ describe('FileUploader', () => {
       />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const largeFile = new File(['max filesize'], 'max-filesize.txt', {
       type: 'text/plain',
     });
@@ -258,12 +297,15 @@ describe('FileUploader', () => {
   });
 
   it('should call onAddFiles with validated files after validation', async () => {
-    const onAddFiles = jest.fn();
+    const onAddFiles = jest.fn<NonNullable<FileUploaderProps['onAddFiles']>>();
     const { container } = render(
       <FileUploader {...requiredProps} multiple onAddFiles={onAddFiles} />
     );
 
-    const input = container.querySelector('input');
+    const input = container.querySelector<HTMLInputElement>('input');
+    if (!input) {
+      throw new Error('Expected the file input to render.');
+    }
     const fileA = new File(['a'], 'a.txt', { type: 'text/plain' });
     const fileB = new File(['b'], 'b.txt', { type: 'text/plain' });
 
@@ -283,7 +325,7 @@ describe('FileUploader', () => {
     beforeAll(() => {
       Object.defineProperty(global, 'crypto', {
         value: {
-          getRandomValues: (arr) => {
+          getRandomValues: (arr: Uint8Array) => {
             for (let i = 0; i < arr.length; i++) {
               arr[i] = Math.floor(Math.random() * 256);
             }
@@ -295,7 +337,7 @@ describe('FileUploader', () => {
     });
 
     it('should handle multiple file uploads with duplicate prevention', async () => {
-      const onChange = jest.fn();
+      const onChange = jest.fn<NonNullable<FileUploaderProps['onChange']>>();
 
       render(
         <FeatureFlags enableEnhancedFileUploader>
@@ -307,7 +349,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
 
       const file1 = new File(['content1'], 'photo1.png', { type: 'image/png' });
       await userEvent.upload(input, file1);
@@ -318,16 +364,19 @@ describe('FileUploader', () => {
       const newFile = new File(['new'], 'photo2.png', { type: 'image/png' });
       await userEvent.upload(input, [duplicateFile, newFile]);
 
-      const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
+      const lastCall = onChange.mock.calls.at(-1)?.[0];
+      if (!lastCall) {
+        throw new Error('Expected the enhanced file event');
+      }
       expect(lastCall.target.action).toBe('add');
-      expect(lastCall.target.currentFiles.length).toBe(2);
-      expect(typeof lastCall.target.files.item).toBe('function');
-      expect(lastCall.target.files.item(0)).toBeDefined();
-      expect(lastCall.target.files.item(99)).toBe(null);
+      expect(lastCall.target.currentFiles?.length).toBe(2);
+      expect(typeof lastCall.target.files?.item).toBe('function');
+      expect(lastCall.target.files?.item(0)).toBeDefined();
+      expect(lastCall.target.files?.item(99)).toBe(null);
     });
 
     it('should replace files in single file mode', async () => {
-      const onChange = jest.fn();
+      const onChange = jest.fn<NonNullable<FileUploaderProps['onChange']>>();
 
       render(
         <FeatureFlags enableEnhancedFileUploader>
@@ -339,7 +388,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
 
       const file1 = new File(['content1'], 'first.png', { type: 'image/png' });
       await userEvent.upload(input, file1);
@@ -347,14 +400,18 @@ describe('FileUploader', () => {
       const file2 = new File(['content2'], 'second.png', { type: 'image/png' });
       await userEvent.upload(input, file2);
 
-      const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
-      expect(lastCall.target.currentFiles).toHaveLength(1);
-      expect(lastCall.target.currentFiles[0].name).toBe('second.png');
+      const lastCall = onChange.mock.calls.at(-1)?.[0];
+      if (!lastCall) {
+        throw new Error('Expected the enhanced file event');
+      }
+      const currentFiles = lastCall.target.currentFiles;
+      expect(currentFiles?.length).toBe(1);
+      expect(currentFiles?.[0]?.name).toBe('second.png');
     });
 
     it('should provide enhanced callbacks when deleting files', async () => {
-      const onDelete = jest.fn();
-      const onChange = jest.fn();
+      const onDelete = jest.fn<NonNullable<FileUploaderProps['onDelete']>>();
+      const onChange = jest.fn<NonNullable<FileUploaderProps['onChange']>>();
 
       render(
         <FeatureFlags enableEnhancedFileUploader>
@@ -367,7 +424,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
       const file = new File(['test'], 'deleteme.png', { type: 'image/png' });
 
       await userEvent.upload(input, file);
@@ -380,9 +441,8 @@ describe('FileUploader', () => {
 
       expect(onDelete).toHaveBeenCalledTimes(1);
       const deleteEvent = onDelete.mock.calls[0][0];
-      //verifys the event
       expect(deleteEvent.target.action).toBe('remove');
-      expect(deleteEvent.target.deletedFile.name).toBe('deleteme.png');
+      expect(deleteEvent.target.deletedFile?.name).toBe('deleteme.png');
       expect(deleteEvent.target.deletedFileName).toBe('deleteme.png');
 
       expect(onChange).toHaveBeenCalledTimes(1);
@@ -391,7 +451,7 @@ describe('FileUploader', () => {
     });
 
     it('should provide file management utilities through ref methods', async () => {
-      const ref = React.createRef();
+      const ref = createRef<FileUploaderHandle>();
 
       render(
         <FeatureFlags enableEnhancedFileUploader>
@@ -399,7 +459,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
       const files = [
         new File(['content1'], 'util1.png', { type: 'image/png' }),
         new File(['content2'], 'util2.png', { type: 'image/png' }),
@@ -407,13 +471,20 @@ describe('FileUploader', () => {
 
       await userEvent.upload(input, files);
 
-      const currentFiles = ref.current.getCurrentFiles();
+      const fileUploader = ref.current;
+      if (!fileUploader) {
+        throw new Error('Expected the FileUploader ref to be set.');
+      }
+      if (!fileUploader.getCurrentFiles) {
+        throw new Error('Expected getCurrentFiles to be available.');
+      }
+      const currentFiles = fileUploader.getCurrentFiles();
       expect(currentFiles).toHaveLength(2);
       expect(currentFiles[0].name).toBe('util1.png');
       expect(currentFiles[1].name).toBe('util2.png');
 
       await act(async () => {
-        ref.current.clearFiles();
+        fileUploader.clearFiles();
       });
 
       expect(screen.queryByText('util1.png')).not.toBeInTheDocument();
@@ -421,8 +492,8 @@ describe('FileUploader', () => {
     });
 
     it('should trigger onChange when clearFiles is called with files present', async () => {
-      const ref = React.createRef();
-      const onChange = jest.fn();
+      const ref = createRef<FileUploaderHandle>();
+      const onChange = jest.fn<NonNullable<FileUploaderProps['onChange']>>();
 
       render(
         <FeatureFlags enableEnhancedFileUploader>
@@ -435,7 +506,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
       const file = new File(['content'], 'clear-test.png', {
         type: 'image/png',
       });
@@ -444,18 +519,22 @@ describe('FileUploader', () => {
       onChange.mockClear();
 
       await act(async () => {
-        ref.current.clearFiles();
+        const fileUploader = ref.current;
+        if (!fileUploader) {
+          throw new Error('Expected the FileUploader ref to be set.');
+        }
+        fileUploader.clearFiles();
       });
 
       expect(onChange).toHaveBeenCalledTimes(1);
       const clearEvent = onChange.mock.calls[0][0];
       expect(clearEvent.target.action).toBe('clear');
-      expect(clearEvent.target.currentFiles).toHaveLength(0);
-      expect(clearEvent.target.clearedFiles).toHaveLength(1);
+      expect(clearEvent.target.currentFiles?.length).toBe(0);
+      expect(clearEvent.target.clearedFiles?.length).toBe(1);
     });
 
     it('should allow setting files programmatically via setCurrentFiles', async () => {
-      const ref = React.createRef();
+      const ref = createRef<FileUploaderHandle>();
 
       render(
         <FeatureFlags enableEnhancedFileUploader>
@@ -471,14 +550,31 @@ describe('FileUploader', () => {
         uuid: 'test-uuid-123',
         file: mockFile,
       };
+      const fileUploader = ref.current;
+      if (!fileUploader) {
+        throw new Error('Expected the FileUploader ref to be set.');
+      }
+      const setCurrentFiles = fileUploader.setCurrentFiles;
+      if (!setCurrentFiles) {
+        throw new Error('Expected setCurrentFiles to be available.');
+      }
 
       await act(async () => {
-        ref.current.setCurrentFiles([mockFileItem]);
+        setCurrentFiles([mockFileItem]);
       });
 
       expect(screen.getByText('programmatic.png')).toBeInTheDocument();
 
-      const currentFiles = ref.current.getCurrentFiles();
+      const updatedFileUploader = ref.current;
+      if (!updatedFileUploader) {
+        throw new Error(
+          'Expected the FileUploader ref to be set after update.'
+        );
+      }
+      if (!updatedFileUploader.getCurrentFiles) {
+        throw new Error('Expected getCurrentFiles to be available.');
+      }
+      const currentFiles = updatedFileUploader.getCurrentFiles();
       expect(currentFiles).toHaveLength(1);
       expect(currentFiles[0].name).toBe('programmatic.png');
     });
@@ -496,7 +592,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
       const file = new File(['test'], 'click-test.png', { type: 'image/png' });
 
       await userEvent.upload(input, file);
@@ -522,7 +622,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
       const file = new File(['test'], 'keyboard-test.png', {
         type: 'image/png',
       });
@@ -541,7 +645,7 @@ describe('FileUploader', () => {
     });
 
     it('should provide files.item() function in delete event', async () => {
-      const onDelete = jest.fn();
+      const onDelete = jest.fn<NonNullable<FileUploaderProps['onDelete']>>();
 
       render(
         <FeatureFlags enableEnhancedFileUploader>
@@ -554,7 +658,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
       const files = [
         new File(['content1'], 'file1.png', { type: 'image/png' }),
         new File(['content2'], 'file2.png', { type: 'image/png' }),
@@ -570,16 +678,15 @@ describe('FileUploader', () => {
       expect(onDelete).toHaveBeenCalledTimes(1);
       const deleteEvent = onDelete.mock.calls[0][0];
 
-      // Test the item() function
-      expect(typeof deleteEvent.target.files.item).toBe('function');
-      expect(deleteEvent.target.files.item(0)).toBeDefined();
-      expect(deleteEvent.target.files.item(0).name).toBe('file2.png');
-      expect(deleteEvent.target.files.item(99)).toBe(null);
+      expect(typeof deleteEvent.target.files?.item).toBe('function');
+      expect(deleteEvent.target.files?.item(0)).toBeDefined();
+      expect(deleteEvent.target.files?.item(0)?.name).toBe('file2.png');
+      expect(deleteEvent.target.files?.item(99)).toBe(null);
     });
 
     it('should provide files.item() function in clearFiles event', async () => {
-      const ref = React.createRef();
-      const onChange = jest.fn();
+      const ref = createRef<FileUploaderHandle>();
+      const onChange = jest.fn<NonNullable<FileUploaderProps['onChange']>>();
 
       render(
         <FeatureFlags enableEnhancedFileUploader>
@@ -592,7 +699,11 @@ describe('FileUploader', () => {
         </FeatureFlags>
       );
 
-      const input = document.querySelector('input[type="file"]');
+      const input =
+        document.querySelector<HTMLInputElement>('input[type="file"]');
+      if (!input) {
+        throw new Error('Expected the file input to render.');
+      }
       const file = new File(['content'], 'clear-item-test.png', {
         type: 'image/png',
       });
@@ -601,15 +712,17 @@ describe('FileUploader', () => {
       onChange.mockClear();
 
       await act(async () => {
-        ref.current.clearFiles();
+        const fileUploader = ref.current;
+        if (!fileUploader) {
+          throw new Error('Expected the FileUploader ref to be set.');
+        }
+        fileUploader.clearFiles();
       });
 
       expect(onChange).toHaveBeenCalledTimes(1);
       const clearEvent = onChange.mock.calls[0][0];
-
-      // Test the item() function returns null for cleared files
-      expect(typeof clearEvent.target.files.item).toBe('function');
-      expect(clearEvent.target.files.item(0)).toBe(null);
+      expect(typeof clearEvent.target.files?.item).toBe('function');
+      expect(clearEvent.target.files?.item(0)).toBe(null);
     });
   });
 });

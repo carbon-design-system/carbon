@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { getByText, render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { Simulate } from 'react-dom/test-utils';
 import { Filename } from '../';
 
-const statuses = ['uploading', 'edit', 'complete'];
+const statuses = ['uploading', 'edit', 'complete'] as const;
 
 describe('Filename', () => {
   describe('automated accessibility tests', () => {
@@ -36,10 +36,14 @@ describe('Filename', () => {
       />
     );
 
-    fireEvent.click(
-      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      edit.querySelector(`[aria-label="test description - File 1"]`)
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const editControl = edit.querySelector(
+      `[aria-label="test description - File 1"]`
     );
+    if (!editControl) {
+      throw new Error('Expected the edit icon to render.');
+    }
+    fireEvent.click(editControl);
     expect(onClick).toHaveBeenCalledTimes(1);
 
     onClick.mockReset();
@@ -53,7 +57,13 @@ describe('Filename', () => {
     );
 
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    fireEvent.click(complete.querySelector(`[aria-label="test description"]`));
+    const completeControl = complete.querySelector(
+      `[aria-label="test description"]`
+    );
+    if (!completeControl) {
+      throw new Error('Expected the complete icon to render.');
+    }
+    fireEvent.click(completeControl);
     expect(onClick).toHaveBeenCalledTimes(1);
 
     const { container: uploading } = render(
