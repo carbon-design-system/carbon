@@ -2071,8 +2071,8 @@ __metadata:
     "@babel/core": "npm:^8.0.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
-    "@octokit/plugin-retry": "npm:^3.0.7"
-    "@octokit/plugin-throttling": "npm:^4.0.0"
+    "@octokit/plugin-retry": "npm:^8.0.0"
+    "@octokit/plugin-throttling": "npm:^11.0.0"
     "@octokit/rest": "npm:^22.0.0"
     chalk: "npm:^6.0.0"
     change-case-all: "npm:^2.1.0"
@@ -5893,20 +5893,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/openapi-types@npm:^12.11.0":
-  version: 12.11.0
-  resolution: "@octokit/openapi-types@npm:12.11.0"
-  checksum: 10/579bbbafe816ab02441d3088c04a7728f13b73aafbe306bbdd4deac374b345b453e520c343e45db454ae6091b75a7b3ce5b7f8434d3e53e45d0802023fcb84e0
-  languageName: node
-  linkType: hard
-
-"@octokit/openapi-types@npm:^13.11.0":
-  version: 13.13.1
-  resolution: "@octokit/openapi-types@npm:13.13.1"
-  checksum: 10/6dcfd1fbcc5807d8232f4f4debf98f8495eb7e672914050ce21345f8a38851ab6b1ea5d4fae6e9d41be9904e8e726d56bdb775a72c361a68db7546deaf06c5e0
-  languageName: node
-  linkType: hard
-
 "@octokit/openapi-types@npm:^25.1.0":
   version: 25.1.0
   resolution: "@octokit/openapi-types@npm:25.1.0"
@@ -5918,6 +5904,20 @@ __metadata:
   version: 27.0.0
   resolution: "@octokit/openapi-types@npm:27.0.0"
   checksum: 10/5cd2cdf4e41fdf522e15e3d53f3ece8380d98dda9173a6fc905828fb2c33e8733d5f5d2a757ae3a572525f4749748e66cb40e7939372132988d8eb4ba978d54f
+  languageName: node
+  linkType: hard
+
+"@octokit/openapi-types@npm:^28.0.0":
+  version: 28.0.0
+  resolution: "@octokit/openapi-types@npm:28.0.0"
+  checksum: 10/031cebd35b7a110771ab9909d4d2f8ac2dba7185b55ea2ba91dfa0736f397797c768b7c12b12290e9cb42f1dd1d157ffe829d2009be8542e227780e588a40c68
+  languageName: node
+  linkType: hard
+
+"@octokit/openapi-types@npm:^29.0.1":
+  version: 29.0.1
+  resolution: "@octokit/openapi-types@npm:29.0.1"
+  checksum: 10/843b0ad4891152e0e22c3c6527602992448dc6aec92d9d90f5e9b5c4ceb440224e911d3fdb583be0af06d2db7b93b4bc5663450d8117b818df8e77c407af877d
   languageName: node
   linkType: hard
 
@@ -5981,34 +5981,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-retry@npm:^3.0.7":
-  version: 3.0.9
-  resolution: "@octokit/plugin-retry@npm:3.0.9"
+"@octokit/plugin-retry@npm:^8.0.0":
+  version: 8.1.1
+  resolution: "@octokit/plugin-retry@npm:8.1.1"
   dependencies:
-    "@octokit/types": "npm:^6.0.3"
-    bottleneck: "npm:^2.15.3"
-  checksum: 10/5744780d308dd2f2b8174264604a9f8ea977374256f5eaf0314e5181c32f96ec53a3cfcee67bf1b48dc7eed401ebefebd2fa744b41cf03103affac92f397a874
-  languageName: node
-  linkType: hard
-
-"@octokit/plugin-throttling@npm:^4.0.0":
-  version: 4.3.0
-  resolution: "@octokit/plugin-throttling@npm:4.3.0"
-  dependencies:
-    "@octokit/types": "npm:^7.0.0"
+    "@octokit/request-error": "npm:^7.1.1"
+    "@octokit/types": "npm:^17.0.0"
     bottleneck: "npm:^2.15.3"
   peerDependencies:
-    "@octokit/core": ^4.0.0
-  checksum: 10/498baab4c5531906d06bf6fe3f71e07270ab44690d8a29b83cbca40f7ad4aa01dfa31862599c3a3d312da8075bb41551b1025c87014795bc3ec588334c98b6d0
+    "@octokit/core": ">=7"
+  checksum: 10/ee42b70c04b6749362093bf79d3b5f4019a3a5e3cdf79e28e9d781e4a43242aa67781d1e71dba069646ea6a0b442e155403877493cd3e194e7045386b26023d7
   languageName: node
   linkType: hard
 
-"@octokit/request-error@npm:^7.0.2, @octokit/request-error@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "@octokit/request-error@npm:7.1.0"
+"@octokit/plugin-throttling@npm:^11.0.0":
+  version: 11.0.5
+  resolution: "@octokit/plugin-throttling@npm:11.0.5"
   dependencies:
-    "@octokit/types": "npm:^16.0.0"
-  checksum: 10/c1d447ff7482382c69f7a4b2eaa44c672906dd111d8a9196a5d07f2adc4ae0f0e12ec4ce0063f14f9b2fb5f0cef4451c95ec961a7a711bd900e5d6441d546570
+    "@octokit/types": "npm:^17.0.0"
+    bottleneck: "npm:^2.15.3"
+  peerDependencies:
+    "@octokit/core": ^7.0.0
+  checksum: 10/0262e8229fc515499e157a7877e62f8b1a27073374301e4c296584e3a9ac2e3714f4a25fcaebc1e81f3745bf52dcf43157593e242f84de1309bfa32d4f2182ff
+  languageName: node
+  linkType: hard
+
+"@octokit/request-error@npm:^7.0.2, @octokit/request-error@npm:^7.1.0, @octokit/request-error@npm:^7.1.1":
+  version: 7.1.2
+  resolution: "@octokit/request-error@npm:7.1.2"
+  dependencies:
+    "@octokit/types": "npm:^18.0.0"
+  checksum: 10/cdc39ee0776b3ee149e3af6373a339f7e3eea98a712d83452db302eb7acd16187325a8be2853623c1215e629674c220395bb47937d8ce8a8a2fa757dc803c52d
   languageName: node
   linkType: hard
 
@@ -6056,21 +6059,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^6.0.3":
-  version: 6.41.0
-  resolution: "@octokit/types@npm:6.41.0"
+"@octokit/types@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "@octokit/types@npm:17.0.0"
   dependencies:
-    "@octokit/openapi-types": "npm:^12.11.0"
-  checksum: 10/905c8553e46e1a32b27f3f8c665c6a390648204f0b05c23693cd22a874e0bf654534ae2e51de3e09a794c07cc67cfd7f067b57f93cea0f658a369767537a72f0
+    "@octokit/openapi-types": "npm:^28.0.0"
+  checksum: 10/38db90d8a2dde153b84a26b6ba2aa4e4a8ddda03dd13d6b4a6f075ffe850c946b6852ba77457e4de8c07b10d06f59d174223e69243c88ecb5cf6280ee541601e
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^7.0.0":
-  version: 7.5.1
-  resolution: "@octokit/types@npm:7.5.1"
+"@octokit/types@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "@octokit/types@npm:18.0.0"
   dependencies:
-    "@octokit/openapi-types": "npm:^13.11.0"
-  checksum: 10/53e43f423bf9229fa2ba55a239c1c7352f7f2c1141074d8884ba3d92fd9f57504ed6d7b6f93f3e8eee38662ff3062fedebe9fb560a91d910283fe9be5f5fa571
+    "@octokit/openapi-types": "npm:^29.0.1"
+  checksum: 10/40cdc058e18295d838f7f0680bf839d7622fe23e1467166a9d2df4b3a8dff995f088c3f132b0b789fb27213647f6dc3a84f286c099de5c4a5a0b858fb07b4e55
   languageName: node
   linkType: hard
 
