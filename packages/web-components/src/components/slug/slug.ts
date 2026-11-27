@@ -6,7 +6,7 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { adoptStyles, html } from 'lit';
+import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
@@ -72,16 +72,6 @@ export default class CDSSlug extends CDSToggleTip {
 
   @property()
   previousValue;
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    adoptStyles(this.renderRoot as ShadowRoot, [
-      popoverStyles,
-      toggletipStyles,
-      styles,
-    ]);
-  }
 
   protected _handleClick = () => {
     if (this.revertActive) {
@@ -154,4 +144,6 @@ export default class CDSSlug extends CDSToggleTip {
       this.parentElement?.requestUpdate();
     }
   }
+
+  static styles = [popoverStyles, toggletipStyles, styles];
 }

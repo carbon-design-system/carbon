@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { adoptStyles, html, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -69,12 +69,6 @@ class CDSChatButton extends LitElement {
   @property({ attribute: 'is-selected', type: Boolean })
   isSelected = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    adoptStyles(this.renderRoot as ShadowRoot, [buttonStyles, styles]);
-  }
-
   render() {
     const allowedSizes = [
       CHAT_BUTTON_SIZE.SMALL,
@@ -116,6 +110,8 @@ class CDSChatButton extends LitElement {
       </cds-button>
     `;
   }
+
+  static styles = [buttonStyles, styles];
 }
 
 export default CDSChatButton;

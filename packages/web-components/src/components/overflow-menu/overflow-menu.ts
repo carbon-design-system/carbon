@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { adoptStyles, html } from 'lit';
+import { html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -369,8 +369,6 @@ class CDSOverflowMenu
       this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
-
-    adoptStyles(this.renderRoot as ShadowRoot, [iconButtonStyles, styles]);
 
     this.addEventListener(
       CDSMenu.eventOnClose,
@@ -796,6 +794,8 @@ class CDSOverflowMenu
       tooltip.open = false;
     }
   }
+
+  static styles = [iconButtonStyles, styles];
 }
 
 export default CDSOverflowMenu;

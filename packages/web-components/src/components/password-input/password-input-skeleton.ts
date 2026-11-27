@@ -9,6 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './password-input.scss?lit';
 
 /**
@@ -33,7 +34,7 @@ class CDSPasswordInputSkeleton extends LitElement {
     `;
   }
 
-  static styles = styles;
+  static styles = [textInputStyles, styles];
 }
 
 export default CDSPasswordInputSkeleton;

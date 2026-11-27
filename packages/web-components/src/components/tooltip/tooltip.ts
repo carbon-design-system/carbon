@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { adoptStyles } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
@@ -212,8 +211,6 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     }
     window.addEventListener('keydown', this._handleKeydown, true);
     super.connectedCallback();
-
-    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }
 
   disconnectedCallback() {
@@ -262,6 +259,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   static get selectorTooltipContent() {
     return `${prefix}-tooltip-content`;
   }
+
+  static styles = [popoverStyles, styles];
 }
 
 export default CDSTooltip;

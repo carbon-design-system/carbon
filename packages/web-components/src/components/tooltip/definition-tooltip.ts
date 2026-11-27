@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { adoptStyles, html, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
@@ -55,8 +55,6 @@ class CDSDefinitionTooltip extends AutoAlignMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
-
-    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
 
     if (this.hasAttribute('default-open')) {
       this.open = true;
@@ -130,7 +128,7 @@ class CDSDefinitionTooltip extends AutoAlignMixin(LitElement) {
     `;
   }
 
-  static styles = styles;
+  static styles = [popoverStyles, styles];
 }
 
 export default CDSDefinitionTooltip;

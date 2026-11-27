@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { adoptStyles, html } from 'lit';
+import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
@@ -74,16 +74,6 @@ class CDSIconButton extends AutoAlignMixin(CDSButton) {
   @property({ reflect: true })
   size?: ICON_BUTTON_SIZE | string = 'lg';
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    adoptStyles(this.renderRoot as ShadowRoot, [
-      tooltipStyles,
-      buttonStyles,
-      styles,
-    ]);
-  }
-
   updated(changedProperties) {
     super.updated?.(changedProperties);
     if (changedProperties) {
@@ -132,6 +122,8 @@ class CDSIconButton extends AutoAlignMixin(CDSButton) {
       </cds-tooltip>
     `;
   }
+
+  static styles = [tooltipStyles, buttonStyles, styles];
 }
 
 export default CDSIconButton;

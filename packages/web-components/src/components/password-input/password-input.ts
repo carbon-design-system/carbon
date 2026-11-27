@@ -18,6 +18,7 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import '../tooltip';
 import '../tooltip/tooltip-content';
+import textInputStyles from '../text-input/text-input.scss?lit';
 import styles from './password-input.scss?lit';
 import CDSTextInput from '../text-input/text-input';
 import CDSTooltip from '../tooltip/tooltip';
@@ -397,7 +398,7 @@ class CDSPasswordInput extends CDSTextInput {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles;
+  static styles = [textInputStyles, styles];
 }
 
 export default CDSPasswordInput;
