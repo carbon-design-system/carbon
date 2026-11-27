@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/badge-indicator/index.js';
 import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-button', () => {
@@ -172,42 +173,67 @@ describe('cds-button', () => {
 
     it('should support badge indicator', async () => {
       const el = await fixture(html`
-        <cds-button has-icon-only badge-count="12" kind="ghost" size="lg">
+        <cds-button has-icon-only kind="ghost" size="lg">
           <svg slot="icon" data-testid="svg"></svg>
+          <cds-badge-indicator
+            slot="badge-indicator"
+            count="12"></cds-badge-indicator>
         </cds-button>
       `);
 
-      expect(el).to.have.attribute('badge-count', '12');
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+      const badgeSlot = button?.querySelector('slot[name="badge-indicator"]');
+      expect(badgeSlot).to.exist;
+      expect(badgeSlot.assignedElements()[0].tagName.toLowerCase()).to.equal(
+        'cds-badge-indicator'
+      );
       await expect(el).shadowDom.to.equalSnapshot();
     });
 
     it('should support badge indicator and truncate', async () => {
       const el = await fixture(html`
-        <cds-button has-icon-only badge-count="1200" kind="ghost" size="lg">
+        <cds-button has-icon-only kind="ghost" size="lg">
           <svg slot="icon" data-testid="svg"></svg>
+          <cds-badge-indicator
+            slot="badge-indicator"
+            count="1200"></cds-badge-indicator>
         </cds-button>
       `);
 
-      expect(el).to.have.attribute('badge-count', '1200');
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+      const badgeSlot = button?.querySelector('slot[name="badge-indicator"]');
+      const badge = badgeSlot?.assignedElements()?.[0];
+
+      expect(badgeSlot).to.exist;
+      expect(badge?.shadowRoot?.textContent?.trim()).to.equal('999+');
+      await expect(el).shadowDom.to.equalSnapshot();
+    });
+
+    it('should place the badge indicator slot inside the link button', async () => {
+      const el = await fixture(html`
+        <cds-button
+          has-icon-only
+          kind="ghost"
+          size="lg"
+          href="https://www.example.com">
+          <svg slot="icon" data-testid="svg"></svg>
+          <cds-badge-indicator
+            slot="badge-indicator"
+            count="4"></cds-badge-indicator>
+        </cds-button>
+      `);
 
       await el.updateComplete;
 
-      // Check that the badge shows "999+" for counts over 999
-      const shadowRoot = el.shadowRoot;
-      const badgeSlot = shadowRoot?.querySelector(
-        'slot[name="badge-indicator"]'
-      );
-
-      let foundBadgeText = false;
-      let badgeText = '';
-
-      const assignedElements = badgeSlot?.assignedElements?.();
-      if (assignedElements && assignedElements.length > 0) {
-        badgeText = assignedElements[0].textContent?.trim() || '';
-        foundBadgeText = badgeText === '999+';
-      }
-      expect(el).to.have.attribute('badge-count', '1200');
-      await expect(el).shadowDom.to.equalSnapshot();
+      const link = el.shadowRoot?.querySelector('a');
+      const badgeSlot = link?.querySelector('slot[name="badge-indicator"]');
+      expect(badgeSlot).to.exist;
+      expect(el.shadowRoot?.querySelector('a > slot[name="badge-indicator"]'))
+        .to.exist;
     });
 
     it('should set aria-pressed on a selected ghost icon button', async () => {
