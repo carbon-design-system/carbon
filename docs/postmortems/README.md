@@ -12,7 +12,7 @@ topic [here](https://landing.google.com/sre/sre-book/chapters/postmortem/).
 
 ## Process
 
-- Copy the [Postmortem template](./00-template.md) over to a new file
+- Copy the [Postmortem template](./0000-00-00-template.md) over to a new file
 - This file should be named: `YYYY-MM-DD-title.md`
   - For example: `10-11-05-critical-layout-breaking-change.md`
 - Fill out the template as best you can, be as detailed as needed
