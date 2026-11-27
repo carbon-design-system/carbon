@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import React, { useState } from 'react';
 import { ErrorBoundary, ErrorBoundaryContext } from '../';
 import userEvent from '@testing-library/user-event';
@@ -31,9 +32,11 @@ describe('ErrorBoundary', () => {
   });
 
   it('should render a fallback if an error is caught', () => {
-    console.error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleError = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
 
-    function MockComponent() {
+    function MockComponent(): never {
       throw new Error('test error');
     }
 
@@ -53,16 +56,18 @@ describe('ErrorBoundary', () => {
 
     expect(screen.queryByText('mock')).not.toBeInTheDocument();
     expect(screen.getByText('fallback')).toBeInTheDocument();
-    expect(console.error).toHaveBeenCalled();
+    expect(consoleError).toHaveBeenCalled();
     expect(log).toHaveBeenCalled();
 
-    console.error.mockRestore();
+    consoleError.mockRestore();
   });
 
   it('should reset from fallback if children have changed', async () => {
-    console.error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleError = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
 
-    function ThrowError({ shouldThrowError }) {
+    function ThrowError({ shouldThrowError }: { shouldThrowError: boolean }) {
       if (shouldThrowError) {
         throw new Error('test error');
       }
@@ -107,6 +112,6 @@ describe('ErrorBoundary', () => {
     expect(screen.getByText('no error span')).toBeInTheDocument();
     expect(screen.queryByText('fallback')).not.toBeInTheDocument();
 
-    console.error.mockRestore();
+    consoleError.mockRestore();
   });
 });

@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { act, render, fireEvent, screen } from '@testing-library/react';
+import { describe, expect, it, jest } from '@jest/globals';
+import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { FileUploaderButton } from '../';
 import userEvent from '@testing-library/user-event';
@@ -94,17 +95,17 @@ describe('FileUploaderButton', () => {
   it('should reset the input value when the label is clicked', async () => {
     render(<FileUploaderButton accept={['.png']} labelText="test" />);
 
-    const input = screen.getByLabelText('test');
+    const input = screen.getByLabelText<HTMLInputElement>('test');
     const file = new File(['test'], 'test.png', { type: 'image/png' });
 
     await userEvent.upload(input, file);
 
-    expect(input.files.length).toBe(1);
+    expect(input.files?.length).toBe(1);
 
     // Use the button text that's actually rendered
     await userEvent.click(screen.getByRole('button'));
 
-    expect(input.files.length).toBe(0);
+    expect(input.files?.length).toBe(0);
   });
 
   it('should update the label text if it receives a new value from props', () => {

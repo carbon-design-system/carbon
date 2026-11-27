@@ -1,19 +1,22 @@
 // cspell:ignore resizer
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, fireEvent, screen } from '@testing-library/react';
-import React from 'react';
+import React, { createRef, useState, type ComponentProps } from 'react';
 import { DEBOUNCE_DELAY, Resizer } from '../Resizer';
 
-const componentName = Resizer.displayName;
+const componentName = Resizer.displayName ?? 'Resizer';
 
 describe(componentName, () => {
-  let prev, next, resizer;
+  let prev: HTMLElement;
+  let next: HTMLElement;
+  let resizer: HTMLElement;
 
   const ResizableContainer = ({
     orientation = 'vertical',
@@ -21,17 +24,24 @@ describe(componentName, () => {
     onResizeEnd,
     onDoubleClick,
     'data-testid': testId = 'resizer',
+  }: Omit<Partial<ComponentProps<typeof Resizer>>, 'onDoubleClick'> & {
+    onDoubleClick?: () => void;
+    'data-testid'?: string;
   }) => {
-    const [prevSize, setPrevSize] = React.useState(100);
-    const [nextSize, setNextSize] = React.useState(100);
+    const [prevSize, setPrevSize] = useState(100);
+    const [nextSize, setNextSize] = useState(100);
 
-    const handleResize = (_, delta) => {
+    const handleResize: NonNullable<
+      ComponentProps<typeof Resizer>['onResize']
+    > = (event, delta) => {
       setPrevSize((p) => p + delta);
       setNextSize((n) => n - delta);
-      onResize?.(_, delta);
+      onResize?.(event, delta);
     };
 
-    const handleResizeEnd = (e, meta) => {
+    const handleResizeEnd: NonNullable<
+      ComponentProps<typeof Resizer>['onResizeEnd']
+    > = (e, meta) => {
       onResizeEnd?.(e, meta);
     };
 
@@ -62,7 +72,13 @@ describe(componentName, () => {
     );
   };
 
-  const setupDOM = (orientation = 'vertical', props = {}) => {
+  const setupDOM = (
+    orientation: 'vertical' | 'horizontal' = 'vertical',
+    props: Omit<Partial<ComponentProps<typeof Resizer>>, 'onDoubleClick'> & {
+      onDoubleClick?: () => void;
+      'data-testid'?: string;
+    } = {}
+  ) => {
     const utils = render(
       <ResizableContainer orientation={orientation} {...props} />
     );
@@ -98,7 +114,7 @@ describe(componentName, () => {
     });
 
     it('forwards a ref to the containing node', () => {
-      const ref = React.createRef();
+      const ref = createRef<HTMLDivElement>();
       render(<Resizer orientation="vertical" ref={ref} />);
       expect(ref.current).toBeInstanceOf(HTMLElement);
     });

@@ -1,15 +1,15 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { useDisclosure } from '../index';
-import '@testing-library/jest-dom';
 
 describe('useDisclosure', () => {
   // https://www.w3.org/TR/wai-aria-practices-1.1/#keyboard-interaction-8
@@ -39,11 +39,19 @@ describe('useDisclosure', () => {
     expect(trigger).toHaveFocus();
 
     // eslint-disable-next-line testing-library/no-node-access
-    await userEvent.click(document.activeElement);
+    const firstActiveElement = document.activeElement;
+    if (!firstActiveElement) {
+      throw new Error('Expected the trigger to receive focus.');
+    }
+    await userEvent.click(firstActiveElement);
     expect(content).toBeVisible();
 
     // eslint-disable-next-line testing-library/no-node-access
-    await userEvent.click(document.activeElement);
+    const secondActiveElement = document.activeElement;
+    if (!secondActiveElement) {
+      throw new Error('Expected the trigger to remain focused.');
+    }
+    await userEvent.click(secondActiveElement);
     expect(content).not.toBeVisible();
   });
 

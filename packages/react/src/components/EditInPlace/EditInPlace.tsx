@@ -1,11 +1,18 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { PropsWithChildren, forwardRef, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useRef,
+  useState,
+  type FocusEvent,
+  type MouseEvent,
+  type PropsWithChildren,
+} from 'react';
 import cx from 'classnames';
 import {
   Checkmark,
@@ -213,7 +220,9 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInPlaceProps>(
       onChange(e.target.value);
     };
 
-    const onFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
+    const onFocusHandler = (
+      e: FocusEvent<HTMLElement> | MouseEvent<HTMLElement>
+    ) => {
       if (!isTargetingChild(e)) {
         inputRef.current?.focus();
       }

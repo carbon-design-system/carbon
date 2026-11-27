@@ -1,16 +1,17 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
+import React, { createRef } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { EditInPlace } from '..';
 
-const componentName = EditInPlace.displayName;
+const componentName = EditInPlace.displayName ?? 'EditInPlace';
 const prefix = 'cds';
 const blockClass = `${prefix}--edit-in-place`;
 
@@ -45,6 +46,9 @@ describe(componentName, () => {
     const input = screen.getByDisplayValue(defaultProps.value);
     expect(input).toHaveAttribute('readOnly');
     const inputContainer = container.querySelector(`.${blockClass}`);
+    if (!inputContainer) {
+      throw new Error('Expected the EditInPlace container to render.');
+    }
     await userEvent.click(inputContainer);
     expect(screen.getByText('This field is read-only')).toBeInTheDocument();
   });
@@ -280,7 +284,7 @@ describe(componentName, () => {
   });
 
   it('forwards a ref to an appropriate node', async () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     render(<EditInPlace {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });

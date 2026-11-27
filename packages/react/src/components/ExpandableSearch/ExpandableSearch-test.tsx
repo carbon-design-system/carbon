@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
+import React, { type RefCallback } from 'react';
 import ExpandableSearch from './ExpandableSearch';
 import userEvent from '@testing-library/user-event';
 import { render, screen, act } from '@testing-library/react';
@@ -63,11 +64,13 @@ describe('ExpandableSearch', () => {
         <ExpandableSearch labelText="test-search" />
       );
 
-      const expandControl = container.querySelector('.cds--search-magnifier');
+      const expandControl = container.querySelector<HTMLButtonElement>(
+        '.cds--search-magnifier'
+      );
       expect(expandControl).not.toBeNull();
 
       await act(async () => {
-        expandControl.focus();
+        expandControl?.focus();
       });
 
       await userEvent.keyboard('[Enter]');
@@ -80,11 +83,13 @@ describe('ExpandableSearch', () => {
         <ExpandableSearch labelText="test-search" />
       );
 
-      const expandControl = container.querySelector('.cds--search-magnifier');
+      const expandControl = container.querySelector<HTMLButtonElement>(
+        '.cds--search-magnifier'
+      );
       expect(expandControl).not.toBeNull();
 
       await act(async () => {
-        expandControl.focus();
+        expandControl?.focus();
       });
 
       await userEvent.keyboard('[Space]');
@@ -118,10 +123,8 @@ describe('ExpandableSearch', () => {
     });
 
     it('supports a ref on the underlying input element', () => {
-      const ref = jest.fn();
-      const { container } = render(
-        <ExpandableSearch labelText="Search" ref={ref} />
-      );
+      const ref = jest.fn<RefCallback<HTMLInputElement>>();
+      render(<ExpandableSearch labelText="Search" ref={ref} />);
       expect(ref).toHaveBeenCalledWith(expect.any(HTMLInputElement));
     });
 
