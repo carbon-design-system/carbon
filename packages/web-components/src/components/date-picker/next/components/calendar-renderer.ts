@@ -24,6 +24,29 @@ import {
 import styles from './date-picker.scss?lit';
 
 /**
+ * Information about a single day cell, passed to `renderDay` and
+ * `getDayLabel`.
+ */
+export interface DatePickerDay {
+  /** The date this cell represents */
+  date: Temporal.PlainDate;
+  /** The default localized accessible label, e.g. "November 20, 2026" */
+  label: string;
+  /** Whether the date belongs to the month being shown */
+  isCurrentMonth: boolean;
+  /** Whether the date is outside `min-date`/`max-date` */
+  isDisabled: boolean;
+  /** Whether the date is today */
+  isToday: boolean;
+  /** Whether the date is selected (start or end of a range) */
+  isSelected: boolean;
+  /** Whether the date is between the start and end of a range */
+  isInRange: boolean;
+  /** Whether the date has keyboard focus */
+  isFocused: boolean;
+}
+
+/**
  * Calendar renderer for date picker.
  * Replaces Flatpickr's calendar UI with a lightweight, framework-agnostic implementation.
  *
@@ -93,6 +116,18 @@ class CDSDatePickerCalendar extends LitElement {
    */
   @property({ type: String })
   locale = 'en-US';
+
+  /**
+   * Custom content for each day cell. Defaults to the day number.
+   */
+  @property({ attribute: false })
+  renderDay?: (day: DatePickerDay) => unknown;
+
+  /**
+   * Custom accessible label for each day cell.
+   */
+  @property({ attribute: false })
+  getDayLabel?: (day: DatePickerDay) => string;
 
   /**
    * Navigate to previous month
@@ -365,6 +400,17 @@ class CDSDatePickerCalendar extends LitElement {
             focused: isFocused,
           });
 
+          const day: DatePickerDay = {
+            date,
+            label: getFullDateLabel(date, this.locale),
+            isCurrentMonth,
+            isDisabled,
+            isToday,
+            isSelected,
+            isInRange,
+            isFocused,
+          };
+
           return html`
             <button
               type="button"
@@ -375,9 +421,9 @@ class CDSDatePickerCalendar extends LitElement {
               @click="${() => this._handleDateSelect(date)}"
               @mouseenter="${() => this._handleDateMouseEnter(date)}"
               @mouseleave="${() => this._handleDateMouseLeave()}"
-              aria-label="${getFullDateLabel(date, this.locale)}"
+              aria-label="${this.getDayLabel?.(day) ?? day.label}"
               aria-current="${ifDefined(isToday ? 'date' : undefined)}">
-              ${date.day}
+              ${this.renderDay ? this.renderDay(day) : date.day}
             </button>
           `;
         })}

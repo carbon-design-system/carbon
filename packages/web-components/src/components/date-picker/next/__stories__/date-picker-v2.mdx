@@ -20,6 +20,7 @@ import * as DatePickerStories from './date-picker-v2.stories';
   - [Range date picker](#range-date-picker)
   - [Skeleton state](#skeleton-state)
   - [AI label](#ai-label)
+  - [Custom day content](#custom-day-content)
 - [Component API](#component-api)
   - [API Compatibility](#api-compatibility)
   - [Breaking changes](#breaking-changes)
@@ -85,6 +86,36 @@ date range is loading.
 The input supports Carbon AI label content as slotted child content.
 
 <Canvas of={DatePickerStories.WithAILabel} />
+
+### Custom day content
+
+Use `renderDay` to add content to each calendar day cell, such as event
+indicators or availability, and `getDayLabel` to announce that content to screen
+readers. Both receive the cell's `date` (a `Temporal.PlainDate`), its default
+`label`, and its state: `isCurrentMonth`, `isDisabled`, `isToday`, `isSelected`,
+`isInRange` and `isFocused`.
+
+Anything `renderDay` shows visually must also be in `getDayLabel`, because the
+day's accessible label replaces its content. Don't rely on color alone, and make
+indicators readable on a selected day, for example with `currentColor`.
+
+Try the `dayRenderer` control on the Default story for event dots, event count
+and availability examples.
+
+```js
+const datePicker = document.querySelector('cds-preview-date-picker');
+datePicker.renderDay = (day) => html`
+  <span style="position: relative">
+    ${day.date.day}
+    ${hasEvents(day.date) ? html`<span aria-hidden="true">•</span>` : ''}
+  </span>
+`;
+datePicker.getDayLabel = (day) =>
+  hasEvents(day.date) ? `${day.label}, has events` : day.label;
+```
+
+The calendar renders inside a shadow root, so style the returned template with
+inline styles or CSS custom properties such as `var(--cds-support-info)`.
 
 ## Component API
 

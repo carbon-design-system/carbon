@@ -114,6 +114,132 @@ const controls = {
   },
 };
 
+// Mock events, generated relative to today so the story always shows events
+// in the visible month, whenever it is opened.
+const eventKinds = {
+  meeting: {
+    label: 'Meeting',
+    color: `var(--${prefix}-support-caution-undefined)`,
+  },
+  deadline: { label: 'Deadline', color: `var(--${prefix}-support-warning)` },
+  reminder: { label: 'Reminder', color: `var(--${prefix}-support-success)` },
+};
+
+const mockEventOffsets = {
+  '-6': ['meeting'],
+  '-3': ['meeting', 'deadline'],
+  '-1': ['reminder'],
+  '0': ['meeting', 'reminder'],
+  '2': ['deadline'],
+  '4': ['meeting', 'deadline', 'reminder'],
+  '5': ['meeting', 'meeting', 'meeting', 'deadline'],
+  '7': ['reminder'],
+};
+
+const getMockEvents = () => {
+  const today = Temporal.Now.plainDateISO();
+  return new Map(
+    Object.entries(mockEventOffsets).map(([offset, kinds]) => [
+      today.add({ days: Number(offset) }).toString(),
+      kinds,
+    ])
+  );
+};
+
+// A day is fully booked when it has three or more events
+const fullyBookedThreshold = 3;
+
+const dayContentStyle =
+  'position: relative; display: flex; align-items: center; justify-content: center; inline-size: 100%; block-size: 100%;';
+
+const dayRenderers = {
+  // 1. Up to three color-coded dots, one per event
+  'Event dots': (day, events) => html`
+    <span style="${dayContentStyle}">
+      ${day.date.day}
+      ${events.length > 0
+        ? html`<span
+            aria-hidden="true"
+            style="position: absolute; inset-block-start: 4px; display: flex; gap: 2px;">
+            ${events
+              .slice(0, 3)
+              .map(
+                (kind) =>
+                  html`<span
+                    style="inline-size: 4px; block-size: 4px; border-radius: 50%; background-color: ${day.isSelected
+                      ? 'currentColor'
+                      : eventKinds[kind].color};"></span>`
+              )}
+          </span>`
+        : ''}
+    </span>
+  `,
+  // 2. Event days get a neutral background behind the number
+  'Event background': (day, events) => html`
+    <span style="${dayContentStyle}">
+      ${events.length > 0 && !day.isSelected
+        ? html`<span
+            aria-hidden="true"
+            style="position: absolute; inline-size: 1.5rem; block-size: 1.25rem; border-radius: 0.25rem; background-color: var(--${prefix}-layer-accent-01);"></span>`
+        : ''}
+      <span style="position: relative;">${day.date.day}</span>
+    </span>
+  `,
+  // 3. A numeric badge: shows the count as text, not only as color
+  'Event count': (day, events) => html`
+    <span style="${dayContentStyle}">
+      ${day.date.day}
+      ${events.length > 0
+        ? html`<span
+            aria-hidden="true"
+            style="position: absolute; inset-block-start: 2px; inset-inline-end: 4px; font-size: 0.625rem; line-height: 1; color: ${day.isSelected
+              ? 'currentColor'
+              : `var(--${prefix}-text-secondary)`};">
+            ${events.length}
+          </span>`
+        : ''}
+    </span>
+  `,
+  // 4. Fully booked days are struck through but stay selectable
+  Availability: (day, events) => html`
+    <span
+      style="${dayContentStyle} ${events.length >= fullyBookedThreshold
+        ? 'text-decoration: line-through;'
+        : ''}">
+      ${day.date.day}
+    </span>
+  `,
+};
+
+const describeEvents = (dayRenderer, events) => {
+  if (events.length === 0) {
+    return '';
+  }
+  if (dayRenderer === 'Availability') {
+    return events.length >= fullyBookedThreshold ? 'fully booked' : '';
+  }
+  const kinds = events
+    .filter((kind, index) => events.indexOf(kind) === index)
+    .map((kind) => eventKinds[kind].label);
+  return `${events.length} ${events.length === 1 ? 'event' : 'events'}: ${kinds.join(', ')}`;
+};
+
+// Returns the `renderDay` and `getDayLabel` for the `dayRenderer` control
+const getDayRendererProps = (dayRenderer) => {
+  if (!dayRenderers[dayRenderer]) {
+    return {};
+  }
+  const events = getMockEvents();
+  const getEvents = (day) => events.get(day.date.toString()) ?? [];
+  return {
+    renderDay: (day) => dayRenderers[dayRenderer](day, getEvents(day)),
+    getDayLabel: (day) =>
+      [day.label, describeEvents(dayRenderer, getEvents(day))]
+        .filter(Boolean)
+        .join(', '),
+  };
+};
+
 export const Default = {
   args: {
     ...defaultArgs,
@@ -122,6 +248,12 @@ export const Default = {
   },
   argTypes: {
     ...controls,
+    dayRenderer: {
+      description:
+        'Example `renderDay` and `getDayLabel` implementations using mock events around today. Event dots: purple for meetings, yellow for deadlines, green for reminders. Event background: event days get a neutral background. Event count: number of events. Availability: struck-through days are fully booked.',
+      options: Object.keys(dayRenderers),
+      control: 'select',
+    },
     kind: {
       control: 'radio',
       options: { Single: 'single', Simple: 'simple', Range: 'range' },
@@ -141,6 +273,7 @@ export const Default = {
   },
   render: ({
     dateFormat,
+    dayRenderer,
     disabled,
     invalid,
     invalidText,
@@ -154,6 +287,7 @@ export const Default = {
     warn,
     warnText,
   }) => {
+    const { renderDay, getDayLabel } = getDayRendererProps(dayRenderer);
     return html`
       <cds-preview-date-picker
         date-format="${dateFormat}"
@@ -161,7 +295,9 @@ export const Default = {
         locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
-        ?readonly="${readonly}">
+        ?readonly="${readonly}"
+        .renderDay="${renderDay}"
+        .getDayLabel="${getDayLabel}">
         <cds-preview-date-picker-input
           kind="${kind === 'range' ? 'from' : kind}"
           label-text="Date Picker label"
