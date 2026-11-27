@@ -2663,6 +2663,19 @@ Map {
         "isRequired": true,
         "type": "arrayOf",
       },
+      "initialSortDirection": {
+        "args": [
+          [
+            "ASC",
+            "DESC",
+            "NONE",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "initialSortHeaderKey": {
+        "type": "string",
+      },
       "isSortable": {
         "type": "bool",
       },

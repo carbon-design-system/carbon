@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
   type MouseEvent,
   type ReactElement,
@@ -306,6 +307,8 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
     rowIds: string[];
   }) => string[];
   headers: DataTableHeader[];
+  initialSortDirection?: DataTableSortState;
+  initialSortHeaderKey?: string;
   isSortable?: boolean;
   locale?: string;
   overflowMenuOnHover?: boolean;
@@ -372,17 +375,37 @@ export const DataTable = <RowType, ColTypes extends any[]>(
 
   const instanceId = useMemo(() => getInstanceId(), []);
 
-  const [state, setState] = useState<DataTableState<ColTypes>>(() => ({
-    ...getDerivedStateFromProps(props, {}),
-    // Initialize to collapsed. A value of `undefined` is treated as neutral.
-    isExpandedAll: false,
-  }));
+  const [state, setState] = useState<DataTableState<ColTypes>>(() => {
+    const { initialSortHeaderKey, initialSortDirection = 'ASC' } = props;
+    const initialSort =
+      initialSortHeaderKey &&
+      headers.some(({ key }) => key === initialSortHeaderKey)
+        ? {
+            sortHeaderKey: initialSortHeaderKey,
+            sortDirection: initialSortDirection,
+          }
+        : {};
+    return {
+      ...getDerivedStateFromProps(props, initialSort),
+      // Initialize to collapsed. A value of `undefined` is treated as neutral.
+      isExpandedAll: false,
+    };
+  });
 
+  const previousTableData = useRef({ rows, headers });
   useEffect(() => {
+    if (
+      rows === previousTableData.current.rows &&
+      headers === previousTableData.current.headers
+    ) {
+      return;
+    }
+    previousTableData.current = { rows, headers };
+
     const nextRowIds = rows.map((row) => row.id);
-    const hasRowIdsChanged = !isEqual(nextRowIds, state.rowIds);
+    const hasRowIdsChanged = !isEqual(nextRowIds, state.initialRowOrder);
     const hasHeadersChanged = !isEqual(headers, state.headers);
-    const currentRows = state.rowIds.map((id) => {
+    const currentRows = state.initialRowOrder.map((id) => {
       const row = state.rowsById[id];
       return headers.reduce(
         (acc, { key }) => ({
@@ -949,6 +972,16 @@ DataTable.propTypes = {
       isSortable: PropTypes.bool,
     })
   ).isRequired,
+
+  /**
+   * Initial sort direction for the specified header. Defaults to ascending.
+   */
+  initialSortDirection: PropTypes.oneOf(['ASC', 'DESC', 'NONE']),
+
+  /**
+   * Key of the header to sort by on the first render.
+   */
+  initialSortHeaderKey: PropTypes.string,
 
   /**
    * Specify whether the table should be able to be sorted by its headers

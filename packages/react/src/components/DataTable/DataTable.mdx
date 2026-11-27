@@ -176,6 +176,17 @@ some table column headers, but not all.
 </TableHeader>
 ```
 
+To sort the table on its first render, set `initialSortHeaderKey` to a header's
+`key`. The default direction is `ASC`. Use `initialSortDirection="DESC"` for
+descending order, or `"NONE"` to keep the supplied row order. The table also
+keeps the supplied order if the key is omitted or doesn't match a header.
+
+These props apply when the table mounts. Once a user sorts a column, new rows
+follow the user's current sort. In this example the table opens with the Name
+column sorted from Load Balancer 6 to Load Balancer 1.
+
+<Canvas id="components-datatable-sorting--with-initial-sort" />
+
 ### Programmatic sorting
 
 In addition to the prop getter specified in the previous section, you can also

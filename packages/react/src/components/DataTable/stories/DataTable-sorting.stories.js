@@ -84,3 +84,15 @@ Default.args = { isSortable: true };
 Default.argTypes = {
   isSortable: { table: { readonly: true } },
 };
+
+export const WithInitialSort = (args) => (
+  <Default
+    key={`${args.initialSortHeaderKey}-${args.initialSortDirection}`}
+    {...args}
+  />
+);
+WithInitialSort.args = {
+  ...Default.args,
+  initialSortHeaderKey: headers[0].key,
+  initialSortDirection: 'DESC',
+};
