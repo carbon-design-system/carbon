@@ -43,10 +43,10 @@
       "default": "./es/globals/*"
     },
     "./es": "./es/index.js",
-    "./es/": "./es/",
+    "./es/*": "./es/*",
     "./es-custom/*": "./es-custom/*",
-    "./lib/": "./lib/",
-    "./scss/": "./scss/",
+    "./lib/*": "./lib/*",
+    "./scss/*": "./scss/*",
     "./custom-elements.json": "./custom-elements.json",
     "./package.json": "./package.json"
   },

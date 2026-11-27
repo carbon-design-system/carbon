@@ -117,6 +117,10 @@ async function build() {
     });
   }
 
+  await fs.writeJson(path.join(packageRoot, 'lib', 'package.json'), {
+    type: 'commonjs',
+  });
+
   await copyScssSources();
   await generateDeclarations();
   await postBuild();
