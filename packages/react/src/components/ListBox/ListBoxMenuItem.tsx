@@ -13,32 +13,20 @@ import React, {
   useState,
   type HTMLAttributes,
   type ReactNode,
-  type Ref,
-  type RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
-import { useMergedRefs } from '../../internal/useMergedRefs';
 
 /**
  * Determines if the content of an element is truncated.
  *
- * Merges a forwarded ref with a local ref to check the element's dimensions.
+ * Measures the element's dimensions with a local ref.
  *
- * @template T
- * @param forwardedRef - A ref passed from the parent component.
- * @param deps - Dependencies to re-run the truncation check.
- * @returns An object containing the truncation state and the merged ref.
+ * @param deps - Dependencies that trigger a new truncation measurement.
+ * @returns An object containing the truncation state and local ref.
  */
-const useIsTruncated = <T extends HTMLElement>(
-  forwardedRef?: Ref<T>,
-  deps: unknown[] = []
-) => {
-  const localRef = useRef<T>(null);
-  const mergedRef = useMergedRefs([
-    ...(forwardedRef ? [forwardedRef] : []),
-    localRef,
-  ]);
+const useIsTruncated = (deps: unknown[] = []) => {
+  const localRef = useRef<HTMLDivElement>(null);
   const [isTruncated, setIsTruncated] = useState(false);
 
   useEffect(() => {
@@ -52,7 +40,7 @@ const useIsTruncated = <T extends HTMLElement>(
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [localRef, ...deps]);
 
-  return { isTruncated, ref: mergedRef };
+  return { isTruncated, ref: localRef };
 };
 
 export interface ListBoxMenuItemProps extends HTMLAttributes<HTMLLIElement> {
@@ -94,19 +82,7 @@ const ListBoxMenuItem = forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
   ) => {
     const prefix = usePrefix();
 
-    const menuItemOptionRefProp =
-      forwardedRef && typeof forwardedRef !== 'function'
-        ? (
-            forwardedRef as RefObject<HTMLLIElement | null> & {
-              menuItemOptionRef?: Ref<HTMLDivElement>;
-            }
-          ).menuItemOptionRef
-        : undefined;
-
-    const { isTruncated, ref: menuItemOptionRef } = useIsTruncated(
-      menuItemOptionRefProp,
-      [children]
-    );
+    const { isTruncated, ref: menuItemOptionRef } = useIsTruncated([children]);
     const className = cx(`${prefix}--list-box__menu-item`, {
       [`${prefix}--list-box__menu-item--active`]: isActive,
       [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
@@ -115,6 +91,7 @@ const ListBoxMenuItem = forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
     return (
       <li
         {...rest}
+        ref={forwardedRef}
         className={className}
         title={isTruncated ? title : undefined}>
         <div

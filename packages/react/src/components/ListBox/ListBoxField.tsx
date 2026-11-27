@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,7 +32,7 @@ function ListBoxField({
   return (
     <div
       className={`${prefix}--list-box__field`}
-      tabIndex={(!disabled && tabIndex) || -1}
+      tabIndex={disabled ? -1 : (tabIndex ?? -1)}
       {...rest}>
       {children}
     </div>

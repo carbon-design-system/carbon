@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import React from 'react';
 import InlineLoading from '../InlineLoading';
 import { render, screen } from '@testing-library/react';

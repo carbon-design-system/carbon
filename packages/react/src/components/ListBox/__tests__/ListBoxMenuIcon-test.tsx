@@ -1,17 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ListBox from '../';
 
 describe('ListBoxMenuIcon', () => {
   it('should support translating the close menu message', () => {
-    const translateWithId = jest.fn((id) => {
+    const translateWithId = jest.fn((id: string) => {
       if (id === 'close.menu') {
         return 'test';
       }
@@ -24,7 +25,7 @@ describe('ListBoxMenuIcon', () => {
   });
 
   it('should support translating the open menu message', () => {
-    const translateWithId = jest.fn((id) => {
+    const translateWithId = jest.fn((id: string) => {
       if (id === 'open.menu') {
         return 'test';
       }

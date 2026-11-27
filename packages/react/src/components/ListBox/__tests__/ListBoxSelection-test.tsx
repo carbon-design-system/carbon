@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ListBox from '../';
 
-function translateWithId(id) {
+function translateWithId(id: string) {
   if (id === 'clear.all') {
     return 'test-clear-all';
   }

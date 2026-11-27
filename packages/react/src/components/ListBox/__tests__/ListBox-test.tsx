@@ -1,12 +1,13 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { type RefCallback } from 'react';
 import ListBox from '../';
 
 describe('ListBox', () => {
@@ -41,7 +42,7 @@ describe('ListBox', () => {
   });
 
   describe('sizes', () => {
-    it.each(['sm', 'md', 'lg'])('should set the %s class', (size) => {
+    it.each(['sm', 'md', 'lg'] as const)('should set the %s class', (size) => {
       const { container } = render(<ListBox size={size} />);
       expect(container.firstChild).toHaveClass(`cds--list-box--${size}`);
     });
@@ -58,8 +59,8 @@ describe('ListBox', () => {
   });
 
   it('should support a `ref` on the outermost element', () => {
-    const ref = jest.fn();
+    const ref = jest.fn<RefCallback<HTMLDivElement>>();
     const { container } = render(<ListBox ref={ref} />);
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
+    expect(ref.mock.calls).toContainEqual([container.querySelector('div')]);
   });
 });
