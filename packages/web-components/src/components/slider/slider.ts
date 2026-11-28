@@ -576,6 +576,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       this.dragCoolDown = false;
     }
     if (this._dragging) {
+      this.value = this._normalizeValue(this.value);
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
           bubbles: true,
@@ -588,6 +589,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       this._dragging = false;
       this._thumbNode.style.touchAction = '';
     } else if (this._draggingUpper) {
+      this.unstable_valueUpper = this._normalizeValue(this.unstable_valueUpper);
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
           bubbles: true,
