@@ -113,7 +113,7 @@ describe('PaginationNav', () => {
       expect(screen.getByLabelText('pagination')).toHaveClass(
         `${prefix}--pagination-nav ${prefix}--layout--size-sm`
       );
-      expect(screen.getByLabelText('Select Page number')).toBeInTheDocument();
+      expect(screen.getByLabelText('Select page number')).toBeInTheDocument();
     });
 
     it('should render in medium size and let user render 4 pages', () => {
@@ -129,7 +129,7 @@ describe('PaginationNav', () => {
       expect(screen.getByLabelText('pagination')).toHaveClass(
         `${prefix}--pagination-nav ${prefix}--layout--size-md`
       );
-      expect(screen.getByLabelText('Select Page number')).toBeInTheDocument();
+      expect(screen.getByLabelText('Select page number')).toBeInTheDocument();
     });
 
     it('should render in default (large) size and let user render 4 pages', () => {
@@ -145,7 +145,7 @@ describe('PaginationNav', () => {
       expect(screen.getByLabelText('pagination')).toHaveClass(
         `${prefix}--pagination-nav ${prefix}--layout--size-lg`
       );
-      expect(screen.getByLabelText('Select Page number')).toBeInTheDocument();
+      expect(screen.getByLabelText('Select page number')).toBeInTheDocument();
     });
 
     it('should respect tooltipAlignment and tooltipPosition props', () => {
@@ -280,7 +280,7 @@ describe('PaginationNav', () => {
         );
 
         expect(
-          screen.getAllByRole('combobox', { name: 'Select Page number' })
+          screen.getAllByRole('combobox', { name: 'Select page number' })
         ).toHaveLength(2);
       }
     );
@@ -319,7 +319,7 @@ describe('PaginationNav', () => {
       expect(screen.getByText('2')).toBeInTheDocument();
       expect(screen.getByText('10')).toBeInTheDocument();
 
-      let selectElements = screen.getAllByLabelText('Select Page number');
+      let selectElements = screen.getAllByLabelText('Select page number');
       expect(selectElements).toHaveLength(1);
 
       // Select page 6 from the dropdown
@@ -329,7 +329,7 @@ describe('PaginationNav', () => {
       expect(screen.getByText('6')).toHaveAttribute('aria-current', 'page');
 
       // Check for two select elements in this state
-      selectElements = screen.getAllByLabelText('Select Page number');
+      selectElements = screen.getAllByLabelText('Select page number');
       expect(selectElements).toHaveLength(2);
 
       // Select page 1 from the first dropdown
@@ -341,7 +341,7 @@ describe('PaginationNav', () => {
       expect(screen.getByText('10')).toBeInTheDocument();
 
       // Check that we're back to one select element
-      selectElements = screen.getAllByLabelText('Select Page number');
+      selectElements = screen.getAllByLabelText('Select page number');
       expect(selectElements).toHaveLength(1);
     });
   });

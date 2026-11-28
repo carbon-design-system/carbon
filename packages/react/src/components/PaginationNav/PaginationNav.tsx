@@ -41,7 +41,7 @@ const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['carbon.pagination-nav.item']]: 'Page',
   [translationIds['carbon.pagination-nav.active']]: 'Active',
   [translationIds['carbon.pagination-nav.of']]: 'of',
-  [translationIds['carbon.pagination-nav.select']]: 'Select Page number',
+  [translationIds['carbon.pagination-nav.select']]: 'Select page number',
 };
 
 const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
