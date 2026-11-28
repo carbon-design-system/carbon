@@ -19491,12 +19491,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-sorting@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "postcss-sorting@npm:10.0.0"
+"postcss-sorting@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "postcss-sorting@npm:11.0.0"
   peerDependencies:
     postcss: ^8.4.20
-  checksum: 10/0d1c9fe60cb7c091ff7411d123303b2f874d435d191d759a78b377543da67a3316c27caa4c2ee0d6a1972e46317c12a3a604b5456e174fa35e1ca11966248010
+  checksum: 10/e74510bfc112a76ac4db7697ceac0e66949bf12d16db899dc9f81250f6611a56a65a8a42e821a0200e6140b074e56ee034a63f840860cf404d2f273cc14b9cee
   languageName: node
   linkType: hard
 
@@ -19539,14 +19539,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.32, postcss@npm:^8.4.47, postcss@npm:^8.5.10, postcss@npm:^8.5.3, postcss@npm:^8.5.32, postcss@npm:^8.5.6, postcss@npm:^8.5.8, postcss@npm:^8.5.9":
-  version: 8.5.33
-  resolution: "postcss@npm:8.5.33"
+"postcss@npm:^8.4.32, postcss@npm:^8.4.47, postcss@npm:^8.5.10, postcss@npm:^8.5.3, postcss@npm:^8.5.32, postcss@npm:^8.5.33, postcss@npm:^8.5.6, postcss@npm:^8.5.9":
+  version: 8.5.34
+  resolution: "postcss@npm:8.5.34"
   dependencies:
     nanoid: "npm:^3.3.20"
     picocolors: "npm:^1.1.1"
-    source-map-js: "npm:^1.2.2"
-  checksum: 10/89136a68865e151c06635707d04e147d0e13d61210927246acfef1ff189663dc6fdb77341a167bf0ac235c0683e7c2af21ac43672660795d22d759cb66134406
+    source-map-js: "npm:^1.2.4"
+  checksum: 10/c482835c943ac8fc1cc983e6901ea3810eca51a6e8f541ca269e1fc572618118b93f5bf3abd1644bd18c29c62ad4187c7699a86e499df40803a6c77a97d9bfe1
   languageName: node
   linkType: hard
 
@@ -21090,10 +21090,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1, source-map-js@npm:^1.2.1, source-map-js@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "source-map-js@npm:1.2.2"
-  checksum: 10/4807c894bb6280c8b84886159b96080e3996f42c6e8015e647881edfd4f955f6024ceebb8bb40d33ce8b106e24b2e29c133575e1c60c01c8aae57a05fdf17761
+"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1, source-map-js@npm:^1.2.1, source-map-js@npm:^1.2.2, source-map-js@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "source-map-js@npm:1.2.4"
+  checksum: 10/65ac88fed07bc58f78203b5b0cbfa9ecc978f738423e83e8b8f035bb15a2efd949e1c6b6697bad8ed6dd38fe6cb624b2ce1ba3c550479980d4e77ec3b5cd028d
   languageName: node
   linkType: hard
 
@@ -21652,7 +21652,7 @@ __metadata:
     stylelint-config-standard: "npm:^36.0.0"
     stylelint-config-standard-scss: "npm:^17.0.0"
     stylelint-no-unsupported-browser-features: "npm:^8.0.4"
-    stylelint-order: "npm:^8.0.0"
+    stylelint-order: "npm:^9.0.0"
     stylelint-prettier: "npm:^5.0.0"
     stylelint-scss: "npm:^7.0.0"
     stylelint-use-logical: "npm:^2.1.0"
@@ -21781,15 +21781,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-order@npm:^8.0.0":
-  version: 8.1.1
-  resolution: "stylelint-order@npm:8.1.1"
+"stylelint-order@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "stylelint-order@npm:9.0.0"
   dependencies:
-    postcss: "npm:^8.5.8"
-    postcss-sorting: "npm:^10.0.0"
+    postcss: "npm:^8.5.33"
+    postcss-sorting: "npm:^11.0.0"
   peerDependencies:
-    stylelint: ^16.18.0 || ^17.0.0
-  checksum: 10/abe08a7037e68253a524a718f78a11e9ae181093e5c2578743352e22c3873f9177f4cbadccec8d6208adc0a648b27c63ca769d80e6c3758a99a4c494182cb2dc
+    stylelint: ^16.18.0 || ^17.0.0 || ^18.0.0
+  checksum: 10/df8984d7f89d72ce28d3803123d4c27f142ec6c45fa520e3849f60bf62988cbe904e696bde3ea22650336c0e907529911ce65a792086d133f3aef8a3a9d4475d
   languageName: node
   linkType: hard
 
