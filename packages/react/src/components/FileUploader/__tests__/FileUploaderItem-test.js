@@ -9,11 +9,36 @@ import { render, fireEvent, screen, act } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { FileUploaderItem } from '../';
+import { FeatureFlags } from '../../FeatureFlags';
 import { keys } from '../../../internal/keyboard';
 
 const statuses = ['uploading', 'edit', 'complete'];
 
 describe('FileUploaderItem', () => {
+  it.each([false, true])(
+    'keeps errorBody visible with enableV12Release=%s',
+    (v12) => {
+      render(
+        <FeatureFlags enableV12Release={v12}>
+          <FileUploaderItem
+            name="test.png"
+            status="edit"
+            invalid
+            errorSubject="File exceeds size limit"
+            errorBody="Select a smaller file and try again."
+          />
+        </FeatureFlags>
+      );
+
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'File exceeds size limit'
+      );
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Select a smaller file and try again.'
+      );
+    }
+  );
+
   it('should apply xs size and invalid classes to an invalid file', () => {
     const { container } = render(
       <FileUploaderItem

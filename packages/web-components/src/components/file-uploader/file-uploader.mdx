@@ -34,6 +34,10 @@ the surrounding
 supported size ranges. Without a size context, upload buttons and file items
 default to `md`. An explicit `size` takes precedence over the inherited size.
 
+The `errorBody` property and `error-body` attribute are deprecated in v12 and
+remain supported. Use `errorSubject` / `error-subject` for the error message in
+new implementations.
+
 <Canvas of={FileUploaderStories.Default} />
 
 ## Drag And Drop

@@ -149,6 +149,8 @@ class CDSFileUploaderItem extends LitElement {
   errorSubject = '';
 
   /**
+   * @deprecated [Deprecated in v12] Use `errorSubject` / `error-subject` for the error message.
+   *
    * The error body text
    */
   @property({ attribute: 'error-body' })
