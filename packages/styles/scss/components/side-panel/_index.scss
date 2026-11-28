@@ -6,6 +6,9 @@
 //
 
 @forward 'side-panel';
+@forward 'side-panel-next';
 @use 'side-panel';
+@use 'side-panel-next';
 
 @include side-panel.side-panel;
+@include side-panel-next.side-panel-next;
